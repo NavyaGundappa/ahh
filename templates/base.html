@@ -426,50 +426,147 @@
         }
 
         /* Hide mobile nav by default */
+        /* Show navigation by default on all screens */
         #mobile-nav {
-            display: none;
-            /* hidden initially */
+            display: flex;
             list-style: none;
             padding: 0;
             margin: 0;
             background-color: #fff;
+            flex-direction: column;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            max-height: 60vh;
+            /* Limit height */
+            overflow-y: auto;
+            /* Add scroll if needed */
         }
 
-        /* Show nav when toggle clicked */
-        #mobile-nav.active {
-            display: block;
-        }
-
-        /* Nav links styling */
+        /* Nav links styling - more compact */
         #mobile-nav li a {
             display: block;
-            padding: 10px 15px;
+            padding: 8px 12px;
+            /* Reduced padding */
             color: #103A60;
             text-decoration: none;
             border-bottom: 1px solid #eee;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            /* Slightly smaller font */
         }
 
         #mobile-nav li a:hover {
             color: #1a9cb7;
+            background-color: #f8f9fa;
         }
 
-        /* Desktop view */
+        /* Desktop view - more compact */
         @media (min-width: 992px) {
             #mobile-nav {
-                display: flex;
-                /* show nav horizontally */
-                gap: 20px;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                gap: 10px;
+                /* Reduced gap */
+                background-color: transparent;
                 border-top: none;
+                box-shadow: none;
+                max-height: none;
+                /* Remove height limit */
+                overflow-y: visible;
+                /* Remove scroll */
+                padding: 5px 0;
+                /* Added some padding */
             }
 
             #mobile-nav li a {
                 border-bottom: none;
-                padding: 10px 0;
+                padding: 8px 12px;
+                /* Consistent padding */
+                border-radius: 4px;
+                /* Rounded corners */
+            }
+
+            #mobile-nav li a:hover {
+                background-color: #e6f7f8;
+                transform: translateY(-1px);
+                /* Subtle hover effect */
             }
 
             .navbar-toggle {
                 display: none;
-                /* hide hamburger on desktop */
+            }
+        }
+
+        /* Mobile view - compact */
+        @media (max-width: 991px) {
+            #mobile-nav {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 280px;
+                /* fixed width */
+                height: auto;
+                /* only as tall as the content */
+                z-index: 1000;
+                transform: translateX(-100%);
+                transition: transform 0.3s ease-in-out;
+                padding-top: 50px;
+                /* keep top padding */
+                background-color: #fff;
+                overflow: visible;
+                /* no scroll, fits content */
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            }
+
+            #mobile-nav.active {
+                transform: translateX(0);
+            }
+        }
+
+
+        #mobile-nav li a {
+            padding: 10px 15px;
+            /* Slightly larger for touch */
+        }
+
+        .navbar-toggle {
+            display: inline-flex;
+            /* Use flex to tightly wrap content */
+            align-items: center;
+            /* Vertically center content */
+            justify-content: center;
+            /* Horizontally center content */
+            position: fixed;
+            right: 15px;
+            top: 15px;
+            z-index: 1001;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 4px;
+            padding: 0;
+            /* Remove all padding */
+            line-height: 1;
+            /* Remove extra line height */
+            height: auto;
+            /* Let height adjust to content */
+        }
+
+        /* Close button for mobile menu */
+        .nav-close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #103A60;
+            cursor: pointer;
+            padding: 5px;
+            display: none;
+        }
+
+        @media (max-width: 991px) {
+            .nav-close-btn {
+                display: block;
             }
         }
 
@@ -716,7 +813,7 @@
                                     <a href="/" class="nav__link">Home</a>
                                 </li>
                                 <li class="footer-items">
-                                    <a href="/about" class="nav__link">About Us</a>
+                                    <a href="/about-us" class="nav__link">About Us</a>
                                 </li>
                                 <li class="footer-items">
                                     <a href="https://app.fyndbetter.com/ahh_apt" target="_blank"
@@ -726,7 +823,7 @@
                                     <a href="/departments" class="nav__link">Departments</a>
                                 </li>
                                 <li class="footer-items">
-                                    <a href="/health_packages" class="nav__link">Health Packages</a>
+                                    <a href="/health-packages" class="nav__link">Health Packages</a>
                                 </li>
                                 <li class="footer-items"><a href="/sports_packages">Sports Packages</a></li>
                                 <li class="footer-items">
@@ -736,7 +833,7 @@
                         </div>
                         <div class="col-6 col-lg-3">
                             <ul class="footer-lists">
-                                <li class="footer-items"><a href="/departments/general_surgery"
+                                <li class="footer-items"><a href="/departments/general-surgery"
                                         class="nav__link">General Surgery</a></li>
                                 <li class="footer-items"><a href="/departments/neurosurgery"
                                         class="nav__link">Neurosurgery</a></li>
@@ -744,11 +841,11 @@
                                         class="nav__link">Orthopaedics</a></li>
                                 <li class="footer-items"><a href="/departments/anaesthesia"
                                         class="nav__link">Anaesthesiology & Critical Care</a></li>
-                                <li class="footer-items"><a href="/departments/pain_medicine" class="nav__link">Pain
+                                <li class="footer-items"><a href="/departments/pain-medicine" class="nav__link">Pain
                                         Medicine</a></li>
-                                <li class="footer-items"><a href="/departments/general_medicine"
+                                <li class="footer-items"><a href="/departments/general-medicine"
                                         class="nav__link">General Medicine</a></li>
-                                <li class="footer-items"><a href="/departments/lab_medicine" class="nav__link">Lab
+                                <li class="footer-items"><a href="/departments/lab-medicine" class="nav__link">Lab
                                         Medicine</a></li>
                             </ul>
                         </div>
@@ -762,7 +859,7 @@
                                         class="nav__link">Dermatology</a></li>
                                 <li class="footer-items"><a href="/departments/ent" class="nav__link">Ear, Nose, and
                                         Throat (ENT)</a></li>
-                                <li class="footer-items"><a href="/departments/emergency_medicine"
+                                <li class="footer-items"><a href="/departments/emergency-medicine"
                                         class="nav__link">Emergency Medicine</a></li>
                                 <li class="footer-items"><a href="/departments/nephrology"
                                         class="nav__link">Nephrology</a></li>
@@ -772,15 +869,15 @@
                         </div>
                         <div class="col-6 col-lg-3">
                             <ul class="footer-lists">
-                                <li class="footer-items"><a href="/departments/medical_gastroenterology"
+                                <li class="footer-items"><a href="/departments/medical-gastroenterology"
                                         class="nav__link">Medical Gastroenterology</a></li>
-                                <li class="footer-items"><a href="/departments/minimal_access_surgery"
+                                <li class="footer-items"><a href="/departments/minimal-access-surgery"
                                         class="nav__link">Minimal Access Surgery</a></li>
-                                <li class="footer-items"><a href="/departments/plastic_surgery"
+                                <li class="footer-items"><a href="/departments/plastic-surgery"
                                         class="nav__link">Plastic Surgery</a></li>
                                 <li class="footer-items"><a href="/departments/obg" class="nav__link">Obstetrics &
                                         Gynaecology</a></li>
-                                <li class="footer-items"><a href="/departments/surgical_gastroenterology"
+                                <li class="footer-items"><a href="/departments/surgical-gastroenterology"
                                         class="nav__link">Surgical Gastroenterology</a></li>
                                 <li class="footer-items"><a href="/departments/radiology"
                                         class="nav__link">Radiology</a></li>
@@ -884,6 +981,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="/static/js/script.js"></script>
+
     <script>
         $(".book-apt").on('click', function () {
             var url = $(this).data("url");
@@ -982,7 +1080,7 @@
             window.scrollTo(0, 0);
         });
     </script>
-    <!--script>
+    <script>
         let lastScrollTop = 0;
         const nav = document.querySelector('.nav-container');
 
@@ -1001,12 +1099,13 @@
         });
 
 
-    </script-->
+    </script>
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     <script src="static/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="static/js/script.js"></script>
+    <script src="https://fyndbetter.com/chatbot/aarogya_chatbot"></script>
     <script>
         $(document).ready(function () {
             $('[data-vbg]').youtube_background({
@@ -1463,6 +1562,8 @@
         document.addEventListener("DOMContentLoaded", function () {
             window.scrollTo(0, 0);
         });
+
+    });
 </script>
 
 

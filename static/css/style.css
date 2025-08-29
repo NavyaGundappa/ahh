@@ -2877,7 +2877,8 @@ h2 {
 }
 
 .card-sl {
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.009) margin-top: 10px;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.009);
+  margin-top: 10px;
   height: 100%;
 }
 
@@ -3269,9 +3270,7 @@ h2 {
 }
 
 #HomeSlider .owl-nav .owl-prev:focus,
-#HomeSlider .owl-nav .owl-next:focus;
-
-  {
+#HomeSlider .owl-nav .owl-next:focus {
   outline: 0;
 }
 
