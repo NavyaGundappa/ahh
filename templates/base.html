@@ -472,63 +472,76 @@
                 /* hide hamburger on desktop */
             }
         }
+
         /* CSS for the Ambulance Animation */
-.ambulance-animation-container {
-    overflow: hidden; /* Hides the ambulance when it is outside the container */
-    height: 50px; /* Adjust height as needed */
-    position: relative;
-    background-color: #f8f9fa; /* Optional: A light background for the animation strip */
-    border-bottom: 1px solid #ddd;
-}
+        .ambulance-animation-container {
+            overflow: hidden;
+            /* Hides the ambulance when it is outside the container */
+            height: 50px;
+            /* Adjust height as needed */
+            position: relative;
+            background-color: #f8f9fa;
+            /* Optional: A light background for the animation strip */
+            border-bottom: 1px solid #ddd;
+        }
 
-.ambulance-animation {
-    position: absolute;
-    top: 0;
-    white-space: nowrap;
-    animation: move-ambulance 10s linear infinite; /* Changed to 5 seconds for a much faster speed */
-    display: flex;
-    align-items: center;
-    height: 100%;
-}
+        .ambulance-animation {
+            position: absolute;
+            top: 0;
+            white-space: nowrap;
+            animation: move-ambulance 10s linear infinite;
+            /* Changed to 5 seconds for a much faster speed */
+            display: flex;
+            align-items: center;
+            height: 100%;
+        }
 
-.ambulance-animation:hover {
-    animation-play-state: paused; /* Pauses the animation on hover */
-}
+        .ambulance-animation:hover {
+            animation-play-state: paused;
+            /* Pauses the animation on hover */
+        }
 
-.ambulance-icon img {
-    height: 40px; /* Adjust ambulance image size */
-    margin-right: 15px;
-}
+        .ambulance-icon img {
+            height: 40px;
+            /* Adjust ambulance image size */
+            margin-right: 15px;
+        }
 
-.ambulance-number a {
-    font-weight: bold;
-    color: #d9534f; /* A red color for the emergency number */
-    text-decoration: none;
-    font-size: 1.1rem;
-}
+        .ambulance-number a {
+            font-weight: bold;
+            color: #d9534f;
+            /* A red color for the emergency number */
+            text-decoration: none;
+            font-size: 1.1rem;
+        }
 
-/* Keyframes for the animation */
-@keyframes move-ambulance {
-    0% {
-        transform: translateX(100vw); /* Starts off-screen to the right */
-    }
-    100% {
-        transform: translateX(-100%); /* Ends off-screen to the left */
-    }
-}
+        /* Keyframes for the animation */
+        @keyframes move-ambulance {
+            0% {
+                transform: translateX(100vw);
+                /* Starts off-screen to the right */
+            }
 
-/* Optional: Adjustments for smaller screens */
-@media (max-width: 768px) {
-    .ambulance-animation-container {
-        height: 40px;
-    }
-    .ambulance-icon img {
-        height: 30px;
-    }
-    .ambulance-number a {
-        font-size: 0.9rem;
-    }
-}
+            100% {
+                transform: translateX(-100%);
+                /* Ends off-screen to the left */
+            }
+        }
+
+        /* Optional: Adjustments for smaller screens */
+        @media (max-width: 768px) {
+            .ambulance-animation-container {
+                height: 40px;
+            }
+
+            .ambulance-icon img {
+                height: 30px;
+            }
+
+            .ambulance-number a {
+                font-size: 0.9rem;
+            }
+        }
     </style>
 </head>
 
@@ -560,10 +573,10 @@
         <div class="header-top-container">
             <div class="container header-top-content">
                 <a href="/" class="logo">
-            <div class="logo-wrapper">
-                <img src="static/img/logo.png" alt="Logo" class="header-logo-img">
-            </div>
-        </a>
+                    <div class="logo-wrapper">
+                        <img src="/static/img/logo.png" alt="Logo" class="header-logo-img">
+                    </div>
+                </a>
 
                 <div class="header-contact">
                     <span class="appointment-number">
@@ -585,15 +598,15 @@
 
             </div>
             <div class="ambulance-animation-container">
-    <div class="ambulance-animation">
-        <div class="ambulance-icon">
-            <img src="/static/img/ambulance.png" alt="Ambulance" />
-        </div>
-        <div class="ambulance-number">
-            <a href="tel:0806666887788">Emergency: 080 6666 8877/88</a>
-        </div>
-    </div>
-</div>
+                <div class="ambulance-animation">
+                    <div class="ambulance-icon">
+                        <img src="/static/img/ambulance.png" alt="Ambulance" />
+                    </div>
+                    <div class="ambulance-number">
+                        <a href="tel:0806666887788">Emergency: 080 6666 8877/88</a>
+                    </div>
+                </div>
+            </div>
 
             <div class="nav-container">
                 <div class="container nav-content">
@@ -629,222 +642,248 @@
 
     {% block content %}{% endblock %}
 
- <footer class="new-footer">
-    <!-- Main footer content -->
-    <div class="container main-footer-content">
-        <div class="row g-4">
-            <div class="col-lg-4 col-md-6 order-md-1">
-                <img loading="lazy" src="/static/img/logo.png" alt="AarogyaHastha Hospitals Logo" class="footer-logo">
-                <p class="mt-3">
-  <a href="https://www.google.com/maps/search/?api=1&query=Aarogya+Hastha+Hospitals,+Site+No.+2,+No.+2816/2,+SY.87,+Kasavanahalli+Main+Rd,+near+1st+Cross+Road,+opposite+HM+Symphony,+Bengaluru,+Karnataka+560035" 
-     target="_blank" 
-     style="text-decoration: none; color: inherit;">
-    Site No. 2, No. 2816/2, SY.87, Kasavanahalli Main Rd, near 1st Cross Road, opposite HM Symphony, Bengaluru, Karnataka 560035
-  </a>
-</p>
-                <div class="app-download">
-                    <div class="app-download-title">Download our APP for more Benifits</div>
-                    <div class="app-download-buttons">
-                        <a href="http://play.google.com/store/search?q=aarogya+hastha+hospital&c=apps&hl=en_IN"
-                            target="_blank" class="app-download-btn">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Google_Play_Store_badge_EN.svg/2560px-Google_Play_Store_badge_EN.svg.png"
-                                alt="Get it on Google Play">
+    <footer class="new-footer">
+        <!-- Main footer content -->
+        <div class="container main-footer-content">
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6 order-md-1">
+                    <img loading="lazy" src="/static/img/logo.png" alt="AarogyaHastha Hospitals Logo"
+                        class="footer-logo">
+                    <p class="mt-3">
+                        <a href="https://www.google.com/maps/search/?api=1&query=Aarogya+Hastha+Hospitals,+Site+No.+2,+No.+2816/2,+SY.87,+Kasavanahalli+Main+Rd,+near+1st+Cross+Road,+opposite+HM+Symphony,+Bengaluru,+Karnataka+560035"
+                            target="_blank" style="text-decoration: none; color: inherit;">
+                            Site No. 2, No. 2816/2, SY.87, Kasavanahalli Main Rd, near 1st Cross Road, opposite HM
+                            Symphony, Bengaluru, Karnataka 560035
                         </a>
-                        <a href="https://apps.apple.com/in/app/aarogya-hastha-hospitals/idYOUR_APP_ID"
-                            target="_blank" class="app-download-btn">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Download_on_the_App_Store_Badge.svg/2560px-Download_on_the_App_Store_Badge.svg.png"
-                                alt="Download on the App Store">
-                        </a>
-                    </div>
-                </div>
-
-                <div class="social-icons mt-4">
-                    <ul class="social-lists">
-                        <li class="social-items">
-                            <a href="https://www.instagram.com/aarogyahastha/" target="_blank">
-                                <img src="/static/img/icon-insta.png" alt="Instagram">
-                            </a>
-                        </li>
-                        <li class="social-items">
-                            <a href="https://www.facebook.com/aarogyahastha" target="_blank">
-                                <img src="/static/img/icon-fb.png" alt="Facebook">
-                            </a>
-                        </li>
-                        <li class="social-items">
-                            <a href="https://www.linkedin.com/company/aarogya-hastha/" target="_blank">
-                                <img src="/static/img/icon-linkedin.png" alt="LinkedIn">
-                            </a>
-                        </li>
-                        <li class="social-items">
-                            <a href="https://twitter.com/AarogyaHastha" target="_blank">
-                                <img src="/static/img/icon-twitter.png" alt="Twitter">
-                            </a>
-                        </li>
-                        <li class="social-items">
-                            <a href="https://www.youtube.com/channel/UCeQv8lTLIT4btbjgLxYzYrw" target="_blank">
-                                <img src="/static/img/icon-youtube.png" alt="YouTube">
-                            </a>
-                        </li>
-                        <li class="social-items">
-                            <a href="javascript:void(0)" onclick="showChromePopup()">
-                                <img src="/static/img/icon-whatsapp.png" alt="WhatsApp">
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="col-md-6 col-lg-8 order-1 order-md-2">
-                <div class="row">
-                    <div class="col-6 col-lg-3">
-                        <ul class="footer-lists">
-                            <li class="footer-items">
-                                <a href="/" class="nav__link">Home</a>
-                            </li>
-                            <li class="footer-items">
-                                <a href="/about-us" class="nav__link">About Us</a>
-                            </li>
-                            <li class="footer-items">
-                                <a href="https://app.fyndbetter.com/ahh_apt" target="_blank" class="nav__link">Appointments</a>
-                            </li>
-                            <li class="footer-items">
-                                <a href="/departments" class="nav__link">Departments</a>
-                            </li>
-                            <li class="footer-items">
-                                <a href="/health-packages" class="nav__link">Health Packages</a>
-                            </li>
-                            <li class="footer-items"><a href="/sports_packages">Sports Packages</a></li>
-                            <li class="footer-items">
-                                <a href="/contact" class="nav__link">Contact</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-6 col-lg-3">
-                        <ul class="footer-lists">
-                            <li class="footer-items"><a href="/departments/general-surgery" class="nav__link">General Surgery</a></li>
-                            <li class="footer-items"><a href="/departments/neurosurgery" class="nav__link">Neurosurgery</a></li>
-                            <li class="footer-items"><a href="/departments/orthopaedics" class="nav__link">Orthopaedics</a></li>
-                            <li class="footer-items"><a href="/departments/anaesthesia" class="nav__link">Anaesthesiology & Critical Care</a></li>
-                            <li class="footer-items"><a href="/departments/pain-medicine" class="nav__link">Pain Medicine</a></li>
-                            <li class="footer-items"><a href="/departments/general-medicine" class="nav__link">General Medicine</a></li>
-                            <li class="footer-items"><a href="/departments/lab-medicine" class="nav__link">Lab Medicine</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-6 col-lg-3">
-                        <ul class="footer-lists">
-                            <li class="footer-items"><a href="/departments/paediatrics" class="nav__link">Paediatrics</a></li>
-                            <li class="footer-items"><a href="/departments/physiotherapy" class="nav__link">Physiotherapy</a></li>
-                            <li class="footer-items"><a href="/departments/dermatology" class="nav__link">Dermatology</a></li>
-                            <li class="footer-items"><a href="/departments/ent" class="nav__link">Ear, Nose, and Throat (ENT)</a></li>
-                            <li class="footer-items"><a href="/departments/emergency-medicine" class="nav__link">Emergency Medicine</a></li>
-                            <li class="footer-items"><a href="/departments/nephrology" class="nav__link">Nephrology</a></li>
-                            <li class="footer-items"><a href="/departments/urology" class="nav__link">Urology</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-6 col-lg-3">
-                        <ul class="footer-lists">
-                            <li class="footer-items"><a href="/departments/medical-gastroenterology" class="nav__link">Medical Gastroenterology</a></li>
-                            <li class="footer-items"><a href="/departments/minimal-access-surgery" class="nav__link">Minimal Access Surgery</a></li>
-                            <li class="footer-items"><a href="/departments/plastic-surgery" class="nav__link">Plastic Surgery</a></li>
-                            <li class="footer-items"><a href="/departments/obg" class="nav__link">Obstetrics & Gynaecology</a></li>
-                            <li class="footer-items"><a href="/departments/surgical-gastroenterology" class="nav__link">Surgical Gastroenterology</a></li>
-                            <li class="footer-items"><a href="/departments/radiology" class="nav__link">Radiology</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Chrome popup (unchanged) -->
-    <div id="chrome-popup" class="chrome-popup" aria-hidden="true">
-        <div class="chrome-popup__content">
-            <p class="chrome-popup__title">Open WhatsApp?</p>
-            <p class="chrome-popup__url">https://api.whatsapp.com wants to open this application.</p>
-            <label class="chrome-popup__checkbox">
-                <input type="checkbox"> Always allow api.whatsapp.com to open links of this type in the associated app
-            </label>
-        </div>
-        <div class="chrome-popup__actions">
-            <a href="whatsapp://send?phone=919036092727" class="chrome-btn chrome-btn--blue">Open with App</a>
-            <a href="https://web.whatsapp.com/send?phone=9036092727" target="_blank" class="chrome-btn chrome-btn--green">Open with Web</a>
-            <button class="chrome-btn chrome-btn--grey" onclick="hideChromePopup()">Cancel</button>
-        </div>
-    </div>
-     <div class="copyright-top-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <p class="copyright-text">
-                        Copyright © 2025, all Rights Reserved to Aarogya Hastha Hospitals Pvt Ltd |
-                        <a href="/terms_and_conditions">Terms & Conditions</a> |
-                        <a href="/privacy_policy">Privacy Policy</a> |
-                        <a href="/disclaimer">Disclaimer</a>
                     </p>
+                    <div class="app-download">
+                        <div class="app-download-title">Download our APP for more Benifits</div>
+                        <div class="app-download-buttons">
+                            <a href="http://play.google.com/store/search?q=aarogya+hastha+hospital&c=apps&hl=en_IN"
+                                target="_blank" class="app-download-btn">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Google_Play_Store_badge_EN.svg/2560px-Google_Play_Store_badge_EN.svg.png"
+                                    alt="Get it on Google Play">
+                            </a>
+                            <a href="https://apps.apple.com/in/app/aarogya-hastha/id6739343936" target="_blank"
+                                class="app-download-btn">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Download_on_the_App_Store_Badge.svg/2560px-Download_on_the_App_Store_Badge.svg.png"
+                                    alt="Download on the App Store">
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="social-icons mt-4">
+                        <ul class="social-lists">
+                            <li class="social-items">
+                                <a href="https://www.instagram.com/aarogyahastha/" target="_blank">
+                                    <img src="/static/img/icon-insta.png" alt="Instagram">
+                                </a>
+                            </li>
+                            <li class="social-items">
+                                <a href="https://www.facebook.com/aarogyahastha" target="_blank">
+                                    <img src="/static/img/icon-fb.png" alt="Facebook">
+                                </a>
+                            </li>
+                            <li class="social-items">
+                                <a href="https://www.linkedin.com/company/aarogya-hastha/" target="_blank">
+                                    <img src="/static/img/icon-linkedin.png" alt="LinkedIn">
+                                </a>
+                            </li>
+                            <li class="social-items">
+                                <a href="https://twitter.com/AarogyaHastha" target="_blank">
+                                    <img src="/static/img/icon-twitter.png" alt="Twitter">
+                                </a>
+                            </li>
+                            <li class="social-items">
+                                <a href="https://www.youtube.com/channel/UCeQv8lTLIT4btbjgLxYzYrw" target="_blank">
+                                    <img src="/static/img/icon-youtube.png" alt="YouTube">
+                                </a>
+                            </li>
+                            <li class="social-items">
+                                <a href="javascript:void(0)" onclick="showChromePopup()">
+                                    <img src="/static/img/icon-whatsapp.png" alt="WhatsApp">
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-8 order-1 order-md-2">
+                    <div class="row">
+                        <div class="col-6 col-lg-3">
+                            <ul class="footer-lists">
+                                <li class="footer-items">
+                                    <a href="/" class="nav__link">Home</a>
+                                </li>
+                                <li class="footer-items">
+                                    <a href="/about" class="nav__link">About Us</a>
+                                </li>
+                                <li class="footer-items">
+                                    <a href="https://app.fyndbetter.com/ahh_apt" target="_blank"
+                                        class="nav__link">Appointments</a>
+                                </li>
+                                <li class="footer-items">
+                                    <a href="/departments" class="nav__link">Departments</a>
+                                </li>
+                                <li class="footer-items">
+                                    <a href="/health_packages" class="nav__link">Health Packages</a>
+                                </li>
+                                <li class="footer-items"><a href="/sports_packages">Sports Packages</a></li>
+                                <li class="footer-items">
+                                    <a href="/contact" class="nav__link">Contact</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-6 col-lg-3">
+                            <ul class="footer-lists">
+                                <li class="footer-items"><a href="/departments/general_surgery"
+                                        class="nav__link">General Surgery</a></li>
+                                <li class="footer-items"><a href="/departments/neurosurgery"
+                                        class="nav__link">Neurosurgery</a></li>
+                                <li class="footer-items"><a href="/departments/orthopaedics"
+                                        class="nav__link">Orthopaedics</a></li>
+                                <li class="footer-items"><a href="/departments/anaesthesia"
+                                        class="nav__link">Anaesthesiology & Critical Care</a></li>
+                                <li class="footer-items"><a href="/departments/pain_medicine" class="nav__link">Pain
+                                        Medicine</a></li>
+                                <li class="footer-items"><a href="/departments/general_medicine"
+                                        class="nav__link">General Medicine</a></li>
+                                <li class="footer-items"><a href="/departments/lab_medicine" class="nav__link">Lab
+                                        Medicine</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-6 col-lg-3">
+                            <ul class="footer-lists">
+                                <li class="footer-items"><a href="/departments/paediatrics"
+                                        class="nav__link">Paediatrics</a></li>
+                                <li class="footer-items"><a href="/departments/physiotherapy"
+                                        class="nav__link">Physiotherapy</a></li>
+                                <li class="footer-items"><a href="/departments/dermatology"
+                                        class="nav__link">Dermatology</a></li>
+                                <li class="footer-items"><a href="/departments/ent" class="nav__link">Ear, Nose, and
+                                        Throat (ENT)</a></li>
+                                <li class="footer-items"><a href="/departments/emergency_medicine"
+                                        class="nav__link">Emergency Medicine</a></li>
+                                <li class="footer-items"><a href="/departments/nephrology"
+                                        class="nav__link">Nephrology</a></li>
+                                <li class="footer-items"><a href="/departments/urology" class="nav__link">Urology</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-6 col-lg-3">
+                            <ul class="footer-lists">
+                                <li class="footer-items"><a href="/departments/medical_gastroenterology"
+                                        class="nav__link">Medical Gastroenterology</a></li>
+                                <li class="footer-items"><a href="/departments/minimal_access_surgery"
+                                        class="nav__link">Minimal Access Surgery</a></li>
+                                <li class="footer-items"><a href="/departments/plastic_surgery"
+                                        class="nav__link">Plastic Surgery</a></li>
+                                <li class="footer-items"><a href="/departments/obg" class="nav__link">Obstetrics &
+                                        Gynaecology</a></li>
+                                <li class="footer-items"><a href="/departments/surgical_gastroenterology"
+                                        class="nav__link">Surgical Gastroenterology</a></li>
+                                <li class="footer-items"><a href="/departments/radiology"
+                                        class="nav__link">Radiology</a></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</footer>
 
-<style>
-/* New styles for the copyright top section */
-.copyright-top-section {
-  
-    padding: 10px 0; /* reduced vertical padding */
-    margin-top: -56px; /* move upward closer to main footer */
-    margin-left: 90px; /* move a bit to the right */
-    text-align: center;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-}
+        <!-- Chrome popup (unchanged) -->
+        <div id="chrome-popup" class="chrome-popup" aria-hidden="true">
+            <div class="chrome-popup__content">
+                <p class="chrome-popup__title">Open WhatsApp?</p>
+                <p class="chrome-popup__url">https://api.whatsapp.com wants to open this application.</p>
+                <label class="chrome-popup__checkbox">
+                    <input type="checkbox"> Always allow api.whatsapp.com to open links of this type in the associated
+                    app
+                </label>
+            </div>
+            <div class="chrome-popup__actions">
+                <a href="whatsapp://send?phone=919036092727" class="chrome-btn chrome-btn--blue">Open with App</a>
+                <a href="https://web.whatsapp.com/send?phone=9036092727" target="_blank"
+                    class="chrome-btn chrome-btn--green">Open with Web</a>
+                <button class="chrome-btn chrome-btn--grey" onclick="hideChromePopup()">Cancel</button>
+            </div>
+        </div>
+        <div class="copyright-top-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <p class="copyright-text">
+                            Copyright © 2025, all Rights Reserved to Aarogya Hastha Hospitals Pvt Ltd |
+                            <a href="/terms_and_conditions">Terms & Conditions</a> |
+                            <a href="/privacy_policy">Privacy Policy</a> |
+                            <a href="/disclaimer">Disclaimer</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <style>
+        /* New styles for the copyright top section */
+        .copyright-top-section {
+
+            padding: 10px 0;
+            /* reduced vertical padding */
+            margin-top: -56px;
+            /* move upward closer to main footer */
+            margin-left: 90px;
+            /* move a bit to the right */
+            text-align: center;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
 
 
 
-.copyright-top-section .copyright-text {
-    font-size: 0.9em;
-    margin: 0;
-    color: #333;
-}
+        .copyright-top-section .copyright-text {
+            font-size: 0.9em;
+            margin: 0;
+            color: #333;
+        }
 
-.copyright-top-section .copyright-text a {
-    color: #103A60;
-    text-decoration: none;
-    font-weight: 600;
-}
+        .copyright-top-section .copyright-text a {
+            color: #103A60;
+            text-decoration: none;
+            font-weight: 600;
+        }
 
-.copyright-top-section .copyright-text a:hover {
-    text-decoration: underline;
-    color: #16979D;
-}
+        .copyright-top-section .copyright-text a:hover {
+            text-decoration: underline;
+            color: #16979D;
+        }
 
-/* Adjust main footer content spacing */
-.main-footer-content {
-    padding: 40px 0 20px;
-}
+        /* Adjust main footer content spacing */
+        .main-footer-content {
+            padding: 40px 0 20px;
+        }
 
-/* Mobile responsive adjustments */
-@media (max-width: 768px) {
-    .copyright-top-section {
-        padding: 12px 0;
-    }
-    
-    .copyright-top-section .copyright-text {
-        font-size: 0.8em;
-        line-height: 1.4;
-    }
-    
-    .main-footer-content {
-        padding: 30px 0 15px;
-    }
-}
-</style>
+        /* Mobile responsive adjustments */
+        @media (max-width: 768px) {
+            .copyright-top-section {
+                padding: 12px 0;
+            }
+
+            .copyright-top-section .copyright-text {
+                font-size: 0.8em;
+                line-height: 1.4;
+            }
+
+            .main-footer-content {
+                padding: 30px 0 15px;
+            }
+        }
+    </style>
 
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     <script src="/static/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="/static/js/script.js"></script>
-    <script src="https://fyndbetter.com/chatbot/aarogya_chatbot"></script>
     <script>
         $(".book-apt").on('click', function () {
             var url = $(this).data("url");
@@ -899,69 +938,534 @@
             mobileNav.classList.toggle('active'); // toggles visibility
         });
         document.addEventListener('DOMContentLoaded', () => {
-    const menuToggle = document.querySelector('.menu-toggle');
-    const sidebar = document.querySelector('.left-sidebar');
+            const menuToggle = document.querySelector('.menu-toggle');
+            const sidebar = document.querySelector('.left-sidebar');
 
-    menuToggle.addEventListener('click', () => {
-        sidebar.classList.toggle('active');
-    });
-});
+            menuToggle.addEventListener('click', () => {
+                sidebar.classList.toggle('active');
+            });
+        });
     </script>
     <script>
-document.addEventListener("DOMContentLoaded", function() {
-    const sidebar = document.querySelector('.left-sidebar');
+        document.addEventListener("DOMContentLoaded", function () {
+            const sidebar = document.querySelector('.left-sidebar');
 
-    // Create toggle line only once
-    if (sidebar && !sidebar.querySelector('.toggle-line')) {
-        const toggleLine = document.createElement('div');
-        toggleLine.classList.add('toggle-line');
+            // Create toggle line only once
+            if (sidebar && !sidebar.querySelector('.toggle-line')) {
+                const toggleLine = document.createElement('div');
+                toggleLine.classList.add('toggle-line');
 
-        // Add toggle line at top
-        sidebar.prepend(toggleLine);
+                // Add toggle line at top
+                sidebar.prepend(toggleLine);
 
-        // Hide icons initially on mobile
-        if (window.innerWidth <= 768) {
-            sidebar.querySelectorAll('.icon-link').forEach(icon => {
-                icon.style.opacity = 0;
-                icon.style.transform = 'translateX(-20px)';
-            });
-        }
+                // Hide icons initially on mobile
+                if (window.innerWidth <= 768) {
+                    sidebar.querySelectorAll('.icon-link').forEach(icon => {
+                        icon.style.opacity = 0;
+                        icon.style.transform = 'translateX(-20px)';
+                    });
+                }
 
-        // Click to toggle icons
-        toggleLine.addEventListener('click', function() {
-            sidebar.classList.toggle('active');
+                // Click to toggle icons
+                toggleLine.addEventListener('click', function () {
+                    sidebar.classList.toggle('active');
+                });
+            }
         });
-    }
-});
-</script>
+    </script>
 
     <a href="#" id="scrollToTopBtn" class="scroll-to-top-btn" title="Scroll to top" aria-label="Scroll to top">
         <i class="fa fa-arrow-up"></i>
     </a>
     <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        window.scrollTo(0, 0);
-    });
+        document.addEventListener("DOMContentLoaded", function () {
+            window.scrollTo(0, 0);
+        });
+    </script>
+    <!--script>
+        let lastScrollTop = 0;
+        const nav = document.querySelector('.nav-container');
+
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+            if (scrollTop > lastScrollTop) {
+                // Scrolling down → hide navbar and remove its space
+                nav.classList.add('hidden');
+            } else if (scrollTop < lastScrollTop) {
+                // Scrolling up → show navbar
+                nav.classList.remove('hidden');
+            }
+
+            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // avoid negative scroll
+        });
+
+
+    </script-->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="static/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="static/js/script.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('[data-vbg]').youtube_background({
+                'play-button': true
+            });
+            if ($('.specialities-carousel').length > 0) {
+                $('.specialities-carousel').owlCarousel({
+                    loop: true,
+                    margin: 30,
+                    autoplay: true,
+                    autoplayTimeout: 2500,
+                    nav: true,
+                    touchDrag: true,
+                    autoplayHoverPause: true,
+                    navText: ["<i class='fa fa-chevron-left'></i>", "<i class='fa fa-chevron-right'></i>"],
+                    responsive: {
+                        0: {
+                            items: 1
+                        },
+                        600: {
+                            items: 2
+                        },
+                        1000: {
+                            items: 3
+                        },
+                        1300: {
+                            items: 4
+                        }
+                    }
+                });
+                $('.specialities-carousel .item').on('click', function () {
+                    location.href = 'departments/' + $(this).data('department');;
+                })
+            }
+            if ($('.doctors-carousel').length > 0) {
+                $('.doctors-carousel').owlCarousel({
+                    loop: true,
+                    margin: 40,
+                    autoplay: true,
+                    autoplayTimeout: 3500,
+                    nav: true,
+                    touchDrag: true,
+                    autoplayHoverPause: true,
+                    navText: ["<i class='fa fa-chevron-left'></i>", "<i class='fa fa-chevron-right'></i>"],
+                    responsive: {
+                        0: {
+                            items: 1
+                        },
+                        600: {
+                            items: 2
+                        },
+                        1000: {
+                            items: 4
+                        }
+                    }
+                });
+            }
+
+            // Initialize the new feedback carousel
+            if ($('.feedback-carousel').length > 0) {
+                $('.feedback-carousel').owlCarousel({
+                    loop: true,
+                    margin: 30,
+                    autoplay: true,
+                    autoplayTimeout: 3000,
+                    nav: true,
+                    touchDrag: true,
+                    autoplayHoverPause: true,
+                    navText: ["<i class='fa fa-chevron-left'></i>", "<i class='fa fa-chevron-right'></i>"],
+                    responsive: {
+                        0: {
+                            items: 1
+                        },
+                        600: {
+                            items: 1
+                        },
+                        1000: {
+                            items: 2
+                        }
+                    }
+                });
+            }
+        })
+        $(window).on('resize', function () {
+            $('[data-img-mob]').each(function () {
+                if ($(document).width() < 993) $(this).attr('src', $(this).data('img-mob'));
+                else $(this).attr('src', $(this).data('img-desk'));
+            })
+        }).trigger('resize');
+        document.addEventListener("DOMContentLoaded", () => {
+            const counters = document.querySelectorAll(".number");
+            let animated = false;
+
+            function animateCounters() {
+                if (!animated && isInViewport(counters[0])) {
+                    counters.forEach(counter => {
+                        let target = +counter.getAttribute("data-count");
+                        let count = 0;
+                        let step = Math.ceil(target / 100); // adjust speed
+
+                        let timer = setInterval(() => {
+                            count += step;
+                            if (count >= target) {
+                                count = target;
+                                clearInterval(timer);
+                            }
+                            counter.textContent = count.toLocaleString();
+                        }, 20);
+                    });
+                    animated = true;
+                }
+            }
+
+            function isInViewport(element) {
+                const rect = element.getBoundingClientRect();
+                return rect.top < window.innerHeight && rect.bottom >= 0;
+            }
+
+            window.addEventListener("scroll", animateCounters);
+        });
+    </script>
+</body>
+
+</html>
+<script type="text/javascript" src="https://unpkg.com/youtube-background/jquery.youtube-background.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('[data-vbg]').youtube_background({
+            'play-button': true
+        });
+        if ($('.specialities-carousel').length > 0) {
+            $('.specialities-carousel').owlCarousel({
+                loop: true,
+                margin: 30,
+                autoplay: true,
+                autoplayTimeout: 2500,
+                nav: true,
+                touchDrag: true,
+                autoplayHoverPause: true,
+                navText: ["<i class='fa fa-chevron-left'></i>", "<i class='fa fa-chevron-right'></i>"],
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    600: {
+                        items: 2
+                    },
+                    1000: {
+                        items: 3
+                    },
+                    1300: {
+                        items: 4
+                    }
+                }
+            });
+            $('.specialities-carousel .item').on('click', function () {
+                location.href = 'departments/' + $(this).data('department');;
+            })
+        }
+        if ($('.doctors-carousel').length > 0) {
+            $('.doctors-carousel').owlCarousel({
+                loop: true,
+                margin: 40,
+                autoplay: true,
+                autoplayTimeout: 3500,
+                nav: true,
+                touchDrag: true,
+                autoplayHoverPause: true,
+                navText: ["<i class='fa fa-chevron-left'></i>", "<i class='fa fa-chevron-right'></i>"],
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    600: {
+                        items: 2
+                    },
+                    1000: {
+                        items: 4
+                    }
+                }
+            });
+        }
+
+        // Initialize the new feedback carousel
+        if ($('.feedback-carousel').length > 0) {
+            $('.feedback-carousel').owlCarousel({
+                loop: true,                // ✅ allow infinite sliding
+                margin: 30,
+                autoplay: true,            // ✅ keep auto-slide
+                autoplayTimeout: 4000,     // slide every 4 seconds (adjust as needed)
+                autoplayHoverPause: true,  // pause on hover
+                nav: true,
+                dots: true,                // show dots under carousel
+                touchDrag: true,
+                mouseDrag: true,
+                navText: [
+                    "<i class='fa fa-chevron-left'></i>",
+                    "<i class='fa fa-chevron-right'></i>"
+                ],
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    600: {
+                        items: 1
+                    },
+                    1000: {
+                        items: 2
+                    }
+                }
+            });
+        }
+
+        $(window).on('resize', function () {
+            $('[data-img-mob]').each(function () {
+                if ($(document).width() < 993) $(this).attr('src', $(this).data('img-mob'));
+                else $(this).attr('src', $(this).data('img-desk'));
+            })
+        }).trigger('resize');
+        document.addEventListener("DOMContentLoaded", () => {
+            const counters = document.querySelectorAll(".number");
+            let animated = false;
+
+            function animateCounters() {
+                if (!animated && isInViewport(counters[0])) {
+                    counters.forEach(counter => {
+                        let target = +counter.getAttribute("data-count");
+                        let count = 0;
+                        let step = Math.ceil(target / 100); // adjust speed
+
+                        let timer = setInterval(() => {
+                            count += step;
+                            if (count >= target) {
+                                count = target;
+                                clearInterval(timer);
+                            }
+                            counter.textContent = count.toLocaleString();
+                        }, 20);
+                    });
+                    animated = true;
+                }
+            }
+
+            function isInViewport(element) {
+                const rect = element.getBoundingClientRect();
+                return rect.top < window.innerHeight && rect.bottom >= 0;
+            }
+
+            window.addEventListener("scroll", animateCounters);
+        });
+        // Enhanced Scroll to Top Button
+        document.addEventListener('DOMContentLoaded', function () {
+            const scrollBtn = document.getElementById('scrollToTopBtn');
+            const scrollThreshold = 300;
+
+            function toggleScrollButton() {
+                if (window.pageYOffset > scrollThreshold ||
+                    document.documentElement.scrollTop > scrollThreshold) {
+                    scrollBtn.style.display = 'flex';
+                } else {
+                    scrollBtn.style.display = 'none';
+                }
+            }
+
+            window.addEventListener('scroll', toggleScrollButton);
+
+            scrollBtn.addEventListener('click', function (e) {
+                e.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+                // Add slight animation to the icon
+                this.querySelector('i').style.transform = 'translateY(-4px)';
+                setTimeout(() => {
+                    this.querySelector('i').style.transform = '';
+                }, 300);
+            });
+
+            // Initialize on load
+            toggleScrollButton();
+        });
+
+
+        function loadVideo() {
+            const placeholder = document.querySelector('.video-placeholder');
+            const container = document.querySelector('.video-container');
+
+            // Create iframe
+            const iframe = document.createElement('iframe');
+            iframe.setAttribute('src', 'https://www.youtube.com/embed/CgLJFg_9enI?autoplay=1&rel=0&showinfo=0');
+            iframe.setAttribute('frameborder', '0');
+            iframe.setAttribute('allowfullscreen', '');
+            iframe.setAttribute('allow', 'autoplay');
+
+            // Remove placeholder and add iframe
+            container.removeChild(placeholder);
+            container.appendChild(iframe);
+        }
+
+        // Optional: Load video when scrolled into view
+        document.addEventListener('DOMContentLoaded', function () {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // You could auto-load the video here if desired
+                        // loadVideo();
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            observer.observe(document.querySelector('.video-section'));
+        });
+
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const videoSection = document.querySelector(".custom-video-section");
+            const sidebar = document.querySelector(".left-sidebar");
+
+            if (!videoSection || !sidebar) return;
+
+            document.addEventListener("scroll", function () {
+                const rect = videoSection.getBoundingClientRect();
+
+                // Check if the section fully covers the viewport
+                const fullyInView = rect.top <= 0 && rect.bottom >= window.innerHeight;
+
+                if (fullyInView) {
+                    sidebar.classList.add("hidden");  // hide ONLY inside video section
+                } else {
+                    sidebar.classList.remove("hidden"); // show everywhere else
+                }
+            });
+        });
+        function showChromePopup() {
+            const popup = document.getElementById("chrome-popup");
+            popup.classList.add("is-visible");
+            popup.setAttribute("aria-hidden", "false");
+        }
+        function hideChromePopup() {
+            const popup = document.getElementById("chrome-popup");
+            popup.classList.remove("is-visible");
+            popup.setAttribute("aria-hidden", "true");
+        }
+        // ESC closes popup
+        document.addEventListener("keydown", e => {
+            if (e.key === "Escape") hideChromePopup();
+        });
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        const mobileNav = document.getElementById('mobile-nav');
+
+        mobileMenuToggle.addEventListener('click', function () {
+            mobileNav.classList.toggle('active'); // toggles visibility only when clicked
+        });
+
 </script>
 <script>
-let lastScrollTop = 0;
-const nav = document.querySelector('.nav-container');
+        document.addEventListener("DOMContentLoaded", function () {
+            if (window.innerWidth <= 768) { // only mobile
+                const sidebar = document.querySelector('.left-sidebar');
 
-window.addEventListener('scroll', () => {
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                // Create toggle line
+                const toggleLine = document.createElement('div');
+                toggleLine.classList.add('toggle-line');
+                toggleLine.style.width = '4px';
+                toggleLine.style.height = '50px';
+                toggleLine.style.background = 'linear-gradient(to bottom, #16979D, #103A60)';
+                toggleLine.style.borderRadius = '2px';
+                toggleLine.style.cursor = 'pointer';
+                toggleLine.style.marginBottom = '10px';
+                toggleLine.style.transition = 'transform 0.3s ease';
 
-    if(scrollTop > lastScrollTop){
-        // Scrolling down → hide navbar and remove its space
-        nav.classList.add('hidden');
-    } else if(scrollTop < lastScrollTop){
-        // Scrolling up → show navbar
-        nav.classList.remove('hidden');
-    }
+                sidebar.prepend(toggleLine);
 
-    lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // avoid negative scroll
-});
+                // Click to toggle icons
+                toggleLine.addEventListener('click', function () {
+                    sidebar.classList.toggle('active');
+                });
 
+                // Initially hide icons
+                sidebar.querySelectorAll('.icon-link').forEach(icon => {
+                    icon.style.opacity = 0;
+                    icon.style.transform = 'translateX(-20px)';
+                    icon.style.transition = 'all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1)';
+                });
+            }
+        });
+</script>
+<script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const sidebar = document.querySelector('.left-sidebar');
+
+            // Create toggle line only once
+            if (sidebar && !sidebar.querySelector('.toggle-line')) {
+                const toggleLine = document.createElement('div');
+                toggleLine.classList.add('toggle-line');
+
+                // Add toggle line at top
+                sidebar.prepend(toggleLine);
+
+                // Hide icons initially on mobile
+                if (window.innerWidth <= 768) {
+                    sidebar.querySelectorAll('.icon-link').forEach(icon => {
+                        icon.style.opacity = 0;
+                        icon.style.transform = 'translateX(-20px)';
+                    });
+                }
+
+                // Click to toggle icons
+                toggleLine.addEventListener('click', function () {
+                    sidebar.classList.toggle('active');
+                });
+            }
+        });
+</script>
+
+
+
+
+<a href="#" id="scrollToTopBtn" class="scroll-to-top-btn" title="Scroll to top" aria-label="Scroll to top">
+    <i class="fa fa-arrow-up"></i> <!-- Simple up arrow -->
+</a>
+<script>
+        document.addEventListener("DOMContentLoaded", function () {
+            window.scrollTo(0, 0);
+        });
+</script>
+<script>
+        let lastScrollTop = 0;
+        const nav = document.querySelector('.nav-container');
+        const threshold = 50; // scroll distance before toggling
+        let navHidden = false;
+
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+            if (scrollTop > lastScrollTop + threshold && !navHidden) {
+                // user scrolled down past threshold → hide
+                nav.classList.add('hidden');
+                navHidden = true;
+            }
+            else if (scrollTop < lastScrollTop - threshold && navHidden) {
+                // user scrolled up past threshold → show
+                nav.classList.remove('hidden');
+                navHidden = false;
+            }
+
+            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+        });
 
 </script>
+<script>
+        document.addEventListener("DOMContentLoaded", function () {
+            window.scrollTo(0, 0);
+        });
+</script>
+
+
 </body>
+
 </html>
