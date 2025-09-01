@@ -1,300 +1,331 @@
 {% extends "base.html" %}
 
-{% block title %}About Us - Aarogya Hastha{% endblock %}
+{% block title %}Advanced Radiology & Imaging Center in Bangalore | CT Scan, MRI, X-Ray | Aarogya Hastha{% endblock %}
+
+{% block head %}
+{{ super() }}
+<meta name="description"
+    content="Get precise CT scans, MRI, ultrasound, and X-ray imaging at our radiology department in Bangalore. Accurate diagnostics for better treatment.">
+<meta name="keywords"
+    content="hospital Bangalore, multi-speciality hospital, healthcare India, medical facilities, expert doctors">
+<meta name="author" content="Aarogyahastha Pvt Ltd">
+<meta name="designer" content="Aarogyahastha Pvt Ltd">
+<meta name="publisher" content="Aarogyahastha Pvt Ltd">
+<meta name="no-email-collection" content="http://www.unspam.com/noemailcollection/">
+<meta name="robots" content="index,follow">
+<meta name="revisit-after" content="7 days">
+<meta name="distribution" content="web">
+<meta name="robots" content="noodp">
+<meta name="web_author" content="Aarogyahastha Pvt Ltd">
+<meta name="rating" content="general">
+<meta name="rating" content="safe for kids">
+<meta name="subject" content="Healthcare">
+<meta name="copyright" content="Copyright © 2025">
+<meta name="reply-to" content="info@aarogyahastha.com">
+<meta name="abstract"
+    content="We provide timely and specialized medical attention for patients experiencing life-threatening conditions, ensuring their urgent needs are met with the highest level of care.">
+<meta name="city" content="Bangalore">
+<meta name="country" content="India">
+<meta name="distribution" content="global">
+<meta name="classification" content="Healthcare, Hospital">
+<base href="/">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+{% endblock %}
 
 {% block content %}
-
-
-    <section class="department-banner" data-aos="fade-up" data-aos-offset="300" data-aos-easing="ease-in-sine">
-        <div class="container">
-            <div class="banner">
-                <img loading="lazy" src="/static/img/department/radiology.jpg" alt="">
-                <div class="text-box-1">
-                    <h1>Radiology</h1>
-                    <p>comprehensive and advanced imaging services</p>
-                </div>
+<section class="department-banner" data-aos="fade-up" data-aos-offset="300" data-aos-easing="ease-in-sine">
+    <div class="container">
+        <div class="banner">
+            <img loading="lazy" src="/static/img/department/radiology.jpg" alt="">
+            <div class="text-box-1">
+                <h1>Radiology</h1>
+                <p>comprehensive and advanced imaging services</p>
             </div>
         </div>
-    </section>
-    <section data-aos="fade-up" data-aos-offset="100" data-aos-easing="ease-in-sine">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-12">
-                    <blockquote class="blockquote blockquote-custom">
-                        <!-- <div class="blockquote-custom-icon shadow-sm"><i class="fa fa-quote-left"></i></div> -->
-                        <p class="mb-0 mt-2">Seeing beyond what meets the eye</p>
-                        <div class="blockquote-footer mt-4 text-end">Dr. Nguyen, Diagnostic Expert</div>
-                    </blockquote>
-                </div>
-                <div class="col-12">
-                    <p>The Radiology Department at Aarogya Hastha is always ready to provide comprehensive and advanced
-                        imaging services to aid in the detection, diagnosis, and treatment of various medical
-                        conditions. Our state-of-the-art equipment and highly trained staff ensure accurate and timely
-                        results for all our patients. </p>
-                </div>
+    </div>
+</section>
+<section data-aos="fade-up" data-aos-offset="100" data-aos-easing="ease-in-sine">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-12">
+                <blockquote class="blockquote blockquote-custom">
+                    <!-- <div class="blockquote-custom-icon shadow-sm"><i class="fa fa-quote-left"></i></div> -->
+                    <p class="mb-0 mt-2">Seeing beyond what meets the eye</p>
+                    <div class="blockquote-footer mt-4 text-end">Dr. Nguyen, Diagnostic Expert</div>
+                </blockquote>
+            </div>
+            <div class="col-12">
+                <p>The Radiology Department at Aarogya Hastha is always ready to provide comprehensive and advanced
+                    imaging services to aid in the detection, diagnosis, and treatment of various medical
+                    conditions. Our state-of-the-art equipment and highly trained staff ensure accurate and timely
+                    results for all our patients. </p>
             </div>
         </div>
-    </section>
-    <section data-aos="fade-up" data-aos-offset="300" data-aos-easing="ease-in-sine" class="department-section py-3">
-        <div class="container">
-            <h2>Our Services</h2>
-            <div class="row department-sub-services pb-4">
-                <div class="department-grid">
-                    <div class="item active">
-                        <h4 class="text-dark-blue">Digital X-Ray</h4>
-                        <p>Our advanced digital X-ray technology produces high-quality images with minimal radiation
-                            exposure, making it safe for patients of all ages.</p>
-                    </div>
-                    <div class="item">
-                        <h4 class="text-dark-blue">C-arm Procedures </h4>
-                        <p>Our C-arm machine allows for real-time imaging during surgeries and other procedures,
-                            providing precise guidance for the best outcomes.</p>
-                    </div>
-                    <div class="item">
-                        <h4 class="text-dark-blue">Ultrasound</h4>
-                        <p>We offer fully digitalized ultrasound facilities with high-resolution imaging for various
-                            organs and systems in the body.</p>
-                    </div>
-                    <div class="item">
-                        <h4 class="text-dark-blue">Ultrasound Guided Procedures</h4>
-                        <p>We perform minimally invasive procedures such as biopsies, drainages, and injections under
-                            ultrasound guidance, ensuring accuracy and safety.</p>
-                    </div>
-                    <div class="item">
-                        <h4 class="text-dark-blue">Ultrasound Colour Doppler Study</h4>
-                        <p>This procedure uses sound waves to create color images of blood vessels, aiding in the
-                            assessment of blood flow and identifying any abnormalities.</p>
-                    </div>
-                    <div class="item">
-                        <h4 class="text-dark-blue">3D/4D Scan</h4>
-                        <p>Our advanced ultrasound technology allows for the visualization of the fetus in three or four
-                            dimensions, providing parents with a clear image of their baby.</p>
-                    </div>
-                    <div class="item">
-                        <h4 class="text-dark-blue">CT Scan 96 Slice</h4>
-                        <p>Our 96-slice CT scanner produces highly detailed images, allowing for better visualization of
-                            various organs and structures in the body.</p>
-                    </div>
-                    <div class="item">
-                        <h4 class="text-dark-blue">Obstetric Imaging</h4>
-                        <p>Our obstetric imaging services include NT scan, anomaly scan, growth scan with BPP, and
-                            Doppler, allowing for the monitoring of fetal growth and development during pregnancy.</p>
-                    </div>
-                    <div class="item">
-                        <h4 class="text-dark-blue">Female Imaging</h4>
-                        <p>We provide specialized services for gynecological and breast ultrasound, ensuring
-                            comprehensive care for women's health.</p>
-                    </div>
-                    <div class="item">
-                        <h4 class="text-dark-blue">Vascular Imaging for Extremities</h4>
-                        <p>Our state-of-the-art vascular imaging technology helps in the diagnosis and treatment of
-                            various circulatory system disorders in the extremities.</p>
-                    </div>
-                    <div class="item">
-                        <h4 class="text-dark-blue">Foetal Scans</h4>
-                        <p>We offer a range of specialized fetal scans, including NT scan, Anomaly scan, Growth scan
-                            with BPP, and Doppler, providing a comprehensive assessment of fetal health.</p>
-                    </div>
-                    <div class="item">
-                        <h4 class="text-dark-blue">General USG</h4>
-                        <p>Our ultrasound services also cover abdominal and pelvic scans, soft tissue scans,
-                            sonomammography, thyroid scans, and vascular dopplers.</p>
-                    </div>
-                    <div class="item">
-                        <h4 class="text-dark-blue">HSG Procedure</h4>
-                        <p>Our HSG procedure uses X-ray and contrast dye to evaluate the female reproductive system,
-                            aiding in the diagnosis and treatment of various conditions.</p>
-                    </div>
-                </div>
-                <div class="department-sub-services-details">
+    </div>
+</section>
+<section data-aos="fade-up" data-aos-offset="300" data-aos-easing="ease-in-sine" class="department-section py-3">
+    <div class="container">
+        <h2>Our Services</h2>
+        <div class="row department-sub-services pb-4">
+            <div class="department-grid">
+                <div class="item active">
                     <h4 class="text-dark-blue">Digital X-Ray</h4>
                     <p>Our advanced digital X-ray technology produces high-quality images with minimal radiation
                         exposure, making it safe for patients of all ages.</p>
                 </div>
-                <p class="content-highlight">Our team of experienced radiologists and technicians work together to
-                    provide accurate and timely results, helping physicians make informed decisions for their patients.
-                    At Aarogya Hastha, we strive to provide the best care for all our patients.</p>
+                <div class="item">
+                    <h4 class="text-dark-blue">C-arm Procedures </h4>
+                    <p>Our C-arm machine allows for real-time imaging during surgeries and other procedures,
+                        providing precise guidance for the best outcomes.</p>
+                </div>
+                <div class="item">
+                    <h4 class="text-dark-blue">Ultrasound</h4>
+                    <p>We offer fully digitalized ultrasound facilities with high-resolution imaging for various
+                        organs and systems in the body.</p>
+                </div>
+                <div class="item">
+                    <h4 class="text-dark-blue">Ultrasound Guided Procedures</h4>
+                    <p>We perform minimally invasive procedures such as biopsies, drainages, and injections under
+                        ultrasound guidance, ensuring accuracy and safety.</p>
+                </div>
+                <div class="item">
+                    <h4 class="text-dark-blue">Ultrasound Colour Doppler Study</h4>
+                    <p>This procedure uses sound waves to create color images of blood vessels, aiding in the
+                        assessment of blood flow and identifying any abnormalities.</p>
+                </div>
+                <div class="item">
+                    <h4 class="text-dark-blue">3D/4D Scan</h4>
+                    <p>Our advanced ultrasound technology allows for the visualization of the fetus in three or four
+                        dimensions, providing parents with a clear image of their baby.</p>
+                </div>
+                <div class="item">
+                    <h4 class="text-dark-blue">CT Scan 96 Slice</h4>
+                    <p>Our 96-slice CT scanner produces highly detailed images, allowing for better visualization of
+                        various organs and structures in the body.</p>
+                </div>
+                <div class="item">
+                    <h4 class="text-dark-blue">Obstetric Imaging</h4>
+                    <p>Our obstetric imaging services include NT scan, anomaly scan, growth scan with BPP, and
+                        Doppler, allowing for the monitoring of fetal growth and development during pregnancy.</p>
+                </div>
+                <div class="item">
+                    <h4 class="text-dark-blue">Female Imaging</h4>
+                    <p>We provide specialized services for gynecological and breast ultrasound, ensuring
+                        comprehensive care for women's health.</p>
+                </div>
+                <div class="item">
+                    <h4 class="text-dark-blue">Vascular Imaging for Extremities</h4>
+                    <p>Our state-of-the-art vascular imaging technology helps in the diagnosis and treatment of
+                        various circulatory system disorders in the extremities.</p>
+                </div>
+                <div class="item">
+                    <h4 class="text-dark-blue">Foetal Scans</h4>
+                    <p>We offer a range of specialized fetal scans, including NT scan, Anomaly scan, Growth scan
+                        with BPP, and Doppler, providing a comprehensive assessment of fetal health.</p>
+                </div>
+                <div class="item">
+                    <h4 class="text-dark-blue">General USG</h4>
+                    <p>Our ultrasound services also cover abdominal and pelvic scans, soft tissue scans,
+                        sonomammography, thyroid scans, and vascular dopplers.</p>
+                </div>
+                <div class="item">
+                    <h4 class="text-dark-blue">HSG Procedure</h4>
+                    <p>Our HSG procedure uses X-ray and contrast dye to evaluate the female reproductive system,
+                        aiding in the diagnosis and treatment of various conditions.</p>
+                </div>
             </div>
+            <div class="department-sub-services-details">
+                <h4 class="text-dark-blue">Digital X-Ray</h4>
+                <p>Our advanced digital X-ray technology produces high-quality images with minimal radiation
+                    exposure, making it safe for patients of all ages.</p>
+            </div>
+            <p class="content-highlight">Our team of experienced radiologists and technicians work together to
+                provide accurate and timely results, helping physicians make informed decisions for their patients.
+                At Aarogya Hastha, we strive to provide the best care for all our patients.</p>
         </div>
-    </section>
+    </div>
+</section>
 
-    <section class=" py-3">
-        <div class="container">
-            <h2>Our Specialists</h2>
-            <div id="doctors-list" class="appointment-section">
-                <div class="doctor-section mb-5">
-                    <div class="row g-3">
-                        <div class="col-lg-6 doctor-item" data-doctor="shobha-hs">
-                            <div class="img-box"><img class="img-fluid" src="/static/img/doctors/shobha-hs-01.jpg"></a>
-                            </div>
-                            <div class="doctor-box">
-                                <h3>Dr. Shobha H S</h3>
-                                <h4>Senior Consultant – Radiology, Foetal Medicine</h4>
-                                <p class="mt-4"><small><b>Languages spoken:</b> <br />Kannada, English, and
-                                        Hindi</small></p><a class="book-btn" href="https://app.fyndbetter.com/ahh_apt"
-                                    target="_blank">BOOK APPOINTMENT</a>
-                            </div>
+<section class=" py-3">
+    <div class="container">
+        <h2>Our Specialists</h2>
+        <div id="doctors-list" class="appointment-section">
+            <div class="doctor-section mb-5">
+                <div class="row g-3">
+                    <div class="col-lg-6 doctor-item" data-doctor="shobha-hs">
+                        <div class="img-box"><img class="img-fluid" src="/static/img/doctors/shobha-hs-01.jpg"></a>
                         </div>
-                        <div class="col-lg-6 doctor-item" data-doctor="anusha-u">
-                            <div class="img-box"><img class="img-fluid" src="/static/img/doctors/anusha-u-01.jpg"></a>
-                            </div>
-                            <div class="doctor-box">
-                                <h3>Dr. Anusha U</h3>
-                                <h4>Consultant - Radiology</h4>
-                                <p class="mt-4"><small><b>Languages spoken:</b> <br />English, Hindi, and
-                                        Kannada</small></p>
-                                <p class="mt-4"><small><b>Consultation</b><br />Monday to Saturday <br />09:30&nbsp;AM
-                                        to 12:30&nbsp;PM</small></p><a class="book-btn"
-                                    href="https://app.fyndbetter.com/ahh_apt" target="_blank">BOOK APPOINTMENT</a>
-                            </div>
+                        <div class="doctor-box">
+                            <h3>Dr. Shobha H S</h3>
+                            <h4>Senior Consultant – Radiology, Foetal Medicine</h4>
+                            <p class="mt-4"><small><b>Languages spoken:</b> <br />Kannada, English, and
+                                    Hindi</small></p><a class="book-btn" href="https://app.fyndbetter.com/ahh_apt"
+                                target="_blank">BOOK APPOINTMENT</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 doctor-item" data-doctor="anusha-u">
+                        <div class="img-box"><img class="img-fluid" src="/static/img/doctors/anusha-u-01.jpg"></a>
+                        </div>
+                        <div class="doctor-box">
+                            <h3>Dr. Anusha U</h3>
+                            <h4>Consultant - Radiology</h4>
+                            <p class="mt-4"><small><b>Languages spoken:</b> <br />English, Hindi, and
+                                    Kannada</small></p>
+                            <p class="mt-4"><small><b>Consultation</b><br />Monday to Saturday <br />09:30&nbsp;AM
+                                    to 12:30&nbsp;PM</small></p><a class="book-btn"
+                                href="https://app.fyndbetter.com/ahh_apt" target="_blank">BOOK APPOINTMENT</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-    <section data-aos-easing="ease-in-sine" class="service-carousel-section py-5">
-        <div class="container d-flex justify-content-center">
-            <div class="owl-carousel service-carousel">
-                <a href="/departments/general_surgery" class="item"
-                    style="--i:url(https://aarogyahastha.com/img/department/icons/general-surgery.svg);"
-                    data-department="general-surgery"><img class="dept-icon" loading="lazy"
-                        src="/static/img/department/icons/general-surgery.svg">
-                    <div class="icon"></div>
-                    <h4 class="text-dark-blue my-md-3">General Surgery</h4>
-                </a><a href="/departments/neurosurgery" class="item"
-                    style="--i:url(https://aarogyahastha.com/img/department/icons/neurosurgery.svg);"
-                    data-department="neurosurgery"><img class="dept-icon" loading="lazy"
-                        src="/static/img/department/icons/neurosurgery.svg">
-                    <div class="icon"></div>
-                    <h4 class="text-dark-blue my-md-3">Neurosurgery</h4>
-                </a><a href="/departments/orthopaedics" class="item"
-                    style="--i:url(https://aarogyahastha.com/img/department/icons/orthopaedics.svg);"
-                    data-department="orthopaedics"><img class="dept-icon" loading="lazy"
-                        src="/static/img/department/icons/orthopaedics.svg">
-                    <div class="icon"></div>
-                    <h4 class="text-dark-blue my-md-3">Orthopaedics</h4>
-                </a><a href="/departments/anaesthesia" class="item"
-                    style="--i:url(https://aarogyahastha.com/img/department/icons/anaesthesia.svg);"
-                    data-department="anaesthesia"><img class="dept-icon" loading="lazy"
-                        src="/static/img/department/icons/anaesthesia.svg">
-                    <div class="icon"></div>
-                    <h4 class="text-dark-blue my-md-3"> Anaesthesiology & Critical Care</h4>
-                </a><a href="/departments/pain_medicine" class="item"
-                    style="--i:url(https://aarogyahastha.com/img/department/icons/pain-medicine.svg);"
-                    data-department="pain-medicine"><img class="dept-icon" loading="lazy"
-                        src="/static/img/department/icons/pain-medicine.svg">
-                    <div class="icon"></div>
-                    <h4 class="text-dark-blue my-md-3">Pain Medicine</h4>
-                </a><a href="/departments/general_medicine" class="item"
-                    style="--i:url(https://aarogyahastha.com/img/department/icons/general-medicine.svg);"
-                    data-department="general-medicine"><img class="dept-icon" loading="lazy"
-                        src="/static/img/department/icons/general-medicine.svg">
-                    <div class="icon"></div>
-                    <h4 class="text-dark-blue my-md-3">General Medicine</h4>
-                </a><a href="/departments/lab_medicine" class="item"
-                    style="--i:url(https://aarogyahastha.com/img/department/icons/lab-medicine.svg);"
-                    data-department="lab-medicine"><img class="dept-icon" loading="lazy"
-                        src="/static/img/department/icons/lab-medicine.svg">
-                    <div class="icon"></div>
-                    <h4 class="text-dark-blue my-md-3">Lab Medicine</h4>
-                </a><a href="/departments/paediatrics" class="item"
-                    style="--i:url(https://aarogyahastha.com/img/department/icons/paediatrics.svg);"
-                    data-department="paediatrics"><img class="dept-icon" loading="lazy"
-                        src="/static/img/department/icons/paediatrics.svg">
-                    <div class="icon"></div>
-                    <h4 class="text-dark-blue my-md-3">Paediatrics</h4>
-                </a><a href="/departments/physiotherapy" class="item"
-                    style="--i:url(https://aarogyahastha.com/img/department/icons/physiotherapy.svg);"
-                    data-department="physiotherapy"><img class="dept-icon" loading="lazy"
-                        src="/static/img/department/icons/physiotherapy.svg">
-                    <div class="icon"></div>
-                    <h4 class="text-dark-blue my-md-3">Physiotherapy</h4>
-                </a><a href="/departments/dermatology" class="item"
-                    style="--i:url(https://aarogyahastha.com/img/department/icons/dermatology.svg);"
-                    data-department="dermatology"><img class="dept-icon" loading="lazy"
-                        src="/static/img/department/icons/dermatology.svg">
-                    <div class="icon"></div>
-                    <h4 class="text-dark-blue my-md-3">Dermatology</h4>
-                </a><a href="/departments/ent" class="item"
-                    style="--i:url(https://aarogyahastha.com/img/department/icons/ent.svg);" data-department="ent"><img
-                        class="dept-icon" loading="lazy" src="/static/img/department/icons/ent.svg">
-                    <div class="icon"></div>
-                    <h4 class="text-dark-blue my-md-3"> Ear, Nose, and Throat (ENT)</h4>
-                </a><a href="/departments/emergency_medicine" class="item"
-                    style="--i:url(https://aarogyahastha.com/img/department/icons/emergency-medicine.svg);"
-                    data-department="emergency-medicine"><img class="dept-icon" loading="lazy"
-                        src="/static/img/department/icons/emergency-medicine.svg">
-                    <div class="icon"></div>
-                    <h4 class="text-dark-blue my-md-3">Emergency Medicine</h4>
-                </a><a href="/departments/nephrology" class="item"
-                    style="--i:url(https://aarogyahastha.com/img/department/icons/nephrology.svg);"
-                    data-department="nephrology"><img class="dept-icon" loading="lazy"
-                        src="/static/img/department/icons/nephrology.svg">
-                    <div class="icon"></div>
-                    <h4 class="text-dark-blue my-md-3">Nephrology</h4>
-                </a><a href="/departments/urology" class="item"
-                    style="--i:url(https://aarogyahastha.com/img/department/icons/urology.svg);"
-                    data-department="urology"><img class="dept-icon" loading="lazy"
-                        src="/static/img/department/icons/urology.svg">
-                    <div class="icon"></div>
-                    <h4 class="text-dark-blue my-md-3">Urology</h4>
-                </a><a href="/departments/medical_gastroenterology" class="item"
-                    style="--i:url(https://aarogyahastha.com/img/department/icons/medical-gastroenterology.svg);"
-                    data-department="medical-gastroenterology"><img class="dept-icon" loading="lazy"
-                        src="/static/img/department/icons/medical-gastroenterology.svg">
-                    <div class="icon"></div>
-                    <h4 class="text-dark-blue my-md-3">Medical Gastroenterology</h4>
-                </a><a href="/departments/minimal_access_surgery" class="item"
-                    style="--i:url(https://aarogyahastha.com/img/department/icons/minimal-access-surgery.svg);"
-                    data-department="minimal-access-surgery"><img class="dept-icon" loading="lazy"
-                        src="/static/img/department/icons/minimal-access-surgery.svg">
-                    <div class="icon"></div>
-                    <h4 class="text-dark-blue my-md-3">Minimal Access Surgery</h4>
-                </a><a href="/departments/plastic_surgery" class="item"
-                    style="--i:url(https://aarogyahastha.com/img/department/icons/plastic-surgery.svg);"
-                    data-department="plastic-surgery"><img class="dept-icon" loading="lazy"
-                        src="/static/img/department/icons/plastic-surgery.svg">
-                    <div class="icon"></div>
-                    <h4 class="text-dark-blue my-md-3">Plastic Surgery</h4>
-                </a><a href="/departments/obg" class="item"
-                    style="--i:url(https://aarogyahastha.com/img/department/icons/obg.svg);" data-department="obg"><img
-                        class="dept-icon" loading="lazy" src="/static/img/department/icons/obg.svg">
-                    <div class="icon"></div>
-                    <h4 class="text-dark-blue my-md-3">Obstetrics & Gynaecology</h4>
-                </a><a href="/departments/surgical_gastroenterology" class="item"
-                    style="--i:url(https://aarogyahastha.com/img/department/icons/surgical-gastroenterology.svg);"
-                    data-department="surgical-gastroenterology"><img class="dept-icon" loading="lazy"
-                        src="/static/img/department/icons/surgical-gastroenterology.svg">
-                    <div class="icon"></div>
-                    <h4 class="text-dark-blue my-md-3">Surgical Gastroenterology</h4>
-                </a><a href="/departments/radiology" class="item"
-                    style="--i:url(https://aarogyahastha.com/img/department/icons/radiology.svg);"
-                    data-department="radiology"><img class="dept-icon" loading="lazy"
-                        src="/static/img/department/icons/radiology.svg">
-                    <div class="icon"></div>
-                    <h4 class="text-dark-blue my-md-3">Radiology</h4>
-                </a>
-            </div>
+    </div>
+</section>
+<section data-aos-easing="ease-in-sine" class="service-carousel-section py-5">
+    <div class="container d-flex justify-content-center">
+        <div class="owl-carousel service-carousel">
+            <a href="/departments/general_surgery" class="item"
+                style="--i:url(https://aarogyahastha.com/img/department/icons/general-surgery.svg);"
+                data-department="general-surgery"><img class="dept-icon" loading="lazy"
+                    src="/static/img/department/icons/general-surgery.svg">
+                <div class="icon"></div>
+                <h4 class="text-dark-blue my-md-3">General Surgery</h4>
+            </a><a href="/departments/neurosurgery" class="item"
+                style="--i:url(https://aarogyahastha.com/img/department/icons/neurosurgery.svg);"
+                data-department="neurosurgery"><img class="dept-icon" loading="lazy"
+                    src="/static/img/department/icons/neurosurgery.svg">
+                <div class="icon"></div>
+                <h4 class="text-dark-blue my-md-3">Neurosurgery</h4>
+            </a><a href="/departments/orthopaedics" class="item"
+                style="--i:url(https://aarogyahastha.com/img/department/icons/orthopaedics.svg);"
+                data-department="orthopaedics"><img class="dept-icon" loading="lazy"
+                    src="/static/img/department/icons/orthopaedics.svg">
+                <div class="icon"></div>
+                <h4 class="text-dark-blue my-md-3">Orthopaedics</h4>
+            </a><a href="/departments/anaesthesia" class="item"
+                style="--i:url(https://aarogyahastha.com/img/department/icons/anaesthesia.svg);"
+                data-department="anaesthesia"><img class="dept-icon" loading="lazy"
+                    src="/static/img/department/icons/anaesthesia.svg">
+                <div class="icon"></div>
+                <h4 class="text-dark-blue my-md-3"> Anaesthesiology & Critical Care</h4>
+            </a><a href="/departments/pain_medicine" class="item"
+                style="--i:url(https://aarogyahastha.com/img/department/icons/pain-medicine.svg);"
+                data-department="pain-medicine"><img class="dept-icon" loading="lazy"
+                    src="/static/img/department/icons/pain-medicine.svg">
+                <div class="icon"></div>
+                <h4 class="text-dark-blue my-md-3">Pain Medicine</h4>
+            </a><a href="/departments/general_medicine" class="item"
+                style="--i:url(https://aarogyahastha.com/img/department/icons/general-medicine.svg);"
+                data-department="general-medicine"><img class="dept-icon" loading="lazy"
+                    src="/static/img/department/icons/general-medicine.svg">
+                <div class="icon"></div>
+                <h4 class="text-dark-blue my-md-3">General Medicine</h4>
+            </a><a href="/departments/lab_medicine" class="item"
+                style="--i:url(https://aarogyahastha.com/img/department/icons/lab-medicine.svg);"
+                data-department="lab-medicine"><img class="dept-icon" loading="lazy"
+                    src="/static/img/department/icons/lab-medicine.svg">
+                <div class="icon"></div>
+                <h4 class="text-dark-blue my-md-3">Lab Medicine</h4>
+            </a><a href="/departments/paediatrics" class="item"
+                style="--i:url(https://aarogyahastha.com/img/department/icons/paediatrics.svg);"
+                data-department="paediatrics"><img class="dept-icon" loading="lazy"
+                    src="/static/img/department/icons/paediatrics.svg">
+                <div class="icon"></div>
+                <h4 class="text-dark-blue my-md-3">Paediatrics</h4>
+            </a><a href="/departments/physiotherapy" class="item"
+                style="--i:url(https://aarogyahastha.com/img/department/icons/physiotherapy.svg);"
+                data-department="physiotherapy"><img class="dept-icon" loading="lazy"
+                    src="/static/img/department/icons/physiotherapy.svg">
+                <div class="icon"></div>
+                <h4 class="text-dark-blue my-md-3">Physiotherapy</h4>
+            </a><a href="/departments/dermatology" class="item"
+                style="--i:url(https://aarogyahastha.com/img/department/icons/dermatology.svg);"
+                data-department="dermatology"><img class="dept-icon" loading="lazy"
+                    src="/static/img/department/icons/dermatology.svg">
+                <div class="icon"></div>
+                <h4 class="text-dark-blue my-md-3">Dermatology</h4>
+            </a><a href="/departments/ent" class="item"
+                style="--i:url(https://aarogyahastha.com/img/department/icons/ent.svg);" data-department="ent"><img
+                    class="dept-icon" loading="lazy" src="/static/img/department/icons/ent.svg">
+                <div class="icon"></div>
+                <h4 class="text-dark-blue my-md-3"> Ear, Nose, and Throat (ENT)</h4>
+            </a><a href="/departments/emergency_medicine" class="item"
+                style="--i:url(https://aarogyahastha.com/img/department/icons/emergency-medicine.svg);"
+                data-department="emergency-medicine"><img class="dept-icon" loading="lazy"
+                    src="/static/img/department/icons/emergency-medicine.svg">
+                <div class="icon"></div>
+                <h4 class="text-dark-blue my-md-3">Emergency Medicine</h4>
+            </a><a href="/departments/nephrology" class="item"
+                style="--i:url(https://aarogyahastha.com/img/department/icons/nephrology.svg);"
+                data-department="nephrology"><img class="dept-icon" loading="lazy"
+                    src="/static/img/department/icons/nephrology.svg">
+                <div class="icon"></div>
+                <h4 class="text-dark-blue my-md-3">Nephrology</h4>
+            </a><a href="/departments/urology" class="item"
+                style="--i:url(https://aarogyahastha.com/img/department/icons/urology.svg);"
+                data-department="urology"><img class="dept-icon" loading="lazy"
+                    src="/static/img/department/icons/urology.svg">
+                <div class="icon"></div>
+                <h4 class="text-dark-blue my-md-3">Urology</h4>
+            </a><a href="/departments/medical_gastroenterology" class="item"
+                style="--i:url(https://aarogyahastha.com/img/department/icons/medical-gastroenterology.svg);"
+                data-department="medical-gastroenterology"><img class="dept-icon" loading="lazy"
+                    src="/static/img/department/icons/medical-gastroenterology.svg">
+                <div class="icon"></div>
+                <h4 class="text-dark-blue my-md-3">Medical Gastroenterology</h4>
+            </a><a href="/departments/minimal_access_surgery" class="item"
+                style="--i:url(https://aarogyahastha.com/img/department/icons/minimal-access-surgery.svg);"
+                data-department="minimal-access-surgery"><img class="dept-icon" loading="lazy"
+                    src="/static/img/department/icons/minimal-access-surgery.svg">
+                <div class="icon"></div>
+                <h4 class="text-dark-blue my-md-3">Minimal Access Surgery</h4>
+            </a><a href="/departments/plastic_surgery" class="item"
+                style="--i:url(https://aarogyahastha.com/img/department/icons/plastic-surgery.svg);"
+                data-department="plastic-surgery"><img class="dept-icon" loading="lazy"
+                    src="/static/img/department/icons/plastic-surgery.svg">
+                <div class="icon"></div>
+                <h4 class="text-dark-blue my-md-3">Plastic Surgery</h4>
+            </a><a href="/departments/obg" class="item"
+                style="--i:url(https://aarogyahastha.com/img/department/icons/obg.svg);" data-department="obg"><img
+                    class="dept-icon" loading="lazy" src="/static/img/department/icons/obg.svg">
+                <div class="icon"></div>
+                <h4 class="text-dark-blue my-md-3">Obstetrics & Gynaecology</h4>
+            </a><a href="/departments/surgical_gastroenterology" class="item"
+                style="--i:url(https://aarogyahastha.com/img/department/icons/surgical-gastroenterology.svg);"
+                data-department="surgical-gastroenterology"><img class="dept-icon" loading="lazy"
+                    src="/static/img/department/icons/surgical-gastroenterology.svg">
+                <div class="icon"></div>
+                <h4 class="text-dark-blue my-md-3">Surgical Gastroenterology</h4>
+            </a><a href="/departments/radiology" class="item"
+                style="--i:url(https://aarogyahastha.com/img/department/icons/radiology.svg);"
+                data-department="radiology"><img class="dept-icon" loading="lazy"
+                    src="/static/img/department/icons/radiology.svg">
+                <div class="icon"></div>
+                <h4 class="text-dark-blue my-md-3">Radiology</h4>
+            </a>
         </div>
-    </section>
-    
-    <!-- scripts -->
-    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-    <script src="/static/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="/static/js/script.js"></script>
-    <script src="https://fyndbetter.com/chatbot/aarogya_chatbot"></script>
-    <script>
-        $(".book-apt").on('click', function () {
-            var url = $(this).data("url");
-            window.open(url, '_blank');
-        });
-    </script>
-    <a href="#" id="scrollToTopBtn" class="scroll-to-top-btn" title="Scroll to top" aria-label="Scroll to top">
-        <i class="fa fa-arrow-up"></i> <!-- Simple up arrow -->
-    </a>
+    </div>
+</section>
+
+<!-- scripts -->
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="/static/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="/static/js/script.js"></script>
+<script src="https://fyndbetter.com/chatbot/aarogya_chatbot"></script>
+<script>
+    $(".book-apt").on('click', function () {
+        var url = $(this).data("url");
+        window.open(url, '_blank');
+    });
+</script>
+<a href="#" id="scrollToTopBtn" class="scroll-to-top-btn" title="Scroll to top" aria-label="Scroll to top">
+    <i class="fa fa-arrow-up"></i> <!-- Simple up arrow -->
+</a>
 
 <script>
     $(document).ready(function () { initDepartmentPageActions(); })

@@ -1,180 +1,213 @@
 {% extends "base.html" %}
 
-{% block title %}About Us - Aarogya Hastha{% endblock %}
+{% block title %}Aarogya Hastha Hospitals | Best [Multi-Speciality] Hospital in Bangalore, India{% endblock %}
+
+{% block head %}
+{{ super() }}
+<meta name="description"
+    content="Discover the best hospitals in Bangalore, India. Find expert care, advanced facilities & trusted doctors near you. Visit Aarogya Hastha Hospitals today!">
+<meta name="keywords"
+    content="hospital Bangalore, multi-speciality hospital, healthcare India, medical facilities, expert doctors">
+<meta name="author" content="Aarogyahastha Pvt Ltd">
+<meta name="designer" content="Aarogyahastha Pvt Ltd">
+<meta name="publisher" content="Aarogyahastha Pvt Ltd">
+<meta name="no-email-collection" content="http://www.unspam.com/noemailcollection/">
+<meta name="robots" content="index,follow">
+<meta name="revisit-after" content="7 days">
+<meta name="distribution" content="web">
+<meta name="robots" content="noodp">
+<meta name="web_author" content="Aarogyahastha Pvt Ltd">
+<meta name="rating" content="general">
+<meta name="rating" content="safe for kids">
+<meta name="subject" content="Healthcare">
+<meta name="copyright" content="Copyright © 2025">
+<meta name="reply-to" content="info@aarogyahastha.com">
+<meta name="abstract"
+    content="We provide timely and specialized medical attention for patients experiencing life-threatening conditions, ensuring their urgent needs are met with the highest level of care.">
+<meta name="city" content="Bangalore">
+<meta name="country" content="India">
+<meta name="distribution" content="global">
+<meta name="classification" content="Healthcare, Hospital">
+<base href="/">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+{% endblock %}
 
 {% block content %}
-    <section class="department-banner" data-aos="fade-up" data-aos-offset="300" data-aos-easing="ease-in-sine">
-        <div class="container">
-            <div class="banner">
-                <img loading="lazy" src="../static/img/banners/privacy-policy.jpg" alt="">
-                <div class="text-box-1">
-                    <h1>PRIVACY POLICY</h1>
+<section class="department-banner" data-aos="fade-up" data-aos-offset="300" data-aos-easing="ease-in-sine">
+    <div class="container">
+        <div class="banner">
+            <img loading="lazy" src="../static/img/banners/privacy-policy.jpg" alt="">
+            <div class="text-box-1">
+                <h1>PRIVACY POLICY</h1>
 
-                </div>
             </div>
         </div>
-    </section>
-    <section data-aos="fade-up" data-aos-offset="300" data-aos-easing="ease-in-sine" class="contact-details py-5 my-1">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-md-10 col-lg-9">
-                    <p>This privacy policy elucidated the information handling practices of AHHPL (hereinafter referred
-                        to as “the Hospital,” “we,” or “our”) in accordance with prevalent Indian legislation, rules,
-                        and regulations, including Information Technology (Reasonable Security Practices and procedures
-                        and Sensitive Personal Data or Information) Rules 2011 under the Information Technology Act,
-                        2000, as well as international standards.</p>
-                    <p>We are committed to protecting the privacy rights of all individuals whose personal data is
-                        provided to us. The instant policy is established by keeping the foremost standards and with the
-                        commitment to protect privacy and personal information. All services provided and any use or
-                        access of the services are subject to the instant privacy policy. </p>
-                    <ol class="big-marker">
-                        <li>
-                            <h2>CATEGORIES OF DATA COLLECTED:</h2>
-                            <p>We collect and process diverse categories of data, encompassing but not limited to:</p>
-                            <ul class="with-bullet-point">
-                                <li><b>Personal Identifiable Information (PII):</b> Including but not limited to name,
-                                    date of birth, contact details, addresses and other demographic information/data.
-                                </li>
-                                <li><b>Health Information (HI):</b> Comprising medical histories, treatment records,
-                                    diagnostic reports, and other health-related information.</li>
-                                <li><b>Financial Data:</b> This includes payment particulars, insurance information,
-                                    billing records, banking partners, etc.</li>
-                                <li><b>Electronic Information:</b> This includes IP addresses, cookies, and technical
-                                    data generated during the interaction with our online platform. </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <h2>PURPOSE OF DATA PROCESSING:</h2>
-                            <p>We undertake data processing for the following lawful purposes:</p>
-                            <ul class="with-bullet-point">
-                                <li><b>Provision of Healthcare Services:</b> To manage appointments, facilitate
-                                    treatments and administer healthcare services.</li>
-                                <li><b>Administrative Operations</b>: including billing, insurance processing, and
-                                    internal record-keeping to maintain the efficiency of hospital functions. </li>
-                                <li><b>Legal Compliances</b>: to adhere to statutory and regulatory obligations and
-                                    other necessary legal requirements. </li>
-                                <li><b>Enhancement of Services</b>: Analysing data to improve the quality and efficacy
-                                    of healthcare services provided by the Hospital.</li>
-                            </ul>
-                        </li>
-                        <li>
-                            <h2>DATA DISCLOSURE:</h2>
-                            <p>We may disclose data collected to the following entities.</p>
-                            <ul class="with-bullet-point">
-                                <li><b>Healthcare Professionals:</b> Authorised medical personnel directly involved in
-                                    your care.</li>
-                                <li><b>Business Associates:</b> Third-party service providers who assist in the delivery
-                                    and administration of healthcare services.</li>
-                                <li><b>Legal Authorities:</b> In instances where we are compelled by law or during the
-                                    course of legal proceedings.</li>
-                            </ul>
-                        </li>
-                        <li>
-                            <h2>INFORMATION SECURITY MEASURES: </h2>
-                            <p>The Hospital employs robust and reasonable security measures to safeguard data against
-                                unauthorised access, disclosure, alteration, and destruction. Such measures include, but
-                                are not limited to, encryption protocols, access controls and regular security audits as
-                                prescribed by law. We ensure strict compliance with all data protection laws.</p>
-                        </li>
-                        <li>
-                            <h2>DATA SUBJECT RIGHTS:</h2>
-                            <p>Data subjects have the following rights:</p>
-                            <ul class="with-bullet-point">
-                                <li><b>Access and Copy:</b> The right to access and obtain a copy of their health
-                                    information. </li>
-                                <li><b>Correction</b>: The right to request correction to any inaccuracies or
-                                    incompleteness in their information. </li>
-                                <li><b>Objection</b>: The right to object to the processing of their information for
-                                    certain purposes.</li>
-                                <li><b>Right to be forgotten</b>: The right to request for deletion of data collected.
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <h2>CONSENT MECHANISM:</h2>
-                            <p>By availing of the Hospital's services, individuals implicitly consent to the
-                                stipulations delineated in this policy and acknowledge that it is part of the terms of
-                                use of the website and other services. By affirming this policy, you provide your
-                                consent to such collection of data as required under applicable law. </p>
-                        </li>
-                        <li>
-                            <h2>POLICY AMENDMENT:</h2>
-                            <p>This Privacy Policy may be amended periodically, and any revision will be made effective
-                                and available on the official website of the Hospital on its date of amendment. </p>
-                        </li>
-                    </ol>
-                </div>
+    </div>
+</section>
+<section data-aos="fade-up" data-aos-offset="300" data-aos-easing="ease-in-sine" class="contact-details py-5 my-1">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-10 col-lg-9">
+                <p>This privacy policy elucidated the information handling practices of AHHPL (hereinafter referred
+                    to as “the Hospital,” “we,” or “our”) in accordance with prevalent Indian legislation, rules,
+                    and regulations, including Information Technology (Reasonable Security Practices and procedures
+                    and Sensitive Personal Data or Information) Rules 2011 under the Information Technology Act,
+                    2000, as well as international standards.</p>
+                <p>We are committed to protecting the privacy rights of all individuals whose personal data is
+                    provided to us. The instant policy is established by keeping the foremost standards and with the
+                    commitment to protect privacy and personal information. All services provided and any use or
+                    access of the services are subject to the instant privacy policy. </p>
+                <ol class="big-marker">
+                    <li>
+                        <h2>CATEGORIES OF DATA COLLECTED:</h2>
+                        <p>We collect and process diverse categories of data, encompassing but not limited to:</p>
+                        <ul class="with-bullet-point">
+                            <li><b>Personal Identifiable Information (PII):</b> Including but not limited to name,
+                                date of birth, contact details, addresses and other demographic information/data.
+                            </li>
+                            <li><b>Health Information (HI):</b> Comprising medical histories, treatment records,
+                                diagnostic reports, and other health-related information.</li>
+                            <li><b>Financial Data:</b> This includes payment particulars, insurance information,
+                                billing records, banking partners, etc.</li>
+                            <li><b>Electronic Information:</b> This includes IP addresses, cookies, and technical
+                                data generated during the interaction with our online platform. </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h2>PURPOSE OF DATA PROCESSING:</h2>
+                        <p>We undertake data processing for the following lawful purposes:</p>
+                        <ul class="with-bullet-point">
+                            <li><b>Provision of Healthcare Services:</b> To manage appointments, facilitate
+                                treatments and administer healthcare services.</li>
+                            <li><b>Administrative Operations</b>: including billing, insurance processing, and
+                                internal record-keeping to maintain the efficiency of hospital functions. </li>
+                            <li><b>Legal Compliances</b>: to adhere to statutory and regulatory obligations and
+                                other necessary legal requirements. </li>
+                            <li><b>Enhancement of Services</b>: Analysing data to improve the quality and efficacy
+                                of healthcare services provided by the Hospital.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h2>DATA DISCLOSURE:</h2>
+                        <p>We may disclose data collected to the following entities.</p>
+                        <ul class="with-bullet-point">
+                            <li><b>Healthcare Professionals:</b> Authorised medical personnel directly involved in
+                                your care.</li>
+                            <li><b>Business Associates:</b> Third-party service providers who assist in the delivery
+                                and administration of healthcare services.</li>
+                            <li><b>Legal Authorities:</b> In instances where we are compelled by law or during the
+                                course of legal proceedings.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h2>INFORMATION SECURITY MEASURES: </h2>
+                        <p>The Hospital employs robust and reasonable security measures to safeguard data against
+                            unauthorised access, disclosure, alteration, and destruction. Such measures include, but
+                            are not limited to, encryption protocols, access controls and regular security audits as
+                            prescribed by law. We ensure strict compliance with all data protection laws.</p>
+                    </li>
+                    <li>
+                        <h2>DATA SUBJECT RIGHTS:</h2>
+                        <p>Data subjects have the following rights:</p>
+                        <ul class="with-bullet-point">
+                            <li><b>Access and Copy:</b> The right to access and obtain a copy of their health
+                                information. </li>
+                            <li><b>Correction</b>: The right to request correction to any inaccuracies or
+                                incompleteness in their information. </li>
+                            <li><b>Objection</b>: The right to object to the processing of their information for
+                                certain purposes.</li>
+                            <li><b>Right to be forgotten</b>: The right to request for deletion of data collected.
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h2>CONSENT MECHANISM:</h2>
+                        <p>By availing of the Hospital's services, individuals implicitly consent to the
+                            stipulations delineated in this policy and acknowledge that it is part of the terms of
+                            use of the website and other services. By affirming this policy, you provide your
+                            consent to such collection of data as required under applicable law. </p>
+                    </li>
+                    <li>
+                        <h2>POLICY AMENDMENT:</h2>
+                        <p>This Privacy Policy may be amended periodically, and any revision will be made effective
+                            and available on the official website of the Hospital on its date of amendment. </p>
+                    </li>
+                </ol>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- scripts -->
-    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-    <script src="static/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="static/js/script.js"></script>
-    <script src="https://fyndbetter.com/chatbot/aarogya_chatbot"></script>
-    <script>
-        $(".book-apt").on('click', function () {
-            var url = $(this).data("url");
-            window.open(url, '_blank');
-        });
-        function showChromePopup() {
-            const popup = document.getElementById("chrome-popup");
-            popup.classList.add("is-visible");
-            popup.setAttribute("aria-hidden", "false");
-        }
-        function hideChromePopup() {
-            const popup = document.getElementById("chrome-popup");
-            popup.classList.remove("is-visible");
-            popup.setAttribute("aria-hidden", "true");
-        }
-        // ESC closes popup
-        document.addEventListener("keydown", e => {
-            if (e.key === "Escape") hideChromePopup();
-        });
-        document.addEventListener('DOMContentLoaded', function () {
-            const scrollBtn = document.getElementById('scrollToTopBtn');
-            const scrollThreshold = 300;
+<!-- scripts -->
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="static/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="static/js/script.js"></script>
+<script src="https://fyndbetter.com/chatbot/aarogya_chatbot"></script>
+<script>
+    $(".book-apt").on('click', function () {
+        var url = $(this).data("url");
+        window.open(url, '_blank');
+    });
+    function showChromePopup() {
+        const popup = document.getElementById("chrome-popup");
+        popup.classList.add("is-visible");
+        popup.setAttribute("aria-hidden", "false");
+    }
+    function hideChromePopup() {
+        const popup = document.getElementById("chrome-popup");
+        popup.classList.remove("is-visible");
+        popup.setAttribute("aria-hidden", "true");
+    }
+    // ESC closes popup
+    document.addEventListener("keydown", e => {
+        if (e.key === "Escape") hideChromePopup();
+    });
+    document.addEventListener('DOMContentLoaded', function () {
+        const scrollBtn = document.getElementById('scrollToTopBtn');
+        const scrollThreshold = 300;
 
-            function toggleScrollButton() {
-                if (window.pageYOffset > scrollThreshold ||
-                    document.documentElement.scrollTop > scrollThreshold) {
-                    scrollBtn.style.display = 'flex';
-                } else {
-                    scrollBtn.style.display = 'none';
-                }
+        function toggleScrollButton() {
+            if (window.pageYOffset > scrollThreshold ||
+                document.documentElement.scrollTop > scrollThreshold) {
+                scrollBtn.style.display = 'flex';
+            } else {
+                scrollBtn.style.display = 'none';
             }
+        }
 
-            window.addEventListener('scroll', toggleScrollButton);
+        window.addEventListener('scroll', toggleScrollButton);
 
-            scrollBtn.addEventListener('click', function (e) {
-                e.preventDefault();
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
-                // Add slight animation to the icon
-                this.querySelector('i').style.transform = 'translateY(-4px)';
-                setTimeout(() => {
-                    this.querySelector('i').style.transform = '';
-                }, 300);
+        scrollBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
             });
-
-            // Initialize on load
-            toggleScrollButton();
-        });
-        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
-        const mobileNav = document.getElementById('mobile-nav');
-
-        mobileMenuToggle.addEventListener('click', function () {
-            mobileNav.classList.toggle('active'); // toggles visibility
+            // Add slight animation to the icon
+            this.querySelector('i').style.transform = 'translateY(-4px)';
+            setTimeout(() => {
+                this.querySelector('i').style.transform = '';
+            }, 300);
         });
 
-    </script>
-    <a href="#" id="scrollToTopBtn" class="scroll-to-top-btn" title="Scroll to top" aria-label="Scroll to top">
-        <i class="fa fa-arrow-up"></i> <!-- Simple up arrow -->
-    </a>
+        // Initialize on load
+        toggleScrollButton();
+    });
+    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+    const mobileNav = document.getElementById('mobile-nav');
+
+    mobileMenuToggle.addEventListener('click', function () {
+        mobileNav.classList.toggle('active'); // toggles visibility
+    });
+
+</script>
+<a href="#" id="scrollToTopBtn" class="scroll-to-top-btn" title="Scroll to top" aria-label="Scroll to top">
+    <i class="fa fa-arrow-up"></i> <!-- Simple up arrow -->
+</a>
 
 {% endblock %}

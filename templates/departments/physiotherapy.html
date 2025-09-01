@@ -1,312 +1,343 @@
 {% extends "base.html" %}
 
-{% block title %}About Us - Aarogya Hastha{% endblock %}
+{% block title %}Physiotherapy & Rehabilitation Center in Bangalore | Aarogya Hastha{% endblock %}
+
+{% block head %}
+{{ super() }}
+<meta name="description"
+    content="Expert physiotherapists in Bangalore providing rehab for sports injuries, post-surgery recovery, back pain, and mobility issues. Customized plans.">
+<meta name="keywords"
+    content="hospital Bangalore, multi-speciality hospital, healthcare India, medical facilities, expert doctors">
+<meta name="author" content="Aarogyahastha Pvt Ltd">
+<meta name="designer" content="Aarogyahastha Pvt Ltd">
+<meta name="publisher" content="Aarogyahastha Pvt Ltd">
+<meta name="no-email-collection" content="http://www.unspam.com/noemailcollection/">
+<meta name="robots" content="index,follow">
+<meta name="revisit-after" content="7 days">
+<meta name="distribution" content="web">
+<meta name="robots" content="noodp">
+<meta name="web_author" content="Aarogyahastha Pvt Ltd">
+<meta name="rating" content="general">
+<meta name="rating" content="safe for kids">
+<meta name="subject" content="Healthcare">
+<meta name="copyright" content="Copyright © 2025">
+<meta name="reply-to" content="info@aarogyahastha.com">
+<meta name="abstract"
+    content="We provide timely and specialized medical attention for patients experiencing life-threatening conditions, ensuring their urgent needs are met with the highest level of care.">
+<meta name="city" content="Bangalore">
+<meta name="country" content="India">
+<meta name="distribution" content="global">
+<meta name="classification" content="Healthcare, Hospital">
+<base href="/">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+{% endblock %}
 
 {% block content %}
+<section class="department-banner" data-aos="fade-up" data-aos-offset="300" data-aos-easing="ease-in-sine">
+    <div class="container">
+        <div class="banner">
+            <img loading="lazy" src="../static/img/department/departments.jpg" alt="" style="width: 100%;">
+            <div class="text-box-1">
+                <h1>Physiotherapy</h1>
+                <p></p>
+            </div>
+        </div>
+    </div>
+</section>
 
-
-    <section class="department-banner" data-aos="fade-up" data-aos-offset="300" data-aos-easing="ease-in-sine">
-        <div class="container">
-            <div class="banner">
-                <img loading="lazy" src="../static/img/department/departments.jpg" alt="" style="width: 100%;">
-                <div class="text-box-1">
-                    <h1>Physiotherapy</h1>
-                    <p></p>
+<!-- appointment section -->
+<section class="pb-5" data-aos="fade-up" data-aos-offset="300" data-aos-easing="ease-in-sine">
+    <div class="container">
+        <div class="row p-5 mx-0 shadow rounded align-items-center">
+            <div class="col-lg-12 order-lg-1 p-4">
+                <p>At Aarogya Hastha Hospitals, our Physiotherapy Department offers comprehensive care aimed at
+                    helping patients restore movement, manage pain, and improve overall physical function. Our
+                    experienced physiotherapists use state-of-the-art techniques and equipment to provide
+                    personalized care, ensuring each patient receives a treatment plan tailored to their specific
+                    needs. Dedicated to guiding you on your journey to recovery with comfort and compassion are our
+                    priorities.</p>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="pb-5" data-aos="fade-up" data-aos-offset="300" data-aos-easing="ease-in-sine">
+    <div class="container">
+        <div class="row deaprtment-services pb-4">
+            <div class="col-md-6 col-lg-4">
+                <div class="card-sl">
+                    <div class="card-heading">Orthopedic Physiotherapy</div>
+                    <div class="card-text">Focuses on the rehabilitation of the musculoskeletal system, treating
+                        conditions such as fractures, sprains, arthritis, post-surgical recovery, joint pain,
+                        tendonitis, bursitis and myofascitis. The goal is to restore mobility, strength, and
+                        function.</div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="card-sl">
+                    <div class="card-heading">Neurological Physiotherapy</div>
+                    <div class="card-text">Designed for patients with neurological conditions like stroke, multiple
+                        sclerosis, Parkinson’s disease, or spinal cord injuries. This therapy aims to enhance motor
+                        function, balance, coordination, and independence.</div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="card-sl">
+                    <div class="card-heading">Cardiopulmonary Physiotherapy</div>
+                    <div class="card-text">Supports patients with heart and lung conditions, including post-cardiac
+                        surgery or chronic obstructive pulmonary disease (COPD). It helps improve cardiovascular
+                        endurance, breathing efficiency, and overall fitness.</div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="card-sl">
+                    <div class="card-heading">Sports Physiotherapy</div>
+                    <div class="card-text">Tailored for athletes and sports enthusiasts, this type of physiotherapy
+                        focuses on injury prevention, rehabilitation, and performance enhancement. It helps treat
+                        sports injuries such as sprains, strains, and ligament tears.</div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="card-sl">
+                    <div class="card-heading">Pediatric Physiotherapy</div>
+                    <div class="card-text">Specialized care for children with developmental delays, cerebral palsy,
+                        or musculoskeletal conditions. The focus is on improving motor skills, posture,
+                        coordination, and strength while supporting growth and development.</div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="card-sl">
+                    <div class="card-heading">Geriatric Physiotherapy</div>
+                    <div class="card-text">This physiotherapy addresses the unique needs of elderly patients,
+                        helping them manage conditions related to ageing, such as arthritis, osteoporosis, and
+                        mobility issues. It focuses on improving balance, strength, and functional independence.
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="card-sl">
+                    <div class="card-heading">Vestibular Rehabilitation</div>
+                    <div class="card-text">Focused on treating dizziness, vertigo, and balance disorders by
+                        retraining the body’s vestibular system to improve balance and reduce symptoms of dizziness.
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="card-sl">
+                    <div class="card-heading">Women’s Health Physiotherapy</div>
+                    <div class="card-text">Targets issues related to women’s health, such as pregnancy-related
+                        discomfort, postnatal recovery, pelvic floor dysfunction, and incontinence, helping women
+                        improve their strength and well-being.</div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="card-sl">
+                    <div class="card-heading">Post-Surgical Physiotherapy</div>
+                    <div class="card-text">This therapy aids recovery after surgeries like joint replacements and
+                        ligament repairs by enhancing strength and mobility while minimizing post-operative
+                        complications.</div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="card-sl">
+                    <div class="card-heading">Home physiotherapy </div>
+                    <div class="card-text">Home-based physiotherapy programs will provide regular visits by the
+                        physiotherapist which helps in a steady observation and follow-up ensuring the progression
+                        of healthcare and improvement in the condition of the patient.</div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
+<section data-aos="fade-up" data-aos-offset="300" data-aos-easing="ease-in-sine" class="department-section py-3">
+    <div class="container">
+        <p class="content-highlight">At Aarogya Hastha Hospitals, our physiotherapy team is committed to delivering
+            the highest standard of care, helping patients to regain function and live healthier, active lives.
+            Whether recovering from surgery, managing a chronic condition, or overcoming an injury, our tailored
+            programs are designed to meet your specific rehabilitation needs.</p>
+    </div>
+</section>
 
-    <!-- appointment section -->
-    <section class="pb-5" data-aos="fade-up" data-aos-offset="300" data-aos-easing="ease-in-sine">
-        <div class="container">
-            <div class="row p-5 mx-0 shadow rounded align-items-center">
-                <div class="col-lg-12 order-lg-1 p-4">
-                    <p>At Aarogya Hastha Hospitals, our Physiotherapy Department offers comprehensive care aimed at
-                        helping patients restore movement, manage pain, and improve overall physical function. Our
-                        experienced physiotherapists use state-of-the-art techniques and equipment to provide
-                        personalized care, ensuring each patient receives a treatment plan tailored to their specific
-                        needs. Dedicated to guiding you on your journey to recovery with comfort and compassion are our
-                        priorities.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="pb-5" data-aos="fade-up" data-aos-offset="300" data-aos-easing="ease-in-sine">
-        <div class="container">
-            <div class="row deaprtment-services pb-4">
-                <div class="col-md-6 col-lg-4">
-                    <div class="card-sl">
-                        <div class="card-heading">Orthopedic Physiotherapy</div>
-                        <div class="card-text">Focuses on the rehabilitation of the musculoskeletal system, treating
-                            conditions such as fractures, sprains, arthritis, post-surgical recovery, joint pain,
-                            tendonitis, bursitis and myofascitis. The goal is to restore mobility, strength, and
-                            function.</div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="card-sl">
-                        <div class="card-heading">Neurological Physiotherapy</div>
-                        <div class="card-text">Designed for patients with neurological conditions like stroke, multiple
-                            sclerosis, Parkinson’s disease, or spinal cord injuries. This therapy aims to enhance motor
-                            function, balance, coordination, and independence.</div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="card-sl">
-                        <div class="card-heading">Cardiopulmonary Physiotherapy</div>
-                        <div class="card-text">Supports patients with heart and lung conditions, including post-cardiac
-                            surgery or chronic obstructive pulmonary disease (COPD). It helps improve cardiovascular
-                            endurance, breathing efficiency, and overall fitness.</div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="card-sl">
-                        <div class="card-heading">Sports Physiotherapy</div>
-                        <div class="card-text">Tailored for athletes and sports enthusiasts, this type of physiotherapy
-                            focuses on injury prevention, rehabilitation, and performance enhancement. It helps treat
-                            sports injuries such as sprains, strains, and ligament tears.</div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="card-sl">
-                        <div class="card-heading">Pediatric Physiotherapy</div>
-                        <div class="card-text">Specialized care for children with developmental delays, cerebral palsy,
-                            or musculoskeletal conditions. The focus is on improving motor skills, posture,
-                            coordination, and strength while supporting growth and development.</div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="card-sl">
-                        <div class="card-heading">Geriatric Physiotherapy</div>
-                        <div class="card-text">This physiotherapy addresses the unique needs of elderly patients,
-                            helping them manage conditions related to ageing, such as arthritis, osteoporosis, and
-                            mobility issues. It focuses on improving balance, strength, and functional independence.
+
+<section class=" py-3">
+    <div class="container">
+        <h2>Our Specialists</h2>
+        <div id="doctors-list" class="appointment-section">
+            <div class="doctor-section mb-5">
+                <div class="row g-3">
+                    <div class="col-lg-6 doctor-item" data-doctor="ankita-pandey">
+                        <div class="img-box"><img class="img-fluid" src="../static/img/doctors/ankita-pandey.jpg"></a>
+                        </div>
+                        <div class="doctor-box">
+                            <h3>Dr. Ankita Pandey </h3>
+                            <h4>Consultant – Physiotherapy</h4>
+                            <p class="mt-4"><small><b>Languages spoken:</b> <br />English, Hindi, Kannada &
+                                    Marathi</small></p>
+                            <p class="mt-4"><small><b>Consultation</b><br />Monday to Saturday - 09:00 AM to 04:00
+                                    PM</small></p><a class="book-btn" href="https://app.fyndbetter.com/ahh_apt"
+                                target="_blank">BOOK APPOINTMENT</a>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="card-sl">
-                        <div class="card-heading">Vestibular Rehabilitation</div>
-                        <div class="card-text">Focused on treating dizziness, vertigo, and balance disorders by
-                            retraining the body’s vestibular system to improve balance and reduce symptoms of dizziness.
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="card-sl">
-                        <div class="card-heading">Women’s Health Physiotherapy</div>
-                        <div class="card-text">Targets issues related to women’s health, such as pregnancy-related
-                            discomfort, postnatal recovery, pelvic floor dysfunction, and incontinence, helping women
-                            improve their strength and well-being.</div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="card-sl">
-                        <div class="card-heading">Post-Surgical Physiotherapy</div>
-                        <div class="card-text">This therapy aids recovery after surgeries like joint replacements and
-                            ligament repairs by enhancing strength and mobility while minimizing post-operative
-                            complications.</div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="card-sl">
-                        <div class="card-heading">Home physiotherapy </div>
-                        <div class="card-text">Home-based physiotherapy programs will provide regular visits by the
-                            physiotherapist which helps in a steady observation and follow-up ensuring the progression
-                            of healthcare and improvement in the condition of the patient.</div>
-                    </div>
-                </div>
             </div>
         </div>
-    </section>
-    <section data-aos="fade-up" data-aos-offset="300" data-aos-easing="ease-in-sine" class="department-section py-3">
-        <div class="container">
-            <p class="content-highlight">At Aarogya Hastha Hospitals, our physiotherapy team is committed to delivering
-                the highest standard of care, helping patients to regain function and live healthier, active lives.
-                Whether recovering from surgery, managing a chronic condition, or overcoming an injury, our tailored
-                programs are designed to meet your specific rehabilitation needs.</p>
+    </div>
+</section>
+<section data-aos-easing="ease-in-sine" class="service-carousel-section py-5">
+    <div class="container d-flex justify-content-center">
+        <div class="owl-carousel service-carousel">
+            <a href="/departments/general_surgery" class="item"
+                style="--i:url(https://aarogyahastha.com/img/department/icons/general-surgery.svg);"
+                data-department="general-surgery"><img class="dept-icon" loading="lazy"
+                    src="/static/img/department/icons/general-surgery.svg">
+                <div class="icon"></div>
+                <h4 class="text-dark-blue my-md-3">General Surgery</h4>
+            </a><a href="/departments/neurosurgery" class="item"
+                style="--i:url(https://aarogyahastha.com/img/department/icons/neurosurgery.svg);"
+                data-department="neurosurgery"><img class="dept-icon" loading="lazy"
+                    src="/static/img/department/icons/neurosurgery.svg">
+                <div class="icon"></div>
+                <h4 class="text-dark-blue my-md-3">Neurosurgery</h4>
+            </a><a href="/departments/orthopaedics" class="item"
+                style="--i:url(https://aarogyahastha.com/img/department/icons/orthopaedics.svg);"
+                data-department="orthopaedics"><img class="dept-icon" loading="lazy"
+                    src="/static/img/department/icons/orthopaedics.svg">
+                <div class="icon"></div>
+                <h4 class="text-dark-blue my-md-3">Orthopaedics</h4>
+            </a><a href="/departments/anaesthesia" class="item"
+                style="--i:url(https://aarogyahastha.com/img/department/icons/anaesthesia.svg);"
+                data-department="anaesthesia"><img class="dept-icon" loading="lazy"
+                    src="/static/img/department/icons/anaesthesia.svg">
+                <div class="icon"></div>
+                <h4 class="text-dark-blue my-md-3"> Anaesthesiology & Critical Care</h4>
+            </a><a href="/departments/pain_medicine" class="item"
+                style="--i:url(https://aarogyahastha.com/img/department/icons/pain-medicine.svg);"
+                data-department="pain-medicine"><img class="dept-icon" loading="lazy"
+                    src="/static/img/department/icons/pain-medicine.svg">
+                <div class="icon"></div>
+                <h4 class="text-dark-blue my-md-3">Pain Medicine</h4>
+            </a><a href="/departments/general_medicine" class="item"
+                style="--i:url(https://aarogyahastha.com/img/department/icons/general-medicine.svg);"
+                data-department="general-medicine"><img class="dept-icon" loading="lazy"
+                    src="/static/img/department/icons/general-medicine.svg">
+                <div class="icon"></div>
+                <h4 class="text-dark-blue my-md-3">General Medicine</h4>
+            </a><a href="/departments/lab_medicine" class="item"
+                style="--i:url(https://aarogyahastha.com/img/department/icons/lab-medicine.svg);"
+                data-department="lab-medicine"><img class="dept-icon" loading="lazy"
+                    src="/static/img/department/icons/lab-medicine.svg">
+                <div class="icon"></div>
+                <h4 class="text-dark-blue my-md-3">Lab Medicine</h4>
+            </a><a href="/departments/paediatrics" class="item"
+                style="--i:url(https://aarogyahastha.com/img/department/icons/paediatrics.svg);"
+                data-department="paediatrics"><img class="dept-icon" loading="lazy"
+                    src="/static/img/department/icons/paediatrics.svg">
+                <div class="icon"></div>
+                <h4 class="text-dark-blue my-md-3">Paediatrics</h4>
+            </a><a href="/departments/physiotherapy" class="item"
+                style="--i:url(https://aarogyahastha.com/img/department/icons/physiotherapy.svg);"
+                data-department="physiotherapy"><img class="dept-icon" loading="lazy"
+                    src="/static/img/department/icons/physiotherapy.svg">
+                <div class="icon"></div>
+                <h4 class="text-dark-blue my-md-3">Physiotherapy</h4>
+            </a><a href="/departments/dermatology" class="item"
+                style="--i:url(https://aarogyahastha.com/img/department/icons/dermatology.svg);"
+                data-department="dermatology"><img class="dept-icon" loading="lazy"
+                    src="/static/img/department/icons/dermatology.svg">
+                <div class="icon"></div>
+                <h4 class="text-dark-blue my-md-3">Dermatology</h4>
+            </a><a href="/departments/ent" class="item"
+                style="--i:url(https://aarogyahastha.com/img/department/icons/ent.svg);" data-department="ent"><img
+                    class="dept-icon" loading="lazy" src="/static/img/department/icons/ent.svg">
+                <div class="icon"></div>
+                <h4 class="text-dark-blue my-md-3"> Ear, Nose, and Throat (ENT)</h4>
+            </a><a href="/departments/emergency_medicine" class="item"
+                style="--i:url(https://aarogyahastha.com/img/department/icons/emergency-medicine.svg);"
+                data-department="emergency-medicine"><img class="dept-icon" loading="lazy"
+                    src="/static/img/department/icons/emergency-medicine.svg">
+                <div class="icon"></div>
+                <h4 class="text-dark-blue my-md-3">Emergency Medicine</h4>
+            </a><a href="/departments/nephrology" class="item"
+                style="--i:url(https://aarogyahastha.com/img/department/icons/nephrology.svg);"
+                data-department="nephrology"><img class="dept-icon" loading="lazy"
+                    src="/static/img/department/icons/nephrology.svg">
+                <div class="icon"></div>
+                <h4 class="text-dark-blue my-md-3">Nephrology</h4>
+            </a><a href="/departments/urology" class="item"
+                style="--i:url(https://aarogyahastha.com/img/department/icons/urology.svg);"
+                data-department="urology"><img class="dept-icon" loading="lazy"
+                    src="/static/img/department/icons/urology.svg">
+                <div class="icon"></div>
+                <h4 class="text-dark-blue my-md-3">Urology</h4>
+            </a><a href="/departments/medical_gastroenterology" class="item"
+                style="--i:url(https://aarogyahastha.com/img/department/icons/medical-gastroenterology.svg);"
+                data-department="medical-gastroenterology"><img class="dept-icon" loading="lazy"
+                    src="/static/img/department/icons/medical-gastroenterology.svg">
+                <div class="icon"></div>
+                <h4 class="text-dark-blue my-md-3">Medical Gastroenterology</h4>
+            </a><a href="/departments/minimal_access_surgery" class="item"
+                style="--i:url(https://aarogyahastha.com/img/department/icons/minimal-access-surgery.svg);"
+                data-department="minimal-access-surgery"><img class="dept-icon" loading="lazy"
+                    src="/static/img/department/icons/minimal-access-surgery.svg">
+                <div class="icon"></div>
+                <h4 class="text-dark-blue my-md-3">Minimal Access Surgery</h4>
+            </a><a href="/departments/plastic_surgery" class="item"
+                style="--i:url(https://aarogyahastha.com/img/department/icons/plastic-surgery.svg);"
+                data-department="plastic-surgery"><img class="dept-icon" loading="lazy"
+                    src="/static/img/department/icons/plastic-surgery.svg">
+                <div class="icon"></div>
+                <h4 class="text-dark-blue my-md-3">Plastic Surgery</h4>
+            </a><a href="/departments/obg" class="item"
+                style="--i:url(https://aarogyahastha.com/img/department/icons/obg.svg);" data-department="obg"><img
+                    class="dept-icon" loading="lazy" src="/static/img/department/icons/obg.svg">
+                <div class="icon"></div>
+                <h4 class="text-dark-blue my-md-3">Obstetrics & Gynaecology</h4>
+            </a><a href="/departments/surgical_gastroenterology" class="item"
+                style="--i:url(https://aarogyahastha.com/img/department/icons/surgical-gastroenterology.svg);"
+                data-department="surgical-gastroenterology"><img class="dept-icon" loading="lazy"
+                    src="/static/img/department/icons/surgical-gastroenterology.svg">
+                <div class="icon"></div>
+                <h4 class="text-dark-blue my-md-3">Surgical Gastroenterology</h4>
+            </a><a href="/departments/radiology" class="item"
+                style="--i:url(https://aarogyahastha.com/img/department/icons/radiology.svg);"
+                data-department="radiology"><img class="dept-icon" loading="lazy"
+                    src="/static/img/department/icons/radiology.svg">
+                <div class="icon"></div>
+                <h4 class="text-dark-blue my-md-3">Radiology</h4>
+            </a>
         </div>
-    </section>
+    </div>
+</section>
+<style>
+    .video-section {
+        display: none;
+    }
+</style>
+<!-- video section -->
+<section class="video-section py-3">
+    <div class="container">
+        <h2 class="text-center">Compassionate Care Dedicated Service
+        </h2>
+        <video poster="../static/video/thumb.jpg" controls>
+            <source src="../static/video/video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+</section>
 
+<!-- scripts -->
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="../static/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
-    <section class=" py-3">
-        <div class="container">
-            <h2>Our Specialists</h2>
-            <div id="doctors-list" class="appointment-section">
-                <div class="doctor-section mb-5">
-                    <div class="row g-3">
-                        <div class="col-lg-6 doctor-item" data-doctor="ankita-pandey">
-                            <div class="img-box"><img class="img-fluid"
-                                    src="../static/img/doctors/ankita-pandey.jpg"></a></div>
-                            <div class="doctor-box">
-                                <h3>Dr. Ankita Pandey </h3>
-                                <h4>Consultant – Physiotherapy</h4>
-                                <p class="mt-4"><small><b>Languages spoken:</b> <br />English, Hindi, Kannada &
-                                        Marathi</small></p>
-                                <p class="mt-4"><small><b>Consultation</b><br />Monday to Saturday - 09:00 AM to 04:00
-                                        PM</small></p><a class="book-btn" href="https://app.fyndbetter.com/ahh_apt"
-                                    target="_blank">BOOK APPOINTMENT</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section data-aos-easing="ease-in-sine" class="service-carousel-section py-5">
-        <div class="container d-flex justify-content-center">
-<div class="owl-carousel service-carousel">
-                <a href="/departments/general_surgery" class="item"
-                    style="--i:url(https://aarogyahastha.com/img/department/icons/general-surgery.svg);"
-                    data-department="general-surgery"><img class="dept-icon" loading="lazy"
-                        src="/static/img/department/icons/general-surgery.svg">
-                    <div class="icon"></div>
-                    <h4 class="text-dark-blue my-md-3">General Surgery</h4>
-                </a><a href="/departments/neurosurgery" class="item"
-                    style="--i:url(https://aarogyahastha.com/img/department/icons/neurosurgery.svg);"
-                    data-department="neurosurgery"><img class="dept-icon" loading="lazy"
-                        src="/static/img/department/icons/neurosurgery.svg">
-                    <div class="icon"></div>
-                    <h4 class="text-dark-blue my-md-3">Neurosurgery</h4>
-                </a><a href="/departments/orthopaedics" class="item"
-                    style="--i:url(https://aarogyahastha.com/img/department/icons/orthopaedics.svg);"
-                    data-department="orthopaedics"><img class="dept-icon" loading="lazy"
-                        src="/static/img/department/icons/orthopaedics.svg">
-                    <div class="icon"></div>
-                    <h4 class="text-dark-blue my-md-3">Orthopaedics</h4>
-                </a><a href="/departments/anaesthesia" class="item"
-                    style="--i:url(https://aarogyahastha.com/img/department/icons/anaesthesia.svg);"
-                    data-department="anaesthesia"><img class="dept-icon" loading="lazy"
-                        src="/static/img/department/icons/anaesthesia.svg">
-                    <div class="icon"></div>
-                    <h4 class="text-dark-blue my-md-3"> Anaesthesiology & Critical Care</h4>
-                </a><a href="/departments/pain_medicine" class="item"
-                    style="--i:url(https://aarogyahastha.com/img/department/icons/pain-medicine.svg);"
-                    data-department="pain-medicine"><img class="dept-icon" loading="lazy"
-                        src="/static/img/department/icons/pain-medicine.svg">
-                    <div class="icon"></div>
-                    <h4 class="text-dark-blue my-md-3">Pain Medicine</h4>
-                </a><a href="/departments/general_medicine" class="item"
-                    style="--i:url(https://aarogyahastha.com/img/department/icons/general-medicine.svg);"
-                    data-department="general-medicine"><img class="dept-icon" loading="lazy"
-                        src="/static/img/department/icons/general-medicine.svg">
-                    <div class="icon"></div>
-                    <h4 class="text-dark-blue my-md-3">General Medicine</h4>
-                </a><a href="/departments/lab_medicine" class="item"
-                    style="--i:url(https://aarogyahastha.com/img/department/icons/lab-medicine.svg);"
-                    data-department="lab-medicine"><img class="dept-icon" loading="lazy"
-                        src="/static/img/department/icons/lab-medicine.svg">
-                    <div class="icon"></div>
-                    <h4 class="text-dark-blue my-md-3">Lab Medicine</h4>
-                </a><a href="/departments/paediatrics" class="item"
-                    style="--i:url(https://aarogyahastha.com/img/department/icons/paediatrics.svg);"
-                    data-department="paediatrics"><img class="dept-icon" loading="lazy"
-                        src="/static/img/department/icons/paediatrics.svg">
-                    <div class="icon"></div>
-                    <h4 class="text-dark-blue my-md-3">Paediatrics</h4>
-                </a><a href="/departments/physiotherapy" class="item"
-                    style="--i:url(https://aarogyahastha.com/img/department/icons/physiotherapy.svg);"
-                    data-department="physiotherapy"><img class="dept-icon" loading="lazy"
-                        src="/static/img/department/icons/physiotherapy.svg">
-                    <div class="icon"></div>
-                    <h4 class="text-dark-blue my-md-3">Physiotherapy</h4>
-                </a><a href="/departments/dermatology" class="item"
-                    style="--i:url(https://aarogyahastha.com/img/department/icons/dermatology.svg);"
-                    data-department="dermatology"><img class="dept-icon" loading="lazy"
-                        src="/static/img/department/icons/dermatology.svg">
-                    <div class="icon"></div>
-                    <h4 class="text-dark-blue my-md-3">Dermatology</h4>
-                </a><a href="/departments/ent" class="item"
-                    style="--i:url(https://aarogyahastha.com/img/department/icons/ent.svg);" data-department="ent"><img
-                        class="dept-icon" loading="lazy" src="/static/img/department/icons/ent.svg">
-                    <div class="icon"></div>
-                    <h4 class="text-dark-blue my-md-3"> Ear, Nose, and Throat (ENT)</h4>
-                </a><a href="/departments/emergency_medicine" class="item"
-                    style="--i:url(https://aarogyahastha.com/img/department/icons/emergency-medicine.svg);"
-                    data-department="emergency-medicine"><img class="dept-icon" loading="lazy"
-                        src="/static/img/department/icons/emergency-medicine.svg">
-                    <div class="icon"></div>
-                    <h4 class="text-dark-blue my-md-3">Emergency Medicine</h4>
-                </a><a href="/departments/nephrology" class="item"
-                    style="--i:url(https://aarogyahastha.com/img/department/icons/nephrology.svg);"
-                    data-department="nephrology"><img class="dept-icon" loading="lazy"
-                        src="/static/img/department/icons/nephrology.svg">
-                    <div class="icon"></div>
-                    <h4 class="text-dark-blue my-md-3">Nephrology</h4>
-                </a><a href="/departments/urology" class="item"
-                    style="--i:url(https://aarogyahastha.com/img/department/icons/urology.svg);"
-                    data-department="urology"><img class="dept-icon" loading="lazy"
-                        src="/static/img/department/icons/urology.svg">
-                    <div class="icon"></div>
-                    <h4 class="text-dark-blue my-md-3">Urology</h4>
-                </a><a href="/departments/medical_gastroenterology" class="item"
-                    style="--i:url(https://aarogyahastha.com/img/department/icons/medical-gastroenterology.svg);"
-                    data-department="medical-gastroenterology"><img class="dept-icon" loading="lazy"
-                        src="/static/img/department/icons/medical-gastroenterology.svg">
-                    <div class="icon"></div>
-                    <h4 class="text-dark-blue my-md-3">Medical Gastroenterology</h4>
-                </a><a href="/departments/minimal_access_surgery" class="item"
-                    style="--i:url(https://aarogyahastha.com/img/department/icons/minimal-access-surgery.svg);"
-                    data-department="minimal-access-surgery"><img class="dept-icon" loading="lazy"
-                        src="/static/img/department/icons/minimal-access-surgery.svg">
-                    <div class="icon"></div>
-                    <h4 class="text-dark-blue my-md-3">Minimal Access Surgery</h4>
-                </a><a href="/departments/plastic_surgery" class="item"
-                    style="--i:url(https://aarogyahastha.com/img/department/icons/plastic-surgery.svg);"
-                    data-department="plastic-surgery"><img class="dept-icon" loading="lazy"
-                        src="/static/img/department/icons/plastic-surgery.svg">
-                    <div class="icon"></div>
-                    <h4 class="text-dark-blue my-md-3">Plastic Surgery</h4>
-                </a><a href="/departments/obg" class="item"
-                    style="--i:url(https://aarogyahastha.com/img/department/icons/obg.svg);" data-department="obg"><img
-                        class="dept-icon" loading="lazy" src="/static/img/department/icons/obg.svg">
-                    <div class="icon"></div>
-                    <h4 class="text-dark-blue my-md-3">Obstetrics & Gynaecology</h4>
-                </a><a href="/departments/surgical_gastroenterology" class="item"
-                    style="--i:url(https://aarogyahastha.com/img/department/icons/surgical-gastroenterology.svg);"
-                    data-department="surgical-gastroenterology"><img class="dept-icon" loading="lazy"
-                        src="/static/img/department/icons/surgical-gastroenterology.svg">
-                    <div class="icon"></div>
-                    <h4 class="text-dark-blue my-md-3">Surgical Gastroenterology</h4>
-                </a><a href="/departments/radiology" class="item"
-                    style="--i:url(https://aarogyahastha.com/img/department/icons/radiology.svg);"
-                    data-department="radiology"><img class="dept-icon" loading="lazy"
-                        src="/static/img/department/icons/radiology.svg">
-                    <div class="icon"></div>
-                    <h4 class="text-dark-blue my-md-3">Radiology</h4>
-                </a>
-            </div>
-        </div>
-    </section>
-    <style>
-        .video-section {
-            display: none;
-        }
-    </style>
-    <!-- video section -->
-    <section class="video-section py-3">
-        <div class="container">
-            <h2 class="text-center">Compassionate Care Dedicated Service
-            </h2>
-            <video poster="../static/video/thumb.jpg" controls>
-                <source src="../static/video/video.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-        </div>
-    </section>
-    
-    <!-- scripts -->
-    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-    <script src="../static/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-
-    <!-- custom script -->
-    <script src="../static/js/script.js"></script>
-    <a href="#" id="scrollToTopBtn" class="scroll-to-top-btn" title="Scroll to top" aria-label="Scroll to top">
-        <i class="fa fa-arrow-up"></i> <!-- Simple up arrow -->
-    </a>
+<!-- custom script -->
+<script src="../static/js/script.js"></script>
+<a href="#" id="scrollToTopBtn" class="scroll-to-top-btn" title="Scroll to top" aria-label="Scroll to top">
+    <i class="fa fa-arrow-up"></i> <!-- Simple up arrow -->
+</a>
 
 
 <script>

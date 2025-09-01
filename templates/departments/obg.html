@@ -1,268 +1,299 @@
 {% extends "base.html" %}
 
-{% block title %}About Us - Aarogya Hastha{% endblock %}
+{% block title %}OB-GYN Department | Best Gynecologists & Maternity Hospital in Bangalore | Aarogya Hastha{% endblock %}
+
+{% block head %}
+{{ super() }}
+<meta name="description"
+    content="Expert gynecologists and maternity care in Bangalore. From prenatal care to advanced laparoscopy surgery, we care for women's health at all stages.">
+<meta name="keywords"
+    content="hospital Bangalore, multi-speciality hospital, healthcare India, medical facilities, expert doctors">
+<meta name="author" content="Aarogyahastha Pvt Ltd">
+<meta name="designer" content="Aarogyahastha Pvt Ltd">
+<meta name="publisher" content="Aarogyahastha Pvt Ltd">
+<meta name="no-email-collection" content="http://www.unspam.com/noemailcollection/">
+<meta name="robots" content="index,follow">
+<meta name="revisit-after" content="7 days">
+<meta name="distribution" content="web">
+<meta name="robots" content="noodp">
+<meta name="web_author" content="Aarogyahastha Pvt Ltd">
+<meta name="rating" content="general">
+<meta name="rating" content="safe for kids">
+<meta name="subject" content="Healthcare">
+<meta name="copyright" content="Copyright © 2025">
+<meta name="reply-to" content="info@aarogyahastha.com">
+<meta name="abstract"
+    content="We provide timely and specialized medical attention for patients experiencing life-threatening conditions, ensuring their urgent needs are met with the highest level of care.">
+<meta name="city" content="Bangalore">
+<meta name="country" content="India">
+<meta name="distribution" content="global">
+<meta name="classification" content="Healthcare, Hospital">
+<base href="/">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+{% endblock %}
 
 {% block content %}
-
-
-    <section class="department-banner" data-aos="fade-up" data-aos-offset="300" data-aos-easing="ease-in-sine">
-        <div class="container">
-            <div class="banner">
-                <img loading="lazy" src="../static/img/department/obg.jpg" alt="">
-                <div class="text-box-1">
-                    <h1>Obstetrics and Gynaecology</h1>
-                    <p>From conception to birth and beyond</p>
-                </div>
+<section class="department-banner" data-aos="fade-up" data-aos-offset="300" data-aos-easing="ease-in-sine">
+    <div class="container">
+        <div class="banner">
+            <img loading="lazy" src="../static/img/department/obg.jpg" alt="">
+            <div class="text-box-1">
+                <h1>Obstetrics and Gynaecology</h1>
+                <p>From conception to birth and beyond</p>
             </div>
         </div>
-    </section>
-    <section data-aos="fade-up" data-aos-offset="100" data-aos-easing="ease-in-sine">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-12">
-                    <blockquote class="blockquote blockquote-custom">
-                        <!-- <p class="mb-0 mt-2">Good doctors know their medicine, but great doctors know their patients</p>
+    </div>
+</section>
+<section data-aos="fade-up" data-aos-offset="100" data-aos-easing="ease-in-sine">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-12">
+                <blockquote class="blockquote blockquote-custom">
+                    <!-- <p class="mb-0 mt-2">Good doctors know their medicine, but great doctors know their patients</p>
                     <div class="blockquote-footer mt-4 text-end">William Osler</div> -->
-                    </blockquote>
-                </div>
-                <div class="col-12">
-                    <p>Aarogya Hastha offers a complete range of obstetrical and gynaecological care, including prenatal
-                        diagnosis, infertility management, management of high-risk pregnancies, painless deliveries,
-                        contraception and family planning, menopause management, cosmetic gynaecology, laparoscopy,
-                        fibroid and ovarian cyst treatment and more.</p>
+                </blockquote>
+            </div>
+            <div class="col-12">
+                <p>Aarogya Hastha offers a complete range of obstetrical and gynaecological care, including prenatal
+                    diagnosis, infertility management, management of high-risk pregnancies, painless deliveries,
+                    contraception and family planning, menopause management, cosmetic gynaecology, laparoscopy,
+                    fibroid and ovarian cyst treatment and more.</p>
+            </div>
+        </div>
+    </div>
+</section>
+<section data-aos="fade-up" data-aos-offset="300" data-aos-easing="ease-in-sine" class="department-section py-3">
+    <div class="container">
+        <h2>OUR SERVICES:</h2>
+        <div class="row deaprtment-services">
+            <div class="col-12">
+                <div class="card-sl">
+                    <ul>
+                        <li>Obstetrics and Gynaecology Consultations</li>
+                        <li>Prenatal and Postnatal Care</li>
+                        <li>Labour Services: painless labour, birthing in our suite or recovery room facilities</li>
+                        <li>Specially trained obstetricians and nurses who promote normal vaginal deliveries</li>
+                        <li>State-of-the-art operation theatres for Obstetrics and Gynaecology</li>
+                        <li>Infertility Treatments</li>
+                        <li>Minimally Invasive Gynaecological Surgeries (Laparoscopy and Hysteroscopy)</li>
+                        <li>Ultrasound and Laboratory Services</li>
+
+                    </ul>
                 </div>
             </div>
         </div>
-    </section>
-    <section data-aos="fade-up" data-aos-offset="300" data-aos-easing="ease-in-sine" class="department-section py-3">
-        <div class="container">
-            <h2>OUR SERVICES:</h2>
-            <div class="row deaprtment-services">
-                <div class="col-12">
-                    <div class="card-sl">
-                        <ul>
-                            <li>Obstetrics and Gynaecology Consultations</li>
-                            <li>Prenatal and Postnatal Care</li>
-                            <li>Labour Services: painless labour, birthing in our suite or recovery room facilities</li>
-                            <li>Specially trained obstetricians and nurses who promote normal vaginal deliveries</li>
-                            <li>State-of-the-art operation theatres for Obstetrics and Gynaecology</li>
-                            <li>Infertility Treatments</li>
-                            <li>Minimally Invasive Gynaecological Surgeries (Laparoscopy and Hysteroscopy)</li>
-                            <li>Ultrasound and Laboratory Services</li>
+        <p class="content-highlight">Aarogya Hastha is the unwavering companion for comprehensive OBG care,
+            prioritising your well-being above all to elevate your quality of life.</p>
+    </div>
+</section>
 
-                        </ul>
+<section class=" py-3">
+    <div class="container">
+        <h2>Our Specialists</h2>
+        <div id="doctors-list" class="appointment-section">
+            <div class="doctor-section mb-5">
+                <div class="row g-3">
+                    <div class="col-lg-6 doctor-item" data-doctor="ekta-eiran">
+                        <div class="img-box"><img class="img-fluid" src="../static/img/doctors/ekta-eiran.jpg"></a>
+                        </div>
+                        <div class="doctor-box">
+                            <h3>Dr. Ekta Eiran</h3>
+                            <h4>Senior Consultant – Obstetrics & Gynaecology</h4>
+                            <p class="mt-4"><small><b>Languages spoken:</b> <br />English, Kannada, Hindi, Bengali,
+                                    Nepali & Oriya</small></p>
+                            <p class="mt-4"><small><b>Consultation</b><br />Monday to Saturday - 09:00 AM to 11.45
+                                    AM</small></p><a class="book-btn" href="https://app.fyndbetter.com/ahh_apt"
+                                target="_blank">BOOK APPOINTMENT</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 doctor-item" data-doctor="sharadamma">
+                        <div class="img-box"><img class="img-fluid" src="../static/img/doctors/sharadamma.jpg"></a>
+                        </div>
+                        <div class="doctor-box">
+                            <h3>Dr. Sharadamma</h3>
+                            <h4>Consultant - Gynaecalogy</h4>
+                            <p class="mt-4"><small><b>Languages spoken:</b> <br />English, Hindi, Kannada, Tamil,
+                                    and Telugu</small></p>
+                            <p class="mt-4"><small><b>Consultation</b><br />On call</small></p><a class="book-btn"
+                                href="https://app.fyndbetter.com/ahh_apt" target="_blank">BOOK APPOINTMENT</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 doctor-item" data-doctor="geetha-r">
+                        <div class="img-box"><img class="img-fluid" src="../static/img/doctors/geetha-r-01.jpg"></a>
+                        </div>
+                        <div class="doctor-box">
+                            <h3>Dr. Geetha R</h3>
+                            <h4>Consultant - OBG, Laparoscopic Surgery & Fertility Specialist</h4>
+                            <p class="mt-4"><small><b>Languages spoken:</b> <br />English, Kannada, Hindi,
+                                    Malayalam, and Telugu</small></p>
+                            <p class="mt-4"><small><b>Consultation</b><br />Monday, Wednesday and Friday
+                                    <br />06:00&nbsp;PM to 08:00&nbsp;PM</small></p><a class="book-btn"
+                                href="https://app.fyndbetter.com/ahh_apt" target="_blank">BOOK APPOINTMENT</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 doctor-item" data-doctor="vishnu-vandana">
+                        <div class="img-box"><img class="img-fluid"
+                                src="../static/img/doctors/vishnu-vandana-01.jpg"></a></div>
+                        <div class="doctor-box">
+                            <h3>Dr. Vishnu Vandana</h3>
+                            <h4>Senior Consultant – Obstetrics & Gynaecology</h4>
+                            <p class="mt-4"><small><b>Languages spoken:</b> <br />Hindi, English, Tamil, Telugu, and
+                                    Kannada</small></p>
+                            <p class="mt-4"><small><b>Consultation</b><br />Tuesday and Thursday <br />06:00&nbsp;PM
+                                    to 08:00&nbsp;PM</small></p><a class="book-btn"
+                                href="https://app.fyndbetter.com/ahh_apt" target="_blank">BOOK APPOINTMENT</a>
+                        </div>
                     </div>
                 </div>
             </div>
-            <p class="content-highlight">Aarogya Hastha is the unwavering companion for comprehensive OBG care,
-                prioritising your well-being above all to elevate your quality of life.</p>
         </div>
-    </section>
+    </div>
+</section>
+<section data-aos-easing="ease-in-sine" class="service-carousel-section py-5">
+    <div class="container d-flex justify-content-center">
+        <div class="owl-carousel service-carousel">
+            <a href="/departments/general_surgery" class="item"
+                style="--i:url(https://aarogyahastha.com/img/department/icons/general-surgery.svg);"
+                data-department="general-surgery"><img class="dept-icon" loading="lazy"
+                    src="/static/img/department/icons/general-surgery.svg">
+                <div class="icon"></div>
+                <h4 class="text-dark-blue my-md-3">General Surgery</h4>
+            </a><a href="/departments/neurosurgery" class="item"
+                style="--i:url(https://aarogyahastha.com/img/department/icons/neurosurgery.svg);"
+                data-department="neurosurgery"><img class="dept-icon" loading="lazy"
+                    src="/static/img/department/icons/neurosurgery.svg">
+                <div class="icon"></div>
+                <h4 class="text-dark-blue my-md-3">Neurosurgery</h4>
+            </a><a href="/departments/orthopaedics" class="item"
+                style="--i:url(https://aarogyahastha.com/img/department/icons/orthopaedics.svg);"
+                data-department="orthopaedics"><img class="dept-icon" loading="lazy"
+                    src="/static/img/department/icons/orthopaedics.svg">
+                <div class="icon"></div>
+                <h4 class="text-dark-blue my-md-3">Orthopaedics</h4>
+            </a><a href="/departments/anaesthesia" class="item"
+                style="--i:url(https://aarogyahastha.com/img/department/icons/anaesthesia.svg);"
+                data-department="anaesthesia"><img class="dept-icon" loading="lazy"
+                    src="/static/img/department/icons/anaesthesia.svg">
+                <div class="icon"></div>
+                <h4 class="text-dark-blue my-md-3"> Anaesthesiology & Critical Care</h4>
+            </a><a href="/departments/pain_medicine" class="item"
+                style="--i:url(https://aarogyahastha.com/img/department/icons/pain-medicine.svg);"
+                data-department="pain-medicine"><img class="dept-icon" loading="lazy"
+                    src="/static/img/department/icons/pain-medicine.svg">
+                <div class="icon"></div>
+                <h4 class="text-dark-blue my-md-3">Pain Medicine</h4>
+            </a><a href="/departments/general_medicine" class="item"
+                style="--i:url(https://aarogyahastha.com/img/department/icons/general-medicine.svg);"
+                data-department="general-medicine"><img class="dept-icon" loading="lazy"
+                    src="/static/img/department/icons/general-medicine.svg">
+                <div class="icon"></div>
+                <h4 class="text-dark-blue my-md-3">General Medicine</h4>
+            </a><a href="/departments/lab_medicine" class="item"
+                style="--i:url(https://aarogyahastha.com/img/department/icons/lab-medicine.svg);"
+                data-department="lab-medicine"><img class="dept-icon" loading="lazy"
+                    src="/static/img/department/icons/lab-medicine.svg">
+                <div class="icon"></div>
+                <h4 class="text-dark-blue my-md-3">Lab Medicine</h4>
+            </a><a href="/departments/paediatrics" class="item"
+                style="--i:url(https://aarogyahastha.com/img/department/icons/paediatrics.svg);"
+                data-department="paediatrics"><img class="dept-icon" loading="lazy"
+                    src="/static/img/department/icons/paediatrics.svg">
+                <div class="icon"></div>
+                <h4 class="text-dark-blue my-md-3">Paediatrics</h4>
+            </a><a href="/departments/physiotherapy" class="item"
+                style="--i:url(https://aarogyahastha.com/img/department/icons/physiotherapy.svg);"
+                data-department="physiotherapy"><img class="dept-icon" loading="lazy"
+                    src="/static/img/department/icons/physiotherapy.svg">
+                <div class="icon"></div>
+                <h4 class="text-dark-blue my-md-3">Physiotherapy</h4>
+            </a><a href="/departments/dermatology" class="item"
+                style="--i:url(https://aarogyahastha.com/img/department/icons/dermatology.svg);"
+                data-department="dermatology"><img class="dept-icon" loading="lazy"
+                    src="/static/img/department/icons/dermatology.svg">
+                <div class="icon"></div>
+                <h4 class="text-dark-blue my-md-3">Dermatology</h4>
+            </a><a href="/departments/ent" class="item"
+                style="--i:url(https://aarogyahastha.com/img/department/icons/ent.svg);" data-department="ent"><img
+                    class="dept-icon" loading="lazy" src="/static/img/department/icons/ent.svg">
+                <div class="icon"></div>
+                <h4 class="text-dark-blue my-md-3"> Ear, Nose, and Throat (ENT)</h4>
+            </a><a href="/departments/emergency_medicine" class="item"
+                style="--i:url(https://aarogyahastha.com/img/department/icons/emergency-medicine.svg);"
+                data-department="emergency-medicine"><img class="dept-icon" loading="lazy"
+                    src="/static/img/department/icons/emergency-medicine.svg">
+                <div class="icon"></div>
+                <h4 class="text-dark-blue my-md-3">Emergency Medicine</h4>
+            </a><a href="/departments/nephrology" class="item"
+                style="--i:url(https://aarogyahastha.com/img/department/icons/nephrology.svg);"
+                data-department="nephrology"><img class="dept-icon" loading="lazy"
+                    src="/static/img/department/icons/nephrology.svg">
+                <div class="icon"></div>
+                <h4 class="text-dark-blue my-md-3">Nephrology</h4>
+            </a><a href="/departments/urology" class="item"
+                style="--i:url(https://aarogyahastha.com/img/department/icons/urology.svg);"
+                data-department="urology"><img class="dept-icon" loading="lazy"
+                    src="/static/img/department/icons/urology.svg">
+                <div class="icon"></div>
+                <h4 class="text-dark-blue my-md-3">Urology</h4>
+            </a><a href="/departments/medical_gastroenterology" class="item"
+                style="--i:url(https://aarogyahastha.com/img/department/icons/medical-gastroenterology.svg);"
+                data-department="medical-gastroenterology"><img class="dept-icon" loading="lazy"
+                    src="/static/img/department/icons/medical-gastroenterology.svg">
+                <div class="icon"></div>
+                <h4 class="text-dark-blue my-md-3">Medical Gastroenterology</h4>
+            </a><a href="/departments/minimal_access_surgery" class="item"
+                style="--i:url(https://aarogyahastha.com/img/department/icons/minimal-access-surgery.svg);"
+                data-department="minimal-access-surgery"><img class="dept-icon" loading="lazy"
+                    src="/static/img/department/icons/minimal-access-surgery.svg">
+                <div class="icon"></div>
+                <h4 class="text-dark-blue my-md-3">Minimal Access Surgery</h4>
+            </a><a href="/departments/plastic_surgery" class="item"
+                style="--i:url(https://aarogyahastha.com/img/department/icons/plastic-surgery.svg);"
+                data-department="plastic-surgery"><img class="dept-icon" loading="lazy"
+                    src="/static/img/department/icons/plastic-surgery.svg">
+                <div class="icon"></div>
+                <h4 class="text-dark-blue my-md-3">Plastic Surgery</h4>
+            </a><a href="/departments/obg" class="item"
+                style="--i:url(https://aarogyahastha.com/img/department/icons/obg.svg);" data-department="obg"><img
+                    class="dept-icon" loading="lazy" src="/static/img/department/icons/obg.svg">
+                <div class="icon"></div>
+                <h4 class="text-dark-blue my-md-3">Obstetrics & Gynaecology</h4>
+            </a><a href="/departments/surgical_gastroenterology" class="item"
+                style="--i:url(https://aarogyahastha.com/img/department/icons/surgical-gastroenterology.svg);"
+                data-department="surgical-gastroenterology"><img class="dept-icon" loading="lazy"
+                    src="/static/img/department/icons/surgical-gastroenterology.svg">
+                <div class="icon"></div>
+                <h4 class="text-dark-blue my-md-3">Surgical Gastroenterology</h4>
+            </a><a href="/departments/radiology" class="item"
+                style="--i:url(https://aarogyahastha.com/img/department/icons/radiology.svg);"
+                data-department="radiology"><img class="dept-icon" loading="lazy"
+                    src="/static/img/department/icons/radiology.svg">
+                <div class="icon"></div>
+                <h4 class="text-dark-blue my-md-3">Radiology</h4>
+            </a>
+        </div>
+    </div>
+</section>
 
-    <section class=" py-3">
-        <div class="container">
-            <h2>Our Specialists</h2>
-            <div id="doctors-list" class="appointment-section">
-                <div class="doctor-section mb-5">
-                    <div class="row g-3">
-                        <div class="col-lg-6 doctor-item" data-doctor="ekta-eiran">
-                            <div class="img-box"><img class="img-fluid" src="../static/img/doctors/ekta-eiran.jpg"></a>
-                            </div>
-                            <div class="doctor-box">
-                                <h3>Dr. Ekta Eiran</h3>
-                                <h4>Senior Consultant – Obstetrics & Gynaecology</h4>
-                                <p class="mt-4"><small><b>Languages spoken:</b> <br />English, Kannada, Hindi, Bengali,
-                                        Nepali & Oriya</small></p>
-                                <p class="mt-4"><small><b>Consultation</b><br />Monday to Saturday - 09:00 AM to 11.45
-                                        AM</small></p><a class="book-btn" href="https://app.fyndbetter.com/ahh_apt"
-                                    target="_blank">BOOK APPOINTMENT</a>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 doctor-item" data-doctor="sharadamma">
-                            <div class="img-box"><img class="img-fluid" src="../static/img/doctors/sharadamma.jpg"></a>
-                            </div>
-                            <div class="doctor-box">
-                                <h3>Dr. Sharadamma</h3>
-                                <h4>Consultant - Gynaecalogy</h4>
-                                <p class="mt-4"><small><b>Languages spoken:</b> <br />English, Hindi, Kannada, Tamil,
-                                        and Telugu</small></p>
-                                <p class="mt-4"><small><b>Consultation</b><br />On call</small></p><a class="book-btn"
-                                    href="https://app.fyndbetter.com/ahh_apt" target="_blank">BOOK APPOINTMENT</a>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 doctor-item" data-doctor="geetha-r">
-                            <div class="img-box"><img class="img-fluid" src="../static/img/doctors/geetha-r-01.jpg"></a>
-                            </div>
-                            <div class="doctor-box">
-                                <h3>Dr. Geetha R</h3>
-                                <h4>Consultant - OBG, Laparoscopic Surgery & Fertility Specialist</h4>
-                                <p class="mt-4"><small><b>Languages spoken:</b> <br />English, Kannada, Hindi,
-                                        Malayalam, and Telugu</small></p>
-                                <p class="mt-4"><small><b>Consultation</b><br />Monday, Wednesday and Friday
-                                        <br />06:00&nbsp;PM to 08:00&nbsp;PM</small></p><a class="book-btn"
-                                    href="https://app.fyndbetter.com/ahh_apt" target="_blank">BOOK APPOINTMENT</a>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 doctor-item" data-doctor="vishnu-vandana">
-                            <div class="img-box"><img class="img-fluid"
-                                    src="../static/img/doctors/vishnu-vandana-01.jpg"></a></div>
-                            <div class="doctor-box">
-                                <h3>Dr. Vishnu Vandana</h3>
-                                <h4>Senior Consultant – Obstetrics & Gynaecology</h4>
-                                <p class="mt-4"><small><b>Languages spoken:</b> <br />Hindi, English, Tamil, Telugu, and
-                                        Kannada</small></p>
-                                <p class="mt-4"><small><b>Consultation</b><br />Tuesday and Thursday <br />06:00&nbsp;PM
-                                        to 08:00&nbsp;PM</small></p><a class="book-btn"
-                                    href="https://app.fyndbetter.com/ahh_apt" target="_blank">BOOK APPOINTMENT</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section data-aos-easing="ease-in-sine" class="service-carousel-section py-5">
-        <div class="container d-flex justify-content-center">
-            <div class="owl-carousel service-carousel">
-                <a href="/departments/general_surgery" class="item"
-                    style="--i:url(https://aarogyahastha.com/img/department/icons/general-surgery.svg);"
-                    data-department="general-surgery"><img class="dept-icon" loading="lazy"
-                        src="/static/img/department/icons/general-surgery.svg">
-                    <div class="icon"></div>
-                    <h4 class="text-dark-blue my-md-3">General Surgery</h4>
-                </a><a href="/departments/neurosurgery" class="item"
-                    style="--i:url(https://aarogyahastha.com/img/department/icons/neurosurgery.svg);"
-                    data-department="neurosurgery"><img class="dept-icon" loading="lazy"
-                        src="/static/img/department/icons/neurosurgery.svg">
-                    <div class="icon"></div>
-                    <h4 class="text-dark-blue my-md-3">Neurosurgery</h4>
-                </a><a href="/departments/orthopaedics" class="item"
-                    style="--i:url(https://aarogyahastha.com/img/department/icons/orthopaedics.svg);"
-                    data-department="orthopaedics"><img class="dept-icon" loading="lazy"
-                        src="/static/img/department/icons/orthopaedics.svg">
-                    <div class="icon"></div>
-                    <h4 class="text-dark-blue my-md-3">Orthopaedics</h4>
-                </a><a href="/departments/anaesthesia" class="item"
-                    style="--i:url(https://aarogyahastha.com/img/department/icons/anaesthesia.svg);"
-                    data-department="anaesthesia"><img class="dept-icon" loading="lazy"
-                        src="/static/img/department/icons/anaesthesia.svg">
-                    <div class="icon"></div>
-                    <h4 class="text-dark-blue my-md-3"> Anaesthesiology & Critical Care</h4>
-                </a><a href="/departments/pain_medicine" class="item"
-                    style="--i:url(https://aarogyahastha.com/img/department/icons/pain-medicine.svg);"
-                    data-department="pain-medicine"><img class="dept-icon" loading="lazy"
-                        src="/static/img/department/icons/pain-medicine.svg">
-                    <div class="icon"></div>
-                    <h4 class="text-dark-blue my-md-3">Pain Medicine</h4>
-                </a><a href="/departments/general_medicine" class="item"
-                    style="--i:url(https://aarogyahastha.com/img/department/icons/general-medicine.svg);"
-                    data-department="general-medicine"><img class="dept-icon" loading="lazy"
-                        src="/static/img/department/icons/general-medicine.svg">
-                    <div class="icon"></div>
-                    <h4 class="text-dark-blue my-md-3">General Medicine</h4>
-                </a><a href="/departments/lab_medicine" class="item"
-                    style="--i:url(https://aarogyahastha.com/img/department/icons/lab-medicine.svg);"
-                    data-department="lab-medicine"><img class="dept-icon" loading="lazy"
-                        src="/static/img/department/icons/lab-medicine.svg">
-                    <div class="icon"></div>
-                    <h4 class="text-dark-blue my-md-3">Lab Medicine</h4>
-                </a><a href="/departments/paediatrics" class="item"
-                    style="--i:url(https://aarogyahastha.com/img/department/icons/paediatrics.svg);"
-                    data-department="paediatrics"><img class="dept-icon" loading="lazy"
-                        src="/static/img/department/icons/paediatrics.svg">
-                    <div class="icon"></div>
-                    <h4 class="text-dark-blue my-md-3">Paediatrics</h4>
-                </a><a href="/departments/physiotherapy" class="item"
-                    style="--i:url(https://aarogyahastha.com/img/department/icons/physiotherapy.svg);"
-                    data-department="physiotherapy"><img class="dept-icon" loading="lazy"
-                        src="/static/img/department/icons/physiotherapy.svg">
-                    <div class="icon"></div>
-                    <h4 class="text-dark-blue my-md-3">Physiotherapy</h4>
-                </a><a href="/departments/dermatology" class="item"
-                    style="--i:url(https://aarogyahastha.com/img/department/icons/dermatology.svg);"
-                    data-department="dermatology"><img class="dept-icon" loading="lazy"
-                        src="/static/img/department/icons/dermatology.svg">
-                    <div class="icon"></div>
-                    <h4 class="text-dark-blue my-md-3">Dermatology</h4>
-                </a><a href="/departments/ent" class="item"
-                    style="--i:url(https://aarogyahastha.com/img/department/icons/ent.svg);" data-department="ent"><img
-                        class="dept-icon" loading="lazy" src="/static/img/department/icons/ent.svg">
-                    <div class="icon"></div>
-                    <h4 class="text-dark-blue my-md-3"> Ear, Nose, and Throat (ENT)</h4>
-                </a><a href="/departments/emergency_medicine" class="item"
-                    style="--i:url(https://aarogyahastha.com/img/department/icons/emergency-medicine.svg);"
-                    data-department="emergency-medicine"><img class="dept-icon" loading="lazy"
-                        src="/static/img/department/icons/emergency-medicine.svg">
-                    <div class="icon"></div>
-                    <h4 class="text-dark-blue my-md-3">Emergency Medicine</h4>
-                </a><a href="/departments/nephrology" class="item"
-                    style="--i:url(https://aarogyahastha.com/img/department/icons/nephrology.svg);"
-                    data-department="nephrology"><img class="dept-icon" loading="lazy"
-                        src="/static/img/department/icons/nephrology.svg">
-                    <div class="icon"></div>
-                    <h4 class="text-dark-blue my-md-3">Nephrology</h4>
-                </a><a href="/departments/urology" class="item"
-                    style="--i:url(https://aarogyahastha.com/img/department/icons/urology.svg);"
-                    data-department="urology"><img class="dept-icon" loading="lazy"
-                        src="/static/img/department/icons/urology.svg">
-                    <div class="icon"></div>
-                    <h4 class="text-dark-blue my-md-3">Urology</h4>
-                </a><a href="/departments/medical_gastroenterology" class="item"
-                    style="--i:url(https://aarogyahastha.com/img/department/icons/medical-gastroenterology.svg);"
-                    data-department="medical-gastroenterology"><img class="dept-icon" loading="lazy"
-                        src="/static/img/department/icons/medical-gastroenterology.svg">
-                    <div class="icon"></div>
-                    <h4 class="text-dark-blue my-md-3">Medical Gastroenterology</h4>
-                </a><a href="/departments/minimal_access_surgery" class="item"
-                    style="--i:url(https://aarogyahastha.com/img/department/icons/minimal-access-surgery.svg);"
-                    data-department="minimal-access-surgery"><img class="dept-icon" loading="lazy"
-                        src="/static/img/department/icons/minimal-access-surgery.svg">
-                    <div class="icon"></div>
-                    <h4 class="text-dark-blue my-md-3">Minimal Access Surgery</h4>
-                </a><a href="/departments/plastic_surgery" class="item"
-                    style="--i:url(https://aarogyahastha.com/img/department/icons/plastic-surgery.svg);"
-                    data-department="plastic-surgery"><img class="dept-icon" loading="lazy"
-                        src="/static/img/department/icons/plastic-surgery.svg">
-                    <div class="icon"></div>
-                    <h4 class="text-dark-blue my-md-3">Plastic Surgery</h4>
-                </a><a href="/departments/obg" class="item"
-                    style="--i:url(https://aarogyahastha.com/img/department/icons/obg.svg);" data-department="obg"><img
-                        class="dept-icon" loading="lazy" src="/static/img/department/icons/obg.svg">
-                    <div class="icon"></div>
-                    <h4 class="text-dark-blue my-md-3">Obstetrics & Gynaecology</h4>
-                </a><a href="/departments/surgical_gastroenterology" class="item"
-                    style="--i:url(https://aarogyahastha.com/img/department/icons/surgical-gastroenterology.svg);"
-                    data-department="surgical-gastroenterology"><img class="dept-icon" loading="lazy"
-                        src="/static/img/department/icons/surgical-gastroenterology.svg">
-                    <div class="icon"></div>
-                    <h4 class="text-dark-blue my-md-3">Surgical Gastroenterology</h4>
-                </a><a href="/departments/radiology" class="item"
-                    style="--i:url(https://aarogyahastha.com/img/department/icons/radiology.svg);"
-                    data-department="radiology"><img class="dept-icon" loading="lazy"
-                        src="/static/img/department/icons/radiology.svg">
-                    <div class="icon"></div>
-                    <h4 class="text-dark-blue my-md-3">Radiology</h4>
-                </a>
-            </div>
-        </div>
-    </section>
-     
-    <!-- scripts -->
-    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-    <script src="../static/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="../static/js/script.js"></script>
-    <script src="https://fyndbetter.com/chatbot/aarogya_chatbot"></script>
-    <script>
-        $(".book-apt").on('click', function () {
-            var url = $(this).data("url");
-            window.open(url, '_blank');
-        });
-    </script>
-    <a href="#" id="scrollToTopBtn" class="scroll-to-top-btn" title="Scroll to top" aria-label="Scroll to top">
-        <i class="fa fa-arrow-up"></i> <!-- Simple up arrow -->
-    </a>
+<!-- scripts -->
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="../static/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="../static/js/script.js"></script>
+<script src="https://fyndbetter.com/chatbot/aarogya_chatbot"></script>
+<script>
+    $(".book-apt").on('click', function () {
+        var url = $(this).data("url");
+        window.open(url, '_blank');
+    });
+</script>
+<a href="#" id="scrollToTopBtn" class="scroll-to-top-btn" title="Scroll to top" aria-label="Scroll to top">
+    <i class="fa fa-arrow-up"></i> <!-- Simple up arrow -->
+</a>
 
 <script>
     $(document).ready(function () { initDepartmentPageActions(); })

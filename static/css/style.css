@@ -4149,7 +4149,7 @@ ul {
 .ambulance-animation-container {
   overflow: hidden;
   /* Hides the ambulance when it is outside the container */
-  height: 50px;
+  height: 35px;
   /* Adjust height as needed */
   position: relative;
   background-color: #f8f9fa;
@@ -4284,9 +4284,6 @@ ul {
 .department-grid .item.active * {
   color: #FFF !important;
 }
-
-/* Fixed image behavior on hover/active */
-
 
 .department-grid .item:hover img.dept-icon,
 .department-grid .item.active img.dept-icon {

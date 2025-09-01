@@ -1,248 +1,279 @@
 {% extends "base.html" %}
 
-{% block title %}About Us - Aarogya Hastha{% endblock %}
+{% block title %}Surgical Gastroenterology | Advanced GI Surgery in Bangalore | Aarogya Hastha{% endblock %}
+
+{% block head %}
+{{ super() }}
+<meta name="description"
+    content="Top GI surgeons in Bangalore performing complex procedures for liver, pancreas, and gastrointestinal cancers. Advanced surgical care.">
+<meta name="keywords"
+    content="hospital Bangalore, multi-speciality hospital, healthcare India, medical facilities, expert doctors">
+<meta name="author" content="Aarogyahastha Pvt Ltd">
+<meta name="designer" content="Aarogyahastha Pvt Ltd">
+<meta name="publisher" content="Aarogyahastha Pvt Ltd">
+<meta name="no-email-collection" content="http://www.unspam.com/noemailcollection/">
+<meta name="robots" content="index,follow">
+<meta name="revisit-after" content="7 days">
+<meta name="distribution" content="web">
+<meta name="robots" content="noodp">
+<meta name="web_author" content="Aarogyahastha Pvt Ltd">
+<meta name="rating" content="general">
+<meta name="rating" content="safe for kids">
+<meta name="subject" content="Healthcare">
+<meta name="copyright" content="Copyright © 2025">
+<meta name="reply-to" content="info@aarogyahastha.com">
+<meta name="abstract"
+    content="We provide timely and specialized medical attention for patients experiencing life-threatening conditions, ensuring their urgent needs are met with the highest level of care.">
+<meta name="city" content="Bangalore">
+<meta name="country" content="India">
+<meta name="distribution" content="global">
+<meta name="classification" content="Healthcare, Hospital">
+<base href="/">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+{% endblock %}
 
 {% block content %}
-
-
-    <section class="department-banner" data-aos="fade-up" data-aos-offset="300" data-aos-easing="ease-in-sine">
-        <div class="container">
-            <div class="banner">
-                <img loading="lazy" src="/static/img/department/surgical-gastroenterology.jpg" alt="">
-                <div class="text-box-1">
-                    <h1>Surgical Gastroenterology</h1>
-                    <p>Expert Hands, Confident Outcomes</p>
-                </div>
+<section class="department-banner" data-aos="fade-up" data-aos-offset="300" data-aos-easing="ease-in-sine">
+    <div class="container">
+        <div class="banner">
+            <img loading="lazy" src="/static/img/department/surgical-gastroenterology.jpg" alt="">
+            <div class="text-box-1">
+                <h1>Surgical Gastroenterology</h1>
+                <p>Expert Hands, Confident Outcomes</p>
             </div>
         </div>
-    </section>
-    <section data-aos="fade-up" data-aos-offset="100" data-aos-easing="ease-in-sine">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-12">
-                    <blockquote class="blockquote blockquote-custom">
-                        <!-- <p class="mb-0 mt-2">Good doctors know their medicine, but great doctors know their patients</p>
+    </div>
+</section>
+<section data-aos="fade-up" data-aos-offset="100" data-aos-easing="ease-in-sine">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-12">
+                <blockquote class="blockquote blockquote-custom">
+                    <!-- <p class="mb-0 mt-2">Good doctors know their medicine, but great doctors know their patients</p>
                     <div class="blockquote-footer mt-4 text-end">William Osler</div> -->
-                    </blockquote>
-                </div>
-                <div class="col-12">
-                    <p>Gastroenterology speciality provides care for disorders of the digestive system. Our team of
-                        skilled surgeons, state-of-the-art facilities and advanced technology make us a trusted choice
-                        for patients seeking surgical solutions for their gastrointestinal issues.</p>
-                    <p>The Surgical Gastroenterology department at Aarogya Hastha offers various services for
-                        gastrointestinal disorders. Here are some of the services we offer:</p>
-                </div>
+                </blockquote>
+            </div>
+            <div class="col-12">
+                <p>Gastroenterology speciality provides care for disorders of the digestive system. Our team of
+                    skilled surgeons, state-of-the-art facilities and advanced technology make us a trusted choice
+                    for patients seeking surgical solutions for their gastrointestinal issues.</p>
+                <p>The Surgical Gastroenterology department at Aarogya Hastha offers various services for
+                    gastrointestinal disorders. Here are some of the services we offer:</p>
             </div>
         </div>
-    </section>
-    <section data-aos="fade-up" data-aos-offset="300" data-aos-easing="ease-in-sine" class="department-section py-3">
-        <div class="container">
-            <h2>Our Services</h2>
-            <div class="row department-sub-services">
-                <div class="department-grid">
-                    <div class="item active">
-                        <h4 class="text-dark-blue">Endoscopy</h4>
-                        <p>We have a dedicated endoscopy unit for procedures such as gastroscopy, colonoscopy, ERCP and
-                            bronchoscopy. Our team of experienced endoscopists uses the latest equipment and techniques
-                            to diagnose and treat various conditions accurately.</p>
-                    </div>
-
-                    <div class="item">
-                        <h4 class="text-dark-blue">Laparoscopic Surgery</h4>
-                        <p>We specialise in laparoscopic (keyhole) surgery for a variety of conditions, such as
-                            gallbladder stones, hernias, appendicitis and many more. This minimally invasive technique
-                            offers numerous benefits to patients, such as shorter recovery time, minimal scarring and
-                            less post-operative pain.</p>
-                    </div>
-
-                    <div class="item">
-                        <h4 class="text-dark-blue">Upper GI Surgeries</h4>
-                        <p>Our team of surgeons are skilled in performing a range of upper gastrointestinal surgeries,
-                            including gastric bypass, Gastroesophageal Reflux Disease (GERD) surgery and pancreatic
-                            surgery. We use advanced technology and techniques to provide safe and effective treatment
-                            for our patients.</p>
-                    </div>
-
-                    <div class="item">
-                        <h4 class="text-dark-blue">Colorectal Surgeries</h4>
-                        <p>Our department offers a comprehensive range of colorectal surgeries, including colectomy,
-                            rectal resection and hemorrhoidectomy. Our surgeons are experienced in treating conditions
-                            such as inflammatory bowel disease and other disorders of the colon and rectum.</p>
-                    </div>
-
-                    <div class="item">
-                        <h4 class="text-dark-blue">Liver Surgery</h4>
-                        <p>We have a team of highly skilled hepatobiliary surgeons who specialise in treating complex
-                            liver diseases. Our state-of-the-art facilities and advanced surgical techniques allow us to
-                            provide the best outcomes for patients undergoing liver surgery.</p>
-                    </div>
-
-                    <div class="item">
-                        <h4 class="text-dark-blue">Pancreatic Surgery</h4>
-                        <p>Our department offers the latest in surgical techniques for treating diseases of the
-                            pancreas, such as pancreatitis, cysts and tumours. Our expert surgeons and advanced medical
-                            techniques ensures a faster recovery and better outcomes for our patients.</p>
-                    </div>
-                </div>
-                <div class="department-sub-services-details">
+    </div>
+</section>
+<section data-aos="fade-up" data-aos-offset="300" data-aos-easing="ease-in-sine" class="department-section py-3">
+    <div class="container">
+        <h2>Our Services</h2>
+        <div class="row department-sub-services">
+            <div class="department-grid">
+                <div class="item active">
                     <h4 class="text-dark-blue">Endoscopy</h4>
                     <p>We have a dedicated endoscopy unit for procedures such as gastroscopy, colonoscopy, ERCP and
-                        bronchoscopy. Our team of experienced endoscopists uses the latest equipment and techniques to
-                        diagnose and treat various conditions accurately.</p>
+                        bronchoscopy. Our team of experienced endoscopists uses the latest equipment and techniques
+                        to diagnose and treat various conditions accurately.</p>
+                </div>
+
+                <div class="item">
+                    <h4 class="text-dark-blue">Laparoscopic Surgery</h4>
+                    <p>We specialise in laparoscopic (keyhole) surgery for a variety of conditions, such as
+                        gallbladder stones, hernias, appendicitis and many more. This minimally invasive technique
+                        offers numerous benefits to patients, such as shorter recovery time, minimal scarring and
+                        less post-operative pain.</p>
+                </div>
+
+                <div class="item">
+                    <h4 class="text-dark-blue">Upper GI Surgeries</h4>
+                    <p>Our team of surgeons are skilled in performing a range of upper gastrointestinal surgeries,
+                        including gastric bypass, Gastroesophageal Reflux Disease (GERD) surgery and pancreatic
+                        surgery. We use advanced technology and techniques to provide safe and effective treatment
+                        for our patients.</p>
+                </div>
+
+                <div class="item">
+                    <h4 class="text-dark-blue">Colorectal Surgeries</h4>
+                    <p>Our department offers a comprehensive range of colorectal surgeries, including colectomy,
+                        rectal resection and hemorrhoidectomy. Our surgeons are experienced in treating conditions
+                        such as inflammatory bowel disease and other disorders of the colon and rectum.</p>
+                </div>
+
+                <div class="item">
+                    <h4 class="text-dark-blue">Liver Surgery</h4>
+                    <p>We have a team of highly skilled hepatobiliary surgeons who specialise in treating complex
+                        liver diseases. Our state-of-the-art facilities and advanced surgical techniques allow us to
+                        provide the best outcomes for patients undergoing liver surgery.</p>
+                </div>
+
+                <div class="item">
+                    <h4 class="text-dark-blue">Pancreatic Surgery</h4>
+                    <p>Our department offers the latest in surgical techniques for treating diseases of the
+                        pancreas, such as pancreatitis, cysts and tumours. Our expert surgeons and advanced medical
+                        techniques ensures a faster recovery and better outcomes for our patients.</p>
                 </div>
             </div>
-        </div>
-    </section>
-    <section data-aos="fade-up" data-aos-offset="300" data-aos-easing="ease-in-sine"
-        class="department-section py-3 aos-init">
-        <div class="container">
-            <p class="content-highlight">Aarogya Hastha is equipped with the latest technologies, including advanced
-                laparoscopic equipment, video endoscopes and high-definition cameras, to ensure accurate diagnosis and
-                treatment. </p>
-        </div>
-    </section>
-    <section data-aos-easing="ease-in-sine" class="service-carousel-section py-5">
-        <div class="container d-flex justify-content-center">
-            <div class="owl-carousel service-carousel">
-                <a href="/departments/general_surgery" class="item"
-                    style="--i:url(https://aarogyahastha.com/img/department/icons/general-surgery.svg);"
-                    data-department="general-surgery"><img class="dept-icon" loading="lazy"
-                        src="/static/img/department/icons/general-surgery.svg">
-                    <div class="icon"></div>
-                    <h4 class="text-dark-blue my-md-3">General Surgery</h4>
-                </a><a href="/departments/neurosurgery" class="item"
-                    style="--i:url(https://aarogyahastha.com/img/department/icons/neurosurgery.svg);"
-                    data-department="neurosurgery"><img class="dept-icon" loading="lazy"
-                        src="/static/img/department/icons/neurosurgery.svg">
-                    <div class="icon"></div>
-                    <h4 class="text-dark-blue my-md-3">Neurosurgery</h4>
-                </a><a href="/departments/orthopaedics" class="item"
-                    style="--i:url(https://aarogyahastha.com/img/department/icons/orthopaedics.svg);"
-                    data-department="orthopaedics"><img class="dept-icon" loading="lazy"
-                        src="/static/img/department/icons/orthopaedics.svg">
-                    <div class="icon"></div>
-                    <h4 class="text-dark-blue my-md-3">Orthopaedics</h4>
-                </a><a href="/departments/anaesthesia" class="item"
-                    style="--i:url(https://aarogyahastha.com/img/department/icons/anaesthesia.svg);"
-                    data-department="anaesthesia"><img class="dept-icon" loading="lazy"
-                        src="/static/img/department/icons/anaesthesia.svg">
-                    <div class="icon"></div>
-                    <h4 class="text-dark-blue my-md-3"> Anaesthesiology & Critical Care</h4>
-                </a><a href="/departments/pain_medicine" class="item"
-                    style="--i:url(https://aarogyahastha.com/img/department/icons/pain-medicine.svg);"
-                    data-department="pain-medicine"><img class="dept-icon" loading="lazy"
-                        src="/static/img/department/icons/pain-medicine.svg">
-                    <div class="icon"></div>
-                    <h4 class="text-dark-blue my-md-3">Pain Medicine</h4>
-                </a><a href="/departments/general_medicine" class="item"
-                    style="--i:url(https://aarogyahastha.com/img/department/icons/general-medicine.svg);"
-                    data-department="general-medicine"><img class="dept-icon" loading="lazy"
-                        src="/static/img/department/icons/general-medicine.svg">
-                    <div class="icon"></div>
-                    <h4 class="text-dark-blue my-md-3">General Medicine</h4>
-                </a><a href="/departments/lab_medicine" class="item"
-                    style="--i:url(https://aarogyahastha.com/img/department/icons/lab-medicine.svg);"
-                    data-department="lab-medicine"><img class="dept-icon" loading="lazy"
-                        src="/static/img/department/icons/lab-medicine.svg">
-                    <div class="icon"></div>
-                    <h4 class="text-dark-blue my-md-3">Lab Medicine</h4>
-                </a><a href="/departments/paediatrics" class="item"
-                    style="--i:url(https://aarogyahastha.com/img/department/icons/paediatrics.svg);"
-                    data-department="paediatrics"><img class="dept-icon" loading="lazy"
-                        src="/static/img/department/icons/paediatrics.svg">
-                    <div class="icon"></div>
-                    <h4 class="text-dark-blue my-md-3">Paediatrics</h4>
-                </a><a href="/departments/physiotherapy" class="item"
-                    style="--i:url(https://aarogyahastha.com/img/department/icons/physiotherapy.svg);"
-                    data-department="physiotherapy"><img class="dept-icon" loading="lazy"
-                        src="/static/img/department/icons/physiotherapy.svg">
-                    <div class="icon"></div>
-                    <h4 class="text-dark-blue my-md-3">Physiotherapy</h4>
-                </a><a href="/departments/dermatology" class="item"
-                    style="--i:url(https://aarogyahastha.com/img/department/icons/dermatology.svg);"
-                    data-department="dermatology"><img class="dept-icon" loading="lazy"
-                        src="/static/img/department/icons/dermatology.svg">
-                    <div class="icon"></div>
-                    <h4 class="text-dark-blue my-md-3">Dermatology</h4>
-                </a><a href="/departments/ent" class="item"
-                    style="--i:url(https://aarogyahastha.com/img/department/icons/ent.svg);" data-department="ent"><img
-                        class="dept-icon" loading="lazy" src="/static/img/department/icons/ent.svg">
-                    <div class="icon"></div>
-                    <h4 class="text-dark-blue my-md-3"> Ear, Nose, and Throat (ENT)</h4>
-                </a><a href="/departments/emergency_medicine" class="item"
-                    style="--i:url(https://aarogyahastha.com/img/department/icons/emergency-medicine.svg);"
-                    data-department="emergency-medicine"><img class="dept-icon" loading="lazy"
-                        src="/static/img/department/icons/emergency-medicine.svg">
-                    <div class="icon"></div>
-                    <h4 class="text-dark-blue my-md-3">Emergency Medicine</h4>
-                </a><a href="/departments/nephrology" class="item"
-                    style="--i:url(https://aarogyahastha.com/img/department/icons/nephrology.svg);"
-                    data-department="nephrology"><img class="dept-icon" loading="lazy"
-                        src="/static/img/department/icons/nephrology.svg">
-                    <div class="icon"></div>
-                    <h4 class="text-dark-blue my-md-3">Nephrology</h4>
-                </a><a href="/departments/urology" class="item"
-                    style="--i:url(https://aarogyahastha.com/img/department/icons/urology.svg);"
-                    data-department="urology"><img class="dept-icon" loading="lazy"
-                        src="/static/img/department/icons/urology.svg">
-                    <div class="icon"></div>
-                    <h4 class="text-dark-blue my-md-3">Urology</h4>
-                </a><a href="/departments/medical_gastroenterology" class="item"
-                    style="--i:url(https://aarogyahastha.com/img/department/icons/medical-gastroenterology.svg);"
-                    data-department="medical-gastroenterology"><img class="dept-icon" loading="lazy"
-                        src="/static/img/department/icons/medical-gastroenterology.svg">
-                    <div class="icon"></div>
-                    <h4 class="text-dark-blue my-md-3">Medical Gastroenterology</h4>
-                </a><a href="/departments/minimal_access_surgery" class="item"
-                    style="--i:url(https://aarogyahastha.com/img/department/icons/minimal-access-surgery.svg);"
-                    data-department="minimal-access-surgery"><img class="dept-icon" loading="lazy"
-                        src="/static/img/department/icons/minimal-access-surgery.svg">
-                    <div class="icon"></div>
-                    <h4 class="text-dark-blue my-md-3">Minimal Access Surgery</h4>
-                </a><a href="/departments/plastic_surgery" class="item"
-                    style="--i:url(https://aarogyahastha.com/img/department/icons/plastic-surgery.svg);"
-                    data-department="plastic-surgery"><img class="dept-icon" loading="lazy"
-                        src="/static/img/department/icons/plastic-surgery.svg">
-                    <div class="icon"></div>
-                    <h4 class="text-dark-blue my-md-3">Plastic Surgery</h4>
-                </a><a href="/departments/obg" class="item"
-                    style="--i:url(https://aarogyahastha.com/img/department/icons/obg.svg);" data-department="obg"><img
-                        class="dept-icon" loading="lazy" src="/static/img/department/icons/obg.svg">
-                    <div class="icon"></div>
-                    <h4 class="text-dark-blue my-md-3">Obstetrics & Gynaecology</h4>
-                </a><a href="/departments/surgical_gastroenterology" class="item"
-                    style="--i:url(https://aarogyahastha.com/img/department/icons/surgical-gastroenterology.svg);"
-                    data-department="surgical-gastroenterology"><img class="dept-icon" loading="lazy"
-                        src="/static/img/department/icons/surgical-gastroenterology.svg">
-                    <div class="icon"></div>
-                    <h4 class="text-dark-blue my-md-3">Surgical Gastroenterology</h4>
-                </a><a href="/departments/radiology" class="item"
-                    style="--i:url(https://aarogyahastha.com/img/department/icons/radiology.svg);"
-                    data-department="radiology"><img class="dept-icon" loading="lazy"
-                        src="/static/img/department/icons/radiology.svg">
-                    <div class="icon"></div>
-                    <h4 class="text-dark-blue my-md-3">Radiology</h4>
-                </a>
+            <div class="department-sub-services-details">
+                <h4 class="text-dark-blue">Endoscopy</h4>
+                <p>We have a dedicated endoscopy unit for procedures such as gastroscopy, colonoscopy, ERCP and
+                    bronchoscopy. Our team of experienced endoscopists uses the latest equipment and techniques to
+                    diagnose and treat various conditions accurately.</p>
             </div>
         </div>
-    </section>
-      
-    <!-- scripts -->
-    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-    <script src="/static/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="/static/js/script.js"></script>
-    <script src="https://fyndbetter.com/chatbot/aarogya_chatbot"></script>
-    <script>
-        $(".book-apt").on('click', function () {
-            var url = $(this).data("url");
-            window.open(url, '_blank');
-        });
-    </script>
-    <a href="#" id="scrollToTopBtn" class="scroll-to-top-btn" title="Scroll to top" aria-label="Scroll to top">
-        <i class="fa fa-arrow-up"></i> <!-- Simple up arrow -->
-    </a>
+    </div>
+</section>
+<section data-aos="fade-up" data-aos-offset="300" data-aos-easing="ease-in-sine"
+    class="department-section py-3 aos-init">
+    <div class="container">
+        <p class="content-highlight">Aarogya Hastha is equipped with the latest technologies, including advanced
+            laparoscopic equipment, video endoscopes and high-definition cameras, to ensure accurate diagnosis and
+            treatment. </p>
+    </div>
+</section>
+<section data-aos-easing="ease-in-sine" class="service-carousel-section py-5">
+    <div class="container d-flex justify-content-center">
+        <div class="owl-carousel service-carousel">
+            <a href="/departments/general_surgery" class="item"
+                style="--i:url(https://aarogyahastha.com/img/department/icons/general-surgery.svg);"
+                data-department="general-surgery"><img class="dept-icon" loading="lazy"
+                    src="/static/img/department/icons/general-surgery.svg">
+                <div class="icon"></div>
+                <h4 class="text-dark-blue my-md-3">General Surgery</h4>
+            </a><a href="/departments/neurosurgery" class="item"
+                style="--i:url(https://aarogyahastha.com/img/department/icons/neurosurgery.svg);"
+                data-department="neurosurgery"><img class="dept-icon" loading="lazy"
+                    src="/static/img/department/icons/neurosurgery.svg">
+                <div class="icon"></div>
+                <h4 class="text-dark-blue my-md-3">Neurosurgery</h4>
+            </a><a href="/departments/orthopaedics" class="item"
+                style="--i:url(https://aarogyahastha.com/img/department/icons/orthopaedics.svg);"
+                data-department="orthopaedics"><img class="dept-icon" loading="lazy"
+                    src="/static/img/department/icons/orthopaedics.svg">
+                <div class="icon"></div>
+                <h4 class="text-dark-blue my-md-3">Orthopaedics</h4>
+            </a><a href="/departments/anaesthesia" class="item"
+                style="--i:url(https://aarogyahastha.com/img/department/icons/anaesthesia.svg);"
+                data-department="anaesthesia"><img class="dept-icon" loading="lazy"
+                    src="/static/img/department/icons/anaesthesia.svg">
+                <div class="icon"></div>
+                <h4 class="text-dark-blue my-md-3"> Anaesthesiology & Critical Care</h4>
+            </a><a href="/departments/pain_medicine" class="item"
+                style="--i:url(https://aarogyahastha.com/img/department/icons/pain-medicine.svg);"
+                data-department="pain-medicine"><img class="dept-icon" loading="lazy"
+                    src="/static/img/department/icons/pain-medicine.svg">
+                <div class="icon"></div>
+                <h4 class="text-dark-blue my-md-3">Pain Medicine</h4>
+            </a><a href="/departments/general_medicine" class="item"
+                style="--i:url(https://aarogyahastha.com/img/department/icons/general-medicine.svg);"
+                data-department="general-medicine"><img class="dept-icon" loading="lazy"
+                    src="/static/img/department/icons/general-medicine.svg">
+                <div class="icon"></div>
+                <h4 class="text-dark-blue my-md-3">General Medicine</h4>
+            </a><a href="/departments/lab_medicine" class="item"
+                style="--i:url(https://aarogyahastha.com/img/department/icons/lab-medicine.svg);"
+                data-department="lab-medicine"><img class="dept-icon" loading="lazy"
+                    src="/static/img/department/icons/lab-medicine.svg">
+                <div class="icon"></div>
+                <h4 class="text-dark-blue my-md-3">Lab Medicine</h4>
+            </a><a href="/departments/paediatrics" class="item"
+                style="--i:url(https://aarogyahastha.com/img/department/icons/paediatrics.svg);"
+                data-department="paediatrics"><img class="dept-icon" loading="lazy"
+                    src="/static/img/department/icons/paediatrics.svg">
+                <div class="icon"></div>
+                <h4 class="text-dark-blue my-md-3">Paediatrics</h4>
+            </a><a href="/departments/physiotherapy" class="item"
+                style="--i:url(https://aarogyahastha.com/img/department/icons/physiotherapy.svg);"
+                data-department="physiotherapy"><img class="dept-icon" loading="lazy"
+                    src="/static/img/department/icons/physiotherapy.svg">
+                <div class="icon"></div>
+                <h4 class="text-dark-blue my-md-3">Physiotherapy</h4>
+            </a><a href="/departments/dermatology" class="item"
+                style="--i:url(https://aarogyahastha.com/img/department/icons/dermatology.svg);"
+                data-department="dermatology"><img class="dept-icon" loading="lazy"
+                    src="/static/img/department/icons/dermatology.svg">
+                <div class="icon"></div>
+                <h4 class="text-dark-blue my-md-3">Dermatology</h4>
+            </a><a href="/departments/ent" class="item"
+                style="--i:url(https://aarogyahastha.com/img/department/icons/ent.svg);" data-department="ent"><img
+                    class="dept-icon" loading="lazy" src="/static/img/department/icons/ent.svg">
+                <div class="icon"></div>
+                <h4 class="text-dark-blue my-md-3"> Ear, Nose, and Throat (ENT)</h4>
+            </a><a href="/departments/emergency_medicine" class="item"
+                style="--i:url(https://aarogyahastha.com/img/department/icons/emergency-medicine.svg);"
+                data-department="emergency-medicine"><img class="dept-icon" loading="lazy"
+                    src="/static/img/department/icons/emergency-medicine.svg">
+                <div class="icon"></div>
+                <h4 class="text-dark-blue my-md-3">Emergency Medicine</h4>
+            </a><a href="/departments/nephrology" class="item"
+                style="--i:url(https://aarogyahastha.com/img/department/icons/nephrology.svg);"
+                data-department="nephrology"><img class="dept-icon" loading="lazy"
+                    src="/static/img/department/icons/nephrology.svg">
+                <div class="icon"></div>
+                <h4 class="text-dark-blue my-md-3">Nephrology</h4>
+            </a><a href="/departments/urology" class="item"
+                style="--i:url(https://aarogyahastha.com/img/department/icons/urology.svg);"
+                data-department="urology"><img class="dept-icon" loading="lazy"
+                    src="/static/img/department/icons/urology.svg">
+                <div class="icon"></div>
+                <h4 class="text-dark-blue my-md-3">Urology</h4>
+            </a><a href="/departments/medical_gastroenterology" class="item"
+                style="--i:url(https://aarogyahastha.com/img/department/icons/medical-gastroenterology.svg);"
+                data-department="medical-gastroenterology"><img class="dept-icon" loading="lazy"
+                    src="/static/img/department/icons/medical-gastroenterology.svg">
+                <div class="icon"></div>
+                <h4 class="text-dark-blue my-md-3">Medical Gastroenterology</h4>
+            </a><a href="/departments/minimal_access_surgery" class="item"
+                style="--i:url(https://aarogyahastha.com/img/department/icons/minimal-access-surgery.svg);"
+                data-department="minimal-access-surgery"><img class="dept-icon" loading="lazy"
+                    src="/static/img/department/icons/minimal-access-surgery.svg">
+                <div class="icon"></div>
+                <h4 class="text-dark-blue my-md-3">Minimal Access Surgery</h4>
+            </a><a href="/departments/plastic_surgery" class="item"
+                style="--i:url(https://aarogyahastha.com/img/department/icons/plastic-surgery.svg);"
+                data-department="plastic-surgery"><img class="dept-icon" loading="lazy"
+                    src="/static/img/department/icons/plastic-surgery.svg">
+                <div class="icon"></div>
+                <h4 class="text-dark-blue my-md-3">Plastic Surgery</h4>
+            </a><a href="/departments/obg" class="item"
+                style="--i:url(https://aarogyahastha.com/img/department/icons/obg.svg);" data-department="obg"><img
+                    class="dept-icon" loading="lazy" src="/static/img/department/icons/obg.svg">
+                <div class="icon"></div>
+                <h4 class="text-dark-blue my-md-3">Obstetrics & Gynaecology</h4>
+            </a><a href="/departments/surgical_gastroenterology" class="item"
+                style="--i:url(https://aarogyahastha.com/img/department/icons/surgical-gastroenterology.svg);"
+                data-department="surgical-gastroenterology"><img class="dept-icon" loading="lazy"
+                    src="/static/img/department/icons/surgical-gastroenterology.svg">
+                <div class="icon"></div>
+                <h4 class="text-dark-blue my-md-3">Surgical Gastroenterology</h4>
+            </a><a href="/departments/radiology" class="item"
+                style="--i:url(https://aarogyahastha.com/img/department/icons/radiology.svg);"
+                data-department="radiology"><img class="dept-icon" loading="lazy"
+                    src="/static/img/department/icons/radiology.svg">
+                <div class="icon"></div>
+                <h4 class="text-dark-blue my-md-3">Radiology</h4>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- scripts -->
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="/static/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="/static/js/script.js"></script>
+<script src="https://fyndbetter.com/chatbot/aarogya_chatbot"></script>
+<script>
+    $(".book-apt").on('click', function () {
+        var url = $(this).data("url");
+        window.open(url, '_blank');
+    });
+</script>
+<a href="#" id="scrollToTopBtn" class="scroll-to-top-btn" title="Scroll to top" aria-label="Scroll to top">
+    <i class="fa fa-arrow-up"></i> <!-- Simple up arrow -->
+</a>
 
 <script>
     $(document).ready(function () { initDepartmentPageActions(); })
