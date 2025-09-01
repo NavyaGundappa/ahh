@@ -88,23 +88,19 @@
 <section data-aos="fade-up" class="dedicated-section-one"
     style="background: none; padding-top: 60px; padding-bottom: 60px;">
     <div class="container">
-        <!-- Section heading centered -->
         <div class="row">
             <div class="col-12 text-center mb-5">
                 <h2 class="section-heading">Our Services</h2>
             </div>
         </div>
 
-        <!-- Image + content row -->
         <div class="row align-items-center">
-            <!-- Image on left -->
             <div class="col-lg-6 mb-4 mb-lg-0 image-column">
                 <img src="static/img/home/our-services.jpg" class="img-fluid rounded-lg shadow-lg w-100"
                     alt="Our Services">
             </div>
 
 
-            <!-- Content on right -->
             <div class="col-lg-6">
                 <div class="service-item">
                     <h3>Emergency and Critical Care</h3>
@@ -126,9 +122,6 @@
         </div>
     </div>
 </section>
-
-
-
 
 <section data-aos-easing="ease-in-sine" class="service-carousel-section">
     <div class="container">
@@ -617,30 +610,9 @@
     </div>
 </section>
 
-
 <section class="counter-number-section">
     <div class="container">
         <div class="row gy-0 justify-content-center medicover-numbers">
-            <div class="col counter-item">
-                <div class="icon-wrap">
-                    <img src="https://www.medicoverhospitals.in/images/icon/hospital-bed.svg" alt="Beds" loading="lazy">
-                </div>
-                <div class="counter-wrap">
-                    <span class="number" data-count="100">0</span>
-                    <span class="suffix">+</span>
-                </div>
-                <div class="label">Beds</div>
-            </div>
-            <div class="col counter-item">
-                <div class="icon-wrap">
-                    <img src="https://www.medicoverhospitals.in/images/icon/doctors.svg" alt="Doctors" loading="lazy">
-                </div>
-                <div class="counter-wrap">
-                    <span class="number" data-count="50">0</span>
-                    <span class="suffix">+</span>
-                </div>
-                <div class="label">Doctors</div>
-            </div>
             <div class="col counter-item">
                 <div class="icon-wrap">
                     <img src="https://www.medicoverhospitals.in/images/icon/surgeries.svg" alt="Patients Treated"
@@ -662,6 +634,26 @@
                     <span class="suffix"> +</span>
                 </div>
                 <div class="label">Surgeries</div>
+            </div>
+            <div class="col counter-item">
+                <div class="icon-wrap">
+                    <img src="https://www.medicoverhospitals.in/images/icon/hospital-bed.svg" alt="Beds" loading="lazy">
+                </div>
+                <div class="counter-wrap">
+                    <span class="number" data-count="100">0</span>
+                    <span class="suffix">+</span>
+                </div>
+                <div class="label">Beds</div>
+            </div>
+            <div class="col counter-item">
+                <div class="icon-wrap">
+                    <img src="https://www.medicoverhospitals.in/images/icon/doctors.svg" alt="Doctors" loading="lazy">
+                </div>
+                <div class="counter-wrap">
+                    <span class="number" data-count="50">0</span>
+                    <span class="suffix">+</span>
+                </div>
+                <div class="label">Doctors</div>
             </div>
             <div class="col counter-item">
                 <div class="icon-wrap">
@@ -733,11 +725,121 @@
     </div>
 </section>
 
-<section data-aos-easing="ease-in-sine" class="custom-video-section">
+<section id="youtube-section" data-aos-easing="ease-in-sine" class="custom-video-section">
     <div class="container-fluid position-relative">
         <img src="https://i.ytimg.com/vi_webp/PpAr4GjuEsE/maxresdefault.webp" class="img-fluid">
         <div data-vbg="https://www.youtube.com/watch?v=CgLJFg_9enI"></div>
     </div>
 </section>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+        // 1. FIX FOR SCROLL-TO-TOP ON REFRESH
+        // This forces the browser to scroll to the top of the page on reload.
+        if (history.scrollRestoration) {
+            history.scrollRestoration = 'manual';
+        }
+        window.scrollTo(0, 0);
+
+
+        // Function to hide/show sidebar based on scroll position
+        function toggleSidebarOnYouTubeSection() {
+            const youtubeSection = document.getElementById('youtube-section');
+            const sidebar = document.querySelector('.left-sidebar'); // Adjust selector as needed
+
+            if (!youtubeSection || !sidebar) return;
+
+            const rect = youtubeSection.getBoundingClientRect();
+            const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+
+            // Check if YouTube section is in view (with some threshold)
+            const isInView = rect.top <= windowHeight / 2 && rect.bottom >= windowHeight / 2;
+
+            if (isInView) {
+                sidebar.style.display = 'none';
+            } else {
+                sidebar.style.display = 'block'; // or whatever its default display value is
+            }
+        }
+
+        // Add scroll event listener
+        window.addEventListener('scroll', toggleSidebarOnYouTubeSection);
+
+        // Also call on page load in case the section is already in view
+        window.addEventListener('load', toggleSidebarOnYouTubeSection);
+
+        function toggleSidebarOnYouTubeSection() {
+            const youtubeSection = document.getElementById('youtube-section');
+            const sidebar = document.querySelector('.left-sidebar');
+
+            if (!youtubeSection || !sidebar) return;
+
+            const rect = youtubeSection.getBoundingClientRect();
+            const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+
+            const isInView = rect.top <= windowHeight / 2 && rect.bottom >= windowHeight / 2;
+
+            if (isInView) {
+                sidebar.classList.add('hidden');
+            } else {
+                sidebar.classList.remove('hidden');
+            }
+        }
+
+        function debounce(func, wait) {
+            let timeout;
+            return function () {
+                const context = this, args = arguments;
+                clearTimeout(timeout);
+                timeout = setTimeout(() => func.apply(context, args), wait);
+            };
+        }
+
+        window.addEventListener('scroll', debounce(toggleSidebarOnYouTubeSection, 10));
+
+        const counters = document.querySelectorAll('.counter-number-section .number');
+        const speed = 200; // Animation speed
+
+        const animateCounter = (counter) => {
+            const target = +counter.getAttribute('data-count');
+            let count = 0;
+            const increment = target / speed;
+
+            const updateCount = () => {
+                if (count < target) {
+                    count += increment;
+                    counter.innerText = Math.ceil(count);
+                    setTimeout(updateCount, 1);
+                } else {
+                    counter.innerText = target; // Ensure it ends on the exact number
+                }
+            };
+            updateCount();
+        };
+
+        const observerOptions = {
+            root: null,
+            threshold: 0.5 // Start animation when 50% of the section is visible
+        };
+
+        const counterObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    counters.forEach(counter => {
+                        animateCounter(counter);
+                    });
+                    observer.unobserve(entry.target); // Stop observing after animation
+                }
+            });
+        }, observerOptions);
+
+        const counterSection = document.querySelector('.counter-number-section');
+        if (counterSection) {
+            counterObserver.observe(counterSection);
+        }
+    });
+</script>
+
 
 {% endblock %}

@@ -572,7 +572,7 @@
         .ambulance-animation-container {
             overflow: hidden;
             /* Hides the ambulance when it is outside the container */
-            height: 50px;
+            height: 35px;
             /* Adjust height as needed */
             position: relative;
             background-color: #f8f9fa;
@@ -1078,26 +1078,7 @@
             window.scrollTo(0, 0);
         });
     </script>
-    <script>
-        let lastScrollTop = 0;
-        const nav = document.querySelector('.nav-container');
 
-        window.addEventListener('scroll', () => {
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-            if (scrollTop > lastScrollTop) {
-                // Scrolling down → hide navbar and remove its space
-                nav.classList.add('hidden');
-            } else if (scrollTop < lastScrollTop) {
-                // Scrolling up → show navbar
-                nav.classList.remove('hidden');
-            }
-
-            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // avoid negative scroll
-        });
-
-
-    </script>
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     <script src="static/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
@@ -1458,98 +1439,75 @@
         mobileMenuToggle.addEventListener('click', function () {
             mobileNav.classList.toggle('active'); // toggles visibility only when clicked
         });
+    });
 
 </script>
 <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            if (window.innerWidth <= 768) { // only mobile
-                const sidebar = document.querySelector('.left-sidebar');
+    document.addEventListener("DOMContentLoaded", function () {
+        if (window.innerWidth <= 768) { // only mobile
+            const sidebar = document.querySelector('.left-sidebar');
 
-                // Create toggle line
-                const toggleLine = document.createElement('div');
-                toggleLine.classList.add('toggle-line');
-                toggleLine.style.width = '4px';
-                toggleLine.style.height = '50px';
-                toggleLine.style.background = 'linear-gradient(to bottom, #16979D, #103A60)';
-                toggleLine.style.borderRadius = '2px';
-                toggleLine.style.cursor = 'pointer';
-                toggleLine.style.marginBottom = '10px';
-                toggleLine.style.transition = 'transform 0.3s ease';
+            // Create toggle line
+            const toggleLine = document.createElement('div');
+            toggleLine.classList.add('toggle-line');
+            toggleLine.style.width = '4px';
+            toggleLine.style.height = '50px';
+            toggleLine.style.background = 'linear-gradient(to bottom, #16979D, #103A60)';
+            toggleLine.style.borderRadius = '2px';
+            toggleLine.style.cursor = 'pointer';
+            toggleLine.style.marginBottom = '10px';
+            toggleLine.style.transition = 'transform 0.3s ease';
 
-                sidebar.prepend(toggleLine);
+            sidebar.prepend(toggleLine);
 
-                // Click to toggle icons
-                toggleLine.addEventListener('click', function () {
-                    sidebar.classList.toggle('active');
-                });
+            // Click to toggle icons
+            toggleLine.addEventListener('click', function () {
+                sidebar.classList.toggle('active');
+            });
 
-                // Initially hide icons
+            // Initially hide icons
+            sidebar.querySelectorAll('.icon-link').forEach(icon => {
+                icon.style.opacity = 0;
+                icon.style.transform = 'translateX(-20px)';
+                icon.style.transition = 'all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1)';
+            });
+        }
+    });
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const sidebar = document.querySelector('.left-sidebar');
+
+        // Create toggle line only once
+        if (sidebar && !sidebar.querySelector('.toggle-line')) {
+            const toggleLine = document.createElement('div');
+            toggleLine.classList.add('toggle-line');
+
+            // Add toggle line at top
+            sidebar.prepend(toggleLine);
+
+            // Hide icons initially on mobile
+            if (window.innerWidth <= 768) {
                 sidebar.querySelectorAll('.icon-link').forEach(icon => {
                     icon.style.opacity = 0;
                     icon.style.transform = 'translateX(-20px)';
-                    icon.style.transition = 'all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1)';
                 });
             }
-        });
-</script>
-<script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const sidebar = document.querySelector('.left-sidebar');
 
-            // Create toggle line only once
-            if (sidebar && !sidebar.querySelector('.toggle-line')) {
-                const toggleLine = document.createElement('div');
-                toggleLine.classList.add('toggle-line');
-
-                // Add toggle line at top
-                sidebar.prepend(toggleLine);
-
-                // Hide icons initially on mobile
-                if (window.innerWidth <= 768) {
-                    sidebar.querySelectorAll('.icon-link').forEach(icon => {
-                        icon.style.opacity = 0;
-                        icon.style.transform = 'translateX(-20px)';
-                    });
-                }
-
-                // Click to toggle icons
-                toggleLine.addEventListener('click', function () {
-                    sidebar.classList.toggle('active');
-                });
-            }
-        });
+            // Click to toggle icons
+            toggleLine.addEventListener('click', function () {
+                sidebar.classList.toggle('active');
+            });
+        }
+    });
 </script>
 
 <a href="#" id="scrollToTopBtn" class="scroll-to-top-btn" title="Scroll to top" aria-label="Scroll to top">
     <i class="fa fa-arrow-up"></i> <!-- Simple up arrow -->
 </a>
 <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            window.scrollTo(0, 0);
-        });
-</script>
-<script>
-        let lastScrollTop = 0;
-        const nav = document.querySelector('.nav-container');
-        const threshold = 50; // scroll distance before toggling
-        let navHidden = false;
-
-        window.addEventListener('scroll', () => {
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-            if (scrollTop > lastScrollTop + threshold && !navHidden) {
-                // user scrolled down past threshold → hide
-                nav.classList.add('hidden');
-                navHidden = true;
-            }
-            else if (scrollTop < lastScrollTop - threshold && navHidden) {
-                // user scrolled up past threshold → show
-                nav.classList.remove('hidden');
-                navHidden = false;
-            }
-
-            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
-        });
+    document.addEventListener("DOMContentLoaded", function () {
+        window.scrollTo(0, 0);
     });
 </script>
 <script>
@@ -1558,6 +1516,28 @@
     });
 </script>
 
+<script>
+    // Add this JavaScript to handle the scroll behavior
+    document.addEventListener("DOMContentLoaded", function () {
+        const navbar = document.querySelector('.nav-container');
+        let lastScrollTop = 0;
+        const scrollThreshold = 100; // Adjust this value as needed
+
+        window.addEventListener('scroll', function () {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+            if (scrollTop > lastScrollTop && scrollTop > scrollThreshold) {
+                // Scrolling down
+                navbar.classList.remove('hide');
+            } else if (scrollTop < lastScrollTop) {
+                // Scrolling up
+                navbar.classList.add('hide');
+            }
+
+            lastScrollTop = scrollTop;
+        });
+    });
+</script>
 </body>
 
 </html>
