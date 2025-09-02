@@ -159,15 +159,5 @@ def disclaimer():
     return render_template('disclaimer.html')
 
 
-@app.route('/test')
-def test():
-    return render_template('test.html')
-
-
-@app.route('/test1')
-def test1():
-    return render_template('test1.html')
-
-
 if __name__ == '__main__':
     app.run(debug=True, port=5001)
