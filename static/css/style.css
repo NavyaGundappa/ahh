@@ -297,31 +297,37 @@ a:hover {
   }
 }
 
-/* CSS for smooth hide/show navbar */
+
+/* Navigation Container */
 .nav-container {
   position: sticky;
   top: 0;
-  z-index: 998;
-  /* Ensures it's above content but below popups */
   background-color: #fff;
-  /* Give it a solid background */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  transition: top 0.4s ease-in-out;
-  /* This is the key to the smooth animation */
-}
-
-/* This class will be added by JavaScript to hide the navbar */
-.nav-container.nav-hidden {
-  top: -100px;
-  /* Moves the navbar completely out of view. Adjust if your navbar is taller. */
+  border-bottom: 1px solid #ddd;
+  overflow: hidden;
+  /* prevent content overflow when collapsing */
+  transition: max-height 0.4s ease, opacity 0.3s ease, transform 0.3s ease, padding 0.3s ease;
+  max-height: 80px;
+  /* your navbar height */
+  padding: 6px 0;
+  z-index: 10;
 }
 
 .nav-container.hidden {
   max-height: 0;
+  /* collapse height */
   padding: 0;
+  /* remove padding */
   opacity: 0;
-  transform: translateY(-100%);
+  /* fade out */
+  transform: translateY(-20px);
+  /* slide up a bit */
 }
+
+
+
+
+
 
 .nav-content {
   display: flex;
@@ -456,7 +462,22 @@ a:hover {
     justify-content: flex-start;
   }
 
-
+  .main-nav {
+    width: 100%;
+    height: 100vh;
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    right: -100%;
+    background-color: var(--bg-light);
+    transition: right 0.3s ease-in-out;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+    justify-content: center;
+    text-align: center;
+    gap: 80px;
+    padding: 20px;
+  }
 
   .main-nav.active {
     right: 0;
@@ -516,7 +537,9 @@ a:hover {
     font-size: 1rem;
   }
 
-
+  .main-nav {
+    gap: 35px;
+  }
 
   .main-nav li a {
     font-size: 0.95rem;
@@ -721,20 +744,13 @@ h2 {
   font-weight: 700;
 }
 
-h2:after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100px;
-  height: 4px;
-  background: linear-gradient(90deg, #00bcd4, #3a7bd5);
-  border-radius: 2px;
-}
+/* The h2:after rule has been removed to eliminate the underline */
+
+
 
 .dedicated-section-one {
   background-color: #fff;
+  padding: 80px 0;
   background-image: radial-gradient(var(--bg-light) 20%, transparent 20%), radial-gradient(var(--bg-light) 20%, transparent 20%);
   background-size: 20px 20px;
   background-position: 0 0, 10px 10px;
@@ -777,6 +793,7 @@ h2:after {
 .service-carousel-section .container h2 {
   margin-bottom: 30px !important;
 }
+
 
 .service-carousel-section .item {
   padding: 20px;
@@ -1309,6 +1326,26 @@ h2:after {
     flex-wrap: wrap;
   }
 
+  .main-nav {
+    width: 100%;
+    /* full width of screen (same as hero) */
+    height: 100vh;
+    /* full height of viewport (same as hero) */
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    right: -100%;
+    /* start hidden */
+    background-color: var(--bg-light);
+    transition: right 0.3s ease-in-out;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+    justify-content: center;
+    text-align: center;
+    gap: 80px;
+    /* spacing between menu items */
+    padding: 20px;
+  }
 
 
   .main-nav li {
@@ -1426,18 +1463,6 @@ h2:after {
 .service-carousel-section,
 .doctors-section {
   position: relative;
-  padding-bottom: 30px !important;
-}
-
-section.service-carousel-section+section.doctors-section {
-  margin-top: -40px;
-}
-
-/* Or adjust the spacing on the container elements */
-.service-carousel-section .container,
-.doctors-section .container {
-  padding-top: 20px;
-  padding-bottom: 20px;
 }
 
 .service-carousel-section .owl-nav .owl-prev,
@@ -3887,77 +3912,6 @@ ul {
   background: rgba(255, 255, 255, 0.08);
 }
 
-@media (max-width: 1100px) {
-  .counter-item {
-    flex: 0 0 calc(33.333% - 25px);
-  }
-}
-
-@media (max-width: 768px) {
-  .counter-item {
-    flex: 0 0 calc(50% - 25px);
-  }
-
-  h2 {
-    font-size: 2rem;
-  }
-
-  .number {
-    font-size: 2.4rem;
-  }
-}
-
-@media (max-width: 576px) {
-  .counter-item {
-    flex: 0 0 100%;
-    max-width: 350px;
-  }
-
-  h2 {
-    font-size: 1.8rem;
-  }
-
-  .number {
-    font-size: 2.2rem;
-  }
-}
-
-/* Animation for counters */
-@keyframes countUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate {
-  animation: countUp 1s ease-out forwards;
-}
-
-.pulse {
-  display: inline-block;
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0% {
-    transform: scale(1);
-  }
-
-  50% {
-    transform: scale(1.05);
-  }
-
-  100% {
-    transform: scale(1);
-  }
-}
-
 .icon-wrap img {
   width: 70px;
   height: 70px;
@@ -3974,12 +3928,6 @@ ul {
   justify-content: center;
   align-items: baseline;
   gap: 3px;
-}
-
-.counter-wrap .number {
-  display: inline-block;
-  min-width: 80px;
-  text-align: center;
 }
 
 .counter-wrap .suffix {
@@ -4349,6 +4297,9 @@ ul {
 .department-grid .item.active * {
   color: #FFF !important;
 }
+
+/* Fixed image behavior on hover/active */
+
 
 .department-grid .item:hover img.dept-icon,
 .department-grid .item.active img.dept-icon {
@@ -4815,11 +4766,6 @@ ul {
   }
 }
 
-.main-content-area {
-  /* This ensures the padding change is smooth */
-  transition: padding-top 0.3s ease-in-out;
-}
-
 .department-grid .item:hover {
   transform: translateY(-5px);
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
@@ -5203,40 +5149,4 @@ ul {
 .map-container iframe {
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.site-header {
-  background-color: #fff;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  width: 100%;
-  transition: transform 0.4s ease-in-out;
-}
-
-/* This class will be added by JavaScript to hide the header */
-.site-header.nav-hidden {
-  transform: translateY(-100%);
-}
-
-.header-content-top {
-  background-color: #f8f9fa;
-  border-bottom: 1px solid #ddd;
-}
-
-.header-content-main {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 10px 20px;
-  height: 80px;
-  /* Adjust as needed */
-}
-
-.logo-wrapper .header-logo-img {
-  max-width: 280px;
-  height: auto;
 }
