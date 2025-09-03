@@ -776,37 +776,65 @@
 
         window.addEventListener('scroll', debounce(toggleSidebarOnYouTubeSection, 10));
 
-        document.addEventListener("DOMContentLoaded", () => {
-            const counters = document.querySelectorAll(".number");
+        // Function to check if element is in viewport
+        function isInViewport(element) {
+            const rect = element.getBoundingClientRect();
+            return (
+                rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.9 &&
+                rect.bottom >= 0
+            );
+        }
+
+        // Function to animate counters
+        function animateCounters() {
+            const counters = document.querySelectorAll('.stat-number');
             let animated = false;
 
-            function animateCounters() {
-                if (!animated && isInViewport(counters[0])) {
+            return function () {
+                if (!animated && isInViewport(document.getElementById('stats-section'))) {
                     counters.forEach(counter => {
-                        let target = +counter.getAttribute("data-count");
-                        let count = 0;
-                        let step = Math.ceil(target / 100); // adjust speed
+                        const target = +counter.getAttribute('data-count');
+                        const duration = 1500; // 1.5 seconds
+                        const increment = target / (duration / 16); // 60fps
+                        let current = 0;
 
-                        let timer = setInterval(() => {
-                            count += step;
-                            if (count >= target) {
-                                count = target;
-                                clearInterval(timer);
+                        const updateCounter = () => {
+                            current += increment;
+                            if (current >= target) {
+                                counter.textContent = target.toLocaleString() + '+';
+                            } else {
+                                counter.textContent = Math.floor(current).toLocaleString();
+                                requestAnimationFrame(updateCounter);
                             }
-                            counter.textContent = count.toLocaleString();
-                        }, 20);
+                        };
+
+                        updateCounter();
                     });
+
                     animated = true;
                 }
-            }
+            };
+        }
 
-            function isInViewport(element) {
-                const rect = element.getBoundingClientRect();
-                return rect.top < window.innerHeight && rect.bottom >= 0;
-            }
+        // Create debounced version of the function
+        function debounce(func, wait) {
+            let timeout;
+            return function () {
+                const context = this, args = arguments;
+                clearTimeout(timeout);
+                timeout = setTimeout(() => func.apply(context, args), wait);
+            };
+        }
 
-            window.addEventListener("scroll", animateCounters);
-        });
+        // Initialize the counter animation function
+        const checkCounters = animateCounters();
+
+        // Check on load and scroll
+        window.addEventListener('load', checkCounters);
+        window.addEventListener('scroll', debounce(checkCounters, 10));
+
+        // Also check immediately in case the section is already in view
+        checkCounters();
     });
 </script>
 
