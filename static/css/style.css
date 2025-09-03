@@ -3928,6 +3928,13 @@ ul {
   height: 60px;
 }
 
+.stat-icon img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  /* Ensures the image aspect ratio is preserved */
+}
+
 .stat-number {
   font-size: 2.2rem;
   font-weight: 700;
