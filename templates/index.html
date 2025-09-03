@@ -10,7 +10,7 @@
     content="hospital Bangalore, multi-speciality hospital, healthcare India, medical facilities, expert doctors">
 <meta name="author" content="Aarogyahastha Pvt Ltd">
 <meta name="designer" content="Aarogyahastha Pvt Ltd">
-<link rel="canonical" href="https://www.aarogyahastha.com" />
+<link rel="canonical" href="https://aarogyahastha.com" />
 <meta name="no-email-collection" content="http://www.unspam.com/noemailcollection/">
 <meta name="robots" content="index,follow">
 <meta name="revisit-after" content="7 days">
@@ -30,7 +30,9 @@
 <meta name="classification" content="Healthcare, Hospital">
 <base href="/">
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 {% endblock %}
@@ -609,97 +611,71 @@
     </div>
 </section>
 
-<section class="counter-number-section">
+<section data-aos="fade-up" class="stats-section dark-stats" id="stats-section">
     <div class="container">
-        <div class="row gy-0 justify-content-center medicover-numbers">
-
+        <div class="stats-row">
             <!-- Patients Treated -->
-            <div class="col counter-item">
-                <div class="icon-wrap">
-                    <img src="https://www.medicoverhospitals.in/images/icon/surgeries.svg" alt="Patients Treated"
-                        loading="lazy">
+            <div class="stat-item">
+                <div class="stat-icon">
+                    <i class="fas fa-users text-white"></i>
                 </div>
-                <div class="counter-wrap">
-                    <span class="number" data-count="15000">0</span>
-                </div>
-                <div class="label">Patients Treated</div>
+                <h3 class="stat-number text-warning" data-count="15000">0</h3>
+                <p class="stat-label text-white">Patients Treated</p>
             </div>
 
             <!-- Surgeries -->
-            <div class="col counter-item">
-                <div class="icon-wrap">
-                    <img src="https://www.medicoverhospitals.in/images/icon/surgeries.svg" alt="Surgeries"
-                        loading="lazy">
+            <div class="stat-item">
+                <div class="stat-icon">
+                    <i class="fa fa-heartbeat text-white"></i>
                 </div>
-                <div class="counter-wrap">
-                    <span class="number" data-count="500">0</span>
-                    <span class="suffix">+</span>
-                </div>
-                <div class="label">Surgeries</div>
+                <h3 class="stat-number text-warning" data-count="500">0</h3>
+                <p class="stat-label text-white">Surgeries</p>
             </div>
 
             <!-- Beds -->
-            <div class="col counter-item">
-                <div class="icon-wrap">
-                    <img src="https://www.medicoverhospitals.in/images/icon/hospital-bed.svg" alt="Beds" loading="lazy">
+            <div class="stat-item">
+                <div class="stat-icon">
+                    <i class="fa fa-bed text-white"></i>
                 </div>
-                <div class="counter-wrap">
-                    <span class="number" data-count="100">0</span>
-                    <span class="suffix">+</span>
-                </div>
-                <div class="label">Beds</div>
+                <h3 class="stat-number text-warning" data-count="100">0</h3>
+                <p class="stat-label text-white">Beds</p>
             </div>
 
             <!-- Doctors -->
-            <div class="col counter-item">
-                <div class="icon-wrap">
-                    <img src="https://www.medicoverhospitals.in/images/icon/doctors.svg" alt="Doctors" loading="lazy">
+            <div class="stat-item">
+                <div class="stat-icon">
+                    <i class="fa fa-user-md text-white"></i>
                 </div>
-                <div class="counter-wrap">
-                    <span class="number" data-count="50">0</span>
-                    <span class="suffix">+</span>
-                </div>
-                <div class="label">Doctors</div>
+                <h3 class="stat-number text-warning" data-count="50">0</h3>
+                <p class="stat-label text-white">Doctors</p>
             </div>
 
             <!-- ICU Beds -->
-            <div class="col counter-item">
-                <div class="icon-wrap">
-                    <img src="https://www.medicoverhospitals.in/images/icon/icu.svg" alt="ICU Beds" loading="lazy">
+            <div class="stat-item">
+                <div class="stat-icon">
+                    <i class="fa-solid fa-hospital-user text-white"></i>
                 </div>
-                <div class="counter-wrap">
-                    <span class="number" data-count="13">0</span>
-                    <span class="suffix">+</span>
-                </div>
-                <div class="label">ICU Beds</div>
+                <h3 class="stat-number text-warning" data-count="13">0</h3>
+                <p class="stat-label text-white">ICU Beds</p>
             </div>
 
             <!-- Operation Theatres -->
-            <div class="col counter-item">
-                <div class="icon-wrap">
-                    <img src="https://www.medicoverhospitals.in/images/icon/operation.svg" alt="Operation Theatres"
-                        loading="lazy">
+            <div class="stat-item">
+                <div class="stat-icon">
+                    <i class="fas fa-procedures text-white"></i>
                 </div>
-                <div class="counter-wrap">
-                    <span class="number" data-count="3">0</span>
-                    <span class="suffix">+</span>
-                </div>
-                <div class="label">Operation Theatres</div>
+                <h3 class="stat-number text-warning" data-count="3">0</h3>
+                <p class="stat-label text-white">Operation Theatres</p>
             </div>
 
-
-            <!-- LABS -->
-            <div class="col counter-item">
-                <div class="icon-wrap">
-                    <img src="https://www.medicoverhospitals.in/images/icon/operation.svg" alt="LABS" loading="lazy">
+            <!-- Labs -->
+            <div class="stat-item">
+                <div class="stat-icon">
+                    <i class="fa fa-flask text-white"></i>
                 </div>
-                <div class="counter-wrap">
-                    <span class="number" data-count="2">0</span>
-                    <span class="suffix">+</span>
-                </div>
-                <div class="label">Lab</div>
+                <h3 class="stat-number text-warning" data-count="2">0</h3>
+                <p class="stat-label text-white">Labs</p>
             </div>
-
         </div>
     </div>
 </section>
