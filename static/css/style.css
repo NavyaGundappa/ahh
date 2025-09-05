@@ -297,36 +297,18 @@ a:hover {
   }
 }
 
-
-/* Navigation Container */
 .nav-container {
   position: sticky;
   top: 0;
   background-color: #fff;
-  border-bottom: 1px solid #ddd;
+  border-bottom: none;
   overflow: hidden;
-  /* prevent content overflow when collapsing */
   transition: max-height 0.4s ease, opacity 0.3s ease, transform 0.3s ease, padding 0.3s ease;
-  max-height: 80px;
-  /* your navbar height */
-  padding: 6px 0;
   z-index: 10;
+  height: auto;
+  padding: 10px 0 0 0;
+  line-height: 1;
 }
-
-.nav-container.hidden {
-  max-height: 0;
-  /* collapse height */
-  padding: 0;
-  /* remove padding */
-  opacity: 0;
-  /* fade out */
-  transform: translateY(-20px);
-  /* slide up a bit */
-}
-
-
-
-
 
 
 .nav-content {
@@ -334,19 +316,20 @@ a:hover {
   justify-content: center;
   max-width: 1400px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0;
 }
 
 .main-nav {
   display: flex;
   list-style: none;
   margin: 0;
-  padding: 0;
+  padding-top: 0px;
   gap: clamp(20px, 6vw, 60px);
 }
 
 .main-nav li a {
-  padding: 8px 0;
+  padding: 0;
+  margin-top: 8px;
   font-weight: 600;
   color: #103A60;
   position: relative;
