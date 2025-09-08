@@ -247,8 +247,6 @@ a:hover {
   color: #d9534f;
 }
 
-/* 🔹 Responsive Styles */
-/* 🔹 Responsive Styles */
 @media (max-width: 768px) {
   .header-top-content {
     flex-direction: column;
@@ -263,7 +261,7 @@ a:hover {
     display: flex;
     justify-content: center;
     /* center logo */
-    margin-bottom: 10px;
+    margin-bottom: 0px;
   }
 
 
@@ -282,9 +280,7 @@ a:hover {
 
 @media (max-width: 480px) {
   .header-logo-img {
-    /* Remove width: 100% - this was the problem */
-    max-width: 200px;
-    /* Set a reasonable size for mobile */
+    max-width: 220px !important;
     height: auto;
   }
 
@@ -424,7 +420,6 @@ a:hover {
     }
   }
 
-
   .navbar-toggle {
     display: block;
     position: fixed;
@@ -439,7 +434,6 @@ a:hover {
     background: none;
     border: none;
   }
-
 
   .nav-content {
     justify-content: flex-start;
@@ -547,10 +541,6 @@ a:hover {
   }
 }
 
-/* This is the end of the header changes. */
-/* ========== HERO SECTION ========== */
-/* Force Owl Carousel wrapper to follow banner height */
-/* Force Owl Carousel wrapper to follow banner height */
 .hero-section .owl-carousel,
 .hero-section .owl-carousel .owl-stage-outer,
 .hero-section .owl-carousel .owl-stage,
@@ -569,20 +559,17 @@ a:hover {
   overflow: hidden;
   position: relative;
   height: 450px;
-  /* desktop */
 }
 
 @media (max-width: 991.98px) {
   .hero-section .banner {
     height: 380px;
-    /* tablet */
   }
 }
 
 @media (max-width: 575.98px) {
   .hero-section .banner {
     height: 300px;
-    /* mobile */
   }
 }
 
@@ -590,19 +577,14 @@ a:hover {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  /* keeps cover for desktop/tablet */
   display: block;
 }
 
-/* Mobile specific adjustment to avoid horizontal cropping */
 @media (max-width: 575.98px) {
   .hero-section .banner .item img {
     object-fit: contain;
-    /* fit whole image without cropping */
     object-position: center;
-    /* center image */
     background-color: #f5f5f5;
-    /* optional: gray background for empty space */
   }
 }
 
@@ -615,23 +597,16 @@ a:hover {
 
 .hero-section .banner-container {
   max-width: 1320px;
-  /* ✅ Same as your site container */
   margin: 0 auto;
-  /* center horizontally */
   padding: 0 15px;
-  /* container padding */
 }
 
 .banner {
   width: 100%;
   height: auto;
-  /* ✅ No fixed/fullscreen height */
   aspect-ratio: 16 / 7;
-  /* ✅ Keeps proportions (wide look) */
   border-radius: 12px;
-  /* optional, makes it neat */
   overflow: visible !important;
-  /* make sure arrows are not hidden */
   position: relative;
 }
 
@@ -645,7 +620,6 @@ a:hover {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  /* ✅ Fills area */
   object-position: center;
   border-radius: 12px;
 }
@@ -726,10 +700,6 @@ h2 {
   margin-bottom: 2em;
   font-weight: 700;
 }
-
-/* The h2:after rule has been removed to eliminate the underline */
-
-
 
 .dedicated-section-one {
   background-color: #fff;
@@ -825,7 +795,6 @@ h2 {
 .doctors-carousel {
   position: relative;
   padding: 0 40px;
-  /* Add padding for arrow navigation */
 }
 
 /* ===== Doctor Items ===== */
@@ -841,17 +810,13 @@ h2 {
   flex-direction: column;
   justify-content: space-between;
   margin: 10px;
-  /* Add some spacing between items */
 }
 
 .doctors-carousel .item {
   display: flex;
   flex-direction: column;
-  /* stack content vertically */
   justify-content: space-between;
-  /* push Learn More to bottom */
   height: 100%;
-  /* ensures all items are same height */
   padding: 20px;
   text-align: center;
   border-radius: 12px;
@@ -913,8 +878,7 @@ h2 {
   box-shadow: var(--shadow-md);
 }
 
-/* ===== Dots Navigation ===== */
-/* ===== Dots Navigation - Enhanced Visibility ===== */
+
 .doctors-carousel .owl-dots {
   position: absolute;
   bottom: -30px;
@@ -946,25 +910,6 @@ h2 {
   transform: scale(1.2);
 }
 
-/* Force dots to be visible on mobile */
-@media (max-width: 767px) {
-  .doctors-carousel .owl-dots {
-    display: flex !important;
-    bottom: -25px;
-  }
-
-  .doctors-carousel .owl-dots button {
-    width: 12px;
-    height: 12px;
-  }
-}
-
-/* Ensure dots are hidden on desktop */
-@media (min-width: 768px) {
-  .doctors-carousel .owl-dots {
-    display: none !important;
-  }
-}
 
 /* ===== Doctor Info Styling ===== */
 .doctors-carousel .item h4 {
@@ -1001,24 +946,6 @@ h2 {
   justify-content: flex-start;
   /* keeps content at top */
 }
-
-/* ===== Mobile adjustments for doctors-carousel ===== */
-@media (max-width: px) {
-  .doctors-carousel .item {
-    margin: 10px auto;
-    /* center each card */
-    max-width: 300%;
-    /* take more width on mobile */
-  }
-
-  .doctors-carousel .item img {
-    width: 170px;
-    /* slightly bigger doctor photo */
-    height: 170px;
-  }
-}
-
-
 
 /* Owl Carousel Navigation */
 .owl-theme {
@@ -1265,6 +1192,27 @@ h2 {
     padding-top: 8px;
     text-align: left;
   }
+
+  .doctors-carousel .item {
+    height: auto;
+    justify-content: space-between;
+  }
+
+  .owl-carousel.specialities-carousel .owl-stage .owl-item h4 {
+    min-height: auto;
+    font-size: 0.9rem;
+  }
+
+  .specialities-carousel .item p {
+    font-size: 0.85rem;
+  }
+
+  .feedback-carousel .item img {
+    width: 100%;
+    height: auto;
+    max-width: 350px;
+    margin: 0 auto;
+  }
 }
 
 /* Very small screens (stack single column) */
@@ -1329,7 +1277,6 @@ h2 {
     /* spacing between menu items */
     padding: 20px;
   }
-
 
   .main-nav li {
     list-style: none;
@@ -1681,91 +1628,6 @@ h2 {
   font-weight: 400;
 }
 
-@media screen and (max-width: 992px) {
-  .about-tab-section .text-box-1 {
-    position: unset !important;
-    max-width: unset !important;
-    width: 100%;
-  }
-}
-
-.foundation-banner .banner {
-  width: 100%;
-  height: auto;
-  position: relative;
-}
-
-.foundation-banner .banner img {
-  width: 100%;
-  height: auto;
-}
-
-.foundation-banner .banner .text-box-1 {
-  position: absolute;
-  top: 50px;
-  left: 50px;
-  max-width: 700px;
-}
-
-.foundation-banner .banner .text-box-1 h1 {
-  z-index: 2;
-  color: white;
-  font-weight: 700;
-  font-size: 55px;
-}
-
-.foundation-banner .banner .text-box-1 p {
-  color: white;
-}
-
-@media screen and (max-width: 1400px) {
-  .foundation-banner .banner h1 {
-    font-size: 50px;
-  }
-}
-
-@media screen and (max-width: 1200px) {
-  .foundation-banner .banner h1 {
-    font-size: 40px;
-  }
-}
-
-@media screen and (max-width: 992px) {
-  .foundation-banner .banner .text-box-1 {
-    top: 50px;
-    left: 50%;
-    transform: translate(-50%);
-    text-align: center;
-    width: 100%;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .foundation-banner h1 {
-    font-size: 36px !important;
-  }
-}
-
-@media screen and (max-width: 550px) {
-  .foundation-banner .banner {
-    background-image: url("../img/foundation/foundation-banner.jpg");
-    height: 50vh;
-    background-position: center;
-    background-size: cover;
-  }
-
-  .foundation-banner .banner img {
-    display: none;
-  }
-
-  .foundation-banner .banner h1 {
-    font-size: 27px !important;
-  }
-
-  .foundation-banner .banner p {
-    padding: 10px;
-  }
-}
 
 .dedicated-section .dedicated-service {
   position: relative;
@@ -1785,31 +1647,6 @@ h2 {
   right: 0;
 }
 
-.foundation-tab-section .foundation-tab {
-  position: relative;
-}
-
-.foundation-tab-section .foundation-tab img {
-  width: 100%;
-  height: auto;
-}
-
-.foundation-tab-section .foundation-tab .text-box-1 {
-  max-width: 800px;
-  position: absolute;
-  background-color: white;
-  padding: 25px;
-  bottom: 50px;
-  right: 0;
-}
-
-@media screen and (max-width: 992px) {
-  .foundation-tab-section .foundation-tab .text-box-1 {
-    position: unset;
-    max-width: unset;
-    background-color: rgb(249, 250, 252);
-  }
-}
 
 .banner {
   width: 100%;
@@ -1956,13 +1793,6 @@ h2 {
 
 .department-section .department-sub-services .department-grid .item img {
   max-width: 160px;
-}
-
-@media screen and (min-width: 768px) {
-  .department-section .department-sub-services .department-grid .item .icon {
-    width: 160px;
-    height: 160px;
-  }
 }
 
 .department-section .department-sub-services .department-grid .item h3,
@@ -2611,44 +2441,6 @@ h2 {
   justify-content: space-between;
 }
 
-@media screen and (min-width: 992px) and (max-width: 1200px) {
-  .appointment-section .doctor-section .doctor-item {
-    flex-direction: column;
-  }
-
-  .appointment-section .doctor-section .doctor-item .img-box {
-    width: 100%;
-  }
-
-  .appointment-section .doctor-section .doctor-item .img-box img {
-    width: 100%;
-    height: auto;
-  }
-
-  .appointment-section .doctor-section .doctor-item .doctor-box {
-    width: 100%;
-  }
-}
-
-@media screen and (max-width: 786px) {
-  .appointment-section .doctor-section .doctor-item {
-    flex-direction: column;
-  }
-
-  .appointment-section .doctor-section .doctor-item .img-box {
-    width: 100%;
-  }
-
-  .appointment-section .doctor-section .doctor-item .img-box img {
-    width: 100%;
-    height: auto;
-  }
-
-  .appointment-section .doctor-section .doctor-item .doctor-box {
-    width: 100%;
-  }
-}
-
 .department-section h2 {
   font-size: 1.6em;
 }
@@ -3049,37 +2841,6 @@ h2 {
 .specialities-carousel .owl-dots button.active {
   background: var(--brand-teal) !important;
   transform: scale(1.3);
-}
-
-/* ===== Responsive Behavior ===== */
-@media (max-width: 767px) {
-  .specialities-carousel {
-    padding: 0 15px;
-  }
-
-  .specialities-carousel .owl-nav {
-    display: none;
-  }
-
-  .specialities-carousel .owl-dots {
-    display: flex;
-    bottom: -20px;
-  }
-
-  .owl-carousel.specialities-carousel .owl-stage .owl-item h4 {
-    min-height: 42px;
-    font-size: 0.95rem;
-  }
-}
-
-@media (min-width: 768px) {
-  .specialities-carousel .owl-dots {
-    display: none;
-  }
-
-  .specialities-carousel .owl-nav {
-    display: flex;
-  }
 }
 
 /* ===== Item Hover Effects ===== */
@@ -4071,26 +3832,11 @@ ul {
   border: none !important;
 }
 
-/* Add padding to all sections for consistent spacing */
-.hero-section,
-.dedicated-section-one,
-.service-carousel-section,
-.doctors-section,
-.counter-number-section,
-.feedback-section,
-.video-section {
-  padding: 80px 0;
-  /* Adjust the value as needed for your design */
-}
-
 /* Remove default margin on the first section to avoid extra space at the top */
 .hero-section {
   padding-top: 0;
 }
 
-/* New CSS for the underline effect on 'Our Services' */
-/* New CSS for the underline effect on 'Our Services' */
-/* Centered section heading */
 .dedicated-section-one .section-heading {
   text-align: center;
   /* centers the heading */
@@ -4101,52 +3847,12 @@ ul {
   margin: 0 auto;
 }
 
-/* Responsive adjustments */
-@media (max-width: 991px) {
-  .dedicated-section-one .section-heading {
-    font-size: 2rem;
-    /* slightly smaller on tablet/mobile */
-  }
-}
-
-@media (max-width: 576px) {
-  .dedicated-section-one .section-heading {
-    font-size: 1.7rem;
-    /* smaller on small phones */
-  }
-}
-
-/* Move image slightly up */
-/* Move image slightly above middle */
-/* Move image higher above middle */
-/* Adjust image slightly above mid, but lower than before */
 .dedicated-section-one .image-column {
   align-self: flex-start;
   /* start near top of column */
   margin-top: -20px;
   /* slightly above mid; reduce previous negative value */
 }
-
-/* Responsive adjustments */
-@media (max-width: 991px) {
-  .dedicated-section-one .image-column {
-    margin-top: 0;
-    /* reset for mobile stacking */
-    align-self: center;
-    /* center image on mobile */
-  }
-}
-
-
-
-
-
-
-
-
-
-
-
 
 
 /* Responsive */
@@ -4164,12 +3870,6 @@ ul {
     font-size: 1rem;
   }
 
-  /* Smaller padding for mobile devices */
-  .dedicated-section-one,
-  .service-carousel-section,
-  .doctors-section,
-  .counter-number-section,
-  .feedback-section,
   .video-section {
     padding: 40px 0;
   }
@@ -4236,53 +3936,6 @@ ul {
   width: 100%;
 }
 
-/* Hide mobile nav by default */
-#mobile-nav {
-  display: none;
-  /* hidden initially */
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  background-color: #fff;
-}
-
-/* Show nav when toggle clicked */
-#mobile-nav.active {
-  display: block;
-}
-
-/* Nav links styling */
-#mobile-nav li a {
-  display: block;
-  padding: 10px 15px;
-  color: #103A60;
-  text-decoration: none;
-  border-bottom: 1px solid #eee;
-}
-
-#mobile-nav li a:hover {
-  color: #1a9cb7;
-}
-
-/* Desktop view */
-@media (min-width: 992px) {
-  #mobile-nav {
-    display: flex;
-    /* show nav horizontally */
-    gap: 20px;
-    border-top: none;
-  }
-
-  #mobile-nav li a {
-    border-bottom: none;
-    padding: 10px 0;
-  }
-
-  .navbar-toggle {
-    display: none;
-    /* hide hamburger on desktop */
-  }
-}
 
 /* CSS for the Ambulance Animation */
 .ambulance-animation-container {
@@ -4424,8 +4077,6 @@ ul {
   color: #FFF !important;
 }
 
-/* Fixed image behavior on hover/active */
-
 
 .department-grid .item:hover img.dept-icon,
 .department-grid .item.active img.dept-icon {
@@ -4552,50 +4203,6 @@ ul {
 
 .chrome-btn--grey:hover {
   background: #dadce0;
-}
-
-#mobile-nav {
-  display: none;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  background-color: #fff;
-}
-
-/* Show nav when toggle clicked */
-#mobile-nav.active {
-  display: block;
-}
-
-/* Nav links styling */
-#mobile-nav li a {
-  display: block;
-  padding: 10px 15px;
-  color: #103A60;
-  text-decoration: none;
-  border-bottom: 1px solid #eee;
-}
-
-#mobile-nav li a:hover {
-  color: #1a9cb7;
-}
-
-/* Desktop view */
-@media (min-width: 992px) {
-  #mobile-nav {
-    display: flex;
-    gap: 20px;
-    border-top: none;
-  }
-
-  #mobile-nav li a {
-    border-bottom: none;
-    padding: 10px 0;
-  }
-
-  .navbar-toggle {
-    display: none;
-  }
 }
 
 .page-container {
@@ -5251,28 +4858,121 @@ ul {
   /* keep proportion and crop if needed */
 }
 
-/* Force bigger logo on small screens */
-/* ✅ Adjusted logo size for mobile */
+
+/*=========================================================================Mobile responsive====================================================*/
 @media (max-width: 768px) {
-  .new-header .header-logo-img {
-    width: auto;
-    max-width: 280px !important;
-    /* medium size */
+  /*
+  * ==========================================
+  * MOBILE FIXES FOR HOME PAGE SECTIONS
+  * ==========================================
+  */
+
+  .dedicated-section-one .container,
+  .service-carousel-section .container {
+    padding-left: 2px;
+    /* Reduced from 15px for a wider look */
+    padding-right: 2px;
+    /* Reduced from 15px for a wider look */
+  }
+
+  /* 2. Remove extra horizontal padding from the specialities carousel itself */
+  .owl-carousel.specialities-carousel {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  /* 3. Hide the carousel navigation arrows on mobile (users can swipe) */
+  .service-carousel-section .owl-nav {
+    display: none;
+  }
+
+  /* 4. Hide the carousel navigation dots on mobile */
+  .service-carousel-section .owl-dots {
+    display: none;
+  }
+
+
+  /* 2. Remove extra horizontal padding from the specialities carousel itself */
+  .owl-carousel.specialities-carousel {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  /* 3. Hide the carousel navigation arrows on mobile (users can swipe) */
+  .service-carousel-section .owl-nav {
+    display: none;
+  }
+
+  /* 4. Hide the carousel navigation dots on mobile */
+  .service-carousel-section .owl-dots {
+    display: none;
+  }
+
+  .feedback-carousel .owl-nav {
+    display: none;
+  }
+
+  .custom-video-section {
     height: auto;
+    padding: 40px 0;
   }
 }
 
-@media (max-width: 480px) {
-  .new-header .header-logo-img {
-    width: auto;
-    max-width: 240px !important;
-    /* slightly smaller for small phones */
-    height: auto;
+/* =========================================================================
+   FINAL MOBILE HEADER FIX - Add this to the very end of your style.css
+   ========================================================================= */
+/* Desktop: stacked style with labels */
+@media (min-width: 992px) {
+  .header-contact {
+    display: block;
+  }
+
+  .contact-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+  }
+
+  .contact-label {
+    display: block;
+    font-weight: 600;
   }
 }
 
+/* Mobile: both numbers in one line */
+@media (max-width: 991.98px) {
+  .header-top-content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+  }
 
-.map-container iframe {
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  .header-contact {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    width: 100%;
+    flex-wrap: nowrap;
+  }
+
+  .contact-row {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+    /* prevent breaking */
+  }
+
+  .contact-label {
+    display: none;
+    /* hide on mobile for single-line look */
+  }
+
+  .header-contact a {
+    font-size: 14px;
+    font-weight: 600;
+  }
 }
