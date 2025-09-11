@@ -1,0 +1,300 @@
+{% extends "base.html" %}
+
+{% block title %}Page Not Found | Aarogya Hastha Hospitals{% endblock %}
+
+{% block head %}
+{{ super() }}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+    :root {
+        --primary-color: #4a90e2;
+        --secondary-color: #50c878;
+        --accent-color: #007B8A;
+        --dark-text: #2c3e50;
+        --light-text: #ffffff;
+        --body-text: #5d6975;
+        --background-color: #f8f9fa;
+        --border-color: #eef2f5;
+    }
+
+    .error-container {
+        font-family: 'Poppins', sans-serif;
+        background-color: var(--background-color);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: var(--dark-text);
+        text-rendering: optimizeLegibility;
+        flex: 1;
+        /* This will make it take available space without forcing height */
+    }
+
+    .container-404 {
+        display: flex;
+        align-items: center;
+        gap: 60px;
+        max-width: 1300px;
+        width: 100%;
+        background: var(--light-text);
+        border-radius: 20px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.07);
+        border: 1px solid var(--border-color);
+        overflow: hidden;
+        padding: 50px 60px;
+        transform: scale(0.95);
+        opacity: 0;
+        animation: fadeInScale 0.6s ease-out forwards;
+        margin: 20px 0;
+        /* Added margin for spacing */
+    }
+
+    .error-details {
+        flex: 1;
+        text-align: left;
+    }
+
+    .error-actions {
+        flex-shrink: 0;
+        width: 350px;
+    }
+
+    .illustration {
+        margin-bottom: 25px;
+        animation: slideInUp 0.7s ease-out;
+    }
+
+    .illustration svg {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .error-container h1 {
+        font-size: 2.8rem;
+        font-weight: 700;
+        margin-bottom: 15px;
+        animation: slideInUp 0.7s ease-out 0.1s;
+        animation-fill-mode: both;
+    }
+
+    .error-code {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: var(--primary-color);
+        margin-bottom: 5px;
+        animation: slideInUp 0.7s ease-out;
+        animation-fill-mode: both;
+    }
+
+    .error-container p {
+        font-size: 1.1rem;
+        color: var(--body-text);
+        line-height: 1.8;
+        max-width: 500px;
+        animation: slideInUp 0.7s ease-out 0.2s;
+        animation-fill-mode: both;
+        margin-bottom: 30px;
+    }
+
+    .button-container {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+        animation: slideInUp 0.7s ease-out 0.3s;
+        animation-fill-mode: both;
+    }
+
+    .btn {
+        display: flex;
+        align-items: center;
+        padding: 16px 30px;
+        border-radius: 12px;
+        font-size: 1rem;
+        font-weight: 600;
+        text-decoration: none;
+        transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+        cursor: pointer;
+        border: none;
+        gap: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        width: 100%;
+        justify-content: flex-start;
+    }
+
+    .btn i {
+        font-size: 1.4rem;
+        flex-shrink: 0;
+    }
+
+    .btn span {
+        flex-grow: 1;
+        text-align: right;
+        margin-right: 10px;
+    }
+
+    .btn:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(74, 144, 226, 0.2);
+    }
+
+    .btn-primary {
+        background-color: var(--primary-color);
+        color: var(--light-text);
+    }
+
+    .btn-primary:hover {
+        background-color: #3a80d1;
+    }
+
+    .btn-secondary {
+        background-color: var(--secondary-color);
+        color: var(--light-text);
+    }
+
+    .btn-secondary:hover {
+        background-color: #45b369;
+        box-shadow: 0 8px 25px rgba(80, 200, 120, 0.2);
+    }
+
+    .btn-accent {
+        background-color: var(--accent-color);
+        color: var(--light-text);
+    }
+
+    .btn-accent:hover {
+        background-color: #006A7A;
+        box-shadow: 0 8px 25px rgba(0, 123, 138, 0.2);
+    }
+
+    /* Animation Keyframes */
+    @keyframes fadeInScale {
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
+    @keyframes slideInUp {
+        from {
+            opacity: 0;
+            transform: translateY(40px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 992px) {
+        .container-404 {
+            flex-direction: column;
+            text-align: center;
+            padding: 40px 30px;
+            gap: 40px;
+        }
+
+        .error-details {
+            text-align: center;
+        }
+
+        .error-actions {
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .error-container p {
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .container-404 {
+            padding: 30px 20px;
+            margin: 15px 0;
+        }
+
+        .error-container {
+            padding: 30px 15px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .error-container h1 {
+            font-size: 2.2rem;
+        }
+
+        .error-container p {
+            font-size: 1rem;
+        }
+
+        .btn {
+            padding: 14px 25px;
+        }
+
+        .btn i {
+            font-size: 1.2rem;
+        }
+
+        .container-404 {
+            padding: 25px 15px;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="error-container">
+    <div class="container-404">
+        <div class="error-details">
+            <div class="illustration">
+                <svg width="200" height="150" viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" style="stop-color:rgb(80,200,120);stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:rgb(74,144,226);stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <path d="M 10 75 L 40 75 L 50 55 L 60 95 L 70 70 L 80 80 L 90 75 L 190 75" stroke="url(#grad1)"
+                        stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                    <circle cx="100" cy="75" r="50" fill="rgba(74, 144, 226, 0.1)" />
+                    <circle cx="100" cy="75" r="40" fill="rgba(74, 144, 226, 0.15)" />
+                    <g transform="translate(88, 63) scale(1.2)">
+                        <rect x="0" y="5" width="20" height="4" rx="2" fill="#2c3e50" />
+                        <rect x="8" y="-3" width="4" height="20" rx="2" fill="#2c3e50" />
+                    </g>
+                    <text x="10" y="140" font-family="Poppins, sans-serif" font-size="16" font-weight="500"
+                        fill="#bdc3c7">Status: Page Not Found</text>
+                </svg>
+            </div>
+            <div class="error-code">ERROR 404</div>
+            <h1>We can't find that page.</h1>
+            <p>It seems the page you're looking for has been moved, deleted, or was never here. Let's get you back to a
+                healthy starting point.</p>
+        </div>
+
+        <div class="error-actions">
+            <div class="button-container">
+                <a href="https://app.fyndbetter.com/ahh_apt" class="btn btn-primary" target="_blank">
+                    <i class="fas fa-calendar-check"></i>
+                    <span>Book Appointment</span>
+                </a>
+                <a href="/departments/" class="btn btn-secondary">
+                    <i class="fas fa-stethoscope"></i>
+                    <span>View Departments</span>
+                </a>
+                <a href="tel:0806666887788" class="btn btn-accent">
+                    <i class="fas fa-phone-alt"></i>
+                    <span>Request Callback</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

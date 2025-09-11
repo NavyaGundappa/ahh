@@ -17,7 +17,6 @@
     <meta name="revisit-after" content="7 days">
     <meta name="distribution" content="web">
     <meta name="robots" content="noodp">
-    <meta name="distribution" content="web">
     <meta name="web_author" content="Aarogyahastha Pvt Ltd">
     <meta name="rating" content="general">
     <meta name="rating" content="safe for kids">
@@ -37,11 +36,13 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
     <link rel="stylesheet" href="/static/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     {% block head %}{% endblock %}
     <link rel="stylesheet" href="/static/css/style.css">
+
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-84XCMMFTS8"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -49,9 +50,19 @@
         gtag('js', new Date());
         gtag('config', 'G-84XCMMFTS8');
     </script>
+    <!-- Google Tag Manager -->
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-WGJFVPCB');</script>
+    <!-- End Google Tag Manager -->
+
     <script>(function (w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-TD2L5G6C');</script>
     <style>
-        /* CSS for the login form modal */
         .login-modal {
             display: none;
             position: fixed;
@@ -61,9 +72,9 @@
             width: 100%;
             height: 100%;
             overflow: auto;
-            background-color: rgba(0, 0, 0, 0.4);
+            background-color: rgba(0, 0, 0, .4);
             justify-content: center;
-            align-items: center;
+            align-items: center
         }
 
         .login-modal-content {
@@ -75,12 +86,11 @@
             max-width: 500px;
             position: relative;
             border-radius: 8px;
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, .2);
             animation-name: animatetop;
-            animation-duration: 0.4s;
+            animation-duration: .4s
         }
 
-        /* Add Animation */
         @keyframes animatetop {
             from {
                 top: -300px;
@@ -97,145 +107,278 @@
             color: #aaa;
             float: right;
             font-size: 28px;
-            font-weight: bold;
+            font-weight: 700
         }
 
-        .close-button:hover,
-        .close-button:focus {
-            color: black;
+        .close-button:focus,
+        .close-button:hover {
+            color: #000;
             text-decoration: none;
-            cursor: pointer;
+            cursor: pointer
         }
 
         .login-form-group {
-            margin-bottom: 15px;
+            margin-bottom: 15px
         }
 
         .login-form-group label {
             display: block;
             margin-bottom: 5px;
-            font-weight: bold;
+            font-weight: 700
         }
 
-        .login-form-group input {
+        .login-form-group input,
+        .login-form-group textarea {
             width: 100%;
             padding: 10px;
             box-sizing: border-box;
-            border: 1px solid #000000;
-            border-radius: 4px;
+            border: 1px solid #000;
+            border-radius: 4px
         }
 
         .login-form-group button {
             width: 100%;
             padding: 10px;
-            background-color: linear-gradient(to bottom, #103A60, #16979D);
-            color: white;
+            background: linear-gradient(to bottom, #103A60, #16979D);
+            color: #fff;
             border: none;
             border-radius: 4px;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 16px
         }
 
+        .main-nav .dropdown {
+            position: relative
+        }
+
+        .main-nav .dropdown .dropdown-menu {
+            display: block;
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 50%;
+            transform: translateX(-50%) translateY(10px);
+            min-width: 280px;
+            padding: 10px 0;
+            margin: 0;
+            list-style: none;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, .15);
+            border: 1px solid #eee;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity .3s ease, transform .3s ease, visibility .3s
+        }
+
+        .main-nav .dropdown .dropdown-menu::before {
+            content: '';
+            position: absolute;
+            top: -6px;
+            left: 50%;
+            transform: translateX(-50%) rotate(45deg);
+            width: 12px;
+            height: 12px;
+            background-color: #fff;
+            border-top: 1px solid #eee;
+            border-left: 1px solid #eee
+        }
+
+        .main-nav .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0)
+        }
+
+        .main-nav .dropdown-menu li a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 20px;
+            font-size: 16px;
+            text-decoration: none;
+            color: #333 !important;
+            background-color: transparent !important;
+            transition: background-color .2s ease, color .2s ease;
+            white-space: nowrap
+        }
+
+        .main-nav .dropdown-menu li a i {
+            color: #16979D;
+            width: 20px;
+            text-align: center
+        }
+
+        .main-nav .dropdown-menu li a:hover {
+            background-color: #f5f5f5 !important;
+            color: #103A60 !important
+        }
+
+        #mobile-nav .dropdown .dropdown-menu {
+            position: static;
+            display: block;
+            background-color: #f0f0f0;
+            box-shadow: none;
+            border: none;
+            padding-left: 15px
+        }
+
+        #mobile-nav .dropdown>a {
+            font-weight: 700
+        }
+
+        /* --- START: LEFT SIDEBAR CSS --- */
         .left-sidebar {
             position: fixed;
             left: 0;
             top: 50%;
             transform: translateY(-50%);
-            z-index: 1000;
             display: flex;
             flex-direction: column;
             gap: 15px;
             padding: 15px 10px;
-            background: transparent;
-            box-shadow: none;
+            z-index: 1000;
+            transition: opacity .3s, visibility .3s
         }
 
-        /* Smaller circular buttons (40px instead of 50px) */
+        .left-sidebar.hidden {
+            opacity: 0;
+            visibility: hidden
+        }
+
         .left-sidebar .icon-link {
             position: relative;
-            display: block;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             display: flex;
             justify-content: center;
             align-items: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, .2);
             background: linear-gradient(to bottom, #16979D, #103A60);
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            transition: all .3s cubic-bezier(.25, .8, .25, 1)
         }
 
         .left-sidebar .icon-link:hover {
             background: linear-gradient(to bottom, #103A60, #16979D);
             transform: scale(1.1);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, .3)
         }
 
-        /* Smaller image inside the icon link */
         .left-sidebar .icon-link img {
             width: 24px;
-            /* Reduced from 30px */
             height: 24px;
-            /* Reduced from 30px */
-            transition: transform 0.3s ease-in-out;
+            transition: transform .3s ease-in-out
         }
 
-        /* Adjusted tooltip positioning for smaller icons */
         .left-sidebar .tooltip-text {
             visibility: hidden;
             opacity: 0;
             position: absolute;
             left: 40px;
-            /* Adjusted from 50px to match new icon size */
             top: 50%;
             transform: translateY(-50%) translateX(-15px);
             margin-left: 10px;
             padding: 8px 12px;
-            /* Slightly smaller padding */
             background: linear-gradient(to bottom, #16979D, #103A60);
             color: #fff;
             white-space: nowrap;
             border-radius: 999px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            transition: opacity 0.4s ease-in-out, transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .left-sidebar .tooltip-text::before {
-            content: none;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, .2);
+            transition: opacity .4s ease-in-out, transform .4s cubic-bezier(.175, .885, .32, 1.275)
         }
 
         .left-sidebar .icon-link:hover .tooltip-text {
             visibility: visible;
             opacity: 1;
-            transform: translateY(-50%) translateX(0);
+            transform: translateY(-50%) translateX(0)
         }
+
+        @media (max-width:768px) {
+            .left-sidebar {
+                background-color: #fff;
+                box-shadow: 0 0 15px rgba(0, 0, 0, .2);
+                padding: 15px 10px;
+                border-top-right-radius: 8px;
+                border-bottom-right-radius: 8px;
+                left: 0;
+                transform: translate(-100%, -50%);
+                transition: transform .3s ease-in-out;
+                z-index: 1040
+            }
+
+            .left-sidebar.show-mobile-sidebar {
+                transform: translate(0, -50%)
+            }
+
+            .left-sidebar .tooltip-text {
+                display: none
+            }
+
+            .left-sidebar .icon-link:hover {
+                transform: none;
+            }
+
+
+            #mobile-sidebar-toggle {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: fixed;
+                left: 0;
+                top: 300px;
+                /* This remains the same */
+                z-index: 1030;
+                background: linear-gradient(to bottom, #16979D, #103A60);
+                color: #fff;
+                border: none;
+                border-top-right-radius: 8px;
+                border-bottom-right-radius: 8px;
+                border-top-left-radius: 0;
+                border-bottom-left-radius: 0;
+                width: 30px;
+                height: 45px;
+                font-size: 20px;
+                box-shadow: 2px 0 10px rgba(0, 0, 0, .2);
+                cursor: pointer;
+                transition: opacity .3s ease-in-out;
+            }
+
+            /* ADDED: Rotates the hamburger icon to be vertical */
+            #mobile-sidebar-toggle .fa-bars {
+                transform: rotate(90deg);
+                transition: transform 0.3s ease;
+            }
+        }
+
+        /* --- END: LEFT SIDEBAR CSS --- */
 
         .counter-number-section {
             background: linear-gradient(135deg, #0d2c49, #133e5c);
             padding: 50px 0;
             text-align: center;
             font-family: 'Montserrat', sans-serif;
-            color: #fff;
+            color: #fff
         }
 
         .counter-item {
             padding: 20px;
             border-radius: 12px;
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, .05);
             margin: 10px;
-            transition: transform 0.3s ease, background-color 0.3s ease;
+            transition: transform .3s ease, background-color .3s ease
         }
 
         .counter-item:hover {
             transform: translateY(-6px);
-            background: rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, .08)
         }
 
         .icon-wrap img {
             width: 70px;
             height: 70px;
             margin-bottom: 10px;
-            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3));
+            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, .3))
         }
 
         .counter-wrap {
@@ -246,25 +389,24 @@
             display: flex;
             justify-content: center;
             align-items: baseline;
-            gap: 3px;
+            gap: 3px
         }
 
         .counter-wrap .suffix {
             font-size: 1.2rem;
-            color: #ffd700;
+            color: #ffd700
         }
 
         .label {
             font-size: 1rem;
             font-weight: 500;
             margin-top: 5px;
-            letter-spacing: 0.5px;
+            letter-spacing: .5px;
             color: #f0f0f0;
             text-decoration: none !important;
-            border: none !important;
+            border: none !important
         }
 
-        /* Add padding to all sections for consistent spacing */
         .hero-section,
         .dedicated-section-one,
         .service-carousel-section,
@@ -272,74 +414,68 @@
         .counter-number-section,
         .feedback-section,
         .video-section {
-            padding: 80px 0;
-            /* Adjust the value as needed for your design */
+            padding: 80px 0
         }
 
-        /* Remove default margin on the first section to avoid extra space at the top */
         .hero-section {
-            padding-top: 0;
+            padding-top: 0
         }
 
         .dedicated-section-one .section-heading {
             text-align: center;
             font-size: 2.5rem;
             padding-bottom: 10px;
-            margin: 0 auto;
+            margin: 0 auto
         }
 
-        @media (max-width: 991px) {
+        @media (max-width:991px) {
             .dedicated-section-one .section-heading {
-                font-size: 2rem;
+                font-size: 2rem
             }
         }
 
-        @media (max-width: 576px) {
+        @media (max-width:576px) {
             .dedicated-section-one .section-heading {
-                font-size: 1.7rem;
+                font-size: 1.7rem
             }
         }
 
         .dedicated-section-one .image-column {
             align-self: flex-start;
-            margin-top: -20px;
+            margin-top: -20px
         }
 
-        /* Responsive adjustments */
-        @media (max-width: 991px) {
+        @media (max-width:991px) {
             .dedicated-section-one .image-column {
                 margin-top: 0;
-                align-self: center;
+                align-self: center
             }
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
+        @media (max-width:768px) {
             .icon-wrap img {
                 width: 50px;
-                height: 50px;
+                height: 50px
             }
 
             .counter-wrap {
-                font-size: 2rem;
+                font-size: 2rem
             }
 
             .counter-wrap .suffix {
-                font-size: 1rem;
+                font-size: 1rem
             }
 
-            /* Smaller padding for mobile devices */
             .dedicated-section-one,
             .service-carousel-section,
             .doctors-section,
             .counter-number-section,
             .feedback-section,
             .video-section {
-                padding: 40px 0;
+                padding: 40px 0
             }
         }
 
-        /* Left-aligned Scroll to Top Button */
         .scroll-to-top-btn {
             display: none;
             position: fixed;
@@ -350,58 +486,52 @@
             height: 50px;
             border-radius: 50%;
             background: linear-gradient(135deg, #16979D, #103A60);
-            color: white;
+            color: #fff;
             border: none;
             cursor: pointer;
             font-size: 20px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, .2);
+            transition: all .3s cubic-bezier(.25, .8, .25, 1);
             align-items: center;
             justify-content: center;
-            text-decoration: none;
+            text-decoration: none
         }
 
         .scroll-to-top-btn:hover {
             background: linear-gradient(135deg, #103A60, #16979D);
             transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, .25)
         }
 
         .scroll-to-top-btn i {
-            transition: transform 0.3s ease;
-            margin-top: 2px;
-            /* Better arrow alignment */
+            transition: transform .3s ease;
+            margin-top: 2px
         }
 
         .scroll-to-top-btn:hover i {
-            transform: translateY(-2px);
+            transform: translateY(-2px)
         }
 
-        /* Mobile responsive */
-        @media (max-width: 768px) {
+        @media (max-width:768px) {
             .scroll-to-top-btn {
                 left: 20px;
                 bottom: 20px;
                 width: 45px;
                 height: 45px;
-                font-size: 18px;
+                font-size: 18px
             }
         }
 
         .dedicated-section-one .col-lg-6:first-child img {
             margin-top: 2rem;
-            /* 32px - adjust this value as needed */
-            transform: translateY(10px);
-            /* Fine-tune positioning */
+            transform: translateY(10px)
         }
 
         .dedicated-section-one img {
             align-self: flex-start;
-            width: 100%;
+            width: 100%
         }
 
-        /* Hide mobile nav by default */
-        /* Show navigation by default on all screens */
         #mobile-nav {
             display: flex;
             list-style: none;
@@ -409,152 +539,140 @@
             margin: 0;
             background-color: #fff;
             flex-direction: column;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, .1);
             max-height: 60vh;
-            /* Limit height */
-            overflow-y: auto;
-            /* Add scroll if needed */
+            overflow-y: auto
         }
 
-        /* Nav links styling - more compact */
         #mobile-nav li a {
             display: block;
             padding: 8px 12px;
-            /* Reduced padding */
             color: #103A60;
             text-decoration: none;
             border-bottom: 1px solid #eee;
-            transition: all 0.3s ease;
-            font-size: 0.95rem;
-            /* Slightly smaller font */
+            transition: all .3s ease;
+            font-size: .95rem
         }
 
         #mobile-nav li a:hover {
             color: #1a9cb7;
-            background-color: #f8f9fa;
+            background-color: #f8f9fa
         }
 
-        /* Desktop view - more compact */
-        @media (min-width: 992px) {
+        @media (min-width:992px) {
             #mobile-nav {
                 flex-direction: row;
                 justify-content: center;
                 align-items: center;
                 gap: 10px;
-                /* Reduced gap */
                 background-color: transparent;
                 border-top: none;
                 box-shadow: none;
                 max-height: none;
-                /* Remove height limit */
                 overflow-y: visible;
-                /* Remove scroll */
-                padding: 5px 0;
-                /* Added some padding */
+                padding: 5px 0
             }
 
             #mobile-nav li a {
                 border-bottom: none;
                 padding: 8px 12px;
-                /* Consistent padding */
-                border-radius: 4px;
-                /* Rounded corners */
+                border-radius: 4px
             }
 
             #mobile-nav li a:hover {
                 background-color: #e6f7f8;
-                transform: translateY(-1px);
-                /* Subtle hover effect */
+                transform: translateY(-1px)
             }
 
             .navbar-toggle {
-                display: none;
+                display: none
             }
         }
 
-        /* Mobile view - compact */
-        @media (max-width: 991px) {
+        @media (max-width:991px) {
             #mobile-nav {
                 position: fixed;
                 top: 0;
                 left: 0;
                 width: 280px;
-                /* fixed width */
-                height: auto;
-                /* only as tall as the content */
-                z-index: 1000;
+                height: 100%;
+                z-index: 1050;
                 transform: translateX(-100%);
-                transition: transform 0.3s ease-in-out;
+                transition: transform .3s ease-in-out;
                 padding-top: 50px;
-                /* keep top padding */
                 background-color: #fff;
-                overflow: visible;
-                /* no scroll, fits content */
-                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+                overflow-y: auto;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, .1)
             }
 
             #mobile-nav.active {
-                transform: translateX(0);
+                transform: translateX(0)
             }
         }
 
+        .nav-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, .5);
+            z-index: 1045;
+            opacity: 0;
+            transition: opacity .3s ease-in-out
+        }
+
+        .nav-overlay.active {
+            display: block;
+            opacity: 1
+        }
 
         #mobile-nav li a {
-            padding: 10px 15px;
-            /* Slightly larger for touch */
+            padding: 10px 15px
         }
 
         .navbar-toggle {
             display: inline-flex;
-            /* Use flex to tightly wrap content */
             align-items: center;
-            /* Vertically center content */
             justify-content: center;
-            /* Horizontally center content */
             position: fixed;
             right: 15px;
             top: 15px;
             z-index: 1001;
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, .9);
             border-radius: 4px;
             padding: 0;
-            /* Remove all padding */
             line-height: 1;
-            /* Remove extra line height */
-            height: auto;
-            /* Let height adjust to content */
+            height: auto
         }
 
-        /* Close button for mobile menu */
         .nav-close-btn {
             position: absolute;
             top: 10px;
-            right: 10px;
-            background: none;
+            right: 15px;
+            background: 0 0;
             border: none;
-            font-size: 1.5rem;
+            font-size: 2rem;
             color: #103A60;
             cursor: pointer;
             padding: 5px;
-            display: none;
+            line-height: 1;
+            display: none
         }
 
-        @media (max-width: 991px) {
+        @media (max-width:991px) {
             .nav-close-btn {
-                display: block;
+                display: block
             }
         }
 
-        /* CSS for the Ambulance Animation */
         .ambulance-animation-container {
             overflow: hidden;
-            /* Hides the ambulance when it is outside the container */
             height: 35px;
-            /* Adjust height as needed */
             position: relative;
             background-color: #f8f9fa;
-            /* Optional: A light background for the animation strip */
-            border-bottom: 1px solid #ddd;
+            border-bottom: 1px solid #ddd
         }
 
         .ambulance-animation {
@@ -562,71 +680,158 @@
             top: 0;
             white-space: nowrap;
             animation: move-ambulance 10s linear infinite;
-            /* Changed to 5 seconds for a much faster speed */
             display: flex;
             align-items: center;
-            height: 100%;
+            height: 100%
         }
 
         .ambulance-animation:hover {
-            animation-play-state: paused;
-            /* Pauses the animation on hover */
+            animation-play-state: paused
         }
 
         .ambulance-icon img {
             height: 40px;
-            /* Adjust ambulance image size */
-            margin-right: 15px;
+            margin-right: 15px
         }
 
         .ambulance-number a {
-            font-weight: bold;
+            font-weight: 700;
             color: #d9534f;
-            /* A red color for the emergency number */
             text-decoration: none;
-            font-size: 1.1rem;
+            font-size: 1.1rem
         }
 
-        /* Keyframes for the animation */
         @keyframes move-ambulance {
             0% {
-                transform: translateX(100vw);
-                /* Starts off-screen to the right */
+                transform: translateX(100vw)
             }
 
             100% {
-                transform: translateX(-100%);
-                /* Ends off-screen to the left */
+                transform: translateX(-100%)
             }
         }
 
-        /* Optional: Adjustments for smaller screens */
-        @media (max-width: 768px) {
+        @media (max-width:768px) {
             .ambulance-animation-container {
-                height: 40px;
+                height: 40px
             }
 
             .ambulance-icon img {
-                height: 30px;
+                height: 30px
             }
 
             .ambulance-number a {
-                font-size: 0.9rem;
+                font-size: .9rem
             }
+        }
+
+        .chrome-popup {
+            position: fixed;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-120%);
+            width: min(480px, 96vw);
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
+            padding: 16px;
+            color: #333;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            z-index: 9999;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.25s ease;
+        }
+
+        .chrome-popup.is-visible {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .chrome-popup__title {
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #333;
+        }
+
+        .chrome-popup__url {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .chrome-popup__checkbox {
+            font-size: 12px;
+            color: #666;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 14px;
+        }
+
+        .chrome-popup__actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        /* Buttons */
+        .chrome-btn {
+            font-size: 13px;
+            border-radius: 18px;
+            padding: 6px 16px;
+            cursor: pointer;
+            border: none;
+            text-decoration: none;
+            line-height: 1.4;
+        }
+
+        .chrome-btn--blue {
+            background: #44a5a6;
+            color: #fff;
+        }
+
+        .chrome-btn--blue:hover {
+            background: #9ededf;
+        }
+
+        .chrome-btn--green {
+            background: #44a5a6;
+            color: #fff;
+        }
+
+        .chrome-btn--green:hover {
+            background: #9ededf;
+        }
+
+        .chrome-btn--grey {
+            background: #e8eaed;
+            color: #202124;
+        }
+
+        .chrome-btn--grey:hover {
+            background: #dadce0;
         }
     </style>
 </head>
 
 <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WGJFVPCB" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TD2L5G6C" height="0" width="0"
             style="display:none;visibility:hidden"></iframe></noscript>
 
+    <div class="nav-overlay"></div>
     <div class="left-sidebar">
         <a href="https://app.fyndbetter.com/ahh_apt" class="icon-link" target="_blank">
             <img src="/static/img/book-appointment.png" alt="Book Appointment Icon">
             <span class="tooltip-text">Book an Appointment</span>
         </a>
-
         <a href="javascript:void(0)" onclick="showChromePopup()" class="icon-link">
             <img src="/static/img/whatsapp.png" alt="WhatsApp Icon">
             <span class="tooltip-text">WhatsApp</span>
@@ -646,10 +851,12 @@
             <div class="container header-top-content">
                 <a href="/" class="logo">
                     <div class="logo-wrapper">
-                        <img src="/static/img/logo.png" alt="Logo" class="header-logo-img">
+                        <img src="static/img/logo.png" alt="Logo" class="header-logo-img">
                     </div>
                 </a>
-
+                <button class="navbar-toggle d-lg-none" id="mobile-menu-toggle">
+                    <i class="fa fa-bars"></i>
+                </button>
                 <div class="header-contact">
                     <span class="appointment-number">
                         <div class="contact-label">Appointments</div>
@@ -662,13 +869,12 @@
                         <div class="contact-label">24/7 Ambulance</div>
                         <div class="contact-row">
                             <i class="fa fa-ambulance"></i>
-                            <a href="tel:0806666887788">080 6666 8877/88</a>
+                            <a href="tel:08066668877">080 6666 8877/88</a>
                         </div>
                     </span>
                 </div>
-
-
             </div>
+
             <div class="ambulance-animation-container">
                 <div class="ambulance-animation">
                     <div class="ambulance-icon">
@@ -682,838 +888,601 @@
 
             <div class="nav-container">
                 <div class="container nav-content">
-                    <button class="navbar-toggle d-lg-none" id="mobile-menu-toggle">
-                        <i class="fa fa-bars"></i>
-                    </button>
-
                     <ul id="mobile-nav" class="nav-list d-lg-none">
+                        <button class="nav-close-btn" id="mobile-menu-close">×</button>
                         <li><a class="nav-links" href="/">Home</a></li>
                         <li><a class="nav-links" href="/about">About Us</a></li>
                         <li><a class="nav-links" href="https://app.fyndbetter.com/ahh_apt"
                                 target="_blank">Appointments</a></li>
-                        <li><a class="nav-links" href="/departments">Departments</a></li>
+                        <li><a class="nav-links" href="/departments/">Departments</a></li>
                         <li><a class="nav-links" href="/health-packages">Health Packages</a></li>
                         <li><a class="nav-links" href="/sports-packages">Sports Packages</a></li>
-                        <li><a class="nav-links" href="/contact">Contact</a></li>
+                        <li class="dropdown">
+                            <a class="nav-links" href="/contact">Contact</a>
+                            <ul class="dropdown-menu">
+                                <li><a
+                                        href="https://www.google.com/search?sca_esv=01d7d1da4f3739f4&sxsrf=AE3TifMajnR1cj7CV7KMp-OAhDhG6-ag5A:1757584508053&si=AMgyJEtREmoPL4P1I5IDCfuA8gybfVI2d5Uj7QMwYCZHKDZ-E67a9GN5xsFdNX82bZli0D47ZU-t7_RrF_VvCuEUJnWTI5SR80ndLu5MxI-lgdtIvv6GkmwZO2uyJfSHoUpzWU5bjtfVoFrfNvZ8hwgIvFvNDwqWmX3a7tdbZfx8SWbB5YgDksnqmrDV4yojH420D2gkt6js&q=AAROGYA+HASTHA+HOSPITALS+-+CENTRE+FOR+SURGICAL+EXCELLENCE+Reviews&sa=X&ved=2ahUKEwiMnY_CuNCPAxXKTGwGHZhvD64Q0bkNegQIKhAD&biw=1280&bih=585&dpr=1.5#lrd=0x3bae132a0bbeb64b:0x626c13b98813a8a3,3,,,,">Reviews</a>
+                                </li>
+                                <li><a href="#" class="write-review-btn">Write a message</a></li>
+                            </ul>
+                        </li>
                     </ul>
-
 
                     <ul class="main-nav" id="main-navigation">
                         <li><a class="nav-links" href="/">Home</a></li>
                         <li><a class="nav-links" href="/about">About Us</a></li>
                         <li><a class="nav-links" href="https://app.fyndbetter.com/ahh_apt"
                                 target="_blank">Appointments</a></li>
-                        <li><a class="nav-links" href="/departments">Departments</a></li>
+                        <li><a class="nav-links" href="/departments/">Departments</a></li>
                         <li><a class="nav-links" href="/health-packages">Health Packages</a></li>
                         <li><a class="nav-links" href="/sports-packages">Sports Packages</a></li>
-                        <li><a class="nav-links" href="/contact">Contact</a></li>
+                        <li class="dropdown">
+                            <a class="nav-links" href="/contact">Contact <i class="fa fa-angle-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="https://www.google.com/search?sca_esv=01d7d1da4f3739f4&sxsrf=AE3TifONK5RnA4evxGz8cGk4CrHNvVAxYg:1757584553118&si=AMgyJEtREmoPL4P1I5IDCfuA8gybfVI2d5Uj7QMwYCZHKDZ-E67a9GN5xsFdNX82bZli0D47ZU-t7_RrF_VvCuEUJnWTI5SR80ndLu5MxI-lgdtIvv6GkmwZO2uyJfSHoUpzWU5bjtfVoFrfNvZ8hwgIvFvNDwqWmX3a7tdbZfx8SWbB5YgDksnqmrDV4yojH420D2gkt6js&q=AAROGYA+HASTHA+HOSPITALS+-+CENTRE+FOR+SURGICAL+EXCELLENCE+Reviews&sa=X&ved=2ahUKEwjU_M3XuNCPAxU-RmwGHaDaFFcQ0bkNegQIKBAD&biw=1280&bih=585&dpr=1.5#lrd=0x3bae132a0bbeb64b:0x626c13b98813a8a3,3,,,,"
+                                        target="_blank"><i class="fa-solid fa-star"></i> Reviews</a></li>
+                                <li><a href="#" class="write-review-btn"><i class="fa-solid fa-envelope"></i> Write a
+                                        message</a></li>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
             </div>
+        </div>
     </header>
 
     {% block content %}{% endblock %}
 
-    <footer class="new-footer">
-        <div class="container main-footer-content">
-            <div class="row g-4">
-                <div class="col-lg-4 col-md-6 order-md-1">
-                    <img loading="lazy" src="/static/img/logo.png" alt="AarogyaHastha Hospitals Logo"
-                        class="footer-logo">
-                    <p class="mt-3">
-                        <a href="https://www.google.com/maps/search/?api=1&query=Aarogya+Hastha+Hospitals,+Site+No.+2,+No.+2816/2,+SY.87,+Kasavanahalli+Main+Rd,+near+1st+Cross+Road,+opposite+HM+Symphony,+Bengaluru,+Karnataka+560035"
-                            target="_blank" style="text-decoration: none; color: inherit;">
-                            Site No. 2, No. 2816/2, SY.87, Kasavanahalli Main Rd, near 1st Cross Road, opposite HM
-                            Symphony, Bengaluru, Karnataka 560035
-                        </a>
-                    </p>
-                    <div class="app-download">
-                        <div class="app-download-title">Download our APP for more Benefits</div>
+    <div id="review-modal" class="login-modal">
+        <div class="login-modal-content">
+            <span class="close-button" id="close-review-modal">×</span>
+            <h2 style="margin-top:0; margin-bottom: 20px;">Write a Message to Management</h2>
+            <form id="review-form">
+                <div class="login-form-group"><label for="reviewer-name">Your Name</label><input type="text"
+                        id="reviewer-name" name="reviewer-name" required></div>
+                <div class="login-form-group"><label for="reviewer-email">Your Email</label><input type="email"
+                        id="reviewer-email" name="reviewer-email" required></div>
+                <div class="login-form-group"><label for="review-message">Message</label><textarea id="review-message"
+                        name="review-message" rows="5" required></textarea></div>
+                <div class="login-form-group"><button type="submit">Submit Message</button></div>
+            </form>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <div class="logo-wrapper"><img loading="lazy" src="/static/img/logo.png"
+                            alt="AarogyaHastha Hospitals Logo"></div>
+                    <p><a href="https://maps.google.com" target="_blank"
+                            style="text-decoration: none; color: inherit;">Site No. 2, Kasavanahalli Main Rd, near 1st
+                            Cross Road, opposite HM Symphony, Bengaluru, Karnataka 560035</a></p>
+                    <div class="social-icons mt-4">
+                        <a href="https://www.instagram.com/aarogyahastha/" target="_blank"><img
+                                src="/static/img/icon-insta.png" alt="Instagram"></a>
+                        <a href="https://www.facebook.com/aarogyahastha" target="_blank"><img
+                                src="/static/img/icon-fb.png" alt="Facebook"></a>
+                        <a href="https://www.linkedin.com/company/aarogya-hastha/" target="_blank"><img
+                                src="/static/img/icon-linkedin.png" alt="LinkedIn"></a>
+                        <a href="https://twitter.com/AarogyaHastha" target="_blank"><img
+                                src="/static/img/icon-twitter.png" alt="Twitter"></a>
+                        <a href="https://www.youtube.com/channel/UCeQv8lTLIT4btbjgLxYzYrw" target="_blank"><img
+                                src="/static/img/icon-youtube.png" alt="YouTube"></a>
+                        <a href="javascript:void(0)" onclick="showChromePopup()"><img
+                                src="/static/img/icon-whatsapp.png" alt="WhatsApp"></a>
+                    </div>
+                    <div class="app-download" style="margin-top: 25px;">
+                        <h4 style="font-size: 18px; margin-bottom: 15px;">Download Our App</h4>
                         <div class="app-download-buttons">
-                            <a href="http://play.google.com/store/search?q=aarogya+hastha+hospital&c=apps&hl=en_IN"
-                                target="_blank" class="app-download-btn">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Google_Play_Store_badge_EN.svg/2560px-Google_Play_Store_badge_EN.svg.png"
-                                    alt="Get it on Google Play">
-                            </a>
-                            <a href="https://apps.apple.com/in/app/aarogya-hastha/id6739343936" target="_blank"
-                                class="app-download-btn">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Download_on_the_App_Store_Badge.svg/2560px-Download_on_the_App_Store_Badge.svg.png"
-                                    alt="Download on the App Store">
-                            </a>
+                            <a href="https://play.google.com" target="_blank" class="app-download-btn"><img
+                                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Google_Play_Store_badge_EN.svg/2560px-Google_Play_Store_badge_EN.svg.png"
+                                    alt="Get it on Google Play"></a>
+                            <a href="https://apps.apple.com" target="_blank" class="app-download-btn"><img
+                                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Download_on_the_App_Store_Badge.svg/2560px-Download_on_the_App_Store_Badge.svg.png"
+                                    alt="Download on the App Store"></a>
                         </div>
                     </div>
-
-                    <div class="social-icons mt-4">
-                        <ul class="social-lists">
-                            <li class="social-items">
-                                <a href="https://www.instagram.com/aarogyahastha/" target="_blank">
-                                    <img src="/static/img/icon-insta.png" alt="Instagram">
-                                </a>
-                            </li>
-                            <li class="social-items">
-                                <a href="https://www.facebook.com/aarogyahastha" target="_blank">
-                                    <img src="/static/img/icon-fb.png" alt="Facebook">
-                                </a>
-                            </li>
-                            <li class="social-items">
-                                <a href="https://www.linkedin.com/company/aarogya-hastha/" target="_blank">
-                                    <img src="/static/img/icon-linkedin.png" alt="LinkedIn">
-                                </a>
-                            </li>
-                            <li class="social-items">
-                                <a href="https://twitter.com/AarogyaHastha" target="_blank">
-                                    <img src="/static/img/icon-twitter.png" alt="Twitter">
-                                </a>
-                            </li>
-                            <li class="social-items">
-                                <a href="https://www.youtube.com/channel/UCeQv8lTLIT4btbjgLxYzYrw" target="_blank">
-                                    <img src="/static/img/icon-youtube.png" alt="YouTube">
-                                </a>
-                            </li>
-                            <li class="social-items">
-                                <a href="javascript:void(0)" onclick="showChromePopup()">
-                                    <img src="/static/img/icon-whatsapp.png" alt="WhatsApp">
-                                </a>
-                            </li>
+                </div>
+                <div class="footer-links-wrapper">
+                    <div class="footer-column">
+                        <h4>Quick Links</h4>
+                        <ul class="footer-links">
+                            <li><a href="/">Home</a></li>
+                            <li><a href="/about">About Us</a></li>
+                            <li><a href="https://app.fyndbetter.com/ahh_apt" target="_blank">Appointments</a></li>
+                            <li><a href="/departments/">Departments</a></li>
+                            <li><a href="/health-packages">Health Packages</a></li>
+                            <li><a href="/sports-packages">Sports Packages</a></li>
+                            <li><a href="/contact">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column" style="flex: 2;">
+                        <h4>Our Departments</h4>
+                        <ul class="footer-links footer-links-multi-column">
+                            <li><a href="/departments/general-surgery">General Surgery</a></li>
+                            <li><a href="/departments/neurosurgery">Neurosurgery</a></li>
+                            <li><a href="/departments/orthopaedics">Orthopaedics</a></li>
+                            <li><a href="/departments/anaesthesia">Anaesthesiology</a></li>
+                            <li><a href="/departments/pain-medicine">Pain Medicine</a></li>
+                            <li><a href="/departments/general-medicine">General Medicine</a></li>
+                            <li><a href="/departments/lab-medicine">Lab Medicine</a></li>
+                            <li><a href="/departments/paediatrics">Paediatrics</a></li>
+                            <li><a href="/departments/physiotherapy">Physiotherapy</a></li>
+                            <li><a href="/departments/dermatology">Dermatology</a></li>
+                            <li><a href="/departments/ent">ENT</a></li>
+                            <li><a href="/departments/emergency-medicine">Emergency Medicine</a></li>
+                            <li><a href="/departments/nephrology">Nephrology</a></li>
+                            <li><a href="/departments/urology">Urology</a></li>
+                            <li><a href="/departments/medical-gastroenterology">Medical Gastroenterology</a></li>
+                            <li><a href="/departments/minimal-access-surgery">Minimal Access Surgery</a></li>
+                            <li><a href="/departments/plastic-surgery">Plastic Surgery</a></li>
+                            <li><a href="/departments/obg">Obstetrics & Gynaecology</a></li>
+                            <li><a href="/departments/surgical-gastroenterology">Surgical Gastroenterology</a></li>
+                            <li><a href="/departments/radiology">Radiology</a></li>
                         </ul>
                     </div>
                 </div>
-
-                <div class="col-md-6 col-lg-8 order-1 order-md-2">
-                    <div class="row">
-                        <div class="col-6 col-lg-3">
-                            <ul class="footer-lists">
-                                <li class="footer-items">
-                                    <a href="/" class="nav__link">Home</a>
-                                </li>
-                                <li class="footer-items">
-                                    <a href="/about" class="nav__link">About Us</a>
-                                </li>
-                                <li class="footer-items">
-                                    <a href="https://app.fyndbetter.com/ahh_apt" target="_blank"
-                                        class="nav__link">Appointments</a>
-                                </li>
-                                <li class="footer-items">
-                                    <a href="/departments/" class="nav__link">Departments</a>
-                                </li>
-                                <li class="footer-items">
-                                    <a href="/health-packages" class="nav__link">Health Packages</a>
-                                </li>
-                                <li class="footer-items"><a href="/sports-packages">Sports Packages</a></li>
-                                <li class="footer-items">
-                                    <a href="/contact" class="nav__link">Contact</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col-6 col-lg-3">
-                            <ul class="footer-lists">
-                                <li class="footer-items"><a href="/departments/general-surgery"
-                                        class="nav__link">General Surgery</a></li>
-                                <li class="footer-items"><a href="/departments/neurosurgery"
-                                        class="nav__link">Neurosurgery</a></li>
-                                <li class="footer-items"><a href="/departments/orthopaedics"
-                                        class="nav__link">Orthopaedics</a></li>
-                                <li class="footer-items"><a href="/departments/anaesthesia"
-                                        class="nav__link">Anaesthesiology & Critical Care</a></li>
-                                <li class="footer-items"><a href="/departments/pain-medicine" class="nav__link">Pain
-                                        Medicine</a></li>
-                                <li class="footer-items"><a href="/departments/general-medicine"
-                                        class="nav__link">General Medicine</a></li>
-                                <li class="footer-items"><a href="/departments/lab-medicine" class="nav__link">Lab
-                                        Medicine</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-6 col-lg-3">
-                            <ul class="footer-lists">
-                                <li class="footer-items"><a href="/departments/paediatrics"
-                                        class="nav__link">Paediatrics</a></li>
-                                <li class="footer-items"><a href="/departments/physiotherapy"
-                                        class="nav__link">Physiotherapy</a></li>
-                                <li class="footer-items"><a href="/departments/dermatology"
-                                        class="nav__link">Dermatology</a></li>
-                                <li class="footer-items"><a href="/departments/ent" class="nav__link">Ear, Nose, and
-                                        Throat (ENT)</a></li>
-                                <li class="footer-items"><a href="/departments/emergency-medicine"
-                                        class="nav__link">Emergency Medicine</a></li>
-                                <li class="footer-items"><a href="/departments/nephrology"
-                                        class="nav__link">Nephrology</a></li>
-                                <li class="footer-items"><a href="/departments/urology" class="nav__link">Urology</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col-6 col-lg-3">
-                            <ul class="footer-lists">
-                                <li class="footer-items"><a href="/departments/medical-gastroenterology"
-                                        class="nav__link">Medical Gastroenterology</a></li>
-                                <li class="footer-items"><a href="/departments/minimal-access-surgery"
-                                        class="nav__link">Minimal Access Surgery</a></li>
-                                <li class="footer-items"><a href="/departments/plastic-surgery"
-                                        class="nav__link">Plastic Surgery</a></li>
-                                <li class="footer-items"><a href="/departments/obg" class="nav__link">Obstetrics &
-                                        Gynaecology</a></li>
-                                <li class="footer-items"><a href="/departments/surgical-gastroenterology"
-                                        class="nav__link">Surgical Gastroenterology</a></li>
-                                <li class="footer-items"><a href="/departments/radiology"
-                                        class="nav__link">Radiology</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
-
-        <!-- Chrome popup (unchanged) -->
-        <div id="chrome-popup" class="chrome-popup" aria-hidden="true">
-            <div class="chrome-popup__content">
-                <p class="chrome-popup__title">Open WhatsApp?</p>
-                <p class="chrome-popup__url">https://api.whatsapp.com wants to open this application.</p>
-                <label class="chrome-popup__checkbox">
-                    <input type="checkbox"> Always allow api.whatsapp.com to open links of this type in the associated
-                    app
-                </label>
-            </div>
-            <div class="chrome-popup__actions">
-                <a href="whatsapp://send?phone=919036092727" class="chrome-btn chrome-btn--blue">Open with App</a>
-                <a href="https://web.whatsapp.com/send?phone=9036092727" target="_blank"
-                    class="chrome-btn chrome-btn--green">Open with Web</a>
-                <button class="chrome-btn chrome-btn--grey" onclick="hideChromePopup()">Cancel</button>
-            </div>
-        </div>
-        <div class="copyright-top-section">
+        <div class="footer-bottom">
             <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <p class="copyright-text">
-                            Copyright © 2025, all Rights Reserved to Aarogya Hastha Hospitals Pvt Ltd |
-                            <a href="/terms-and-conditions">Terms & Conditions</a> |
-                            <a href="/privacy-policy">Privacy Policy</a> |
-                            <a href="/disclaimer">Disclaimer</a>
-                        </p>
-                    </div>
-                </div>
+                <p>Copyright © 2025, all Rights Reserved to Aarogya Hastha Hospitals Pvt Ltd | <a
+                        href="/terms-and-conditions">Terms & Conditions</a> | <a href="/privacy-policy">Privacy
+                        Policy</a> | <a href="/disclaimer">Disclaimer</a></p>
             </div>
         </div>
     </footer>
-
     <style>
-        /* New styles for the copyright top section */
         .copyright-top-section {
-
             padding: 10px 0;
-            /* reduced vertical padding */
             margin-top: -56px;
-            /* move upward closer to main footer */
             margin-left: 90px;
-            /* move a bit to the right */
             text-align: center;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            border-bottom: 1px solid rgba(0, 0, 0, .1)
         }
 
-
-
         .copyright-top-section .copyright-text {
-            font-size: 0.9em;
+            font-size: .9em;
             margin: 0;
-            color: #333;
+            color: #333
         }
 
         .copyright-top-section .copyright-text a {
             color: #103A60;
             text-decoration: none;
-            font-weight: 600;
+            font-weight: 600
         }
 
         .copyright-top-section .copyright-text a:hover {
             text-decoration: underline;
-            color: #16979D;
+            color: #16979D
         }
 
-        /* Adjust main footer content spacing */
         .main-footer-content {
-            padding: 40px 0 20px;
+            padding: 40px 0 20px
         }
 
-        /* Mobile responsive adjustments */
-        @media (max-width: 768px) {
+        @media (max-width:768px) {
             .copyright-top-section {
-                padding: 12px 0;
+                padding: 12px 0
             }
 
             .copyright-top-section .copyright-text {
-                font-size: 0.8em;
-                line-height: 1.4;
+                font-size: .8em;
+                line-height: 1.4
             }
 
             .main-footer-content {
-                padding: 30px 0 15px;
+                padding: 30px 0 15px
+            }
+        }
+
+        .site-footer {
+            background-color: #fff;
+            color: #555;
+            padding: 50px 0 0;
+            font-size: 15px;
+            border-top: 1px solid #e9e9e9;
+            box-shadow: 0 -4px 12px rgba(0, 0, 0, .05)
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            padding-bottom: 40px
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 250px
+        }
+
+        .footer-column .logo-wrapper img {
+            height: 50px;
+            margin-bottom: 15px
+        }
+
+        .footer-column h4 {
+            color: #103A60;
+            font-size: 18px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px
+        }
+
+        .footer-column h4::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 2px;
+            background-color: #16979D
+        }
+
+        .footer-column p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+            color: #555
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0
+        }
+
+        .app-download {
+            margin-top: 25px
+        }
+
+        .app-download-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-start
+        }
+
+        .app-download-btn {
+            display: block;
+            height: 40px;
+            transition: transform .3s ease
+        }
+
+        .app-download-btn:hover {
+            transform: translateY(-2px)
+        }
+
+        .app-download-btn img {
+            height: 100%;
+            width: auto
+        }
+
+        .footer-links li {
+            margin-bottom: 12px
+        }
+
+        .footer-links a {
+            color: #555;
+            text-decoration: none;
+            transition: color .3s, padding-left .3s;
+            display: inline-block
+        }
+
+        .footer-links a:hover {
+            color: #1a6db3;
+            padding-left: 5px
+        }
+
+        .footer-links a::before {
+            content: '\f105';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            margin-right: 8px;
+            color: #16979D
+        }
+
+        .footer-links-multi-column {
+            column-count: 3;
+            column-gap: 25px
+        }
+
+        .footer-links-multi-column li {
+            -webkit-column-break-inside: avoid;
+            page-break-inside: avoid;
+            break-inside: avoid
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px
+        }
+
+        .social-icons a {
+            color: #103A60;
+            background-color: #e8eaed;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            text-decoration: none;
+            transition: background-color .3s, color .3s, transform .3s
+        }
+
+        .social-icons a:hover {
+            background-color: #103A60;
+            color: #fff;
+            transform: translateY(-3px)
+        }
+
+        .social-icons a img {
+            height: 20px;
+            width: 20px
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #e9e9e9;
+            text-align: center;
+            padding: 20px 0
+        }
+
+        .footer-bottom p {
+            margin: 0;
+            font-size: 14px;
+            color: #666
+        }
+
+        .footer-links-wrapper {
+            display: contents
+        }
+
+        @media (max-width:991.98px) {
+            .footer-links-multi-column {
+                column-count: 2
+            }
+        }
+
+        @media (max-width:991.98px) {
+            .header-top-content {
+                position: relative;
+                padding-top: 10px;
+                padding-bottom: 10px;
+                flex-wrap: wrap;
+                justify-content: center
+            }
+
+            .logo {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                order: 1
+            }
+
+            .header-logo-img {
+                height: 50px;
+                width: auto;
+                max-width: 200px;
+                object-fit: contain
+            }
+
+            .navbar-toggle {
+                position: absolute;
+                top: 50%;
+                right: 15px;
+                transform: translateY(-50%)
+            }
+
+            .header-contact {
+                flex-basis: 100%;
+                justify-content: center;
+                margin-top: 10px;
+                order: 2
+            }
+        }
+
+        @media (max-width:768px) {
+            .footer-content {
+                flex-direction: column;
+                text-align: center
+            }
+
+            .footer-column {
+                min-width: 100%
+            }
+
+            .footer-column h4::after {
+                left: 50%;
+                transform: translateX(-50%)
+            }
+
+            .app-download-buttons {
+                justify-content: center
+            }
+
+            .footer-links-wrapper {
+                display: flex;
+                flex-direction: row;
+                gap: 20px;
+                width: 100%;
+                text-align: left
+            }
+
+            .footer-links-wrapper .footer-column {
+                min-width: 0
+            }
+
+            .footer-links-wrapper .footer-column h4::after {
+                left: 0;
+                transform: none
+            }
+
+            .footer-links-multi-column {
+                column-count: 2
+            }
+
+            .social-icons {
+                justify-content: center
             }
         }
     </style>
+
+    <a href="#" id="scrollToTopBtn" class="scroll-to-top-btn" title="Scroll to top" aria-label="Scroll to top"><i
+            class="fa fa-arrow-up"></i></a>
+    <button id="mobile-sidebar-toggle" class="d-lg-none"><i class="fa fa-bars"></i></button>
+
+    <div id="chrome-popup" class="chrome-popup" aria-hidden="true">
+        <div class="chrome-popup__content">
+            <p class="chrome-popup__title">Open WhatsApp?</p>
+            <p class="chrome-popup__url">https://api.whatsapp.com wants to open this application.</p>
+            <label class="chrome-popup__checkbox">
+                <input type="checkbox"> Always allow api.whatsapp.com to open links of this type in the associated
+                app
+            </label>
+        </div>
+        <div class="chrome-popup__actions">
+            <a href="whatsapp://send?phone=919036092727" class="chrome-btn chrome-btn--blue">Open with App</a>
+            <a href="https://web.whatsapp.com/send?phone=9036092727" target="_blank"
+                class="chrome-btn chrome-btn--green">Open with Web</a>
+            <button class="chrome-btn chrome-btn--grey" onclick="hideChromePopup()">Cancel</button>
+        </div>
+    </div>
 
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     <script src="/static/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="/static/js/script.js"></script>
+    <script src="https://fyndbetter.com/chatbot/aarogya_chatbot"></script>
+    <script type="text/javascript" src="https://unpkg.com/youtube-background/jquery.youtube-background.min.js"></script>
 
-    <script>
-        $(".book-apt").on('click', function () {
-            var url = $(this).data("url");
-            window.open(url, '_blank');
-        });
-        function showChromePopup() {
-            const popup = document.getElementById("chrome-popup");
-            popup.classList.add("is-visible");
-            popup.setAttribute("aria-hidden", "false");
-        }
-        function hideChromePopup() {
-            const popup = document.getElementById("chrome-popup");
-            popup.classList.remove("is-visible");
-            popup.setAttribute("aria-hidden", "true");
-        }
-        // ESC closes popup
-        document.addEventListener("keydown", e => {
-            if (e.key === "Escape") hideChromePopup();
-        });
-        document.addEventListener('DOMContentLoaded', function () {
-            const scrollBtn = document.getElementById('scrollToTopBtn');
-            const scrollThreshold = 300;
-
-            function toggleScrollButton() {
-                if (window.pageYOffset > scrollThreshold ||
-                    document.documentElement.scrollTop > scrollThreshold) {
-                    scrollBtn.style.display = 'flex';
-                } else {
-                    scrollBtn.style.display = 'none';
-                }
-            }
-            window.addEventListener('scroll', toggleScrollButton);
-            scrollBtn.addEventListener('click', function (e) {
-                e.preventDefault();
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
-                // Add slight animation to the icon
-                this.querySelector('i').style.transform = 'translateY(-4px)';
-                setTimeout(() => {
-                    this.querySelector('i').style.transform = '';
-                }, 300);
-            });
-            // Initialize on load
-            toggleScrollButton();
-        });
-        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
-        const mobileNav = document.getElementById('mobile-nav');
-
-        mobileMenuToggle.addEventListener('click', function () {
-            mobileNav.classList.toggle('active'); // toggles visibility
-        });
-        document.addEventListener('DOMContentLoaded', () => {
-            const menuToggle = document.querySelector('.menu-toggle');
-            const sidebar = document.querySelector('.left-sidebar');
-
-            menuToggle.addEventListener('click', () => {
-                sidebar.classList.toggle('active');
-            });
-        });
-    </script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const sidebar = document.querySelector('.left-sidebar');
-
-            // Create toggle line only once
-            if (sidebar && !sidebar.querySelector('.toggle-line')) {
-                const toggleLine = document.createElement('div');
-                toggleLine.classList.add('toggle-line');
-
-                // Add toggle line at top
-                sidebar.prepend(toggleLine);
-
-                // Hide icons initially on mobile
-                if (window.innerWidth <= 768) {
-                    sidebar.querySelectorAll('.icon-link').forEach(icon => {
-                        icon.style.opacity = 0;
-                        icon.style.transform = 'translateX(-20px)';
-                    });
-                }
-
-                // Click to toggle icons
-                toggleLine.addEventListener('click', function () {
-                    sidebar.classList.toggle('active');
-                });
-            }
-        });
-    </script>
-
-    <a href="#" id="scrollToTopBtn" class="scroll-to-top-btn" title="Scroll to top" aria-label="Scroll to top">
-        <i class="fa fa-arrow-up"></i>
-    </a>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            window.scrollTo(0, 0);
-        });
-    </script>
-
-    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-    <script src="static/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="static/js/script.js"></script>
     <script>
         $(document).ready(function () {
-            $('[data-vbg]').youtube_background({
-                'play-button': true
-            });
-            if ($('.specialities-carousel').length > 0) {
-                $('.specialities-carousel').owlCarousel({
-                    loop: true,
-                    margin: 30,
-                    autoplay: true,
-                    autoplayTimeout: 2500,
-                    nav: true,
-                    touchDrag: true,
-                    autoplayHoverPause: true,
-                    navText: ["<i class='fa fa-chevron-left'></i>", "<i class='fa fa-chevron-right'></i>"],
-                    responsive: {
-                        0: {
-                            items: 1
-                        },
-                        600: {
-                            items: 2
-                        },
-                        1000: {
-                            items: 3
-                        },
-                        1300: {
-                            items: 4
-                        }
+            // --- 1. MOBILE NAVIGATION LOGIC ---
+            const mobileMenuToggle = $('#mobile-menu-toggle');
+            const mobileMenuClose = $('#mobile-menu-close');
+            const mobileNav = $('#mobile-nav');
+            const navOverlay = $('.nav-overlay');
+
+            if (mobileMenuToggle.length) {
+                const openNav = () => {
+                    mobileNav.addClass('active');
+                    navOverlay.addClass('active');
+                    $('body').css('overflow', 'hidden');
+                };
+                const closeNav = () => {
+                    mobileNav.removeClass('active');
+                    navOverlay.removeClass('active');
+                    $('body').css('overflow', '');
+                };
+
+                // MODIFIED: This now toggles the menu
+                mobileMenuToggle.on('click', () => {
+                    if (mobileNav.hasClass('active')) {
+                        closeNav();
+                    } else {
+                        openNav();
                     }
                 });
-                $('.specialities-carousel .item').on('click', function () {
-                    location.href = 'departments/' + $(this).data('department');;
-                })
+
+                mobileMenuClose.on('click', closeNav);
+                navOverlay.on('click', closeNav);
             }
-            if ($('.doctors-carousel').length > 0) {
-                $('.doctors-carousel').owlCarousel({
-                    loop: true,
-                    margin: 40,
-                    autoplay: true,
-                    autoplayTimeout: 3500,
-                    nav: true,
-                    touchDrag: true,
-                    autoplayHoverPause: true,
-                    navText: ["<i class='fa fa-chevron-left'></i>", "<i class='fa fa-chevron-right'></i>"],
-                    responsive: {
-                        0: {
-                            items: 1
-                        },
-                        600: {
-                            items: 2
-                        },
-                        1000: {
-                            items: 4
-                        }
+
+            // --- 2. MOBILE SIDEBAR LOGIC ---
+            const mobileSidebarToggle = $('#mobile-sidebar-toggle');
+            const sidebar = $('.left-sidebar');
+
+            if (mobileSidebarToggle.length && sidebar.length) {
+                const toggleSidebar = () => {
+                    sidebar.toggleClass('show-mobile-sidebar');
+                };
+                mobileSidebarToggle.on('click', function (event) {
+                    event.stopPropagation();
+                    toggleSidebar();
+                });
+                $(document).on('click', function (event) {
+                    if (sidebar.hasClass('show-mobile-sidebar') && !sidebar.is(event.target) && sidebar.has(event.target).length === 0 && !mobileSidebarToggle.is(event.target) && mobileSidebarToggle.has(event.target).length === 0) {
+                        toggleSidebar();
                     }
                 });
             }
 
-            // Initialize the new feedback carousel
-            if ($('.feedback-carousel').length > 0) {
-                $('.feedback-carousel').owlCarousel({
-                    loop: true,
-                    margin: 30,
-                    autoplay: true,
-                    autoplayTimeout: 3000,
-                    nav: true,
-                    touchDrag: true,
-                    autoplayHoverPause: true,
-                    navText: ["<i class='fa fa-chevron-left'></i>", "<i class='fa fa-chevron-right'></i>"],
-                    responsive: {
-                        0: {
-                            items: 1
-                        },
-                        600: {
-                            items: 1
-                        },
-                        1000: {
-                            items: 2
-                        }
+            // --- 3. SCROLL-TO-TOP BUTTON ---
+            const scrollBtn = $('#scrollToTopBtn');
+            if (scrollBtn.length) {
+                $(window).on('scroll', function () {
+                    if ($(window).scrollTop() > 300) {
+                        scrollBtn.css('display', 'flex');
+                    } else {
+                        scrollBtn.hide();
                     }
                 });
-            }
-        })
-        $(window).on('resize', function () {
-            $('[data-img-mob]').each(function () {
-                if ($(document).width() < 993) $(this).attr('src', $(this).data('img-mob'));
-                else $(this).attr('src', $(this).data('img-desk'));
-            })
-        }).trigger('resize');
-        document.addEventListener("DOMContentLoaded", () => {
-            const counters = document.querySelectorAll(".number");
-            let animated = false;
-
-            function animateCounters() {
-                if (!animated && isInViewport(counters[0])) {
-                    counters.forEach(counter => {
-                        let target = +counter.getAttribute("data-count");
-                        let count = 0;
-                        let step = Math.ceil(target / 100); // adjust speed
-
-                        let timer = setInterval(() => {
-                            count += step;
-                            if (count >= target) {
-                                count = target;
-                                clearInterval(timer);
-                            }
-                            counter.textContent = count.toLocaleString();
-                        }, 20);
-                    });
-                    animated = true;
-                }
-            }
-
-            function isInViewport(element) {
-                const rect = element.getBoundingClientRect();
-                return rect.top < window.innerHeight && rect.bottom >= 0;
-            }
-
-            window.addEventListener("scroll", animateCounters);
-        });
-    </script>
-</body>
-
-</html>
-<script type="text/javascript" src="https://unpkg.com/youtube-background/jquery.youtube-background.min.js"></script>
-<script>
-    $(document).ready(function () {
-        $('[data-vbg]').youtube_background({
-            'play-button': true
-        });
-        if ($('.specialities-carousel').length > 0) {
-            $('.specialities-carousel').owlCarousel({
-                loop: true,
-                margin: 30,
-                autoplay: true,
-                autoplayTimeout: 2500,
-                nav: true,
-                touchDrag: true,
-                autoplayHoverPause: true,
-                navText: ["<i class='fa fa-chevron-left'></i>", "<i class='fa fa-chevron-right'></i>"],
-                responsive: {
-                    0: {
-                        items: 1
-                    },
-                    600: {
-                        items: 2
-                    },
-                    1000: {
-                        items: 3
-                    },
-                    1300: {
-                        items: 4
-                    }
-                }
-            });
-            $('.specialities-carousel .item').on('click', function () {
-                location.href = 'departments/' + $(this).data('department');;
-            })
-        }
-        if ($('.doctors-carousel').length > 0) {
-            $('.doctors-carousel').owlCarousel({
-                loop: true,
-                margin: 40,
-                autoplay: true,
-                autoplayTimeout: 3500,
-                nav: true,
-                touchDrag: true,
-                autoplayHoverPause: true,
-                navText: ["<i class='fa fa-chevron-left'></i>", "<i class='fa fa-chevron-right'></i>"],
-                responsive: {
-                    0: {
-                        items: 1
-                    },
-                    600: {
-                        items: 2
-                    },
-                    1000: {
-                        items: 4
-                    }
-                }
-            });
-        }
-
-        // Initialize the new feedback carousel
-        if ($('.feedback-carousel').length > 0) {
-            $('.feedback-carousel').owlCarousel({
-                loop: true,                // ✅ allow infinite sliding
-                margin: 30,
-                autoplay: true,            // ✅ keep auto-slide
-                autoplayTimeout: 4000,     // slide every 4 seconds (adjust as needed)
-                autoplayHoverPause: true,  // pause on hover
-                nav: true,
-                dots: true,                // show dots under carousel
-                touchDrag: true,
-                mouseDrag: true,
-                navText: [
-                    "<i class='fa fa-chevron-left'></i>",
-                    "<i class='fa fa-chevron-right'></i>"
-                ],
-                responsive: {
-                    0: {
-                        items: 1
-                    },
-                    600: {
-                        items: 1
-                    },
-                    1000: {
-                        items: 2
-                    }
-                }
-            });
-        }
-
-        $(window).on('resize', function () {
-            $('[data-img-mob]').each(function () {
-                if ($(document).width() < 993) $(this).attr('src', $(this).data('img-mob'));
-                else $(this).attr('src', $(this).data('img-desk'));
-            })
-        }).trigger('resize');
-        document.addEventListener("DOMContentLoaded", () => {
-            const counters = document.querySelectorAll(".number");
-            let animated = false;
-
-            function animateCounters() {
-                if (!animated && isInViewport(counters[0])) {
-                    counters.forEach(counter => {
-                        let target = +counter.getAttribute("data-count");
-                        let count = 0;
-                        let step = Math.ceil(target / 100); // adjust speed
-
-                        let timer = setInterval(() => {
-                            count += step;
-                            if (count >= target) {
-                                count = target;
-                                clearInterval(timer);
-                            }
-                            counter.textContent = count.toLocaleString();
-                        }, 20);
-                    });
-                    animated = true;
-                }
-            }
-
-            function isInViewport(element) {
-                const rect = element.getBoundingClientRect();
-                return rect.top < window.innerHeight && rect.bottom >= 0;
-            }
-
-            window.addEventListener("scroll", animateCounters);
-        });
-        // Enhanced Scroll to Top Button
-        document.addEventListener('DOMContentLoaded', function () {
-            const scrollBtn = document.getElementById('scrollToTopBtn');
-            const scrollThreshold = 300;
-
-            function toggleScrollButton() {
-                if (window.pageYOffset > scrollThreshold ||
-                    document.documentElement.scrollTop > scrollThreshold) {
-                    scrollBtn.style.display = 'flex';
-                } else {
-                    scrollBtn.style.display = 'none';
-                }
-            }
-
-            window.addEventListener('scroll', toggleScrollButton);
-
-            scrollBtn.addEventListener('click', function (e) {
-                e.preventDefault();
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
+                scrollBtn.on('click', function (e) {
+                    e.preventDefault();
+                    $('html, body').animate({ scrollTop: 0 }, 'smooth');
                 });
-                // Add slight animation to the icon
-                this.querySelector('i').style.transform = 'translateY(-4px)';
-                setTimeout(() => {
-                    this.querySelector('i').style.transform = '';
-                }, 300);
-            });
+            }
 
-            // Initialize on load
-            toggleScrollButton();
-        });
-
-
-        function loadVideo() {
-            const placeholder = document.querySelector('.video-placeholder');
-            const container = document.querySelector('.video-container');
-
-            // Create iframe
-            const iframe = document.createElement('iframe');
-            iframe.setAttribute('src', 'https://www.youtube.com/embed/CgLJFg_9enI?autoplay=1&rel=0&showinfo=0');
-            iframe.setAttribute('frameborder', '0');
-            iframe.setAttribute('allowfullscreen', '');
-            iframe.setAttribute('allow', 'autoplay');
-
-            // Remove placeholder and add iframe
-            container.removeChild(placeholder);
-            container.appendChild(iframe);
-        }
-
-        // Optional: Load video when scrolled into view
-        document.addEventListener('DOMContentLoaded', function () {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        // You could auto-load the video here if desired
-                        // loadVideo();
-                        observer.unobserve(entry.target);
-                    }
+            // --- 4. OWL CAROUSEL AND OTHER PLUGINS ---
+            if ($('.specialities-carousel').length) {
+                $('.specialities-carousel').owlCarousel({ loop: true, margin: 30, autoplay: true, autoplayTimeout: 2500, nav: true, responsive: { 0: { items: 1 }, 600: { items: 2 }, 1000: { items: 3 }, 1300: { items: 4 } } });
+            }
+            if ($('.doctors-carousel').length) {
+                $('.doctors-carousel').owlCarousel({ loop: true, margin: 40, autoplay: true, autoplayTimeout: 3500, nav: true, responsive: { 0: { items: 1 }, 600: { items: 2 }, 1000: { items: 4 } } });
+            }
+            if ($('.feedback-carousel').length) {
+                $('.feedback-carousel').owlCarousel({ loop: true, margin: 30, autoplay: true, autoplayTimeout: 4000, nav: true, dots: true, responsive: { 0: { items: 1 }, 1000: { items: 2 } } });
+            }
+            if ($('[data-vbg]').length) {
+                $('[data-vbg]').youtube_background({ 'play-button': true });
+            }
+            $(window).on('resize', () => {
+                $('[data-img-mob]').each(function () {
+                    $(this).attr('src', $(document).width() < 993 ? $(this).data('img-mob') : $(this).data('img-desk'));
                 });
-            }, { threshold: 0.5 });
-
-            observer.observe(document.querySelector('.video-section'));
+            }).trigger('resize');
         });
 
-
-        document.addEventListener("DOMContentLoaded", function () {
-            const videoSection = document.querySelector(".custom-video-section");
-            const sidebar = document.querySelector(".left-sidebar");
-
-            if (!videoSection || !sidebar) return;
-
-            document.addEventListener("scroll", function () {
-                const rect = videoSection.getBoundingClientRect();
-
-                // Check if the section fully covers the viewport
-                const fullyInView = rect.top <= 0 && rect.bottom >= window.innerHeight;
-
-                if (fullyInView) {
-                    sidebar.classList.add("hidden");  // hide ONLY inside video section
-                } else {
-                    sidebar.classList.remove("hidden"); // show everywhere else
-                }
-            });
-        });
+        // Standalone Functions and Modal Logic
         function showChromePopup() {
             const popup = document.getElementById("chrome-popup");
-            popup.classList.add("is-visible");
-            popup.setAttribute("aria-hidden", "false");
+            if (popup) popup.classList.add("is-visible");
         }
         function hideChromePopup() {
             const popup = document.getElementById("chrome-popup");
-            popup.classList.remove("is-visible");
-            popup.setAttribute("aria-hidden", "true");
+            if (popup) popup.classList.remove("is-visible");
         }
-        // ESC closes popup
         document.addEventListener("keydown", e => {
             if (e.key === "Escape") hideChromePopup();
         });
-        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
-        const mobileNav = document.getElementById('mobile-nav');
 
-        mobileMenuToggle.addEventListener('click', function () {
-            mobileNav.classList.toggle('active'); // toggles visibility only when clicked
-        });
-    });
-
-</script>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        if (window.innerWidth <= 768) { // only mobile
-            const sidebar = document.querySelector('.left-sidebar');
-
-            // Create toggle line
-            const toggleLine = document.createElement('div');
-            toggleLine.classList.add('toggle-line');
-            toggleLine.style.width = '4px';
-            toggleLine.style.height = '50px';
-            toggleLine.style.background = 'linear-gradient(to bottom, #16979D, #103A60)';
-            toggleLine.style.borderRadius = '2px';
-            toggleLine.style.cursor = 'pointer';
-            toggleLine.style.marginBottom = '10px';
-            toggleLine.style.transition = 'transform 0.3s ease';
-
-            sidebar.prepend(toggleLine);
-
-            // Click to toggle icons
-            toggleLine.addEventListener('click', function () {
-                sidebar.classList.toggle('active');
-            });
-
-            // Initially hide icons
-            sidebar.querySelectorAll('.icon-link').forEach(icon => {
-                icon.style.opacity = 0;
-                icon.style.transform = 'translateX(-20px)';
-                icon.style.transition = 'all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1)';
-            });
-        }
-    });
-</script>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const sidebar = document.querySelector('.left-sidebar');
-
-        // Create toggle line only once
-        if (sidebar && !sidebar.querySelector('.toggle-line')) {
-            const toggleLine = document.createElement('div');
-            toggleLine.classList.add('toggle-line');
-
-            // Add toggle line at top
-            sidebar.prepend(toggleLine);
-
-            // Hide icons initially on mobile
-            if (window.innerWidth <= 768) {
-                sidebar.querySelectorAll('.icon-link').forEach(icon => {
-                    icon.style.opacity = 0;
-                    icon.style.transform = 'translateX(-20px)';
+        document.addEventListener('DOMContentLoaded', () => {
+            const reviewModal = document.getElementById('review-modal');
+            if (reviewModal) {
+                document.querySelectorAll('.write-review-btn').forEach(btn => {
+                    btn.addEventListener('click', e => {
+                        e.preventDefault();
+                        reviewModal.style.display = 'flex';
+                    });
+                });
+                reviewModal.querySelector('.close-button').addEventListener('click', () => {
+                    reviewModal.style.display = 'none';
+                });
+                window.addEventListener('click', e => {
+                    if (e.target === reviewModal) reviewModal.style.display = 'none';
+                });
+                reviewModal.querySelector('#review-form').addEventListener('submit', async e => {
+                    e.preventDefault();
+                    // Form submission logic would go here
+                    alert('Message submitted!');
+                    reviewModal.style.display = 'none';
                 });
             }
-
-            // Click to toggle icons
-            toggleLine.addEventListener('click', function () {
-                sidebar.classList.toggle('active');
-            });
-        }
-    });
-</script>
-
-<a href="#" id="scrollToTopBtn" class="scroll-to-top-btn" title="Scroll to top" aria-label="Scroll to top">
-    <i class="fa fa-arrow-up"></i> <!-- Simple up arrow -->
-</a>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        window.scrollTo(0, 0);
-    });
-</script>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        window.scrollTo(0, 0);
-    });
-</script>
-
-<script>
-    // Add this JavaScript to handle the scroll behavior
-    document.addEventListener("DOMContentLoaded", function () {
-        const navbar = document.querySelector('.nav-container');
-        let lastScrollTop = 0;
-        const scrollThreshold = 100; // Adjust this value as needed
-
-        window.addEventListener('scroll', function () {
-            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-            if (scrollTop > lastScrollTop && scrollTop > scrollThreshold) {
-                // Scrolling down
-                navbar.classList.remove('hide');
-            } else if (scrollTop < lastScrollTop) {
-                // Scrolling up
-                navbar.classList.add('hide');
-            }
-
-            lastScrollTop = scrollTop;
         });
-    });
-</script>
+    </script>
 </body>
 
 </html>

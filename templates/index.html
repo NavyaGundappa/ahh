@@ -39,8 +39,6 @@
 {% endblock %}
 
 {% block content %}
-
-<script src="https://fyndbetter.com/chatbot/aarogya_chatbot"></script>
 <section class="hero-section">
     <div class="banner-container">
         <div class="banner">
@@ -713,6 +711,11 @@
     </div>
 </section>
 
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="static/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="static/js/script.js"></script>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
 
@@ -838,6 +841,31 @@
 
         // Also check immediately in case the section is already in view
         checkCounters();
+    });
+    document.addEventListener("DOMContentLoaded", function () {
+        window.scrollTo(0, 0);
+    });
+</script>
+<script>
+    // Add this JavaScript to handle the scroll behavior
+    document.addEventListener("DOMContentLoaded", function () {
+        const navbar = document.querySelector('.nav-container');
+        let lastScrollTop = 0;
+        const scrollThreshold = 100; // Adjust this value as needed
+
+        window.addEventListener('scroll', function () {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+            if (scrollTop > lastScrollTop && scrollTop > scrollThreshold) {
+                // Scrolling down
+                navbar.classList.remove('hide');
+            } else if (scrollTop < lastScrollTop) {
+                // Scrolling up
+                navbar.classList.add('hide');
+            }
+
+            lastScrollTop = scrollTop;
+        });
     });
 </script>
 
