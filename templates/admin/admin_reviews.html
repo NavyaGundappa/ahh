@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Admin - Review Messages</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+        }
+
+        .btn {
+            padding: 8px 12px;
+            background: #333;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+
+        .btn:hover {
+            background: #555;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 10px;
+        }
+
+        th {
+            background: #333;
+            color: #fff;
+        }
+
+        tr:nth-child(even) {
+            background: #f2f2f2;
+        }
+
+        .search-box {
+            padding: 6px;
+            width: 250px;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Submitted Messages</h2>
+
+    <div class="top-bar">
+        <div>
+            <a href="/admin" class="btn">⬅ Back to Dashboard</a>
+        </div>
+        <div>
+            <input type="text" id="searchInput" class="search-box" placeholder="Search messages...">
+            <a href="/admin/reviews/export" class="btn">⬇ Download Excel</a>
+        </div>
+    </div>
+
+    <table id="reviewsTable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Date</th>
+                <th>Name</th>
+                <th>Mobile</th>
+                <th>Email</th>
+                <th>Message</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for r in reviews %}
+            <tr>
+                <td>{{ r.id }}</td>
+                <td>{{ r.created_at.strftime("%Y-%m-%d %H:%M") }}</td>
+                <td>{{ r.name }}</td>
+                <td>{{ r.mobile_number }}</td>
+                <td>{{ r.email }}</td>
+                <td>{{ r.message }}</td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="6">No messages yet.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <script>
+        // Simple search filter
+        document.getElementById('searchInput').addEventListener('keyup', function () {
+            const filter = this.value.toLowerCase();
+            const rows = document.querySelectorAll("#reviewsTable tbody tr");
+            rows.forEach(row => {
+                const text = row.innerText.toLowerCase();
+                row.style.display = text.includes(filter) ? "" : "none";
+            });
+        });
+    </script>
+</body>
+
+</html>

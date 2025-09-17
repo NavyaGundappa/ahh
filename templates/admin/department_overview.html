@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Department Overview Management</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="container-fluid py-4">
+        <!-- Department Overviews Section -->
+        <div class="card">
+            <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                <h3 class="mb-0">Department Overviews</h3>
+                <div class="d-flex gap-2">
+                    <a href="{{ url_for('admin_dashboard') }}" class="btn btn-secondary">
+                        Back to Dashboard
+                    </a>
+                    <button class="btn btn-light" data-bs-toggle="modal" data-bs-target="#overviewModal">
+                        <i class="fas fa-plus me-1"></i> Add New Overview
+                    </button>
+                </div>
+            </div>
+            <div class="card-body">
+                <!-- Search Box -->
+                <div class="mb-3">
+                    <input type="text" id="searchInput" class="form-control"
+                        placeholder="Search Department, Content, or Quote...">
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover" id="overviewTable">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Department</th>
+                                <th>Content Preview</th>
+                                <th>Quote</th>
+                                <th>Last Updated</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for overview in overviews %}
+                            <tr>
+                                <td>{{ overview.id }}</td>
+                                <td>
+                                    {% for department in departments %}
+                                    {% if department.id == overview.department_id %}
+                                    {{ department.name }}
+                                    {% endif %}
+                                    {% endfor %}
+                                </td>
+                                <td>{{ overview.content[:50] }}{% if overview.content|length > 50 %}...{% endif %}</td>
+                                <td>{{ overview.quote[:30] }}{% if overview.quote|length > 30 %}...{% endif %}</td>
+                                <td>{{ overview.updated_at.strftime('%Y-%m-%d %H:%M') }}</td>
+                                <td>
+                                    <button class="btn btn-sm btn-warning edit-overview" data-id="{{ overview.id }}"
+                                        data-content="{{ overview.content }}" data-quote="{{ overview.quote }}"
+                                        data-quote-author="{{ overview.quote_author }}"
+                                        data-department-id="{{ overview.department_id }}">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <form action="{{ url_for('delete_overview', id=overview.id) }}" method="POST"
+                                        style="display: inline;">
+                                        <button type="submit" class="btn btn-sm btn-danger"
+                                            onclick="return confirm('Are you sure you want to delete this overview?')">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Overview Modal -->
+        <div class="modal fade" id="overviewModal" tabindex="-1" aria-labelledby="overviewModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <form method="POST" action="{{ url_for('admin_department_overview') }}">
+                        <input type="hidden" name="overview_id" id="overviewId" value="">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="overviewModalLabel">Add Department Overview</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label for="department_id" class="form-label">Department</label>
+                                <select class="form-select" id="department_id" name="department_id" required>
+                                    <option value="">Select Department</option>
+                                    {% for department in departments %}
+                                    <option value="{{ department.id }}">{{ department.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="content" class="form-label">Content</label>
+                                <textarea class="form-control" id="content" name="content" rows="5" required></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="quote" class="form-label">Quote (Optional)</label>
+                                <textarea class="form-control" id="quote" name="quote" rows="3"></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="quote_author" class="form-label">Quote Author (Optional)</label>
+                                <input type="text" class="form-control" id="quote_author" name="quote_author">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save Overview</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Overview form handling
+        document.querySelectorAll('.edit-overview').forEach(button => {
+            button.addEventListener('click', function () {
+                const overviewId = this.getAttribute('data-id');
+                const content = this.getAttribute('data-content');
+                const quote = this.getAttribute('data-quote');
+                const quoteAuthor = this.getAttribute('data-quote-author');
+                const departmentId = this.getAttribute('data-department-id');
+
+                document.getElementById('overviewId').value = overviewId;
+                document.getElementById('content').value = content;
+                document.getElementById('quote').value = quote;
+                document.getElementById('quote_author').value = quoteAuthor;
+                document.getElementById('department_id').value = departmentId;
+
+                document.getElementById('overviewModalLabel').textContent = 'Edit Department Overview';
+
+                const overviewModal = new bootstrap.Modal(document.getElementById('overviewModal'));
+                overviewModal.show();
+            });
+        });
+
+        // Reset form when modal is closed
+        document.getElementById('overviewModal').addEventListener('hidden.bs.modal', function () {
+            document.getElementById('overviewId').value = '';
+            document.getElementById('overviewModalLabel').textContent = 'Add Department Overview';
+        });
+
+        // Search functionality
+        document.getElementById('searchInput').addEventListener('keyup', function () {
+            const filter = this.value.toLowerCase();
+            const rows = document.querySelectorAll('#overviewTable tbody tr');
+            rows.forEach(row => {
+                const department = row.cells[1].textContent.toLowerCase();
+                const content = row.cells[2].textContent.toLowerCase();
+                const quote = row.cells[3].textContent.toLowerCase();
+                if (department.includes(filter) || content.includes(filter) || quote.includes(filter)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

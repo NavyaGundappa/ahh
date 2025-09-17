@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Manage Doctors</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body class="container py-4">
+    <h2 class="mb-4">Manage Doctors</h2>
+    <div class="d-flex justify-content-end mb-3">
+        <a href="{{ url_for('admin_dashboard') }}" class="btn btn-secondary">
+            Back to Dashboard
+        </a>
+    </div>
+
+    <!-- Add Doctor Form -->
+    <form method="POST" enctype="multipart/form-data" class="mb-4 p-3 border rounded">
+        <h4 class="mb-3">Add New Doctor</h4>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Doctor Name *</label>
+                <input type="text" name="name" class="form-control" required>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Specialization *</label>
+                <input type="text" name="specialization" class="form-control" required>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Department *</label>
+                <select name="department_slug" class="form-select" required>
+                    <option value="">Select Department</option>
+                    {% for dept in departments %}
+                    <option value="{{ dept.slug }}">{{ dept.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Designation</label>
+                <input type="text" name="designation" class="form-control">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Experience</label>
+                <input type="text" name="experience" class="form-control">
+            </div>
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Languages</label>
+                <input type="text" name="languages" class="form-control">
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Bio</label>
+            <textarea name="bio" class="form-control" rows="2"></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Qualification</label>
+            <input type="text" name="qualification" class="form-control">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Overview</label>
+            <textarea name="overview" class="form-control" rows="2"></textarea>
+        </div>
+
+        <!-- Fellowship & Membership Section -->
+        <div class="mb-3 p-3 border rounded">
+            <h5>Fellowship / Membership</h5>
+            <div class="mb-3">
+                <label class="form-label">Details</label>
+                <textarea name="fellowship_membership" class="form-control" rows="2"></textarea>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Links (one per line)</label>
+                <textarea name="fellowship_links" class="form-control" rows="2"
+                    placeholder="https://example.com/link1&#10;https://example.com/link2"></textarea>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Upload File</label>
+                <input type="file" name="fellowship_file" class="form-control" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png">
+                <small class="form-text text-muted">Accepted formats: PDF, DOC, DOCX, JPG, PNG</small>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Field of Expertise</label>
+            <textarea name="field_of_expertise" class="form-control" rows="2"></textarea>
+        </div>
+
+        <!-- Talks & Publications Section -->
+        <div class="mb-3 p-3 border rounded">
+            <h5>Talks & Publications</h5>
+            <div class="mb-3">
+                <label class="form-label">Details</label>
+                <textarea name="talks_and_publications" class="form-control" rows="2"></textarea>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Links (one per line)</label>
+                <textarea name="talks_links" class="form-control" rows="2"
+                    placeholder="https://example.com/link1&#10;https://example.com/link2"></textarea>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Upload File</label>
+                <input type="file" name="talks_file" class="form-control" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png">
+                <small class="form-text text-muted">Accepted formats: PDF, DOC, DOCX, JPG, PNG</small>
+            </div>
+        </div>
+
+        <!-- Timings Section -->
+        <!-- Timings Section -->
+        <!-- Timings Section -->
+        <div class="mb-3 p-3 border rounded">
+            <h5>Doctor Availability</h5>
+            <div id="timingsContainer">
+                <div class="timing-entry border p-3 mb-2 rounded" data-index="0">
+                    <!-- Days Selection -->
+                    <label class="form-label d-block">Select Days *</label>
+                    <div class="d-flex flex-wrap mb-2 days-container">
+                        <div class="form-check me-2">
+                            <input class="form-check-input" type="checkbox" name="days[0][]" value="MON" id="mon0">
+                            <label class="form-check-label" for="mon0">Mon</label>
+                        </div>
+                        <div class="form-check me-2">
+                            <input class="form-check-input" type="checkbox" name="days[0][]" value="TUE" id="tue0">
+                            <label class="form-check-label" for="tue0">Tue</label>
+                        </div>
+                        <div class="form-check me-2">
+                            <input class="form-check-input" type="checkbox" name="days[0][]" value="WED" id="wed0">
+                            <label class="form-check-label" for="wed0">Wed</label>
+                        </div>
+                        <div class="form-check me-2">
+                            <input class="form-check-input" type="checkbox" name="days[0][]" value="THU" id="thu0">
+                            <label class="form-check-label" for="thu0">Thu</label>
+                        </div>
+                        <div class="form-check me-2">
+                            <input class="form-check-input" type="checkbox" name="days[0][]" value="FRI" id="fri0">
+                            <label class="form-check-label" for="fri0">Fri</label>
+                        </div>
+                        <div class="form-check me-2">
+                            <input class="form-check-input" type="checkbox" name="days[0][]" value="SAT" id="sat0">
+                            <label class="form-check-label" for="sat0">Sat</label>
+                        </div>
+                        <div class="form-check me-2">
+                            <input class="form-check-input" type="checkbox" name="days[0][]" value="SUN" id="sun0">
+                            <label class="form-check-label" for="sun0">Sun</label>
+                        </div>
+                    </div>
+
+                    <div class="row mb-2 time-container">
+                        <div class="col-md-6">
+                            <label class="form-label">From</label>
+                            <div class="input-group">
+                                <input type="time" name="time_from[]" class="form-control">
+                                <select name="time_from_period[]" class="form-select" style="max-width:90px">
+                                    <option value="AM">AM</option>
+                                    <option value="PM">PM</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">To</label>
+                            <div class="input-group">
+                                <input type="time" name="time_to[]" class="form-control">
+                                <select name="time_to_period[]" class="form-select" style="max-width:90px">
+                                    <option value="AM">AM</option>
+                                    <option value="PM">PM</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button type="button" class="btn btn-outline-primary btn-sm" id="addTimingBtn">+ Add More</button>
+        </div>
+
+        <script>
+            let timingIndex = 1; // Start from 1 because 0 already exists
+
+            document.getElementById("addTimingBtn").addEventListener("click", function () {
+                const container = document.getElementById("timingsContainer");
+                const newEntry = document.querySelector(".timing-entry").cloneNode(true);
+
+                // Update data-index
+                newEntry.setAttribute("data-index", timingIndex);
+
+                // Update all input/select names and ids for the new index
+                newEntry.querySelectorAll("input, select, label").forEach(el => {
+                    if (el.tagName === "INPUT") {
+                        el.value = "";
+                        if (el.type === "checkbox") {
+                            const oldValue = el.value;
+                            el.name = `days[${timingIndex}][]`;
+                            el.id = oldValue.toLowerCase() + timingIndex;
+                        }
+                    }
+                    if (el.tagName === "SELECT") el.value = "AM";
+                    if (el.tagName === "LABEL") {
+                        const htmlFor = el.getAttribute("for");
+                        if (htmlFor) {
+                            const day = htmlFor.replace(/\d+$/, "");
+                            el.setAttribute("for", day + timingIndex);
+                        }
+                    }
+                });
+
+                container.appendChild(newEntry);
+                timingIndex++;
+            });
+        </script>
+
+
+
+
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Appointment Link</label>
+            <input type="url" name="appointment_link" class="form-control"
+                placeholder="https://example.com/appointment">
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label class="form-label">Slug (optional)</label>
+                <input type="text" name="slug" class="form-control">
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Doctor Image</label>
+                <input type="file" name="image" class="form-control" accept="image/*">
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-success">Add Doctor</button>
+    </form>
+
+    <div class="mb-3">
+        <input type="text" id="doctorSearch" class="form-control" placeholder="Search doctors by name...">
+    </div>
+
+    <!-- Existing Doctors Table -->
+    <h3 class="mt-5">Existing Doctors</h3>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Specialization</th>
+                    <th>Department</th>
+                    <th>Image</th>
+                    <th>Files</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for doctor in doctors %}
+                <tr>
+                    <td>{{ doctor.name }}</td>
+                    <td>{{ doctor.specialization }}</td>
+                    <td>{{ doctor.department_slug }}</td>
+                    <td>
+                        {% if doctor.image_path %}
+                        <img src="{{ url_for('static', filename=doctor.image_path) }}" alt="{{ doctor.name }}"
+                            width="80" height="80" style="object-fit: cover;">
+                        {% else %}
+                        <span class="text-muted">No image</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if doctor.fellowship_file_path %}
+                        <a href="{{ url_for('static', filename=doctor.fellowship_file_path) }}" target="_blank"
+                            class="btn btn-sm btn-info mb-1">
+                            Fellowship File
+                        </a><br>
+                        {% endif %}
+                        {% if doctor.talks_file_path %}
+                        <a href="{{ url_for('static', filename=doctor.talks_file_path) }}" target="_blank"
+                            class="btn btn-sm btn-info">
+                            Talks File
+                        </a>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-sm btn-primary editDoctorBtn" data-id="{{ doctor.id }}"
+                            data-name="{{ doctor.name }}" data-specialization="{{ doctor.specialization }}"
+                            data-department="{{ doctor.department_slug }}" data-designation="{{ doctor.designation }}"
+                            data-experience="{{ doctor.experience }}" data-languages="{{ doctor.languages }}"
+                            data-bio="{{ doctor.bio }}" data-qualification="{{ doctor.qualification }}"
+                            data-overview="{{ doctor.overview }}"
+                            data-fellowship_membership="{{ doctor.fellowship_membership }}"
+                            data-fellowship_links="{{ doctor.fellowship_links }}"
+                            data-fellowship_file="{{ doctor.fellowship_file_path }}"
+                            data-field_of_expertise="{{ doctor.field_of_expertise }}"
+                            data-talks_and_publications="{{ doctor.talks_and_publications }}"
+                            data-talks_links="{{ doctor.talks_links }}" data-talks_file="{{ doctor.talks_file_path }}"
+                            data-slug="{{ doctor.slug }}" data-image="{{ doctor.image_path }}"
+                            data-appointment_link="{{ doctor.appointment_link }}" data-day_from="{{ doctor.day_from }}"
+                            data-day_to="{{ doctor.day_to }}" data-time_from_hour="{{ doctor.time_from_hour }}"
+                            data-time_from_min="{{ doctor.time_from_min }}"
+                            data-time_from_ampm="{{ doctor.time_from_ampm }}"
+                            data-time_to_hour="{{ doctor.time_to_hour }}" data-time_to_min="{{ doctor.time_to_min }}"
+                            data-time_to_ampm="{{ doctor.time_to_ampm }}">
+                            Edit
+                        </button>
+                        <form method="POST" action="{{ url_for('delete_doctor', doctor_id=doctor.id) }}"
+                            style="display:inline;"
+                            onsubmit="return confirm('Are you sure you want to delete this doctor?');">
+                            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="6" class="text-center">No doctors found. Add your first doctor above.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Edit Doctor Modal -->
+    <div class="modal fade" id="doctorModal" tabindex="-1" aria-labelledby="doctorModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <form method="POST" enctype="multipart/form-data" id="doctorForm">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="doctorModalLabel">Edit Doctor</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body" style="max-height:70vh; overflow-y:auto;">
+                        <input type="hidden" name="doctor_id" id="doctor_id">
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Doctor Name *</label>
+                                <input type="text" name="name" class="form-control" id="doctor_name" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Specialization *</label>
+                                <input type="text" name="specialization" class="form-control" id="doctor_specialization"
+                                    required>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Department *</label>
+                                <select name="department_slug" class="form-select" id="doctor_department" required>
+                                    <option value="">Select Department</option>
+                                    {% for dept in departments %}
+                                    <option value="{{ dept.slug }}">{{ dept.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Designation</label>
+                                <input type="text" name="designation" class="form-control" id="doctor_designation">
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Experience</label>
+                                <input type="text" name="experience" class="form-control" id="doctor_experience">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Languages</label>
+                                <input type="text" name="languages" class="form-control" id="doctor_languages">
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Bio</label>
+                            <textarea name="bio" class="form-control" rows="2" id="doctor_bio"></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Qualification</label>
+                            <input type="text" name="qualification" class="form-control" id="doctor_qualification">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Overview</label>
+                            <textarea name="overview" class="form-control" rows="2" id="doctor_overview"></textarea>
+                        </div>
+
+                        <!-- Fellowship & Membership Section -->
+                        <div class="mb-3 p-3 border rounded">
+                            <h5>Fellowship / Membership</h5>
+                            <div class="mb-3">
+                                <label class="form-label">Details</label>
+                                <textarea name="fellowship_membership" class="form-control" rows="2"
+                                    id="doctor_fellowship_membership"></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Links (one per line)</label>
+                                <textarea name="fellowship_links" class="form-control" rows="2"
+                                    id="doctor_fellowship_links"
+                                    placeholder="https://example.com/link1&#10;https://example.com/link2"></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Upload File</label>
+                                <input type="file" name="fellowship_file" class="form-control"
+                                    accept=".pdf,.doc,.docx,.jpg,.jpeg,.png">
+                                <div id="currentFellowshipFile" class="mt-2"></div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Field of Expertise</label>
+                            <textarea name="field_of_expertise" class="form-control" rows="2"
+                                id="doctor_field_of_expertise"></textarea>
+                        </div>
+
+                        <!-- Talks & Publications Section -->
+                        <div class="mb-3 p-3 border rounded">
+                            <h5>Talks & Publications</h5>
+                            <div class="mb-3">
+                                <label class="form-label">Details</label>
+                                <textarea name="talks_and_publications" class="form-control" rows="2"
+                                    id="doctor_talks_and_publications"></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Links (one per line)</label>
+                                <textarea name="talks_links" class="form-control" rows="2" id="doctor_talks_links"
+                                    placeholder="https://example.com/link1&#10;https://example.com/link2"></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Upload File</label>
+                                <input type="file" name="talks_file" class="form-control"
+                                    accept=".pdf,.doc,.docx,.jpg,.jpeg,.png">
+                                <div id="currentTalksFile" class="mt-2"></div>
+                            </div>
+                        </div>
+
+                        <!-- Timings -->
+                        <!-- Timings -->
+                        <!-- Timings Section in Modal -->
+                        <div class="mb-3 p-3 border rounded">
+                            <h5>Doctor Availability</h5>
+                            <div id="modalTimingsContainer">
+                                <div class="timing-entry border p-3 mb-2 rounded" data-index="0">
+                                    <!-- Days Selection -->
+                                    <label class="form-label d-block">Select Days *</label>
+                                    <div class="d-flex flex-wrap mb-2 days-container">
+                                        <div class="form-check me-2">
+                                            <input class="form-check-input" type="checkbox" name="days[0][]" value="MON"
+                                                id="modal_mon0">
+                                            <label class="form-check-label" for="modal_mon0">Mon</label>
+                                        </div>
+                                        <div class="form-check me-2">
+                                            <input class="form-check-input" type="checkbox" name="days[0][]" value="TUE"
+                                                id="modal_tue0">
+                                            <label class="form-check-label" for="modal_tue0">Tue</label>
+                                        </div>
+                                        <div class="form-check me-2">
+                                            <input class="form-check-input" type="checkbox" name="days[0][]" value="WED"
+                                                id="modal_wed0">
+                                            <label class="form-check-label" for="modal_wed0">Wed</label>
+                                        </div>
+                                        <div class="form-check me-2">
+                                            <input class="form-check-input" type="checkbox" name="days[0][]" value="THU"
+                                                id="modal_thu0">
+                                            <label class="form-check-label" for="modal_thu0">Thu</label>
+                                        </div>
+                                        <div class="form-check me-2">
+                                            <input class="form-check-input" type="checkbox" name="days[0][]" value="FRI"
+                                                id="modal_fri0">
+                                            <label class="form-check-label" for="modal_fri0">Fri</label>
+                                        </div>
+                                        <div class="form-check me-2">
+                                            <input class="form-check-input" type="checkbox" name="days[0][]" value="SAT"
+                                                id="modal_sat0">
+                                            <label class="form-check-label" for="modal_sat0">Sat</label>
+                                        </div>
+                                        <div class="form-check me-2">
+                                            <input class="form-check-input" type="checkbox" name="days[0][]" value="SUN"
+                                                id="modal_sun0">
+                                            <label class="form-check-label" for="modal_sun0">Sun</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-2 time-container">
+                                        <div class="col-md-6">
+                                            <label class="form-label">From</label>
+                                            <div class="input-group">
+                                                <input type="time" name="time_from[]" class="form-control">
+                                                <select name="time_from_period[]" class="form-select"
+                                                    style="max-width:90px">
+                                                    <option value="AM">AM</option>
+                                                    <option value="PM">PM</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">To</label>
+                                            <div class="input-group">
+                                                <input type="time" name="time_to[]" class="form-control">
+                                                <select name="time_to_period[]" class="form-select"
+                                                    style="max-width:90px">
+                                                    <option value="AM">AM</option>
+                                                    <option value="PM">PM</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button type="button" class="btn btn-outline-primary btn-sm" id="modalAddTimingBtn">+ Add
+                                More</button>
+                        </div>
+                        // Attach modal "Add More" button
+                        <script>
+                            document.getElementById("modalAddTimingBtn").addEventListener("click", function () {
+                                addTimingEntry("modalTimingsContainer", true);
+                            });</script>
+
+
+
+
+                        <div class="mb-3">
+                            <label class="form-label">Appointment Link</label>
+                            <input type="url" name="appointment_link" class="form-control" id="doctor_appointment_link">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Slug</label>
+                            <input type="text" name="slug" class="form-control" id="doctor_slug">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Doctor Image</label>
+                            <input type="file" name="image" class="form-control" accept="image/*">
+                            <div id="currentImagePreview" class="mt-2"></div>
+                        </div>
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const editButtons = document.querySelectorAll('.editDoctorBtn');
+        const doctorModal = new bootstrap.Modal(document.getElementById('doctorModal'));
+
+        editButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.getElementById('doctorForm').action = `/admin/doctors/edit/${btn.dataset.id}`;
+                document.getElementById('doctor_id').value = btn.dataset.id;
+                document.getElementById('doctor_name').value = btn.dataset.name;
+                document.getElementById('doctor_specialization').value = btn.dataset.specialization;
+                document.getElementById('doctor_department').value = btn.dataset.department || '';
+                document.getElementById('doctor_designation').value = btn.dataset.designation || '';
+                document.getElementById('doctor_experience').value = btn.dataset.experience || '';
+                document.getElementById('doctor_languages').value = btn.dataset.languages || '';
+                document.getElementById('doctor_bio').value = btn.dataset.bio || '';
+                document.getElementById('doctor_qualification').value = btn.dataset.qualification || '';
+                document.getElementById('doctor_overview').value = btn.dataset.overview || '';
+                document.getElementById('doctor_fellowship_membership').value = btn.dataset.fellowship_membership || '';
+                document.getElementById('doctor_fellowship_links').value = btn.dataset.fellowship_links || '';
+                document.getElementById('doctor_field_of_expertise').value = btn.dataset.field_of_expertise || '';
+                document.getElementById('doctor_talks_and_publications').value = btn.dataset.talks_and_publications || '';
+                document.getElementById('doctor_talks_links').value = btn.dataset.talks_links || '';
+                document.getElementById('doctor_slug').value = btn.dataset.slug || '';
+                document.getElementById('doctor_appointment_link').value = btn.dataset.appointment_link || '';
+
+                // Timings
+                // Clear all checkboxes first
+                document.querySelectorAll('#doctorModal input[type="checkbox"]').forEach(cb => cb.checked = false);
+
+                // Fill days
+                if (btn.dataset.days) {
+                    const days = btn.dataset.days.split(',');
+                    days.forEach(day => {
+                        const checkbox = document.querySelector(`#doctorModal input[value="${day}"]`);
+                        if (checkbox) checkbox.checked = true;
+                    });
+                }
+
+                // Fill time from
+                if (btn.dataset.time_from) {
+                    document.querySelector('#doctorModal input[name="time_from[]"]').value = btn.dataset.time_from;
+                }
+                if (btn.dataset.time_from_ampm) {
+                    document.querySelector('#doctorModal select[name="time_from_period[]"]').value = btn.dataset.time_from_ampm;
+                }
+
+                // Fill time to
+                if (btn.dataset.time_to) {
+                    document.querySelector('#doctorModal input[name="time_to[]"]').value = btn.dataset.time_to;
+                }
+                if (btn.dataset.time_to_ampm) {
+                    document.querySelector('#doctorModal select[name="time_to_period[]"]').value = btn.dataset.time_to_ampm;
+                }
+
+
+                // Image preview
+                const preview = document.getElementById('currentImagePreview');
+                if (btn.dataset.image) {
+                    preview.innerHTML = `<img src="/static/${btn.dataset.image}" width="100" height="100" style="object-fit: cover;">`;
+                } else {
+                    preview.innerHTML = '';
+                }
+
+                // Fellowship file preview
+                const fellowshipPreview = document.getElementById('currentFellowshipFile');
+                if (btn.dataset.fellowship_file) {
+                    fellowshipPreview.innerHTML = `
+                        <p>Current file: <a href="/static/${btn.dataset.fellowship_file}" target="_blank">View File</a></p>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="remove_fellowship_file" id="remove_fellowship_file">
+                            <label class="form-check-label" for="remove_fellowship_file">Remove current file</label>
+                        </div>
+                    `;
+                } else {
+                    fellowshipPreview.innerHTML = '';
+                }
+
+                // Talks file preview
+                const talksPreview = document.getElementById('currentTalksFile');
+                if (btn.dataset.talks_file) {
+                    talksPreview.innerHTML = `
+                        <p>Current file: <a href="/static/${btn.dataset.talks_file}" target="_blank">View File</a></p>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="remove_talks_file" id="remove_talks_file">
+                            <label class="form-check-label" for="remove_talks_file">Remove current file</label>
+                        </div>
+                    `;
+                } else {
+                    talksPreview.innerHTML = '';
+                }
+
+                doctorModal.show();
+            });
+        });
+
+        const doctorSearchInput = document.getElementById('doctorSearch');
+        const doctorsTable = document.querySelector('table tbody');
+        const doctorsRows = doctorsTable.getElementsByTagName('tr');
+
+        doctorSearchInput.addEventListener('keyup', function () {
+            const filter = this.value.toLowerCase();
+            for (let i = 0; i < doctorsRows.length; i++) {
+                const nameCell = doctorsRows[i].getElementsByTagName('td')[0];
+                if (nameCell) {
+                    const nameText = nameCell.textContent || nameCell.innerText;
+                    if (nameText.toLowerCase().indexOf(filter) > -1) {
+                        doctorsRows[i].style.display = "";
+                    } else {
+                        doctorsRows[i].style.display = "none";
+                    }
+                }
+            }
+        });
+    </script>
+    <script>
+        // Function to add timing entries (for both form and modal)
+
+
+
+        // Add timing functionality for modal
+        function addTimingEntry(containerId, isModal = false) {
+            const container = document.getElementById(containerId);
+            const firstEntry = container.querySelector(".timing-entry");
+            const newEntry = firstEntry.cloneNode(true);
+
+            // Calculate new index
+            const existingEntries = container.querySelectorAll(".timing-entry");
+            const newIndex = existingEntries.length;
+
+            newEntry.setAttribute("data-index", newIndex);
+
+            // Reset values and update names/ids
+            newEntry.querySelectorAll("input, select, label").forEach(el => {
+                if (el.tagName === "INPUT") {
+                    if (el.type === "checkbox") {
+                        const oldValue = el.value;
+                        el.name = `days[${newIndex}][]`;
+                        el.id = (isModal ? "modal_" : "") + oldValue.toLowerCase() + newIndex;
+                        el.checked = false;
+                    } else if (el.type === "time") {
+                        el.value = "";
+                    }
+                }
+                if (el.tagName === "SELECT") el.value = "AM";
+                if (el.tagName === "LABEL") {
+                    const htmlFor = el.getAttribute("for");
+                    if (htmlFor) {
+                        const prefix = isModal ? "modal_" : "";
+                        const day = htmlFor.replace(/(modal_)?[a-z]+\d+$/, "").replace(/\d+$/, "");
+                        el.setAttribute("for", prefix + day + newIndex);
+                    }
+                }
+            });
+
+            // Add remove button
+            const removeBtn = document.createElement("button");
+            removeBtn.type = "button";
+            removeBtn.className = "btn btn-sm btn-danger remove-timing ms-2";
+            removeBtn.innerHTML = "×";
+            removeBtn.onclick = function () {
+                newEntry.remove();
+            };
+
+            // Add header if it doesn't exist
+            let headerDiv = newEntry.querySelector(".d-flex.justify-content-between");
+            if (!headerDiv) {
+                const header = document.createElement("div");
+                header.className = "d-flex justify-content-between align-items-center mb-2";
+                header.innerHTML = `<h6 class="mb-0">Time Slot ${newIndex + 1}</h6>`;
+                header.appendChild(removeBtn);
+                newEntry.insertBefore(header, newEntry.firstChild);
+            } else {
+                headerDiv.appendChild(removeBtn);
+            }
+
+            container.appendChild(newEntry);
+        }
+
+        // Add remove functionality to existing entries when modal opens
+        document.getElementById('doctorModal').addEventListener('show.bs.modal', function () {
+            // Add remove buttons to existing modal entries
+            const modalEntries = document.querySelectorAll('#modalTimingsContainer .timing-entry');
+            modalEntries.forEach(entry => {
+                if (!entry.querySelector('.remove-timing')) {
+                    const removeBtn = document.createElement("button");
+                    removeBtn.type = "button";
+                    removeBtn.className = "btn btn-sm btn-danger remove-timing";
+                    removeBtn.innerHTML = "×";
+                    removeBtn.onclick = function () {
+                        entry.remove();
+                    };
+
+                    const headerDiv = entry.querySelector(".d-flex");
+                    if (headerDiv) {
+                        headerDiv.appendChild(removeBtn);
+                    } else {
+                        // Create header if it doesn't exist
+                        const index = entry.getAttribute("data-index");
+                        const header = document.createElement("div");
+                        header.className = "d-flex justify-content-between align-items-center mb-2";
+                        header.innerHTML = `<h6 class="mb-0">Time Slot ${parseInt(index) + 1}</h6>`;
+                        header.appendChild(removeBtn);
+                        entry.insertBefore(header, entry.firstChild);
+                    }
+                }
+            });
+        });
+
+        // Rest of your existing JavaScript code...
+
+        // ... keep the rest of your JavaScript code as is
+    </script>
+
+</body>
+
+</html>

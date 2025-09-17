@@ -1,0 +1,273 @@
+{% extends "base.html" %}
+
+{% block title %} Sports-Packages - Aarogya Hastha{% endblock %}
+
+{% block content %}
+
+<head>
+  <meta charset="utf-8">
+  <meta name="language" content="english">
+  <meta http-equiv="content-type" content="text/html">
+  <meta name="format-detection" content="telephone=yes" />
+  <meta name="HandheldFriendly" content="true" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="author" content="Smruthi Technologies Pvt Ltd">
+  <meta name="designer" content="Forest Creative Pvt Ltd">
+  <meta name="publisher" content="Smruthi Technologies Pvt Ltd">
+  <meta name="no-email-collection" content="http://www.unspam.com/noemailcollection/">
+  <link rel="icon" type="image/x-icon" href="/static/img/fav.png">
+  <meta name="robots" content="index,follow">
+  <meta name="revisit-after" content="7 days">
+  <meta name="distribution" content="web">
+  <meta name="robots" content="noodp">
+  <meta name="distribution" content="web">
+  <meta name="web_author" content="smruthi technologies pvt ltd">
+  <meta name="rating" content="general">
+  <meta name="rating" content="safe for kids">
+  <meta name="subject" content="Healthcare">
+  <meta name="copyright" content="Copyright © 2025">
+  <meta name="reply-to" content="info@aarogyahastha.com">
+  <meta name="abstract"
+    content="We provide timely and specialized medical attention for patients experiencing life-threatening conditions, ensuring their urgent needs are met with the highest level of care.">
+  <meta name="city" content="Bangalore">
+  <meta name="country" content="India">
+  <meta name="distribution" content="global">
+  <meta name="classification" content="Healthcare, Hospital ">
+  <base href="/">
+  <meta name="description"
+    content="AarogyaHastha Hospitals: With compassionate care and dedicated service, the premier healthcare facility provides quality medical treatment with over 15 specialities. We provide the care every patient need with responsibility they deserve and developing pioneering treatments and approaches through the implementation of cutting-edge technologies and its renowned research and teaching practices.">
+  <meta name="keywords" content="">
+  <meta name="title" content="AarogyaHastha Hospitals :: Caring Responsibly">
+  <title>AarogyaHastha Hospitals :: Caring Responsibly</title>
+  <link rel="stylesheet" type="text/css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+  <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/style.css">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-84XCMMFTS8"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-84XCMMFTS8');
+  </script>
+  <script>(function (w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-TD2L5G6C');</script>
+
+</head>
+
+<div class="health-packages-container">
+  {% for package in packages %}
+  <div class="health-package-card">
+    <a href="#" class="package-link" onclick="openCallbackForm(event, '{{ package.title }}')">
+      <div class="package-header">
+        <h2>{{ package.title }}</h2>
+        {% if package.is_best_value %}
+        <div class="best-value
+                -tag">BEST VALUE</div>
+        {% endif %}
+      </div>
+
+      <div class="package-content">
+        <div class="tests-columns">
+          {% set tests_list = package.tests.split(',') %}
+          {% set mid_point = (tests_list|length / 2)|round|int %}
+
+          <div class="tests-column">
+            {% for test in tests_list[:mid_point] %}
+            <div class="test-item">{{ test }}</div>
+            {% endfor %}
+          </div>
+
+          <div class="tests-column">
+            {% for test in tests_list[mid_point:] %}
+            <div class="test-item">{{ test }}</div>
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="price-section">
+          <div class="original-price">Usual Price: <span>₹ {{ package.original_price }}</span></div>
+          <div class="offer-price">Offer Price: ₹ {{ package.offer_price }}</div>
+          {% if package.discount_percentage %}
+          <div class="discount-badge">{{ package.discount_percentage|round }}% OFF</div>
+          {% endif %}
+        </div>
+      </div>
+    </a>
+  </div>
+  {% endfor %}
+</div>
+<!-- Callback Form Modal -->
+<div id="callbackFormModal" class="callback-modal">
+  <div class="callback-modal-content">
+    <span class="close-btn" onclick="closeCallbackForm()">&times;</span>
+    <h3 id="callbackPackageTitle">Request a Call Back</h3>
+    <form id="callbackForm">
+      <div class="form-group">
+        <label for="userName">Name</label>
+        <input type="text" id="userName" name="name" required class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="userPhone">Phone Number</label>
+        <input type="tel" id="userPhone" name="phone" required class="form-control">
+      </div>
+      <button type="submit" class="btn btn-primary">Call Back</button>
+    </form>
+  </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="static/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="static/js/script.js"></script>
+<script>
+  $(".book-apt").on('click', function () {
+    var url = $(this).data("url");
+    window.open(url, '_blank');
+  });
+  function showChromePopup() {
+    const popup = document.getElementById("chrome-popup");
+    popup.classList.add("is-visible");
+    popup.setAttribute("aria-hidden", "false");
+  }
+  function hideChromePopup() {
+    const popup = document.getElementById("chrome-popup");
+    popup.classList.remove("is-visible");
+    popup.setAttribute("aria-hidden", "true");
+  }
+  // ESC closes popup
+  document.addEventListener("keydown", e => {
+    if (e.key === "Escape") hideChromePopup();
+  });
+  document.addEventListener('DOMContentLoaded', function () {
+    const scrollBtn = document.getElementById('scrollToTopBtn');
+    const scrollThreshold = 300;
+
+    function toggleScrollButton() {
+      if (window.pageYOffset > scrollThreshold ||
+        document.documentElement.scrollTop > scrollThreshold) {
+        scrollBtn.style.display = 'flex';
+      } else {
+        scrollBtn.style.display = 'none';
+      }
+    }
+
+    window.addEventListener('scroll', toggleScrollButton);
+
+    scrollBtn.addEventListener('click', function (e) {
+      e.preventDefault();
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+      // Add slight animation to the icon
+      this.querySelector('i').style.transform = 'translateY(-4px)';
+      setTimeout(() => {
+        this.querySelector('i').style.transform = '';
+      }, 300);
+    });
+
+    // Initialize on load
+    toggleScrollButton();
+  });
+  const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+  const mobileNav = document.getElementById('mobile-nav');
+
+  mobileMenuToggle.addEventListener('click', function () {
+    mobileNav.classList.toggle('active'); // toggles visibility
+  });
+  document.getElementById('callbackForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const name = document.getElementById('userName').value;
+    const phone = document.getElementById('userPhone').value;
+    const packageName = document.getElementById('callbackPackageTitle').innerText.replace("Request Call Back: ", "");
+
+    fetch('/request_callback', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, phone, package_name: packageName })
+    })
+      .then(response => response.json())
+      .then(data => {
+        alert(data.message);
+        if (data.status === 'success') {
+          closeCallbackForm();
+          document.getElementById('callbackForm').reset();
+        }
+      })
+      .catch(err => {
+        console.error(err);
+        alert('Something went wrong. Please try again later.');
+      });
+  });
+  function openCallbackForm(event, packageTitle) {
+    event.preventDefault(); // Prevent the link from navigating to "#"
+    document.getElementById('callbackPackageTitle').innerText = "Request Call Back: " + packageTitle;
+    document.getElementById('callbackFormModal').style.display = 'block';
+  }
+
+  function closeCallbackForm() {
+    document.getElementById('callbackFormModal').style.display = 'none';
+  }
+
+
+</script>
+<a href="#" id="scrollToTopBtn" class="scroll-to-top-btn" title="Scroll to top" aria-label="Scroll to top">
+  <i class="fa fa-arrow-up"></i> <!-- Simple up arrow -->
+</a>
+
+<style>
+  .callback-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.6);
+    font-size: 14px;
+    /* reduced from default */
+  }
+
+  .callback-modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 15px;
+    /* slightly smaller padding */
+    border-radius: 10px;
+    max-width: 400px;
+    position: relative;
+    font-size: 14px;
+    /* reduce modal content font */
+  }
+
+  .close-btn {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    /* adjusted for smaller size */
+    font-size: 22px;
+    /* reduced from 28px */
+    cursor: pointer;
+  }
+
+  .callback-modal .form-group {
+    margin-bottom: 12px;
+    /* slightly smaller spacing */
+    font-size: 14px;
+  }
+
+  .callback-modal input,
+  .callback-modal button {
+    font-size: 14px;
+    /* input fields and buttons smaller */
+  }
+</style>
+{% endblock %}

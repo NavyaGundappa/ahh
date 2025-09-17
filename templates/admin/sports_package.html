@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Manage Sports Packages</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="container py-4">
+    <h2 class="mb-4">Manage Sports Packages</h2>
+    <div class="d-flex justify-content-end mb-3">
+        <a href="{{ url_for('admin_dashboard') }}" class="btn btn-secondary">
+            Back to Dashboard
+        </a>
+    </div>
+
+    <!-- Flash messages -->
+
+
+    <!-- Add Package Form -->
+    <div class="card mb-4">
+        <div class="card-header">Add New Sports Package</div>
+        <div class="card-body">
+            <form method="POST">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label">Title</label>
+                        <input type="text" name="title" class="form-control" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Slug</label>
+                        <input type="text" name="slug" class="form-control" placeholder="sports-comprehensive-cricket"
+                            required>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Sport Type</label>
+                        <input type="text" name="sport_type" class="form-control" placeholder="Cricket, Football, etc.">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Original Price (₹)</label>
+                        <input type="number" name="original_price" class="form-control" step="0.01" required>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Offer Price (₹)</label>
+                        <input type="number" name="offer_price" class="form-control" step="0.01" required>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="is_best_value" id="is_best_value">
+                            <label class="form-check-label" for="is_best_value">
+                                Mark as Best Value
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <label class="form-label">Tests/Inclusions (one per line)</label>
+                        <textarea name="tests" class="form-control" rows="6" required></textarea>
+                    </div>
+                    <div class="col-md-12">
+                        <label class="form-label">Description</label>
+                        <textarea name="description" class="form-control" rows="2"></textarea>
+                    </div>
+                    <div class="col-md-12">
+                        <label class="form-label">Important Information</label>
+                        <textarea name="important_info" class="form-control" rows="2"></textarea>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary mt-3">Add Package</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Packages Table -->
+    <div class="card">
+        <div class="card-header">All Sports Packages</div>
+        <div class="card-body">
+            <table class="table table-striped align-middle">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Title</th>
+                        <th>Sport Type</th>
+                        <th>Original Price</th>
+                        <th>Offer Price</th>
+                        <th>Discount</th>
+                        <th>Status</th>
+                        <th style="width: 160px;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for package in packages %}
+                    <tr>
+                        <td>{{ package.id }}</td>
+                        <td>{{ package.title }}{% if package.is_best_value %} <span class="badge bg-warning">Best
+                                Value</span>{% endif %}</td>
+                        <td>{{ package.sport_type or 'General' }}</td>
+                        <td>₹{{ package.original_price }}</td>
+                        <td>₹{{ package.offer_price }}</td>
+                        <td>{{ package.discount_percentage|round(1) }}%</td>
+                        <td>
+                            <form method="POST" action="{{ url_for('toggle_sports_package', package_id=package.id) }}"
+                                class="d-inline">
+                                <button type="submit"
+                                    class="btn btn-sm {{ 'btn-success' if package.is_active else 'btn-secondary' }}">
+                                    {{ 'Active' if package.is_active else 'Inactive' }}
+                                </button>
+                            </form>
+                        </td>
+                        <td>
+                            <!-- Edit button opens modal -->
+                            <button class="btn btn-sm btn-warning" data-bs-toggle="modal"
+                                data-bs-target="#editModal{{ package.id }}">Edit</button>
+
+                            <!-- Delete form -->
+                            <form method="POST" style="display:inline-block;">
+                                <input type="hidden" name="delete_id" value="{{ package.id }}">
+                                <button type="submit" class="btn btn-sm btn-danger"
+                                    onclick="return confirm('Delete this sports package?');">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+
+                    <!-- Edit Modal -->
+                    <div class="modal fade" id="editModal{{ package.id }}" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <form method="POST">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Edit Package - {{ package.title }}</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <input type="hidden" name="package_id" value="{{ package.id }}">
+                                        <div class="row g-3">
+                                            <div class="col-md-6">
+                                                <label class="form-label">Title</label>
+                                                <input type="text" name="title" class="form-control"
+                                                    value="{{ package.title }}" required>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="form-label">Slug</label>
+                                                <input type="text" name="slug" class="form-control"
+                                                    value="{{ package.slug }}" required>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="form-label">Sport Type</label>
+                                                <input type="text" name="sport_type" class="form-control"
+                                                    value="{{ package.sport_type or '' }}"
+                                                    placeholder="Cricket, Football, etc.">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label class="form-label">Original Price (₹)</label>
+                                                <input type="number" name="original_price" class="form-control"
+                                                    value="{{ package.original_price }}" step="0.01" required>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label class="form-label">Offer Price (₹)</label>
+                                                <input type="number" name="offer_price" class="form-control"
+                                                    value="{{ package.offer_price }}" step="0.01" required>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" name="is_best_value"
+                                                        id="is_best_value{{ package.id }}" {{ 'checked' if
+                                                        package.is_best_value }}>
+                                                    <label class="form-check-label" for="is_best_value{{ package.id }}">
+                                                        Mark as Best Value
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <label class="form-label">Tests/Inclusions (one per line)</label>
+                                                <textarea name="tests" class="form-control" rows="6"
+                                                    required>{{ package.tests.replace(',', '\n') }}</textarea>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <label class="form-label">Description</label>
+                                                <textarea name="description" class="form-control"
+                                                    rows="2">{{ package.description or '' }}</textarea>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <label class="form-label">Important Information</label>
+                                                <textarea name="important_info" class="form-control"
+                                                    rows="2">{{ package.important_info or '' }}</textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-success">Save Changes</button>
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Cancel</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
