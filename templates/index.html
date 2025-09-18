@@ -411,23 +411,65 @@
     });
 </script>
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const counters = document.querySelectorAll('.number');
-        counters.forEach(counter => {
-            const updateCount = () => {
-                const target = +counter.getAttribute('data-count');
-                const count = +counter.innerText;
-                const increment = target / 100; // adjust speed
-                if (count < target) {
-                    counter.innerText = Math.ceil(count + increment);
-                    setTimeout(updateCount, 20);
-                } else {
-                    counter.innerText = target;
+    // Counter animation function
+    function animateCounter(counter) {
+        const target = parseInt(counter.getAttribute('data-count'));
+        const duration = 2000; // 2 seconds
+        const increment = Math.ceil(target / (duration / 16)); // 60fps
+        let current = 0;
+
+        const updateCounter = () => {
+            current += increment;
+            if (current >= target) {
+                counter.textContent = target;
+                if (counter.nextElementSibling && counter.nextElementSibling.classList.contains('suffix')) {
+                    counter.textContent = target + counter.nextElementSibling.textContent;
                 }
+            } else {
+                counter.textContent = current;
+                requestAnimationFrame(updateCounter);
             }
-            updateCount();
-        });
-    });
+        };
+
+        updateCounter();
+    }
+
+    // Function to check if counters are in viewport
+    function isInViewport(element) {
+        const rect = element.getBoundingClientRect();
+        return (
+            rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.8 &&
+            rect.bottom >= 0
+        );
+    }
+
+    // Function to handle counter animation when scrolled into view
+    function handleCounterAnimation() {
+        const counters = document.querySelectorAll('.number');
+        let animated = false;
+
+        return function () {
+            if (!animated && document.getElementById('stats-section') &&
+                isInViewport(document.getElementById('stats-section'))) {
+
+                counters.forEach(counter => {
+                    animateCounter(counter);
+                });
+
+                animated = true;
+            }
+        };
+    }
+
+    // Initialize counter animation handler
+    const checkCounters = handleCounterAnimation();
+
+    // Check on load and scroll
+    window.addEventListener('load', checkCounters);
+    window.addEventListener('scroll', checkCounters);
+
+    // Also check immediately
+    checkCounters();
 </script>
 
 

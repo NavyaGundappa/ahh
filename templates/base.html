@@ -63,33 +63,73 @@
 
     <script>(function (w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-TD2L5G6C');</script>
     <style>
-        .login-modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 70px;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, .4);
-            justify-content: center;
-            align-items: center
+        .login-modal-content {
+            background-color: #fff;
+            margin: auto;
+            top: 50px;
+            padding: 20px 25px;
+            border: 1px solid #ddd;
+            width: 90%;
+            max-width: 400px;
+            position: relative;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            animation-name: animatetop;
+            animation-duration: 0.4s;
+            transition: all 0.3s ease;
+            /* Added a transition */
         }
 
-        .login-modal-content {
-            background-color: #fefefe;
-            margin: auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-            max-width: 500px;
-            position: relative;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, .2);
-            animation-name: animatetop;
-            animation-duration: .4s
+        .login-form-group {
+            margin-bottom: 12px;
         }
+
+        .login-form-group input,
+        .login-form-group textarea {
+            width: 100%;
+            padding: 10px 12px;
+            /* Adjusted padding */
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            font-size: 14px;
+            color: #333;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .login-form-group input:focus,
+        .login-form-group textarea:focus {
+            outline: none;
+            border-color: #16979D;
+            box-shadow: 0 0 0 2px rgba(22, 151, 157, 0.2);
+        }
+
+        .login-form-group textarea {
+            resize: vertical;
+            /* Allows vertical resizing but prevents horizontal */
+        }
+
+        .login-form-group button {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(to right, #16979D, #103A60);
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: background 0.3s ease, transform 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .login-form-group button:hover {
+            background: linear-gradient(to right, #103A60, #16979D);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
 
         @keyframes animatetop {
             from {
@@ -882,7 +922,7 @@
                         <img src="/static/img/ambulance.png" alt="Ambulance" />
                     </div>
                     <div class="ambulance-number">
-                        <a href="tel:0806666887788">Emergency: 080 6666 8877/88</a>
+                        <a href="tel:08066668877">Emergency: 080 6666 8877/88</a>
                     </div>
                 </div>
             </div>
@@ -903,9 +943,10 @@
                             <a class="nav-links" href="/contact">Contact</a>
                             <ul class="dropdown-menu">
                                 <li><a
-                                        href="https://www.google.com/search?sca_esv=01d7d1da4f3739f4&sxsrf=AE3TifMajnR1cj7CV7KMp-OAhDhG6-ag5A:1757584508053&si=AMgyJEtREmoPL4P1I5IDCfuA8gybfVI2d5Uj7QMwYCZHKDZ-E67a9GN5xsFdNX82bZli0D47ZU-t7_RrF_VvCuEUJnWTI5SR80ndLu5MxI-lgdtIvv6GkmwZO2uyJfSHoUpzWU5bjtfVoFrfNvZ8hwgIvFvNDwqWmX3a7tdbZfx8SWbB5YgDksnqmrDV4yojH420D2gkt6js&q=AAROGYA+HASTHA+HOSPITALS+-+CENTRE+FOR+SURGICAL+EXCELLENCE+Reviews&sa=X&ved=2ahUKEwiMnY_CuNCPAxXKTGwGHZhvD64Q0bkNegQIKhAD&biw=1280&bih=585&dpr=1.5#lrd=0x3bae132a0bbeb64b:0x626c13b98813a8a3,3,,,,">Reviews</a>
+                                        href="https://www.google.com/search?sca_esv=01d7d1da4f3739f4&sxsrf=AE3TifMajnR1cj7CV7KMp-OAhDhG6-ag5A:1757584508053&si=AMgyJEtREmoPL4P1I5IDCfuA8gybfVI2d5Uj7QMwYCZHKDZ-E67a9GN5xsFdNX82bZli0D47ZU-t7_RrF_VvCuEUJnWTI5SR80ndLu5MxI-lgdtIvv6GkmwZO2uyJfSHoUpzWU5bjtfVoFrfNvZ8hwgIvFvNDwqWmX3a7tdbZfx8SWbB5YgDksnqmrDV4yojH420D2gkt6js&q=AAROGYA+HASTHA+HOSPITALS+-+CENTRE+FOR+SURGICAL+EXCELLENCE+Reviews&sa=X&ved=2ahUKEwiMnY_CuNCPAxXKTGwGHZhvD64Q0bkNegQIKhAD&biw=1280&bih=585&dpr=1.5#lrd=0x3bae132a0bbeb64b:0x626c13b98813a8a3,3,,,,">Review
+                                        us</a>
                                 </li>
-                                <li><a href="#" class="write-review-btn">Write a message</a></li>
+                                <li><a href="#" class="write-review-btn">Write a message to ED</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -923,9 +964,9 @@
                             <a class="nav-links" href="/contact">Contact <i class="fa fa-angle-down"></i></a>
                             <ul class="dropdown-menu">
                                 <li><a href="https://www.google.com/search?sca_esv=01d7d1da4f3739f4&sxsrf=AE3TifONK5RnA4evxGz8cGk4CrHNvVAxYg:1757584553118&si=AMgyJEtREmoPL4P1I5IDCfuA8gybfVI2d5Uj7QMwYCZHKDZ-E67a9GN5xsFdNX82bZli0D47ZU-t7_RrF_VvCuEUJnWTI5SR80ndLu5MxI-lgdtIvv6GkmwZO2uyJfSHoUpzWU5bjtfVoFrfNvZ8hwgIvFvNDwqWmX3a7tdbZfx8SWbB5YgDksnqmrDV4yojH420D2gkt6js&q=AAROGYA+HASTHA+HOSPITALS+-+CENTRE+FOR+SURGICAL+EXCELLENCE+Reviews&sa=X&ved=2ahUKEwjU_M3XuNCPAxU-RmwGHaDaFFcQ0bkNegQIKBAD&biw=1280&bih=585&dpr=1.5#lrd=0x3bae132a0bbeb64b:0x626c13b98813a8a3,3,,,,"
-                                        target="_blank"><i class="fa-solid fa-star"></i> Reviews</a></li>
+                                        target="_blank"><i class="fa-solid fa-star"></i> Review us</a></li>
                                 <li><a href="#" class="write-review-btn"><i class="fa-solid fa-envelope"></i> Write a
-                                        message</a></li>
+                                        message to ED</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -939,17 +980,26 @@
     <div id="review-modal" class="login-modal">
         <div class="login-modal-content">
             <span class="close-button" id="close-review-modal">×</span>
-            <h2 style="margin-top:0; margin-bottom: 20px;">Write a Message to Management</h2>
+            <h2 style="margin-top:0; margin-bottom: 15px; font-size: 1.5rem; text-align: center;">Send a Message to
+                Management</h2>
             <form id="review-form">
-                <div class="login-form-group"><label for="reviewer-name">Name</label><input type="text"
-                        id="reviewer-name" name="reviewer-name" required></div>
-                <div class="login-form-group"><label for="reviewer-number">Mobile Number</label><input type="number"
-                        id="reviewer-number" name="reviewer-number" required></div>
-                <div class="login-form-group"><label for="reviewer-email">Email</label><input type="email"
-                        id="reviewer-email" name="reviewer-email" required></div>
-                <div class="login-form-group"><label for="review-message">Message</label><textarea id="review-message"
-                        name="review-message" rows="5" required></textarea></div>
-                <div class="login-form-group"><button type="submit">Submit Message</button></div>
+                <div class="login-form-group">
+                    <input type="text" id="reviewer-name" name="reviewer-name" placeholder="Your Name" required>
+                </div>
+                <div class="login-form-group">
+                    <input type="number" id="reviewer-number" name="reviewer-number" placeholder="Mobile Number"
+                        required>
+                </div>
+                <div class="login-form-group">
+                    <input type="email" id="reviewer-email" name="reviewer-email" placeholder="Email Address" required>
+                </div>
+                <div class="login-form-group">
+                    <textarea id="review-message" name="review-message" rows="4" placeholder="Your Message..."
+                        required></textarea>
+                </div>
+                <div class="login-form-group">
+                    <button type="submit">Submit</button>
+                </div>
             </form>
         </div>
     </div>
@@ -960,8 +1010,9 @@
                 <div class="footer-column">
                     <div class="logo-wrapper"><img loading="lazy" src="/static/img/logo.png"
                             alt="AarogyaHastha Hospitals Logo"></div>
-                    <p><a href="https://maps.google.com" target="_blank"
-                            style="text-decoration: none; color: inherit;">Site No. 2, Kasavanahalli Main Rd, near 1st
+                    <p><a href="https://www.google.com/maps/dir//Site+No.+2,+No.+2816%2F2,+SY.87,+Kasavanahalli+Main+Rd,+near+1st+Cross+Road,+opposite+HM+Symphony,+Bengaluru,+Karnataka+560035/@12.9007391,77.6745367,21769m/data=!3m1!1e3!4m8!4m7!1m0!1m5!1m1!1s0x3bae132a0bbeb64b:0x626c13b98813a8a3!2m2!1d77.67569!2d12.9005956?entry=ttu&g_ep=EgoyMDI1MDkxNi4wIKXMDSoASAFQAw%3D%3D"
+                            target="_blank" style="text-decoration: none; color: inherit;">Site No. 2, Kasavanahalli
+                            Main Rd, near 1st
                             Cross Road, opposite HM Symphony, Bengaluru, Karnataka 560035</a></p>
                     <div class="social-icons mt-4">
                         <a href="https://www.instagram.com/aarogyahastha/" target="_blank"><img

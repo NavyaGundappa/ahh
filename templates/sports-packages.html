@@ -103,7 +103,11 @@
 <div id="callbackFormModal" class="callback-modal">
   <div class="callback-modal-content">
     <span class="close-btn" onclick="closeCallbackForm()">&times;</span>
-    <h3 id="callbackPackageTitle">Request a Call Back</h3>
+    <h3 id="callbackPackageTitle">
+      <span class="callback-title">Request a Call Back:</span>
+      <br>
+      <span id="packageNameDisplay"></span>
+    </h3>
     <form id="callbackForm">
       <div class="form-group">
         <label for="userName">Name</label>
@@ -206,8 +210,14 @@
       });
   });
   function openCallbackForm(event, packageTitle) {
-    event.preventDefault(); // Prevent the link from navigating to "#"
-    document.getElementById('callbackPackageTitle').innerText = "Request Call Back: " + packageTitle;
+    event.preventDefault();
+
+    // Set the first part of the title
+    document.getElementById('callbackPackageTitle').innerHTML = '<span class="callback-title">Request a Call Back:</span><br><span id="packageNameDisplay"></span>';
+
+    // Set the package name on the next line
+    document.getElementById('packageNameDisplay').innerText = packageTitle;
+
     document.getElementById('callbackFormModal').style.display = 'block';
   }
 
@@ -225,49 +235,150 @@
   .callback-modal {
     display: none;
     position: fixed;
-    z-index: 1000;
+    z-index: 1050;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    overflow: auto;
+    overflow-y: auto;
     background-color: rgba(0, 0, 0, 0.6);
-    font-size: 14px;
-    /* reduced from default */
+    font-family: 'Arial', sans-serif;
+    animation: fadeIn 0.3s forwards;
+    /* Apply the fade-in animation */
+  }
+
+  /* Keyframes for the fade-in animation */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
+  .packageNameDisplay {
+    color: #837474;
+  }
+
+  #packageNameDisplay {
+    color: #686a6d;
+    /* Change this hex code to your desired color */
+    font-weight: 500;
+    /* Optional: adjust font weight */
+    font-size: 20px;
+    /* Optional: adjust font size */
+  }
+
+  .callback-title {
+    font-size: 20px;
+    display: block;
+    margin-bottom: 5px;
+    color: #0c0c0c;
   }
 
   .callback-modal-content {
     background-color: #fff;
     margin: 10% auto;
-    padding: 15px;
-    /* slightly smaller padding */
-    border-radius: 10px;
-    max-width: 400px;
+    padding: 30px;
+    border-radius: 12px;
+    max-width: 450px;
     position: relative;
-    font-size: 14px;
-    /* reduce modal content font */
+    box-shadow: 0 8px 25px rgba(66, 64, 64, 0.2);
+    transition: transform 0.3s ease-out;
+    /* Add a transition for a subtle pop effect */
+    transform: scale(0.95);
+    animation: slideUp 0.3s forwards;
+    /* Apply the slide-up animation to the content */
+  }
+
+  /* Keyframes for the slide-up animation */
+  @keyframes slideUp {
+    from {
+      transform: translateY(20px) scale(0.95);
+      opacity: 0;
+    }
+
+    to {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+    }
   }
 
   .close-btn {
     position: absolute;
-    top: 8px;
-    right: 12px;
-    /* adjusted for smaller size */
-    font-size: 22px;
-    /* reduced from 28px */
+    top: 15px;
+    right: 20px;
+    font-size: 32px;
+    font-weight: 300;
+    color: #999;
     cursor: pointer;
+    transition: color 0.2s ease-in-out;
+  }
+
+  .close-btn:hover {
+    color: #333;
+  }
+
+  .callback-modal h3 {
+    margin-top: 0;
+    margin-bottom: 25px;
+    font-size: 24px;
+    font-weight: 600;
+    color: #333;
+    text-align: center;
   }
 
   .callback-modal .form-group {
-    margin-bottom: 12px;
-    /* slightly smaller spacing */
+    margin-bottom: 20px;
+  }
+
+  .callback-modal label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #555;
     font-size: 14px;
   }
 
-  .callback-modal input,
-  .callback-modal button {
-    font-size: 14px;
-    /* input fields and buttons smaller */
+  .callback-modal input.form-control {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 16px;
+    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  }
+
+  .callback-modal input.form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
+    outline: none;
+  }
+
+  .callback-modal button.btn-primary {
+    width: 50%;
+    padding: 10px;
+    /* Reduced height */
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    margin: 0 auto;
+    /* Center the button */
+    display: block;
+    /* Necessary for margin auto to work */
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out;
+  }
+
+  .callback-modal button.btn-primary:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
   }
 </style>
 {% endblock %}
