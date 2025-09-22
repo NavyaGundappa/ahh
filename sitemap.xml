@@ -4,149 +4,334 @@
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+
 <url>
   <loc>https://aarogyahastha.com/</loc>
-  <lastmod>2025-09-04</lastmod>
+  <lastmod>2025-09-22T07:26:09+00:00</lastmod>
   <priority>1.00</priority>
 </url>
 <url>
-  <loc>https://aarogyahastha.com/about</loc>
-  <lastmod>2025-09-04</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://aarogyahastha.com/contact</loc>
-  <lastmod>2025-09-04</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
   <loc>https://aarogyahastha.com/departments/</loc>
-  <lastmod>2025-09-04</lastmod>
+  <lastmod>2025-09-22T07:26:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://aarogyahastha.com/doctors</loc>
+  <lastmod>2025-09-22T07:26:09+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://aarogyahastha.com/health-packages</loc>
-  <lastmod>2025-09-04</lastmod>
+  <lastmod>2025-09-22T07:26:09+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://aarogyahastha.com/sports-packages</loc>
-  <lastmod>2025-09-04</lastmod>
+  <lastmod>2025-09-22T07:26:09+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://aarogyahastha.com/departments/general-surgery</loc>
-  <lastmod>2025-09-04</lastmod>
+  <loc>https://aarogyahastha.com/about</loc>
+  <lastmod>2025-09-22T07:26:09+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://aarogyahastha.com/departments/neurosurgery</loc>
-  <lastmod>2025-09-04</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://aarogyahastha.com/departments/orthopaedics</loc>
-  <lastmod>2025-09-04</lastmod>
+  <loc>https://aarogyahastha.com/contact</loc>
+  <lastmod>2025-09-22T07:26:09+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://aarogyahastha.com/departments/anaesthesia</loc>
-  <lastmod>2025-09-04</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://aarogyahastha.com/departments/pain-medicine</loc>
-  <lastmod>2025-09-04</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://aarogyahastha.com/departments/general-medicine</loc>
-  <lastmod>2025-09-04</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://aarogyahastha.com/departments/lab-medicine</loc>
-  <lastmod>2025-09-04</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://aarogyahastha.com/departments/paediatrics</loc>
-  <lastmod>2025-09-04</lastmod>
+  <lastmod>2025-09-22T07:26:09+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://aarogyahastha.com/departments/dermatology</loc>
-  <lastmod>2025-09-04</lastmod>
+  <lastmod>2025-09-22T07:26:09+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://aarogyahastha.com/departments/ent</loc>
-  <lastmod>2025-09-04</lastmod>
+  <lastmod>2025-09-22T07:26:09+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://aarogyahastha.com/departments/emergency-medicine</loc>
-  <lastmod>2025-09-04</lastmod>
+  <lastmod>2025-09-22T07:26:09+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://aarogyahastha.com/departments/nephrology</loc>
-  <lastmod>2025-09-04</lastmod>
+  <loc>https://aarogyahastha.com/departments/general-medicine</loc>
+  <lastmod>2025-09-22T07:26:09+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://aarogyahastha.com/departments/urology</loc>
-  <lastmod>2025-09-04</lastmod>
+  <loc>https://aarogyahastha.com/departments/general-surgery</loc>
+  <lastmod>2025-09-22T07:26:09+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://aarogyahastha.com/departments/physiotherapy</loc>
-  <lastmod>2025-09-04</lastmod>
+  <loc>https://aarogyahastha.com/departments/lab-medicine</loc>
+  <lastmod>2025-09-22T07:26:09+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://aarogyahastha.com/departments/medical-gastroenterology</loc>
-  <lastmod>2025-09-04</lastmod>
+  <lastmod>2025-09-22T07:26:09+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://aarogyahastha.com/departments/minimal-access-surgery</loc>
-  <lastmod>2025-09-04</lastmod>
+  <lastmod>2025-09-22T07:26:09+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://aarogyahastha.com/departments/plastic-surgery</loc>
-  <lastmod>2025-09-04</lastmod>
+  <loc>https://aarogyahastha.com/departments/nephrology</loc>
+  <lastmod>2025-09-22T07:26:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://aarogyahastha.com/departments/neurosurgery</loc>
+  <lastmod>2025-09-22T07:26:09+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://aarogyahastha.com/departments/obg</loc>
-  <lastmod>2025-09-04</lastmod>
+  <lastmod>2025-09-22T07:26:09+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://aarogyahastha.com/departments/surgical-gastroenterology</loc>
-  <lastmod>2025-09-04</lastmod>
+  <loc>https://aarogyahastha.com/departments/orthopaedics</loc>
+  <lastmod>2025-09-22T07:26:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://aarogyahastha.com/departments/paediatrics</loc>
+  <lastmod>2025-09-22T07:26:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://aarogyahastha.com/departments/pain-medicine</loc>
+  <lastmod>2025-09-22T07:26:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://aarogyahastha.com/departments/physiotherapy</loc>
+  <lastmod>2025-09-22T07:26:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://aarogyahastha.com/departments/plastic-surgery</loc>
+  <lastmod>2025-09-22T07:26:09+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://aarogyahastha.com/departments/radiology</loc>
-  <lastmod>2025-09-04</lastmod>
+  <lastmod>2025-09-22T07:26:09+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://aarogyahastha.com/privacy-policy</loc>
-  <lastmod>2025-09-04</lastmod>
+  <loc>https://aarogyahastha.com/departments/surgical-gastroenterology</loc>
+  <lastmod>2025-09-22T07:26:09+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://aarogyahastha.com/disclaimer</loc>
-  <lastmod>2025-09-04</lastmod>
+  <loc>https://aarogyahastha.com/departments/urology</loc>
+  <lastmod>2025-09-22T07:26:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://aarogyahastha.com/doctors/dr.-swetha-gutha</loc>
+  <lastmod>2025-09-22T07:26:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://aarogyahastha.com/doctors/dr-sumalatha-c-b</loc>
+  <lastmod>2025-09-22T07:26:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://aarogyahastha.com/doctors/dr-abhilasha-sadhoo</loc>
+  <lastmod>2025-09-22T07:26:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://aarogyahastha.com/doctors/dr-hiranmayi-seshu</loc>
+  <lastmod>2025-09-22T07:26:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://aarogyahastha.com/doctors/dr-sharat-honnatti</loc>
+  <lastmod>2025-09-22T07:26:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://aarogyahastha.com/doctors/dr-v-devendran</loc>
+  <lastmod>2025-09-22T07:26:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://aarogyahastha.com/doctors/dr-rammohan-sripad-bhat</loc>
+  <lastmod>2025-09-22T07:26:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://aarogyahastha.com/doctors/dr-geetha-r</loc>
+  <lastmod>2025-09-22T07:26:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://aarogyahastha.com/doctors/dr-kushal-lakshmana</loc>
+  <lastmod>2025-09-22T07:26:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://aarogyahastha.com/doctors/dr-mahima-shetty-kr</loc>
+  <lastmod>2025-09-22T07:26:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://aarogyahastha.com/doctors/dr-shalini-g.-agasthi</loc>
+  <lastmod>2025-09-22T07:26:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://aarogyahastha.com/doctors/dr-ankita-pandey</loc>
+  <lastmod>2025-09-22T07:26:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://aarogyahastha.com/doctors/dr-akash-mukherjee</loc>
+  <lastmod>2025-09-22T07:26:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://aarogyahastha.com/doctors/dr.-sowmya</loc>
+  <lastmod>2025-09-22T07:26:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://aarogyahastha.com/doctors/dr-vishnu-vandhana</loc>
+  <lastmod>2025-09-22T07:26:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://aarogyahastha.com/doctors/dr-sharadhamma</loc>
+  <lastmod>2025-09-22T07:26:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://aarogyahastha.com/doctors/dr-janaki-ram</loc>
+  <lastmod>2025-09-22T07:26:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://aarogyahastha.com/doctors/dr-shobha</loc>
+  <lastmod>2025-09-22T07:26:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://aarogyahastha.com/doctors/dr-deepika</loc>
+  <lastmod>2025-09-22T07:26:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://aarogyahastha.com/doctors/dr-sulagna</loc>
+  <lastmod>2025-09-22T07:26:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://aarogyahastha.com/doctors/dr-c-l-karan-gowda</loc>
+  <lastmod>2025-09-22T07:26:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://aarogyahastha.com/doctors/dr-radhesh-menon</loc>
+  <lastmod>2025-09-22T07:26:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://aarogyahastha.com/doctors/dr-deepak-a</loc>
+  <lastmod>2025-09-22T07:26:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://aarogyahastha.com/doctors/dr-mythreye-sm-r</loc>
+  <lastmod>2025-09-22T07:26:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://aarogyahastha.com/doctors/dr-lohith</loc>
+  <lastmod>2025-09-22T07:26:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://aarogyahastha.com/doctors/dr-vivekanand</loc>
+  <lastmod>2025-09-22T07:26:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://aarogyahastha.com/doctors/dr-srinivas-reddy</loc>
+  <lastmod>2025-09-22T07:26:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://aarogyahastha.com/doctors/dr-sanjog-sharma</loc>
+  <lastmod>2025-09-22T07:26:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://aarogyahastha.com/doctors/dr-yogeshwarappa</loc>
+  <lastmod>2025-09-22T07:26:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://aarogyahastha.com/doctors/dr-atisha-modi</loc>
+  <lastmod>2025-09-22T07:26:09+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://aarogyahastha.com/terms-and-conditions</loc>
-  <lastmod>2025-09-04</lastmod>
+  <lastmod>2025-09-22T07:26:09+00:00</lastmod>
   <priority>0.80</priority>
 </url>
+<url>
+  <loc>https://aarogyahastha.com/privacy-policy</loc>
+  <lastmod>2025-09-22T07:26:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://aarogyahastha.com/disclaimer</loc>
+  <lastmod>2025-09-22T07:26:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://aarogyahastha.com/doctors?page=1</loc>
+  <lastmod>2025-09-22T07:26:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://aarogyahastha.com/doctors?page=2</loc>
+  <lastmod>2025-09-22T07:26:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://aarogyahastha.com/doctors?page=3</loc>
+  <lastmod>2025-09-22T07:26:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://aarogyahastha.com/doctors?page=5</loc>
+  <lastmod>2025-09-22T07:26:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://aarogyahastha.com/doctors?page=4</loc>
+  <lastmod>2025-09-22T07:26:09+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+
+
 </urlset>
