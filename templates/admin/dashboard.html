@@ -56,11 +56,20 @@
             {% if access['users'] %}
             <a href="{{ url_for('admin_users') }}"
                 class="flex items-center px-3 py-2 rounded hover:bg-blue-500 transition">Users</a>
-            <a href="{{ url_for('admin_callbacks') }}"
-                class="flex items-center px-3 py-2 rounded hover:bg-blue-500 transition">Call Back Requests</a>
-            <a href="{{ url_for('admin_reviews') }}"
-                class="flex items-center px-3 py-2 rounded hover:bg-blue-500 transition">Feed Back</a>
             {% endif %}
+
+            {% if access.callback_requests %}
+            <div class="col-md-4">
+                <a href="{{ url_for('admin_callbacks') }}" class="card-link">Callback Requests</a>
+            </div>
+            {% endif %}
+
+            {% if access.reviews %}
+            <div class="col-md-4">
+                <a href="{{ url_for('admin_reviews') }}" class="card-link">View Reviews</a>
+            </div>
+            {% endif %}
+
             <a href="{{ url_for('admin_logout') }}"
                 class="flex items-center px-3 py-2 rounded hover:bg-red-500 transition">Logout</a>
         </nav>
