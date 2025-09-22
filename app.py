@@ -116,8 +116,6 @@ def privacy_policy():
 def disclaimer():
     return render_template('disclaimer.html')
 
- # ADMIN Routes -----------------------------------------------------------------------------------------------------------------------------------------
-
 
 def login_required(f):
     @wraps(f)
@@ -126,6 +124,41 @@ def login_required(f):
             return redirect(url_for("admin_login"))
         return f(*args, **kwargs)
     return decorated_function
+
+
+def permission_required(permission_name):
+    """
+    Decorator to check if a user has a specific permission.
+    e.g., @permission_required('banners')
+    """
+    def decorator(f):
+        @wraps(f)
+        def decorated_function(*args, **kwargs):
+            # First, check if user is logged in at all
+            if "admin_id" not in session:
+                flash("Please log in to access this page.", "warning")
+                return redirect(url_for("admin_login"))
+
+            # Get the user and their permissions
+            user_id = session.get("admin_id")
+            user = User.query.get(user_id)
+
+            # Check if user exists and has access rights
+            if not user or not user.access:
+                flash("You do not have permission to access this page.", "danger")
+                return redirect(url_for('admin_dashboard'))
+
+            # The actual permission check
+            # This checks if user.access.banners (or whatever permission_name is) is True
+            has_permission = getattr(user.access, permission_name, False)
+
+            if not has_permission:
+                flash("You do not have permission to access this page.", "danger")
+                return redirect(url_for('admin_dashboard'))
+
+            return f(*args, **kwargs)
+        return decorated_function
+    return decorator
 
 
 @app.route("/admin")
@@ -138,7 +171,7 @@ def admin_dashboard():
     user = User.query.get(admin_id)
 
     modules = ['banners', 'doctors', 'counters', 'testimonials', 'specialities',
-               'departments', 'health_packages', 'sports_packages', 'department_content', 'users', 'callback_requests']
+               'departments', 'health_packages', 'sports_packages', 'department_content', 'users', 'callback_requests', 'reviews']
 
     access = {module: False for module in modules}
     if user and user.access:
@@ -149,6 +182,8 @@ def admin_dashboard():
 
 
 @app.route('/admin/banners', methods=['GET', 'POST'])
+@login_required
+@permission_required('banners')
 def admin_banners():
     if request.method == 'POST':
         title = request.form.get('title')
@@ -272,6 +307,8 @@ def handle_file_upload(file, folder_name):
 
 
 @app.route('/admin/doctors', methods=['GET', 'POST'])
+@login_required
+@permission_required('doctors')
 def admin_doctors():
     departments = Department.query.filter_by(is_active=True).all()
 
@@ -761,6 +798,8 @@ def generate_department_html(department):
 
 
 @app.route('/admin/counters', methods=['GET', 'POST'])
+@login_required
+@permission_required('counters')
 def admin_counters():
     if request.method == 'POST':
         label = request.form.get('label')
@@ -836,6 +875,8 @@ def delete_counter(counter_id):
 
 
 @app.route('/admin/testimonials', methods=['GET', 'POST'])
+@login_required
+@permission_required('testimonials')
 def admin_testimonials():
     if request.method == 'POST':
         alt_text = request.form.get('alt_text', '')
@@ -1739,86 +1780,110 @@ def doctor_profile(slug):
     return render_template('doctor_profile.html', doctor=doctor)
 
 
-@app.route('/admin/users', methods=['GET', 'POST'])
+@app.route("/admin/users", methods=["GET", "POST"])
+@login_required
+@permission_required("users")
 def admin_users():
-    if request.method == 'POST':
-        user_id = request.form.get('user_id')
-        emp_id = request.form.get('emp_id')
-        name = request.form.get('name')
-        email = request.form.get('email')
-        password = request.form.get('password')
-        is_active = True if request.form.get('is_active') == 'on' else False
+    users = User.query.order_by(User.created_at.desc()).all()
+    modules = [
+        "banners",
+        "doctors",
+        "counters",
+        "testimonials",
+        "specialities",
+        "departments",
+        "health_packages",
+        "sports_packages",
+        "department_content",
+        "users",
+        "callback_requests",
+        "reviews",
+    ]
 
-        # Access permissions
-        permissions = {
-            'banners': bool(request.form.get('banners')),
-            'doctors': bool(request.form.get('doctors')),
-            'counters': bool(request.form.get('counters')),
-            'testimonials': bool(request.form.get('testimonials')),
-            'specialities': bool(request.form.get('specialities')),
-            'departments': bool(request.form.get('departments')),
-            'health_packages': bool(request.form.get('health_packages')),
-            'sports_packages': bool(request.form.get('sports_packages')),
-            'department_content': bool(request.form.get('department_content')),
-            'users': bool(request.form.get('users')),
-            # Added
-            'callback_requests': bool(request.form.get('callback_requests')),
-            'reviews': bool(request.form.get('reviews')),
-        }
+    if request.method == "POST":
+        user_id = request.form.get("user_id")
+        emp_id = request.form.get("emp_id")
+        name = request.form.get("name")
+        email = request.form.get("email")
+        password = request.form.get("password")
+        is_active = request.form.get("is_active") == 'on'
 
-        if user_id:  # Update existing user
+        # Add validation
+        if not emp_id or not name or not email:
+            flash("Emp ID, Name, and Email are required!", "danger")
+            return redirect(url_for("admin_users"))
+
+        # Check if it's an existing user or a new one
+        if user_id:
             user = User.query.get(user_id)
             if user:
                 user.emp_id = emp_id
                 user.name = name
                 user.email = email
                 if password:
-                    user.set_password(password)
+                    user.password_hash = generate_password_hash(password)
                 user.is_active = is_active
+                flash("User updated successfully!", "success")
+            else:
+                flash("User not found!", "danger")
+                return redirect(url_for("admin_users"))
+        else:
+            # Create a new user
+            if not password:
+                flash("Password is required for a new user!", "danger")
+                return redirect(url_for("admin_users"))
 
-                # Update permissions
-                if user.access:
-                    for key, value in permissions.items():
-                        setattr(user.access, key, value)
-                else:
-                    user.access = UserAccess(**permissions)
-                db.session.commit()
-                flash("User updated successfully!")
-        else:  # Add new user
-            new_user = User(emp_id=emp_id, name=name,
-                            email=email, is_active=is_active)
-            new_user.set_password(password)
-            db.session.add(new_user)
-            db.session.flush()
+            existing_user = User.query.filter_by(email=email).first()
+            if existing_user:
+                flash("A user with that email already exists.", "danger")
+                return redirect(url_for("admin_users"))
 
-            new_user.access = UserAccess(user_id=new_user.id, **permissions)
-            db.session.add(new_user.access)
-            db.session.commit()
-            flash("User added successfully!")
+            user = User(
+                emp_id=emp_id,
+                name=name,
+                email=email,
+                password_hash=generate_password_hash(password),
+                is_active=is_active
+            )
+            db.session.add(user)
+            db.session.flush()  # Flush to get user.id for UserAccess
 
-        return redirect(url_for('admin_users'))
+            flash("User added successfully!", "success")
 
-    users = User.query.all()
+        # Update permissions
+        user_access = user.access if user and user.access else UserAccess(
+            user_id=user.id)
 
-    # Convert access to dictionary for template usage
-    users_data = []
-    modules = ['banners', 'doctors', 'counters', 'testimonials', 'specialities',
-               'departments', 'health_packages', 'sports_packages', 'department_content', 'users', 'callback_requests', 'reviews']
+        # CORRECTED LOGIC: Check if each module is in the form data
+        for module in modules:
+            is_checked = request.form.get(module) == 'on'
+            setattr(user_access, module, is_checked)
+
+        if not user.access:
+            db.session.add(user_access)
+
+        db.session.commit()
+
+        return redirect(url_for("admin_users"))
+
+    # CORRECTED LOGIC FOR THE GET REQUEST
+    users_with_access = []
     for user in users:
-        access_dict = {module: False for module in modules}
+        access_dict = {}
         if user.access:
             for module in modules:
                 access_dict[module] = getattr(user.access, module, False)
-        users_data.append({
+
+        users_with_access.append({
             'id': user.id,
             'emp_id': user.emp_id,
             'name': user.name,
             'email': user.email,
             'is_active': user.is_active,
-            'access': access_dict
+            'access': access_dict  # This is now a simple dictionary
         })
 
-    return render_template('admin/users.html', users=users_data)
+    return render_template('admin/users.html', users=users_with_access, modules=modules)
 
 
 @app.route('/admin/users/delete/<int:user_id>', methods=['POST'])
@@ -1856,6 +1921,8 @@ def request_callback():
 
 
 @app.route('/admin/callbacks')
+@login_required
+@permission_required('callback_requests')
 def admin_callbacks():
     package_type = request.args.get(
         'package_type', 'health')  # 'health' or 'sports'
@@ -1956,6 +2023,8 @@ def thank_you():
 
 
 @app.route("/admin/reviews")
+@login_required
+@permission_required('reviews')
 def admin_reviews():
     reviews = ReviewMessage.query.order_by(
         ReviewMessage.created_at.desc()).all()
