@@ -56,6 +56,41 @@
   <script>(function (w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-TD2L5G6C');</script>
 
 </head>
+<style>
+  .breadcrumb-section {
+    padding: 10px 0;
+    background-color: #f8f9fa;
+  }
+
+  .breadcrumb {
+    margin-bottom: 0;
+    padding: 0.75rem 1rem;
+  }
+
+  .breadcrumb-item+.breadcrumb-item::before {
+    content: ">>";
+    padding: 0 0.5rem;
+  }
+
+  .breadcrumb-item a {
+    color: #007bff;
+    text-decoration: none;
+  }
+
+  .breadcrumb-item.active {
+    color: #6c757d;
+  }
+</style>
+<section class="breadcrumb-section">
+  <div class="container">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item">Sports Packages</li>
+      </ol>
+    </nav>
+  </div>
+</section>
 
 <div class="health-packages-container">
   {% for package in packages %}

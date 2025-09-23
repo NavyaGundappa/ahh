@@ -1,206 +1,182 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "admin_layout.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <title>Manage Counters</title>
+{% block title %}
+Manage Counters - Admin Panel
+{% endblock %}
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        .counter-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+{% block content %}
+<h2 class="mb-4 text-2xl font-bold">Manage Counters</h2>
+<div class="flex justify-end mb-3">
+    <a href="{{ url_for('admin_dashboard') }}"
+        class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded transition">
+        Back to Dashboard
+    </a>
+</div>
 
-        .counter-info {
-            flex-grow: 1;
-        }
-
-        .counter-actions {
-            display: flex;
-            gap: 10px;
-        }
-
-        .icon-preview {
-            width: 30px;
-            height: 30px;
-            object-fit: contain;
-            margin-right: 10px;
-        }
-
-        .alert {
-            transition: opacity 0.5s ease;
-        }
-    </style>
-</head>
-
-<body class="container py-4">
-
-    <!-- Flash Messages -->
-
-
-    <h2 class="mb-4">Manage Counters</h2>
-    <div class="d-flex justify-content-end mb-3">
-        <a href="{{ url_for('admin_dashboard') }}" class="btn btn-secondary">
-            Back to Dashboard
-        </a>
+<form method="POST" enctype="multipart/form-data" class="mb-4 p-6 border rounded shadow-md bg-white">
+    <h4 class="mb-3 text-lg font-semibold">Add New Counter</h4>
+    <div class="mb-3">
+        <label class="block text-gray-700 text-sm font-bold mb-2">Label</label>
+        <input type="text" name="label"
+            class="w-full px-3 py-2 border rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required>
     </div>
+    <div class="mb-3">
+        <label class="block text-gray-700 text-sm font-bold mb-2">Count</label>
+        <input type="number" name="count"
+            class="w-full px-3 py-2 border rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required>
+    </div>
+    <div class="mb-3">
+        <label class="block text-gray-700 text-sm font-bold mb-2">Suffix</label>
+        <input type="text" name="suffix"
+            class="w-full px-3 py-2 border rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            value="+">
+    </div>
+    <div class="mb-3">
+        <label class="block text-gray-700 text-sm font-bold mb-2">Icon</label>
+        <input type="file" name="icon_file"
+            class="w-full px-3 py-2 border rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            accept=".svg,.png,.jpg,.jpeg">
+    </div>
+    <button type="submit" class="bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 transition">
+        <i class="fas fa-plus-circle me-1"></i> Add Counter
+    </button>
+</form>
 
-    <!-- Add Counter Form -->
-    <form method="POST" enctype="multipart/form-data" class="mb-4 p-4 border rounded bg-light">
-        <h4 class="mb-3">Add New Counter</h4>
-        <div class="mb-3">
-            <label class="form-label">Label</label>
-            <input type="text" name="label" class="form-control" required>
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Count</label>
-            <input type="number" name="count" class="form-control" required>
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Suffix</label>
-            <input type="text" name="suffix" class="form-control" value="+">
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Icon</label>
-            <input type="file" name="icon_file" class="form-control" accept=".svg,.png,.jpg,.jpeg">
-        </div>
-        <button type="submit" class="btn btn-info">
-            <i class="fas fa-plus-circle me-1"></i> Add Counter
-        </button>
-    </form>
+<h3 class="mt-5 mb-3 text-lg font-bold">Existing Counters</h3>
 
-    <!-- Counters List -->
-    <h3 class="mt-5 mb-3">Existing Counters</h3>
-
-    {% if counters %}
-    <ul class="list-group">
-        {% for counter in counters %}
-        <li class="list-group-item">
-            <div class="counter-item">
-                <div class="counter-info d-flex align-items-center">
+{% if counters %}
+<div class="overflow-x-auto bg-white rounded shadow-md">
+    <table class="min-w-full leading-normal">
+        <thead>
+            <tr>
+                <th
+                    class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                    Icon</th>
+                <th
+                    class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                    Label</th>
+                <th
+                    class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                    Count</th>
+                <th
+                    class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                    Suffix</th>
+                <th
+                    class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                    Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for counter in counters %}
+            <tr>
+                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                     {% if counter.icon_path %}
-                    <img src="{{ url_for('static', filename=counter.icon_path) }}" class="icon-preview">
+                    <img src="{{ url_for('static', filename=counter.icon_path) }}" class="w-10 h-10 object-contain">
                     {% else %}
-                    <i class="fas fa-image icon-preview text-muted"></i>
+                    <i class="fas fa-image text-gray-400 text-2xl"></i>
                     {% endif %}
-                    <div>
-                        <strong>{{ counter.label }}</strong>: {{ counter.count }}{{ counter.suffix }}
-                    </div>
-                </div>
-                <div class="counter-actions">
-                    <!-- Edit Button (opens modal) -->
-                    <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal"
-                        data-bs-target="#editCounterModal" data-id="{{ counter.id }}" data-label="{{ counter.label }}"
-                        data-count="{{ counter.count }}" data-suffix="{{ counter.suffix }}"
-                        data-icon="{{ counter.icon_path }}">
+                </td>
+                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ counter.label }}</td>
+                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ counter.count }}</td>
+                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ counter.suffix }}</td>
+                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm space-x-2">
+                    <button type="button"
+                        class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded text-xs transition"
+                        data-id="{{ counter.id }}" data-label="{{ counter.label }}" data-count="{{ counter.count }}"
+                        data-suffix="{{ counter.suffix }}" data-icon="{{ counter.icon_path }}"
+                        onclick="openEditModal('{{ counter.id }}', '{{ counter.label }}', '{{ counter.count }}', '{{ counter.suffix }}', '{{ counter.icon_path }}')">
                         <i class="fas fa-edit"></i> Edit
                     </button>
 
-                    <!-- Delete Button -->
                     <form method="POST" action="{{ url_for('delete_counter', counter_id=counter.id) }}"
-                        onsubmit="return confirm('Are you sure you want to delete this counter?');">
-                        <button type="submit" class="btn btn-sm btn-danger">
+                        onsubmit="return confirm('Are you sure you want to delete this counter?');" class="inline">
+                        <button type="submit"
+                            class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded text-xs transition">
                             <i class="fas fa-trash-alt"></i> Delete
                         </button>
                     </form>
-                </div>
-            </div>
-        </li>
-        {% endfor %}
-    </ul>
-    {% else %}
-    <div class="alert alert-info">
-        No counters yet. Add your first counter using the form above.
-    </div>
-    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+<div class="bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded relative" role="alert">
+    No counters yet. Add your first counter using the form above.
+</div>
+{% endif %}
 
-    <!-- Edit Counter Modal -->
-    <div class="modal fade" id="editCounterModal" tabindex="-1" aria-labelledby="editCounterModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
+<div id="editCounterModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden">
+    <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+        <div class="mt-3 text-center">
+            <h3 class="text-lg leading-6 font-medium text-gray-900">Edit Counter</h3>
+            <div class="mt-2 px-7 py-3">
                 <form method="POST" enctype="multipart/form-data" id="editCounterForm">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="editCounterModalLabel">Edit Counter</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <input type="hidden" name="counter_id" id="editCounterId">
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2">Label</label>
+                        <input type="text" name="label" id="editLabel" class="w-full px-3 py-2 border rounded shadow-sm"
+                            required>
                     </div>
-                    <div class="modal-body">
-                        <input type="hidden" name="counter_id" id="editCounterId">
-                        <div class="mb-3">
-                            <label class="form-label">Label</label>
-                            <input type="text" name="label" id="editLabel" class="form-control" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Count</label>
-                            <input type="number" name="count" id="editCount" class="form-control" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Suffix</label>
-                            <input type="text" name="suffix" id="editSuffix" class="form-control">
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Current Icon</label><br>
-                            <img id="currentIconPreview" src="" width="50" class="mb-2">
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Change Icon</label>
-                            <input type="file" name="icon_file" class="form-control" accept=".svg,.png,.jpg,.jpeg">
-                        </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2">Count</label>
+                        <input type="number" name="count" id="editCount"
+                            class="w-full px-3 py-2 border rounded shadow-sm" required>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-success">
-                            <i class="fas fa-save me-1"></i> Save Changes
-                        </button>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2">Suffix</label>
+                        <input type="text" name="suffix" id="editSuffix"
+                            class="w-full px-3 py-2 border rounded shadow-sm">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2">Current Icon</label><br>
+                        <img id="currentIconPreview" src="" class="w-12 h-12 mb-2 object-contain" alt="Current Icon">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2">Change Icon</label>
+                        <input type="file" name="icon_file" class="w-full px-3 py-2 border rounded shadow-sm"
+                            accept=".svg,.png,.jpg,.jpeg">
+                    </div>
+                    <div class="flex items-center justify-between mt-4">
+                        <button type="submit"
+                            class="bg-blue-500 text-white px-4 py-2 rounded font-bold hover:bg-blue-700 transition">Save
+                            Changes</button>
+                        <button type="button" onclick="closeModal('editCounterModal')"
+                            class="bg-gray-500 text-white px-4 py-2 rounded font-bold hover:bg-gray-700 transition ml-2">Cancel</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+</div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        // Auto-hide flash messages after 5 seconds
-        setTimeout(() => {
-            const alerts = document.querySelectorAll('.alert');
-            alerts.forEach(alert => {
-                alert.style.opacity = '0';
-                setTimeout(() => alert.remove(), 500);
-            });
-        }, 5000);
+<script>
+    function openEditModal(id, label, count, suffix, icon) {
+        document.getElementById('editCounterId').value = id;
+        document.getElementById('editLabel').value = label;
+        document.getElementById('editCount').value = count;
+        document.getElementById('editSuffix').value = suffix;
 
-        // Fill modal with counter data
-        const editModal = document.getElementById('editCounterModal');
-        editModal.addEventListener('show.bs.modal', event => {
-            const button = event.relatedTarget;
-            const id = button.getAttribute('data-id');
-            const label = button.getAttribute('data-label');
-            const count = button.getAttribute('data-count');
-            const suffix = button.getAttribute('data-suffix');
-            const icon = button.getAttribute('data-icon');
+        const preview = document.getElementById('currentIconPreview');
+        if (icon && icon !== "None") { // Handle case where icon_path is empty
+            preview.src = "{{ url_for('static', filename='') }}" + icon;
+            preview.classList.remove('hidden');
+        } else {
+            preview.src = '';
+            preview.classList.add('hidden');
+        }
 
-            // Fill form fields
-            document.getElementById('editCounterId').value = id;
-            document.getElementById('editLabel').value = label;
-            document.getElementById('editCount').value = count;
-            document.getElementById('editSuffix').value = suffix;
+        const form = document.getElementById('editCounterForm');
+        form.action = "{{ url_for('edit_counter', counter_id=0) }}".replace('/0', '/' + id);
 
-            const preview = document.getElementById('currentIconPreview');
-            if (icon) {
-                preview.src = "/static/" + icon;
-                preview.style.display = "inline";
-            } else {
-                preview.style.display = "none";
-            }
+        document.getElementById('editCounterModal').classList.remove('hidden');
+    }
 
-            // Set form action dynamically
-            const form = document.getElementById('editCounterForm');
-            form.action = "/admin/counters/edit/" + id;
-        });
-    </script>
-</body>
-
-</html>
+    function closeModal(modalId) {
+        document.getElementById(modalId).classList.add('hidden');
+    }
+</script>
+{% endblock %}

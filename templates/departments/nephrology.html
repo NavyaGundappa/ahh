@@ -3,6 +3,42 @@
 {% block title %}{{ department.name }} - Aarogya Hastha{% endblock %}
 
 {% block content %}
+<style>
+    .breadcrumb-section {
+        padding: 10px 0;
+        background-color: #f8f9fa;
+    }
+
+    .breadcrumb {
+        margin-bottom: 0;
+        padding: 0.75rem 1rem;
+    }
+
+    .breadcrumb-item+.breadcrumb-item::before {
+        content: ">>";
+        padding: 0 0.5rem;
+    }
+
+    .breadcrumb-item a {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+    .breadcrumb-item.active {
+        color: #6c757d;
+    }
+</style>
+<section class="breadcrumb-section">
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item"><a href="/departments/">Departments</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{ department.name }}</li>
+            </ol>
+        </nav>
+    </div>
+</section>
 <section class="department-banner" data-aos="fade-up" data-aos-offset="300" data-aos-easing="ease-in-sine">
     <div class="container">
         <div class="banner">
@@ -83,7 +119,6 @@
 
         <div class="tab-pane fade" id="specialists-tab-pane" role="tabpanel" aria-labelledby="specialists-tab">
             <section class="py-4">
-                <h2>Our Specialists</h2>
                 <div id="specialists-list" class="appointment-section">
                     <div class="row g-3">
                         {% set ns = namespace(has_doctors=False) %}

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Admin Panel{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 font-sans flex min-h-screen">
+
+    <aside class="w-64 bg-blue-600 text-white flex flex-col flex-shrink-0">
+        <div class="p-6 text-xl font-bold">Admin Panel</div>
+
+        <nav class="flex flex-col space-y-2 p-4 flex-grow">
+            {% if access['banners'] %}
+            <a href="{{ url_for('admin_banners') }}"
+                class="flex items-center px-3 py-2 rounded hover:bg-blue-500 transition">Banners</a>
+            {% endif %}
+            {% if access['doctors'] %}
+            <a href="{{ url_for('admin_doctors') }}"
+                class="flex items-center px-3 py-2 rounded hover:bg-blue-500 transition">Doctors</a>
+            {% endif %}
+            {% if access['counters'] %}
+            <a href="{{ url_for('admin_counters') }}"
+                class="flex items-center px-3 py-2 rounded hover:bg-blue-500 transition">Counters</a>
+            {% endif %}
+            {% if access['testimonials'] %}
+            <a href="{{ url_for('admin_testimonials') }}"
+                class="flex items-center px-3 py-2 rounded hover:bg-blue-500 transition">Testimonials</a>
+            {% endif %}
+            {% if access['specialities'] %}
+            <a href="{{ url_for('admin_specialities') }}"
+                class="flex items-center px-3 py-2 rounded hover:bg-blue-500 transition">Specialities</a>
+            {% endif %}
+            {% if access['departments'] %}
+            <a href="{{ url_for('admin_departments') }}"
+                class="flex items-center px-3 py-2 rounded hover:bg-blue-500 transition">Departments</a>
+            {% endif %}
+            {% if access['health_packages'] %}
+            <a href="{{ url_for('admin_health_packages') }}"
+                class="flex items-center px-3 py-2 rounded hover:bg-blue-500 transition">Health Packages</a>
+            {% endif %}
+            {% if access['sports_packages'] %}
+            <a href="{{ url_for('admin_sports_packages') }}"
+                class="flex items-center px-3 py-2 rounded hover:bg-blue-500 transition">Sports Packages</a>
+            {% endif %}
+            {% if access['department_content'] %}
+            <a href="{{ url_for('admin_department_services') }}"
+                class="flex items-center px-3 py-2 rounded hover:bg-blue-500 transition">Our Services</a>
+            <a href="{{ url_for('admin_department_overview') }}"
+                class="flex items-center px-3 py-2 rounded hover:bg-blue-500 transition">Overview</a>
+            {% endif %}
+            {% if access['users'] %}
+            <a href="{{ url_for('admin_users') }}"
+                class="flex items-center px-3 py-2 rounded hover:bg-blue-500 transition">Users</a>
+            {% endif %}
+            {% if access.callback_requests %}
+            <a href="{{ url_for('admin_callbacks') }}"
+                class="flex items-center px-3 py-2 rounded hover:bg-blue-500 transition">Callback Requests</a>
+            {% endif %}
+            {% if access.reviews %}
+            <a href="{{ url_for('admin_reviews') }}"
+                class="flex items-center px-3 py-2 rounded hover:bg-blue-500 transition">View Reviews</a>
+            {% endif %}
+        </nav>
+
+    </aside>
+
+    <main class="flex-1 p-10 overflow-y-auto">
+        <header class="flex justify-end items-center mb-8">
+            <div class="relative">
+                <button id="user-menu-button" type="button"
+                    class="flex items-center space-x-2 p-2 rounded-lg hover:bg-gray-200 transition">
+                    <span class="font-medium text-gray-700">{{ current_user.name }}</span>
+                    <svg class="w-5 h-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                        fill="currentColor">
+                        <path fill-rule="evenodd"
+                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                            clip-rule="evenodd" />
+                    </svg>
+                </button>
+
+                <div id="user-menu"
+                    class="hidden absolute right-0 mt-2 w-max bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 z-10">
+                    <div class="flex p-4 space-x-6">
+                        <div class="border-r border-gray-200 pr-6">
+                            <p class="font-bold text-gray-800">{{ current_user.name }}</p>
+                            <p class="text-sm text-gray-500">ID: {{ current_user.emp_id }}</p>
+                        </div>
+                        <div class="flex items-center">
+                            <a href="{{ url_for('admin_logout') }}"
+                                class="font-medium text-red-600 hover:text-red-800 transition">Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <script>
+        const userMenuButton = document.getElementById('user-menu-button');
+        const userMenu = document.getElementById('user-menu');
+
+        // Toggle dropdown on button click
+        userMenuButton.addEventListener('click', (event) => {
+            event.stopPropagation(); // Prevents the window click event from firing immediately
+            userMenu.classList.toggle('hidden');
+        });
+
+        // Close dropdown when clicking anywhere else on the page
+        window.addEventListener('click', (event) => {
+            if (!userMenu.classList.contains('hidden')) {
+                userMenu.classList.add('hidden');
+            }
+        });
+    </script>
+</body>
+
+</html>

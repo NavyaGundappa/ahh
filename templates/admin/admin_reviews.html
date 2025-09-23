@@ -1,112 +1,83 @@
-<!DOCTYPE html>
-<html>
+{% extends "admin_layout.html" %}
 
-<head>
-    <title>Admin - Review Messages</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
+{% block title %}
+Review Messages - Admin Panel
+{% endblock %}
 
-        .top-bar {
-            display: flex;
-            justify-content: space-between;
-            margin: 20px 0;
-        }
+{% block content %}
+<h2 class="text-2xl font-bold text-gray-800 mb-4">Submitted Messages</h2>
 
-        .btn {
-            padding: 8px 12px;
-            background: #333;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 4px;
-        }
-
-        .btn:hover {
-            background: #555;
-        }
-
-        table {
-            border-collapse: collapse;
-            width: 100%;
-            margin: 20px 0;
-        }
-
-        th,
-        td {
-            border: 1px solid #ddd;
-            padding: 10px;
-        }
-
-        th {
-            background: #333;
-            color: #fff;
-        }
-
-        tr:nth-child(even) {
-            background: #f2f2f2;
-        }
-
-        .search-box {
-            padding: 6px;
-            width: 250px;
-        }
-    </style>
-</head>
-
-<body>
-    <h2>Submitted Messages</h2>
-
-    <div class="top-bar">
-        <div>
-            <a href="/admin" class="btn">⬅ Back to Dashboard</a>
-        </div>
-        <div>
-            <input type="text" id="searchInput" class="search-box" placeholder="Search messages...">
-            <a href="/admin/reviews/export" class="btn">⬇ Download Excel</a>
-        </div>
+<div class="flex justify-between items-center mb-4">
+    <a href="{{ url_for('admin_dashboard') }}"
+        class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded transition">
+        Back to Dashboard
+    </a>
+    <div class="flex items-center space-x-2">
+        <input type="text" id="searchInput"
+            class="px-3 py-2 border rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="Search messages...">
+        <a href="{{ url_for('export_reviews') }}"
+            class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded transition">
+            Download Excel
+        </a>
     </div>
+</div>
 
-    <table id="reviewsTable">
+<div class="overflow-x-auto bg-white rounded shadow-md">
+    <table id="reviewsTable" class="min-w-full leading-normal">
         <thead>
             <tr>
-                <th>ID</th>
-                <th>Date</th>
-                <th>Name</th>
-                <th>Mobile</th>
-                <th>Email</th>
-                <th>Message</th>
+                <th
+                    class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                    ID</th>
+                <th
+                    class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                    Date</th>
+                <th
+                    class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                    Name</th>
+                <th
+                    class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                    Mobile</th>
+                <th
+                    class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                    Email</th>
+                <th
+                    class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                    Message</th>
             </tr>
         </thead>
         <tbody>
             {% for r in reviews %}
             <tr>
-                <td>{{ r.id }}</td>
-                <td>{{ r.created_at.strftime("%Y-%m-%d %H:%M") }}</td>
-                <td>{{ r.name }}</td>
-                <td>{{ r.mobile_number }}</td>
-                <td>{{ r.email }}</td>
-                <td>{{ r.message }}</td>
+                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ r.id }}</td>
+                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ r.created_at.strftime("%Y-%m-%d
+                    %H:%M") }}</td>
+                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ r.name }}</td>
+                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ r.mobile_number }}</td>
+                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ r.email }}</td>
+                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ r.message }}</td>
             </tr>
             {% else %}
             <tr>
-                <td colspan="6">No messages yet.</td>
+                <td colspan="6" class="text-center py-5">No messages yet.</td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
+</div>
 
-    <script>
-        // Simple search filter
-        document.getElementById('searchInput').addEventListener('keyup', function () {
-            const filter = this.value.toLowerCase();
-            const rows = document.querySelectorAll("#reviewsTable tbody tr");
-            rows.forEach(row => {
-                const text = row.innerText.toLowerCase();
-                row.style.display = text.includes(filter) ? "" : "none";
-            });
+<script>
+    document.getElementById('searchInput').addEventListener('keyup', function () {
+        const filter = this.value.toLowerCase();
+        const rows = document.querySelectorAll("#reviewsTable tbody tr");
+        rows.forEach(row => {
+            if (row.innerText.toLowerCase().includes(filter)) {
+                row.style.display = "";
+            } else {
+                row.style.display = "none";
+            }
         });
-    </script>
-</body>
-
-</html>
+    });
+</script>
+{% endblock %}

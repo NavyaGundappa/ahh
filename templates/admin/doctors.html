@@ -1,14 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "admin_layout.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <title>Manage Doctors</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head>
+{% block title %}
+Manage Doctors - Admin Panel
+{% endblock %}
 
-<body class="container py-4">
+{% block content %}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<div class="container py-4">
     <h2 class="mb-4">Manage Doctors</h2>
     <div class="d-flex justify-content-end mb-3">
         <a href="{{ url_for('admin_dashboard') }}" class="btn btn-secondary">
@@ -16,7 +16,6 @@
         </a>
     </div>
 
-    <!-- Add Doctor Form -->
     <form method="POST" enctype="multipart/form-data" class="mb-4 p-3 border rounded">
         <h4 class="mb-3">Add New Doctor</h4>
         <div class="row">
@@ -72,7 +71,6 @@
             <textarea name="overview" class="form-control" rows="2"></textarea>
         </div>
 
-        <!-- Fellowship & Membership Section -->
         <div class="mb-3 p-3 border rounded">
             <h5>Fellowship / Membership</h5>
             <div class="mb-3">
@@ -96,7 +94,6 @@
             <textarea name="field_of_expertise" class="form-control" rows="2"></textarea>
         </div>
 
-        <!-- Talks & Publications Section -->
         <div class="mb-3 p-3 border rounded">
             <h5>Talks & Publications</h5>
             <div class="mb-3">
@@ -115,14 +112,10 @@
             </div>
         </div>
 
-        <!-- Timings Section -->
-        <!-- Timings Section -->
-        <!-- Timings Section -->
         <div class="mb-3 p-3 border rounded">
             <h5>Doctor Availability</h5>
             <div id="timingsContainer">
                 <div class="timing-entry border p-3 mb-2 rounded" data-index="0">
-                    <!-- Days Selection -->
                     <label class="form-label d-block">Select Days *</label>
                     <div class="d-flex flex-wrap mb-2 days-container">
                         <div class="form-check me-2">
@@ -183,46 +176,6 @@
             <button type="button" class="btn btn-outline-primary btn-sm" id="addTimingBtn">+ Add More</button>
         </div>
 
-        <script>
-            let timingIndex = 1; // Start from 1 because 0 already exists
-
-            document.getElementById("addTimingBtn").addEventListener("click", function () {
-                const container = document.getElementById("timingsContainer");
-                const newEntry = document.querySelector(".timing-entry").cloneNode(true);
-
-                // Update data-index
-                newEntry.setAttribute("data-index", timingIndex);
-
-                // Update all input/select names and ids for the new index
-                newEntry.querySelectorAll("input, select, label").forEach(el => {
-                    if (el.tagName === "INPUT") {
-                        el.value = "";
-                        if (el.type === "checkbox") {
-                            const oldValue = el.value;
-                            el.name = `days[${timingIndex}][]`;
-                            el.id = oldValue.toLowerCase() + timingIndex;
-                        }
-                    }
-                    if (el.tagName === "SELECT") el.value = "AM";
-                    if (el.tagName === "LABEL") {
-                        const htmlFor = el.getAttribute("for");
-                        if (htmlFor) {
-                            const day = htmlFor.replace(/\d+$/, "");
-                            el.setAttribute("for", day + timingIndex);
-                        }
-                    }
-                });
-
-                container.appendChild(newEntry);
-                timingIndex++;
-            });
-        </script>
-
-
-
-
-        </div>
-
         <div class="mb-3">
             <label class="form-label">Appointment Link</label>
             <input type="url" name="appointment_link" class="form-control"
@@ -247,7 +200,6 @@
         <input type="text" id="doctorSearch" class="form-control" placeholder="Search doctors by name...">
     </div>
 
-    <!-- Existing Doctors Table -->
     <h3 class="mt-5">Existing Doctors</h3>
     <div class="table-responsive">
         <table class="table table-striped">
@@ -327,7 +279,6 @@
         </table>
     </div>
 
-    <!-- Edit Doctor Modal -->
     <div class="modal fade" id="doctorModal" tabindex="-1" aria-labelledby="doctorModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -393,7 +344,6 @@
                             <textarea name="overview" class="form-control" rows="2" id="doctor_overview"></textarea>
                         </div>
 
-                        <!-- Fellowship & Membership Section -->
                         <div class="mb-3 p-3 border rounded">
                             <h5>Fellowship / Membership</h5>
                             <div class="mb-3">
@@ -421,7 +371,6 @@
                                 id="doctor_field_of_expertise"></textarea>
                         </div>
 
-                        <!-- Talks & Publications Section -->
                         <div class="mb-3 p-3 border rounded">
                             <h5>Talks & Publications</h5>
                             <div class="mb-3">
@@ -442,14 +391,10 @@
                             </div>
                         </div>
 
-                        <!-- Timings -->
-                        <!-- Timings -->
-                        <!-- Timings Section in Modal -->
                         <div class="mb-3 p-3 border rounded">
                             <h5>Doctor Availability</h5>
                             <div id="modalTimingsContainer">
                                 <div class="timing-entry border p-3 mb-2 rounded" data-index="0">
-                                    <!-- Days Selection -->
                                     <label class="form-label d-block">Select Days *</label>
                                     <div class="d-flex flex-wrap mb-2 days-container">
                                         <div class="form-check me-2">
@@ -515,18 +460,9 @@
                                     </div>
                                 </div>
                             </div>
-
                             <button type="button" class="btn btn-outline-primary btn-sm" id="modalAddTimingBtn">+ Add
                                 More</button>
                         </div>
-                        // Attach modal "Add More" button
-                        <script>
-                            document.getElementById("modalAddTimingBtn").addEventListener("click", function () {
-                                addTimingEntry("modalTimingsContainer", true);
-                            });</script>
-
-
-
 
                         <div class="mb-3">
                             <label class="form-label">Appointment Link</label>
@@ -543,7 +479,6 @@
                             <input type="file" name="image" class="form-control" accept="image/*">
                             <div id="currentImagePreview" class="mt-2"></div>
                         </div>
-
                     </div>
 
                     <div class="modal-footer">
@@ -554,221 +489,170 @@
             </div>
         </div>
     </div>
+</div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        const editButtons = document.querySelectorAll('.editDoctorBtn');
-        const doctorModal = new bootstrap.Modal(document.getElementById('doctorModal'));
-
-        editButtons.forEach(btn => {
-            btn.addEventListener('click', () => {
-                document.getElementById('doctorForm').action = `/admin/doctors/edit/${btn.dataset.id}`;
-                document.getElementById('doctor_id').value = btn.dataset.id;
-                document.getElementById('doctor_name').value = btn.dataset.name;
-                document.getElementById('doctor_specialization').value = btn.dataset.specialization;
-                document.getElementById('doctor_department').value = btn.dataset.department || '';
-                document.getElementById('doctor_designation').value = btn.dataset.designation || '';
-                document.getElementById('doctor_experience').value = btn.dataset.experience || '';
-                document.getElementById('doctor_languages').value = btn.dataset.languages || '';
-                document.getElementById('doctor_bio').value = btn.dataset.bio || '';
-                document.getElementById('doctor_qualification').value = btn.dataset.qualification || '';
-                document.getElementById('doctor_overview').value = btn.dataset.overview || '';
-                document.getElementById('doctor_fellowship_membership').value = btn.dataset.fellowship_membership || '';
-                document.getElementById('doctor_fellowship_links').value = btn.dataset.fellowship_links || '';
-                document.getElementById('doctor_field_of_expertise').value = btn.dataset.field_of_expertise || '';
-                document.getElementById('doctor_talks_and_publications').value = btn.dataset.talks_and_publications || '';
-                document.getElementById('doctor_talks_links').value = btn.dataset.talks_links || '';
-                document.getElementById('doctor_slug').value = btn.dataset.slug || '';
-                document.getElementById('doctor_appointment_link').value = btn.dataset.appointment_link || '';
-
-                // Timings
-                // Clear all checkboxes first
-                document.querySelectorAll('#doctorModal input[type="checkbox"]').forEach(cb => cb.checked = false);
-
-                // Fill days
-                if (btn.dataset.days) {
-                    const days = btn.dataset.days.split(',');
-                    days.forEach(day => {
-                        const checkbox = document.querySelector(`#doctorModal input[value="${day}"]`);
-                        if (checkbox) checkbox.checked = true;
-                    });
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    let timingIndex = 1;
+    document.getElementById("addTimingBtn").addEventListener("click", function () {
+        const container = document.getElementById("timingsContainer");
+        const newEntry = document.querySelector(".timing-entry").cloneNode(true);
+        newEntry.setAttribute("data-index", timingIndex);
+        newEntry.querySelectorAll("input, select, label").forEach(el => {
+            if (el.tagName === "INPUT") {
+                el.value = "";
+                if (el.type === "checkbox") {
+                    const oldValue = el.value;
+                    el.name = `days[${timingIndex}][]`;
+                    el.id = oldValue.toLowerCase() + timingIndex;
                 }
-
-                // Fill time from
-                if (btn.dataset.time_from) {
-                    document.querySelector('#doctorModal input[name="time_from[]"]').value = btn.dataset.time_from;
-                }
-                if (btn.dataset.time_from_ampm) {
-                    document.querySelector('#doctorModal select[name="time_from_period[]"]').value = btn.dataset.time_from_ampm;
-                }
-
-                // Fill time to
-                if (btn.dataset.time_to) {
-                    document.querySelector('#doctorModal input[name="time_to[]"]').value = btn.dataset.time_to;
-                }
-                if (btn.dataset.time_to_ampm) {
-                    document.querySelector('#doctorModal select[name="time_to_period[]"]').value = btn.dataset.time_to_ampm;
-                }
-
-
-                // Image preview
-                const preview = document.getElementById('currentImagePreview');
-                if (btn.dataset.image) {
-                    preview.innerHTML = `<img src="/static/${btn.dataset.image}" width="100" height="100" style="object-fit: cover;">`;
-                } else {
-                    preview.innerHTML = '';
-                }
-
-                // Fellowship file preview
-                const fellowshipPreview = document.getElementById('currentFellowshipFile');
-                if (btn.dataset.fellowship_file) {
-                    fellowshipPreview.innerHTML = `
-                        <p>Current file: <a href="/static/${btn.dataset.fellowship_file}" target="_blank">View File</a></p>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="remove_fellowship_file" id="remove_fellowship_file">
-                            <label class="form-check-label" for="remove_fellowship_file">Remove current file</label>
-                        </div>
-                    `;
-                } else {
-                    fellowshipPreview.innerHTML = '';
-                }
-
-                // Talks file preview
-                const talksPreview = document.getElementById('currentTalksFile');
-                if (btn.dataset.talks_file) {
-                    talksPreview.innerHTML = `
-                        <p>Current file: <a href="/static/${btn.dataset.talks_file}" target="_blank">View File</a></p>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="remove_talks_file" id="remove_talks_file">
-                            <label class="form-check-label" for="remove_talks_file">Remove current file</label>
-                        </div>
-                    `;
-                } else {
-                    talksPreview.innerHTML = '';
-                }
-
-                doctorModal.show();
-            });
-        });
-
-        const doctorSearchInput = document.getElementById('doctorSearch');
-        const doctorsTable = document.querySelector('table tbody');
-        const doctorsRows = doctorsTable.getElementsByTagName('tr');
-
-        doctorSearchInput.addEventListener('keyup', function () {
-            const filter = this.value.toLowerCase();
-            for (let i = 0; i < doctorsRows.length; i++) {
-                const nameCell = doctorsRows[i].getElementsByTagName('td')[0];
-                if (nameCell) {
-                    const nameText = nameCell.textContent || nameCell.innerText;
-                    if (nameText.toLowerCase().indexOf(filter) > -1) {
-                        doctorsRows[i].style.display = "";
-                    } else {
-                        doctorsRows[i].style.display = "none";
-                    }
+            }
+            if (el.tagName === "SELECT") el.value = "AM";
+            if (el.tagName === "LABEL") {
+                const htmlFor = el.getAttribute("for");
+                if (htmlFor) {
+                    const day = htmlFor.replace(/\d+$/, "");
+                    el.setAttribute("for", day + timingIndex);
                 }
             }
         });
-    </script>
-    <script>
-        // Function to add timing entries (for both form and modal)
+        container.appendChild(newEntry);
+        timingIndex++;
+    });
 
+    document.getElementById("modalAddTimingBtn").addEventListener("click", function () {
+        addTimingEntry("modalTimingsContainer", true);
+    });
 
+    const editButtons = document.querySelectorAll('.editDoctorBtn');
+    const doctorModal = new bootstrap.Modal(document.getElementById('doctorModal'));
+    editButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.getElementById('doctorForm').action = `/admin/doctors/edit/${btn.dataset.id}`;
+            document.getElementById('doctor_id').value = btn.dataset.id;
+            document.getElementById('doctor_name').value = btn.dataset.name;
+            document.getElementById('doctor_specialization').value = btn.dataset.specialization;
+            document.getElementById('doctor_department').value = btn.dataset.department || '';
+            document.getElementById('doctor_designation').value = btn.dataset.designation || '';
+            document.getElementById('doctor_experience').value = btn.dataset.experience || '';
+            document.getElementById('doctor_languages').value = btn.dataset.languages || '';
+            document.getElementById('doctor_bio').value = btn.dataset.bio || '';
+            document.getElementById('doctor_qualification').value = btn.dataset.qualification || '';
+            document.getElementById('doctor_overview').value = btn.dataset.overview || '';
+            document.getElementById('doctor_fellowship_membership').value = btn.dataset.fellowship_membership || '';
+            document.getElementById('doctor_fellowship_links').value = btn.dataset.fellowship_links || '';
+            document.getElementById('doctor_field_of_expertise').value = btn.dataset.field_of_expertise || '';
+            document.getElementById('doctor_talks_and_publications').value = btn.dataset.talks_and_publications || '';
+            document.getElementById('doctor_talks_links').value = btn.dataset.talks_links || '';
+            document.getElementById('doctor_slug').value = btn.dataset.slug || '';
+            document.getElementById('doctor_appointment_link').value = btn.dataset.appointment_link || '';
 
-        // Add timing functionality for modal
-        function addTimingEntry(containerId, isModal = false) {
-            const container = document.getElementById(containerId);
-            const firstEntry = container.querySelector(".timing-entry");
-            const newEntry = firstEntry.cloneNode(true);
-
-            // Calculate new index
-            const existingEntries = container.querySelectorAll(".timing-entry");
-            const newIndex = existingEntries.length;
-
-            newEntry.setAttribute("data-index", newIndex);
-
-            // Reset values and update names/ids
-            newEntry.querySelectorAll("input, select, label").forEach(el => {
-                if (el.tagName === "INPUT") {
-                    if (el.type === "checkbox") {
-                        const oldValue = el.value;
-                        el.name = `days[${newIndex}][]`;
-                        el.id = (isModal ? "modal_" : "") + oldValue.toLowerCase() + newIndex;
-                        el.checked = false;
-                    } else if (el.type === "time") {
-                        el.value = "";
-                    }
-                }
-                if (el.tagName === "SELECT") el.value = "AM";
-                if (el.tagName === "LABEL") {
-                    const htmlFor = el.getAttribute("for");
-                    if (htmlFor) {
-                        const prefix = isModal ? "modal_" : "";
-                        const day = htmlFor.replace(/(modal_)?[a-z]+\d+$/, "").replace(/\d+$/, "");
-                        el.setAttribute("for", prefix + day + newIndex);
-                    }
-                }
-            });
-
-            // Add remove button
-            const removeBtn = document.createElement("button");
-            removeBtn.type = "button";
-            removeBtn.className = "btn btn-sm btn-danger remove-timing ms-2";
-            removeBtn.innerHTML = "×";
-            removeBtn.onclick = function () {
-                newEntry.remove();
-            };
-
-            // Add header if it doesn't exist
-            let headerDiv = newEntry.querySelector(".d-flex.justify-content-between");
-            if (!headerDiv) {
-                const header = document.createElement("div");
-                header.className = "d-flex justify-content-between align-items-center mb-2";
-                header.innerHTML = `<h6 class="mb-0">Time Slot ${newIndex + 1}</h6>`;
-                header.appendChild(removeBtn);
-                newEntry.insertBefore(header, newEntry.firstChild);
-            } else {
-                headerDiv.appendChild(removeBtn);
+            document.querySelectorAll('#doctorModal input[type="checkbox"]').forEach(cb => cb.checked = false);
+            if (btn.dataset.days) {
+                const days = btn.dataset.days.split(',');
+                days.forEach(day => {
+                    const checkbox = document.querySelector(`#doctorModal input[value="${day}"]`);
+                    if (checkbox) checkbox.checked = true;
+                });
+            }
+            if (btn.dataset.time_from) {
+                document.querySelector('#doctorModal input[name="time_from[]"]').value = btn.dataset.time_from;
+            }
+            if (btn.dataset.time_from_ampm) {
+                document.querySelector('#doctorModal select[name="time_from_period[]"]').value = btn.dataset.time_from_ampm;
+            }
+            if (btn.dataset.time_to) {
+                document.querySelector('#doctorModal input[name="time_to[]"]').value = btn.dataset.time_to;
+            }
+            if (btn.dataset.time_to_ampm) {
+                document.querySelector('#doctorModal select[name="time_to_period[]"]').value = btn.dataset.time_to_ampm;
             }
 
-            container.appendChild(newEntry);
+            const preview = document.getElementById('currentImagePreview');
+            preview.innerHTML = btn.dataset.image ? `<img src="/static/${btn.dataset.image}" width="100" height="100" style="object-fit: cover;">` : '';
+
+            const fellowshipPreview = document.getElementById('currentFellowshipFile');
+            fellowshipPreview.innerHTML = btn.dataset.fellowship_file ? `<p>Current file: <a href="/static/${btn.dataset.fellowship_file}" target="_blank">View File</a></p><div class="form-check"><input class="form-check-input" type="checkbox" name="remove_fellowship_file" id="remove_fellowship_file"><label class="form-check-label" for="remove_fellowship_file">Remove current file</label></div>` : '';
+
+            const talksPreview = document.getElementById('currentTalksFile');
+            talksPreview.innerHTML = btn.dataset.talks_file ? `<p>Current file: <a href="/static/${btn.dataset.talks_file}" target="_blank">View File</a></p><div class="form-check"><input class="form-check-input" type="checkbox" name="remove_talks_file" id="remove_talks_file"><label class="form-check-label" for="remove_talks_file">Remove current file</label></div>` : '';
+
+            doctorModal.show();
+        });
+    });
+
+    const doctorSearchInput = document.getElementById('doctorSearch');
+    const doctorsRows = document.querySelector('table tbody').getElementsByTagName('tr');
+    doctorSearchInput.addEventListener('keyup', function () {
+        const filter = this.value.toLowerCase();
+        for (let row of doctorsRows) {
+            const nameCell = row.getElementsByTagName('td')[0];
+            if (nameCell) {
+                const nameText = nameCell.textContent || nameCell.innerText;
+                row.style.display = nameText.toLowerCase().indexOf(filter) > -1 ? "" : "none";
+            }
         }
+    });
 
-        // Add remove functionality to existing entries when modal opens
-        document.getElementById('doctorModal').addEventListener('show.bs.modal', function () {
-            // Add remove buttons to existing modal entries
-            const modalEntries = document.querySelectorAll('#modalTimingsContainer .timing-entry');
-            modalEntries.forEach(entry => {
-                if (!entry.querySelector('.remove-timing')) {
-                    const removeBtn = document.createElement("button");
-                    removeBtn.type = "button";
-                    removeBtn.className = "btn btn-sm btn-danger remove-timing";
-                    removeBtn.innerHTML = "×";
-                    removeBtn.onclick = function () {
-                        entry.remove();
-                    };
+    function addTimingEntry(containerId, isModal = false) {
+        const container = document.getElementById(containerId);
+        const newEntry = container.querySelector(".timing-entry").cloneNode(true);
+        const newIndex = container.querySelectorAll(".timing-entry").length;
+        newEntry.setAttribute("data-index", newIndex);
 
-                    const headerDiv = entry.querySelector(".d-flex");
-                    if (headerDiv) {
-                        headerDiv.appendChild(removeBtn);
-                    } else {
-                        // Create header if it doesn't exist
-                        const index = entry.getAttribute("data-index");
-                        const header = document.createElement("div");
-                        header.className = "d-flex justify-content-between align-items-center mb-2";
-                        header.innerHTML = `<h6 class="mb-0">Time Slot ${parseInt(index) + 1}</h6>`;
-                        header.appendChild(removeBtn);
-                        entry.insertBefore(header, entry.firstChild);
-                    }
+        newEntry.querySelectorAll("input, select, label").forEach(el => {
+            if (el.tagName === "INPUT") {
+                if (el.type === "checkbox") {
+                    const oldValue = el.value;
+                    el.name = `days[${newIndex}][]`;
+                    el.id = (isModal ? "modal_" : "") + oldValue.toLowerCase() + newIndex;
+                    el.checked = false;
+                } else {
+                    el.value = "";
                 }
-            });
+            }
+            if (el.tagName === "SELECT") el.value = "AM";
+            if (el.tagName === "LABEL") {
+                const htmlFor = el.getAttribute("for");
+                if (htmlFor) {
+                    const day = htmlFor.replace(/(modal_)?[a-z]+|\d+/g, "");
+                    el.setAttribute("for", (isModal ? "modal_" : "") + day + newIndex);
+                }
+            }
         });
 
-        // Rest of your existing JavaScript code...
+        const removeBtn = document.createElement("button");
+        removeBtn.type = "button";
+        removeBtn.className = "btn btn-sm btn-danger remove-timing ms-auto";
+        removeBtn.innerHTML = "&times;";
+        removeBtn.onclick = () => newEntry.remove();
 
-        // ... keep the rest of your JavaScript code as is
-    </script>
+        let header = newEntry.querySelector(".d-flex.justify-content-between");
+        if (!header) {
+            header = document.createElement("div");
+            header.className = "d-flex justify-content-between align-items-center mb-2";
+            let title = document.createElement("h6");
+            title.className = "mb-0";
+            title.innerText = `Time Slot ${newIndex + 1}`;
+            header.appendChild(title);
+            newEntry.insertBefore(header, newEntry.firstChild);
+        }
+        header.appendChild(removeBtn);
+        container.appendChild(newEntry);
+    }
 
-</body>
+    document.getElementById('doctorModal').addEventListener('show.bs.modal', function () {
+        document.querySelectorAll('#modalTimingsContainer .timing-entry').forEach(entry => {
+            if (!entry.querySelector('.remove-timing')) {
+                const removeBtn = document.createElement("button");
+                removeBtn.type = "button";
+                removeBtn.className = "btn btn-sm btn-danger remove-timing";
+                removeBtn.innerHTML = "&times;";
+                removeBtn.onclick = () => entry.remove();
+                entry.querySelector(".days-container").prepend(removeBtn);
+            }
+        });
+    });
+</script>
 
-</html>
+{% endblock %}

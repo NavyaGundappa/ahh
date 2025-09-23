@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}{{ doctor.name }} - Doctor Profile - Aarogya Hastha{% endblock %}
+{% block title %}{{ doctor.name }} - {{ doctor.specialization }} - Aarogya Hastha{% endblock %}
 
 {% block content %}
 
@@ -638,7 +638,42 @@
             margin: 5px 0;
         }
     }
+
+    .breadcrumb-section {
+        padding: 10px 0;
+        background-color: #f8f9fa;
+    }
+
+    .breadcrumb {
+        margin-bottom: 0;
+        padding: 0.75rem 1rem;
+    }
+
+    .breadcrumb-item+.breadcrumb-item::before {
+        content: ">>";
+        padding: 0 0.5rem;
+    }
+
+    .breadcrumb-item a {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+    .breadcrumb-item.active {
+        color: #6c757d;
+    }
 </style>
+<section class="breadcrumb-section">
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item"><a href="/doctors">Doctors</a></li>
+                <li class="breadcrumb-item">{{ doctor.name }}</li>
+            </ol>
+        </nav>
+    </div>
+</section>
 
 <div class="doctor-profile-page">
     <div class="container">

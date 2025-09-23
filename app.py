@@ -70,7 +70,6 @@ def index():
                            specialities=specialities)  # Add this parameter
 
 
-# Departments listing page (already exists)
 @app.route('/departments/')
 def departments():
     departments = Department.query.filter_by(
@@ -170,15 +169,21 @@ def admin_dashboard():
     admin_id = session.get("admin_id")
     user = User.query.get(admin_id)
 
+    # If the user is somehow invalid, redirect to login
+    if not user:
+        flash("Could not find user. Please log in again.", "warning")
+        return redirect(url_for("admin_login"))
+
     modules = ['banners', 'doctors', 'counters', 'testimonials', 'specialities',
                'departments', 'health_packages', 'sports_packages', 'department_content', 'users', 'callback_requests', 'reviews']
 
     access = {module: False for module in modules}
-    if user and user.access:
+    if user.access:
         for module in modules:
             access[module] = getattr(user.access, module, False)
 
-    return render_template("admin/dashboard.html", access=access)
+    # FIX: Pass the `user` object to the template, which expects `current_user`
+    return render_template("admin/dashboard.html", access=access, current_user=user)
 
 
 @app.route('/admin/banners', methods=['GET', 'POST'])
@@ -231,7 +236,16 @@ def admin_banners():
 
     # Fetch banners for display
     banners = Banner.query.order_by(Banner.created_at.desc()).all()
-    return render_template('admin/banners.html', banners=banners)
+    admin_id = session.get("admin_id")
+    user = User.query.get(admin_id)
+    modules = ['banners', 'doctors', 'counters', 'testimonials', 'specialities',
+               'departments', 'health_packages', 'sports_packages', 'department_content', 'users', 'callback_requests', 'reviews']
+    access = {module: False for module in modules}
+    if user and user.access:
+        for module in modules:
+            access[module] = getattr(user.access, module, False)
+
+    return render_template('admin/banners.html', banners=banners, access=access, current_user=user)
 
 
 @app.route('/admin/banners/delete/<int:banner_id>', methods=['POST'])
@@ -440,8 +454,16 @@ def admin_doctors():
         except Exception:
             d.timings_parsed = []
             d.days_parsed = []
+    admin_id = session.get("admin_id")
+    user = User.query.get(admin_id)
+    modules = ['banners', 'doctors', 'counters', 'testimonials', 'specialities',
+               'departments', 'health_packages', 'sports_packages', 'department_content', 'users', 'callback_requests', 'reviews']
+    access = {module: False for module in modules}
+    if user and user.access:
+        for module in modules:
+            access[module] = getattr(user.access, module, False)
 
-    return render_template('admin/doctors.html', doctors=doctors, departments=departments)
+    return render_template('admin/doctors.html', doctors=doctors, departments=departments, access=access, current_user=user)
 
 
 @app.route('/admin/doctors/edit/<int:doctor_id>', methods=['GET', 'POST'])
@@ -829,7 +851,15 @@ def admin_counters():
         return redirect(url_for('admin_counters'))
 
     counters = Counter.query.all()
-    return render_template('admin/counters.html', counters=counters)
+    admin_id = session.get("admin_id")
+    user = User.query.get(admin_id)
+    modules = ['banners', 'doctors', 'counters', 'testimonials', 'specialities',
+               'departments', 'health_packages', 'sports_packages', 'department_content', 'users', 'callback_requests', 'reviews']
+    access = {module: False for module in modules}
+    if user and user.access:
+        for module in modules:
+            access[module] = getattr(user.access, module, False)
+    return render_template('admin/counters.html', counters=counters, access=access, current_user=user)
 
 
 @app.route('/admin/counters/edit/<int:counter_id>', methods=['GET', 'POST'])
@@ -908,7 +938,15 @@ def admin_testimonials():
 
     testimonials = Testimonial.query.order_by(
         Testimonial.created_at.desc()).all()
-    return render_template('admin/testimonials.html', testimonials=testimonials)
+    admin_id = session.get("admin_id")
+    user = User.query.get(admin_id)
+    modules = ['banners', 'doctors', 'counters', 'testimonials', 'specialities',
+               'departments', 'health_packages', 'sports_packages', 'department_content', 'users', 'callback_requests', 'reviews']
+    access = {module: False for module in modules}
+    if user and user.access:
+        for module in modules:
+            access[module] = getattr(user.access, module, False)
+    return render_template('admin/testimonials.html', testimonials=testimonials, access=access, current_user=user)
 
 # Route to delete testimonial
 
@@ -1151,7 +1189,15 @@ def admin_specialities():
             return redirect(url_for('admin_specialities'))
 
     specialities = Speciality.query.order_by(Speciality.name).all()
-    return render_template('admin/specialities.html', specialities=specialities)
+    admin_id = session.get("admin_id")
+    user = User.query.get(admin_id)
+    modules = ['banners', 'doctors', 'counters', 'testimonials', 'specialities',
+               'departments', 'health_packages', 'sports_packages', 'department_content', 'users', 'callback_requests', 'reviews']
+    access = {module: False for module in modules}
+    if user and user.access:
+        for module in modules:
+            access[module] = getattr(user.access, module, False)
+    return render_template('admin/specialities.html', specialities=specialities, access=access, current_user=user)
 
 
 @app.route('/admin/specialities/toggle/<int:speciality_id>', methods=['POST'])
@@ -1308,7 +1354,15 @@ def admin_departments():
 
     # ------------------ GET DEPARTMENTS ------------------
     departments = Department.query.order_by(Department.name).all()
-    return render_template('admin/departments.html', departments=departments)
+    admin_id = session.get("admin_id")
+    user = User.query.get(admin_id)
+    modules = ['banners', 'doctors', 'counters', 'testimonials', 'specialities',
+               'departments', 'health_packages', 'sports_packages', 'department_content', 'users', 'callback_requests', 'reviews']
+    access = {module: False for module in modules}
+    if user and user.access:
+        for module in modules:
+            access[module] = getattr(user.access, module, False)
+    return render_template('admin/departments.html', departments=departments, access=access, current_user=user)
 
 # departments -------end
 
@@ -1398,7 +1452,15 @@ def admin_health_packages():
         return redirect(url_for('admin_health_packages'))
 
     packages = HealthPackage.query.order_by(HealthPackage.title).all()
-    return render_template('admin/health-packages.html', packages=packages)
+    admin_id = session.get("admin_id")
+    user = User.query.get(admin_id)
+    modules = ['banners', 'doctors', 'counters', 'testimonials', 'specialities',
+               'departments', 'health_packages', 'sports_packages', 'department_content', 'users', 'callback_requests', 'reviews']
+    access = {module: False for module in modules}
+    if user and user.access:
+        for module in modules:
+            access[module] = getattr(user.access, module, False)
+    return render_template('admin/health-packages.html', packages=packages, access=access, current_user=user)
 
 
 @app.route('/api/toggle_package/<int:package_id>', methods=['POST'])
@@ -1501,7 +1563,15 @@ def admin_sports_packages():
         return redirect(url_for('admin_sports_packages'))
 
     packages = SportsPackage.query.order_by(SportsPackage.title).all()
-    return render_template('admin/sports_package.html', packages=packages)
+    admin_id = session.get("admin_id")
+    user = User.query.get(admin_id)
+    modules = ['banners', 'doctors', 'counters', 'testimonials', 'specialities',
+               'departments', 'health_packages', 'sports_packages', 'department_content', 'users', 'callback_requests', 'reviews']
+    access = {module: False for module in modules}
+    if user and user.access:
+        for module in modules:
+            access[module] = getattr(user.access, module, False)
+    return render_template('admin/sports_package.html', packages=packages, access=access, current_user=user)
 
 
 @app.route('/api/toggle_sports_package/<int:package_id>', methods=['POST'])
@@ -1569,7 +1639,15 @@ def admin_department_overview():
 
     overviews = DepartmentOverview.query.all()
     departments = Department.query.all()
-    return render_template("admin/department_overview.html", overviews=overviews, departments=departments)
+    admin_id = session.get("admin_id")
+    user = User.query.get(admin_id)
+    modules = ['banners', 'doctors', 'counters', 'testimonials', 'specialities',
+               'departments', 'health_packages', 'sports_packages', 'department_content', 'users', 'callback_requests', 'reviews']
+    access = {module: False for module in modules}
+    if user and user.access:
+        for module in modules:
+            access[module] = getattr(user.access, module, False)
+    return render_template("admin/department_overview.html", overviews=overviews, departments=departments, access=access, current_user=user)
 
 
 # ------------------ ADMIN: Department Services ------------------
@@ -1631,7 +1709,15 @@ def admin_department_services():
 
     services = DepartmentService.query.all()
     departments = Department.query.all()
-    return render_template("admin/department_services.html", services=services, departments=departments)
+    admin_id = session.get("admin_id")
+    user = User.query.get(admin_id)
+    modules = ['banners', 'doctors', 'counters', 'testimonials', 'specialities',
+               'departments', 'health_packages', 'sports_packages', 'department_content', 'users', 'callback_requests', 'reviews']
+    access = {module: False for module in modules}
+    if user and user.access:
+        for module in modules:
+            access[module] = getattr(user.access, module, False)
+    return render_template("admin/department_services.html", services=services, departments=departments, access=access, current_user=user)
 
 
 @app.route('/admin/delete_overview/<int:id>', methods=['POST'])
@@ -1882,8 +1968,23 @@ def admin_users():
             'is_active': user.is_active,
             'access': access_dict  # This is now a simple dictionary
         })
+        admin_id = session.get("admin_id")
+    user = User.query.get(admin_id)
 
-    return render_template('admin/users.html', users=users_with_access, modules=modules)
+    # If the user is somehow invalid, redirect to login
+    if not user:
+        flash("Could not find user. Please log in again.", "warning")
+        return redirect(url_for("admin_login"))
+
+    modules = ['banners', 'doctors', 'counters', 'testimonials', 'specialities',
+               'departments', 'health_packages', 'sports_packages', 'department_content', 'users', 'callback_requests', 'reviews']
+
+    access = {module: False for module in modules}
+    if user.access:
+        for module in modules:
+            access[module] = getattr(user.access, module, False)
+
+    return render_template('admin/users.html', users=users_with_access, modules=modules, access=access, current_user=user)
 
 
 @app.route('/admin/users/delete/<int:user_id>', methods=['POST'])
@@ -1924,12 +2025,22 @@ def request_callback():
 @login_required
 @permission_required('callback_requests')
 def admin_callbacks():
-    package_type = request.args.get(
-        'package_type', 'health')  # 'health' or 'sports'
+    # --- FIX: Define admin_id and get user at the beginning ---
+    admin_id = session.get("admin_id")
+    user = User.query.get(admin_id)
+
+    # If the user is somehow invalid, redirect to login
+    if not user:
+        flash("Could not find user. Please log in again.", "warning")
+        return redirect(url_for("admin_login"))
+
+    # Get query parameters
+    package_type = request.args.get('package_type', 'health')
     package_title = request.args.get('package', '')
     start_date = request.args.get('start_date')
     end_date = request.args.get('end_date')
 
+    # Build the callback query
     callbacks = CallbackRequest.query
 
     if package_title:
@@ -1941,17 +2052,37 @@ def admin_callbacks():
 
     if end_date:
         end_dt = datetime.strptime(end_date, "%Y-%m-%d")
+        # For 'less than or equal to', you might need to add a full day
+        end_dt = end_dt.replace(hour=23, minute=59, second=59)
         callbacks = callbacks.filter(CallbackRequest.created_at <= end_dt)
 
     callbacks = callbacks.order_by(CallbackRequest.created_at.desc()).all()
 
-    # Get packages for dropdown based on type
+    # Get packages for the dropdown filter
     if package_type == 'health':
         packages = HealthPackage.query.filter_by(is_active=True).all()
     else:
         packages = SportsPackage.query.filter_by(is_active=True).all()
 
-    return render_template('admin/admin_callbacks.html', callbacks=callbacks, packages=packages, package_type=package_type)
+    # --- FIX: Removed duplicated code for getting user access ---
+    modules = [
+        'banners', 'doctors', 'counters', 'testimonials', 'specialities',
+        'departments', 'health_packages', 'sports_packages',
+        'department_content', 'users', 'callback_requests', 'reviews'
+    ]
+    access = {module: False for module in modules}
+    if user.access:
+        for module in modules:
+            access[module] = getattr(user.access, module, False)
+
+    return render_template(
+        'admin/admin_callbacks.html',
+        callbacks=callbacks,
+        packages=packages,
+        package_type=package_type,
+        access=access,
+        current_user=user
+    )
 
 
 @app.route('/admin/callbacks/download')
@@ -2019,8 +2150,6 @@ def submit_review():
 def thank_you():
     return "<h2>Thank you for your message. Management will get back to you soon.</h2>"
 
-# Simple Admin Page
-
 
 @app.route("/admin/reviews")
 @login_required
@@ -2028,7 +2157,30 @@ def thank_you():
 def admin_reviews():
     reviews = ReviewMessage.query.order_by(
         ReviewMessage.created_at.desc()).all()
-    return render_template("admin/admin_reviews.html", reviews=reviews)
+    admin_id = session.get("admin_id")
+    user = User.query.get(admin_id)
+
+    # If the user is somehow invalid, redirect to login
+    if not user:
+        flash("Could not find user. Please log in again.", "warning")
+        return redirect(url_for("admin_login"))
+
+    modules = ['banners', 'doctors', 'counters', 'testimonials', 'specialities',
+               'departments', 'health_packages', 'sports_packages', 'department_content', 'users', 'callback_requests', 'reviews']
+
+    access = {module: False for module in modules}
+    if user.access:
+        for module in modules:
+            access[module] = getattr(user.access, module, False)
+    admin_id = session.get("admin_id")
+    user = User.query.get(admin_id)
+    modules = ['banners', 'doctors', 'counters', 'testimonials', 'specialities',
+               'departments', 'health_packages', 'sports_packages', 'department_content', 'users', 'callback_requests', 'reviews']
+    access = {module: False for module in modules}
+    if user and user.access:
+        for module in modules:
+            access[module] = getattr(user.access, module, False)
+    return render_template("admin/admin_reviews.html", reviews=reviews, access=access, current_user=user)
 
 
 @app.route("/admin/reviews/export")

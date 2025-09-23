@@ -1,8 +1,9 @@
 {% extends "base.html" %}
 
-{% block title %}About Us - Aarogya Hastha{% endblock %}
+{% block title %}Doctors - Aarogya Hastha{% endblock %}
 
 {% block content %}
+
 <head>
     <meta charset="utf-8">
     <meta name="language" content="english">
@@ -59,316 +60,316 @@
 
 
 
-    <div class="page-container">
-        <div class="container" id="doctorProfile"></div>
-    </div>
+<div class="page-container">
+    <div class="container" id="doctorProfile"></div>
+</div>
 
-      
-    <!-- scripts -->
-    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-    <script src="static/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="static/js/script.js"></script>
-    <script src="https://fyndbetter.com/chatbot/aarogya_chatbot"></script>
-    <script>
-        $(".book-apt").on('click', function () {
-            var url = $(this).data("url");
-            window.open(url, '_blank');
-        });
 
-        const doctors = {
-            "mahima-shetty": {
-                name: "Dr. Mahima Shetty KR",
-                image: "static/img/doctors/mahima-shetty.jpg",
-                specialty: "Paediatrics",
-                designation: "Senior Consultant – Paediatrics",
-                experience: "17 Years",
-                consultation: "Monday to Saturday - 09.30 AM to 11.15 AM & 05:00 PM to 05.45 PM",
-                expertise: "Neonatology & Paediatric Infectious Diseases, Paediatric Allergies & Asthma, General Paediatrics and Immunisation",
-                languages: "English, Kannada and Hindi",
-                contact: "For appointments: 080 6666 8811/22/33\nFor Emergency (24/7): 080 6666 8877/88\nEmail: info@aarogyahastha.com"
-            },
-            "shalini-agasthi": {
-                name: "Dr. Shalini G. Agasthi",
-                image: "static/img/doctors/shalini-agasthi.jpg",
-                specialty: "Paediatrics",
-                designation: "Senior Consultant – Paediatrics",
-                experience: "27 Years",
-                consultation: "Monday - Saturday - 05:00 PM to 08:00 PM",
-                membership: "Executive Board Member - Indian Academy of Paediatrics, Paediatrics Society, BPS, EBM BAHA",
-                languages: "English, Kannada, Hindi, and Telugu"
-            },
-            "rammohan-bhat": {
-                name: "Dr. Rammohan Sripad Bhat",
-                image: "static/img/doctors/rammohan-bhat.jpg",
-                specialty: "Nephrology",
-                designation: "Senior Consultant – Interventional Nephrologist",
-                experience: "24 Years",
-                languages: "English, Hindi, Telugu, and Kannada"
-            },
-            "sumalatha-cb": {
-                name: "Dr. Sumalatha C B",
-                image: "static/img/doctors/sumalatha-cb.jpg",
-                specialty: "Dermatology, Cosmetology, and Dermatologic Surgery",
-                designation: "Consultant – Dermatology, Cosmetology, and Dermatologic Surgery",
-                experience: "16 Years",
-                consultation: "Wednesday - 10:15 AM to 11:15 AM",
-                membership: "Indian Association of Dermatologists, Bangalore Dermatologist Society",
-                languages: "English, Kannada, Hindi, and Telugu"
-            },
-            "neelima-sharma": {
-                name: "Ms. Neelima Sharma",
-                image: "static/img/doctors/neelima-sharma.jpg",
-                specialty: "Dietetics & Nutrition",
-                designation: "Consultant – Dietetics & Nutrition",
-                experience: "8 Years",
-                consultation: "Monday - Saturday - 08:00 AM to 04:00 PM",
-                languages: "English, Hindi, Punjabi"
-            },
-            "sanjay-y": {
-                name: "Dr. Sanjay Y",
-                image: "static/img/doctors/sanjay-y.jpg",
-                specialty: "Psychiatry",
-                designation: "Consultant – Psychiatry and Addiction Medicine",
-                experience: "10 Years",
-                consultation: "Tuesday and Thursday - 02:00 PM to 03:00 PM",
-                languages: "English, Hindi, Punjabi"
-            },
-            "sharadamma": {
-                name: "Dr. Sharadamma",
-                image: "static/img/doctors/sharadamma.jpg",
-                specialty: "General Practitioner, Obstetrics & Gynaecology",
-                designation: "Consultant - Gynaecology",
-                experience: "28 Years",
-                consultation: "On call",
-                languages: "English, Hindi, Kannada, Tamil, and Telugu"
-            },
-            "surbhi-agrawal": {
-                name: "Dr. Surbhi Agrawal",
-                image: "static/img/doctors/surbhi-agrawal-01.jpg",
-                specialty: "Emergency Medicine",
-                designation: "Consultant – Emergency Medicine",
-                experience: "7 Years",
-                awards: "ACLS BLS Experienced Provider",
-                languages: "English, Hindi, Kannada"
-            },
-            "karan-gowda": {
-                name: "Dr. C L Karan Gowda",
-                image: "static/img/doctors/karan-gowda.jpg",
-                specialty: "Orthopaedics and Advanced Trauma",
-                designation: "Consultant - Orthopaedic",
-                consultation: "Monday to Friday\n10:00 AM to 02:30 PM | 07:00 PM to 09:00 PM\nSaturday\n11:00 AM to 02:30 PM",
-                languages: "Kannada, English, Hindi"
-            },
-            "abhilasha-sadhoo": {
-                name: "Dr. Abhilasha Sadhoo",
-                image: "static/img/doctors/abhilasha-sadhoo-01.jpg",
-                specialty: "ENT",
-                designation: "Consultant - ENT",
-                experience: "19 Years",
-                consultation: "Tuesday, Thursday and Saturday\n11:00 AM to 02:00 PM",
-                publications: "Nasal Bone Fracture Management - Our Experience,\nIdiopathic Mucocele of Maxillary Sinus: A rare and frequently misdiagnosed entity,\nPattern of Maxillofacial Trauma - Our Experience",
-                languages: "Kannada, English, and Hindi"
-            },
-            "devendran": {
-                name: "Dr. V Devendran",
-                image: "static/img/doctors/devendran-01.jpg",
-                specialty: "Laproscopic Surgery",
-                designation: "Senior Consultant - General Surgery, Laparoscopic & Laser Surgery, Proctology",
-                experience: "12 Years",
-                consultation: "Monday to Saturday\n10:00 AM to 01:00 PM | 05:00 PM to 07:30 PM",
-                languages: "Telugu, Kannada, Hindi, English, Tamil"
-            },
-            "pramod-s": {
-                name: "Dr. Pramod S",
-                image: "static/img/doctors/pramod-s-01.jpg",
-                specialty: "Paediatrics",
-                designation: "Senior Consultant - Paediatric Surgery",
-                experience: "13 Years",
-                consultation: "Saturday\n02:00 PM to 05:00 PM",
-                languages: "Kannada, English, Hindi"
-            },
-            "srikanth": {
-                name: "Dr. Srikanth",
-                image: "static/img/doctors/srikanth-01.jpg",
-                specialty: "Urology",
-                designation: "Consultant – Urology",
-                experience: "12 Years",
-                consultation: "Monday, Wednesday and Friday\n11:30 AM to 01:30 PM",
-                membership: "Karnataka Urology Association (KUA) and Urology Society of India (USI)",
-                publications: "Robotic Kidney transplant a single centre study - Manipal hospital Bangalore",
-                languages: "Kannada, English, Hindi, Tamil, and Telugu"
-            },
-            "geetha-r": {
-                name: "Dr. Geetha R",
-                image: "static/img/doctors/geetha-r-01.jpg",
-                specialty: "OBG & Fertility",
-                designation: "Consultant - OBG, Laparoscopic Surgery & Fertility Specialist",
-                experience: "14 Years",
-                consultation: "Monday, Wednesday and Friday\n06:00 PM to 08:00 PM",
-                membership: "FOGSI, IAGE, IFS",
-                languages: "English, Kannada, Hindi, Malayalam, and Telugu"
-            },
-            "hiranmayi-seshu": {
-                name: "Dr. Hiranmayi Seshu",
-                image: "static/img/doctors/hiranmai-seshu-01.jpg",
-                specialty: "Diabetology",
-                designation: "Senior Consultant - Internal Medicine and Diabetology",
-                experience: "23 Years",
-                consultation: "Monday to Saturday\n09:00 AM to 04:00 PM",
-                membership: "API, RSSDI",
-                languages: "Kannada, Hindi, English, Telugu, and Tamil"
-            },
-            "srinivasa-reddy": {
-                name: "Dr. Srinivasa Reddy",
-                image: "static/img/doctors/srinivasa-reddy-01.jpg",
-                specialty: "Neurosurgery",
-                designation: "Consultant – Neurosurgery, Minimally Invasive Spine Surgery",
-                experience: "15 years as a Clinician,\n10 years as a Neurosurgeon",
-                consultation: "Tuesday, Thursday and Saturday\n05:00 PM to 08:00 PM",
-                membership: "LIFE MEMBER OF NSI, MISSAB, ASSICON, BNS",
-                languages: "English, Kannada, Hindi, and Telugu"
-            },
-            "vishnu-vandana": {
-                name: "Dr. Vishnu Vandana",
-                image: "static/img/doctors/vishnu-vandana-01.jpg",
-                specialty: "Obstetrics & Gynaecology",
-                designation: "Senior Consultant – Obstetrics & Gynaecology",
-                experience: "15 Years",
-                consultation: "Tuesday and Thursday\n06:00 PM to 08:00 PM",
-                membership: "BSOG and FOGSI",
-                languages: "Hindi, English, Tamil, Telugu, and Kannada"
-            },
-            "sharat-honnatti": {
-                name: "Dr. Sharat Honnatti",
-                image: "static/img/doctors/sharat-honnatti-01.jpg",
-                specialty: "Diabetology",
-                designation: "Consultant - Internal Medicine and Diabetology",
-                experience: "20 Years",
-                consultation: "Monday to Saturday\n07:00 PM to 09:00 PM",
-                membership: "Medical Council of India (MCI), Karnataka Medical Council, Academy Of Family Physicians, and Indian Medical Association (IMA) and also International Endocrine Society",
-                publications: "key spokesperson and contributor in numerous articles in newspapers, journals, and medical councils",
-                languages: "English, Hindi, Kannada, Telugu, Tamil, and Marathi"
-            },
-            "akash-mukherjee": {
-                name: "Dr. Akash Mukherjee",
-                image: "static/img/doctors/akash-mukherjee-01.jpg",
-                specialty: "Anaesthesiology",
-                designation: "Sr. Consultant & HOD - Anaesthesia, Critical Care & Pain Medicine",
-                experience: "10 Years",
-                consultation: "Monday to Saturday\n11 AM to 01 PM | 04 PM to 06 PM",
-                expertise: "Highly qualified and experienced in the field of pain medicine. Holds an MBBS degree.",
-                membership: "Indian Society of Anaesthesiology (ISA), Karnataka Medical Council (KMC)",
-                languages: "Hindi, Bengali, English, Basic Kannada"
-            },
-            "shobha-hs": {
-                name: "Dr. Shobha H S",
-                image: "static/img/doctors/shobha-hs-01.jpg",
-                specialty: "Radiology",
-                designation: "Senior Consultant – Radiology, Foetal Medicine",
-                experience: "16 Years",
-                membership: "IRIA (Indian Radiological and Imaging Association)",
-                languages: "Kannada, English, and Hindi"
-            },
-            "anusha-u": {
-                name: "Dr. Anusha U",
-                image: "static/img/doctors/anusha-u-01.jpg",
-                specialty: "Radiology",
-                designation: "Consultant - Radiology",
-                experience: "10 Years",
-                consultation: "Monday to Saturday\n09:30 AM to 12:30 PM",
-                membership: "IRIA, RCR London",
-                languages: "English, Hindi, and Kannada"
-            },
-            "kushal-lakshmana": {
-                name: "Dr. Kushal Lakshmana",
-                image: "static/img/doctors/kushal-lakshmana.jpg",
-                specialty: "Orthopaedics",
-                designation: "Consultant & HOD – Orthopaedics",
-                experience: "10 Years",
-                consultation: "Monday to Friday - 11.00 AM to 12.00PM",
-                expertise: "Hip and Knee replacement, Arthroscopy and Sports Medicine, General Orthopaedics Advanced Trauma etc.",
-                membership: "Indian Orthopaedic Association and Karnataka Orthopaedic Association",
-                publications: "International Journal Of Orthopaedics Sciences",
-                languages: "English, Kannada, Hindi & Telugu"
-            },
-            "prathyush-v": {
-                name: "Dr. Prathyush V",
-                image: "static/img/doctors/prathyush-v.jpg",
-                specialty: "Oncology",
-                designation: "Senior Consultant- Medical Oncology and Haematology",
-                experience: "9 Years",
-                consultation: "Monday, Wednesday and Saturday - 02.00 PM to 03.00PM",
-                expertise: "Solid organ and blood cancers in adults and children, Precision oncology, Immunotherapy, Preventive oncology and Integrative targeted therapy with chemotherapy",
-                languages: "English, Kannada & Hindi"
-            },
-            "shadman-ali": {
-                name: "Dr. Shadman Ali",
-                image: "static/img/doctors/shadman-ali.jpg",
-                specialty: "Cardiology",
-                designation: "Consultant- Cardiology",
-                experience: "3 Years",
-                consultation: "Monday, Wednesday and Friday - 05.30 PM to 06.30PM",
-                expertise: "General Medicine & Cardiology",
-                languages: "English, Kannada & Hindi"
-            },
-            "yogeshwarappa-cn": {
-                name: "Dr. Yogeshwarappa C N",
-                image: "static/img/doctors/yogeshwarappa-cn.jpg",
-                specialty: "Cosmetic Surgery",
-                designation: "Senior Consultant- Plastic Surgery",
-                experience: "21 Years",
-                consultation: "Monday, Thursday, Saturday and Sunday - 10.30 AM to 12.00 PM",
-                expertise: "Cosmetic Surgery, Faciomaxillary trauma & Reconstruction, Hand surgery & Limb Reconstruction, Burns, Liposuction for Gynecomastia & Body Contouring, Breast Augmentation & Reconstruction, Hernia & Abdominoplasty",
-                languages: "English, Kannada & Hindi"
-            },
-            "ankita-pandey": {
-                name: "Dr. Ankita Pandey",
-                image: "static/img/doctors/ankita-pandey.jpg",
-                specialty: "Physiotherapy",
-                designation: "Consultant – Physiotherapy",
-                experience: "10 Years",
-                consultation: "Monday to Saturday - 09:00 AM to 04:00 PM",
-                expertise: "Orthopedics and Musculoskeletal/Sports",
-                languages: "English, Hindi, Kannada & Marathi"
-            },
-            "swetha-gutha": {
-                name: "Dr. Swetha Gutha",
-                image: "static/img/doctors/swetha-gutha.jpg",
-                specialty: "Dermatology & Cosmetology",
-                designation: "Consultant – Dermatologist & Cosmetologist",
-                experience: "8 Years",
-                consultation: "Monday and Saturday - 09:00 AM to 10:00 AM",
-                expertise: "Skin Infections, Acne and Pigmentation, Cosmetology, Chemical Peels, PRP and GFC Therapy and Hair Fall Treatments.",
-                languages: "English, Kannada & Telugu"
-            },
-            "taruni-priya": {
-                name: "Ms. Taruni Priya",
-                image: "static/img/doctors/taruni-priya.jpg",
-                specialty: "Counseling & Mental health",
-                designation: "Counselling Psychologist",
-                experience: "3 Years",
-                consultation: "Monday to Friday - 05:30 PM to 07:30 PM",
-                expertise: "Individual Counseling, Child and Adolescent Mental Health, College & Academic Stress, Work Stress & Work-Life Balance, Relationship and Interpersonal Issues, Self-awareness & Emotional Regulation & Grief Counselling.",
-                languages: "English and Kannada"
-            },
-            "ekta-eiran": {
-                name: "Dr. Ekta Eiran",
-                image: "static/img/doctors/ekta-eiran.jpg",
-                specialty: "High Risk Obstetrics, Normal Delivery and Caesarean Delivery",
-                designation: "Senior Consultant – Obstetrics & Gynaecology",
-                experience: "19 Years",
-                consultation: "Monday to Saturday - 09:00 AM to 11.45 AM",
-                expertise: "Minimally Invasive Gynaecological Surgeries, Clinical Research in Gyn-Oncology & Breast Cancers, Trained in vNOTES, Robotic Surgery & Laparoscopy, PCOD Management etc.",
-                languages: "English, Kannada, Hindi, Bengali, Nepali & Oriya"
-            }
-        };
+<!-- scripts -->
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="static/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="static/js/script.js"></script>
+<script src="https://fyndbetter.com/chatbot/aarogya_chatbot"></script>
+<script>
+    $(".book-apt").on('click', function () {
+        var url = $(this).data("url");
+        window.open(url, '_blank');
+    });
 
-        // Function to show doctor details
+    const doctors = {
+        "mahima-shetty": {
+            name: "Dr. Mahima Shetty KR",
+            image: "static/img/doctors/mahima-shetty.jpg",
+            specialty: "Paediatrics",
+            designation: "Senior Consultant – Paediatrics",
+            experience: "17 Years",
+            consultation: "Monday to Saturday - 09.30 AM to 11.15 AM & 05:00 PM to 05.45 PM",
+            expertise: "Neonatology & Paediatric Infectious Diseases, Paediatric Allergies & Asthma, General Paediatrics and Immunisation",
+            languages: "English, Kannada and Hindi",
+            contact: "For appointments: 080 6666 8811/22/33\nFor Emergency (24/7): 080 6666 8877/88\nEmail: info@aarogyahastha.com"
+        },
+        "shalini-agasthi": {
+            name: "Dr. Shalini G. Agasthi",
+            image: "static/img/doctors/shalini-agasthi.jpg",
+            specialty: "Paediatrics",
+            designation: "Senior Consultant – Paediatrics",
+            experience: "27 Years",
+            consultation: "Monday - Saturday - 05:00 PM to 08:00 PM",
+            membership: "Executive Board Member - Indian Academy of Paediatrics, Paediatrics Society, BPS, EBM BAHA",
+            languages: "English, Kannada, Hindi, and Telugu"
+        },
+        "rammohan-bhat": {
+            name: "Dr. Rammohan Sripad Bhat",
+            image: "static/img/doctors/rammohan-bhat.jpg",
+            specialty: "Nephrology",
+            designation: "Senior Consultant – Interventional Nephrologist",
+            experience: "24 Years",
+            languages: "English, Hindi, Telugu, and Kannada"
+        },
+        "sumalatha-cb": {
+            name: "Dr. Sumalatha C B",
+            image: "static/img/doctors/sumalatha-cb.jpg",
+            specialty: "Dermatology, Cosmetology, and Dermatologic Surgery",
+            designation: "Consultant – Dermatology, Cosmetology, and Dermatologic Surgery",
+            experience: "16 Years",
+            consultation: "Wednesday - 10:15 AM to 11:15 AM",
+            membership: "Indian Association of Dermatologists, Bangalore Dermatologist Society",
+            languages: "English, Kannada, Hindi, and Telugu"
+        },
+        "neelima-sharma": {
+            name: "Ms. Neelima Sharma",
+            image: "static/img/doctors/neelima-sharma.jpg",
+            specialty: "Dietetics & Nutrition",
+            designation: "Consultant – Dietetics & Nutrition",
+            experience: "8 Years",
+            consultation: "Monday - Saturday - 08:00 AM to 04:00 PM",
+            languages: "English, Hindi, Punjabi"
+        },
+        "sanjay-y": {
+            name: "Dr. Sanjay Y",
+            image: "static/img/doctors/sanjay-y.jpg",
+            specialty: "Psychiatry",
+            designation: "Consultant – Psychiatry and Addiction Medicine",
+            experience: "10 Years",
+            consultation: "Tuesday and Thursday - 02:00 PM to 03:00 PM",
+            languages: "English, Hindi, Punjabi"
+        },
+        "sharadamma": {
+            name: "Dr. Sharadamma",
+            image: "static/img/doctors/sharadamma.jpg",
+            specialty: "General Practitioner, Obstetrics & Gynaecology",
+            designation: "Consultant - Gynaecology",
+            experience: "28 Years",
+            consultation: "On call",
+            languages: "English, Hindi, Kannada, Tamil, and Telugu"
+        },
+        "surbhi-agrawal": {
+            name: "Dr. Surbhi Agrawal",
+            image: "static/img/doctors/surbhi-agrawal-01.jpg",
+            specialty: "Emergency Medicine",
+            designation: "Consultant – Emergency Medicine",
+            experience: "7 Years",
+            awards: "ACLS BLS Experienced Provider",
+            languages: "English, Hindi, Kannada"
+        },
+        "karan-gowda": {
+            name: "Dr. C L Karan Gowda",
+            image: "static/img/doctors/karan-gowda.jpg",
+            specialty: "Orthopaedics and Advanced Trauma",
+            designation: "Consultant - Orthopaedic",
+            consultation: "Monday to Friday\n10:00 AM to 02:30 PM | 07:00 PM to 09:00 PM\nSaturday\n11:00 AM to 02:30 PM",
+            languages: "Kannada, English, Hindi"
+        },
+        "abhilasha-sadhoo": {
+            name: "Dr. Abhilasha Sadhoo",
+            image: "static/img/doctors/abhilasha-sadhoo-01.jpg",
+            specialty: "ENT",
+            designation: "Consultant - ENT",
+            experience: "19 Years",
+            consultation: "Tuesday, Thursday and Saturday\n11:00 AM to 02:00 PM",
+            publications: "Nasal Bone Fracture Management - Our Experience,\nIdiopathic Mucocele of Maxillary Sinus: A rare and frequently misdiagnosed entity,\nPattern of Maxillofacial Trauma - Our Experience",
+            languages: "Kannada, English, and Hindi"
+        },
+        "devendran": {
+            name: "Dr. V Devendran",
+            image: "static/img/doctors/devendran-01.jpg",
+            specialty: "Laproscopic Surgery",
+            designation: "Senior Consultant - General Surgery, Laparoscopic & Laser Surgery, Proctology",
+            experience: "12 Years",
+            consultation: "Monday to Saturday\n10:00 AM to 01:00 PM | 05:00 PM to 07:30 PM",
+            languages: "Telugu, Kannada, Hindi, English, Tamil"
+        },
+        "pramod-s": {
+            name: "Dr. Pramod S",
+            image: "static/img/doctors/pramod-s-01.jpg",
+            specialty: "Paediatrics",
+            designation: "Senior Consultant - Paediatric Surgery",
+            experience: "13 Years",
+            consultation: "Saturday\n02:00 PM to 05:00 PM",
+            languages: "Kannada, English, Hindi"
+        },
+        "srikanth": {
+            name: "Dr. Srikanth",
+            image: "static/img/doctors/srikanth-01.jpg",
+            specialty: "Urology",
+            designation: "Consultant – Urology",
+            experience: "12 Years",
+            consultation: "Monday, Wednesday and Friday\n11:30 AM to 01:30 PM",
+            membership: "Karnataka Urology Association (KUA) and Urology Society of India (USI)",
+            publications: "Robotic Kidney transplant a single centre study - Manipal hospital Bangalore",
+            languages: "Kannada, English, Hindi, Tamil, and Telugu"
+        },
+        "geetha-r": {
+            name: "Dr. Geetha R",
+            image: "static/img/doctors/geetha-r-01.jpg",
+            specialty: "OBG & Fertility",
+            designation: "Consultant - OBG, Laparoscopic Surgery & Fertility Specialist",
+            experience: "14 Years",
+            consultation: "Monday, Wednesday and Friday\n06:00 PM to 08:00 PM",
+            membership: "FOGSI, IAGE, IFS",
+            languages: "English, Kannada, Hindi, Malayalam, and Telugu"
+        },
+        "hiranmayi-seshu": {
+            name: "Dr. Hiranmayi Seshu",
+            image: "static/img/doctors/hiranmai-seshu-01.jpg",
+            specialty: "Diabetology",
+            designation: "Senior Consultant - Internal Medicine and Diabetology",
+            experience: "23 Years",
+            consultation: "Monday to Saturday\n09:00 AM to 04:00 PM",
+            membership: "API, RSSDI",
+            languages: "Kannada, Hindi, English, Telugu, and Tamil"
+        },
+        "srinivasa-reddy": {
+            name: "Dr. Srinivasa Reddy",
+            image: "static/img/doctors/srinivasa-reddy-01.jpg",
+            specialty: "Neurosurgery",
+            designation: "Consultant – Neurosurgery, Minimally Invasive Spine Surgery",
+            experience: "15 years as a Clinician,\n10 years as a Neurosurgeon",
+            consultation: "Tuesday, Thursday and Saturday\n05:00 PM to 08:00 PM",
+            membership: "LIFE MEMBER OF NSI, MISSAB, ASSICON, BNS",
+            languages: "English, Kannada, Hindi, and Telugu"
+        },
+        "vishnu-vandana": {
+            name: "Dr. Vishnu Vandana",
+            image: "static/img/doctors/vishnu-vandana-01.jpg",
+            specialty: "Obstetrics & Gynaecology",
+            designation: "Senior Consultant – Obstetrics & Gynaecology",
+            experience: "15 Years",
+            consultation: "Tuesday and Thursday\n06:00 PM to 08:00 PM",
+            membership: "BSOG and FOGSI",
+            languages: "Hindi, English, Tamil, Telugu, and Kannada"
+        },
+        "sharat-honnatti": {
+            name: "Dr. Sharat Honnatti",
+            image: "static/img/doctors/sharat-honnatti-01.jpg",
+            specialty: "Diabetology",
+            designation: "Consultant - Internal Medicine and Diabetology",
+            experience: "20 Years",
+            consultation: "Monday to Saturday\n07:00 PM to 09:00 PM",
+            membership: "Medical Council of India (MCI), Karnataka Medical Council, Academy Of Family Physicians, and Indian Medical Association (IMA) and also International Endocrine Society",
+            publications: "key spokesperson and contributor in numerous articles in newspapers, journals, and medical councils",
+            languages: "English, Hindi, Kannada, Telugu, Tamil, and Marathi"
+        },
+        "akash-mukherjee": {
+            name: "Dr. Akash Mukherjee",
+            image: "static/img/doctors/akash-mukherjee-01.jpg",
+            specialty: "Anaesthesiology",
+            designation: "Sr. Consultant & HOD - Anaesthesia, Critical Care & Pain Medicine",
+            experience: "10 Years",
+            consultation: "Monday to Saturday\n11 AM to 01 PM | 04 PM to 06 PM",
+            expertise: "Highly qualified and experienced in the field of pain medicine. Holds an MBBS degree.",
+            membership: "Indian Society of Anaesthesiology (ISA), Karnataka Medical Council (KMC)",
+            languages: "Hindi, Bengali, English, Basic Kannada"
+        },
+        "shobha-hs": {
+            name: "Dr. Shobha H S",
+            image: "static/img/doctors/shobha-hs-01.jpg",
+            specialty: "Radiology",
+            designation: "Senior Consultant – Radiology, Foetal Medicine",
+            experience: "16 Years",
+            membership: "IRIA (Indian Radiological and Imaging Association)",
+            languages: "Kannada, English, and Hindi"
+        },
+        "anusha-u": {
+            name: "Dr. Anusha U",
+            image: "static/img/doctors/anusha-u-01.jpg",
+            specialty: "Radiology",
+            designation: "Consultant - Radiology",
+            experience: "10 Years",
+            consultation: "Monday to Saturday\n09:30 AM to 12:30 PM",
+            membership: "IRIA, RCR London",
+            languages: "English, Hindi, and Kannada"
+        },
+        "kushal-lakshmana": {
+            name: "Dr. Kushal Lakshmana",
+            image: "static/img/doctors/kushal-lakshmana.jpg",
+            specialty: "Orthopaedics",
+            designation: "Consultant & HOD – Orthopaedics",
+            experience: "10 Years",
+            consultation: "Monday to Friday - 11.00 AM to 12.00PM",
+            expertise: "Hip and Knee replacement, Arthroscopy and Sports Medicine, General Orthopaedics Advanced Trauma etc.",
+            membership: "Indian Orthopaedic Association and Karnataka Orthopaedic Association",
+            publications: "International Journal Of Orthopaedics Sciences",
+            languages: "English, Kannada, Hindi & Telugu"
+        },
+        "prathyush-v": {
+            name: "Dr. Prathyush V",
+            image: "static/img/doctors/prathyush-v.jpg",
+            specialty: "Oncology",
+            designation: "Senior Consultant- Medical Oncology and Haematology",
+            experience: "9 Years",
+            consultation: "Monday, Wednesday and Saturday - 02.00 PM to 03.00PM",
+            expertise: "Solid organ and blood cancers in adults and children, Precision oncology, Immunotherapy, Preventive oncology and Integrative targeted therapy with chemotherapy",
+            languages: "English, Kannada & Hindi"
+        },
+        "shadman-ali": {
+            name: "Dr. Shadman Ali",
+            image: "static/img/doctors/shadman-ali.jpg",
+            specialty: "Cardiology",
+            designation: "Consultant- Cardiology",
+            experience: "3 Years",
+            consultation: "Monday, Wednesday and Friday - 05.30 PM to 06.30PM",
+            expertise: "General Medicine & Cardiology",
+            languages: "English, Kannada & Hindi"
+        },
+        "yogeshwarappa-cn": {
+            name: "Dr. Yogeshwarappa C N",
+            image: "static/img/doctors/yogeshwarappa-cn.jpg",
+            specialty: "Cosmetic Surgery",
+            designation: "Senior Consultant- Plastic Surgery",
+            experience: "21 Years",
+            consultation: "Monday, Thursday, Saturday and Sunday - 10.30 AM to 12.00 PM",
+            expertise: "Cosmetic Surgery, Faciomaxillary trauma & Reconstruction, Hand surgery & Limb Reconstruction, Burns, Liposuction for Gynecomastia & Body Contouring, Breast Augmentation & Reconstruction, Hernia & Abdominoplasty",
+            languages: "English, Kannada & Hindi"
+        },
+        "ankita-pandey": {
+            name: "Dr. Ankita Pandey",
+            image: "static/img/doctors/ankita-pandey.jpg",
+            specialty: "Physiotherapy",
+            designation: "Consultant – Physiotherapy",
+            experience: "10 Years",
+            consultation: "Monday to Saturday - 09:00 AM to 04:00 PM",
+            expertise: "Orthopedics and Musculoskeletal/Sports",
+            languages: "English, Hindi, Kannada & Marathi"
+        },
+        "swetha-gutha": {
+            name: "Dr. Swetha Gutha",
+            image: "static/img/doctors/swetha-gutha.jpg",
+            specialty: "Dermatology & Cosmetology",
+            designation: "Consultant – Dermatologist & Cosmetologist",
+            experience: "8 Years",
+            consultation: "Monday and Saturday - 09:00 AM to 10:00 AM",
+            expertise: "Skin Infections, Acne and Pigmentation, Cosmetology, Chemical Peels, PRP and GFC Therapy and Hair Fall Treatments.",
+            languages: "English, Kannada & Telugu"
+        },
+        "taruni-priya": {
+            name: "Ms. Taruni Priya",
+            image: "static/img/doctors/taruni-priya.jpg",
+            specialty: "Counseling & Mental health",
+            designation: "Counselling Psychologist",
+            experience: "3 Years",
+            consultation: "Monday to Friday - 05:30 PM to 07:30 PM",
+            expertise: "Individual Counseling, Child and Adolescent Mental Health, College & Academic Stress, Work Stress & Work-Life Balance, Relationship and Interpersonal Issues, Self-awareness & Emotional Regulation & Grief Counselling.",
+            languages: "English and Kannada"
+        },
+        "ekta-eiran": {
+            name: "Dr. Ekta Eiran",
+            image: "static/img/doctors/ekta-eiran.jpg",
+            specialty: "High Risk Obstetrics, Normal Delivery and Caesarean Delivery",
+            designation: "Senior Consultant – Obstetrics & Gynaecology",
+            experience: "19 Years",
+            consultation: "Monday to Saturday - 09:00 AM to 11.45 AM",
+            expertise: "Minimally Invasive Gynaecological Surgeries, Clinical Research in Gyn-Oncology & Breast Cancers, Trained in vNOTES, Robotic Surgery & Laparoscopy, PCOD Management etc.",
+            languages: "English, Kannada, Hindi, Bengali, Nepali & Oriya"
+        }
+    };
 
-        function displayDoctorProfile(doctor) {
-            return `
+    // Function to show doctor details
+
+    function displayDoctorProfile(doctor) {
+        return `
                 <div class="doctor-card-container">
                     <button class="close-button" onclick="window.location.href='departments.html'">&times;</button>
                     
@@ -422,80 +423,80 @@
                     </div>
                 </div>
             `;
+    }
+
+    // Your existing showDoctorDetails function remains the same
+    function showDoctorDetails() {
+        const doctorId = window.location.hash.substring(1);
+        const doctor = doctors[doctorId];
+
+        if (!doctor) {
+            document.getElementById('doctorProfile').innerHTML = '<p>Doctor not found</p>';
+            return;
         }
 
-        // Your existing showDoctorDetails function remains the same
-        function showDoctorDetails() {
-            const doctorId = window.location.hash.substring(1);
-            const doctor = doctors[doctorId];
+        document.getElementById('doctorProfile').innerHTML = displayDoctorProfile(doctor);
+    }
 
-            if (!doctor) {
-                document.getElementById('doctorProfile').innerHTML = '<p>Doctor not found</p>';
-                return;
+    // Load doctor details when page loads
+    window.addEventListener('DOMContentLoaded', showDoctorDetails);
+
+    // Handle hash changes
+    window.addEventListener('hashchange', showDoctorDetails);
+    function showChromePopup() {
+        const popup = document.getElementById("chrome-popup");
+        popup.classList.add("is-visible");
+        popup.setAttribute("aria-hidden", "false");
+    }
+    function hideChromePopup() {
+        const popup = document.getElementById("chrome-popup");
+        popup.classList.remove("is-visible");
+        popup.setAttribute("aria-hidden", "true");
+    }
+    // ESC closes popup
+    document.addEventListener("keydown", e => {
+        if (e.key === "Escape") hideChromePopup();
+    });
+    document.addEventListener('DOMContentLoaded', function () {
+        const scrollBtn = document.getElementById('scrollToTopBtn');
+        const scrollThreshold = 300;
+
+        function toggleScrollButton() {
+            if (window.pageYOffset > scrollThreshold ||
+                document.documentElement.scrollTop > scrollThreshold) {
+                scrollBtn.style.display = 'flex';
+            } else {
+                scrollBtn.style.display = 'none';
             }
-
-            document.getElementById('doctorProfile').innerHTML = displayDoctorProfile(doctor);
         }
 
-        // Load doctor details when page loads
-        window.addEventListener('DOMContentLoaded', showDoctorDetails);
+        window.addEventListener('scroll', toggleScrollButton);
 
-        // Handle hash changes
-        window.addEventListener('hashchange', showDoctorDetails);
-        function showChromePopup() {
-            const popup = document.getElementById("chrome-popup");
-            popup.classList.add("is-visible");
-            popup.setAttribute("aria-hidden", "false");
-        }
-        function hideChromePopup() {
-            const popup = document.getElementById("chrome-popup");
-            popup.classList.remove("is-visible");
-            popup.setAttribute("aria-hidden", "true");
-        }
-        // ESC closes popup
-        document.addEventListener("keydown", e => {
-            if (e.key === "Escape") hideChromePopup();
-        });
-        document.addEventListener('DOMContentLoaded', function () {
-            const scrollBtn = document.getElementById('scrollToTopBtn');
-            const scrollThreshold = 300;
-
-            function toggleScrollButton() {
-                if (window.pageYOffset > scrollThreshold ||
-                    document.documentElement.scrollTop > scrollThreshold) {
-                    scrollBtn.style.display = 'flex';
-                } else {
-                    scrollBtn.style.display = 'none';
-                }
-            }
-
-            window.addEventListener('scroll', toggleScrollButton);
-
-            scrollBtn.addEventListener('click', function (e) {
-                e.preventDefault();
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
-                // Add slight animation to the icon
-                this.querySelector('i').style.transform = 'translateY(-4px)';
-                setTimeout(() => {
-                    this.querySelector('i').style.transform = '';
-                }, 300);
+        scrollBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
             });
-
-            // Initialize on load
-            toggleScrollButton();
-        });
-        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
-        const mobileNav = document.getElementById('mobile-nav');
-
-        mobileMenuToggle.addEventListener('click', function () {
-            mobileNav.classList.toggle('active'); // toggles visibility
+            // Add slight animation to the icon
+            this.querySelector('i').style.transform = 'translateY(-4px)';
+            setTimeout(() => {
+                this.querySelector('i').style.transform = '';
+            }, 300);
         });
 
-    </script>
-    <a href="#" id="scrollToTopBtn" class="scroll-to-top-btn" title="Scroll to top" aria-label="Scroll to top">
-        <i class="fa fa-arrow-up"></i> <!-- Simple up arrow -->
-    </a>
+        // Initialize on load
+        toggleScrollButton();
+    });
+    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+    const mobileNav = document.getElementById('mobile-nav');
+
+    mobileMenuToggle.addEventListener('click', function () {
+        mobileNav.classList.toggle('active'); // toggles visibility
+    });
+
+</script>
+<a href="#" id="scrollToTopBtn" class="scroll-to-top-btn" title="Scroll to top" aria-label="Scroll to top">
+    <i class="fa fa-arrow-up"></i> <!-- Simple up arrow -->
+</a>
 {% endblock %}

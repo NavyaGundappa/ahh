@@ -226,8 +226,41 @@
             /* smaller button text */
         }
     }
-</style>
 
+    .breadcrumb-section {
+        padding: 10px 0;
+        background-color: #f8f9fa;
+    }
+
+    .breadcrumb {
+        margin-bottom: 0;
+        padding: 0.75rem 1rem;
+    }
+
+    .breadcrumb-item+.breadcrumb-item::before {
+        content: ">>";
+        padding: 0 0.5rem;
+    }
+
+    .breadcrumb-item a {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+    .breadcrumb-item.active {
+        color: #6c757d;
+    }
+</style>
+<section class="breadcrumb-section">
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item">Doctors</li>
+            </ol>
+        </nav>
+    </div>
+</section>
 <div class="doctor-page">
     <div class="container">
         <h1>Our Doctors</h1>
@@ -240,34 +273,34 @@
                     <h2 class="doctor-name">{{ doctor.name }}</h2>
                     <p class="doctor-specialization">{{ doctor.specialization }}</p>
                     <div class="doctor-timings">
-    {% set valid_timings = doctor.timings_parsed | selectattr('from') | selectattr('to') | list %}
-    
-    {% if valid_timings %}
-        {% set grouped_days = {} %}
-        {% for t in valid_timings %}
-            {% if t.days %}
-                {% set days_key = t.days | map('capitalize') | join(', ') %}
-                {% set time_slot = t.from ~ ' ' ~ t.from_period ~ ' - ' ~ t.to ~ ' ' ~ t.to_period %}
-                {% if days_key in grouped_days %}
-                    {% set _ = grouped_days[days_key].append(time_slot) %}
-                {% else %}
-                    {% set _ = grouped_days.update({days_key: [time_slot]}) %}
-                {% endif %}
-            {% endif %}
-        {% endfor %}
+                        {% set valid_timings = doctor.timings_parsed | selectattr('from') | selectattr('to') | list %}
 
-        {% for days, times in grouped_days.items() %}
-        <div class="doctor-timings-text">
-            <strong>Days:</strong> {{ days }}<br>
-            <strong>Timings:</strong> {{ times | join(' and ') }}
-        </div>
-        {% endfor %}
-    {% else %}
-        <div class="doctor-timings-text text-muted">
-            <strong>Timings:</strong> On Call
-        </div>
-    {% endif %}
-</div>
+                        {% if valid_timings %}
+                        {% set grouped_days = {} %}
+                        {% for t in valid_timings %}
+                        {% if t.days %}
+                        {% set days_key = t.days | map('capitalize') | join(', ') %}
+                        {% set time_slot = t.from ~ ' ' ~ t.from_period ~ ' - ' ~ t.to ~ ' ' ~ t.to_period %}
+                        {% if days_key in grouped_days %}
+                        {% set _ = grouped_days[days_key].append(time_slot) %}
+                        {% else %}
+                        {% set _ = grouped_days.update({days_key: [time_slot]}) %}
+                        {% endif %}
+                        {% endif %}
+                        {% endfor %}
+
+                        {% for days, times in grouped_days.items() %}
+                        <div class="doctor-timings-text">
+                            <strong>Days:</strong> {{ days }}<br>
+                            <strong>Timings:</strong> {{ times | join(' and ') }}
+                        </div>
+                        {% endfor %}
+                        {% else %}
+                        <div class="doctor-timings-text text-muted">
+                            <strong>Timings:</strong> On Call
+                        </div>
+                        {% endif %}
+                    </div>
                     <div class="doctor-actions">
                         {% if doctor.appointment_link %}
                         <a href="{{ doctor.appointment_link }}" target="_blank" class="action-btn profile-btn">Book
