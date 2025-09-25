@@ -103,30 +103,42 @@
     </div>
 </section>
 
+
 <section class="department-section section py-3">
     <div class="container">
         <h2 class="text-center py-2 pt-5">Departments</h2>
         <div class="department-grid">
             {% for dept in departments %}
+
+            {# Check if an icon path exists before using it #}
+            {% if dept.icon_path %}
             <a href="{{ url_for('department_page', slug=dept.slug) }}" class="item"
                 style="--i:url('{{ url_for('static', filename=dept.icon_path) }}');" data-department="{{ dept.slug }}">
 
-                <!-- Department Icon -->
                 <img class="dept-icon" loading="lazy" src="{{ url_for('static', filename=dept.icon_path) }}"
                     alt="{{ dept.name }}">
 
                 <div class="icon"></div>
 
-                <!-- Department Name -->
                 <h4 class="text-dark-blue my-md-3">{{ dept.name }}</h4>
             </a>
+            {% else %}
+            {# Fallback for departments without an icon #}
+            <a href="{{ url_for('department_page', slug=dept.slug) }}" class="item" data-department="{{ dept.slug }}">
+
+                <img class="dept-icon" loading="lazy" src="{{ url_for('static', filename='img/default-icon.png') }}"
+                    alt="{{ dept.name }}">
+
+                <div class="icon"></div>
+
+                <h4 class="text-dark-blue my-md-3">{{ dept.name }}</h4>
+            </a>
+            {% endif %}
+
             {% endfor %}
         </div>
     </div>
 </section>
-
-
-
 
 <div id="chrome-popup" class="chrome-popup" aria-hidden="true">
     <div class="chrome-popup__content">
