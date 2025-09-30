@@ -70,6 +70,11 @@ def index():
                            specialities=specialities)  # Add this parameter
 
 
+@app.route('/appointments')
+def appointments():
+    return render_template('appointments.html')
+
+
 @app.route('/departments/')
 def departments():
     departments = Department.query.filter_by(
