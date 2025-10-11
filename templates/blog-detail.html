@@ -1,0 +1,917 @@
+{% extends "base.html" %}
+
+{% block title %}{% if blog %}{{ blog.title }} - Aarogya Hastha{% else %}Blog - Aarogya Hastha{% endif %}{% endblock %}
+
+{% block content %}
+<div class="blog-detail-container">
+    {% if blog %}
+    <!-- Mobile-Optimized Hero Section with Meta on Banner -->
+    <section class="mobile-hero-section spaced-section">
+        <div class="hero-image-container">
+            {% if blog.image_path %}
+            <img src="{{ url_for('static', filename=blog.image_path) }}" alt="{{ blog.title }}"
+                class="mobile-hero-image">
+            {% else %}
+            <img src="{{ url_for('static', filename='img/blogs/default.jpg') }}" alt="{{ blog.title }}"
+                class="mobile-hero-image">
+            {% endif %}
+            <div class="hero-banner-overlay">
+                <div class="hero-banner-content">
+                    <h1 class="mobile-blog-title">{{ blog.title }}</h1>
+                    <div class="mobile-blog-meta">
+                        <span class="blog-date">{{ blog.created_at.strftime('%b %d, %Y') }}</span>
+                        <span class="blog-read-time">{{ blog.read_time or '5 min' }} read</span>
+                        {% if blog.department %}
+                        <span class="blog-category">{{ blog.department.name }}</span>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <style>
+        .spaced-section {
+            margin-top: 0px;
+            /* Adjust this value as needed */
+            /* or use padding-top: 20px; */
+        }
+    </style>
+
+    <!-- Desktop Layout with Sidebar -->
+    <div class="desktop-layout">
+        <!-- Main Content -->
+        <article class="main-content">
+            {% if blog.excerpt %}
+            <section class="intro-section">
+                <div class="intro-card">
+                    <p class="blog-intro">{{ blog.excerpt }}</p>
+                </div>
+            </section>
+            {% endif %}
+
+            <section class="content-section">
+                <div class="blog-body">
+                    {{ blog.content|safe }}
+                </div>
+            </section>
+
+            <!-- Mobile Related Articles - Inside Main Content for Mobile -->
+            {% if related_blogs %}
+            <section class="mobile-related-section">
+                <div class="mobile-widget-header">
+                    <h3 class="mobile-widget-title">Related Articles</h3>
+                    <p class="mobile-widget-subtitle">More from {{ blog.department.name if blog.department else 'Health'
+                        }}</p>
+                </div>
+                <div class="mobile-related-container">
+                    <div class="mobile-related-scroll" id="mobileRelatedScroll">
+                        {% for related_blog in related_blogs %}
+                        <a href="{{ url_for('blog_detail', slug=related_blog.slug) }}" class="mobile-related-card">
+                            <div class="mobile-related-image">
+                                {% if related_blog.image_path %}
+                                <img src="{{ url_for('static', filename=related_blog.image_path) }}"
+                                    alt="{{ related_blog.title }}">
+                                {% else %}
+                                <img src="{{ url_for('static', filename='img/blogs/default.jpg') }}"
+                                    alt="{{ related_blog.title }}">
+                                {% endif %}
+                            </div>
+                            <div class="mobile-related-content">
+                                <h4 class="mobile-related-title">{{ related_blog.title }}</h4>
+                                <div class="mobile-related-meta">
+                                    <span class="mobile-related-date">{{ related_blog.created_at.strftime('%b %d, %Y')
+                                        }}</span>
+                                    <span class="mobile-related-time">{{ related_blog.read_time or '5 min' }}</span>
+                                </div>
+                            </div>
+                        </a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </section>
+            {% endif %}
+        </article>
+
+        <!-- Sidebar with Related Articles for Desktop -->
+        {% if related_blogs %}
+        <aside class="sidebar">
+            <div class="sidebar-widget">
+                <div class="widget-header">
+                    <h3 class="widget-title">Related Articles</h3>
+                    <p class="widget-subtitle">More from {{ blog.department.name if blog.department else 'Health' }}</p>
+                </div>
+                <div class="related-articles-container">
+                    <div class="related-articles-scroll" id="desktopRelatedScroll">
+                        {% for related_blog in related_blogs %}
+                        <a href="{{ url_for('blog_detail', slug=related_blog.slug) }}" class="related-article-card">
+                            <div class="related-article-image">
+                                {% if related_blog.image_path %}
+                                <img src="{{ url_for('static', filename=related_blog.image_path) }}"
+                                    alt="{{ related_blog.title }}">
+                                {% else %}
+                                <img src="{{ url_for('static', filename='img/blogs/default.jpg') }}"
+                                    alt="{{ related_blog.title }}">
+                                {% endif %}
+                            </div>
+                            <div class="related-article-content">
+                                <h4 class="related-article-title">{{ related_blog.title }}</h4>
+                                <div class="related-article-meta">
+                                    <span class="related-article-date">{{ related_blog.created_at.strftime('%b %d, %Y')
+                                        }}</span>
+                                    <span class="related-article-time">{{ related_blog.read_time or '5 min' }}</span>
+                                </div>
+                            </div>
+                        </a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </aside>
+        {% endif %}
+    </div>
+    {% else %}
+    <div class="error-message">
+        <h2>Blog Not Found</h2>
+        <p>The blog you're looking for doesn't exist or has been removed.</p>
+        <a href="{{ url_for('blog') }}" class="btn btn-primary">Back to Blog</a>
+    </div>
+    {% endif %}
+</div>
+
+<style>
+    /* Modern CSS Variables */
+    :root {
+        --color-primary: #3498db;
+        --color-primary-dark: #2980b9;
+        --color-secondary: #2c3e50;
+        --color-text: #7f8c8d;
+        --color-background-light: #f8f9fa;
+        --color-white: #ffffff;
+        --color-border: #e0e0e0;
+
+        --space-xs: 0.5rem;
+        --space-sm: 1rem;
+        --space-md: 1.5rem;
+        --space-lg: 2rem;
+        --space-xl: 3rem;
+    }
+
+    /* Blog Detail Container */
+    .blog-detail-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0;
+    }
+
+    /* Mobile-Optimized Hero Section with Banner Overlay */
+    .mobile-hero-section {
+        width: 100%;
+        margin-bottom: var(--space-lg);
+        padding: 0 var(--space-sm);
+    }
+
+    .hero-image-container {
+        max-width: 800px;
+        margin: 0 auto;
+
+        overflow: hidden;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+        position: relative;
+    }
+
+    .mobile-hero-image {
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+        object-position: center 30%;
+        /* moves the image even further down */
+        display: block;
+    }
+
+
+    .hero-banner-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+        padding: var(--space-lg) var(--space-md);
+    }
+
+    .hero-banner-content {
+        max-width: 100%;
+    }
+
+    .mobile-blog-title {
+        font-size: 1.8rem;
+        font-weight: 800;
+        line-height: 1.3;
+        color: var(--color-white);
+        margin-bottom: var(--space-sm);
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    .mobile-blog-meta {
+        display: flex;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        gap: var(--space-sm);
+    }
+
+    .blog-date,
+    .blog-read-time,
+    .blog-category {
+        font-size: 0.9rem;
+        color: var(--color-white);
+        font-weight: 500;
+        padding: 0.4rem 0.8rem;
+        background: rgba(255, 255, 255, 0.2);
+
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .blog-category {
+        background: var(--color-primary);
+        border-color: var(--color-primary);
+    }
+
+    /* Desktop Layout */
+    .desktop-layout {
+        display: block;
+        /* Show on all devices */
+    }
+
+    /* Main Content Styles */
+    .main-content {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 0 var(--space-sm);
+    }
+
+    .intro-section {
+        margin-bottom: var(--space-xl);
+    }
+
+    .intro-card {
+        background: linear-gradient(135deg, #f8f9fa, #e8f4f8);
+        border-left: 4px solid var(--color-primary);
+        padding: var(--space-lg);
+
+        margin-bottom: var(--space-lg);
+    }
+
+    .blog-intro {
+        font-size: 1.2rem;
+        line-height: 1.7;
+        color: var(--color-secondary);
+        font-weight: 500;
+        margin: 0;
+    }
+
+    .content-section {
+        margin-bottom: var(--space-xl);
+    }
+
+    .blog-body {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        color: var(--color-secondary);
+    }
+
+    .blog-body h1,
+    .blog-body h2,
+    .blog-body h3,
+    .blog-body h4 {
+        color: var(--color-secondary);
+        margin: var(--space-lg) 0 var(--space-md) 0;
+        line-height: 1.4;
+    }
+
+    .blog-body h1 {
+        font-size: 2rem;
+    }
+
+    .blog-body h2 {
+        font-size: 1.8rem;
+    }
+
+    .blog-body h3 {
+        font-size: 1.6rem;
+    }
+
+    .blog-body h4 {
+        font-size: 1.4rem;
+    }
+
+    .blog-body p {
+        margin-bottom: var(--space-md);
+    }
+
+    .blog-body img {
+        max-width: 100%;
+        height: auto;
+
+        margin: var(--space-md) 0;
+    }
+
+    /* Mobile Related Articles Section */
+    .mobile-related-section {
+        margin-top: var(--space-xl);
+        padding: var(--space-lg) 0;
+        border-top: 1px solid var(--color-border);
+        display: block;
+        /* Show on mobile by default */
+    }
+
+    .mobile-widget-header {
+        text-align: center;
+        margin-bottom: var(--space-md);
+    }
+
+    .mobile-widget-title {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: var(--color-secondary);
+        margin-bottom: var(--space-xs);
+    }
+
+    .mobile-widget-subtitle {
+        font-size: 0.9rem;
+        color: var(--color-text);
+        margin: 0;
+    }
+
+    .mobile-related-container {
+        width: 100%;
+        height: 300px;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .mobile-related-scroll {
+        position: relative;
+        height: 100%;
+    }
+
+    .mobile-related-card {
+        display: flex;
+        gap: var(--space-sm);
+        padding: var(--space-sm);
+
+        text-decoration: none;
+        transition: all 0.3s ease;
+        border: 1px solid var(--color-border);
+        background: var(--color-white);
+        margin-bottom: var(--space-sm);
+        height: 100px;
+    }
+
+    .mobile-related-card:hover {
+        background: var(--color-background-light);
+        border-color: var(--color-primary);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .mobile-related-image {
+        width: 70px;
+        height: 70px;
+
+        overflow: hidden;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--color-background-light);
+    }
+
+    .mobile-related-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        /* Changed from cover to contain to show full image */
+
+    }
+
+    .mobile-related-content {
+        flex: 1;
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .mobile-related-title {
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: var(--color-secondary);
+        margin-bottom: var(--space-xs);
+        line-height: 1.3;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .mobile-related-meta {
+        display: flex;
+        gap: var(--space-sm);
+        font-size: 0.75rem;
+        color: var(--color-text);
+    }
+
+    /* Auto-scroll animation for mobile */
+    .auto-scroll-mobile {
+        animation: autoScrollMobile 12s linear infinite;
+    }
+
+    .auto-scroll-mobile:hover {
+        animation-play-state: paused;
+    }
+
+    @keyframes autoScrollMobile {
+        0% {
+            transform: translateY(0);
+        }
+
+        100% {
+            transform: translateY(-50%);
+        }
+    }
+
+    /* Desktop Styles */
+    @media (min-width: 1024px) {
+        .desktop-layout {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: var(--space-lg);
+            padding: 0 var(--space-xl) var(--space-xl);
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .mobile-hero-section {
+            padding: 0 var(--space-xl);
+            margin-bottom: var(--space-xl);
+        }
+
+        .hero-image-container {
+            max-width: 1000px;
+        }
+
+        .mobile-hero-image {
+            height: 400px;
+        }
+
+        .hero-banner-overlay {
+            padding: var(--space-xl);
+        }
+
+        .mobile-blog-title {
+            font-size: 2.5rem;
+        }
+
+        .main-content {
+            max-width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Hide mobile related section on desktop */
+        .mobile-related-section {
+            display: none;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            position: sticky;
+            top: 120px;
+            height: 500px;
+            overflow: hidden;
+            display: block;
+            /* Show on desktop */
+        }
+
+        .sidebar-widget {
+            background: var(--color-white);
+
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            border: 1px solid var(--color-border);
+            margin-bottom: var(--space-lg);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .widget-header {
+            padding: var(--space-md) var(--space-md) var(--space-sm);
+            border-bottom: 1px solid var(--color-border);
+            flex-shrink: 0;
+        }
+
+        .widget-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--color-secondary);
+            margin-bottom: var(--space-xs);
+        }
+
+        .widget-subtitle {
+            font-size: 0.85rem;
+            color: var(--color-text);
+            margin: 0;
+        }
+
+        /* Desktop Auto-Scroll Related Articles */
+        .related-articles-container {
+            padding: var(--space-sm);
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .related-articles-scroll {
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .related-article-card {
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+
+            overflow: hidden;
+            background: var(--color-white);
+            border: 1px solid var(--color-border);
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+            margin-bottom: var(--space-sm);
+            height: auto;
+            min-height: 140px;
+        }
+
+        .related-article-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border-color: var(--color-primary);
+        }
+
+        .related-article-image {
+            width: 100%;
+            height: 100px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--color-background-light);
+        }
+
+        .related-article-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            /* Changed from cover to contain to show full image */
+            transition: transform 0.3s ease;
+        }
+
+        .related-article-card:hover .related-article-image img {
+            transform: scale(1.05);
+        }
+
+        .related-article-content {
+            padding: var(--space-sm);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .related-article-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--color-secondary);
+            margin-bottom: var(--space-xs);
+            line-height: 1.3;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            flex: 1;
+        }
+
+        .related-article-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            color: var(--color-text);
+            margin-top: auto;
+        }
+
+        /* Auto-scroll animation for desktop */
+        .auto-scroll-vertical {
+            animation: autoScrollVertical 15s linear infinite;
+        }
+
+        .auto-scroll-vertical:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes autoScrollVertical {
+            0% {
+                transform: translateY(0);
+            }
+
+            100% {
+                transform: translateY(-50%);
+            }
+        }
+    }
+
+    /* Hide sidebar on mobile */
+    @media (max-width: 1023px) {
+        .sidebar {
+            display: none;
+        }
+    }
+
+    /* Error Message */
+    .error-message {
+        text-align: center;
+        padding: var(--space-xl) var(--space-md);
+        max-width: 500px;
+        margin: 0 auto;
+    }
+
+    .error-message h2 {
+        color: #e74c3c;
+        margin-bottom: var(--space-sm);
+        font-size: 1.8rem;
+    }
+
+    .error-message p {
+        color: var(--color-text);
+        font-size: 1.1rem;
+        margin-bottom: var(--space-lg);
+        line-height: 1.6;
+    }
+
+    .btn-primary {
+        background: var(--color-primary);
+        color: var(--color-white);
+        padding: 12px 30px;
+        text-decoration: none;
+
+        display: inline-block;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        border: none;
+        cursor: pointer;
+        font-size: 1rem;
+    }
+
+    .btn-primary:hover {
+        background: var(--color-primary-dark);
+        transform: translateY(-2px);
+    }
+
+    /* Tablet Styles */
+    @media (min-width: 768px) and (max-width: 1023px) {
+        .mobile-hero-section {
+            padding: 0 var(--space-md);
+        }
+
+        .hero-image-container {
+            max-width: 700px;
+        }
+
+        .mobile-hero-image {
+            height: 350px;
+        }
+
+        .mobile-blog-title {
+            font-size: 2.2rem;
+        }
+
+        .main-content {
+            padding: 0 var(--space-md);
+        }
+
+        .mobile-related-section {
+            padding: var(--space-lg) 0;
+        }
+
+        .mobile-related-container {
+            height: 280px;
+        }
+
+        .mobile-related-card {
+            height: 110px;
+        }
+
+        .mobile-related-image {
+            width: 80px;
+            height: 80px;
+        }
+    }
+
+    /* Small Mobile Devices */
+    @media (max-width: 480px) {
+        .mobile-hero-section {
+            padding: 0 var(--space-xs);
+        }
+
+        .mobile-hero-image {
+            height: 250px;
+        }
+
+        .hero-banner-overlay {
+            padding: var(--space-md);
+        }
+
+        .mobile-blog-title {
+            font-size: 1.6rem;
+            text-align: center;
+        }
+
+        .mobile-blog-meta {
+            justify-content: center;
+            gap: var(--space-xs);
+        }
+
+        .blog-date,
+        .blog-read-time,
+        .blog-category {
+            font-size: 0.8rem;
+            padding: 0.3rem 0.6rem;
+        }
+
+        .main-content {
+            padding: 0 var(--space-xs);
+        }
+
+        .mobile-related-section {
+            padding: var(--space-lg) 0;
+        }
+
+        .mobile-related-container {
+            height: 250px;
+        }
+
+        .mobile-related-card {
+            flex-direction: column;
+            text-align: center;
+            height: auto;
+            min-height: 150px;
+        }
+
+        .mobile-related-image {
+            width: 100%;
+            height: 100px;
+            margin-bottom: var(--space-sm);
+        }
+
+        .mobile-related-content {
+            width: 100%;
+        }
+    }
+
+    /* Touch-friendly improvements */
+    @media (hover: none) and (pointer: coarse) {
+
+        .related-article-card:hover,
+        .mobile-related-card:hover {
+            transform: none;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .related-article-card:active,
+        .mobile-related-card:active {
+            transform: scale(0.98);
+            background: var(--color-background-light);
+        }
+
+        .btn-primary:active {
+            transform: scale(0.98);
+        }
+
+        /* Disable hover pause on touch devices */
+        .auto-scroll-vertical:hover,
+        .auto-scroll-mobile:hover {
+            animation-play-state: running;
+        }
+    }
+
+    /* Reduced motion support */
+    @media (prefers-reduced-motion: reduce) {
+
+        .related-article-card,
+        .mobile-related-card,
+        .btn-primary {
+            transition: none;
+        }
+
+        .related-article-card:hover,
+        .mobile-related-card:hover {
+            transform: none;
+        }
+
+        .btn-primary:hover {
+            transform: none;
+        }
+
+        .auto-scroll-vertical,
+        .auto-scroll-mobile {
+            animation: none;
+        }
+    }
+
+    .blog-body {
+        font-size: 1rem;
+        line-height: 1.8;
+        color: #333333;
+        /* Text color */
+    }
+
+    .blog-body p {
+        margin-bottom: 1rem;
+        /* Space between paragraphs */
+    }
+
+    .blog-body strong {
+        font-weight: 700;
+        /* Ensure bold text is actually bold */
+        color: #000000;
+        /* Optional: make bold darker */
+    }
+
+    .blog-body em {
+        font-style: italic;
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Initialize auto-scroll for desktop related articles
+        const desktopScroll = document.getElementById('desktopRelatedScroll');
+        if (desktopScroll) {
+            // Duplicate content for seamless loop
+            const originalContent = desktopScroll.innerHTML;
+            desktopScroll.innerHTML = originalContent + originalContent;
+            desktopScroll.classList.add('auto-scroll-vertical');
+        }
+
+        // Initialize auto-scroll for mobile related articles
+        const mobileScroll = document.getElementById('mobileRelatedScroll');
+        if (mobileScroll) {
+            // Duplicate content for seamless loop
+            const originalContent = mobileScroll.innerHTML;
+            mobileScroll.innerHTML = originalContent + originalContent;
+            mobileScroll.classList.add('auto-scroll-mobile');
+        }
+
+        // Smooth scroll for anchor links in blog content
+        const blogContent = document.querySelector('.blog-body');
+        if (blogContent) {
+            const anchorLinks = blogContent.querySelectorAll('a[href^="#"]');
+            anchorLinks.forEach(link => {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        }
+
+        // Pause auto-scroll when user interacts with related articles
+        const relatedCards = document.querySelectorAll('.related-article-card, .mobile-related-card');
+        relatedCards.forEach(card => {
+            card.addEventListener('mouseenter', function () {
+                if (desktopScroll) desktopScroll.style.animationPlayState = 'paused';
+                if (mobileScroll) mobileScroll.style.animationPlayState = 'paused';
+            });
+
+            card.addEventListener('mouseleave', function () {
+                if (desktopScroll) desktopScroll.style.animationPlayState = 'running';
+                if (mobileScroll) mobileScroll.style.animationPlayState = 'running';
+            });
+
+            card.addEventListener('focus', function () {
+                if (desktopScroll) desktopScroll.style.animationPlayState = 'paused';
+                if (mobileScroll) mobileScroll.style.animationPlayState = 'paused';
+            });
+
+            card.addEventListener('blur', function () {
+                if (desktopScroll) desktopScroll.style.animationPlayState = 'running';
+                if (mobileScroll) mobileScroll.style.animationPlayState = 'running';
+            });
+        });
+    });
+</script>
+{% endblock %}

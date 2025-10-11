@@ -1,6 +1,6 @@
 from sqlalchemy import func
 import pandas as pd
-from flask import request, redirect, url_for, flash, render_template
+from flask import request, redirect, url_for, flash, render_template, send_from_directory
 import json
 from flask_migrate import Migrate
 from datetime import datetime
@@ -21,7 +21,7 @@ import flash
 from flask import Flask, render_template, request, redirect, url_for, flash, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.utils import secure_filename
-from models import db, Banner, Doctor, Counter, Testimonial, Speciality, Department,  HealthPackage, SportsPackage, DepartmentOverview, DepartmentService, User, UserAccess, CallbackRequest, ReviewMessage
+from models import db, Banner, Doctor, Counter, Testimonial, Speciality, Department,  HealthPackage, SportsPackage, DepartmentOverview, DepartmentService, User, UserAccess, CallbackRequest, ReviewMessage, Blog, BMWReportPDF,FAQ , DepartmentTestimonial 
 from config import Config
 import os
 from functools import wraps
@@ -68,6 +68,9 @@ def index():
                            counters=counters,
                            testimonials=testimonials,
                            specialities=specialities)  # Add this parameter
+
+
+
 
 
 @app.route('/appointments')
@@ -180,7 +183,7 @@ def admin_dashboard():
         return redirect(url_for("admin_login"))
 
     modules = ['banners', 'doctors', 'counters', 'testimonials', 'specialities',
-               'departments', 'health_packages', 'sports_packages', 'department_content', 'users', 'callback_requests', 'reviews']
+               'departments', 'health_packages', 'sports_packages', 'department_content', 'users', 'callback_requests', 'reviews','blogs','bmw_report']
 
     access = {module: False for module in modules}
     if user.access:
@@ -244,7 +247,7 @@ def admin_banners():
     admin_id = session.get("admin_id")
     user = User.query.get(admin_id)
     modules = ['banners', 'doctors', 'counters', 'testimonials', 'specialities',
-               'departments', 'health_packages', 'sports_packages', 'department_content', 'users', 'callback_requests', 'reviews']
+               'departments', 'health_packages', 'sports_packages', 'department_content', 'users', 'callback_requests', 'reviews''blog','bmw_report']
     access = {module: False for module in modules}
     if user and user.access:
         for module in modules:
@@ -407,6 +410,10 @@ def admin_doctors():
         talks_file_path = handle_file_upload(
             request.files.get('talks_file'), 'talks')
 
+        # ----- Calculate display order (put new doctor at the end) -----
+        max_order = db.session.query(db.func.max(Doctor.display_order)).scalar() or 0
+        display_order = max_order + 1
+
         # ----- Save Doctor -----
         doctor = Doctor(
             name=name,
@@ -428,7 +435,8 @@ def admin_doctors():
             image_path=image_path,
             appointment_link=appointment_link,
             department_slug=department_slug,
-            timings=timings
+            timings=timings,
+            display_order=display_order  # Add display order
         )
         db.session.add(doctor)
         db.session.commit()
@@ -441,8 +449,8 @@ def admin_doctors():
         flash('Doctor added successfully!', 'success')
         return redirect(url_for('admin_doctors'))
 
-    # ----- Fetch doctors for display -----
-    doctors = Doctor.query.order_by(Doctor.name).all()
+    # ----- Fetch doctors ordered by display_order -----
+    doctors = Doctor.query.order_by(Doctor.display_order.asc(), Doctor.name.asc()).all()
 
     # ----- Parse timings and aggregate days for template -----
     for d in doctors:
@@ -459,6 +467,7 @@ def admin_doctors():
         except Exception:
             d.timings_parsed = []
             d.days_parsed = []
+    
     admin_id = session.get("admin_id")
     user = User.query.get(admin_id)
     modules = ['banners', 'doctors', 'counters', 'testimonials', 'specialities',
@@ -469,6 +478,32 @@ def admin_doctors():
             access[module] = getattr(user.access, module, False)
 
     return render_template('admin/doctors.html', doctors=doctors, departments=departments, access=access, current_user=user)
+
+
+# Add this route to handle the drag-and-drop order updates
+@app.route('/admin/doctors/update-order', methods=['POST'])
+@login_required
+@permission_required('doctors')
+def update_doctors_orders():
+    try:
+        data = request.get_json()
+        order_data = data.get('order', [])
+        
+        for doctor_data in order_data:
+            doctor_id = doctor_data['id']
+            display_order = doctor_data['display_order']
+            
+            # Update the doctor's display_order in the database
+            doctor = Doctor.query.get(doctor_id)
+            if doctor:
+                doctor.display_order = display_order
+                
+        db.session.commit()
+        return jsonify({'success': True, 'message': 'Doctor order updated successfully'})
+    
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'success': False, 'message': str(e)}), 500
 
 
 @app.route('/admin/doctors/edit/<int:doctor_id>', methods=['GET', 'POST'])
@@ -488,12 +523,10 @@ def edit_doctor(doctor_id):
         slug = request.form.get('slug', '').strip()
         qualification = request.form.get('qualification', '').strip()
         overview = request.form.get('overview', '').strip()
-        fellowship_membership = request.form.get(
-            'fellowship_membership', '').strip()
+        fellowship_membership = request.form.get('fellowship_membership', '').strip()
         fellowship_links = request.form.get('fellowship_links', '').strip()
         field_of_expertise = request.form.get('field_of_expertise', '').strip()
-        talks_and_publications = request.form.get(
-            'talks_and_publications', '').strip()
+        talks_and_publications = request.form.get('talks_and_publications', '').strip()
         talks_links = request.form.get('talks_links', '').strip()
         appointment_link = request.form.get('appointment_link', '').strip()
         department_slug = request.form.get('department_slug', '').strip()
@@ -537,8 +570,7 @@ def edit_doctor(doctor_id):
             file = request.files['image']
             if file and file.filename != '' and allowed_file(file.filename):
                 filename = secure_filename(file.filename)
-                doctors_folder = os.path.join(
-                    app.config['UPLOAD_FOLDER'], 'doctors')
+                doctors_folder = os.path.join(app.config['UPLOAD_FOLDER'], 'doctors')
                 os.makedirs(doctors_folder, exist_ok=True)
                 save_path = os.path.join(doctors_folder, filename)
                 file.save(save_path)
@@ -549,23 +581,19 @@ def edit_doctor(doctor_id):
             fellowship_file = request.files['fellowship_file']
             if fellowship_file and fellowship_file.filename != '' and allowed_file(fellowship_file.filename):
                 if doctor.fellowship_file_path:
-                    old_file_path = os.path.join(
-                        app.static_folder, doctor.fellowship_file_path)
+                    old_file_path = os.path.join(app.static_folder, doctor.fellowship_file_path)
                     if os.path.exists(old_file_path):
                         os.remove(old_file_path)
-                doctor.fellowship_file_path = handle_file_upload(
-                    fellowship_file, 'fellowships')
+                doctor.fellowship_file_path = handle_file_upload(fellowship_file, 'fellowships')
 
         if 'talks_file' in request.files:
             talks_file = request.files['talks_file']
             if talks_file and talks_file.filename != '' and allowed_file(talks_file.filename):
                 if doctor.talks_file_path:
-                    old_file_path = os.path.join(
-                        app.static_folder, doctor.talks_file_path)
+                    old_file_path = os.path.join(app.static_folder, doctor.talks_file_path)
                     if os.path.exists(old_file_path):
                         os.remove(old_file_path)
-                doctor.talks_file_path = handle_file_upload(
-                    talks_file, 'talks')
+                doctor.talks_file_path = handle_file_upload(talks_file, 'talks')
 
         # ----- Update fields -----
         doctor.name = name
@@ -589,13 +617,11 @@ def edit_doctor(doctor_id):
 
         # ----- Regenerate department HTMLs -----
         if old_department_slug != department_slug:
-            old_department = Department.query.filter_by(
-                slug=old_department_slug).first()
+            old_department = Department.query.filter_by(slug=old_department_slug).first()
             if old_department:
                 generate_department_html(old_department)
 
-        new_department = Department.query.filter_by(
-            slug=department_slug).first()
+        new_department = Department.query.filter_by(slug=department_slug).first()
         if new_department:
             generate_department_html(new_department)
 
@@ -604,18 +630,11 @@ def edit_doctor(doctor_id):
 
     # ----- Parse timings for edit form -----
     try:
-        doctor.timings_parsed = json.loads(
-            doctor.timings) if doctor.timings else []
-        all_days = []
-        for t in doctor.timings_parsed:
-            if t.get("days"):
-                all_days.extend(t["days"])
-        doctor.days_parsed = list(dict.fromkeys(all_days))
+        doctor.timings_parsed = json.loads(doctor.timings) if doctor.timings else []
     except Exception:
         doctor.timings_parsed = []
-        doctor.days_parsed = []
 
-    return render_template('admin/edit_doctor.html', doctor=doctor, departments=departments)
+    return render_template('admin/doctors.html', doctor=doctor, departments=departments, doctors=Doctor.query.all())
 
 
 @app.route('/admin/doctors/delete/<int:doctor_id>', methods=['POST'])
@@ -657,159 +676,987 @@ def generate_department_html(department):
 {% block title %}{{ department.name }} - Aarogya Hastha{% endblock %}
 
 {% block content %}
+<style>
+    .breadcrumb-section {
+        padding: 10px 0;
+        background-color: #f8f9fa;
+    }
+
+    .breadcrumb {
+        margin-bottom: 0;
+        padding: 0.75rem 1rem;
+    }
+
+    .breadcrumb-item+.breadcrumb-item::before {
+        content: ">>";
+        padding: 0 0.5rem;
+    }
+
+    .breadcrumb-item a {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+    .breadcrumb-item.active {
+        color: #6c757d;
+    }
+</style>
+<section class="breadcrumb-section">
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item"><a href="/departments/">Departments</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{ department.name }}</li>
+            </ol>
+        </nav>
+    </div>
+</section>
 <section class="department-banner" data-aos="fade-up" data-aos-offset="300" data-aos-easing="ease-in-sine">
     <div class="container">
         <div class="banner">
             {% if department.banner_path %}
-                <img loading="lazy" src="{{ url_for('static', filename=department.banner_path) }}" alt="{{ department.name }}">
+            <img loading="lazy" src="{{ url_for('static', filename=department.banner_path) }}"
+                alt="{{ department.name }}">
             {% else %}
-                <img loading="lazy" src="/static/img/banners/default.jpg" alt="{{ department.name }}">
+            <img loading="lazy" src="/static/img/banners/default.jpg" alt="{{ department.name }}">
             {% endif %}
-            <div class="text-box-1">
-                <h1>{{ department.name }}</h1>
-                <p>{{ department.description }}</p>
+            <div class="banner-content-transparent">
+                <div class="transparent-container">
+                    <div class="text-content">
+                        <h1>{{ department.name }}</h1>
+                        <p>{{ department.description }}</p>
+                    </div>
+                    <div class="banner-buttons-transparent">
+                        <a href="https://app.fyndbetter.com/ahh_apt" target="_blank"
+                            class="btn btn-appointment-transparent">
+                            <i class="fas fa-calendar-check me-1"></i>Book Now
+                        </a>
+                        <a href="tel:+080 6666 8811" class="btn btn-call-transparent">
+                            <i class="fas fa-phone me-1"></i>Call Us
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </section>
-
+<!-- Overview -->
 <div class="container my-5">
- <ul class="nav nav-tabs" id="departmentTabs" role="tablist">
-    <li class="nav-item" role="presentation">
-        <button class="nav-link active fw-bold text-dark" id="overview-tab" data-bs-toggle="tab" data-bs-target="#overview-tab-pane" type="button" role="tab" aria-controls="overview-tab-pane" aria-selected="true">Overview</button>
-    </li>
-    <li class="nav-item" role="presentation">
-        <button class="nav-link fw-bold text-dark" id="services-tab" data-bs-toggle="tab" data-bs-target="#services-tab-pane" type="button" role="tab" aria-controls="services-tab-pane" aria-selected="false">Our Services</button>
-    </li>
-    <li class="nav-item" role="presentation">
-        <button class="nav-link fw-bold text-dark" id="specialists-tab" data-bs-toggle="tab" data-bs-target="#specialists-tab-pane" type="button" role="tab" aria-controls="specialists-tab-pane" aria-selected="false">Our Specialists</button>
-    </li>
-</ul>
+    <ul class="nav nav-tabs" id="departmentTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active fw-bold text-dark" id="overview-tab" data-bs-toggle="tab"
+                data-bs-target="#overview-tab-pane" type="button" role="tab" aria-controls="overview-tab-pane"
+                aria-selected="true">Overview</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link fw-bold text-dark" id="services-tab" data-bs-toggle="tab"
+                data-bs-target="#services-tab-pane" type="button" role="tab" aria-controls="services-tab-pane"
+                aria-selected="false">Our Services</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link fw-bold text-dark" id="specialists-tab" data-bs-toggle="tab"
+                data-bs-target="#specialists-tab-pane" type="button" role="tab" aria-controls="specialists-tab-pane"
+                aria-selected="false">Our Specialists</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link fw-bold text-dark" id="blog-tab" data-bs-toggle="tab"
+                data-bs-target="#blog-tab-pane" type="button" role="tab" aria-controls="blog-tab-pane"
+                aria-selected="false">Blog</button>
+
+        </li>
+    </ul>
 
     <div class="tab-content" id="departmentTabsContent">
 
         <div class="tab-pane fade show active" id="overview-tab-pane" role="tabpanel" aria-labelledby="overview-tab">
-            <section data-aos="fade-up" class="py-4">
+            <section data-aos="fade-up" class="py-2"> <!-- Reduced py-4 to py-2 -->
                 {% if overview %}
-                <blockquote class="blockquote blockquote-custom">
-                    <p class="mb-0 mt-2">{{ overview.quote }}</p>
-                    <div class="blockquote-footer mt-4 text-end">{{ overview.quote_author }}</div>
-                </blockquote>
-                <p>{{ overview.content }}</p>
+
+                <!-- Transparent Container -->
+                <div class="bg-transparent border border-gray-200 rounded-lg p-4 backdrop-blur-sm">
+                    <!-- Reduced p-6 to p-4 -->
+
+                    <!-- Quote Section -->
+                    {% if overview.quote %}
+                    <blockquote class="relative border-l-4 border-blue-400 pl-4 italic text-gray-700 text-base mb-2">
+                        <!-- Reduced to mb-2 -->
+                        <p class="mb-1 text-lg font-medium text-gray-800">"{{ overview.quote }}"</p>
+                        <!-- Reduced mb-2 to mb-1 -->
+                        {% if overview.quote_author %}
+                        <footer class="text-right text-sm font-medium text-gray-500 mt-1">— {{ overview.quote_author }}
+                        </footer> <!-- Added mt-1 -->
+                        {% endif %}
+                    </blockquote>
+                    {% endif %}
+
+                    <!-- Content Paragraphs -->
+                    <div class="text-gray-800 leading-relaxed mb-2"> <!-- Reduced to mb-2 -->
+                        {% for para in overview.content.split('</p>') if para.strip() %}
+                        {% set para_clean = para.replace('<p>', '').strip() %}
+                            {% if para_clean %}
+                        <p class="mb-2 first-letter:text-2xl first-letter:font-bold first-letter:text-blue-500">
+                            <!-- Reduced mb-4 to mb-2 -->
+                            {{ para_clean | safe }}
+                        </p>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+
+                    <!-- Testimonials Section -->
+                    {% if testimonials %}
+                    <div class="mt-2"> <!-- Changed mb-4 to mt-2 and removed bottom margin -->
+                        <h3 class="section-header mb-2 text-lg">Testimonials</h3>
+                        <!-- Reduced margin and smaller font -->
+                        <div class="testimonials-grid mt-2"> <!-- Added mt-2 -->
+                            {% for testimonial in testimonials %}
+                            <div class="testimonial-card {{ ['blue', 'green', 'purple'][loop.index0 % 3] }}">
+                                <div class="testimonial-header">
+                                    <div
+                                        class="testimonial-avatar avatar-{{ ['blue', 'green', 'purple'][loop.index0 % 3] }}">
+                                        {{ testimonial.name[:2].upper() }}
+                                    </div>
+                                    <div class="testimonial-info">
+                                        <h4 class="text-sm">{{ testimonial.name }}</h4> <!-- Smaller text -->
+                                    </div>
+                                </div>
+
+                                <div class="testimonial-content">
+                                    <p class="testimonial-text text-sm">"{{ testimonial.comment }}"</p>
+                                    <!-- Smaller text -->
+                                </div>
+
+                                <div class="testimonial-actions">
+                                    <div class="testimonial-rating text-base"> <!-- Adjusted star size -->
+                                        {{ '★' * testimonial.rating }}{{ '☆' * (5 - testimonial.rating) }}
+                                    </div>
+                                    <button class="view-more-btn text-xs" style="display: none;">View More</button>
+                                    <!-- Smaller button -->
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endif %}
+                    <style>
+                        .section-header {
+                            border: none !important;
+                            /* remove borders */
+                            text-decoration: none !important;
+                            /* remove underlines */
+                            box-shadow: none !important;
+                            /* remove any shadow underlines */
+                            color: #2c3e50;
+                            /* keep text color */
+                            font-weight: 600;
+                            margin-bottom: 1rem;
+                        }
+
+                        .section-header a {
+                            text-decoration: none !important;
+                            /* remove underline if inside a link */
+                            color: inherit;
+                            /* keep text color */
+                        }
+
+                        .section-header::after,
+                        .section-header::before {
+                            content: none !important;
+                            /* remove pseudo-elements */
+                        }
+                    </style>
+                    <!-- FAQ Section -->
+                    <!-- FAQ Section -->
+                    {% if faqs %}
+                    <div class="faq-section">
+                        <h3 class="section-header">Frequently Asked Questions</h3>
+                        <div class="faq-container">
+                            {% for faq in faqs %}
+                            <div class="faq-item">
+                                <button class="faq-question">
+                                    <span class="faq-question-text">{{ faq.question }}</span>
+                                    <svg class="faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M19 9l-7 7-7-7"></path>
+                                    </svg>
+                                </button>
+                                <div class="faq-answer">
+                                    {{ faq.answer|replace('
+                                    ', '<br>')|safe }}
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endif %}
+
+
+                </div>
+
+                {% else %}
+                <div class="bg-transparent border border-gray-200 rounded-lg p-6 backdrop-blur-sm">
+                    <p class="text-gray-400 italic text-center py-2">No overview available.</p>
+                </div>
                 {% endif %}
             </section>
         </div>
-        
 
-<div class="tab-pane fade" id="services-tab-pane" role="tabpanel" aria-labelledby="services-tab">
-    <section class="department-section py-4">
-        <h2>Types of {{ department.name }} Care</h2>
-        <div class="row g-4">
-            {% for service in services %}
-            <div class="col-md-6">
-                <div class="card h-100 p-3">
-                    {% if service.icon_path %}
-                    <img src="{{ url_for('static', filename=service.icon_path) }}" alt="{{ service.title }}" class="card-img-top" style="max-width: 60px;">
-                    {% endif %}
-                    <div class="card-body">
-                        <h4 class="card-title text-dark-blue">{{ service.title }}</h4>
-                        {% if service.list_items %}
-                        <ul class="card-text list-unstyled">
-                            {% for item in service.get_list_items() %}
-                            <li><i class="fas fa-check-circle text-success me-2"></i>{{ item }}</li>
-                            {% endfor %}
-                        </ul>
-                        {% endif %}
-                        <p class="card-text">{{ service.description }}</p>
+        <style>
+            /* Testimonials Section Styles */
+            .testimonials-grid {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                margin-bottom: 2rem;
+            }
+
+            @media (min-width: 768px) {
+                .testimonials-grid {
+                    grid-template-columns: repeat(2, 1fr);
+                }
+            }
+
+            @media (min-width: 1024px) {
+                .testimonials-grid {
+                    grid-template-columns: repeat(3, 1fr);
+                }
+            }
+
+            .testimonial-card {
+                background: #ffffff;
+                border-radius: 0.5rem;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+                padding: 1.5rem;
+                border: 1px solid #f0f0f0;
+                transition: all 0.3s ease;
+                position: relative;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .testimonial-card:hover {
+                box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+                transform: translateY(-2px);
+                border-color: #e5e5e5;
+            }
+
+            .testimonial-card::before {
+                content: '"';
+                position: absolute;
+                top: 1rem;
+                left: 1.5rem;
+                font-size: 3rem;
+                color: #f8f8f8;
+                font-family: Georgia, serif;
+                line-height: 1;
+                z-index: 1;
+            }
+
+            .testimonial-header {
+                display: flex;
+                align-items: center;
+                margin-bottom: 1rem;
+                position: relative;
+                z-index: 2;
+            }
+
+            .testimonial-avatar {
+                width: 2.5rem;
+                height: 2.5rem;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-right: 1rem;
+                font-weight: 600;
+                font-size: 0.875rem;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                color: white;
+            }
+
+            .testimonial-info h4 {
+                font-weight: 600;
+                color: #2d3748;
+                margin: 0 0 0.25rem 0;
+                font-size: 1rem;
+                font-family: 'Inter', sans-serif;
+            }
+
+            .testimonial-info p {
+                color: #718096;
+                margin: 0;
+                font-size: 0.875rem;
+                font-weight: 400;
+            }
+
+            .testimonial-content {
+                position: relative;
+                z-index: 2;
+                flex: 1;
+            }
+
+            .testimonial-text {
+                color: #4a5568;
+                line-height: 1.6;
+                font-style: normal;
+                font-size: 0.95rem;
+                margin-bottom: 1rem;
+                display: -webkit-box;
+                -webkit-line-clamp: 4;
+                /* Show only 4 lines initially */
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+                transition: all 0.3s ease;
+            }
+
+            .testimonial-text.expanded {
+                -webkit-line-clamp: unset;
+                display: block;
+            }
+
+            /* Gradient fade effect for truncated text */
+            .testimonial-text:not(.expanded)::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                height: 2rem;
+                background: linear-gradient(transparent, white);
+                pointer-events: none;
+            }
+
+            .testimonial-actions {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-top: auto;
+                padding-top: 0.5rem;
+                border-top: 1px solid #f7f7f7;
+            }
+
+            .testimonial-rating {
+                display: flex;
+                color: #fbbf24;
+                font-size: 3rem;
+                gap: 0.1rem;
+            }
+
+            .view-more-btn {
+                background: none;
+                border: none;
+                color: #667eea;
+                font-size: 0.875rem;
+                font-weight: 500;
+                cursor: pointer;
+                padding: 0.25rem 0.5rem;
+                border-radius: 0.25rem;
+                transition: all 0.2s ease;
+                text-decoration: underline;
+            }
+
+            .view-more-btn:hover {
+                color: #5a67d8;
+                background: #f7fafc;
+            }
+
+            .view-more-btn:focus {
+                outline: 2px solid #667eea;
+                outline-offset: 2px;
+            }
+
+            /* Minimal color variations */
+            .testimonial-card.cardiology {
+                border-left: 3px solid #e53e3e;
+            }
+
+            .testimonial-card.orthopedics {
+                border-left: 3px solid #3182ce;
+            }
+
+            .testimonial-card.neurology {
+                border-left: 3px solid #805ad5;
+            }
+
+            .testimonial-card.general {
+                border-left: 3px solid #38a169;
+            }
+
+            /* FAQ Section Styles */
+            .faq-section {
+                background: linear-gradient(135deg, #eff6ff 0%, #e0e7ff 100%);
+                border-radius: 0.75rem;
+                padding: 1.5rem;
+                border: 1px solid #e5e7eb;
+            }
+
+            .faq-container {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .faq-item {
+                background: white;
+                border-radius: 0.5rem;
+                box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+                border: 1px solid #f3f4f6;
+                overflow: hidden;
+                transition: all 0.3s ease;
+            }
+
+            .faq-item:hover {
+                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            }
+
+            .faq-question {
+                width: 100%;
+                text-align: left;
+                padding: 1rem;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                background: none;
+                border: none;
+                cursor: pointer;
+                transition: background-color 0.2s ease;
+            }
+
+            .faq-question:hover {
+                background-color: #f9fafb;
+            }
+
+            .faq-question-text {
+                font-weight: 600;
+                color: #1f2937;
+                font-size: 1rem;
+            }
+
+            .faq-icon {
+                width: 1.25rem;
+                height: 1.25rem;
+                color: #6b7280;
+                transform: rotate(0deg);
+                transition: transform 0.3s ease;
+            }
+
+            .faq-icon.rotated {
+                transform: rotate(180deg);
+            }
+
+            .faq-answer {
+                padding: 1rem;
+                background-color: #f9fafb;
+                border-top: 1px solid #e5e7eb;
+                color: #4b5563;
+                line-height: 1.6;
+                display: none;
+            }
+
+            .faq-answer.show {
+                display: block;
+                animation: fadeIn 0.3s ease-in-out;
+            }
+
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(-10px);
+                }
+
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            /* Section Headers */
+            .section-header {
+                font-size: 1.5rem;
+                font-weight: bold;
+                color: #1f2937;
+                text-align: center;
+                margin-bottom: 1.5rem;
+                position: relative;
+            }
+
+            .section-header::after {
+                content: '';
+                position: absolute;
+                bottom: -0.5rem;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 60px;
+                height: 3px;
+                background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+                border-radius: 2px;
+            }
+        </style>
+
+        <script>
+            // FAQ Accordion functionality
+            document.addEventListener('DOMContentLoaded', function () {
+                const faqQuestions = document.querySelectorAll('.faq-question');
+
+                faqQuestions.forEach(question => {
+                    question.addEventListener('click', function () {
+                        const answer = this.nextElementSibling;
+                        const icon = this.querySelector('.faq-icon');
+
+                        // Toggle current item
+                        if (answer.style.display === 'block') {
+                            answer.style.display = 'none';
+                            icon.classList.remove('rotated');
+                        } else {
+                            answer.style.display = 'block';
+                            icon.classList.add('rotated');
+                        }
+
+                        // Close other FAQ items
+                        faqQuestions.forEach(otherQuestion => {
+                            if (otherQuestion !== question) {
+                                const otherAnswer = otherQuestion.nextElementSibling;
+                                const otherIcon = otherQuestion.querySelector('.faq-icon');
+                                otherAnswer.style.display = 'none';
+                                otherIcon.classList.remove('rotated');
+                            }
+                        });
+                    });
+
+                    // Initially hide all FAQ answers
+                    question.nextElementSibling.style.display = 'none';
+                });
+            });
+            // Testimonial view more functionality
+            document.addEventListener('DOMContentLoaded', function () {
+                const testimonialCards = document.querySelectorAll('.testimonial-card');
+
+                testimonialCards.forEach(card => {
+                    const textElement = card.querySelector('.testimonial-text');
+                    const viewMoreBtn = card.querySelector('.view-more-btn');
+
+                    if (textElement && viewMoreBtn) {
+                        // Check if text needs truncation
+                        const lineHeight = parseInt(getComputedStyle(textElement).lineHeight);
+                        const maxHeight = lineHeight * 4; // 4 lines
+
+                        if (textElement.scrollHeight > maxHeight) {
+                            viewMoreBtn.style.display = 'block';
+
+                            viewMoreBtn.addEventListener('click', function () {
+                                textElement.classList.toggle('expanded');
+
+                                if (textElement.classList.contains('expanded')) {
+                                    viewMoreBtn.textContent = 'View Less';
+                                } else {
+                                    viewMoreBtn.textContent = 'View More';
+                                }
+                            });
+                        } else {
+                            viewMoreBtn.style.display = 'none';
+                        }
+                    }
+                });
+            });
+        </script>
+
+        <div class="tab-pane fade" id="services-tab-pane" role="tabpanel" aria-labelledby="services-tab">
+            <section class="department-section py-4">
+                <h2>Conditions Treated by Our {{ department.name }} Specialists</h2>
+                <div class="row g-4">
+                    {% for service in services %}
+                    <div class="col-md-6">
+                        <div class="card h-100 p-3">
+                            {% if service.icon_path %}
+                            <img src="{{ url_for('static', filename=service.icon_path) }}" alt="{{ service.title }}"
+                                class="card-img-top" style="max-width: 60px;">
+                            {% endif %}
+                            <div class="card-body">
+                                <h4 class="card-title text-dark-blue">{{ service.title }}</h4>
+                                {% if service.list_items %}
+                                <ul class="card-text list-unstyled">
+                                    {% for item in service.get_list_items() %}
+                                    <li><i class="fas fa-check-circle text-success me-2"></i>{{ item }}</li>
+                                    {% endfor %}
+                                </ul>
+                                {% endif %}
+                                <p class="card-text">{{ service.description }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <!-- ✅ SERVICES OVERVIEW SECTION - Show first service that has overview content BELOW services -->
+                {% set found_overview = false %}
+                {% for service in services %}
+                {% if service.services_overview and not found_overview %}
+                <div class="services-overview-section mt-5">
+                    <div class="bg-light p-4 rounded">
+                        {{ service.services_overview|safe }}
                     </div>
                 </div>
-            </div>
-            {% endfor %}
+                {% set found_overview = true %}
+                {% endif %}
+                {% endfor %}
+            </section>
         </div>
-    </section>
-</div>
 
-<div class="tab-pane fade" id="specialists-tab-pane" role="tabpanel" aria-labelledby="specialists-tab">
-    <section class="py-4">
-        <h2>Our Specialists</h2>
-        <div id="specialists-list" class="appointment-section">
-            <div class="row g-3">
-                {% set ns = namespace(has_doctors=False) %}
-                
-                {% for doctor in doctors %}
-                    {% if doctor.is_active %}
+        <div class="tab-pane fade" id="specialists-tab-pane" role="tabpanel" aria-labelledby="specialists-tab">
+            <section class="py-4">
+                {% if department.specialists_heading or department.specialists_content %}
+                <div class="specialists-header mb-4">
+                    {% if department.specialists_heading %}
+                    <h2 class="section-title text-center mb-3" style="text-decoration: none; border-bottom: none;">{{
+                        department.specialists_heading }}</h2>
+                    {% endif %}
+                    {% if department.specialists_content %}
+                    <div class="specialists-content text-center mb-4">
+                        {{ department.specialists_content|safe }}
+                    </div>
+                    {% endif %}
+                </div>
+                {% endif %}
+
+                <div id="specialists-list" class="appointment-section">
+                    <div class="row g-3">
+                        {% set ns = namespace(has_doctors=False) %}
+
+                        {% for doctor in doctors %}
+                        {% if doctor.is_active %}
                         {% set ns.has_doctors = True %}
                         <div class="col-lg-6 specialist-item" data-specialist="{{ doctor.slug }}">
                             <div class="specialist-card">
                                 <div class="img-box">
                                     {% if doctor.image_path %}
-                                        <img class="img-fluid" src="{{ url_for('static', filename=doctor.image_path) }}" alt="{{ doctor.name }}">
+                                    <img class="img-fluid" src="{{ url_for('static', filename=doctor.image_path) }}"
+                                        alt="{{ doctor.name }}">
                                     {% else %}
-                                        <img class="img-fluid" src="{{ url_for('static', filename='img/default-doctor.jpg') }}" alt="No Image">
+                                    <img class="img-fluid"
+                                        src="{{ url_for('static', filename='img/default-doctor.jpg') }}" alt="No Image">
                                     {% endif %}
                                 </div>
                                 <div class="content">
                                     <h3>{{ doctor.name }}</h3>
                                     <h4>{{ doctor.specialization }}</h4>
                                     {% if doctor.day_from and doctor.day_to and doctor.time_from_hour %}
-                                        <p class="details">
-                                            <b>Timings:</b>
-                                            {{ doctor.day_from }} - {{ doctor.day_to }},
-                                            {{ doctor.time_from_hour }}:{{ doctor.time_from_min }} {{ doctor.time_from_ampm }} -
-                                            {{ doctor.time_to_hour }}:{{ doctor.time_to_min }} {{ doctor.time_to_ampm }}
-                                        </p>
+                                    <p class="details">
+                                        <b>Timings:</b>
+                                        {{ doctor.day_from }} - {{ doctor.day_to }},
+                                        {{ doctor.time_from_hour }}:{{ doctor.time_from_min }} {{ doctor.time_from_ampm
+                                        }} -
+                                        {{ doctor.time_to_hour }}:{{ doctor.time_to_min }} {{ doctor.time_to_ampm }}
+                                    </p>
                                     {% endif %}
-                                    <a class="book-btn" target="_blank" href="{{ doctor.appointment_link or 'https://app.fyndbetter.com/ahh_apt' }}">
+                                    <a class="book-btn" target="_blank"
+                                        href="{{ doctor.appointment_link or 'https://app.fyndbetter.com/ahh_apt' }}">
                                         BOOK APPOINTMENT
                                     </a>
+                                    <a href="{{ url_for('doctor_detail', slug=doctor.slug) }}"
+                                        class="action-btn profile-btn">View
+                                        Profile</a>
+
                                 </div>
                             </div>
                         </div>
-                    {% endif %}
-                {% endfor %}
+                        {% endif %}
+                        {% endfor %}
 
-                {% if not ns.has_doctors %}
-                <div class="col-12">
-                    <div class="alert alert-warning">
-                        No specialists found for this department.
+                        {% if not ns.has_doctors %}
+                        <div class="col-12">
+                            <div class="alert alert-warning">
+                                No specialists found for this department.
+                            </div>
+                        </div>
+                        {% endif %}
                     </div>
                 </div>
-                {% endif %}
-            </div>
+            </section>
         </div>
-    </section>
-</div>
+        <style>
+            /* Remove any underline or decorative line from department specialists heading */
+            #specialists-tab-pane .section-title,
+            #specialists-tab-pane .section-title::after,
+            #specialists-tab-pane .section-title::before {
+                all: unset;
+                display: block;
+                font-size: 2rem;
+                font-weight: 600;
+                text-align: center;
+                color: #000;
+                /* set your desired color */
+                margin-bottom: 1rem;
+            }
+        </style>
 
+
+
+        <div class="tab-pane fade" id="blog-tab-pane" role="tabpanel" aria-labelledby="blog-tab">
+            <section class="py-4">
+                <div class="container">
+                    <h2 class="text-center mb-4 fw-bold text-dark">Latest Blog from {{ department.name }}</h2>
+
+                    {% if blogs %}
+                    <section class="blogs-section py-5">
+                        <div class="container">
+                            <div class="blogs-grid square">
+                                {% set latest_blog = blogs[0] %}
+                                <div class="blog-card square">
+                                    <div class="blog-image">
+                                        {% if latest_blog.image_path %}
+                                        <img src="{{ url_for('static', filename=latest_blog.image_path) }}"
+                                            alt="{{ latest_blog.title }}">
+                                        {% else %}
+                                        <img src="{{ url_for('static', filename='img/blogs/default-blog.jpg') }}"
+                                            alt="{{ latest_blog.title }}">
+                                        {% endif %}
+                                    </div>
+                                    <div class="blog-content">
+                                        <h3 class="blog-title">{{ latest_blog.title }}</h3>
+                                        <div class="read-more-container">
+                                            <a href="{{ url_for('blog_detail', slug=latest_blog.slug) }}"
+                                                class="read-more-btn">
+                                                Read More
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    {% else %}
+                    <div class="alert alert-info text-center mt-4">
+                        No blog posts available for this department.
+                    </div>
+                    {% endif %}
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+<style>
+    .blogs-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(18.75rem, 1fr));
+        gap: var(--space-lg);
+        padding: var(--space-xl) var(--space-md);
+        max-width: 75rem;
+        margin: 0 auto;
+    }
+
+    .blog-card {
+        background: var(--color-white);
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        border: 1px solid #f0f0f0;
+        display: flex;
+        flex-direction: column;
+        width: 24rem;
+        /* ⬅️ Reduced width */
+        height: 25rem;
+        /* Keeps the taller card look */
+        margin: 0 auto;
+
+        transition: all 0.3s ease;
+    }
+
+
+
+
+
+    .blog-image {
+        width: 18rem;
+        height: 12rem;
+        margin: 1.25rem auto 1rem auto;
+        overflow: hidden;
+        background: var(--color-background-light);
+
+    }
+
+    .blog-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+
+    }
+
+
+    .blog-content {
+        padding: 0 var(--space-md) var(--space-md) var(--space-md);
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .blog-title {
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: var(--color-secondary);
+        line-height: 1.4;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        margin: 0;
+        text-align: center;
+    }
+
+    .blog-date {
+        font-size: 0.9rem;
+        color: var(--color-text);
+        font-weight: 500;
+        margin: 0;
+        text-align: center;
+    }
+
+    .read-more-container {
+        margin-top: 0.5rem;
+        /* reduced from 'auto' to bring it up */
+    }
+
+    .read-more-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #ffffff;
+        /* White text */
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.9rem;
+        padding: 0.5rem 0;
+        width: 50%;
+        border: 2px solid #16979D;
+        /* matching gradient start */
+        background: linear-gradient(to bottom, #16979D, #103A60);
+        /* Gradient background */
+        transition: all 0.3s ease;
+        margin: 0.5rem auto 0;
+        /* Top margin reduced to move up */
+        border-radius: 6px;
+    }
+
+
+
+    .read-more-btn:hover {
+        background: linear-gradient(to bottom, #7FD1D5, #4D7FA3);
+        /* Even lighter gradient */
+        color: #ffffff;
+    }
+</style>
 
 <script>
     function showDescription(index) {
+        // Get the hidden description
         let desc = document.getElementById("desc-" + index).innerHTML;
+
+        // Place it into the container below the grid
         document.getElementById("description-container").innerHTML = desc;
     }
 </script>
 
+
+
+
 <section data-aos-easing="ease-in-sine" class="service-carousel-section py-5">
     <div class="container d-flex justify-content-center">
         <div class="owl-carousel service-carousel">
+            {% if departments %}
+            {% for dept in departments %}
+            {% if dept.is_active %}
+            <a href="{{ url_for('department_page', slug=dept.slug) }}" class="item"
+                style="--i: url('{{ url_for('static', filename=dept.icon_path) if dept.icon_path else url_for('static', filename='img/department/icons/default.svg') }}');"
+                data-department="{{ dept.slug }}">
+                {% if dept.icon_path %}
+                <img class="dept-icon" loading="lazy" src="{{ url_for('static', filename=dept.icon_path) }}"
+                    alt="{{ dept.name }}">
+                {% else %}
+                <img class="dept-icon" loading="lazy"
+                    src="{{ url_for('static', filename='img/department/icons/default.svg') }}" alt="{{ dept.name }}">
+                {% endif %}
+                <div class="icon"></div>
+                <h4 class="text-dark-blue my-md-3">{{ dept.name }}</h4>
+            </a>
+            {% endif %}
+            {% endfor %}
+            {% else %}
+            <div class="alert alert-warning">
+                No departments available.
             </div>
+            {% endif %}
+        </div>
     </div>
 </section>
 
+<!-- scripts -->
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 <script src="/static/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script src="/static/js/script.js"></script>
-<script src="https://fyndbetter.com/chatbot/aarogya_chatbot"></script>
 <script>
     $(".book-apt").on('click', function () {
         var url = $(this).data("url");
         window.open(url, '_blank');
     });
+    function showChromePopup() {
+        const popup = document.getElementById("chrome-popup");
+        popup.classList.add("is-visible");
+        popup.setAttribute("aria-hidden", "false");
+    }
+    function hideChromePopup() {
+        const popup = document.getElementById("chrome-popup");
+        popup.classList.remove("is-visible");
+        popup.setAttribute("aria-hidden", "true");
+    }
+    // ESC closes popup
+    document.addEventListener("keydown", e => {
+        if (e.key === "Escape") hideChromePopup();
+    });
+    document.addEventListener('DOMContentLoaded', function () {
+        const scrollBtn = document.getElementById('scrollToTopBtn');
+        const scrollThreshold = 300;
+
+        function toggleScrollButton() {
+            if (window.pageYOffset > scrollThreshold ||
+                document.documentElement.scrollTop > scrollThreshold) {
+                scrollBtn.style.display = 'flex';
+            } else {
+                scrollBtn.style.display = 'none';
+            }
+        }
+
+        window.addEventListener('scroll', toggleScrollButton);
+
+        scrollBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+            // Add slight animation to the icon
+            this.querySelector('i').style.transform = 'translateY(-4px)';
+            setTimeout(() => {
+                this.querySelector('i').style.transform = '';
+            }, 300);
+        });
+
+        // Initialize on load
+        toggleScrollButton();
+    });
+    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+    const mobileNav = document.getElementById('mobile-nav');
+
+    mobileMenuToggle.addEventListener('click', function () {
+        mobileNav.classList.toggle('active'); // toggles visibility
+    });
+
 </script>
 <a href="#" id="scrollToTopBtn" class="scroll-to-top-btn" title="Scroll to top" aria-label="Scroll to top">
-    <i class="fa fa-arrow-up"></i>
+    <i class="fa fa-arrow-up"></i> <!-- Simple up arrow -->
 </a>
+
 <script> $(document).ready(function () { initDepartmentPageActions(); }) </script>
 {% endblock %}
     """
@@ -1252,6 +2099,9 @@ def admin_departments():
             department.name = request.form.get('name')
             department.slug = request.form.get('slug')
             department.description = request.form.get('description')
+            # ✅ ADD THESE TWO LINES for specialists content
+            department.specialists_heading = request.form.get('specialists_heading')
+            department.specialists_content = request.form.get('specialists_content')
 
             # ---- Handle Icon Update ----
             icon_file = request.files.get('icon')
@@ -1298,6 +2148,10 @@ def admin_departments():
                     return redirect(url_for('admin_departments'))
 
             db.session.commit()
+            
+            # ✅ Regenerate department HTML after update
+            generate_department_html(department)
+            
             flash("Department updated successfully!", "success")
             return redirect(url_for('admin_departments'))
 
@@ -1305,6 +2159,9 @@ def admin_departments():
         name = request.form.get('name')
         slug = request.form.get('slug')
         description = request.form.get('description')
+        # ✅ ADD THESE TWO LINES for specialists content
+        specialists_heading = request.form.get('specialists_heading')
+        specialists_content = request.form.get('specialists_content')
 
         existing = Department.query.filter_by(slug=slug).first()
         if existing:
@@ -1349,11 +2206,18 @@ def admin_departments():
             name=name,
             slug=slug,
             description=description,
+            # ✅ ADD THESE TWO LINES for specialists content
+            specialists_heading=specialists_heading,
+            specialists_content=specialists_content,
             icon_path=icon_path,
             banner_path=banner_path
         )
         db.session.add(department)
         db.session.commit()
+        
+        # ✅ Regenerate department HTML after creation
+        generate_department_html(department)
+        
         flash("Department added successfully!", "success")
         return redirect(url_for('admin_departments'))
 
@@ -1368,7 +2232,6 @@ def admin_departments():
         for module in modules:
             access[module] = getattr(user.access, module, False)
     return render_template('admin/departments.html', departments=departments, access=access, current_user=user)
-
 # departments -------end
 
 # healht package start
@@ -1601,16 +2464,51 @@ def department_page(slug):
     # Fetch doctors for this department
     doctors = Doctor.query.filter_by(
         department_slug=slug, is_active=True).all()
+    
+    # Fetch testimonials for this department
+    testimonials = DepartmentTestimonial.query.filter_by(
+        department_id=department.id, is_active=True
+    ).order_by(DepartmentTestimonial.display_order, DepartmentTestimonial.created_at.desc()).all()
+    
+    # Fetch FAQs for this department
+    faqs = FAQ.query.filter_by(
+        department_id=department.id, is_active=True
+    ).order_by(FAQ.display_order, FAQ.created_at.desc()).all()
+    
+    # ✅ ADD THIS: Fetch blogs for this department
+    blogs = Blog.query.filter_by(
+        department_id=department.id, is_active=True
+    ).order_by(Blog.created_at.desc()).limit(6).all()
+    
+    # Get all active departments for the carousel
+    all_departments = Department.query.filter_by(is_active=True).order_by(Department.name).all()
 
     template_path = f"departments/{slug}.html"
     if os.path.exists(os.path.join(app.template_folder, template_path)):
-        return render_template(template_path, department=department, overview=overview, services=services, doctors=doctors)
+        return render_template(template_path, 
+                             department=department, 
+                             overview=overview, 
+                             services=services, 
+                             doctors=doctors,
+                             departments=all_departments,
+                             testimonials=testimonials,
+                             faqs=faqs,
+                             blogs=blogs)  # ✅ Add blogs here
 
-    return render_template("department.html", department=department, overview=overview, services=services, doctors=doctors)
-
+    return render_template("department.html", 
+                         department=department, 
+                         overview=overview, 
+                         services=services, 
+                         doctors=doctors,
+                         departments=all_departments,
+                         testimonials=testimonials,
+                         faqs=faqs,
+                         blogs=blogs)  # ✅ Add blogs here
 
 # ------------------ ADMIN: Department Overview ------------------
 @app.route('/admin/department_overview', methods=['GET', 'POST'])
+@login_required
+@permission_required('department_content')
 def admin_department_overview():
     if request.method == 'POST':
         overview_id = request.form.get('overview_id')
@@ -1642,23 +2540,52 @@ def admin_department_overview():
 
         return redirect(url_for('admin_department_overview'))
 
+    # Get all data for the template
     overviews = DepartmentOverview.query.all()
+    department_testimonials = DepartmentTestimonial.query.order_by(DepartmentTestimonial.display_order, DepartmentTestimonial.created_at.desc()).all()
+    faqs = FAQ.query.order_by(FAQ.display_order, FAQ.created_at.desc()).all()
     departments = Department.query.all()
+    
     admin_id = session.get("admin_id")
     user = User.query.get(admin_id)
     modules = ['banners', 'doctors', 'counters', 'testimonials', 'specialities',
-               'departments', 'health_packages', 'sports_packages', 'department_content', 'users', 'callback_requests', 'reviews']
+               'departments', 'health_packages', 'sports_packages', 'department_content', 
+               'users', 'callback_requests', 'reviews', 'blogs', 'bmw_report']
     access = {module: False for module in modules}
     if user and user.access:
         for module in modules:
             access[module] = getattr(user.access, module, False)
-    return render_template("admin/department_overview.html", overviews=overviews, departments=departments, access=access, current_user=user)
+    
+    return render_template("admin/department_overview.html", 
+                         overviews=overviews,
+                         department_testimonials=department_testimonials,  # Fixed variable name
+                         faqs=faqs,
+                         departments=departments, 
+                         access=access, 
+                         current_user=user)
 
 
 # ------------------ ADMIN: Department Services ------------------
 @app.route('/admin/department_services', methods=['GET', 'POST'])
 def admin_department_services():
     if request.method == 'POST':
+        # Check if it's a services overview update
+        if 'services_overview' in request.form:
+            service_id = request.form.get('service_id')
+            services_overview = request.form.get('services_overview')
+            
+            service = DepartmentService.query.get_or_404(service_id)
+            service.services_overview = services_overview
+            db.session.commit()
+            
+            # Regenerate department HTML
+            department = Department.query.get(service.department_id)
+            if department:
+                generate_department_html(department)
+            flash("Services overview updated successfully!", "success")
+            return redirect(url_for('admin_department_services'))
+        
+        # Existing service management code
         service_id = request.form.get('service_id')
         department_id = request.form.get('department_id')
 
@@ -1666,8 +2593,8 @@ def admin_department_services():
             service = DepartmentService.query.get_or_404(service_id)
             service.title = request.form.get('title')
             service.description = request.form.get('description')
-            service.list_items = request.form.get(
-                'list_items')  # comma separated
+            service.list_items = request.form.get('list_items')
+            service.services_overview = request.form.get('services_overview')
             service.department_id = department_id
 
             # Handle icon upload
@@ -1675,8 +2602,7 @@ def admin_department_services():
                 icon = request.files['icon']
                 if icon and icon.filename != '':
                     filename = secure_filename(icon.filename)
-                    filepath = os.path.join(
-                        app.config['UPLOAD_FOLDER'], filename)
+                    filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
                     icon.save(filepath)
                     service.icon_path = f'img/department/icons/{filename}'
 
@@ -1689,8 +2615,7 @@ def admin_department_services():
                 icon = request.files['icon']
                 if icon and icon.filename != '':
                     filename = secure_filename(icon.filename)
-                    filepath = os.path.join(
-                        app.config['UPLOAD_FOLDER'], filename)
+                    filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
                     icon.save(filepath)
                     icon_path = f'img/department/icons/{filename}'
 
@@ -1698,6 +2623,7 @@ def admin_department_services():
                 title=request.form.get('title'),
                 description=request.form.get('description'),
                 list_items=request.form.get('list_items'),
+                services_overview=request.form.get('services_overview'),
                 department_id=department_id,
                 icon_path=icon_path
             )
@@ -1723,7 +2649,6 @@ def admin_department_services():
         for module in modules:
             access[module] = getattr(user.access, module, False)
     return render_template("admin/department_services.html", services=services, departments=departments, access=access, current_user=user)
-
 
 @app.route('/admin/delete_overview/<int:id>', methods=['POST'])
 def delete_overview(id):
@@ -1836,6 +2761,28 @@ def admin_logout():
     return redirect(url_for("admin_login"))
 
 
+@app.route('/admin/doctors/update-order', methods=['POST'])
+def update_doctors_order():
+    try:
+        data = request.get_json()
+        order_data = data.get('order', [])
+        
+        for doctor_data in order_data:
+            doctor_id = doctor_data['id']
+            display_order = doctor_data['display_order']
+            
+            # Update the doctor's display_order in the database
+            doctor = Doctor.query.get(doctor_data['id'])
+            if doctor:
+                doctor.display_order = display_order
+                
+        db.session.commit()
+        return jsonify({'success': True, 'message': 'Doctor order updated successfully'})
+    
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'success': False, 'message': str(e)}), 500
+
 @app.route('/doctors')
 def list_doctors():
     page = request.args.get('page', 1, type=int)
@@ -1844,7 +2791,7 @@ def list_doctors():
     pagination = (
         Doctor.query
         .filter_by(is_active=True)
-        # strips "Dr. "
+        .order_by(Doctor.display_order.asc())  # Add this line
         .order_by(func.replace(func.lower(Doctor.name), "dr. ", ""))
         .paginate(page=page, per_page=per_page, error_out=False)
     )
@@ -1875,20 +2822,11 @@ def doctor_profile(slug):
 @login_required
 @permission_required("users")
 def admin_users():
-    users = User.query.order_by(User.created_at.desc()).all()
+    
     modules = [
-        "banners",
-        "doctors",
-        "counters",
-        "testimonials",
-        "specialities",
-        "departments",
-        "health_packages",
-        "sports_packages",
-        "department_content",
-        "users",
-        "callback_requests",
-        "reviews",
+        "banners", "doctors", "counters", "testimonials", "specialities",
+        "departments", "health_packages", "sports_packages", "department_content",
+        "users", "callback_requests", "reviews", "blogs", "bmw_report"
     ]
 
     if request.method == "POST":
@@ -1904,14 +2842,15 @@ def admin_users():
             flash("Emp ID, Name, and Email are required!", "danger")
             return redirect(url_for("admin_users"))
 
-        # Check if it's an existing user or a new one
+        user = None
         if user_id:
+            # Update existing user
             user = User.query.get(user_id)
             if user:
                 user.emp_id = emp_id
                 user.name = name
                 user.email = email
-                if password:
+                if password and password.strip():  # Only update password if provided
                     user.password_hash = generate_password_hash(password)
                 user.is_active = is_active
                 flash("User updated successfully!", "success")
@@ -1919,14 +2858,21 @@ def admin_users():
                 flash("User not found!", "danger")
                 return redirect(url_for("admin_users"))
         else:
-            # Create a new user
+            # Create new user
             if not password:
                 flash("Password is required for a new user!", "danger")
                 return redirect(url_for("admin_users"))
 
+            # Check for duplicate email
             existing_user = User.query.filter_by(email=email).first()
             if existing_user:
                 flash("A user with that email already exists.", "danger")
+                return redirect(url_for("admin_users"))
+
+            # Check for duplicate emp_id
+            existing_emp = User.query.filter_by(emp_id=emp_id).first()
+            if existing_emp:
+                flash("A user with that Employee ID already exists.", "danger")
                 return redirect(url_for("admin_users"))
 
             user = User(
@@ -1937,33 +2883,38 @@ def admin_users():
                 is_active=is_active
             )
             db.session.add(user)
-            db.session.flush()  # Flush to get user.id for UserAccess
-
+            db.session.flush()  # Get user.id for UserAccess
             flash("User added successfully!", "success")
 
-        # Update permissions
-        user_access = user.access if user and user.access else UserAccess(
-            user_id=user.id)
+        # Handle permissions - FIXED LOGIC
+        if user:
+            # Get or create user access
+            user_access = UserAccess.query.filter_by(user_id=user.id).first()
+            if not user_access:
+                user_access = UserAccess(user_id=user.id)
+                db.session.add(user_access)
 
-        # CORRECTED LOGIC: Check if each module is in the form data
-        for module in modules:
-            is_checked = request.form.get(module) == 'on'
-            setattr(user_access, module, is_checked)
-
-        if not user.access:
-            db.session.add(user_access)
+            # Update each permission
+            for module in modules:
+                is_checked = request.form.get(module) == 'on'
+                setattr(user_access, module, is_checked)
 
         db.session.commit()
-
         return redirect(url_for("admin_users"))
 
-    # CORRECTED LOGIC FOR THE GET REQUEST
+    # GET REQUEST - FIXED LOGIC
+    users = User.query.order_by(User.created_at.desc()).all()
+    
+    # Process users with their access permissions
     users_with_access = []
     for user in users:
         access_dict = {}
-        if user.access:
-            for module in modules:
+        for module in modules:
+            # Check if user has access record and get permission
+            if user.access:
                 access_dict[module] = getattr(user.access, module, False)
+            else:
+                access_dict[module] = False
 
         users_with_access.append({
             'id': user.id,
@@ -1971,26 +2922,28 @@ def admin_users():
             'name': user.name,
             'email': user.email,
             'is_active': user.is_active,
-            'access': access_dict  # This is now a simple dictionary
+            'access': access_dict
         })
-        admin_id = session.get("admin_id")
-    user = User.query.get(admin_id)
 
-    # If the user is somehow invalid, redirect to login
-    if not user:
+    # Get current admin user for sidebar
+    admin_id = session.get("admin_id")
+    current_admin = User.query.get(admin_id)
+
+    if not current_admin:
         flash("Could not find user. Please log in again.", "warning")
         return redirect(url_for("admin_login"))
 
-    modules = ['banners', 'doctors', 'counters', 'testimonials', 'specialities',
-               'departments', 'health_packages', 'sports_packages', 'department_content', 'users', 'callback_requests', 'reviews']
-
-    access = {module: False for module in modules}
-    if user.access:
+    # Get current admin's access for sidebar
+    current_access = {module: False for module in modules}
+    if current_admin.access:
         for module in modules:
-            access[module] = getattr(user.access, module, False)
+            current_access[module] = getattr(current_admin.access, module, False)
 
-    return render_template('admin/users.html', users=users_with_access, modules=modules, access=access, current_user=user)
-
+    return render_template('admin/users.html', 
+                         users=users_with_access, 
+                         modules=modules, 
+                         access=current_access, 
+                         current_user=current_admin)
 
 @app.route('/admin/users/delete/<int:user_id>', methods=['POST'])
 def delete_user(user_id):
@@ -2218,6 +3171,431 @@ def export_reviews():
         mimetype="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
     )
 
+@app.route('/blog')
+def blog():
+    departments = Department.query.filter_by(is_active=True).all()
+    return render_template('blog.html', departments=departments)
+
+@app.route('/api/blogs')
+def api_blogs():
+    try:
+        department_slug = request.args.get('department', 'all')
+        search_query = request.args.get('search', '')
+        
+        # Base query for active blogs
+        blog_query = Blog.query.filter_by(is_active=True)
+        
+        # Filter by department if specified
+        if department_slug != 'all':
+            department = Department.query.filter_by(slug=department_slug, is_active=True).first()
+            if department:
+                blog_query = blog_query.filter_by(department_id=department.id)
+        
+        # Filter by search query
+        if search_query:
+            blog_query = blog_query.filter(
+                (Blog.title.ilike(f'%{search_query}%')) |
+                (Blog.excerpt.ilike(f'%{search_query}%')) |
+                (Blog.content.ilike(f'%{search_query}%'))
+            )
+        
+        blogs = blog_query.order_by(Blog.created_at.desc()).all()
+        
+        return jsonify([{
+            'id': blog.id,
+            'title': blog.title,
+            'excerpt': blog.excerpt,
+            'content': blog.content,
+            'image_path': blog.image_path,
+            'department': blog.department.name if blog.department else 'General',
+            'department_slug': blog.department.slug if blog.department else 'general',
+            'created_at': blog.created_at.strftime('%B %d, %Y'),
+            'slug': blog.slug
+        } for blog in blogs])
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/blog/<slug>')
+def blog_detail(slug):
+    try:
+        print(f"Looking for blog with slug: {slug}")  # Debug
+        blog = Blog.query.filter_by(slug=slug, is_active=True).first()
+        
+        if not blog:
+            print("Blog not found")  # Debug
+            flash("Blog not found", "error")
+            return redirect(url_for('blog'))
+        
+        print(f"Found blog: {blog.title}")  # Debug
+        print(f"Blog department: {blog.department}")  # Debug
+        
+        # Get related blogs from same department
+        related_blogs = []
+        if blog.department_id:
+            related_blogs = Blog.query.filter(
+                Blog.department_id == blog.department_id,
+                Blog.id != blog.id,
+                Blog.is_active == True
+            ).order_by(Blog.created_at.desc()).limit(3).all()
+        
+        print(f"Found {len(related_blogs)} related blogs")  # Debug
+        
+        # Make sure we're passing the blog variable
+        return render_template('blog-detail.html', blog=blog, related_blogs=related_blogs)
+        
+    except Exception as e:
+        print(f"Error in blog_detail: {str(e)}")
+        traceback.print_exc()
+        flash("Error loading blog", "error")
+        return redirect(url_for('blog'))
+
+# Admin Blog Management
+@app.route('/admin/blogs', methods=['GET', 'POST'])
+def admin_blogs():
+    if request.method == 'POST':
+        # Delete Blog
+        if 'delete_id' in request.form:
+            blog_id = request.form.get('delete_id')
+            blog = Blog.query.get_or_404(blog_id)
+            
+            # Delete associated image if exists
+            if blog.image_path:
+                image_full_path = os.path.join(app.static_folder, blog.image_path)
+                if os.path.exists(image_full_path):
+                    os.remove(image_full_path)
+            
+            db.session.delete(blog)
+            db.session.commit()
+            flash("Blog deleted successfully!", "success")
+            return redirect(url_for('admin_blogs'))
+        
+        # Add/Update Blog
+        blog_id = request.form.get('blog_id')
+        
+        # Handle image upload
+        image_path = None
+        if 'image' in request.files:
+            image_file = request.files['image']
+            if image_file and image_file.filename != '':
+                if allowed_file(image_file.filename):
+                    filename = secure_filename(image_file.filename)
+                    blogs_folder = os.path.join(app.static_folder, 'img', 'blogs')
+                    os.makedirs(blogs_folder, exist_ok=True)
+                    full_path = os.path.join(blogs_folder, filename)
+                    image_file.save(full_path)
+                    image_path = f'img/blogs/{filename}'
+                else:
+                    flash('Invalid file type for blog image. Allowed: png, jpg, jpeg, gif, webp', 'error')
+                    return redirect(url_for('admin_blogs'))
+        
+        if blog_id:
+            # Update existing blog
+            blog = Blog.query.get_or_404(blog_id)
+            blog.title = request.form.get('title')
+            blog.slug = request.form.get('slug')
+            blog.excerpt = request.form.get('excerpt')
+            blog.content = request.form.get('content')
+            blog.department_id = request.form.get('department_id') or None
+            
+            # Update image if new one uploaded
+            if image_path:
+                # Delete old image if exists
+                if blog.image_path:
+                    old_image_path = os.path.join(app.static_folder, blog.image_path)
+                    if os.path.exists(old_image_path):
+                        os.remove(old_image_path)
+                blog.image_path = image_path
+            
+            db.session.commit()
+            flash("Blog updated successfully!", "success")
+        else:
+            # Add new blog
+            title = request.form.get('title')
+            slug = request.form.get('slug')
+            excerpt = request.form.get('excerpt')
+            content = request.form.get('content')
+            department_id = request.form.get('department_id') or None
+            
+            # Check if blog with same slug exists
+            existing = Blog.query.filter_by(slug=slug).first()
+            if existing:
+                flash("A blog with this slug already exists.", "error")
+                return redirect(url_for('admin_blogs'))
+            
+            blog = Blog(
+                title=title,
+                slug=slug,
+                excerpt=excerpt,
+                content=content,
+                image_path=image_path,
+                department_id=department_id
+            )
+            db.session.add(blog)
+            db.session.commit()
+            flash("Blog added successfully!", "success")
+        
+        return redirect(url_for('admin_blogs'))
+    
+    blogs = Blog.query.order_by(Blog.created_at.desc()).all()
+    departments = Department.query.filter_by(is_active=True).all()
+    
+    admin_id = session.get("admin_id")
+    user = User.query.get(admin_id)
+    modules = ['banners', 'doctors', 'counters', 'testimonials', 'specialities',
+               'departments', 'health_packages', 'sports_packages', 'department_content', 
+               'users', 'callback_requests', 'reviews', 'blogs']
+    access = {module: False for module in modules}
+    if user and user.access:
+        for module in modules:
+            access[module] = getattr(user.access, module, False)
+    
+    return render_template('admin/blogs.html', blogs=blogs, departments=departments, access=access, current_user=user)
+
+# API endpoint for fetching blog data for editing
+@app.route('/api/blog/<int:blog_id>')
+def get_blog(blog_id):
+    blog = Blog.query.get_or_404(blog_id)
+    return {
+        'id': blog.id,
+        'title': blog.title,
+        'slug': blog.slug,
+        'excerpt': blog.excerpt or '',
+        'content': blog.content or '',
+        'department_id': blog.department_id,
+        'image_path': blog.image_path or ''
+    }
+
+@app.route('/api/toggle_blog/<int:blog_id>', methods=['POST'])
+def toggle_blog(blog_id):
+    blog = Blog.query.get_or_404(blog_id)
+    blog.is_active = not blog.is_active
+    db.session.commit()
+    return jsonify({'status': 'success', 'is_active': blog.is_active})
+
+@app.route('/test-blog-detail')
+def test_blog_detail():
+    try:
+        # Get the first blog from database
+        blog = Blog.query.filter_by(is_active=True).first()
+        
+        if not blog:
+            return "No blogs found in database. Please create a blog first."
+        
+        # Test the template rendering
+        return render_template('blog-detail.html', blog=blog, related_blogs=[])
+        
+    except Exception as e:
+        return f"Error: {str(e)}"
+
+
+@app.route('/admin/upload', methods=['GET', 'POST'])
+def admin_upload():
+    if request.method == 'POST':
+        file = request.files.get('pdf_file')
+        if not file:
+            flash('No file selected', 'danger')
+            return redirect(url_for('admin_upload'))
+
+        filename = secure_filename(file.filename)
+        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
+        # Save file info to DB
+        pdf_entry = BMWReportPDF(file_name=filename)
+        db.session.add(pdf_entry)
+        db.session.commit()
+
+        flash('BMW Report uploaded successfully!', 'success')
+        return redirect(url_for('admin_upload'))
+
+    # Show last uploaded file
+    latest_pdf = BMWReportPDF.query.order_by(BMWReportPDF.uploaded_at.desc()).first()
+    return render_template('admin/admin_upload.html', latest_pdf=latest_pdf)
+
+
+# ---------------- FRONTEND BMW REPORT PAGE ---------------- #
+@app.route('/bmw_report')
+def bmw_report():
+    latest_pdf = BMWReportPDF.query.order_by(BMWReportPDF.uploaded_at.desc()).first()
+    if latest_pdf:
+        # open the latest uploaded PDF
+        return redirect(url_for('serve_pdf', filename=latest_pdf.file_name))
+    else:
+        return "<h3 style='text-align:center;margin-top:50px;'>No BMW report uploaded yet.</h3>"
+
+
+# ---------------- SERVE PDF FILE ---------------- #
+@app.route('/uploads/<filename>')
+def serve_pdf(filename):
+    return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
+
+# ------------------ ADMIN: Department Testimonials Management ------------------
+@app.route('/admin/department_testimonials', methods=['GET', 'POST'])
+@login_required
+@permission_required('testimonials')
+def admin_department_testimonials():
+    if request.method == 'POST':
+        # Delete testimonial
+        if 'delete_id' in request.form:
+            testimonial_id = request.form.get('delete_id')
+            testimonial = DepartmentTestimonial.query.get_or_404(testimonial_id)
+            db.session.delete(testimonial)
+            db.session.commit()
+            flash("Testimonial deleted successfully!", "success")
+            return redirect(url_for('admin_department_overview'))
+
+        # Add/Update testimonial
+        testimonial_id = request.form.get('testimonial_id')
+        
+        if testimonial_id:
+            # Update existing testimonial
+            testimonial = DepartmentTestimonial.query.get_or_404(testimonial_id)
+            testimonial.name = request.form.get('name')
+            testimonial.comment = request.form.get('comment')
+            testimonial.rating = int(request.form.get('rating', 5))
+            testimonial.avatar_color = request.form.get('avatar_color')
+            testimonial.department_id = request.form.get('department_id')
+            testimonial.display_order = int(request.form.get('display_order', 0))
+            
+            db.session.commit()
+            flash("Testimonial updated successfully!", "success")
+        else:
+            # Add new testimonial
+            name = request.form.get('name')
+            comment = request.form.get('comment')
+            rating = int(request.form.get('rating', 5))
+            avatar_color = request.form.get('avatar_color')
+            department_id = request.form.get('department_id')
+            display_order = int(request.form.get('display_order', 0))
+            
+            testimonial = DepartmentTestimonial(
+                name=name,
+                comment=comment,
+                rating=rating,
+                avatar_color=avatar_color,
+                department_id=department_id,
+                display_order=display_order
+            )
+            db.session.add(testimonial)
+            db.session.commit()
+            flash("Testimonial added successfully!", "success")
+        
+        return redirect(url_for('admin_department_overview'))
+    
+    # For GET requests, redirect to the main department overview page
+    return redirect(url_for('admin_department_overview'))
+
+
+# ✅ Toggle active/inactive testimonial
+@app.route('/api/toggle_department_testimonial/<int:testimonial_id>', methods=['POST'])
+@login_required
+@permission_required('testimonials')
+def toggle_department_testimonial(testimonial_id):
+    testimonial = DepartmentTestimonial.query.get_or_404(testimonial_id)
+    testimonial.is_active = not testimonial.is_active
+    db.session.commit()
+    return jsonify({'status': 'success', 'is_active': testimonial.is_active})
+
+
+# ------------------ ADMIN: FAQ Management ------------------
+@app.route('/admin/faqs', methods=['GET', 'POST'])
+@login_required
+@permission_required('department_content')
+def admin_faqs():
+    if request.method == 'POST':
+        # Delete FAQ
+        if 'delete_id' in request.form:
+            faq_id = request.form.get('delete_id')
+            faq = FAQ.query.get_or_404(faq_id)
+            db.session.delete(faq)
+            db.session.commit()
+            flash("FAQ deleted successfully!", "success")
+            return redirect(url_for('admin_department_overview'))
+
+        # Add/Update FAQ
+        faq_id = request.form.get('faq_id')
+        
+        if faq_id:
+            # Update existing FAQ
+            faq = FAQ.query.get_or_404(faq_id)
+            faq.question = request.form.get('question')
+            faq.answer = request.form.get('answer')
+            faq.department_id = request.form.get('department_id')
+            faq.display_order = int(request.form.get('display_order', 0))
+            
+            db.session.commit()
+            flash("FAQ updated successfully!", "success")
+        else:
+            # Add new FAQ
+            question = request.form.get('question')
+            answer = request.form.get('answer')
+            department_id = request.form.get('department_id')
+            display_order = int(request.form.get('display_order', 0))
+            
+            faq = FAQ(
+                question=question,
+                answer=answer,
+                department_id=department_id,
+                display_order=display_order
+            )
+            db.session.add(faq)
+            db.session.commit()
+            flash("FAQ added successfully!", "success")
+        
+        return redirect(url_for('admin_department_overview'))
+    
+    # For GET requests, redirect to the main department overview page
+    return redirect(url_for('admin_department_overview'))
+
+
+@app.route('/api/toggle_faq/<int:faq_id>', methods=['POST'])
+def toggle_faq(faq_id):
+    faq = FAQ.query.get_or_404(faq_id)
+    faq.is_active = not faq.is_active
+    db.session.commit()
+    return jsonify({'status': 'success', 'is_active': faq.is_active})
+
+
+# ------------------ DELETE ROUTES ------------------
+
+# ✅ Delete Department Testimonial
+@app.route('/admin/delete_testimonial/<int:testimonial_id>', methods=['POST'])
+@login_required
+@permission_required('testimonials')
+def delete_department_testimonial(testimonial_id):
+    testimonial = DepartmentTestimonial.query.get_or_404(testimonial_id)
+    department_id = testimonial.department_id
+    db.session.delete(testimonial)
+    db.session.commit()
+
+    # Regenerate department HTML
+    department = Department.query.get(department_id)
+    if department:
+        generate_department_html(department)
+
+    flash("Testimonial deleted successfully!", "success")
+    return redirect(url_for('admin_department_overview'))
+
+
+# ✅ Delete Department FAQ - FIXED PARAMETER NAME
+@app.route('/admin/delete_faq/<int:faq_id>', methods=['POST'])
+@login_required
+@permission_required('department_content')
+def delete_faq(faq_id):  # Changed from 'id' to 'faq_id'
+    faq = FAQ.query.get_or_404(faq_id)
+    department_id = faq.department_id
+    db.session.delete(faq)
+    db.session.commit()
+
+    # Regenerate department HTML
+    department = Department.query.get(department_id)
+    if department:
+        generate_department_html(department)
+
+    flash("FAQ deleted successfully!", "success")
+    return redirect(url_for('admin_department_overview'))
+
+# ------------------ TOGGLE ROUTES ------------------
+
 
 # admin routes end -------------------------------------------------------------------------------------------------------------------------
 migrate = Migrate(app, db)
@@ -2231,4 +3609,4 @@ if __name__ == "__main__":
         print("Startup error:", e)
         traceback.print_exc()
 
-    app.run(host="0.0.0.0", port=8000, debug=True)
+    app.run(host="0.0.0.0", port=2000, debug=True)

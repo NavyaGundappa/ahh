@@ -30,7 +30,7 @@ class Doctor(db.Model):
     qualification = db.Column(db.String(200), nullable=True)
     languages = db.Column(db.String(200), nullable=True)
     overview = db.Column(db.Text, nullable=True)
-
+    display_order = db.Column(db.Integer, default=0)
     fellowship_membership = db.Column(db.Text, nullable=True)
     fellowship_links = db.Column(db.Text, nullable=True)
     fellowship_file_path = db.Column(db.String(300), nullable=True)
@@ -56,7 +56,6 @@ class Doctor(db.Model):
 
     def __repr__(self):
         return f"<Doctor {self.name}>"
-
 
 class CallbackRequest(db.Model):
     __tablename__ = 'callback_requests'
@@ -121,8 +120,12 @@ class Department(db.Model):
     icon_path = db.Column(db.String(300), nullable=True)
     # ✅ new column for banner image
     banner_path = db.Column(db.String(300), nullable=True)
+    
+    # ✅ NEW FIELDS for specialists section
+    specialists_heading = db.Column(db.String(500), nullable=True)
+    specialists_content = db.Column(db.Text, nullable=True)
+    
     is_active = db.Column(db.Boolean, default=True)
-
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(
         db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
@@ -215,6 +218,9 @@ class DepartmentService(db.Model):
     icon_path = db.Column(db.String(300), nullable=True)  # path to svg/png
     # store bullet points as comma-separated text
     list_items = db.Column(db.Text, nullable=True)
+    
+    # ✅ RENAMED FIELD for services overview
+    services_overview = db.Column(db.Text, nullable=True)
 
     department_id = db.Column(db.Integer, db.ForeignKey(
         'departments.id'), nullable=False)
@@ -273,13 +279,14 @@ class UserAccess(db.Model):
     department_content = db.Column(db.Boolean, default=False)
     users = db.Column(db.Boolean, default=False)
     callback_requests = db.Column(db.Boolean, default=False)
-    reviews = db.Column(db.Boolean, default=False)   # ✅ new field
+    reviews = db.Column(db.Boolean, default=False)
+    blogs = db.Column(db.Boolean, default=False)
+    bmw_report = db.Column(db.Boolean, default=False)
 
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(
         db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow
     )
-
 
 class ReviewMessage(db.Model):
     __tablename__ = "review_messages"
@@ -293,3 +300,63 @@ class ReviewMessage(db.Model):
 
     def __repr__(self):
         return f"<ReviewMessage {self.name}>"
+
+
+class Blog(db.Model):
+    __tablename__ = 'blogs'
+    
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(200), nullable=False)
+    slug = db.Column(db.String(200), unique=True, nullable=False)
+    excerpt = db.Column(db.Text, nullable=True)
+    content = db.Column(db.Text, nullable=False)
+    image_path = db.Column(db.String(300), nullable=True)
+    department_id = db.Column(db.Integer, db.ForeignKey('departments.id'), nullable=True)
+    is_active = db.Column(db.Boolean, default=True)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    
+    # Relationship
+    department = db.relationship('Department', backref='blogs')
+    
+    def __repr__(self):
+        return f"<Blog {self.title}>"
+
+class BMWReportPDF(db.Model):
+    __tablename__ = 'bmw_report_pdfs'
+    id = db.Column(db.Integer, primary_key=True)
+    file_name = db.Column(db.String(255), nullable=False)
+    uploaded_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+class DepartmentTestimonial(db.Model):
+    __tablename__ = 'department_testimonials'
+    
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    
+    comment = db.Column(db.Text, nullable=False)
+    rating = db.Column(db.Integer, nullable=False, default=5)
+    avatar_color = db.Column(db.String(20), nullable=True)
+    is_active = db.Column(db.Boolean, default=True)
+    display_order = db.Column(db.Integer, default=0)
+    department_id = db.Column(db.Integer, db.ForeignKey('departments.id'), nullable=False)
+    
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    
+    department = db.relationship('Department', backref=db.backref('department_testimonials', lazy=True))
+
+class FAQ(db.Model):
+    __tablename__ = 'faqs'
+    
+    id = db.Column(db.Integer, primary_key=True)
+    question = db.Column(db.Text, nullable=False)
+    answer = db.Column(db.Text, nullable=False)
+    display_order = db.Column(db.Integer, default=0)
+    is_active = db.Column(db.Boolean, default=True)
+    department_id = db.Column(db.Integer, db.ForeignKey('departments.id'), nullable=False)
+    
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    
+    department = db.relationship('Department', backref=db.backref('faqs', lazy=True))

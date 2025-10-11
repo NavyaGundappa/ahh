@@ -46,6 +46,27 @@ Manage Departments - Admin Panel
                 class="w-full px-3 py-2 border rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                 rows="2"></textarea>
         </div>
+
+        <!-- ✅ NEW FIELDS: Specialists Section -->
+        <div class="md:col-span-2 border-t pt-4 mt-2">
+            <h4 class="font-semibold text-gray-700 mb-3">Specialists Section Content</h4>
+            <div class="mb-3">
+                <label class="block text-gray-700 text-sm font-bold mb-2">Specialists Heading</label>
+                <input type="text" name="specialists_heading"
+                    class="w-full px-3 py-2 border rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="e.g., Meet Our Expert Team, Our Specialists">
+                <p class="text-xs text-gray-500 mt-1">This will appear above the specialists list on the department page
+                </p>
+            </div>
+            <div class="mb-3">
+                <label class="block text-gray-700 text-sm font-bold mb-2">Specialists Content</label>
+                <textarea name="specialists_content"
+                    class="w-full px-3 py-2 border rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    rows="4"
+                    placeholder="e.g., Our team of highly qualified specialists is dedicated to providing the best care..."></textarea>
+                <p class="text-xs text-gray-500 mt-1">You can use HTML formatting for rich text content</p>
+            </div>
+        </div>
     </div>
     <button type="submit"
         class="bg-blue-500 text-white px-4 py-2 rounded font-bold hover:bg-blue-700 transition mt-4">Add
@@ -79,6 +100,9 @@ Manage Departments - Admin Panel
                     Banner</th>
                 <th
                     class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                    Specialists Content</th>
+                <th
+                    class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                     Actions</th>
             </tr>
         </thead>
@@ -104,6 +128,13 @@ Manage Departments - Admin Panel
                     {% endif %}
                 </td>
                 <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                    {% if dept.specialists_heading or dept.specialists_content %}
+                    <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">✓ Configured</span>
+                    {% else %}
+                    <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full">Not set</span>
+                    {% endif %}
+                </td>
+                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                     <button class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded text-xs"
                         onclick="openModal('editModal-{{ dept.id }}')">Edit</button>
                     <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded text-xs"
@@ -120,7 +151,7 @@ Manage Departments - Admin Panel
 
 {% for dept in departments %}
 <div id="editModal-{{ dept.id }}" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden">
-    <div class="relative top-20 mx-auto p-5 border w-full max-w-lg shadow-lg rounded-md bg-white">
+    <div class="relative top-20 mx-auto p-5 border w-full max-w-2xl shadow-lg rounded-md bg-white">
         <h3 class="text-lg leading-6 font-medium text-gray-900 mb-4">Edit Department - {{ dept.name }}</h3>
         <form method="POST" enctype="multipart/form-data">
             <input type="hidden" name="department_id" value="{{ dept.id }}">
@@ -143,10 +174,35 @@ Manage Departments - Admin Panel
                 <div>
                     <label class="block text-gray-700 text-sm font-bold mb-2">Icon (leave empty to keep)</label>
                     <input type="file" name="icon" class="w-full px-3 py-2 border rounded">
+                    {% if dept.icon_path %}
+                    <p class="text-xs text-gray-500 mt-1">Current: {{ dept.icon_path }}</p>
+                    {% endif %}
                 </div>
                 <div>
                     <label class="block text-gray-700 text-sm font-bold mb-2">Banner (leave empty to keep)</label>
                     <input type="file" name="banner" class="w-full px-3 py-2 border rounded">
+                    {% if dept.banner_path %}
+                    <p class="text-xs text-gray-500 mt-1">Current: {{ dept.banner_path }}</p>
+                    {% endif %}
+                </div>
+
+                <!-- ✅ NEW FIELDS: Specialists Section in Edit Modal -->
+                <div class="md:col-span-2 border-t pt-4 mt-2">
+                    <h4 class="font-semibold text-gray-700 mb-3">Specialists Section Content</h4>
+                    <div class="mb-3">
+                        <label class="block text-gray-700 text-sm font-bold mb-2">Specialists Heading</label>
+                        <input type="text" name="specialists_heading" class="w-full px-3 py-2 border rounded"
+                            value="{{ dept.specialists_heading or '' }}"
+                            placeholder="e.g., Meet Our Expert Team, Our Specialists">
+                        <p class="text-xs text-gray-500 mt-1">This will appear above the specialists list on the
+                            department page</p>
+                    </div>
+                    <div class="mb-3">
+                        <label class="block text-gray-700 text-sm font-bold mb-2">Specialists Content</label>
+                        <textarea name="specialists_content" class="w-full px-3 py-2 border rounded" rows="4"
+                            placeholder="e.g., Our team of highly qualified specialists is dedicated to providing the best care...">{{ dept.specialists_content or '' }}</textarea>
+                        <p class="text-xs text-gray-500 mt-1">You can use HTML formatting for rich text content</p>
+                    </div>
                 </div>
             </div>
             <div class="flex items-center justify-end mt-4">

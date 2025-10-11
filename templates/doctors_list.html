@@ -4,331 +4,498 @@
 
 {% block content %}
 <style>
-    /* Scoped styling for doctor page */
     .doctor-page {
-        --doctor-primary: #005ea3;
-        /* Deep Blue */
-        --doctor-hover: #004173;
-        /* Darker Blue for hover */
-        --doctor-secondary: #f0f4f8;
-        /* Light gray background */
+        --doctor-primary: #103A60;
+        --doctor-accent: #1e5a96;
         --doctor-card-bg: #ffffff;
-        /* Card background */
-        --doctor-text: #1a1a1a;
-        /* Text color */
+        --doctor-text: #1e293b;
+        --doctor-border: #e2e8f0;
+        --doctor-light: #f8fafc;
+        --doctor-text-light: #64748b;
     }
 
     .doctor-page .container {
         max-width: 1200px;
-        margin: auto;
-        padding: 20px;
+        margin: 0 auto;
+        padding: 20px 20px 40px 20px;
     }
 
-    .doctor-page h1 {
+    .doctor-page .page-header {
         text-align: center;
-        font-size: 1.7em;
-        color: #004173;
         margin-bottom: 40px;
+    }
+
+    .doctor-page .page-title {
+        font-size: 2.5rem;
         font-weight: 700;
+        color: var(--doctor-primary);
+        margin-bottom: 16px;
     }
 
-    .doctor-page .doctor-list {
+    .doctor-page .doctor-grid {
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        /* exactly 2 per row */
+        grid-template-columns: repeat(3, 1fr);
         gap: 20px;
-    }
-
-    @media screen and (max-width: 768px) {
-        .doctor-page .doctor-list {
-            grid-template-columns: 1fr;
-            /* single column on mobile */
-        }
+        margin-bottom: 40px;
     }
 
     .doctor-page .doctor-card {
-        background-color: var(--doctor-card-bg);
+        background: var(--doctor-card-bg);
         border-radius: 12px;
-        padding: 20px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        border: 1px solid var(--doctor-border);
+        overflow: hidden;
+        transition: all 0.3s ease;
+        animation: cardEntrance 0.6s ease-out;
+        height: 320px;
         display: flex;
-        align-items: center;
-        gap: 20px;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        flex-direction: column;
     }
 
     .doctor-page .doctor-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        transform: translateY(-4px);
+        box-shadow: 0 8px 16px rgba(0,0,0,0.12);
+        border-color: var(--doctor-accent);
+    }
+
+    .doctor-page .card-header {
+        padding: 16px;
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        flex-shrink: 0;
     }
 
     .doctor-page .doctor-image {
-        width: 120px;
-        height: 120px;
+        width: 60px;
+        height: 60px;
         border-radius: 50%;
         object-fit: cover;
-        border: 3px solid var(--doctor-primary);
+        border: 2px solid var(--doctor-primary);
         flex-shrink: 0;
     }
 
     .doctor-page .doctor-info {
-        flex-grow: 1;
+        flex: 1;
+        min-width: 0;
     }
 
     .doctor-page .doctor-name {
-        font-size: 1.5em;
+        font-size: 1rem;
         font-weight: 700;
-        margin: 0;
         color: var(--doctor-text);
+        margin: 0 0 6px 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        line-height: 1.2;
     }
 
     .doctor-page .doctor-specialization {
         color: var(--doctor-primary);
-        font-weight: 500;
-        margin: 5px 0 15px;
+        font-weight: 600;
+        font-size: 0.8rem;
+        padding: 3px 8px;
+        background: rgba(16,58,96,0.1);
+        border-radius: 12px;
+        display: inline-block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 100%;
+        line-height: 1;
     }
 
-    /* Button container */
-    .doctor-page .doctor-actions {
+    .doctor-page .card-body {
+        padding: 12px 16px;
+        border-top: 1px solid var(--doctor-border);
+        background: var(--doctor-light);
+        flex: 1;
+        overflow: hidden;
         display: flex;
-        gap: 10px;
-        flex-wrap: nowrap;
-        /* prevent buttons from stacking */
-        align-items: flex-end;
-        /* vertical alignment */
-        justify-content: flex-start;
-        /* align buttons horizontally */
+        flex-direction: column;
     }
 
-    /* Common button style */
-    .doctor-page .action-btn {
-        display: inline-flex;
+    .timing-container {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        flex: 1;
+        overflow: hidden;
+    }
+
+    .timing-group {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+    }
+
+    .timing-row {
+        display: flex;
+        align-items: flex-start;
+    }
+
+    .timing-label {
+        font-weight: 600;
+        color: var(--doctor-text);
+        width: 35px;
+        flex-shrink: 0;
+        text-align: left;
+        line-height: 1.2;
+        position: relative;
+        font-size: 0.75rem;
+    }
+
+    .timing-label::after {
+        content: ":";
+        position: absolute;
+        right: -4px;
+    }
+
+    .timing-content {
+        color: var(--doctor-text-light);
+        font-size: 0.75rem;
+        line-height: 1.2;
+        flex: 1;
+        margin-left: 10px;
+        overflow: hidden;
+    }
+
+    .timing-content .time-slot {
+        display: block;
+        margin-bottom: 1px;
+        font-size: 0.7rem;
+    }
+
+    .on-call {
+        font-style: italic;
+        text-align: center;
+        color: var(--doctor-text-light);
+        padding: 8px 0;
+        flex: 1;
+        display: flex;
         align-items: center;
         justify-content: center;
-        padding: 7px 10px;
-        min-width: 160px;
-        border-radius: 25px;
+        font-size: 0.8rem;
+    }
+
+    .card-footer {
+        padding: 12px 16px;
+        display: flex;
+        gap: 8px;
+        flex-shrink: 0;
+    }
+
+    .action-btn {
+        flex: 1;
+        padding: 8px 12px;
+        border-radius: 8px;
         text-decoration: none;
-        font-weight: 300;
-        line-height: 1.2;
-        box-sizing: border-box;
-        transition: background-color 0.3s ease, transform 0.2s ease;
-        color: #fff;
-        white-space: nowrap;
-        /* prevent wrapping of text */
-    }
-
-
-    /* View Profile button */
-    .doctor-page .profile-btn {
-        background-color: var(--doctor-primary);
-    }
-
-    .doctor-page .profile-btn:hover {
-        background-color: var(--doctor-hover);
-    }
-
-    .doctor-page .profile-btn:active {
-        transform: scale(0.97);
-    }
-
-    /* Disabled button */
-    .doctor-page .disabled {
-        opacity: 0.6;
-        pointer-events: none;
-    }
-
-    .doctor-page .pagination {
+        font-weight: 600;
+        font-size: 0.75rem;
         text-align: center;
-        margin-top: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+        transition: all 0.2s ease;
+        white-space: nowrap;
     }
 
-    .doctor-page .page-link {
-        width: auto;
-        padding: 8px 16px;
-        border-radius: 20px;
-        border: 1px solid #ccc;
-        color: #555;
+    .btn-primary {
+        background: var(--doctor-primary);
+        color: white;
     }
 
-    .doctor-page .page-link.active,
-    .doctor-page .page-link:hover {
-        background-color: #005ea3;
-        color: #fff;
-        border-color: #78aed4;
+    .btn-primary:hover {
+        background: var(--doctor-accent);
+        transform: translateY(-1px);
     }
 
-    .doctor-timings-text {
-        font-size: 0.85em;
-        /* smaller font size */
-        color: #555;
-        /* optional: slightly muted color */
+    .btn-outline {
+        background: transparent;
+        color: var(--doctor-primary);
+        border: 1px solid var(--doctor-primary);
     }
 
-    @media screen and (max-width: 768px) {
+    .btn-outline:hover {
+        background: var(--doctor-primary);
+        color: white;
+        transform: translateY(-1px);
+    }
+
+    .btn-disabled {
+        background: var(--doctor-border);
+        color: var(--doctor-text-light);
+        cursor: not-allowed;
+        opacity: 0.6;
+    }
+
+    .btn-disabled:hover {
+        transform: none;
+        background: var(--doctor-border);
+    }
+
+    /* Loading Indicator */
+    .loading-indicator {
+        text-align: center;
+        padding: 20px;
+        color: var(--doctor-text-light);
+        display: none;
+    }
+
+    .loading-indicator.active {
+        display: block;
+    }
+
+    .loading-spinner {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 2px solid rgba(16,58,96,0.3);
+        border-radius: 50%;
+        border-top-color: var(--doctor-primary);
+        animation: spin 1s ease-in-out infinite;
+        margin-right: 8px;
+        vertical-align: middle;
+    }
+
+    .end-message {
+        text-align: center;
+        padding: 20px;
+        color: var(--doctor-text-light);
+        font-style: italic;
+        display: none;
+        font-size: 0.9rem;
+    }
+
+    .end-message.active {
+        display: block;
+    }
+
+    @media (max-width: 1024px) {
+        .doctor-page .doctor-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (max-width: 768px) {
+        .doctor-page .doctor-grid {
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+
         .doctor-page .doctor-card {
+            height: auto;
+            min-height: 280px;
+        }
+
+        .doctor-page .card-header {
             flex-direction: column;
-            align-items: flex-start;
-            /* align items to the left */
-            text-align: left;
-            /* text aligns left */
-            padding: 15px;
-            /* smaller padding */
-            gap: 10px;
-            /* reduce spacing between elements */
+            text-align: center;
+            padding: 12px;
         }
 
         .doctor-page .doctor-image {
-            width: 90px;
-            /* smaller image */
-            height: 90px;
-            border-width: 2px;
+            width: 80px;
+            height: 80px;
         }
 
-        .doctor-page .doctor-info {
-            flex-grow: 0;
-            width: 100%;
-            /* take full width */
+        .card-footer {
+            flex-direction: column;
+            padding: 10px 12px;
         }
 
-        .doctor-page .doctor-name {
-            font-size: 1.2em;
-            /* smaller name font */
-            margin-bottom: 3px;
+        .timing-label {
+            width: 30px;
         }
-
-        .doctor-page .doctor-specialization {
-            font-size: 0.95em;
-            /* smaller specialization font */
-            margin-bottom: 5px;
+        
+        .timing-label::after {
+            right: -3px;
         }
-
-        .doctor-page .doctor-timings-text {
-            font-size: 0.8em;
-            /* smaller timings text */
-        }
-
-        .doctor-page .doctor-actions {
-            justify-content: flex-start;
-            /* buttons aligned left */
-            gap: 8px;
-            /* smaller button spacing */
-            flex-wrap: wrap;
-            /* allow buttons to wrap if needed */
-        }
-
-        .doctor-page .action-btn {
-            padding: 8px 16px;
-            /* smaller button padding */
-            min-width: 130px;
-            /* slightly smaller width */
-            font-size: 0.85em;
-            /* smaller button text */
+        
+        .timing-content {
+            margin-left: 8px;
         }
     }
 
-    .breadcrumb-section {
-        padding: 10px 0;
-        background-color: #f8f9fa;
+    @media (max-width: 480px) {
+        .doctor-page .page-title {
+            font-size: 2rem;
+        }
+        
+        .doctor-page .container {
+            padding: 15px 10px 30px 10px;
+        }
     }
 
-    .breadcrumb {
-        margin-bottom: 0;
-        padding: 0.75rem 1rem;
+    @keyframes cardEntrance {
+        from { opacity: 0; transform: translateY(20px);}
+        to { opacity: 1; transform: translateY(0);}
     }
 
-    .breadcrumb-item+.breadcrumb-item::before {
-        content: ">>";
-        padding: 0 0.5rem;
-    }
-
-    .breadcrumb-item a {
-        color: #007bff;
-        text-decoration: none;
-    }
-
-    .breadcrumb-item.active {
-        color: #6c757d;
+    @keyframes spin {
+        to { transform: rotate(360deg); }
     }
 </style>
-<section class="breadcrumb-section">
-    <div class="container">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Home</a></li>
-                <li class="breadcrumb-item">Doctors</li>
-            </ol>
-        </nav>
-    </div>
-</section>
+
 <div class="doctor-page">
     <div class="container">
-        <h1>Our Doctors</h1>
-        <div class="doctor-list">
-            {% for doctor in doctors %}
-            <div class="doctor-card">
-                <img src="{{ url_for('static', filename=doctor.image_path if doctor.image_path else 'img/doctors/dr-he.jpg') }}"
-                    alt="{{ doctor.name }}" class="doctor-image">
-                <div class="doctor-info">
-                    <h2 class="doctor-name">{{ doctor.name }}</h2>
-                    <p class="doctor-specialization">{{ doctor.specialization }}</p>
-                    <div class="doctor-timings">
-                        {% set valid_timings = doctor.timings_parsed | selectattr('from') | selectattr('to') | list %}
+        <div class="page-header">
+            <h1 class="page-title">Meet Our Expert Doctors</h1>
+        </div>
 
-                        {% if valid_timings %}
+        <div class="doctor-grid" id="doctorGrid">
+            {% for doctor in doctors %}
+            <div class="doctor-card" data-doctor-id="{{ doctor.id }}">
+                <div class="card-header">
+                    <img src="{{ url_for('static', filename=doctor.image_path if doctor.image_path else 'img/doctors/dr-he.jpg') }}" 
+                         class="doctor-image" alt="{{ doctor.name }}">
+                    <div class="doctor-info">
+                        <h2 class="doctor-name">{{ doctor.name }}</h2>
+                        <div class="doctor-specialization">{{ doctor.specialization }}</div>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    {% set valid_timings = doctor.timings_parsed | selectattr('from') | selectattr('to') | list %}
+                    {% if valid_timings %}
                         {% set grouped_days = {} %}
                         {% for t in valid_timings %}
-                        {% if t.days %}
-                        {% set days_key = t.days | map('capitalize') | join(', ') %}
-                        {% set time_slot = t.from ~ ' ' ~ t.from_period ~ ' - ' ~ t.to ~ ' ' ~ t.to_period %}
-                        {% if days_key in grouped_days %}
-                        {% set _ = grouped_days[days_key].append(time_slot) %}
-                        {% else %}
-                        {% set _ = grouped_days.update({days_key: [time_slot]}) %}
-                        {% endif %}
-                        {% endif %}
+                            {% if t.days %}
+                                {% set days_key = t.days | map('capitalize') | join(', ') %}
+                                {% set time_slot = t.from ~ ' ' ~ t.from_period ~ ' - ' ~ t.to ~ ' ' ~ t.to_period %}
+                                {% if days_key in grouped_days %}
+                                    {% set _ = grouped_days[days_key].append(time_slot) %}
+                                {% else %}
+                                    {% set _ = grouped_days.update({days_key: [time_slot]}) %}
+                                {% endif %}
+                            {% endif %}
                         {% endfor %}
 
-                        {% for days, times in grouped_days.items() %}
-                        <div class="doctor-timings-text">
-                            <strong>Days:</strong> {{ days }}<br>
-                            <strong>Timings:</strong> {{ times | join(' and ') }}
+                        <div class="timing-container">
+                            {% for days, times in grouped_days.items() %}
+                            <div class="timing-group">
+                                <div class="timing-row">
+                                    <div class="timing-label">Day</div>
+                                    <div class="timing-content">{{ days }}</div>
+                                </div>
+                                <div class="timing-row">
+                                    <div class="timing-label">Time</div>
+                                    <div class="timing-content">
+                                        {% for time in times %}
+                                        <span class="time-slot">{{ time }}</span>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                            {% if not loop.last %}
+                            <div style="height: 8px;"></div>
+                            {% endif %}
+                            {% endfor %}
                         </div>
-                        {% endfor %}
-                        {% else %}
-                        <div class="doctor-timings-text text-muted">
-                            <strong>Timings:</strong> On Call
-                        </div>
-                        {% endif %}
-                    </div>
-                    <div class="doctor-actions">
-                        {% if doctor.appointment_link %}
-                        <a href="{{ doctor.appointment_link }}" target="_blank" class="action-btn profile-btn">Book
-                            Appointment</a>
-                        {% else %}
-                        <a href="#" class="action-btn profile-btn disabled">No Appointment Link</a>
-                        {% endif %}
-                        <a href="{{ url_for('doctor_detail', slug=doctor.slug) }}" class="action-btn profile-btn">View
-                            Profile</a>
-                    </div>
+                    {% else %}
+                        <div class="on-call">Available on call basis</div>
+                    {% endif %}
+                </div>
+
+                <div class="card-footer">
+                    {% if doctor.appointment_link %}
+                    <a href="{{ doctor.appointment_link }}" target="_blank" class="action-btn btn-primary">
+                        Book Appointment
+                    </a>
+                    {% else %}
+                    <a href="#" class="action-btn btn-disabled">Unavailable</a>
+                    {% endif %}
+                    <a href="{{ url_for('doctor_detail', slug=doctor.slug) }}" class="action-btn btn-outline">
+                        View Profile
+                    </a>
                 </div>
             </div>
             {% endfor %}
         </div>
 
-        <div class="pagination">
-            {% for page_num in pagination.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
-            {% if page_num %}
-            {% if pagination.page == page_num %}
-            <a href="{{ url_for('list_doctors', page=page_num) }}" class="page-link active">{{ page_num }}</a>
-            {% else %}
-            <a href="{{ url_for('list_doctors', page=page_num) }}" class="page-link">{{ page_num }}</a>
-            {% endif %}
-            {% else %}
-            <span class="ellipsis">...</span>
-            {% endif %}
-            {% endfor %}
+        <!-- Loading Indicator -->
+        <div class="loading-indicator" id="loadingIndicator">
+            <div class="loading-spinner"></div>
+            Loading more doctors...
+        </div>
+
+        <!-- End of Content Message -->
+        <div class="end-message" id="endMessage">
+            You've reached the end of our doctors list.
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const doctorGrid = document.getElementById('doctorGrid');
+        const loadingIndicator = document.getElementById('loadingIndicator');
+        const endMessage = document.getElementById('endMessage');
+        
+        let currentPage = 1;
+        let isLoading = false;
+        let hasMoreDoctors = true;
+
+        // Infinite Scroll Functionality
+        function checkScroll() {
+            if (isLoading || !hasMoreDoctors) return;
+            
+            const scrollPosition = window.innerHeight + window.scrollY;
+            const pageHeight = document.documentElement.scrollHeight;
+            const threshold = 500;
+            
+            if (scrollPosition >= pageHeight - threshold) {
+                loadMoreDoctors();
+            }
+        }
+
+        function loadMoreDoctors() {
+            if (isLoading || !hasMoreDoctors) return;
+            
+            isLoading = true;
+            loadingIndicator.classList.add('active');
+            
+            currentPage++;
+            
+            fetch(`/doctors?page=${currentPage}&ajax=1`)
+            .then(response => response.text())
+            .then(html => {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                const newDoctors = doc.querySelectorAll('.doctor-card');
+                
+                if (newDoctors.length > 0) {
+                    newDoctors.forEach(doctor => {
+                        doctorGrid.appendChild(doctor);
+                    });
+                    
+                    const allCards = document.querySelectorAll('.doctor-card');
+                    allCards.forEach((card, index) => {
+                        if (index >= allCards.length - newDoctors.length) {
+                            card.style.animation = 'cardEntrance 0.6s ease-out';
+                        }
+                    });
+                } else {
+                    hasMoreDoctors = false;
+                    endMessage.classList.add('active');
+                }
+                
+                isLoading = false;
+                loadingIndicator.classList.remove('active');
+            })
+            .catch(error => {
+                console.error('Error loading more doctors:', error);
+                isLoading = false;
+                loadingIndicator.classList.remove('active');
+                hasMoreDoctors = false;
+            });
+        }
+
+        // Initialize
+        window.addEventListener('scroll', checkScroll);
+        setTimeout(checkScroll, 100);
+    });
+</script>
 {% endblock %}

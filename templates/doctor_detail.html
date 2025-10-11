@@ -124,6 +124,11 @@
         color: var(--subtle-text-color);
     }
 
+    .doctor-profile-page .text-muted {
+        color: var(--subtle-text-color) !important;
+        font-style: italic;
+    }
+
     /* Buttons */
     .doctor-profile-page .appointment-btn,
     .doctor-profile-page .view-profile-btn {
@@ -345,148 +350,6 @@
         min-width: 20px;
     }
 
-    /* Tabs */
-    .doctor-profile-page .doctor-tabs-container {
-        background-color: var(--card-bg);
-        border-radius: 16px;
-        box-shadow: var(--shadow-soft);
-        margin-top: 20px;
-        overflow: hidden;
-    }
-
-    .doctor-profile-page .tab-navigation {
-        display: flex;
-        overflow-x: auto;
-        background-color: #e6f7ff;
-        border-radius: 16px 16px 0 0;
-        padding: 4px;
-    }
-
-    .doctor-profile-page .tab-navigation::-webkit-scrollbar {
-        display: none;
-    }
-
-    .doctor-profile-page .tab-button {
-        flex: 1;
-        text-align: center;
-        padding: 14px 0;
-        cursor: pointer;
-        font-size: 1em;
-        font-weight: 500;
-        color: var(--tab-color);
-        border-radius: 12px 12px 0 0;
-        margin: 0 6px;
-        background-color: transparent;
-        transition: all 0.3s ease;
-        position: relative;
-    }
-
-    .doctor-profile-page .tab-button.active {
-        color: #fff;
-        background: var(--tab-active-bg);
-        font-weight: 700;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    }
-
-    .doctor-profile-page .tab-button:hover:not(.active) {
-        background-color: var(--tab-hover-bg);
-        color: var(--primary-color);
-        transform: translateY(-2px);
-    }
-
-    /* Tab Content */
-    .doctor-profile-page .tab-content {
-        padding: 30px;
-        background-color: #fff;
-        border-radius: 0 0 16px 16px;
-    }
-
-    .doctor-profile-page .tab-pane {
-        display: none;
-        animation: fadeIn 0.5s ease-in-out;
-    }
-
-    .doctor-profile-page .tab-pane.active {
-        display: block;
-    }
-
-    @keyframes fadeIn {
-        from {
-            opacity: 0;
-            transform: translateY(12px);
-        }
-
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    /* Sections */
-    .doctor-profile-page .doctor-section h4 {
-        color: var(--primary-color);
-        font-weight: 600;
-        margin-bottom: 14px;
-        font-size: 1.3em;
-        position: relative;
-    }
-
-    .doctor-profile-page .doctor-section h4::after {
-        content: '';
-        display: block;
-        width: 50px;
-        height: 3px;
-        background: var(--accent-color);
-        margin-top: 6px;
-        border-radius: 2px;
-    }
-
-    .doctor-profile-page .doctor-section p,
-    .doctor-profile-page .doctor-section ul,
-    .doctor-profile-page .doctor-section ol {
-        line-height: 1.75;
-        color: #495057;
-        font-size: 1em;
-    }
-
-    /* Responsive */
-    @media (max-width: 992px) {
-        .doctor-profile-page .doctor-top-container {
-            flex-direction: column;
-            text-align: center;
-        }
-
-        .doctor-profile-page .doctor-image-container {
-            margin-bottom: 20px;
-        }
-    }
-
-    @media (max-width: 768px) {
-        .doctor-profile-page .doctor-name {
-            font-size: 2em;
-        }
-
-        .doctor-profile-page .doctor-specialization {
-            font-size: 1.1em;
-        }
-
-        .doctor-profile-page .tab-button {
-            padding: 10px 8px;
-            font-size: 0.95em;
-        }
-
-        .doctor-profile-page .tab-content {
-            padding: 20px;
-        }
-
-        .doctor-profile-page .file-link {
-            display: flex;
-            margin: 8px 0;
-            width: 100%;
-            justify-content: center;
-        }
-    }
-
     /* Styled bullet lists */
     /* Arrow-style bullets for all lists in doctor profile */
     .doctor-profile-page ul.custom-list {
@@ -693,25 +556,41 @@
                 <h2 class="doctor-name">{{ doctor.name }}</h2>
                 <h3 class="doctor-specialization">{{ doctor.specialization }}</h3>
                 <div class="doctor-details">
-                    {% if doctor.designation %}<p><strong>Designation:</strong> {{ doctor.designation }}</p>{% endif %}
-                    {% if doctor.qualification %}<p><strong>Qualification:</strong> {{ doctor.qualification }}</p>{%
-                    endif %}
-                    {% if doctor.experience %}<p><strong>Experience:</strong> {{ doctor.experience }}</p>{% endif %}
+                    <!-- Always show qualification heading -->
+                    <p>
+                        <strong>Qualification:</strong> 
+                        {% if doctor.qualification and doctor.qualification.strip() %}
+                            {{ doctor.qualification }}
+                        {% else %}
+                            <span class="text-muted">Not specified</span>
+                        {% endif %}
+                    </p>
+
+                    <!-- Always show designation heading -->
+
+                    <!-- Always show experience heading -->
+                    <p>
+                        <strong>Experience:</strong> 
+                        {% if doctor.experience and doctor.experience.strip() %}
+                            {{ doctor.experience }}
+                        {% else %}
+                            <span class="text-muted">Not specified</span>
+                        {% endif %}
+                    </p>
+
+                    <!-- Timings section -->
                     {% if doctor.timings_parsed %}
-                    {% for slot in doctor.timings_parsed %}
-                    <div class="mb-2">
-                        <strong>Day:</strong> {{ slot.days | join(', ') }}<br>
-                        <strong>Timings:</strong> {{ slot.from }} {{ slot.from_period }} - {{ slot.to }} {{
-                        slot.to_period }}
-                    </div>
-                    {% endfor %}
+                        {% for slot in doctor.timings_parsed %}
+                        <div class="mb-2">
+                            <strong>Day:</strong> {{ slot.days | join(', ') }}<br>
+                            <strong>Timings:</strong> {{ slot.from }} {{ slot.from_period }} - {{ slot.to }} {{
+                            slot.to_period }}
+                        </div>
+                        {% endfor %}
                     {% else %}
-                    <p class="doctor-days text-muted"><strong>Days:</strong> No days available</p>
-                    <p class="doctor-timings text-muted"><strong>Timings:</strong> No timings available</p>
+                        <p><strong>Days:</strong> <span class="text-muted">No days available</span></p>
+                        <p><strong>Timings:</strong> <span class="text-muted">No timings available</span></p>
                     {% endif %}
-
-
-
                 </div>
 
                 {% if doctor.appointment_link %}
@@ -739,22 +618,20 @@
                 <div id="overview" class="tab-pane active">
                     <div class="doctor-section">
                         <h4>Overview</h4>
-                        {% if doctor.overview %}
-                        {% for para in doctor.overview.splitlines() if para.strip() %}
-                        <p>{{ para }}</p>
-                        {% endfor %}
+                        {% if doctor.overview and doctor.overview.strip() %}
+                            {% for para in doctor.overview.splitlines() if para.strip() %}
+                            <p>{{ para }}</p>
+                            {% endfor %}
                         {% else %}
-                        <p class="text-muted">No overview available.</p>
+                            <p class="text-muted">No overview available.</p>
                         {% endif %}
-
                     </div>
-
                 </div>
 
                 <div id="fellowship" class="tab-pane">
                     <div class="doctor-section">
                         <h4>Fellowships & Memberships</h4>
-                        {% if doctor.fellowship_membership %}
+                        {% if doctor.fellowship_membership and doctor.fellowship_membership.strip() %}
                         <ul class="custom-list">
                             {% for item in doctor.fellowship_membership.splitlines() if item.strip() %}
                             <li>{{ item.strip() }}</li>
@@ -764,10 +641,7 @@
                         <p class="text-muted">No fellowship/membership information available.</p>
                         {% endif %}
 
-
-
-
-                        {% if doctor.fellowship_links %}
+                        {% if doctor.fellowship_links and doctor.fellowship_links.strip() %}
                         <h5 class="mt-4">Related Links:</h5>
                         <div class="links-container">
                             {% for link in doctor.fellowship_links.split('\n') if link.strip() %}
@@ -794,7 +668,7 @@
                 <div id="expertise" class="tab-pane">
                     <div class="doctor-section">
                         <h4>Field of Expertise</h4>
-                        {% if doctor.field_of_expertise %}
+                        {% if doctor.field_of_expertise and doctor.field_of_expertise.strip() %}
                         <ul class="custom-list">
                             {% for item in doctor.field_of_expertise.splitlines() if item.strip() %}
                             <li>{{ item.strip() }}</li>
@@ -803,16 +677,13 @@
                         {% else %}
                         <p class="text-muted">No expertise information available.</p>
                         {% endif %}
-
-
-
                     </div>
                 </div>
 
                 <div id="languages" class="tab-pane">
                     <div class="doctor-section">
                         <h4>Languages Spoken</h4>
-                        {% if doctor.languages %}
+                        {% if doctor.languages and doctor.languages.strip() %}
                         <p>{{ doctor.languages }}</p>
                         {% else %}
                         <p class="text-muted">No language information available.</p>
@@ -823,7 +694,7 @@
                 <div id="publications" class="tab-pane">
                     <div class="doctor-section">
                         <h4>Talks, Publications, & Research</h4>
-                        {% if doctor.talks_and_publications %}
+                        {% if doctor.talks_and_publications and doctor.talks_and_publications.strip() %}
                         <ul class="custom-list">
                             {% for item in doctor.talks_and_publications.splitlines() if item.strip() %}
                             <li>{{ item.strip() }}</li>
@@ -833,22 +704,23 @@
                         <p class="text-muted">No talks or publications information available.</p>
                         {% endif %}
 
-
-
-
-                        {% if doctor.talks_links %}
-                        <h5 class="mt-4">Related Links:</h5>
-                        <div class="links-container">
-                            {% for link in doctor.talks_links.split('\n') if link.strip() %}
-                            <div class="link-item">
-                                <i class="fas fa-link"></i>
-                                <a href="{{ link.strip() }}" target="_blank" class="text-decoration-none">
-                                    {{ link.strip() }}
-                                </a>
-                            </div>
-                            {% endfor %}
-                        </div>
-                        {% endif %}
+                        {% if doctor.talks_links and doctor.talks_links.strip() %}
+<h5 class="mt-4">Related Links:</h5>
+<div class="links-container">
+    {% for link in doctor.talks_links.split('\n') if link.strip() %}
+    <div class="link-item">
+        <i class="fas fa-link"></i>
+        <a href="{{ link.strip().split('|')[0] }}" target="_blank" class="text-decoration-none">
+            {% if '|' in link %}
+                {{ link.strip().split('|')[1] }}
+            {% else %}
+                Related Link {{ loop.index }}
+            {% endif %}
+        </a>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
 
                         {% if doctor.talks_file_path %}
                         <h5 class="mt-4">Documents:</h5>

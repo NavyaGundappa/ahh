@@ -45,12 +45,10 @@ Manage Users - Admin Panel
                 <span class="ml-2">Select All</span>
             </label>
             <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-2">
-                {% set modules = ['banners', 'doctors', 'counters', 'testimonials', 'specialities', 'departments',
-                'health_packages', 'sports_packages', 'department_content', 'users', 'callback_requests', 'reviews'] %}
                 {% for module in modules %}
                 <label class="flex items-center">
-                    <input type="checkbox" class="form-checkbox h-4 w-4 access-checkbox" id="{{module}}"
-                        name="{{module}}">
+                    <input type="checkbox" class="form-checkbox h-4 w-4 access-checkbox" 
+                           id="{{ module }}" name="{{ module }}" value="on">
                     <span class="ml-2 text-sm">{{ module.replace('_',' ').title() }}</span>
                 </label>
                 {% endfor %}
@@ -60,7 +58,7 @@ Manage Users - Admin Panel
 
     <div class="flex items-center justify-between">
         <label class="flex items-center">
-            <input type="checkbox" class="form-checkbox h-5 w-5" id="is_active" name="is_active" checked>
+            <input type="checkbox" class="form-checkbox h-5 w-5" id="is_active" name="is_active">
             <span class="ml-2 text-gray-700">User is Active</span>
         </label>
         <div>
@@ -77,17 +75,13 @@ Manage Users - Admin Panel
     <table class="min-w-full leading-normal">
         <thead>
             <tr>
-                <th
-                    class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase">
+                <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase">
                     Name / Emp ID</th>
-                <th
-                    class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase">
+                <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase">
                     Access</th>
-                <th
-                    class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase">
+                <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase">
                     Status</th>
-                <th
-                    class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase">
+                <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase">
                     Actions</th>
             </tr>
         </thead>
@@ -100,29 +94,30 @@ Manage Users - Admin Panel
                 </td>
                 <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                     <div class="flex flex-wrap gap-1">
-                        {% if user.access %}
                         {% for module in modules %}
                         {% if user.access[module] %}
-                        <span class="text-xs font-semibold bg-green-200 text-green-800 px-2 py-1 rounded-full">{{
-                            module.replace('_',' ').title() }}</span>
+                        <span class="text-xs font-semibold bg-green-200 text-green-800 px-2 py-1 rounded-full">
+                            {{ module.replace('_',' ').title() }}
+                        </span>
                         {% endif %}
                         {% endfor %}
-                        {% endif %}
                     </div>
                 </td>
                 <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                    <span
-                        class="relative inline-block px-3 py-1 font-semibold leading-tight {{ 'text-green-900' if user.is_active else 'text-red-900' }}">
-                        <span aria-hidden
-                            class="absolute inset-0 {{ 'bg-green-200' if user.is_active else 'bg-red-200' }} opacity-50 rounded-full"></span>
+                    <span class="relative inline-block px-3 py-1 font-semibold leading-tight {{ 'text-green-900' if user.is_active else 'text-red-900' }}">
+                        <span aria-hidden class="absolute inset-0 {{ 'bg-green-200' if user.is_active else 'bg-red-200' }} opacity-50 rounded-full"></span>
                         <span class="relative">{{ 'Active' if user.is_active else 'Inactive' }}</span>
                     </span>
                 </td>
                 <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                     <button class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-3 rounded text-xs"
-                        onclick='editUser({{ user.id }}, {{ user.emp_id|tojson }}, {{ user.name|tojson }}, {{ user.email|tojson }}, {{ "true" if user.is_active else "false" }}, {{ user.access|tojson }})'>Edit</button>
+                        onclick='editUser({{ user.id }}, {{ user.emp_id|tojson }}, {{ user.name|tojson }}, {{ user.email|tojson }}, {{ "true" if user.is_active else "false" }}, {{ user.access|tojson }})'>
+                        Edit
+                    </button>
                     <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-3 rounded text-xs"
-                        onclick="openModal('deleteModal-{{ user.id }}')">Delete</button>
+                        onclick="openModal('deleteModal-{{ user.id }}')">
+                        Delete
+                    </button>
                 </td>
             </tr>
             {% endfor %}
@@ -131,8 +126,7 @@ Manage Users - Admin Panel
 </div>
 
 {% for user in users %}
-<div id="deleteModal-{{ user.id }}"
-    class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden">
+<div id="deleteModal-{{ user.id }}" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden">
     <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
         <div class="mt-3 text-center">
             <h3 class="text-lg leading-6 font-medium text-gray-900">Delete User</h3>
@@ -150,7 +144,6 @@ Manage Users - Admin Panel
 </div>
 {% endfor %}
 
-
 <script>
     function openModal(modalId) {
         document.getElementById(modalId).classList.remove('hidden');
@@ -161,29 +154,78 @@ Manage Users - Admin Panel
     }
 
     function resetForm() {
-        document.querySelector('form').reset();
         document.getElementById('user_id').value = '';
+        document.getElementById('emp_id').value = '';
+        document.getElementById('name').value = '';
+        document.getElementById('email').value = '';
+        document.getElementById('password').value = '';
+        document.getElementById('is_active').checked = false; // Changed to false
         document.getElementById('formTitle').innerText = 'Add New User';
+        
+        // Reset all checkboxes
+        document.querySelectorAll('.access-checkbox').forEach(cb => {
+            cb.checked = false;
+        });
+        document.getElementById('selectAll').checked = false;
     }
 
     function editUser(id, emp_id, name, email, is_active, access) {
+        console.log('Editing user:', { id, emp_id, name, email, is_active, access });
+        
         resetForm();
         document.getElementById('user_id').value = id;
         document.getElementById('emp_id').value = emp_id;
         document.getElementById('name').value = name;
         document.getElementById('email').value = email;
-        document.getElementById('is_active').checked = is_active;
+        document.getElementById('is_active').checked = is_active === 'true';
         document.getElementById('formTitle').innerText = 'Edit User: ' + name;
 
+        // Update access checkboxes
         const checkboxes = document.querySelectorAll('.access-checkbox');
+        let allChecked = true;
+        
         checkboxes.forEach(cb => {
-            cb.checked = access && access[cb.id];
+            const moduleName = cb.name;
+            console.log(`Checking module: ${moduleName}, access value:`, access[moduleName]);
+            
+            cb.checked = access && access[moduleName] === true;
+            if (!cb.checked) allChecked = false;
         });
+        
+        // Update select all checkbox state
+        document.getElementById('selectAll').checked = allChecked;
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
+    // Select all functionality
     document.getElementById('selectAll').addEventListener('change', function () {
-        document.querySelectorAll('.access-checkbox').forEach(cb => cb.checked = this.checked);
+        const isChecked = this.checked;
+        document.querySelectorAll('.access-checkbox').forEach(cb => {
+            cb.checked = isChecked;
+        });
+    });
+
+    // Update select all when individual checkboxes change
+    document.querySelectorAll('.access-checkbox').forEach(cb => {
+        cb.addEventListener('change', function() {
+            const allChecked = Array.from(document.querySelectorAll('.access-checkbox'))
+                .every(checkbox => checkbox.checked);
+            document.getElementById('selectAll').checked = allChecked;
+        });
+    });
+
+    // Debug form submission
+    document.querySelector('form').addEventListener('submit', function(e) {
+        console.log('Form submitted with data:');
+        const formData = new FormData(this);
+        for (let [key, value] of formData.entries()) {
+            console.log(`${key}: ${value}`);
+        }
+    });
+
+    // Initialize form on page load
+    document.addEventListener('DOMContentLoaded', function() {
+        resetForm(); // Ensure form starts in a clean state
     });
 </script>
 {% endblock %}

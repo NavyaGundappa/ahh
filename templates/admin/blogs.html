@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Blogs - Admin Panel</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Header -->
+    <div class="header py-3 bg-light mb-4">
+        <div class="container d-flex justify-content-between align-items-center">
+            <div>
+                <h4 class="mb-0 text-primary"><i class="fas fa-blog me-2"></i>Blog Management</h4>
+                <small class="text-muted">Manage health articles and blog posts</small>
+            </div>
+            <div>
+                <a href="{{ url_for('admin_dashboard') }}" class="btn btn-outline-primary btn-sm me-2"><i
+                        class="fas fa-home me-1"></i>Home</a>
+                <a href="{{ url_for('admin_logout') }}" class="btn btn-outline-danger btn-sm"><i
+                        class="fas fa-sign-out-alt me-1"></i>Logout</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Action Bar -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h5 class="mb-1">Blog Posts</h5>
+                <p class="text-muted mb-0">Total: {{ blogs|length }} posts</p>
+            </div>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addBlogModal" id="addNewBlogBtn">
+                <i class="fas fa-plus me-1"></i>Add Blog
+            </button>
+        </div>
+
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{ 'danger' if category == 'error' else 'success' }} alert-dismissible fade show mb-4"
+            role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+        <!-- Blogs Table -->
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover" id="blogsTable">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Department</th>
+                                <th>Status</th>
+                                <th>Created</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for blog in blogs %}
+                            <tr>
+                                <td>
+                                    <strong>{{ blog.title }}</strong>
+                                    {% if blog.excerpt %}<br><small class="text-muted">{{ blog.excerpt[:60]
+                                        }}...</small>{% endif %}
+                                </td>
+                                <td>{{ blog.department.name if blog.department else 'General' }}</td>
+                                <td>
+                                    <span
+                                        class="badge {% if blog.is_active %}bg-success{% else %}bg-secondary{% endif %}">
+                                        {{ 'Active' if blog.is_active else 'Inactive' }}
+                                    </span>
+                                </td>
+                                <td>{{ blog.created_at.strftime('%Y-%m-%d') }}</td>
+                                <td>
+                                    <div class="btn-group btn-group-sm">
+                                        <button class="btn btn-outline-primary edit-blog" data-blog-id="{{ blog.id }}"
+                                            data-title="{{ blog.title }}" data-slug="{{ blog.slug }}"
+                                            data-department="{{ blog.department.id if blog.department else '' }}"
+                                            data-excerpt="{{ blog.excerpt }}" data-content="{{ blog.content|e }}">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <form method="POST" action="{{ url_for('admin_blogs') }}"
+                                            style="display:inline;">
+                                            <input type="hidden" name="delete_id" value="{{ blog.id }}">
+                                            <button type="submit" class="btn btn-outline-danger"
+                                                onclick="return confirm('Delete this blog?')"><i
+                                                    class="fas fa-trash"></i></button>
+                                        </form>
+                                        <form method="POST" action="{{ url_for('toggle_blog', blog_id=blog.id) }}"
+                                            style="display:inline;">
+                                            <button type="submit"
+                                                class="btn btn-outline-{% if blog.is_active %}warning{% else %}success{% endif %}">
+                                                <i
+                                                    class="fas {% if blog.is_active %}fa-eye-slash{% else %}fa-eye{% endif %}"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add/Edit Blog Modal -->
+    <div class="modal fade" id="addBlogModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <form method="POST" action="{{ url_for('admin_blogs') }}" enctype="multipart/form-data"
+                    id="addBlogForm">
+                    <input type="hidden" name="blog_id" id="blog_id">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalTitle">Add New Blog</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label form-required">Title</label>
+                                <input type="text" class="form-control" name="title" id="blog_title" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label form-required">Slug</label>
+                                <input type="text" class="form-control" name="slug" id="blog_slug" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Department</label>
+                            <select class="form-select" name="department_id" id="blog_department">
+                                <option value="">Select Department (Optional)</option>
+                                {% for department in departments %}
+                                <option value="{{ department.id }}">{{ department.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Excerpt</label>
+                            <textarea class="form-control" name="excerpt" id="blog_excerpt" rows="2"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label form-required">Content</label>
+                            <div id="editor"></div>
+                            <textarea name="content" id="content" style="display:none;"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Blog Image</label>
+                            <input type="file" class="form-control" name="image" id="blog_image">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary" id="addBlogBtn"><i
+                                class="fas fa-plus me-1"></i>Add Blog</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+
+    <script>
+        let quill;
+        const customColors = ['#000000', '#333333', '#666666', '#999999', '#cccccc', '#ffffff', '#4e73df', '#1cc88a'];
+
+        function initializeEditor() {
+            if (!quill) {
+                quill = new Quill('#editor', {
+                    theme: 'snow',
+                    modules: {
+                        toolbar: [
+                            [{ 'header': [1, 2, 3, false] }],
+                            ['bold', 'italic', 'underline', 'strike'],
+                            [{ 'color': customColors }, { 'background': customColors }],
+                            [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+                            [{ 'align': [] }],
+                            ['link', 'image'],
+                            ['clean']
+                        ]
+                    },
+                    placeholder: 'Write your blog content here...'
+                });
+            } else {
+                quill.root.innerHTML = '';
+            }
+        }
+
+        $(document).ready(function () {
+            $('#blogsTable').DataTable({ pageLength: 10, order: [[3, 'desc']] });
+
+            $('#addBlogModal').on('shown.bs.modal', function () {
+                initializeEditor();
+            });
+
+            $('#addBlogModal').on('hidden.bs.modal', function () {
+                document.getElementById('addBlogForm').reset();
+                $('#blog_id').val('');
+                $('#modalTitle').text('Add New Blog');
+                $('#addBlogBtn').html('<i class="fas fa-plus me-1"></i>Add Blog').prop('disabled', false);
+                if (quill) quill.root.innerHTML = '';
+            });
+
+            $('#blog_title').on('input', function () {
+                const title = $(this).val();
+                const slug = title.toLowerCase().replace(/[^a-z0-9 -]/g, '')
+                    .replace(/\s+/g, '-').replace(/-+/g, '-').trim();
+                $('#blog_slug').val(slug);
+            });
+
+            $('.edit-blog').click(function () {
+                const blogId = $(this).data('blog-id');
+                const title = $(this).data('title');
+                const slug = $(this).data('slug');
+                const department = $(this).data('department');
+                const excerpt = $(this).data('excerpt');
+                const content = $(this).data('content');
+
+                $('#blog_id').val(blogId);
+                $('#blog_title').val(title);
+                $('#blog_slug').val(slug);
+                $('#blog_department').val(department);
+                $('#blog_excerpt').val(excerpt);
+                if (quill) quill.root.innerHTML = content;
+
+                $('#modalTitle').text('Edit Blog');
+                $('#addBlogBtn').html('<i class="fas fa-save me-1"></i>Update Blog').prop('disabled', false);
+                $('#addBlogModal').modal('show');
+            });
+
+            $('#addBlogForm').submit(function (e) {
+                if (!quill) {
+                    alert('Editor not loaded!');
+                    e.preventDefault();
+                    return;
+                }
+                const content = quill.root.innerHTML.trim();
+                if (!content || content === '<p><br></p>') {
+                    alert('Please add some content to the blog post.');
+                    e.preventDefault();
+                    return;
+                }
+                $('#content').val(content);
+                $('#addBlogBtn').html('<i class="fas fa-spinner fa-spin me-1"></i>Saving...').prop('disabled', true);
+            });
+        });
+    </script>
+</body>
+
+</html>
