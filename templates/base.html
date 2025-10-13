@@ -195,35 +195,53 @@
         .main-nav .dropdown .dropdown-menu {
             display: block;
             position: absolute;
-            top: calc(100% + 10px);
+            top: calc(100% + 5px);
+            /* slightly closer */
             left: 50%;
-            transform: translateX(-50%) translateY(10px);
-            min-width: 280px;
-            padding: 10px 0;
+            transform: translateX(-50%) translateY(5px);
+            /* slightly closer */
+            min-width: 120px;
+            /* reduced width */
+            padding: 3px 0;
+            /* reduced padding */
             margin: 0;
             list-style: none;
             background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, .15);
+            border-radius: 6px;
+            /* slightly smaller radius */
+            box-shadow: 0 6px 20px rgba(0, 0, 0, .12);
+            /* slightly smaller shadow */
             border: 1px solid #eee;
             z-index: 1000;
             opacity: 0;
             visibility: hidden;
-            transition: opacity .3s ease, transform .3s ease, visibility .3s
+            transition: opacity .3s ease, transform .3s ease, visibility .3s;
+        }
+
+        .main-nav .dropdown-menu li a {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            /* smaller gap */
+            padding: 8px 15px;
+            /* smaller padding */
+            font-size: 14px;
+            /* smaller font */
+            text-decoration: none;
+            color: #333 !important;
+            background-color: transparent !important;
+            transition: background-color .2s ease, color .2s ease;
+            white-space: nowrap;
         }
 
         .main-nav .dropdown .dropdown-menu::before {
-            content: '';
-            position: absolute;
-            top: -6px;
-            left: 50%;
-            transform: translateX(-50%) rotate(45deg);
-            width: 12px;
-            height: 12px;
-            background-color: #fff;
-            border-top: 1px solid #eee;
-            border-left: 1px solid #eee
+            top: -5px;
+            /* slightly closer */
+            width: 10px;
+            /* smaller arrow */
+            height: 10px;
         }
+
 
         .main-nav .dropdown:hover .dropdown-menu {
             opacity: 1;
@@ -231,18 +249,7 @@
             transform: translateX(-50%) translateY(0)
         }
 
-        .main-nav .dropdown-menu li a {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px 20px;
-            font-size: 16px;
-            text-decoration: none;
-            color: #333 !important;
-            background-color: transparent !important;
-            transition: background-color .2s ease, color .2s ease;
-            white-space: nowrap
-        }
+
 
         .main-nav .dropdown-menu li a i {
             color: #16979D;
@@ -958,16 +965,16 @@
                         <li><a class="nav-links" href="/departments/">Departments</a></li>
                         <li><a class="nav-links" href="/health-packages">Health Packages</a></li>
                         <li><a class="nav-links" href="/sports-packages">Sports Packages</a></li>
-                         <li><a class="nav-links" href="/blog">Blog</a></li>
+                        <li><a class="nav-links" href="/blog">Blog</a></li>
                         <li class="dropdown">
-    <a class="nav-links" href="/about">About us <i class="fa fa-angle-down"></i></a>
-    <ul class="dropdown-menu">
-        
-        <li>
-            <a href="/bmw_report"><i class="fa-solid fa-circle-info"></i>BMW Report</a>
-        </li>
-    </ul>
-</li>
+                            <a class="nav-links" href="/about">About us <i class="fa fa-angle-down"></i></a>
+                            <ul class="dropdown-menu">
+
+                                <li>
+                                    <a href="/bmw_report"><i class="fa-solid fa-circle-info"></i>BMW Report</a>
+                                </li>
+                            </ul>
+                        </li>
                         <li class="dropdown">
                             <a class="nav-links" href="/contact">Contact <i class="fa fa-angle-down"></i></a>
                             <ul class="dropdown-menu">
@@ -1037,7 +1044,7 @@
                                 src="/static/img/icon-whatsapp.png" alt="WhatsApp"></a>
                     </div>
                     <div class="app-download" style="margin-top: 25px;">
-                        <h4 style="font-size: 18px; margin-bottom: 15px;">Download App for more benefits</h4>
+                        <h4 style="font-size: 16px; margin-bottom: 15px;">Download App for more benefits</h4>
                         <div class="app-download-buttons">
 
                             <a href="https://play.google.com/store/apps/details?id=com.better.aarogyahastha"

@@ -328,146 +328,82 @@ def handle_file_upload(file, folder_name):
 # Assuming your app, db, models, and helper functions (allowed_file, handle_file_upload, generate_department_html) are already defined
 
 
+
+def doctor_to_dict(doctor):
+    """Convert Doctor object to JSON-serializable dictionary for template."""
+    return {
+        "id": doctor.id,
+        "name": doctor.name,
+        "specialization": doctor.specialization,
+        "designation": doctor.designation,
+        "experience": doctor.experience,
+        "qualification": doctor.qualification,
+        "languages": doctor.languages,
+        "overview": doctor.overview,
+        "fellowship_membership": doctor.fellowship_membership,
+        "fellowship_links": doctor.fellowship_links,
+        "fellowship_file_path": doctor.fellowship_file_path,
+        "field_of_expertise": doctor.field_of_expertise,
+        "talks_and_publications": doctor.talks_and_publications,
+        "talks_links": doctor.talks_links,
+        "talks_file_path": doctor.talks_file_path,
+        "bio": doctor.bio,
+        "image_path": doctor.image_path,
+        "appointment_link": doctor.appointment_link,
+        "department_slug": doctor.department_slug,
+        "slug": doctor.slug,
+        "timings": json.loads(doctor.timings) if doctor.timings else [],
+        "days_parsed": getattr(doctor, 'days_parsed', [])
+    }
+
+def handle_file_upload(file, folder_name):
+    """Handle file uploads for fellowships and talks."""
+    if file and file.filename != '' and allowed_file(file.filename):
+        filename = secure_filename(file.filename)
+        folder_path = os.path.join(app.config['UPLOAD_FOLDER'], folder_name)
+        os.makedirs(folder_path, exist_ok=True)
+        save_path = os.path.join(folder_path, filename)
+        file.save(save_path)
+        return f"img/{folder_name}/{filename}"
+    return None
+
+# --- Admin Doctors Route ---
 @app.route('/admin/doctors', methods=['GET', 'POST'])
 @login_required
 @permission_required('doctors')
 def admin_doctors():
     departments = Department.query.filter_by(is_active=True).all()
-
+    
+    # Handle search
+    search_query = request.args.get('search', '').strip()
+    
     if request.method == 'POST':
-        # ----- Collect basic form data -----
-        name = request.form.get('name', '').strip()
-        specialization = request.form.get('specialization', '').strip()
-        designation = request.form.get('designation', '').strip()
-        experience = request.form.get('experience', '').strip()
-        languages = request.form.get('languages', '').strip()
-        bio = request.form.get('bio', '').strip()
-        slug = request.form.get('slug', '').strip()
-        qualification = request.form.get('qualification', '').strip()
-        overview = request.form.get('overview', '').strip()
-        fellowship_membership = request.form.get(
-            'fellowship_membership', '').strip()
-        fellowship_links = request.form.get('fellowship_links', '').strip()
-        field_of_expertise = request.form.get('field_of_expertise', '').strip()
-        talks_and_publications = request.form.get(
-            'talks_and_publications', '').strip()
-        talks_links = request.form.get('talks_links', '').strip()
-        appointment_link = request.form.get('appointment_link', '').strip()
-        department_slug = request.form.get('department_slug', '').strip()
-
-        # ----- Collect timings with days -----
-        time_from = request.form.getlist('time_from[]')
-        time_from_period = request.form.getlist('time_from_period[]')
-        time_to = request.form.getlist('time_to[]')
-        time_to_period = request.form.getlist('time_to_period[]')
-
-        timings_list = []
-        for i in range(len(time_from)):
-            if time_from[i] and time_to[i]:
-                # Collect days for this timing row
-                days = request.form.getlist(f'days[{i}][]')
-                timings_list.append({
-                    "from": time_from[i],
-                    "from_period": time_from_period[i],
-                    "to": time_to[i],
-                    "to_period": time_to_period[i],
-                    "days": days
-                })
-
-        timings = json.dumps(timings_list) if timings_list else None
-
-        # ----- Validation -----
-        if not name or not specialization or not department_slug:
-            flash("Name, Specialization, and Department are required!", "danger")
+        form_type = request.form.get('form_type')
+        
+        if form_type == 'add':
+            return add_doctor_function(request, departments)
+        elif form_type == 'edit':
+            return edit_doctor_function(request, departments)
+        else:
+            flash("Invalid form submission!", "danger")
             return redirect(url_for('admin_doctors'))
 
-        if not slug:
-            slug = name.lower().replace(' ', '-')
-
-        # Ensure unique slug
-        original_slug = slug
-        counter = 1
-        while Doctor.query.filter_by(slug=slug).first():
-            slug = f"{original_slug}-{counter}"
-            counter += 1
-
-        # ----- Handle image upload -----
-        image_path = None
-        if 'image' in request.files:
-            file = request.files['image']
-            if file and file.filename != '' and allowed_file(file.filename):
-                filename = secure_filename(file.filename)
-                doctors_folder = os.path.join(
-                    app.config['UPLOAD_FOLDER'], 'doctors')
-                os.makedirs(doctors_folder, exist_ok=True)
-                save_path = os.path.join(doctors_folder, filename)
-                file.save(save_path)
-                image_path = f"img/doctors/{filename}"
-
-        # ----- Handle file uploads -----
-        fellowship_file_path = handle_file_upload(
-            request.files.get('fellowship_file'), 'fellowships')
-        talks_file_path = handle_file_upload(
-            request.files.get('talks_file'), 'talks')
-
-        # ----- Calculate display order (put new doctor at the end) -----
-        max_order = db.session.query(db.func.max(Doctor.display_order)).scalar() or 0
-        display_order = max_order + 1
-
-        # ----- Save Doctor -----
-        doctor = Doctor(
-            name=name,
-            specialization=specialization,
-            designation=designation,
-            experience=experience,
-            qualification=qualification,
-            languages=languages,
-            overview=overview,
-            fellowship_membership=fellowship_membership,
-            fellowship_links=fellowship_links,
-            fellowship_file_path=fellowship_file_path,
-            field_of_expertise=field_of_expertise,
-            talks_and_publications=talks_and_publications,
-            talks_links=talks_links,
-            talks_file_path=talks_file_path,
-            bio=bio,
-            slug=slug,
-            image_path=image_path,
-            appointment_link=appointment_link,
-            department_slug=department_slug,
-            timings=timings,
-            display_order=display_order  # Add display order
-        )
-        db.session.add(doctor)
-        db.session.commit()
-
-        # ----- Regenerate department HTML -----
-        department = Department.query.filter_by(slug=department_slug).first()
-        if department:
-            generate_department_html(department)
-
-        flash('Doctor added successfully!', 'success')
-        return redirect(url_for('admin_doctors'))
-
-    # ----- Fetch doctors ordered by display_order -----
-    doctors = Doctor.query.order_by(Doctor.display_order.asc(), Doctor.name.asc()).all()
-
-    # ----- Parse timings and aggregate days for template -----
-    for d in doctors:
-        try:
-            d.timings_parsed = json.loads(d.timings) if d.timings else []
-
-            # Collect all unique days across all timings
-            all_days = []
-            for t in d.timings_parsed:
-                if t.get("days"):
-                    all_days.extend(t["days"])
-            # Remove duplicates while preserving order
-            d.days_parsed = list(dict.fromkeys(all_days))
-        except Exception:
-            d.timings_parsed = []
-            d.days_parsed = []
+    # ----- GET Request: Fetch doctors with optional search -----
+    doctors_query = Doctor.query
     
+    if search_query:
+        doctors_query = doctors_query.filter(
+            db.or_(
+                Doctor.name.ilike(f'%{search_query}%'),
+                Doctor.specialization.ilike(f'%{search_query}%'),
+                Doctor.department_slug.ilike(f'%{search_query}%'),
+                Doctor.designation.ilike(f'%{search_query}%')
+            )
+        )
+    
+    doctors = doctors_query.order_by(Doctor.display_order.asc(), Doctor.name.asc()).all()
+    doctors_json = [doctor_to_dict(d) for d in doctors]
+
     admin_id = session.get("admin_id")
     user = User.query.get(admin_id)
     modules = ['banners', 'doctors', 'counters', 'testimonials', 'specialities',
@@ -477,9 +413,234 @@ def admin_doctors():
         for module in modules:
             access[module] = getattr(user.access, module, False)
 
-    return render_template('admin/doctors.html', doctors=doctors, departments=departments, access=access, current_user=user)
+    return render_template('admin/doctors.html', 
+                         doctors=doctors_json, 
+                         departments=departments, 
+                         access=access, 
+                         current_user=user,
+                         search_query=search_query)
 
+def add_doctor_function(request, departments):
+    """Handle adding a new doctor."""
+    # ----- Collect basic form data -----
+    name = request.form.get('name', '').strip()
+    specialization = request.form.get('specialization', '').strip()
+    designation = request.form.get('designation', '').strip()
+    experience = request.form.get('experience', '').strip()
+    languages = request.form.get('languages', '').strip()
+    bio = request.form.get('bio', '').strip()
+    slug = request.form.get('slug', '').strip()
+    qualification = request.form.get('qualification', '').strip()
+    overview = request.form.get('overview', '').strip()
+    fellowship_membership = request.form.get('fellowship_membership', '').strip()
+    fellowship_links = request.form.get('fellowship_links', '').strip()
+    field_of_expertise = request.form.get('field_of_expertise', '').strip()
+    talks_and_publications = request.form.get('talks_and_publications', '').strip()
+    talks_links = request.form.get('talks_links', '').strip()
+    appointment_link = request.form.get('appointment_link', '').strip()
+    department_slug = request.form.get('department_slug', '').strip()
 
+    # ----- Collect timings with days -----
+    time_from_hour = request.form.getlist('time_from_hour[]')
+    time_from_minute = request.form.getlist('time_from_minute[]')
+    time_from_period = request.form.getlist('time_from_period[]')
+    time_to_hour = request.form.getlist('time_to_hour[]')
+    time_to_minute = request.form.getlist('time_to_minute[]')
+    time_to_period = request.form.getlist('time_to_period[]')
+
+    timings_list = []
+    for i in range(len(time_from_hour)):
+        if time_from_hour[i] and time_to_hour[i]:
+            days = request.form.getlist(f'days[{i}][]')
+            # Format time as "HH:MM AM/PM"
+            from_time = f"{time_from_hour[i]}:{time_from_minute[i]}"
+            to_time = f"{time_to_hour[i]}:{time_to_minute[i]}"
+            
+            timings_list.append({
+                "from_hour": time_from_hour[i],
+                "from_minute": time_from_minute[i],
+                "from_period": time_from_period[i],
+                "to_hour": time_to_hour[i],
+                "to_minute": time_to_minute[i],
+                "to_period": time_to_period[i],
+                "from": from_time,
+                "to": to_time,
+                "days": days
+            })
+
+    timings = json.dumps(timings_list) if timings_list else None
+
+    # ----- Validation -----
+    if not name or not specialization or not department_slug:
+        flash("Name, Specialization, and Department are required!", "danger")
+        return redirect(url_for('admin_doctors'))
+
+    if not slug:
+        slug = name.lower().replace(' ', '-')
+
+    original_slug = slug
+    counter = 1
+    while Doctor.query.filter_by(slug=slug).first():
+        slug = f"{original_slug}-{counter}"
+        counter += 1
+
+    # ----- Handle image upload -----
+    image_path = None
+    if 'image' in request.files:
+        file = request.files['image']
+        if file and file.filename != '' and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            doctors_folder = os.path.join(app.config['UPLOAD_FOLDER'], 'doctors')
+            os.makedirs(doctors_folder, exist_ok=True)
+            save_path = os.path.join(doctors_folder, filename)
+            file.save(save_path)
+            image_path = f"img/doctors/{filename}"
+
+    # ----- Handle file uploads -----
+    fellowship_file_path = handle_file_upload(request.files.get('fellowship_file'), 'fellowships')
+    talks_file_path = handle_file_upload(request.files.get('talks_file'), 'talks')
+
+    # ----- Calculate display order -----
+    max_order = db.session.query(db.func.max(Doctor.display_order)).scalar() or 0
+    display_order = max_order + 1
+
+    # ----- Save Doctor -----
+    doctor = Doctor(
+        name=name,
+        specialization=specialization,
+        designation=designation,
+        experience=experience,
+        qualification=qualification,
+        languages=languages,
+        overview=overview,
+        fellowship_membership=fellowship_membership,
+        fellowship_links=fellowship_links,
+        fellowship_file_path=fellowship_file_path,
+        field_of_expertise=field_of_expertise,
+        talks_and_publications=talks_and_publications,
+        talks_links=talks_links,
+        talks_file_path=talks_file_path,
+        bio=bio,
+        slug=slug,
+        image_path=image_path,
+        appointment_link=appointment_link,
+        department_slug=department_slug,
+        timings=timings,
+        display_order=display_order
+    )
+    db.session.add(doctor)
+    db.session.commit()
+
+    # Regenerate department HTML if needed
+    department = Department.query.filter_by(slug=department_slug).first()
+    if department:
+        generate_department_html(department)
+
+    flash('Doctor added successfully!', 'success')
+    return redirect(url_for('admin_doctors'))
+
+def edit_doctor_function(request, departments):
+    """Handle editing an existing doctor."""
+    doctor_id = request.form.get('doctor_id')
+    doctor = Doctor.query.get_or_404(doctor_id)
+
+    # ----- Collect basic form data -----
+    doctor.name = request.form.get('name', '').strip()
+    doctor.specialization = request.form.get('specialization', '').strip()
+    doctor.designation = request.form.get('designation', '').strip()
+    doctor.experience = request.form.get('experience', '').strip()
+    doctor.languages = request.form.get('languages', '').strip()
+    doctor.bio = request.form.get('bio', '').strip()
+    doctor.qualification = request.form.get('qualification', '').strip()
+    doctor.overview = request.form.get('overview', '').strip()
+    doctor.fellowship_membership = request.form.get('fellowship_membership', '').strip()
+    doctor.fellowship_links = request.form.get('fellowship_links', '').strip()
+    doctor.field_of_expertise = request.form.get('field_of_expertise', '').strip()
+    doctor.talks_and_publications = request.form.get('talks_and_publications', '').strip()
+    doctor.talks_links = request.form.get('talks_links', '').strip()
+    doctor.appointment_link = request.form.get('appointment_link', '').strip()
+    doctor.department_slug = request.form.get('department_slug', '').strip()
+
+    # ----- Collect timings with days -----
+    time_from_hour = request.form.getlist('time_from_hour[]')
+    time_from_minute = request.form.getlist('time_from_minute[]')
+    time_from_period = request.form.getlist('time_from_period[]')
+    time_to_hour = request.form.getlist('time_to_hour[]')
+    time_to_minute = request.form.getlist('time_to_minute[]')
+    time_to_period = request.form.getlist('time_to_period[]')
+
+    timings_list = []
+    for i in range(len(time_from_hour)):
+        if time_from_hour[i] and time_to_hour[i]:
+            days = request.form.getlist(f'days[{i}][]')
+            # Format time as "HH:MM AM/PM"
+            from_time = f"{time_from_hour[i]}:{time_from_minute[i]}"
+            to_time = f"{time_to_hour[i]}:{time_to_minute[i]}"
+            
+            timings_list.append({
+                "from_hour": time_from_hour[i],
+                "from_minute": time_from_minute[i],
+                "from_period": time_from_period[i],
+                "to_hour": time_to_hour[i],
+                "to_minute": time_to_minute[i],
+                "to_period": time_to_period[i],
+                "from": from_time,
+                "to": to_time,
+                "days": days
+            })
+
+    doctor.timings = json.dumps(timings_list) if timings_list else None
+
+    # ----- Handle image upload -----
+    if 'image' in request.files:
+        file = request.files['image']
+        if file and file.filename != '' and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            doctors_folder = os.path.join(app.config['UPLOAD_FOLDER'], 'doctors')
+            os.makedirs(doctors_folder, exist_ok=True)
+            save_path = os.path.join(doctors_folder, filename)
+            file.save(save_path)
+            doctor.image_path = f"img/doctors/{filename}"
+
+    # ----- Handle file uploads -----
+    if 'fellowship_file' in request.files:
+        fellowship_file = handle_file_upload(request.files['fellowship_file'], 'fellowships')
+        if fellowship_file:
+            doctor.fellowship_file_path = fellowship_file
+
+    if 'talks_file' in request.files:
+        talks_file = handle_file_upload(request.files['talks_file'], 'talks')
+        if talks_file:
+            doctor.talks_file_path = talks_file
+
+    db.session.commit()
+
+    # Regenerate department HTML if needed
+    department = Department.query.filter_by(slug=doctor.department_slug).first()
+    if department:
+        generate_department_html(department)
+
+    flash('Doctor updated successfully!', 'success')
+    return redirect(url_for('admin_doctors'))
+
+@app.route('/admin/delete_doctor/<int:doctor_id>')
+@login_required
+@permission_required('doctors')
+def delete_doctor(doctor_id):
+    """Delete a doctor."""
+    doctor = Doctor.query.get_or_404(doctor_id)
+    department_slug = doctor.department_slug
+    
+    db.session.delete(doctor)
+    db.session.commit()
+
+    # Regenerate department HTML if needed
+    department = Department.query.filter_by(slug=department_slug).first()
+    if department:
+        generate_department_html(department)
+
+    flash('Doctor deleted successfully!', 'success')
+    return redirect(url_for('admin_doctors'))
 # Add this route to handle the drag-and-drop order updates
 @app.route('/admin/doctors/update-order', methods=['POST'])
 @login_required
@@ -636,31 +797,6 @@ def edit_doctor(doctor_id):
 
     return render_template('admin/doctors.html', doctor=doctor, departments=departments, doctors=Doctor.query.all())
 
-
-@app.route('/admin/doctors/delete/<int:doctor_id>', methods=['POST'])
-def delete_doctor(doctor_id):
-    doctor = Doctor.query.get_or_404(doctor_id)
-    # Store department slug for regeneration
-    department_slug = doctor.department_slug
-
-    # Optionally, delete the uploaded image file from static folder
-    if doctor.image_path:
-        image_full_path = os.path.join(
-            app.config['UPLOAD_FOLDER'], doctor.image_path)
-        if os.path.exists(image_full_path):
-            os.remove(image_full_path)
-
-    # Delete doctor from DB
-    db.session.delete(doctor)
-    db.session.commit()
-
-    # Regenerate the department HTML after deleting doctor
-    department = Department.query.filter_by(slug=department_slug).first()
-    if department:
-        generate_department_html(department)
-
-    flash(f'Doctor "{doctor.name}" has been deleted!', 'success')
-    return redirect(url_for('admin_doctors'))
 
 
 # --- Utility function to generate HTML ---
@@ -3407,26 +3543,40 @@ def admin_upload():
         flash('BMW Report uploaded successfully!', 'success')
         return redirect(url_for('admin_upload'))
 
-    # Show last uploaded file
+    # Show last uploaded file and all PDFs
     latest_pdf = BMWReportPDF.query.order_by(BMWReportPDF.uploaded_at.desc()).first()
-    return render_template('admin/admin_upload.html', latest_pdf=latest_pdf)
+    all_pdfs = BMWReportPDF.query.order_by(BMWReportPDF.uploaded_at.desc()).all()
+    return render_template('admin/admin_upload.html', latest_pdf=latest_pdf, all_pdfs=all_pdfs)
 
+# ---------------- DELETE PDF ---------------- #
+@app.route('/admin/delete/<int:pdf_id>', methods=['POST'])
+def delete_pdf(pdf_id):
+    pdf = BMWReportPDF.query.get_or_404(pdf_id)
+    # Delete file from folder
+    try:
+        os.remove(os.path.join(app.config['UPLOAD_FOLDER'], pdf.file_name))
+    except:
+        pass
+    # Delete entry from DB
+    db.session.delete(pdf)
+    db.session.commit()
+    flash('PDF deleted successfully!', 'success')
+    return redirect(url_for('admin_upload'))
 
 # ---------------- FRONTEND BMW REPORT PAGE ---------------- #
 @app.route('/bmw_report')
 def bmw_report():
     latest_pdf = BMWReportPDF.query.order_by(BMWReportPDF.uploaded_at.desc()).first()
     if latest_pdf:
-        # open the latest uploaded PDF
         return redirect(url_for('serve_pdf', filename=latest_pdf.file_name))
     else:
         return "<h3 style='text-align:center;margin-top:50px;'>No BMW report uploaded yet.</h3>"
-
 
 # ---------------- SERVE PDF FILE ---------------- #
 @app.route('/uploads/<filename>')
 def serve_pdf(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
+
 
 # ------------------ ADMIN: Department Testimonials Management ------------------
 @app.route('/admin/department_testimonials', methods=['GET', 'POST'])
@@ -3595,6 +3745,10 @@ def delete_faq(faq_id):  # Changed from 'id' to 'faq_id'
     return redirect(url_for('admin_department_overview'))
 
 # ------------------ TOGGLE ROUTES ------------------
+@app.route('/check_timing')
+def check_timing():
+    doctor = Doctor.query.first()
+    return doctor.timings or "No timings"
 
 
 # admin routes end -------------------------------------------------------------------------------------------------------------------------

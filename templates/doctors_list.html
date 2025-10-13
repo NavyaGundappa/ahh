@@ -41,35 +41,32 @@
 
     .doctor-page .doctor-card {
         background: var(--doctor-card-bg);
-        border-radius: 12px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         border: 1px solid var(--doctor-border);
         overflow: hidden;
         transition: all 0.3s ease;
         animation: cardEntrance 0.6s ease-out;
-        height: 320px;
         display: flex;
         flex-direction: column;
+        min-height: 380px;
     }
 
     .doctor-page .doctor-card:hover {
         transform: translateY(-4px);
-        box-shadow: 0 8px 16px rgba(0,0,0,0.12);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
         border-color: var(--doctor-accent);
     }
 
     .doctor-page .card-header {
-        padding: 16px;
+        padding: 20px;
         display: flex;
-        gap: 12px;
+        gap: 16px;
         align-items: center;
         flex-shrink: 0;
     }
 
     .doctor-page .doctor-image {
-        width: 60px;
-        height: 60px;
-        border-radius: 50%;
+        width: 80px;
+        height: 80px;
         object-fit: cover;
         border: 2px solid var(--doctor-primary);
         flex-shrink: 0;
@@ -81,125 +78,108 @@
     }
 
     .doctor-page .doctor-name {
-        font-size: 1rem;
+        font-size: 1.25rem;
         font-weight: 700;
         color: var(--doctor-text);
-        margin: 0 0 6px 0;
+        margin: 0 0 8px 0;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        line-height: 1.2;
     }
 
     .doctor-page .doctor-specialization {
         color: var(--doctor-primary);
         font-weight: 600;
-        font-size: 0.8rem;
-        padding: 3px 8px;
-        background: rgba(16,58,96,0.1);
-        border-radius: 12px;
+        font-size: 0.95rem;
+        padding: 5px 10px;
+        background: rgba(16, 58, 96, 0.08);
         display: inline-block;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        max-width: 100%;
-        line-height: 1;
+        cursor: default;
     }
 
     .doctor-page .card-body {
-        padding: 12px 16px;
+        padding: 16px 20px;
         border-top: 1px solid var(--doctor-border);
         background: var(--doctor-light);
         flex: 1;
-        overflow: hidden;
         display: flex;
         flex-direction: column;
+        justify-content: center;
+        font-size: 0.9rem;
+        color: var(--doctor-text-light);
     }
 
     .timing-container {
         display: flex;
         flex-direction: column;
-        gap: 6px;
-        flex: 1;
-        overflow: hidden;
+        gap: 8px;
     }
 
     .timing-group {
         display: flex;
         flex-direction: column;
-        gap: 2px;
+        gap: 4px;
     }
 
     .timing-row {
         display: flex;
-        align-items: flex-start;
+        flex-wrap: wrap;
+        gap: 6px;
+        align-items: center;
     }
 
     .timing-label {
         font-weight: 600;
         color: var(--doctor-text);
-        width: 35px;
+        width: 45px;
         flex-shrink: 0;
-        text-align: left;
-        line-height: 1.2;
-        position: relative;
-        font-size: 0.75rem;
-    }
-
-    .timing-label::after {
-        content: ":";
-        position: absolute;
-        right: -4px;
     }
 
     .timing-content {
         color: var(--doctor-text-light);
-        font-size: 0.75rem;
-        line-height: 1.2;
-        flex: 1;
-        margin-left: 10px;
-        overflow: hidden;
-    }
-
-    .timing-content .time-slot {
-        display: block;
-        margin-bottom: 1px;
-        font-size: 0.7rem;
-    }
-
-    .on-call {
-        font-style: italic;
-        text-align: center;
-        color: var(--doctor-text-light);
-        padding: 8px 0;
+        font-size: 0.9rem;
         flex: 1;
         display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 0.8rem;
+        flex-wrap: wrap;
+        gap: 4px;
+    }
+
+    .time-slot {
+        display: inline;
     }
 
     .card-footer {
-        padding: 12px 16px;
+        padding: 16px 20px;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+
+    .footer-left {
         display: flex;
         gap: 8px;
-        flex-shrink: 0;
+    }
+
+    .footer-right {
+        display: flex;
+        gap: 8px;
     }
 
     .action-btn {
-        flex: 1;
-        padding: 8px 12px;
-        border-radius: 8px;
-        text-decoration: none;
+        padding: 12px 18px;
         font-weight: 600;
-        font-size: 0.75rem;
+        font-size: 0.95rem;
         text-align: center;
-        display: flex;
+        display: inline-flex;
         align-items: center;
         justify-content: center;
         gap: 4px;
         transition: all 0.2s ease;
-        white-space: nowrap;
+        min-width: 130px;
     }
 
     .btn-primary {
@@ -231,12 +211,12 @@
         opacity: 0.6;
     }
 
-    .btn-disabled:hover {
-        transform: none;
-        background: var(--doctor-border);
+    .on-call {
+        font-style: italic;
+        text-align: center;
+        color: var(--doctor-text-light);
     }
 
-    /* Loading Indicator */
     .loading-indicator {
         text-align: center;
         padding: 20px;
@@ -252,7 +232,7 @@
         display: inline-block;
         width: 20px;
         height: 20px;
-        border: 2px solid rgba(16,58,96,0.3);
+        border: 2px solid rgba(16, 58, 96, 0.3);
         border-radius: 50%;
         border-top-color: var(--doctor-primary);
         animation: spin 1s ease-in-out infinite;
@@ -285,59 +265,81 @@
             gap: 15px;
         }
 
-        .doctor-page .doctor-card {
-            height: auto;
-            min-height: 280px;
-        }
-
         .doctor-page .card-header {
             flex-direction: column;
             text-align: center;
-            padding: 12px;
         }
 
         .doctor-page .doctor-image {
-            width: 80px;
-            height: 80px;
+            width: 90px;
+            height: 90px;
         }
 
         .card-footer {
             flex-direction: column;
-            padding: 10px 12px;
+            align-items: stretch;
+            gap: 8px;
         }
 
-        .timing-label {
-            width: 30px;
-        }
-        
-        .timing-label::after {
-            right: -3px;
-        }
-        
-        .timing-content {
-            margin-left: 8px;
-        }
-    }
-
-    @media (max-width: 480px) {
-        .doctor-page .page-title {
-            font-size: 2rem;
-        }
-        
-        .doctor-page .container {
-            padding: 15px 10px 30px 10px;
+        .footer-left,
+        .footer-right {
+            justify-content: center;
         }
     }
 
     @keyframes cardEntrance {
-        from { opacity: 0; transform: translateY(20px);}
-        to { opacity: 1; transform: translateY(0);}
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
 
     @keyframes spin {
-        to { transform: rotate(360deg); }
+        to {
+            transform: rotate(360deg);
+        }
     }
 </style>
+<style>
+    .breadcrumb-section {
+        padding: 10px 0;
+        background-color: #f8f9fa;
+    }
+
+    .breadcrumb {
+        margin-bottom: 0;
+        padding: 0.75rem 1rem;
+    }
+
+    .breadcrumb-item+.breadcrumb-item::before {
+        content: ">>";
+        padding: 0 0.5rem;
+    }
+
+    .breadcrumb-item a {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+    .breadcrumb-item.active {
+        color: #6c757d;
+    }
+</style>
+<section class="breadcrumb-section">
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item">Doctors</li>
+            </ol>
+        </nav>
+    </div>
+</section>
 
 <div class="doctor-page">
     <div class="container">
@@ -349,79 +351,80 @@
             {% for doctor in doctors %}
             <div class="doctor-card" data-doctor-id="{{ doctor.id }}">
                 <div class="card-header">
-                    <img src="{{ url_for('static', filename=doctor.image_path if doctor.image_path else 'img/doctors/dr-he.jpg') }}" 
-                         class="doctor-image" alt="{{ doctor.name }}">
+                    <img src="{{ url_for('static', filename=doctor.image_path if doctor.image_path else 'img/doctors/dr-he.jpg') }}"
+                        class="doctor-image" alt="{{ doctor.name }}">
                     <div class="doctor-info">
                         <h2 class="doctor-name">{{ doctor.name }}</h2>
-                        <div class="doctor-specialization">{{ doctor.specialization }}</div>
+                        <div class="doctor-specialization" title="{{ doctor.specialization }}">
+                            {{ doctor.specialization }}
+                        </div>
                     </div>
                 </div>
 
                 <div class="card-body">
                     {% set valid_timings = doctor.timings_parsed | selectattr('from') | selectattr('to') | list %}
                     {% if valid_timings %}
-                        {% set grouped_days = {} %}
-                        {% for t in valid_timings %}
-                            {% if t.days %}
-                                {% set days_key = t.days | map('capitalize') | join(', ') %}
-                                {% set time_slot = t.from ~ ' ' ~ t.from_period ~ ' - ' ~ t.to ~ ' ' ~ t.to_period %}
-                                {% if days_key in grouped_days %}
-                                    {% set _ = grouped_days[days_key].append(time_slot) %}
-                                {% else %}
-                                    {% set _ = grouped_days.update({days_key: [time_slot]}) %}
-                                {% endif %}
-                            {% endif %}
-                        {% endfor %}
+                    {% set grouped_days = {} %}
+                    {% for t in valid_timings %}
+                    {% if t.days %}
+                    {% set days_key = t.days | map('capitalize') | join(', ') %}
+                    {% set time_slot = t.from ~ ' ' ~ t.from_period ~ ' - ' ~ t.to ~ ' ' ~ t.to_period %}
+                    {% if days_key in grouped_days %}
+                    {% set _ = grouped_days[days_key].append(time_slot) %}
+                    {% else %}
+                    {% set _ = grouped_days.update({days_key: [time_slot]}) %}
+                    {% endif %}
+                    {% endif %}
+                    {% endfor %}
 
-                        <div class="timing-container">
-                            {% for days, times in grouped_days.items() %}
-                            <div class="timing-group">
-                                <div class="timing-row">
-                                    <div class="timing-label">Day</div>
-                                    <div class="timing-content">{{ days }}</div>
-                                </div>
-                                <div class="timing-row">
-                                    <div class="timing-label">Time</div>
-                                    <div class="timing-content">
-                                        {% for time in times %}
-                                        <span class="time-slot">{{ time }}</span>
-                                        {% endfor %}
-                                    </div>
+                    <div class="timing-container">
+                        {% for days, times in grouped_days.items() %}
+                        <div class="timing-group">
+                            <div class="timing-row">
+                                <div class="timing-label">Day</div>
+                                <div class="timing-content">{{ days }}</div>
+                            </div>
+                            <div class="timing-row">
+                                <div class="timing-label">Time</div>
+                                <div class="timing-content">
+                                    {% for time in times %}
+                                    <span class="time-slot">{{ time }}{% if not loop.last %} |{% endif %}</span>
+                                    {% endfor %}
                                 </div>
                             </div>
-                            {% if not loop.last %}
-                            <div style="height: 8px;"></div>
-                            {% endif %}
-                            {% endfor %}
                         </div>
+                        {% endfor %}
+                    </div>
                     {% else %}
-                        <div class="on-call">Available on call basis</div>
+                    <div class="on-call">Available on call basis</div>
                     {% endif %}
                 </div>
 
                 <div class="card-footer">
-                    {% if doctor.appointment_link %}
-                    <a href="{{ doctor.appointment_link }}" target="_blank" class="action-btn btn-primary">
-                        Book Appointment
-                    </a>
-                    {% else %}
-                    <a href="#" class="action-btn btn-disabled">Unavailable</a>
-                    {% endif %}
-                    <a href="{{ url_for('doctor_detail', slug=doctor.slug) }}" class="action-btn btn-outline">
-                        View Profile
-                    </a>
+                    <div class="footer-left">
+                        {% if doctor.appointment_link %}
+                        <a href="{{ doctor.appointment_link }}" target="_blank" class="action-btn btn-primary">
+                            Book Appointment
+                        </a>
+                        {% else %}
+                        <a href="#" class="action-btn btn-disabled">Unavailable</a>
+                        {% endif %}
+                    </div>
+                    <div class="footer-right">
+                        <a href="{{ url_for('doctor_detail', slug=doctor.slug) }}" class="action-btn btn-outline">
+                            View Profile
+                        </a>
+                    </div>
                 </div>
             </div>
             {% endfor %}
         </div>
 
-        <!-- Loading Indicator -->
         <div class="loading-indicator" id="loadingIndicator">
             <div class="loading-spinner"></div>
             Loading more doctors...
         </div>
 
-        <!-- End of Content Message -->
         <div class="end-message" id="endMessage">
             You've reached the end of our doctors list.
         </div>
@@ -429,23 +432,22 @@
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         const doctorGrid = document.getElementById('doctorGrid');
         const loadingIndicator = document.getElementById('loadingIndicator');
         const endMessage = document.getElementById('endMessage');
-        
+
         let currentPage = 1;
         let isLoading = false;
         let hasMoreDoctors = true;
 
-        // Infinite Scroll Functionality
         function checkScroll() {
             if (isLoading || !hasMoreDoctors) return;
-            
+
             const scrollPosition = window.innerHeight + window.scrollY;
             const pageHeight = document.documentElement.scrollHeight;
             const threshold = 500;
-            
+
             if (scrollPosition >= pageHeight - threshold) {
                 loadMoreDoctors();
             }
@@ -453,47 +455,37 @@
 
         function loadMoreDoctors() {
             if (isLoading || !hasMoreDoctors) return;
-            
+
             isLoading = true;
             loadingIndicator.classList.add('active');
-            
+
             currentPage++;
-            
+
             fetch(`/doctors?page=${currentPage}&ajax=1`)
-            .then(response => response.text())
-            .then(html => {
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(html, 'text/html');
-                const newDoctors = doc.querySelectorAll('.doctor-card');
-                
-                if (newDoctors.length > 0) {
-                    newDoctors.forEach(doctor => {
-                        doctorGrid.appendChild(doctor);
-                    });
-                    
-                    const allCards = document.querySelectorAll('.doctor-card');
-                    allCards.forEach((card, index) => {
-                        if (index >= allCards.length - newDoctors.length) {
-                            card.style.animation = 'cardEntrance 0.6s ease-out';
-                        }
-                    });
-                } else {
+                .then(response => response.text())
+                .then(html => {
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, 'text/html');
+                    const newDoctors = doc.querySelectorAll('.doctor-card');
+
+                    if (newDoctors.length > 0) {
+                        newDoctors.forEach(doctor => doctorGrid.appendChild(doctor));
+                    } else {
+                        hasMoreDoctors = false;
+                        endMessage.classList.add('active');
+                    }
+
+                    isLoading = false;
+                    loadingIndicator.classList.remove('active');
+                })
+                .catch(error => {
+                    console.error('Error loading more doctors:', error);
+                    isLoading = false;
+                    loadingIndicator.classList.remove('active');
                     hasMoreDoctors = false;
-                    endMessage.classList.add('active');
-                }
-                
-                isLoading = false;
-                loadingIndicator.classList.remove('active');
-            })
-            .catch(error => {
-                console.error('Error loading more doctors:', error);
-                isLoading = false;
-                loadingIndicator.classList.remove('active');
-                hasMoreDoctors = false;
-            });
+                });
         }
 
-        // Initialize
         window.addEventListener('scroll', checkScroll);
         setTimeout(checkScroll, 100);
     });
