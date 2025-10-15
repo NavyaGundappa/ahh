@@ -1,119 +1,51 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "admin_layout.html" %}
 
-<head>
-  <meta charset="UTF-8">
-  <title>BMW Report Upload</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    body {
-      background-color: #f8fafc;
-      font-family: 'Poppins', sans-serif;
-    }
+{% block title %}BMW Report - Admin Panel{% endblock %}
 
-    .navbar {
-      background-color: #000;
-      color: #fff;
-      padding: 1rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+{% block content %}
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <div class="bg-white p-6 rounded-xl shadow-md max-w-lg mx-auto">
+        <h2 class="text-2xl font-bold text-gray-800 mb-4 text-center">Upload BMW Report</h2>
 
-    .navbar h1 {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: #0078d6;
-    }
-
-    .upload-box {
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .upload-box:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-    }
-  </style>
-</head>
-
-<body>
-  <!-- Navbar -->
-  <nav class="navbar shadow-md">
-    <h1>BMW Reports</h1>
-    <div class="flex space-x-6">
-      <a href="{{ url_for('admin_dashboard') }}" class="hover:text-blue-400">Dashboard</a>
-      <a href="{{ url_for('bmw_report') }}" class="hover:text-blue-400" target="_blank">View Report</a>
-      <a href="{{ url_for('admin_upload') }}" class="hover:text-blue-400">Upload</a>
-    </div>
-  </nav>
-
-  <!-- Upload Section -->
-  <div class="max-w-lg mx-auto bg-white p-8 rounded-2xl shadow-lg mt-16 upload-box">
-    <h2 class="text-2xl font-bold mb-6 text-center text-gray-800">Upload BMW Report PDF</h2>
-
-    <!-- Flash Messages -->
-    {% with messages = get_flashed_messages(with_categories=true) %}
-    {% if messages %}
-    {% for category, message in messages %}
-    <div class="p-3 mb-4 rounded-lg text-white {{ 'bg-green-500' if category == 'success' else 'bg-red-500' }}">
-      {{ message }}
-    </div>
-    {% endfor %}
-    {% endif %}
-    {% endwith %}
-
-    <form method="POST" enctype="multipart/form-data">
-      <label class="block text-gray-700 font-medium mb-2">Select PDF file:</label>
-      <input type="file" name="pdf_file" accept="application/pdf" required
-        class="border border-gray-300 p-3 w-full rounded-lg mb-4 focus:ring-2 focus:ring-blue-500 outline-none">
-      <button type="submit" class="bg-black text-white py-2 px-4 rounded-lg hover:bg-gray-800 w-full transition-all">
-        Upload
-      </button>
-    </form>
-
-    <!-- Latest uploaded PDF -->
-    {% if latest_pdf %}
-    <div class="mt-6 text-center border-t pt-4">
-      <h3 class="text-lg font-semibold mb-2 text-gray-700">Latest Uploaded PDF:</h3>
-      <a href="{{ url_for('serve_pdf', filename=latest_pdf.file_name) }}" target="_blank"
-        class="text-blue-600 underline hover:text-blue-800">
-        {{ latest_pdf.file_name }}
-      </a>
-      <p class="text-sm text-gray-500 mt-1">Uploaded on: {{ latest_pdf.uploaded_at.strftime('%Y-%m-%d %H:%M') }}</p>
-    </div>
-    {% else %}
-    <div class="mt-6 text-center border-t pt-4">
-      <h3 class="text-lg font-semibold mb-2 text-gray-700">No PDF uploaded yet</h3>
-      <p class="text-sm text-gray-500">Upload your first BMW report PDF above.</p>
-    </div>
-    {% endif %}
-
-    <!-- All Uploaded PDFs with Delete -->
-    {% if all_pdfs %}
-    <div class="mt-6 border-t pt-4">
-      <h3 class="text-lg font-semibold mb-3 text-gray-700 text-center">All Uploaded Reports</h3>
-      <div class="max-h-40 overflow-y-auto">
-        {% for pdf in all_pdfs %}
-        <div class="flex justify-between items-center py-2 border-b">
-          <a href="{{ url_for('serve_pdf', filename=pdf.file_name) }}" target="_blank"
-            class="text-blue-600 hover:text-blue-800 text-sm">
-            {{ pdf.file_name }}
-          </a>
-          <div class="flex items-center space-x-2">
-            <span class="text-xs text-gray-500">{{ pdf.uploaded_at.strftime('%m/%d/%Y') }}</span>
-            <form action="{{ url_for('delete_pdf', pdf_id=pdf.id) }}" method="POST"
-              onsubmit="return confirm('Are you sure you want to delete this PDF?');">
-              <button type="submit" class="text-red-600 hover:text-red-800 text-sm">Delete</button>
-            </form>
+        <form action="{{ url_for('admin_upload') }}" method="POST" enctype="multipart/form-data">
+          <div class="mb-4">
+            <input type="file" name="pdf_file" accept=".pdf"
+              class="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+            <p class="text-sm text-gray-500 mt-1">Only PDF files are allowed</p>
           </div>
+          <button type="submit"
+            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition">
+            Upload PDF
+          </button>
+        </form>
+
+        {% if all_pdfs %}
+        <div class="mt-6">
+          <h3 class="text-lg font-semibold mb-3">Uploaded Reports</h3>
+          <ul class="divide-y divide-gray-200">
+            {% for pdf in all_pdfs %}
+            <li class="py-3 flex justify-between items-center">
+              <div>
+                <span class="font-medium">{{ pdf.file_name }}</span>
+                <p class="text-sm text-gray-500">Uploaded: {{ pdf.uploaded_at.strftime('%Y-%m-%d %H:%M') }}</p>
+              </div>
+              <form action="{{ url_for('delete_pdf', pdf_id=pdf.id) }}" method="POST"
+                onsubmit="return confirm('Are you sure you want to delete this PDF?');">
+                <button type="submit" class="bg-red-500 hover:bg-red-700 text-white py-1 px-3 rounded text-sm">
+                  Delete
+                </button>
+              </form>
+            </li>
+            {% endfor %}
+          </ul>
         </div>
-        {% endfor %}
+        {% else %}
+        <p class="text-center text-gray-500 mt-6">No reports uploaded yet</p>
+        {% endif %}
       </div>
     </div>
-    {% endif %}
   </div>
-</body>
-
-</html>
+</div>
+{% endblock %}

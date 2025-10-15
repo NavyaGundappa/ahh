@@ -770,7 +770,7 @@
     }
 
     function createTimingEntry(prefix, index, timingData = null) {
-        const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+        const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun', 'On Call'];
         const daysHtml = days.map(day => {
             const checked = timingData && timingData.days && timingData.days.includes(day) ? 'checked' : '';
             return `<label class="me-2 mb-1"><input type="checkbox" name="days[${index}][]" value="${day}" ${checked}> ${day}</label>`;

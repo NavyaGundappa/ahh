@@ -3525,15 +3525,31 @@ def test_blog_detail():
 
 
 @app.route('/admin/upload', methods=['GET', 'POST'])
+@login_required
+@permission_required('bmw_report')  # Add this decorator
 def admin_upload():
+    # Get current user info properly
+    admin_id = session.get("admin_id")
+    user = User.query.get(admin_id)
+    
+    if not user:
+        flash("Please log in first!", "warning")
+        return redirect(url_for("admin_login"))
+
     if request.method == 'POST':
         file = request.files.get('pdf_file')
         if not file:
             flash('No file selected', 'danger')
             return redirect(url_for('admin_upload'))
 
+        # Check if it's a PDF
+        if not file.filename.lower().endswith('.pdf'):
+            flash('Please upload a PDF file', 'danger')
+            return redirect(url_for('admin_upload'))
+
         filename = secure_filename(file.filename)
-        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        file.save(file_path)
 
         # Save file info to DB
         pdf_entry = BMWReportPDF(file_name=filename)
@@ -3543,25 +3559,41 @@ def admin_upload():
         flash('BMW Report uploaded successfully!', 'success')
         return redirect(url_for('admin_upload'))
 
-    # Show last uploaded file and all PDFs
-    latest_pdf = BMWReportPDF.query.order_by(BMWReportPDF.uploaded_at.desc()).first()
+    # Show all PDFs
     all_pdfs = BMWReportPDF.query.order_by(BMWReportPDF.uploaded_at.desc()).all()
-    return render_template('admin/admin_upload.html', latest_pdf=latest_pdf, all_pdfs=all_pdfs)
+
+    # Get user access for sidebar
+    modules = ['banners', 'doctors', 'counters', 'testimonials', 'specialities',
+               'departments', 'health_packages', 'sports_packages', 'department_content', 
+               'users', 'callback_requests', 'reviews', 'blogs', 'bmw_report']
+    access = {module: False for module in modules}
+    if user.access:
+        for module in modules:
+            access[module] = getattr(user.access, module, False)
+
+    return render_template(
+        'admin/admin_upload.html',
+        all_pdfs=all_pdfs,
+        access=access,
+        current_user=user
+    )
+
+
+
 
 # ---------------- DELETE PDF ---------------- #
 @app.route('/admin/delete/<int:pdf_id>', methods=['POST'])
 def delete_pdf(pdf_id):
     pdf = BMWReportPDF.query.get_or_404(pdf_id)
-    # Delete file from folder
     try:
         os.remove(os.path.join(app.config['UPLOAD_FOLDER'], pdf.file_name))
     except:
         pass
-    # Delete entry from DB
     db.session.delete(pdf)
     db.session.commit()
     flash('PDF deleted successfully!', 'success')
     return redirect(url_for('admin_upload'))
+
 
 # ---------------- FRONTEND BMW REPORT PAGE ---------------- #
 @app.route('/bmw_report')
@@ -3572,10 +3604,12 @@ def bmw_report():
     else:
         return "<h3 style='text-align:center;margin-top:50px;'>No BMW report uploaded yet.</h3>"
 
+
 # ---------------- SERVE PDF FILE ---------------- #
 @app.route('/uploads/<filename>')
 def serve_pdf(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
+
 
 
 # ------------------ ADMIN: Department Testimonials Management ------------------

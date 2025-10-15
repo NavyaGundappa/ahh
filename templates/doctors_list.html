@@ -47,7 +47,10 @@
         animation: cardEntrance 0.6s ease-out;
         display: flex;
         flex-direction: column;
-        min-height: 380px;
+        /* Square dimensions */
+        aspect-ratio: 1 / 1;
+        min-height: 320px;
+        max-height: 320px;
     }
 
     .doctor-page .doctor-card:hover {
@@ -57,16 +60,16 @@
     }
 
     .doctor-page .card-header {
-        padding: 20px;
+        padding: 16px;
         display: flex;
-        gap: 16px;
-        align-items: center;
+        gap: 12px;
+        align-items: flex-start;
         flex-shrink: 0;
     }
 
     .doctor-page .doctor-image {
-        width: 80px;
-        height: 80px;
+        width: 70px;
+        height: 70px;
         object-fit: cover;
         border: 2px solid var(--doctor-primary);
         flex-shrink: 0;
@@ -78,7 +81,7 @@
     }
 
     .doctor-page .doctor-name {
-        font-size: 1.25rem;
+        font-size: 1.1rem;
         font-weight: 700;
         color: var(--doctor-text);
         margin: 0 0 8px 0;
@@ -90,8 +93,8 @@
     .doctor-page .doctor-specialization {
         color: var(--doctor-primary);
         font-weight: 600;
-        font-size: 0.95rem;
-        padding: 5px 10px;
+        font-size: 0.85rem;
+        padding: 4px 8px;
         background: rgba(16, 58, 96, 0.08);
         display: inline-block;
         white-space: nowrap;
@@ -100,63 +103,81 @@
         cursor: default;
     }
 
-    .doctor-page .card-body {
-        padding: 16px 20px;
+    .doctor-page .timing-section {
+        padding: 10px 16px;
         border-top: 1px solid var(--doctor-border);
         background: var(--doctor-light);
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        font-size: 0.9rem;
-        color: var(--doctor-text-light);
+        flex-shrink: 0;
     }
 
     .timing-container {
         display: flex;
         flex-direction: column;
-        gap: 8px;
+        gap: 6px;
     }
 
     .timing-group {
         display: flex;
         flex-direction: column;
-        gap: 4px;
+        gap: 3px;
     }
 
     .timing-row {
         display: flex;
         flex-wrap: wrap;
         gap: 6px;
-        align-items: center;
+        align-items: flex-start;
     }
 
     .timing-label {
         font-weight: 600;
         color: var(--doctor-text);
-        width: 45px;
+        width: 40px;
         flex-shrink: 0;
+        font-size: 0.8rem;
     }
 
     .timing-content {
         color: var(--doctor-text-light);
-        font-size: 0.9rem;
+        font-size: 0.8rem;
         flex: 1;
         display: flex;
         flex-wrap: wrap;
         gap: 4px;
+        line-height: 1.3;
     }
 
     .time-slot {
         display: inline;
     }
 
+    .doctor-page .card-body {
+        padding: 8px 16px;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        font-size: 0.8rem;
+        color: var(--doctor-text-light);
+        overflow: hidden;
+    }
+
+    .on-call {
+        font-style: italic;
+        text-align: center;
+        color: var(--doctor-text-light);
+        margin: 0;
+        font-size: 0.85rem;
+    }
+
     .card-footer {
-        padding: 16px 20px;
+        padding: 10px 16px;
         display: flex;
         justify-content: space-between;
         flex-wrap: wrap;
         align-items: center;
+        border-top: 1px solid var(--doctor-border);
+        gap: 8px;
     }
 
     .footer-left {
@@ -170,16 +191,16 @@
     }
 
     .action-btn {
-        padding: 12px 18px;
+        padding: 6px 10px;
         font-weight: 600;
-        font-size: 0.95rem;
+        font-size: 0.8rem;
         text-align: center;
         display: inline-flex;
         align-items: center;
         justify-content: center;
         gap: 4px;
         transition: all 0.2s ease;
-        min-width: 130px;
+        min-width: 100px;
     }
 
     .btn-primary {
@@ -209,12 +230,6 @@
         color: var(--doctor-text-light);
         cursor: not-allowed;
         opacity: 0.6;
-    }
-
-    .on-call {
-        font-style: italic;
-        text-align: center;
-        color: var(--doctor-text-light);
     }
 
     .loading-indicator {
@@ -265,14 +280,10 @@
             gap: 15px;
         }
 
-        .doctor-page .card-header {
-            flex-direction: column;
-            text-align: center;
-        }
-
-        .doctor-page .doctor-image {
-            width: 90px;
-            height: 90px;
+        .doctor-page .doctor-card {
+            aspect-ratio: auto;
+            min-height: auto;
+            max-height: none;
         }
 
         .card-footer {
@@ -306,19 +317,19 @@
     }
 </style>
 <style>
+    /* Styling for the breadcrumb navigation */
     .breadcrumb-section {
-        padding: 10px 0;
+        /* ORIGINAL: padding: 15px 200px; */
+        /* MODIFIED: Add a left offset to clear the sidebar (~80px total width/padding) */
+        padding: 15px 200px 15px 80px;
         background-color: #f8f9fa;
+        border-bottom: 1px solid #dee2e6;
     }
 
     .breadcrumb {
         margin-bottom: 0;
-        padding: 0.75rem 1rem;
-    }
-
-    .breadcrumb-item+.breadcrumb-item::before {
-        content: ">>";
-        padding: 0 0.5rem;
+        background-color: transparent;
+        padding: 0;
     }
 
     .breadcrumb-item a {
@@ -326,16 +337,51 @@
         text-decoration: none;
     }
 
+    .breadcrumb-item a:hover {
+        text-decoration: underline;
+    }
+
     .breadcrumb-item.active {
         color: #6c757d;
     }
+
+    .breadcrumb-item+.breadcrumb-item::before {
+        content: ">>";
+        padding: 0 0.75rem;
+        color: #6c757d;
+    }
+
+    /* Styling for a seamless, full-page iframe experience */
+    .appointment-page-section {
+        padding: 0;
+        /* MODIFIED: Add a left offset to clear the sidebar */
+        padding-left: 20px;
+    }
+
+    .appointment-iframe-wrapper {
+        width: 100%;
+        overflow: hidden;
+    }
+
+    #appointment-page-iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+    }
+
+    /* Hide footer and scroll-to-top button to prevent scrolling issues */
+    .site-footer,
+    .scroll-to-top-btn {
+        display: none !important;
+    }
 </style>
-<section class="breadcrumb-section">
-    <div class="container">
+
+<section class="breadcrumb-section" id="breadcrumb-nav">
+    <div class="container-fluid">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Home</a></li>
-                <li class="breadcrumb-item">Doctors</li>
+                <li class="breadcrumb-item active" aria-current="page">Doctors</li>
             </ol>
         </nav>
     </div>
@@ -361,9 +407,9 @@
                     </div>
                 </div>
 
-                <div class="card-body">
-                    {% set valid_timings = doctor.timings_parsed | selectattr('from') | selectattr('to') | list %}
-                    {% if valid_timings %}
+                {% set valid_timings = doctor.timings_parsed | selectattr('from') | selectattr('to') | list %}
+                {% if valid_timings %}
+                <div class="timing-section">
                     {% set grouped_days = {} %}
                     {% for t in valid_timings %}
                     {% if t.days %}
@@ -395,9 +441,16 @@
                         </div>
                         {% endfor %}
                     </div>
-                    {% else %}
+                </div>
+                {% else %}
+                <div class="timing-section">
                     <div class="on-call">Available on call basis</div>
-                    {% endif %}
+                </div>
+                {% endif %}
+
+                <div class="card-body">
+                    <!-- Additional doctor information can go here if needed -->
+                    <!-- Currently empty but structure is maintained for future content -->
                 </div>
 
                 <div class="card-footer">

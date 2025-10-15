@@ -91,7 +91,7 @@
             /* Adjusted padding */
             box-sizing: border-box;
             border: 1px solid #ccc;
-            border-radius: 20px;
+
             font-size: 14px;
             color: #333;
             transition: border-color 0.3s ease, box-shadow 0.3s ease;
@@ -115,7 +115,7 @@
             background: linear-gradient(to right, #16979D, #103A60);
             color: #fff;
             border: none;
-            border-radius: 6px;
+
             cursor: pointer;
             font-size: 16px;
             font-weight: 600;
@@ -174,7 +174,7 @@
             padding: 10px;
             box-sizing: border-box;
             border: 1px solid #000;
-            border-radius: 4px
+
         }
 
         .login-form-group button {
@@ -183,7 +183,7 @@
             background: linear-gradient(to bottom, #103A60, #16979D);
             color: #fff;
             border: none;
-            border-radius: 4px;
+
             cursor: pointer;
             font-size: 16px
         }
@@ -971,7 +971,10 @@
                             <ul class="dropdown-menu">
 
                                 <li>
-                                    <a href="/bmw_report"><i class="fa-solid fa-circle-info"></i>BMW Report</a>
+                                    <a href="/bmw_report" target="_blank">
+                                        <i class="fa-solid fa-circle-info"></i> BMW Report
+                                    </a>
+
                                 </li>
                             </ul>
                         </li>
@@ -994,9 +997,20 @@
 
     <div id="review-modal" class="login-modal">
         <div class="login-modal-content">
+            <!-- Close Button -->
             <span class="close-button" id="close-review-modal">×</span>
-            <h2 style="margin-top:0; margin-bottom: 15px; font-size: 1.5rem; text-align: center;">Send a Message to
-                Management</h2>
+
+            <!-- Logo -->
+            <div style="text-align: center; margin-bottom: 10px;">
+                <img src="static/img/logo.png" alt="Company Logo" style="max-width: 160px; height: auto;">
+            </div>
+
+            <!-- Modal Title -->
+            <h2 style="margin-top: 0; margin-bottom: 15px; font-size: 1.5rem; text-align: center;">
+                Write to Management
+            </h2>
+
+            <!-- Form -->
             <form id="review-form">
                 <div class="login-form-group">
                     <input type="text" id="reviewer-name" name="reviewer-name" placeholder="Your Name" required>
@@ -1018,6 +1032,7 @@
             </form>
         </div>
     </div>
+
 
     <footer class="site-footer">
         <div class="container">

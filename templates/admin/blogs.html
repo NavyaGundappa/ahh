@@ -9,21 +9,52 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css" rel="stylesheet">
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <style>
+        .ql-editor {
+            min-height: 200px;
+        }
+
+        .preview-content {
+            max-height: 400px;
+            overflow-y: auto;
+            border: 1px solid #dee2e6;
+            border-radius: 0.375rem;
+            padding: 1rem;
+        }
+
+        .form-required::after {
+            content: " *";
+            color: #dc3545;
+        }
+
+        .preview-modal .modal-dialog {
+            max-width: 800px;
+        }
+
+        .header-logo {
+            height: 50px;
+            margin-right: 30px;
+        }
+    </style>
 </head>
 
 <body>
     <!-- Header -->
     <div class="header py-3 bg-light mb-4">
         <div class="container d-flex justify-content-between align-items-center">
-            <div>
-                <h4 class="mb-0 text-primary"><i class="fas fa-blog me-2"></i>Blog Management</h4>
-                <small class="text-muted">Manage health articles and blog posts</small>
+            <div class="d-flex align-items-center">
+                <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo" class="header-logo">
+                <div>
+
+                </div>
             </div>
             <div>
-                <a href="{{ url_for('admin_dashboard') }}" class="btn btn-outline-primary btn-sm me-2"><i
-                        class="fas fa-home me-1"></i>Home</a>
-                <a href="{{ url_for('admin_logout') }}" class="btn btn-outline-danger btn-sm"><i
-                        class="fas fa-sign-out-alt me-1"></i>Logout</a>
+                <a href="{{ url_for('admin_dashboard') }}" class="btn btn-outline-primary btn-sm me-2">
+                    <i class="fas fa-home me-1"></i>Home
+                </a>
+                <a href="{{ url_for('admin_logout') }}" class="btn btn-outline-danger btn-sm">
+                    <i class="fas fa-sign-out-alt me-1"></i>Logout
+                </a>
             </div>
         </div>
     </div>
@@ -91,6 +122,10 @@
                                             data-excerpt="{{ blog.excerpt }}" data-content="{{ blog.content|e }}">
                                             <i class="fas fa-edit"></i>
                                         </button>
+                                        <button class="btn btn-outline-info preview-blog" data-title="{{ blog.title }}"
+                                            data-content="{{ blog.content|e }}">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
                                         <form method="POST" action="{{ url_for('admin_blogs') }}"
                                             style="display:inline;">
                                             <input type="hidden" name="delete_id" value="{{ blog.id }}">
@@ -154,6 +189,11 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label form-required">Content</label>
+                            <div class="d-flex justify-content-end mb-2">
+                                <button type="button" class="btn btn-sm btn-outline-secondary" id="previewBtn">
+                                    <i class="fas fa-eye me-1"></i>Preview
+                                </button>
+                            </div>
                             <div id="editor"></div>
                             <textarea name="content" id="content" style="display:none;"></textarea>
                         </div>
@@ -172,6 +212,24 @@
         </div>
     </div>
 
+    <!-- Content Preview Modal -->
+    <div class="modal fade preview-modal" id="previewModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="previewTitle">Content Preview</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="preview-content" id="previewContent"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -181,45 +239,38 @@
 
     <script>
         let quill;
-        const customColors = ['#000000', '#333333', '#666666', '#999999', '#cccccc', '#ffffff', '#4e73df', '#1cc88a'];
-
-        function initializeEditor() {
-            if (!quill) {
-                quill = new Quill('#editor', {
-                    theme: 'snow',
-                    modules: {
-                        toolbar: [
-                            [{ 'header': [1, 2, 3, false] }],
-                            ['bold', 'italic', 'underline', 'strike'],
-                            [{ 'color': customColors }, { 'background': customColors }],
-                            [{ 'list': 'ordered' }, { 'list': 'bullet' }],
-                            [{ 'align': [] }],
-                            ['link', 'image'],
-                            ['clean']
-                        ]
-                    },
-                    placeholder: 'Write your blog content here...'
-                });
-            } else {
-                quill.root.innerHTML = '';
-            }
-        }
 
         $(document).ready(function () {
+            // Initialize DataTable
             $('#blogsTable').DataTable({ pageLength: 10, order: [[3, 'desc']] });
 
-            $('#addBlogModal').on('shown.bs.modal', function () {
-                initializeEditor();
+            // Initialize Quill once
+            quill = new Quill('#editor', {
+                theme: 'snow',
+                modules: {
+                    toolbar: [
+                        [{ 'header': [1, 2, 3, false] }],
+                        ['bold', 'italic', 'underline', 'strike'],
+                        [{ 'color': [] }, { 'background': [] }],
+                        [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+                        [{ 'align': [] }],
+                        ['link', 'image'],
+                        ['clean']
+                    ]
+                },
+                placeholder: 'Write your blog content here...'
             });
 
+            // Add New Blog button
             $('#addBlogModal').on('hidden.bs.modal', function () {
                 document.getElementById('addBlogForm').reset();
                 $('#blog_id').val('');
                 $('#modalTitle').text('Add New Blog');
                 $('#addBlogBtn').html('<i class="fas fa-plus me-1"></i>Add Blog').prop('disabled', false);
-                if (quill) quill.root.innerHTML = '';
+                quill.root.innerHTML = '';
             });
 
+            // Auto slug
             $('#blog_title').on('input', function () {
                 const title = $(this).val();
                 const slug = title.toLowerCase().replace(/[^a-z0-9 -]/g, '')
@@ -227,6 +278,7 @@
                 $('#blog_slug').val(slug);
             });
 
+            // Edit blog
             $('.edit-blog').click(function () {
                 const blogId = $(this).data('blog-id');
                 const title = $(this).data('title');
@@ -240,19 +292,39 @@
                 $('#blog_slug').val(slug);
                 $('#blog_department').val(department);
                 $('#blog_excerpt').val(excerpt);
-                if (quill) quill.root.innerHTML = content;
-
                 $('#modalTitle').text('Edit Blog');
                 $('#addBlogBtn').html('<i class="fas fa-save me-1"></i>Update Blog').prop('disabled', false);
+
+                // Show modal
                 $('#addBlogModal').modal('show');
+
+                // Set content after modal fully shown
+                $('#addBlogModal').on('shown.bs.modal', function () {
+                    quill.root.innerHTML = content || '';
+                });
             });
 
+            // Preview blog
+            function showPreview(title, content) {
+                $('#previewTitle').text('Preview: ' + title);
+                $('#previewContent').html(content || '<p class="text-muted">No content to preview.</p>');
+                $('#previewModal').modal('show');
+            }
+
+            $('.preview-blog').click(function () {
+                const title = $(this).data('title');
+                const content = $(this).data('content');
+                showPreview(title, content);
+            });
+
+            $('#previewBtn').click(function () {
+                const title = $('#blog_title').val() || 'Untitled';
+                const content = quill.root.innerHTML;
+                showPreview(title, content);
+            });
+
+            // Form submit
             $('#addBlogForm').submit(function (e) {
-                if (!quill) {
-                    alert('Editor not loaded!');
-                    e.preventDefault();
-                    return;
-                }
                 const content = quill.root.innerHTML.trim();
                 if (!content || content === '<p><br></p>') {
                     alert('Please add some content to the blog post.');
