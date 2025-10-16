@@ -266,6 +266,35 @@
     textarea {
         cursor: auto;
     }
+
+    .form-section {
+        border-bottom: 1px solid #dee2e6;
+        padding-bottom: 15px;
+        margin-bottom: 20px;
+    }
+
+    .form-section-title {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: #495057;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+    }
+
+    .form-section-title i {
+        margin-right: 8px;
+    }
+
+    .textarea-small {
+        min-height: 80px;
+        resize: vertical;
+    }
+
+    .textarea-medium {
+        min-height: 100px;
+        resize: vertical;
+    }
 </style>
 
 <div class="container-fluid mt-4">
@@ -572,35 +601,66 @@
                 </div>
                 <div class="modal-body">
                     <div class="row g-3">
-                        <!-- Basic Information -->
-                        <div class="col-md-6">
-                            <label class="form-label">Name *</label>
-                            <input type="text" name="name" class="form-control" required placeholder="Dr. John Smith">
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label">Specialization *</label>
-                            <input type="text" name="specialization" class="form-control" required
-                                placeholder="Cardiology">
-                        </div>
+                        <!-- Basic Information Section -->
+                        <div class="col-12 form-section">
+                            <h6 class="form-section-title"><i class="fas fa-info-circle"></i> Basic Information</h6>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label class="form-label">Name *</label>
+                                    <input type="text" name="name" class="form-control" required
+                                        placeholder="Dr. John Smith">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Specialization *</label>
+                                    <input type="text" name="specialization" class="form-control" required
+                                        placeholder="Cardiology">
+                                </div>
 
-                        <div class="col-md-6">
-                            <label class="form-label">Department *</label>
-                            <select name="department_slug" class="form-select" required>
-                                <option value="">Select Department</option>
-                                {% for dept in departments %}
-                                <option value="{{ dept.slug }}">{{ dept.name }}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label">Designation</label>
-                            <input type="text" name="designation" class="form-control" placeholder="Senior Consultant">
+                                <div class="col-md-6">
+                                    <label class="form-label">Department *</label>
+                                    <select name="department_slug" class="form-select" required>
+                                        <option value="">Select Department</option>
+                                        {% for dept in departments %}
+                                        <option value="{{ dept.slug }}">{{ dept.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Designation</label>
+                                    <input type="text" name="designation" class="form-control"
+                                        placeholder="Senior Consultant">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label">Experience</label>
+                                    <input type="text" name="experience" class="form-control" placeholder="15 years">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Qualification</label>
+                                    <input type="text" name="qualification" class="form-control" placeholder="MBBS, MD">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label">Languages</label>
+                                    <input type="text" name="languages" class="form-control"
+                                        placeholder="English, Hindi, Spanish">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Appointment Link</label>
+                                    <input type="url" name="appointment_link" class="form-control"
+                                        placeholder="https://">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label">Slug</label>
+                                    <input type="text" name="slug" class="form-control" placeholder="dr-john-smith">
+                                </div>
+                            </div>
                         </div>
 
                         <!-- Timings Section -->
-                        <div class="col-md-12">
-                            <hr>
-                            <h5><i class="fas fa-clock me-2"></i>Availability Schedule</h5>
+                        <div class="col-12 form-section">
+                            <h6 class="form-section-title"><i class="fas fa-clock"></i> Availability Schedule</h6>
                             <button type="button" class="btn btn-sm btn-outline-primary add-timing-btn"
                                 onclick="addTimingEntry('add')">
                                 <i class="fas fa-plus me-1"></i> Add Time Slot
@@ -610,37 +670,69 @@
                             </div>
                         </div>
 
-                        <!-- Additional Fields -->
-                        <div class="col-md-6">
-                            <label class="form-label">Experience</label>
-                            <input type="text" name="experience" class="form-control" placeholder="15 years">
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label">Qualification</label>
-                            <input type="text" name="qualification" class="form-control" placeholder="MBBS, MD">
+                        <!-- Professional Details Section -->
+                        <div class="col-12 form-section">
+                            <h6 class="form-section-title"><i class="fas fa-graduation-cap"></i> Professional Details
+                            </h6>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label class="form-label">Overview</label>
+                                    <textarea name="overview" class="form-control textarea-medium"
+                                        placeholder="Professional overview..."></textarea>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <label class="form-label">Field of Expertise</label>
+                                    <textarea name="field_of_expertise" class="form-control textarea-small"
+                                        placeholder="List areas of expertise, one per line&#10;• Cardiac Surgery&#10;• Interventional Cardiology&#10;• Heart Failure Management"></textarea>
+                                    <small class="text-muted">Enter each area of expertise on a new line</small>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <label class="form-label">Fellowship & Membership</label>
+                                    <textarea name="fellowship_membership" class="form-control textarea-small"
+                                        placeholder="List fellowships and memberships, one per line&#10;• Fellow, American College of Cardiology&#10;• Member, European Society of Cardiology&#10;• Fellow, Royal College of Physicians"></textarea>
+                                    <small class="text-muted">Enter each fellowship or membership on a new line</small>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label">Fellowship Links</label>
+                                    <input type="text" name="fellowship_links" class="form-control"
+                                        placeholder="Links to fellowship details">
+                                </div>
+
+                                <div class="col-md-12">
+                                    <label class="form-label">Talks & Publications</label>
+                                    <textarea name="talks_and_publications" class="form-control textarea-medium"
+                                        placeholder="List conference talks, publications, and research, one per line&#10;• 'Advances in Cardiac Care' - International Cardiology Conference 2023&#10;• 'Managing Heart Failure in Elderly Patients' - Journal of Cardiology&#10;• 'Innovations in Interventional Procedures' - National Medical Symposium"></textarea>
+                                    <small class="text-muted">Enter each talk or publication on a new line</small>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label">Talks Links</label>
+                                    <input type="text" name="talks_links" class="form-control"
+                                        placeholder="Links to talks and publications">
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="col-md-6">
-                            <label class="form-label">Languages</label>
-                            <input type="text" name="languages" class="form-control"
-                                placeholder="English, Hindi, Spanish">
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label">Appointment Link</label>
-                            <input type="url" name="appointment_link" class="form-control" placeholder="https://">
-                        </div>
+                        <!-- Profile Section -->
+                        <div class="col-12 form-section">
+                            <h6 class="form-section-title"><i class="fas fa-user"></i> Profile Information</h6>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label class="form-label">Profile Image</label>
+                                    <input type="file" name="image" class="form-control" accept="image/*"
+                                        onchange="previewImage(this, 'add_image_preview')">
+                                    <img id="add_image_preview" class="img-preview mt-2">
+                                </div>
 
-                        <div class="col-md-12">
-                            <label class="form-label">Profile Image</label>
-                            <input type="file" name="image" class="form-control" accept="image/*"
-                                onchange="previewImage(this, 'add_image_preview')">
-                            <img id="add_image_preview" class="img-preview mt-2">
-                        </div>
-
-                        <div class="col-md-12">
-                            <label class="form-label">Bio</label>
-                            <textarea name="bio" class="form-control" rows="3"
-                                placeholder="Brief description about the doctor..."></textarea>
+                                <div class="col-md-12">
+                                    <label class="form-label">Bio</label>
+                                    <textarea name="bio" class="form-control textarea-medium" rows="3"
+                                        placeholder="Brief description about the doctor..."></textarea>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -669,35 +761,65 @@
                 </div>
                 <div class="modal-body">
                     <div class="row g-3">
-                        <!-- Basic Information -->
-                        <div class="col-md-6">
-                            <label class="form-label">Name *</label>
-                            <input type="text" name="name" id="edit_name" class="form-control" required>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label">Specialization *</label>
-                            <input type="text" name="specialization" id="edit_specialization" class="form-control"
-                                required>
-                        </div>
+                        <!-- Basic Information Section -->
+                        <div class="col-12 form-section">
+                            <h6 class="form-section-title"><i class="fas fa-info-circle"></i> Basic Information</h6>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label class="form-label">Name *</label>
+                                    <input type="text" name="name" id="edit_name" class="form-control" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Specialization *</label>
+                                    <input type="text" name="specialization" id="edit_specialization"
+                                        class="form-control" required>
+                                </div>
 
-                        <div class="col-md-6">
-                            <label class="form-label">Department *</label>
-                            <select name="department_slug" id="edit_department_slug" class="form-select" required>
-                                <option value="">Select Department</option>
-                                {% for dept in departments %}
-                                <option value="{{ dept.slug }}">{{ dept.name }}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label">Designation</label>
-                            <input type="text" name="designation" id="edit_designation" class="form-control">
+                                <div class="col-md-6">
+                                    <label class="form-label">Department *</label>
+                                    <select name="department_slug" id="edit_department_slug" class="form-select"
+                                        required>
+                                        <option value="">Select Department</option>
+                                        {% for dept in departments %}
+                                        <option value="{{ dept.slug }}">{{ dept.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Designation</label>
+                                    <input type="text" name="designation" id="edit_designation" class="form-control">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label">Experience</label>
+                                    <input type="text" name="experience" id="edit_experience" class="form-control">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Qualification</label>
+                                    <input type="text" name="qualification" id="edit_qualification"
+                                        class="form-control">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label">Languages</label>
+                                    <input type="text" name="languages" id="edit_languages" class="form-control">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Appointment Link</label>
+                                    <input type="url" name="appointment_link" id="edit_appointment_link"
+                                        class="form-control">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label">Slug</label>
+                                    <input type="text" name="slug" id="edit_slug" class="form-control">
+                                </div>
+                            </div>
                         </div>
 
                         <!-- Timings Section -->
-                        <div class="col-md-12">
-                            <hr>
-                            <h5><i class="fas fa-clock me-2"></i>Availability Schedule</h5>
+                        <div class="col-12 form-section">
+                            <h6 class="form-section-title"><i class="fas fa-clock"></i> Availability Schedule</h6>
                             <button type="button" class="btn btn-sm btn-outline-primary add-timing-btn"
                                 onclick="addTimingEntry('edit')">
                                 <i class="fas fa-plus me-1"></i> Add Time Slot
@@ -707,35 +829,71 @@
                             </div>
                         </div>
 
-                        <!-- Additional Fields -->
-                        <div class="col-md-6">
-                            <label class="form-label">Experience</label>
-                            <input type="text" name="experience" id="edit_experience" class="form-control">
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label">Qualification</label>
-                            <input type="text" name="qualification" id="edit_qualification" class="form-control">
+                        <!-- Professional Details Section -->
+                        <div class="col-12 form-section">
+                            <h6 class="form-section-title"><i class="fas fa-graduation-cap"></i> Professional Details
+                            </h6>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label class="form-label">Overview</label>
+                                    <textarea name="overview" id="edit_overview"
+                                        class="form-control textarea-medium"></textarea>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <label class="form-label">Field of Expertise</label>
+                                    <textarea name="field_of_expertise" id="edit_field_of_expertise"
+                                        class="form-control textarea-small"
+                                        placeholder="List areas of expertise, one per line"></textarea>
+                                    <small class="text-muted">Enter each area of expertise on a new line</small>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <label class="form-label">Fellowship & Membership</label>
+                                    <textarea name="fellowship_membership" id="edit_fellowship_membership"
+                                        class="form-control textarea-small"
+                                        placeholder="List fellowships and memberships, one per line"></textarea>
+                                    <small class="text-muted">Enter each fellowship or membership on a new line</small>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label">Fellowship Links</label>
+                                    <input type="text" name="fellowship_links" id="edit_fellowship_links"
+                                        class="form-control">
+                                </div>
+
+                                <div class="col-md-12">
+                                    <label class="form-label">Talks & Publications</label>
+                                    <textarea name="talks_and_publications" id="edit_talks_and_publications"
+                                        class="form-control textarea-medium"
+                                        placeholder="List conference talks, publications, and research, one per line"></textarea>
+                                    <small class="text-muted">Enter each talk or publication on a new line</small>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label">Talks Links</label>
+                                    <input type="text" name="talks_links" id="edit_talks_links" class="form-control">
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="col-md-6">
-                            <label class="form-label">Languages</label>
-                            <input type="text" name="languages" id="edit_languages" class="form-control">
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label">Appointment Link</label>
-                            <input type="url" name="appointment_link" id="edit_appointment_link" class="form-control">
-                        </div>
+                        <!-- Profile Section -->
+                        <div class="col-12 form-section">
+                            <h6 class="form-section-title"><i class="fas fa-user"></i> Profile Information</h6>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label class="form-label">Profile Image</label>
+                                    <input type="file" name="image" class="form-control" accept="image/*"
+                                        onchange="previewImage(this, 'edit_image_preview')">
+                                    <img id="edit_image_preview" class="img-preview mt-2">
+                                </div>
 
-                        <div class="col-md-12">
-                            <label class="form-label">Profile Image</label>
-                            <input type="file" name="image" class="form-control" accept="image/*"
-                                onchange="previewImage(this, 'edit_image_preview')">
-                            <img id="edit_image_preview" class="img-preview mt-2">
-                        </div>
-
-                        <div class="col-md-12">
-                            <label class="form-label">Bio</label>
-                            <textarea name="bio" id="edit_bio" class="form-control" rows="3"></textarea>
+                                <div class="col-md-12">
+                                    <label class="form-label">Bio</label>
+                                    <textarea name="bio" id="edit_bio" class="form-control textarea-medium"
+                                        rows="3"></textarea>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -973,6 +1131,17 @@
         document.getElementById('edit_qualification').value = doctor.qualification || '';
         document.getElementById('edit_languages').value = doctor.languages || '';
         document.getElementById('edit_appointment_link').value = doctor.appointment_link || '';
+        document.getElementById('edit_slug').value = doctor.slug || '';
+
+        // Populate professional details
+        document.getElementById('edit_overview').value = doctor.overview || '';
+        document.getElementById('edit_field_of_expertise').value = doctor.field_of_expertise || '';
+        document.getElementById('edit_fellowship_membership').value = doctor.fellowship_membership || '';
+        document.getElementById('edit_fellowship_links').value = doctor.fellowship_links || '';
+        document.getElementById('edit_talks_and_publications').value = doctor.talks_and_publications || '';
+        document.getElementById('edit_talks_links').value = doctor.talks_links || '';
+
+        // Populate bio
         document.getElementById('edit_bio').value = doctor.bio || '';
 
         // Populate image preview

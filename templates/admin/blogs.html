@@ -10,8 +10,70 @@
     <link href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css" rel="stylesheet">
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
     <style>
+        :root {
+            --primary-color: #ffff;
+            --secondary-color: #ffff;
+            --success-color: #4cc9f0;
+            --light-bg: #ffffff;
+            --dark-text: #000000;
+            --header-bg: #eeebeb;
+        }
+
+        body {
+            background-color: #f5f7fb;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-logo {
+            height: 40px;
+            margin-right: 15px;
+        }
+
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border: none;
+            border-radius: 6px;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .table th {
+            border-top: none;
+            font-weight: 600;
+            color: var(--dark-text);
+            background-color: var(--light-bg);
+        }
+
+        .badge {
+            font-weight: 500;
+            padding: 6px 10px;
+            border-radius: 20px;
+        }
+
         .ql-editor {
             min-height: 200px;
+            font-size: 16px;
+            line-height: 1.6;
         }
 
         .preview-content {
@@ -20,6 +82,7 @@
             border: 1px solid #dee2e6;
             border-radius: 0.375rem;
             padding: 1rem;
+            background-color: white;
         }
 
         .form-required::after {
@@ -31,28 +94,137 @@
             max-width: 800px;
         }
 
-        .header-logo {
-            height: 50px;
-            margin-right: 30px;
+        /* Spell check styles */
+        .spell-check-highlight {
+            background-color: rgba(255, 193, 7, 0.3);
+            border-bottom: 2px wavy #dc3545;
+            cursor: pointer;
+            border-radius: 2px;
+        }
+
+        .grammar-check-highlight {
+            background-color: rgba(0, 123, 255, 0.3);
+            border-bottom: 2px wavy #0d6efd;
+            cursor: pointer;
+            border-radius: 2px;
+        }
+
+        .spell-check-menu {
+            position: absolute;
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            padding: 8px 0;
+            min-width: 180px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .spell-check-menu button {
+            display: block;
+            width: 100%;
+            text-align: left;
+            border: none;
+            background: none;
+            padding: 8px 16px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.2s;
+        }
+
+        .spell-check-menu button:hover {
+            background-color: #e9ecef;
+        }
+
+        .spell-check-menu .divider {
+            height: 1px;
+            background-color: #e9ecef;
+            margin: 8px 0;
+        }
+
+        .spell-check-menu .suggestion {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .spell-check-toolbar {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px 8px 0 0;
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .spell-check-status {
+            font-size: 0.875rem;
+            color: #6c757d;
+            font-weight: 500;
+        }
+
+        .spell-check-toggle {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .form-check-input:checked {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .action-buttons .btn {
+            border-radius: 6px;
+            margin: 2px;
+        }
+
+        .modal-header {
+            background-color: var(--light-bg);
+            border-bottom: 1px solid #dee2e6;
+            border-radius: 10px 10px 0 0;
+        }
+
+        h5 {
+            color: var(--dark-text);
+            font-weight: 600;
+        }
+
+        .alert {
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .table-hover tbody tr:hover {
+            background-color: rgba(67, 97, 238, 0.05);
+        }
+
+        #editor {
+            border-radius: 0 0 8px 8px;
+            border: 1px solid #dee2e6;
+            border-top: none;
         }
     </style>
 </head>
 
 <body>
     <!-- Header -->
-    <div class="header py-3 bg-light mb-4">
+    <div class="header py-3 text-white mb-4">
         <div class="container d-flex justify-content-between align-items-center">
             <div class="d-flex align-items-center">
                 <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo" class="header-logo">
-                <div>
-
+                <div class="ms-3">
+                    <h4 class="mb-0">Blog Management</h4>
+                    <small class="opacity-75">Admin Panel</small>
                 </div>
             </div>
             <div>
-                <a href="{{ url_for('admin_dashboard') }}" class="btn btn-outline-primary btn-sm me-2">
-                    <i class="fas fa-home me-1"></i>Home
+                <a href="{{ url_for('admin_dashboard') }}" class="btn btn-secondary btn-sm">
+                    <i class="fas fa-home me-1"></i>Dashboard
                 </a>
-                <a href="{{ url_for('admin_logout') }}" class="btn btn-outline-danger btn-sm">
+                <a href="{{ url_for('admin_logout') }}" class="btn btn-secondary btn-sm">
                     <i class="fas fa-sign-out-alt me-1"></i>Logout
                 </a>
             </div>
@@ -63,11 +235,11 @@
         <!-- Action Bar -->
         <div class="d-flex justify-content-between align-items-center mb-4">
             <div>
-                <h5 class="mb-1">Blog Posts</h5>
+                <h3 class="mb-1 fw-bold">Blog Posts</h3>
                 <p class="text-muted mb-0">Total: {{ blogs|length }} posts</p>
             </div>
             <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addBlogModal" id="addNewBlogBtn">
-                <i class="fas fa-plus me-1"></i>Add Blog
+                <i class="fas fa-plus me-1"></i>Add New Blog
             </button>
         </div>
 
@@ -115,7 +287,7 @@
                                 </td>
                                 <td>{{ blog.created_at.strftime('%Y-%m-%d') }}</td>
                                 <td>
-                                    <div class="btn-group btn-group-sm">
+                                    <div class="action-buttons btn-group btn-group-sm">
                                         <button class="btn btn-outline-primary edit-blog" data-blog-id="{{ blog.id }}"
                                             data-title="{{ blog.title }}" data-slug="{{ blog.slug }}"
                                             data-department="{{ blog.department.id if blog.department else '' }}"
@@ -130,8 +302,9 @@
                                             style="display:inline;">
                                             <input type="hidden" name="delete_id" value="{{ blog.id }}">
                                             <button type="submit" class="btn btn-outline-danger"
-                                                onclick="return confirm('Delete this blog?')"><i
-                                                    class="fas fa-trash"></i></button>
+                                                onclick="return confirm('Are you sure you want to delete this blog?')">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
                                         </form>
                                         <form method="POST" action="{{ url_for('toggle_blog', blog_id=blog.id) }}"
                                             style="display:inline;">
@@ -167,11 +340,13 @@
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label class="form-label form-required">Title</label>
-                                <input type="text" class="form-control" name="title" id="blog_title" required>
+                                <input type="text" class="form-control" name="title" id="blog_title" required
+                                    spellcheck="true" placeholder="Enter blog title">
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label class="form-label form-required">Slug</label>
-                                <input type="text" class="form-control" name="slug" id="blog_slug" required>
+                                <input type="text" class="form-control" name="slug" id="blog_slug" required
+                                    spellcheck="false" placeholder="URL-friendly version">
                             </div>
                         </div>
                         <div class="mb-3">
@@ -185,9 +360,30 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Excerpt</label>
-                            <textarea class="form-control" name="excerpt" id="blog_excerpt" rows="2"></textarea>
+                            <textarea class="form-control" name="excerpt" id="blog_excerpt" rows="2" spellcheck="true"
+                                placeholder="Brief description of the blog post"></textarea>
                         </div>
                         <div class="mb-3">
+                            <div class="spell-check-toolbar">
+                                <div class="spell-check-toggle">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="spellCheckToggle" checked>
+                                        <label class="form-check-label" for="spellCheckToggle">Spell Check</label>
+                                    </div>
+                                </div>
+                                <div class="spell-check-toggle">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="grammarCheckToggle">
+                                        <label class="form-check-label" for="grammarCheckToggle">Grammar Check</label>
+                                    </div>
+                                </div>
+                                <div class="spell-check-status" id="spellCheckStatus">No issues found</div>
+                                <div class="ms-auto">
+                                    <button type="button" class="btn btn-sm btn-outline-primary" id="checkAllBtn">
+                                        <i class="fas fa-search me-1"></i>Check All
+                                    </button>
+                                </div>
+                            </div>
                             <label class="form-label form-required">Content</label>
                             <div class="d-flex justify-content-end mb-2">
                                 <button type="button" class="btn btn-sm btn-outline-secondary" id="previewBtn">
@@ -199,13 +395,14 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Blog Image</label>
-                            <input type="file" class="form-control" name="image" id="blog_image">
+                            <input type="file" class="form-control" name="image" id="blog_image" accept="image/*">
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary" id="addBlogBtn"><i
-                                class="fas fa-plus me-1"></i>Add Blog</button>
+                        <button type="submit" class="btn btn-primary" id="addBlogBtn">
+                            <i class="fas fa-plus me-1"></i>Add Blog
+                        </button>
                     </div>
                 </form>
             </div>
@@ -239,10 +436,115 @@
 
     <script>
         let quill;
+        let spellCheckEnabled = true;
+        let grammarCheckEnabled = false;
+        let spellCheckMenu = null;
+        let currentSpellCheckWord = null;
+        let currentSpellCheckRange = null;
+        let spellingErrors = [];
+        let grammarErrors = [];
+
+        // Common misspellings dictionary
+        const commonMisspellings = {
+            'accomodate': 'accommodate',
+            'acheive': 'achieve',
+            'acknowledgement': 'acknowledgment',
+            'aquire': 'acquire',
+            'arguement': 'argument',
+            'athiest': 'atheist',
+            'beleive': 'believe',
+            'calender': 'calendar',
+            'cemetary': 'cemetery',
+            'committment': 'commitment',
+            'concensus': 'consensus',
+            'definately': 'definitely',
+            'dilemna': 'dilemma',
+            'dissapear': 'disappear',
+            'embarass': 'embarrass',
+            'existance': 'existence',
+            'firey': 'fiery',
+            'foriegn': 'foreign',
+            'guage': 'gauge',
+            'harrass': 'harass',
+            'heighth': 'height',
+            'hygeine': 'hygiene',
+            'independant': 'independent',
+            'judgement': 'judgment',
+            'liason': 'liaison',
+            'manuever': 'maneuver',
+            'mischevious': 'mischievous',
+            'neccessary': 'necessary',
+            'noticable': 'noticeable',
+            'occurence': 'occurrence',
+            'perserverance': 'perseverance',
+            'privelege': 'privilege',
+            'publically': 'publicly',
+            'recieve': 'receive',
+            'seperate': 'separate',
+            'truely': 'truly',
+            'untill': 'until',
+            'wierd': 'weird',
+            'alot': 'a lot',
+            'becuase': 'because',
+            'environement': 'environment',
+            'goverment': 'government',
+            'occassion': 'occasion',
+            'preform': 'perform',
+            'pronounciation': 'pronunciation',
+            'tommorrow': 'tomorrow'
+        };
+
+        // Grammar rules
+        const grammarRules = [
+            {
+                pattern: /\b(a|an) ([aeiouAEIOU])/g,
+                message: "Use 'an' before vowel sounds",
+                replacement: (match, article, word) => {
+                    return article === 'a' ? `an ${word}` : match;
+                }
+            },
+            {
+                pattern: /\b(their|there|they're)\b/gi,
+                message: "Check usage of their/there/they're",
+                replacement: null // No auto-fix, user needs to decide
+            },
+            {
+                pattern: /\b(your|you're)\b/gi,
+                message: "Check usage of your/you're",
+                replacement: null
+            },
+            {
+                pattern: /\b(its|it's)\b/gi,
+                message: "Check usage of its/it's",
+                replacement: null
+            },
+            {
+                pattern: /\b(affect|effect)\b/gi,
+                message: "Check usage of affect/effect",
+                replacement: null
+            },
+            {
+                pattern: /\b(then|than)\b/gi,
+                message: "Check usage of then/than",
+                replacement: null
+            },
+            {
+                pattern: /\b(loose|lose)\b/gi,
+                message: "Check usage of loose/lose",
+                replacement: null
+            }
+        ];
 
         $(document).ready(function () {
             // Initialize DataTable
-            $('#blogsTable').DataTable({ pageLength: 10, order: [[3, 'desc']] });
+            $('#blogsTable').DataTable({
+                pageLength: 10,
+                order: [[3, 'desc']],
+                language: {
+                    search: "Search blogs:",
+                    lengthMenu: "Show _MENU_ entries"
+                }
+            });
 
             // Initialize Quill once
             quill = new Quill('#editor', {
@@ -261,6 +563,9 @@
                 placeholder: 'Write your blog content here...'
             });
 
+            // Enable spell check by default
+            quill.root.setAttribute('spellcheck', 'true');
+
             // Add New Blog button
             $('#addBlogModal').on('hidden.bs.modal', function () {
                 document.getElementById('addBlogForm').reset();
@@ -268,6 +573,10 @@
                 $('#modalTitle').text('Add New Blog');
                 $('#addBlogBtn').html('<i class="fas fa-plus me-1"></i>Add Blog').prop('disabled', false);
                 quill.root.innerHTML = '';
+                clearSpellCheckHighlights();
+                spellingErrors = [];
+                grammarErrors = [];
+                updateSpellCheckStatus();
             });
 
             // Auto slug
@@ -301,6 +610,13 @@
                 // Set content after modal fully shown
                 $('#addBlogModal').on('shown.bs.modal', function () {
                     quill.root.innerHTML = content || '';
+                    if (spellCheckEnabled) {
+                        runSpellCheck();
+                    }
+                    if (grammarCheckEnabled) {
+                        runGrammarCheck();
+                    }
+                    updateSpellCheckStatus();
                 });
             });
 
@@ -323,6 +639,44 @@
                 showPreview(title, content);
             });
 
+            // Spell check toggle
+            $('#spellCheckToggle').change(function () {
+                spellCheckEnabled = $(this).is(':checked');
+                quill.root.setAttribute('spellcheck', spellCheckEnabled);
+
+                if (spellCheckEnabled) {
+                    runSpellCheck();
+                } else {
+                    clearSpellCheckHighlights();
+                    spellingErrors = [];
+                    updateSpellCheckStatus();
+                }
+            });
+
+            // Grammar check toggle
+            $('#grammarCheckToggle').change(function () {
+                grammarCheckEnabled = $(this).is(':checked');
+
+                if (grammarCheckEnabled) {
+                    runGrammarCheck();
+                } else {
+                    clearGrammarCheckHighlights();
+                    grammarErrors = [];
+                    updateSpellCheckStatus();
+                }
+            });
+
+            // Check all button
+            $('#checkAllBtn').click(function () {
+                if (spellCheckEnabled) {
+                    runSpellCheck();
+                }
+                if (grammarCheckEnabled) {
+                    runGrammarCheck();
+                }
+                updateSpellCheckStatus();
+            });
+
             // Form submit
             $('#addBlogForm').submit(function (e) {
                 const content = quill.root.innerHTML.trim();
@@ -334,6 +688,261 @@
                 $('#content').val(content);
                 $('#addBlogBtn').html('<i class="fas fa-spinner fa-spin me-1"></i>Saving...').prop('disabled', true);
             });
+
+            // Spell check functions
+            function runSpellCheck() {
+                clearSpellCheckHighlights();
+                spellingErrors = [];
+
+                const text = quill.getText();
+                const words = text.split(/\s+/);
+
+                words.forEach((word, index) => {
+                    // Remove punctuation from word for checking
+                    const cleanWord = word.replace(/[^\w]/g, '');
+
+                    if (cleanWord.length > 2 && !isWordInDictionary(cleanWord)) {
+                        spellingErrors.push({
+                            word: cleanWord,
+                            suggestions: getSpellingSuggestions(cleanWord)
+                        });
+
+                        // Find and highlight the word in the editor
+                        highlightWord(cleanWord, 'spell-check-highlight');
+                    }
+                });
+
+                updateSpellCheckStatus();
+            }
+
+            function runGrammarCheck() {
+                clearGrammarCheckHighlights();
+                grammarErrors = [];
+
+                const text = quill.getText();
+
+                grammarRules.forEach(rule => {
+                    const matches = [...text.matchAll(rule.pattern)];
+
+                    matches.forEach(match => {
+                        grammarErrors.push({
+                            text: match[0],
+                            message: rule.message,
+                            replacement: rule.replacement ? rule.replacement(...match) : null
+                        });
+
+                        // Highlight the grammar issue
+                        highlightWord(match[0], 'grammar-check-highlight');
+                    });
+                });
+
+                updateSpellCheckStatus();
+            }
+
+            function isWordInDictionary(word) {
+                // This is a simplified check - in a real app, you'd use a proper dictionary
+                const lowerWord = word.toLowerCase();
+                return commonMisspellings[lowerWord] === undefined;
+            }
+
+            function getSpellingSuggestions(word) {
+                const lowerWord = word.toLowerCase();
+                const suggestions = [];
+
+                // Check common misspellings
+                if (commonMisspellings[lowerWord]) {
+                    suggestions.push(commonMisspellings[lowerWord]);
+                }
+
+                // Add some basic suggestions based on common patterns
+                if (lowerWord.endsWith('ing')) {
+                    suggestions.push(lowerWord.replace('ing', ''));
+                }
+
+                if (lowerWord.endsWith('ed')) {
+                    suggestions.push(lowerWord.replace('ed', ''));
+                }
+
+                if (lowerWord.endsWith('s')) {
+                    suggestions.push(lowerWord.slice(0, -1));
+                }
+
+                // Add the word with first letter capitalized
+                suggestions.push(word.charAt(0).toUpperCase() + word.slice(1).toLowerCase());
+
+                // Remove duplicates
+                return [...new Set(suggestions)];
+            }
+
+            function highlightWord(word, className) {
+                const text = quill.getText();
+                let index = 0;
+
+                while ((index = text.indexOf(word, index)) !== -1) {
+                    // Format the text with Quill
+                    quill.formatText(index, word.length, 'background', '');
+                    quill.formatText(index, word.length, 'underline', '');
+
+                    // Add custom class through DOM manipulation
+                    setTimeout(() => {
+                        const editor = document.querySelector('.ql-editor');
+                        const spans = editor.querySelectorAll('span');
+
+                        spans.forEach(span => {
+                            if (span.textContent === word &&
+                                span.parentNode.textContent.indexOf(word) === index) {
+                                span.classList.add(className);
+
+                                // Add right-click event for spell check menu
+                                span.addEventListener('contextmenu', function (e) {
+                                    showSpellCheckMenu(e.target, word, index);
+                                    e.preventDefault();
+                                });
+                            }
+                        });
+                    }, 0);
+
+                    index += word.length;
+                }
+            }
+
+            function clearSpellCheckHighlights() {
+                const editor = document.querySelector('.ql-editor');
+                if (editor) {
+                    const highlights = editor.querySelectorAll('.spell-check-highlight');
+                    highlights.forEach(highlight => {
+                        highlight.classList.remove('spell-check-highlight');
+                    });
+                }
+            }
+
+            function clearGrammarCheckHighlights() {
+                const editor = document.querySelector('.ql-editor');
+                if (editor) {
+                    const highlights = editor.querySelectorAll('.grammar-check-highlight');
+                    highlights.forEach(highlight => {
+                        highlight.classList.remove('grammar-check-highlight');
+                    });
+                }
+            }
+
+            function showSpellCheckMenu(element, word, index) {
+                // Remove existing menu
+                if (spellCheckMenu) {
+                    spellCheckMenu.remove();
+                }
+
+                currentSpellCheckWord = word;
+                currentSpellCheckRange = { index, length: word.length };
+
+                // Create menu
+                spellCheckMenu = document.createElement('div');
+                spellCheckMenu.className = 'spell-check-menu';
+
+                // Get suggestions
+                const suggestions = getSpellingSuggestions(word);
+
+                // Add title
+                const title = document.createElement('div');
+                title.className = 'px-3 py-2 text-muted small';
+                title.textContent = 'Spelling Suggestions';
+                spellCheckMenu.appendChild(title);
+
+                const divider = document.createElement('div');
+                divider.className = 'divider';
+                spellCheckMenu.appendChild(divider);
+
+                // Add suggestions to menu
+                if (suggestions.length > 0) {
+                    suggestions.forEach(suggestion => {
+                        const button = document.createElement('button');
+                        button.innerHTML = `<span class="suggestion">${suggestion}</span>`;
+                        button.addEventListener('click', function () {
+                            replaceWord(suggestion);
+                            spellCheckMenu.remove();
+                            spellCheckMenu = null;
+                        });
+                        spellCheckMenu.appendChild(button);
+                    });
+
+                    // Add divider
+                    const divider2 = document.createElement('div');
+                    divider2.className = 'divider';
+                    spellCheckMenu.appendChild(divider2);
+                }
+
+                // Add ignore option
+                const ignoreButton = document.createElement('button');
+                ignoreButton.textContent = 'Ignore';
+                ignoreButton.addEventListener('click', function () {
+                    // Remove highlight for this instance
+                    element.classList.remove('spell-check-highlight');
+                    spellCheckMenu.remove();
+                    spellCheckMenu = null;
+                });
+                spellCheckMenu.appendChild(ignoreButton);
+
+                // Add to document
+                document.body.appendChild(spellCheckMenu);
+
+                // Position menu at cursor position
+                spellCheckMenu.style.top = `${event.clientY}px`;
+                spellCheckMenu.style.left = `${event.clientX}px`;
+
+                // Close menu when clicking elsewhere
+                setTimeout(() => {
+                    document.addEventListener('click', closeSpellCheckMenu);
+                }, 0);
+            }
+
+            function closeSpellCheckMenu() {
+                if (spellCheckMenu) {
+                    spellCheckMenu.remove();
+                    spellCheckMenu = null;
+                    document.removeEventListener('click', closeSpellCheckMenu);
+                }
+            }
+
+            function replaceWord(replacement) {
+                if (currentSpellCheckRange) {
+                    quill.deleteText(currentSpellCheckRange.index, currentSpellCheckRange.length);
+                    quill.insertText(currentSpellCheckRange.index, replacement);
+
+                    // Remove the highlight
+                    const editor = document.querySelector('.ql-editor');
+                    const spans = editor.querySelectorAll('span');
+
+                    spans.forEach(span => {
+                        if (span.textContent === currentSpellCheckWord &&
+                            span.classList.contains('spell-check-highlight')) {
+                            span.classList.remove('spell-check-highlight');
+                        }
+                    });
+
+                    // Update errors count
+                    spellingErrors = spellingErrors.filter(error => error.word !== currentSpellCheckWord);
+                    updateSpellCheckStatus();
+                }
+            }
+
+            function updateSpellCheckStatus() {
+                let statusText = '';
+
+                if (spellingErrors.length > 0) {
+                    statusText += `${spellingErrors.length} spelling issue${spellingErrors.length !== 1 ? 's' : ''}`;
+                }
+
+                if (grammarErrors.length > 0) {
+                    if (statusText) statusText += ', ';
+                    statusText += `${grammarErrors.length} grammar issue${grammarErrors.length !== 1 ? 's' : ''}`;
+                }
+
+                if (!statusText) {
+                    statusText = 'No issues found';
+                }
+
+                $('#spellCheckStatus').text(statusText);
+            }
         });
     </script>
 </body>
