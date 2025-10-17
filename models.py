@@ -120,7 +120,7 @@ class Department(db.Model):
     icon_path = db.Column(db.String(300), nullable=True)
     # ✅ new column for banner image
     banner_path = db.Column(db.String(300), nullable=True)
-    
+    banner_alt_text = db.Column(db.String(300), nullable=True)
     # ✅ NEW FIELDS for specialists section
     specialists_heading = db.Column(db.String(500), nullable=True)
     specialists_content = db.Column(db.Text, nullable=True)

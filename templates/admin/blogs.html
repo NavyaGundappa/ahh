@@ -11,22 +11,30 @@
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #ffff;
-            --secondary-color: #ffff;
-            --success-color: #4cc9f0;
-            --light-bg: #ffffff;
-            --dark-text: #000000;
-            --header-bg: #eeebeb;
+            --primary-color: #4361ee;
+            --secondary-color: #3a0ca3;
+            --accent-color: #4cc9f0;
+            --success-color: #2ecc71;
+            --warning-color: #f39c12;
+            --danger-color: #e74c3c;
+            --light-bg: #f8f9fa;
+            --dark-text: #2c3e50;
+            --header-bg: #ffffff;
+            --card-bg: #ffffff;
+            --sidebar-bg: #2c3e50;
+            --border-color: #e9ecef;
         }
 
         body {
             background-color: #f5f7fb;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--dark-text);
         }
 
         .header {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background: var(--header-bg);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            border-bottom: 1px solid var(--border-color);
         }
 
         .header-logo {
@@ -36,38 +44,70 @@
 
         .card {
             border: none;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background-color: var(--card-bg);
         }
 
         .card:hover {
             transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
         }
 
         .btn-primary {
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             border: none;
-            border-radius: 6px;
+            border-radius: 8px;
+            font-weight: 600;
+            padding: 10px 20px;
+            transition: all 0.3s ease;
         }
 
         .btn-primary:hover {
             background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
             transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 6px 15px rgba(67, 97, 238, 0.3);
+        }
+
+        .btn-outline-primary {
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+            border-radius: 6px;
+        }
+
+        .btn-outline-primary:hover {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            transform: translateY(-1px);
         }
 
         .table th {
             border-top: none;
             font-weight: 600;
             color: var(--dark-text);
-            background-color: var(--light-bg);
+            background-color: rgba(67, 97, 238, 0.05);
+            padding: 15px 12px;
+        }
+
+        .table td {
+            padding: 12px;
+            vertical-align: middle;
         }
 
         .badge {
             font-weight: 500;
-            padding: 6px 10px;
+            padding: 6px 12px;
             border-radius: 20px;
+            font-size: 0.8rem;
+        }
+
+        .badge.bg-success {
+            background-color: var(--success-color) !important;
+        }
+
+        .badge.bg-secondary {
+            background-color: #95a5a6 !important;
         }
 
         .ql-editor {
@@ -79,15 +119,15 @@
         .preview-content {
             max-height: 400px;
             overflow-y: auto;
-            border: 1px solid #dee2e6;
+            border: 1px solid var(--border-color);
             border-radius: 0.375rem;
-            padding: 1rem;
+            padding: 1.5rem;
             background-color: white;
         }
 
         .form-required::after {
             content: " *";
-            color: #dc3545;
+            color: var(--danger-color);
         }
 
         .preview-modal .modal-dialog {
@@ -97,14 +137,14 @@
         /* Spell check styles */
         .spell-check-highlight {
             background-color: rgba(255, 193, 7, 0.3);
-            border-bottom: 2px wavy #dc3545;
+            border-bottom: 2px wavy var(--danger-color);
             cursor: pointer;
             border-radius: 2px;
         }
 
         .grammar-check-highlight {
             background-color: rgba(0, 123, 255, 0.3);
-            border-bottom: 2px wavy #0d6efd;
+            border-bottom: 2px wavy var(--accent-color);
             cursor: pointer;
             border-radius: 2px;
         }
@@ -150,9 +190,9 @@
 
         .spell-check-toolbar {
             background-color: #f8f9fa;
-            border: 1px solid #dee2e6;
+            border: 1px solid var(--border-color);
             border-radius: 8px 8px 0 0;
-            padding: 10px 15px;
+            padding: 12px 15px;
             display: flex;
             align-items: center;
             gap: 15px;
@@ -182,8 +222,9 @@
 
         .modal-header {
             background-color: var(--light-bg);
-            border-bottom: 1px solid #dee2e6;
-            border-radius: 10px 10px 0 0;
+            border-bottom: 1px solid var(--border-color);
+            border-radius: 12px 12px 0 0;
+            padding: 1.25rem 1.5rem;
         }
 
         h5 {
@@ -203,28 +244,227 @@
 
         #editor {
             border-radius: 0 0 8px 8px;
-            border: 1px solid #dee2e6;
+            border: 1px solid var(--border-color);
             border-top: none;
+        }
+
+        .page-title {
+            color: var(--dark-text);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            color: #6c757d;
+            font-size: 0.95rem;
+        }
+
+        .stats-card {
+            text-align: center;
+            padding: 1.5rem;
+        }
+
+        .stats-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .stats-label {
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+
+        .form-control,
+        .form-select {
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            padding: 10px 15px;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(67, 97, 238, 0.15);
+        }
+
+        .modal-content {
+            border-radius: 12px;
+            border: none;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .modal-footer {
+            border-top: 1px solid var(--border-color);
+            padding: 1.25rem 1.5rem;
+        }
+
+        .dataTables_wrapper .dataTables_length,
+        .dataTables_wrapper .dataTables_filter,
+        .dataTables_wrapper .dataTables_info,
+        .dataTables_wrapper .dataTables_paginate {
+            padding: 10px 0;
+        }
+
+        .dataTables_wrapper .dataTables_filter input {
+            border-radius: 6px;
+            padding: 6px 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        .pagination .page-link {
+            border-radius: 6px;
+            margin: 0 3px;
+            border: 1px solid var(--border-color);
+            color: var(--dark-text);
+        }
+
+        .pagination .page-link:hover {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: white;
+        }
+
+        .pagination .page-item.active .page-link {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary-color);
+        }
+
+        /* Make Quill content start at top-left with minimal spacing */
+        .content-wrapper {
+            padding: 0;
+            margin: 0;
+        }
+
+        .quill-content.ql-editor {
+            padding: 0.25rem 0.5rem;
+            margin: 0;
+            min-height: auto;
+            line-height: 1.4;
+        }
+
+        .quill-content.ql-editor>*:first-child {
+            margin-top: 0;
+        }
+
+        .quill-content.ql-editor>*:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Reduce indentation for lists */
+        .quill-content.ql-editor .ql-list[data-list="bullet"],
+        .quill-content.ql-editor .ql-list[data-list="ordered"] {
+            margin-left: 1.5rem;
+            position: relative;
+        }
+
+        .quill-content.ql-editor .ql-list[data-list="bullet"]::before,
+        .quill-content.ql-editor .ql-list[data-list="ordered"]::before {
+            left: -1.5rem;
+        }
+
+        .quill-content.ql-editor {
+            padding: 0;
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        .quill-content.ql-editor>*:first-child {
+            margin-top: 0;
+        }
+
+        /* Gradient text effect */
+        .gradient-text {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Status indicators */
+        .status-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+
+        .status-active {
+            background-color: var(--success-color);
+        }
+
+        .status-inactive {
+            background-color: #95a5a6;
+        }
+
+        /* Image resize handles */
+        .ql-image-resize-handle {
+            background-color: var(--primary-color);
+            border: 2px solid white;
+            border-radius: 2px;
+            box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .ql-image-resize-handle.top-left,
+        .ql-image-resize-handle.top-right,
+        .ql-image-resize-handle.bottom-left,
+        .ql-image-resize-handle.bottom-right {
+            width: 10px;
+            height: 10px;
+        }
+
+        .ql-image-resize-handle.top,
+        .ql-image-resize-handle.bottom {
+            width: 10px;
+            height: 6px;
+        }
+
+        .ql-image-resize-handle.left,
+        .ql-image-resize-handle.right {
+            width: 6px;
+            height: 10px;
         }
     </style>
 </head>
 
 <body>
     <!-- Header -->
-    <div class="header py-3 text-white mb-4">
+    <div class="header py-3 mb-4">
         <div class="container d-flex justify-content-between align-items-center">
             <div class="d-flex align-items-center">
                 <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo" class="header-logo">
                 <div class="ms-3">
-                    <h4 class="mb-0">Blog Management</h4>
-                    <small class="opacity-75">Admin Panel</small>
+                    <h4 class="mb-0 gradient-text">Blog Management</h4>
+                    <small class="text-muted">Admin Panel</small>
                 </div>
             </div>
             <div>
-                <a href="{{ url_for('admin_dashboard') }}" class="btn btn-secondary btn-sm">
+                <a href="{{ url_for('admin_dashboard') }}" class="btn btn-outline-primary btn-sm">
                     <i class="fas fa-home me-1"></i>Dashboard
                 </a>
-                <a href="{{ url_for('admin_logout') }}" class="btn btn-secondary btn-sm">
+                <a href="{{ url_for('admin_logout') }}" class="btn btn-outline-secondary btn-sm">
                     <i class="fas fa-sign-out-alt me-1"></i>Logout
                 </a>
             </div>
@@ -235,26 +475,15 @@
         <!-- Action Bar -->
         <div class="d-flex justify-content-between align-items-center mb-4">
             <div>
-                <h3 class="mb-1 fw-bold">Blog Posts</h3>
-                <p class="text-muted mb-0">Total: {{ blogs|length }} posts</p>
+                <h3 class="page-title">Blog Posts</h3>
+                <p class="page-subtitle">Total: {{ blogs|length }} posts</p>
             </div>
             <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addBlogModal" id="addNewBlogBtn">
                 <i class="fas fa-plus me-1"></i>Add New Blog
             </button>
         </div>
 
-        <!-- Flash Messages -->
-        {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-        {% for category, message in messages %}
-        <div class="alert alert-{{ 'danger' if category == 'error' else 'success' }} alert-dismissible fade show mb-4"
-            role="alert">
-            {{ message }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
-        {% endfor %}
-        {% endif %}
-        {% endwith %}
+
 
         <!-- Blogs Table -->
         <div class="card">
@@ -282,6 +511,8 @@
                                 <td>
                                     <span
                                         class="badge {% if blog.is_active %}bg-success{% else %}bg-secondary{% endif %}">
+                                        <span
+                                            class="status-indicator {% if blog.is_active %}status-active{% else %}status-inactive{% endif %}"></span>
                                         {{ 'Active' if blog.is_active else 'Inactive' }}
                                     </span>
                                 </td>
@@ -340,9 +571,10 @@
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label class="form-label form-required">Title</label>
-                                <input type="text" class="form-control" name="title" id="blog_title" required
-                                    spellcheck="true" placeholder="Enter blog title">
+                                <textarea class="form-control" name="title" id="blog_title" required spellcheck="true"
+                                    placeholder="Enter blog title" rows="3"></textarea>
                             </div>
+
                             <div class="col-md-6 mb-3">
                                 <label class="form-label form-required">Slug</label>
                                 <input type="text" class="form-control" name="slug" id="blog_slug" required
@@ -433,6 +665,8 @@
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
     <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <!-- Add the image resize module -->
+    <script src="https://cdn.jsdelivr.net/npm/quill-image-resize@3.0.9/image-resize.min.js"></script>
 
     <script>
         let quill;
@@ -546,7 +780,7 @@
                 }
             });
 
-            // Initialize Quill once
+            // Initialize Quill with enhanced image resize module
             quill = new Quill('#editor', {
                 theme: 'snow',
                 modules: {
@@ -558,7 +792,29 @@
                         [{ 'align': [] }],
                         ['link', 'image'],
                         ['clean']
-                    ]
+                    ],
+                    // Enhanced image resize module configuration
+                    imageResize: {
+                        modules: ['Resize', 'DisplaySize'],
+                        handleStyles: {
+                            backgroundColor: 'var(--primary-color)',
+                            border: '2px solid white',
+                            borderRadius: '2px'
+                        },
+                        displayStyles: {
+                            backgroundColor: 'var(--dark-text)',
+                            color: 'white',
+                            fontFamily: 'Arial',
+                            fontSize: '12px',
+                            fontWeight: 'bold',
+                            textAlign: 'center'
+                        },
+                        // Enable both horizontal and vertical resizing
+                        resize: {
+                            horizontal: true,
+                            vertical: true
+                        }
+                    }
                 },
                 placeholder: 'Write your blog content here...'
             });

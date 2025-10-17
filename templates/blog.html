@@ -73,10 +73,6 @@
         }
 
         /* Hide footer and scroll-to-top button to prevent scrolling issues */
-        .site-footer,
-        .scroll-to-top-btn {
-            display: none !important;
-        }
     </style>
 
     <section class="breadcrumb-section" id="breadcrumb-nav">
@@ -252,7 +248,16 @@
         background-repeat: no-repeat;
         background-position: right 1rem center;
         background-size: 0.75rem;
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+
+        /* ✅ Prevent dropdown from flipping upward */
+        position: relative;
+        overflow: visible;
     }
+
+
 
     /* --- Blogs Grid --- */
     .blogs-section {

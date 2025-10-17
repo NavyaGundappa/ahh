@@ -3,7 +3,35 @@
 {% block title %}{{ doctor.name }} - {{ doctor.specialization }} - Aarogya Hastha{% endblock %}
 
 {% block content %}
-
+{% block head %}
+{{ super() }}
+<meta name="author" content="Aarogyahastha Pvt Ltd">
+<meta name="designer" content="Aarogyahastha Pvt Ltd">
+<meta name="publisher" content="Aarogyahastha Pvt Ltd">
+<link rel="canonical" href="https://aarogyahastha.com/doctors" />
+<meta name="no-email-collection" content="http://www.unspam.com/noemailcollection/">
+<meta name="robots" content="index,follow">
+<meta name="revisit-after" content="7 days">
+<meta name="distribution" content="web">
+<meta name="robots" content="noodp">
+<meta name="web_author" content="Aarogyahastha Pvt Ltd">
+<meta name="rating" content="general">
+<meta name="rating" content="safe for kids">
+<meta name="subject" content="Healthcare">
+<meta name="copyright" content="Copyright © 2025">
+<meta name="reply-to" content="info@aarogyahastha.com">
+<meta name="abstract"
+    content="We provide timely and specialized medical attention for patients experiencing life-threatening conditions, ensuring their urgent needs are met with the highest level of care.">
+<meta name="city" content="Bangalore">
+<meta name="country" content="India">
+<meta name="distribution" content="global">
+<meta name="classification" content="Healthcare, Hospital">
+<base href="/">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+{% endblock %}
 <style>
     /* Scope everything under .doctor-profile-page */
     .doctor-profile-page {
@@ -558,11 +586,11 @@
                 <div class="doctor-details">
                     <!-- Always show qualification heading -->
                     <p>
-                        <strong>Qualification:</strong> 
+                        <strong>Qualification:</strong>
                         {% if doctor.qualification and doctor.qualification.strip() %}
-                            {{ doctor.qualification }}
+                        {{ doctor.qualification }}
                         {% else %}
-                            <span class="text-muted">Not specified</span>
+                        <span class="text-muted">Not specified</span>
                         {% endif %}
                     </p>
 
@@ -570,26 +598,26 @@
 
                     <!-- Always show experience heading -->
                     <p>
-                        <strong>Experience:</strong> 
+                        <strong>Experience:</strong>
                         {% if doctor.experience and doctor.experience.strip() %}
-                            {{ doctor.experience }}
+                        {{ doctor.experience }}
                         {% else %}
-                            <span class="text-muted">Not specified</span>
+                        <span class="text-muted">Not specified</span>
                         {% endif %}
                     </p>
 
                     <!-- Timings section -->
                     {% if doctor.timings_parsed %}
-                        {% for slot in doctor.timings_parsed %}
-                        <div class="mb-2">
-                            <strong>Day:</strong> {{ slot.days | join(', ') }}<br>
-                            <strong>Timings:</strong> {{ slot.from }} {{ slot.from_period }} - {{ slot.to }} {{
-                            slot.to_period }}
-                        </div>
-                        {% endfor %}
+                    {% for slot in doctor.timings_parsed %}
+                    <div class="mb-2">
+                        <strong>Day:</strong> {{ slot.days | join(', ') }}<br>
+                        <strong>Timings:</strong> {{ slot.from }} {{ slot.from_period }} - {{ slot.to }} {{
+                        slot.to_period }}
+                    </div>
+                    {% endfor %}
                     {% else %}
-                        <p><strong>Days:</strong> <span class="text-muted">No days available</span></p>
-                        <p><strong>Timings:</strong> <span class="text-muted">No timings available</span></p>
+                    <p><strong>Days:</strong> <span class="text-muted">No days available</span></p>
+                    <p><strong>Timings:</strong> <span class="text-muted">No timings available</span></p>
                     {% endif %}
                 </div>
 
@@ -619,11 +647,11 @@
                     <div class="doctor-section">
                         <h4>Overview</h4>
                         {% if doctor.overview and doctor.overview.strip() %}
-                            {% for para in doctor.overview.splitlines() if para.strip() %}
-                            <p>{{ para }}</p>
-                            {% endfor %}
+                        {% for para in doctor.overview.splitlines() if para.strip() %}
+                        <p>{{ para }}</p>
+                        {% endfor %}
                         {% else %}
-                            <p class="text-muted">No overview available.</p>
+                        <p class="text-muted">No overview available.</p>
                         {% endif %}
                     </div>
                 </div>
@@ -705,22 +733,22 @@
                         {% endif %}
 
                         {% if doctor.talks_links and doctor.talks_links.strip() %}
-<h5 class="mt-4">Related Links:</h5>
-<div class="links-container">
-    {% for link in doctor.talks_links.split('\n') if link.strip() %}
-    <div class="link-item">
-        <i class="fas fa-link"></i>
-        <a href="{{ link.strip().split('|')[0] }}" target="_blank" class="text-decoration-none">
-            {% if '|' in link %}
-                {{ link.strip().split('|')[1] }}
-            {% else %}
-                Related Link {{ loop.index }}
-            {% endif %}
-        </a>
-    </div>
-    {% endfor %}
-</div>
-{% endif %}
+                        <h5 class="mt-4">Related Links:</h5>
+                        <div class="links-container">
+                            {% for link in doctor.talks_links.split('\n') if link.strip() %}
+                            <div class="link-item">
+                                <i class="fas fa-link"></i>
+                                <a href="{{ link.strip().split('|')[0] }}" target="_blank" class="text-decoration-none">
+                                    {% if '|' in link %}
+                                    {{ link.strip().split('|')[1] }}
+                                    {% else %}
+                                    Related Link {{ loop.index }}
+                                    {% endif %}
+                                </a>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
 
                         {% if doctor.talks_file_path %}
                         <h5 class="mt-4">Documents:</h5>

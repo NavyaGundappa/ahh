@@ -34,12 +34,20 @@ Manage Departments - Admin Panel
                 class="w-full px-3 py-2 border rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                 accept=".png,.jpg,.jpeg,.gif,.svg">
         </div>
-        <div>
+        <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2">Banner</label>
             <input type="file" name="banner"
                 class="w-full px-3 py-2 border rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                 accept=".png,.jpg,.jpeg,.gif,.svg">
         </div>
+
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2">Banner Alt Text</label>
+            <input type="text" name="banner_alt_text" value=""
+                placeholder="Enter a short descriptive alt text for the banner"
+                class="w-full px-3 py-2 border rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+        </div>
+
         <div class="md:col-span-2">
             <label class="block text-gray-700 text-sm font-bold mb-2">Description</label>
             <textarea name="description"
@@ -100,6 +108,9 @@ Manage Departments - Admin Panel
                     Banner</th>
                 <th
                     class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                    Banner Alt Text</th>
+                <th
+                    class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                     Specialists Content</th>
                 <th
                     class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
@@ -121,11 +132,14 @@ Manage Departments - Admin Panel
                 </td>
                 <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                     {% if dept.banner_path %}
-                    <img src="{{ url_for('static', filename=dept.banner_path) }}" alt="{{ dept.name }}"
-                        class="w-20 h-auto rounded">
+                    <img src="{{ url_for('static', filename=dept.banner_path) }}"
+                        alt="{{ dept.banner_alt_text or dept.name }}" class="w-20 h-auto rounded">
                     {% else %}
                     <span class="text-gray-500">No banner</span>
                     {% endif %}
+                </td>
+                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                    {{ dept.banner_alt_text or 'Not set' }}
                 </td>
                 <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                     {% if dept.specialists_heading or dept.specialists_content %}
@@ -184,6 +198,12 @@ Manage Departments - Admin Panel
                     {% if dept.banner_path %}
                     <p class="text-xs text-gray-500 mt-1">Current: {{ dept.banner_path }}</p>
                     {% endif %}
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2">Banner Alt Text</label>
+                    <input type="text" name="banner_alt_text" value="{{ dept.banner_alt_text or '' }}"
+                        placeholder="Enter a short descriptive alt text for the banner"
+                        class="w-full px-3 py-2 border rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
                 </div>
 
                 <!-- ✅ NEW FIELDS: Specialists Section in Edit Modal -->

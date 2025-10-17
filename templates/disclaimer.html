@@ -4,57 +4,43 @@
 
 {% block content %}
 
-<head>
-    <meta charset="utf-8">
-    <meta name="language" content="english">
-    <meta http-equiv="content-type" content="text/html">
-    <meta name="format-detection" content="telephone=yes" />
-    <meta name="HandheldFriendly" content="true" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="author" content="Smruthi Technologies Pvt Ltd">
-    <meta name="designer" content="Forest Creative Pvt Ltd">
-    <meta name="publisher" content="Smruthi Technologies Pvt Ltd">
-    <meta name="no-email-collection" content="http://www.unspam.com/noemailcollection/">
-    <link rel="icon" type="image/x-icon" href="/static/img/fav.png">
-    <meta name="robots" content="index,follow">
-    <meta name="revisit-after" content="7 days">
-    <meta name="distribution" content="web">
-    <meta name="robots" content="noodp">
-    <meta name="distribution" content="web">
-    <meta name="web_author" content="smruthi technologies pvt ltd">
-    <meta name="rating" content="general">
-    <meta name="rating" content="safe for kids">
-    <meta name="subject" content="Healthcare">
-    <meta name="copyright" content="Copyright © 2025">
-    <meta name="reply-to" content="info@aarogyahastha.com">
-    <meta name="abstract"
-        content="We provide timely and specialized medical attention for patients experiencing life-threatening conditions, ensuring their urgent needs are met with the highest level of care.">
-    <meta name="city" content="Bangalore">
-    <meta name="country" content="India">
-    <meta name="distribution" content="global">
-    <meta name="classification" content="Healthcare, Hospital ">
-    <base href="/">
-    <meta name="description"
-        content="AarogyaHastha Hospitals: With compassionate care and dedicated service, the premier healthcare facility provides quality medical treatment with over 15 specialities. We provide the care every patient need with responsibility they deserve and developing pioneering treatments and approaches through the implementation of cutting-edge technologies and its renowned research and teaching practices.">
-    <meta name="keywords" content="">
-    <meta name="title" content="AarogyaHastha Hospitals :: Caring Responsibly">
-    <title>AarogyaHastha Hospitals :: Caring Responsibly</title>
-    <link rel="stylesheet" type="text/css"
-        href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
-    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link rel="stylesheet" href="/static/css/style.css">
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-84XCMMFTS8"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-        gtag('config', 'G-84XCMMFTS8');
-    </script>
-    <script>(function (w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-TD2L5G6C');</script>
+{% block head %}
+{{ super() }}
+<meta name="author" content="Aarogyahastha Pvt Ltd">
+<meta name="designer" content="Aarogyahastha Pvt Ltd">
+<meta name="publisher" content="Aarogyahastha Pvt Ltd">
+<link rel="canonical" href="https://aarogyahastha.com/disclaimer" />
+<meta name="no-email-collection" content="http://www.unspam.com/noemailcollection/">
+<meta name="robots" content="index,follow">
+<meta name="revisit-after" content="7 days">
+<meta name="distribution" content="web">
+<meta name="robots" content="noodp">
+<meta name="web_author" content="Aarogyahastha Pvt Ltd">
+<meta name="rating" content="general">
+<meta name="rating" content="safe for kids">
+<meta name="subject" content="Healthcare">
+<meta name="copyright" content="Copyright © 2025">
+<meta name="reply-to" content="info@aarogyahastha.com">
+<meta name="abstract"
+    content="We provide timely and specialized medical attention for patients experiencing life-threatening conditions, ensuring their urgent needs are met with the highest level of care.">
+<meta name="city" content="Bangalore">
+<meta name="country" content="India">
+<meta name="distribution" content="global">
+<meta name="classification" content="Healthcare, Hospital">
+<base href="/">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+{% endblock %}
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-84XCMMFTS8"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-84XCMMFTS8');
+</script>
+<script>(function (w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-TD2L5G6C');</script>
 
 </head>
 <style>

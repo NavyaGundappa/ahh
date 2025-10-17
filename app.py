@@ -21,7 +21,7 @@ import flash
 from flask import Flask, render_template, request, redirect, url_for, flash, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.utils import secure_filename
-from models import db, Banner, Doctor, Counter, Testimonial, Speciality, Department,  HealthPackage, SportsPackage, DepartmentOverview, DepartmentService, User, UserAccess, CallbackRequest, ReviewMessage, Blog, BMWReportPDF,FAQ , DepartmentTestimonial 
+from models import db, Banner, Doctor, Counter, Testimonial, Speciality, Department,  HealthPackage, SportsPackage, DepartmentOverview, DepartmentService, User, UserAccess, CallbackRequest, ReviewMessage, Blog, BMWReportPDF, FAQ, DepartmentTestimonial
 from config import Config
 import os
 from functools import wraps
@@ -68,9 +68,6 @@ def index():
                            counters=counters,
                            testimonials=testimonials,
                            specialities=specialities)  # Add this parameter
-
-
-
 
 
 @app.route('/appointments')
@@ -183,7 +180,7 @@ def admin_dashboard():
         return redirect(url_for("admin_login"))
 
     modules = ['banners', 'doctors', 'counters', 'testimonials', 'specialities',
-               'departments', 'health_packages', 'sports_packages', 'department_content', 'users', 'callback_requests', 'reviews','blogs','bmw_report']
+               'departments', 'health_packages', 'sports_packages', 'department_content', 'users', 'callback_requests', 'reviews', 'blogs', 'bmw_report']
 
     access = {module: False for module in modules}
     if user.access:
@@ -247,7 +244,7 @@ def admin_banners():
     admin_id = session.get("admin_id")
     user = User.query.get(admin_id)
     modules = ['banners', 'doctors', 'counters', 'testimonials', 'specialities',
-               'departments', 'health_packages', 'sports_packages', 'department_content', 'users', 'callback_requests', 'reviews''blog','bmw_report']
+               'departments', 'health_packages', 'sports_packages', 'department_content', 'users', 'callback_requests', 'reviews''blog', 'bmw_report']
     access = {module: False for module in modules}
     if user and user.access:
         for module in modules:
@@ -328,7 +325,6 @@ def handle_file_upload(file, folder_name):
 # Assuming your app, db, models, and helper functions (allowed_file, handle_file_upload, generate_department_html) are already defined
 
 
-
 def doctor_to_dict(doctor):
     """Convert Doctor object to JSON-serializable dictionary for template."""
     return {
@@ -356,6 +352,7 @@ def doctor_to_dict(doctor):
         "days_parsed": getattr(doctor, 'days_parsed', [])
     }
 
+
 def handle_file_upload(file, folder_name):
     """Handle file uploads for fellowships and talks."""
     if file and file.filename != '' and allowed_file(file.filename):
@@ -368,18 +365,20 @@ def handle_file_upload(file, folder_name):
     return None
 
 # --- Admin Doctors Route ---
+
+
 @app.route('/admin/doctors', methods=['GET', 'POST'])
 @login_required
 @permission_required('doctors')
 def admin_doctors():
     departments = Department.query.filter_by(is_active=True).all()
-    
+
     # Handle search
     search_query = request.args.get('search', '').strip()
-    
+
     if request.method == 'POST':
         form_type = request.form.get('form_type')
-        
+
         if form_type == 'add':
             return add_doctor_function(request, departments)
         elif form_type == 'edit':
@@ -390,7 +389,7 @@ def admin_doctors():
 
     # ----- GET Request: Fetch doctors with optional search -----
     doctors_query = Doctor.query
-    
+
     if search_query:
         doctors_query = doctors_query.filter(
             db.or_(
@@ -400,8 +399,9 @@ def admin_doctors():
                 Doctor.designation.ilike(f'%{search_query}%')
             )
         )
-    
-    doctors = doctors_query.order_by(Doctor.display_order.asc(), Doctor.name.asc()).all()
+
+    doctors = doctors_query.order_by(
+        Doctor.display_order.asc(), Doctor.name.asc()).all()
     doctors_json = [doctor_to_dict(d) for d in doctors]
 
     admin_id = session.get("admin_id")
@@ -413,12 +413,13 @@ def admin_doctors():
         for module in modules:
             access[module] = getattr(user.access, module, False)
 
-    return render_template('admin/doctors.html', 
-                         doctors=doctors_json, 
-                         departments=departments, 
-                         access=access, 
-                         current_user=user,
-                         search_query=search_query)
+    return render_template('admin/doctors.html',
+                           doctors=doctors_json,
+                           departments=departments,
+                           access=access,
+                           current_user=user,
+                           search_query=search_query)
+
 
 def add_doctor_function(request, departments):
     """Handle adding a new doctor."""
@@ -432,10 +433,12 @@ def add_doctor_function(request, departments):
     slug = request.form.get('slug', '').strip()
     qualification = request.form.get('qualification', '').strip()
     overview = request.form.get('overview', '').strip()
-    fellowship_membership = request.form.get('fellowship_membership', '').strip()
+    fellowship_membership = request.form.get(
+        'fellowship_membership', '').strip()
     fellowship_links = request.form.get('fellowship_links', '').strip()
     field_of_expertise = request.form.get('field_of_expertise', '').strip()
-    talks_and_publications = request.form.get('talks_and_publications', '').strip()
+    talks_and_publications = request.form.get(
+        'talks_and_publications', '').strip()
     talks_links = request.form.get('talks_links', '').strip()
     appointment_link = request.form.get('appointment_link', '').strip()
     department_slug = request.form.get('department_slug', '').strip()
@@ -455,7 +458,7 @@ def add_doctor_function(request, departments):
             # Format time as "HH:MM AM/PM"
             from_time = f"{time_from_hour[i]}:{time_from_minute[i]}"
             to_time = f"{time_to_hour[i]}:{time_to_minute[i]}"
-            
+
             timings_list.append({
                 "from_hour": time_from_hour[i],
                 "from_minute": time_from_minute[i],
@@ -490,18 +493,22 @@ def add_doctor_function(request, departments):
         file = request.files['image']
         if file and file.filename != '' and allowed_file(file.filename):
             filename = secure_filename(file.filename)
-            doctors_folder = os.path.join(app.config['UPLOAD_FOLDER'], 'doctors')
+            doctors_folder = os.path.join(
+                app.config['UPLOAD_FOLDER'], 'doctors')
             os.makedirs(doctors_folder, exist_ok=True)
             save_path = os.path.join(doctors_folder, filename)
             file.save(save_path)
             image_path = f"img/doctors/{filename}"
 
     # ----- Handle file uploads -----
-    fellowship_file_path = handle_file_upload(request.files.get('fellowship_file'), 'fellowships')
-    talks_file_path = handle_file_upload(request.files.get('talks_file'), 'talks')
+    fellowship_file_path = handle_file_upload(
+        request.files.get('fellowship_file'), 'fellowships')
+    talks_file_path = handle_file_upload(
+        request.files.get('talks_file'), 'talks')
 
     # ----- Calculate display order -----
-    max_order = db.session.query(db.func.max(Doctor.display_order)).scalar() or 0
+    max_order = db.session.query(db.func.max(
+        Doctor.display_order)).scalar() or 0
     display_order = max_order + 1
 
     # ----- Save Doctor -----
@@ -539,6 +546,7 @@ def add_doctor_function(request, departments):
     flash('Doctor added successfully!', 'success')
     return redirect(url_for('admin_doctors'))
 
+
 def edit_doctor_function(request, departments):
     """Handle editing an existing doctor."""
     doctor_id = request.form.get('doctor_id')
@@ -553,10 +561,13 @@ def edit_doctor_function(request, departments):
     doctor.bio = request.form.get('bio', '').strip()
     doctor.qualification = request.form.get('qualification', '').strip()
     doctor.overview = request.form.get('overview', '').strip()
-    doctor.fellowship_membership = request.form.get('fellowship_membership', '').strip()
+    doctor.fellowship_membership = request.form.get(
+        'fellowship_membership', '').strip()
     doctor.fellowship_links = request.form.get('fellowship_links', '').strip()
-    doctor.field_of_expertise = request.form.get('field_of_expertise', '').strip()
-    doctor.talks_and_publications = request.form.get('talks_and_publications', '').strip()
+    doctor.field_of_expertise = request.form.get(
+        'field_of_expertise', '').strip()
+    doctor.talks_and_publications = request.form.get(
+        'talks_and_publications', '').strip()
     doctor.talks_links = request.form.get('talks_links', '').strip()
     doctor.appointment_link = request.form.get('appointment_link', '').strip()
     doctor.department_slug = request.form.get('department_slug', '').strip()
@@ -576,7 +587,7 @@ def edit_doctor_function(request, departments):
             # Format time as "HH:MM AM/PM"
             from_time = f"{time_from_hour[i]}:{time_from_minute[i]}"
             to_time = f"{time_to_hour[i]}:{time_to_minute[i]}"
-            
+
             timings_list.append({
                 "from_hour": time_from_hour[i],
                 "from_minute": time_from_minute[i],
@@ -596,7 +607,8 @@ def edit_doctor_function(request, departments):
         file = request.files['image']
         if file and file.filename != '' and allowed_file(file.filename):
             filename = secure_filename(file.filename)
-            doctors_folder = os.path.join(app.config['UPLOAD_FOLDER'], 'doctors')
+            doctors_folder = os.path.join(
+                app.config['UPLOAD_FOLDER'], 'doctors')
             os.makedirs(doctors_folder, exist_ok=True)
             save_path = os.path.join(doctors_folder, filename)
             file.save(save_path)
@@ -604,7 +616,8 @@ def edit_doctor_function(request, departments):
 
     # ----- Handle file uploads -----
     if 'fellowship_file' in request.files:
-        fellowship_file = handle_file_upload(request.files['fellowship_file'], 'fellowships')
+        fellowship_file = handle_file_upload(
+            request.files['fellowship_file'], 'fellowships')
         if fellowship_file:
             doctor.fellowship_file_path = fellowship_file
 
@@ -616,12 +629,14 @@ def edit_doctor_function(request, departments):
     db.session.commit()
 
     # Regenerate department HTML if needed
-    department = Department.query.filter_by(slug=doctor.department_slug).first()
+    department = Department.query.filter_by(
+        slug=doctor.department_slug).first()
     if department:
         generate_department_html(department)
 
     flash('Doctor updated successfully!', 'success')
     return redirect(url_for('admin_doctors'))
+
 
 @app.route('/admin/delete_doctor/<int:doctor_id>')
 @login_required
@@ -630,7 +645,7 @@ def delete_doctor(doctor_id):
     """Delete a doctor."""
     doctor = Doctor.query.get_or_404(doctor_id)
     department_slug = doctor.department_slug
-    
+
     db.session.delete(doctor)
     db.session.commit()
 
@@ -642,6 +657,8 @@ def delete_doctor(doctor_id):
     flash('Doctor deleted successfully!', 'success')
     return redirect(url_for('admin_doctors'))
 # Add this route to handle the drag-and-drop order updates
+
+
 @app.route('/admin/doctors/update-order', methods=['POST'])
 @login_required
 @permission_required('doctors')
@@ -649,19 +666,19 @@ def update_doctors_orders():
     try:
         data = request.get_json()
         order_data = data.get('order', [])
-        
+
         for doctor_data in order_data:
             doctor_id = doctor_data['id']
             display_order = doctor_data['display_order']
-            
+
             # Update the doctor's display_order in the database
             doctor = Doctor.query.get(doctor_id)
             if doctor:
                 doctor.display_order = display_order
-                
+
         db.session.commit()
         return jsonify({'success': True, 'message': 'Doctor order updated successfully'})
-    
+
     except Exception as e:
         db.session.rollback()
         return jsonify({'success': False, 'message': str(e)}), 500
@@ -684,10 +701,12 @@ def edit_doctor(doctor_id):
         slug = request.form.get('slug', '').strip()
         qualification = request.form.get('qualification', '').strip()
         overview = request.form.get('overview', '').strip()
-        fellowship_membership = request.form.get('fellowship_membership', '').strip()
+        fellowship_membership = request.form.get(
+            'fellowship_membership', '').strip()
         fellowship_links = request.form.get('fellowship_links', '').strip()
         field_of_expertise = request.form.get('field_of_expertise', '').strip()
-        talks_and_publications = request.form.get('talks_and_publications', '').strip()
+        talks_and_publications = request.form.get(
+            'talks_and_publications', '').strip()
         talks_links = request.form.get('talks_links', '').strip()
         appointment_link = request.form.get('appointment_link', '').strip()
         department_slug = request.form.get('department_slug', '').strip()
@@ -731,7 +750,8 @@ def edit_doctor(doctor_id):
             file = request.files['image']
             if file and file.filename != '' and allowed_file(file.filename):
                 filename = secure_filename(file.filename)
-                doctors_folder = os.path.join(app.config['UPLOAD_FOLDER'], 'doctors')
+                doctors_folder = os.path.join(
+                    app.config['UPLOAD_FOLDER'], 'doctors')
                 os.makedirs(doctors_folder, exist_ok=True)
                 save_path = os.path.join(doctors_folder, filename)
                 file.save(save_path)
@@ -742,19 +762,23 @@ def edit_doctor(doctor_id):
             fellowship_file = request.files['fellowship_file']
             if fellowship_file and fellowship_file.filename != '' and allowed_file(fellowship_file.filename):
                 if doctor.fellowship_file_path:
-                    old_file_path = os.path.join(app.static_folder, doctor.fellowship_file_path)
+                    old_file_path = os.path.join(
+                        app.static_folder, doctor.fellowship_file_path)
                     if os.path.exists(old_file_path):
                         os.remove(old_file_path)
-                doctor.fellowship_file_path = handle_file_upload(fellowship_file, 'fellowships')
+                doctor.fellowship_file_path = handle_file_upload(
+                    fellowship_file, 'fellowships')
 
         if 'talks_file' in request.files:
             talks_file = request.files['talks_file']
             if talks_file and talks_file.filename != '' and allowed_file(talks_file.filename):
                 if doctor.talks_file_path:
-                    old_file_path = os.path.join(app.static_folder, doctor.talks_file_path)
+                    old_file_path = os.path.join(
+                        app.static_folder, doctor.talks_file_path)
                     if os.path.exists(old_file_path):
                         os.remove(old_file_path)
-                doctor.talks_file_path = handle_file_upload(talks_file, 'talks')
+                doctor.talks_file_path = handle_file_upload(
+                    talks_file, 'talks')
 
         # ----- Update fields -----
         doctor.name = name
@@ -778,11 +802,13 @@ def edit_doctor(doctor_id):
 
         # ----- Regenerate department HTMLs -----
         if old_department_slug != department_slug:
-            old_department = Department.query.filter_by(slug=old_department_slug).first()
+            old_department = Department.query.filter_by(
+                slug=old_department_slug).first()
             if old_department:
                 generate_department_html(old_department)
 
-        new_department = Department.query.filter_by(slug=department_slug).first()
+        new_department = Department.query.filter_by(
+            slug=department_slug).first()
         if new_department:
             generate_department_html(new_department)
 
@@ -791,12 +817,12 @@ def edit_doctor(doctor_id):
 
     # ----- Parse timings for edit form -----
     try:
-        doctor.timings_parsed = json.loads(doctor.timings) if doctor.timings else []
+        doctor.timings_parsed = json.loads(
+            doctor.timings) if doctor.timings else []
     except Exception:
         doctor.timings_parsed = []
 
     return render_template('admin/doctors.html', doctor=doctor, departments=departments, doctors=Doctor.query.all())
-
 
 
 # --- Utility function to generate HTML ---
@@ -809,7 +835,42 @@ def generate_department_html(department):
     file_content = """
 {% extends "base.html" %}
 
-{% block title %}{{ department.name }} - Aarogya Hastha{% endblock %}
+{% block title %}Best Orthopedic Surgeon in Bangalore | Aarogya Hastha Hospitals.{% endblock %}
+
+{% block head %}
+{{ super() }}
+<meta name="description"
+    content="Discover advanced GI treatments at Aarogya Hastha—endoscopy, laparoscopic surgery, liver & pancreatic care. Book your consultation today!">
+<meta name="keywords" content="">
+<meta name="author" content="Aarogyahastha Pvt Ltd">
+<meta name="designer" content="Aarogyahastha Pvt Ltd">
+<link rel="canonical" href="https://aarogyahastha.com/departments/{{ department.name }}" />
+<meta name="no-email-collection" content="http://www.unspam.com/noemailcollection/">
+<meta name="google-site-verification" content="T3QqCQjcJP8HqwIYaCHz3AZHCSXJDF-NJfE8GNiSb-Q" />
+<meta name="robots" content="index,follow">
+<meta name="revisit-after" content="7 days">
+<meta name="distribution" content="web">
+<meta name="robots" content="noodp">
+<meta name="web_author" content="Aarogyahastha Pvt Ltd">
+<meta name="rating" content="general">
+<meta name="rating" content="safe for kids">
+<meta name="subject" content="Healthcare">
+<meta name="copyright" content="Copyright © 2025">
+<meta name="reply-to" content="info@aarogyahastha.com">
+<meta name="abstract"
+    content="We provide timely and specialized medical attention for patients experiencing life-threatening conditions, ensuring their urgent needs are met with the highest level of care.">
+<meta name="city" content="Bangalore">
+<meta name="country" content="India">
+<meta name="distribution" content="global">
+<meta name="classification" content="Healthcare, Hospital">
+<base href="/">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+{% endblock %}
 
 {% block content %}
 <style>
@@ -848,15 +909,20 @@ def generate_department_html(department):
         </nav>
     </div>
 </section>
+</section>
 <section class="department-banner" data-aos="fade-up" data-aos-offset="300" data-aos-easing="ease-in-sine">
     <div class="container">
-        <div class="banner">
+        <div class="banner" style="position: relative;">
             {% if department.banner_path %}
             <img loading="lazy" src="{{ url_for('static', filename=department.banner_path) }}"
-                alt="{{ department.name }}">
+                alt="{{ department.banner_alt_text or department.name }}"
+                style="width: 100%; height: 400px; object-fit: cover;">
             {% else %}
-            <img loading="lazy" src="/static/img/banners/default.jpg" alt="{{ department.name }}">
+            <img loading="lazy" src="/static/img/banners/default.jpg"
+                alt="{{ department.banner_alt_text or department.name }}"
+                style="width: 100%; height: 400px; object-fit: cover;">
             {% endif %}
+
             <div class="banner-content-transparent">
                 <div class="transparent-container">
                     <div class="text-content">
@@ -2235,9 +2301,13 @@ def admin_departments():
             department.name = request.form.get('name')
             department.slug = request.form.get('slug')
             department.description = request.form.get('description')
-            # ✅ ADD THESE TWO LINES for specialists content
-            department.specialists_heading = request.form.get('specialists_heading')
-            department.specialists_content = request.form.get('specialists_content')
+            department.specialists_heading = request.form.get(
+                'specialists_heading')
+            department.specialists_content = request.form.get(
+                'specialists_content')
+
+            # ✅ New field for banner alt text
+            department.banner_alt_text = request.form.get('banner_alt_text')
 
             # ---- Handle Icon Update ----
             icon_file = request.files.get('icon')
@@ -2284,10 +2354,10 @@ def admin_departments():
                     return redirect(url_for('admin_departments'))
 
             db.session.commit()
-            
+
             # ✅ Regenerate department HTML after update
             generate_department_html(department)
-            
+
             flash("Department updated successfully!", "success")
             return redirect(url_for('admin_departments'))
 
@@ -2295,9 +2365,11 @@ def admin_departments():
         name = request.form.get('name')
         slug = request.form.get('slug')
         description = request.form.get('description')
-        # ✅ ADD THESE TWO LINES for specialists content
         specialists_heading = request.form.get('specialists_heading')
         specialists_content = request.form.get('specialists_content')
+
+        # ✅ New field for alt text
+        banner_alt_text = request.form.get('banner_alt_text')
 
         existing = Department.query.filter_by(slug=slug).first()
         if existing:
@@ -2338,22 +2410,24 @@ def admin_departments():
                     'Invalid file type for banner. Allowed: png, jpg, jpeg, gif, svg', 'error')
                 return redirect(url_for('admin_departments'))
 
+        # ✅ Create and save department
         department = Department(
             name=name,
             slug=slug,
             description=description,
-            # ✅ ADD THESE TWO LINES for specialists content
             specialists_heading=specialists_heading,
             specialists_content=specialists_content,
             icon_path=icon_path,
-            banner_path=banner_path
+            banner_path=banner_path,
+            banner_alt_text=banner_alt_text  # ✅ New field
         )
+
         db.session.add(department)
         db.session.commit()
-        
+
         # ✅ Regenerate department HTML after creation
         generate_department_html(department)
-        
+
         flash("Department added successfully!", "success")
         return redirect(url_for('admin_departments'))
 
@@ -2368,7 +2442,6 @@ def admin_departments():
         for module in modules:
             access[module] = getattr(user.access, module, False)
     return render_template('admin/departments.html', departments=departments, access=access, current_user=user)
-# departments -------end
 
 # healht package start
 
@@ -2600,48 +2673,51 @@ def department_page(slug):
     # Fetch doctors for this department
     doctors = Doctor.query.filter_by(
         department_slug=slug, is_active=True).all()
-    
+
     # Fetch testimonials for this department
     testimonials = DepartmentTestimonial.query.filter_by(
         department_id=department.id, is_active=True
     ).order_by(DepartmentTestimonial.display_order, DepartmentTestimonial.created_at.desc()).all()
-    
+
     # Fetch FAQs for this department
     faqs = FAQ.query.filter_by(
         department_id=department.id, is_active=True
     ).order_by(FAQ.display_order, FAQ.created_at.desc()).all()
-    
+
     # ✅ ADD THIS: Fetch blogs for this department
     blogs = Blog.query.filter_by(
         department_id=department.id, is_active=True
     ).order_by(Blog.created_at.desc()).limit(6).all()
-    
+
     # Get all active departments for the carousel
-    all_departments = Department.query.filter_by(is_active=True).order_by(Department.name).all()
+    all_departments = Department.query.filter_by(
+        is_active=True).order_by(Department.name).all()
 
     template_path = f"departments/{slug}.html"
     if os.path.exists(os.path.join(app.template_folder, template_path)):
-        return render_template(template_path, 
-                             department=department, 
-                             overview=overview, 
-                             services=services, 
-                             doctors=doctors,
-                             departments=all_departments,
-                             testimonials=testimonials,
-                             faqs=faqs,
-                             blogs=blogs)  # ✅ Add blogs here
+        return render_template(template_path,
+                               department=department,
+                               overview=overview,
+                               services=services,
+                               doctors=doctors,
+                               departments=all_departments,
+                               testimonials=testimonials,
+                               faqs=faqs,
+                               blogs=blogs)  # ✅ Add blogs here
 
-    return render_template("department.html", 
-                         department=department, 
-                         overview=overview, 
-                         services=services, 
-                         doctors=doctors,
-                         departments=all_departments,
-                         testimonials=testimonials,
-                         faqs=faqs,
-                         blogs=blogs)  # ✅ Add blogs here
+    return render_template("department.html",
+                           department=department,
+                           overview=overview,
+                           services=services,
+                           doctors=doctors,
+                           departments=all_departments,
+                           testimonials=testimonials,
+                           faqs=faqs,
+                           blogs=blogs)  # ✅ Add blogs here
 
 # ------------------ ADMIN: Department Overview ------------------
+
+
 @app.route('/admin/department_overview', methods=['GET', 'POST'])
 @login_required
 @permission_required('department_content')
@@ -2678,27 +2754,28 @@ def admin_department_overview():
 
     # Get all data for the template
     overviews = DepartmentOverview.query.all()
-    department_testimonials = DepartmentTestimonial.query.order_by(DepartmentTestimonial.display_order, DepartmentTestimonial.created_at.desc()).all()
+    department_testimonials = DepartmentTestimonial.query.order_by(
+        DepartmentTestimonial.display_order, DepartmentTestimonial.created_at.desc()).all()
     faqs = FAQ.query.order_by(FAQ.display_order, FAQ.created_at.desc()).all()
     departments = Department.query.all()
-    
+
     admin_id = session.get("admin_id")
     user = User.query.get(admin_id)
     modules = ['banners', 'doctors', 'counters', 'testimonials', 'specialities',
-               'departments', 'health_packages', 'sports_packages', 'department_content', 
+               'departments', 'health_packages', 'sports_packages', 'department_content',
                'users', 'callback_requests', 'reviews', 'blogs', 'bmw_report']
     access = {module: False for module in modules}
     if user and user.access:
         for module in modules:
             access[module] = getattr(user.access, module, False)
-    
-    return render_template("admin/department_overview.html", 
-                         overviews=overviews,
-                         department_testimonials=department_testimonials,  # Fixed variable name
-                         faqs=faqs,
-                         departments=departments, 
-                         access=access, 
-                         current_user=user)
+
+    return render_template("admin/department_overview.html",
+                           overviews=overviews,
+                           department_testimonials=department_testimonials,  # Fixed variable name
+                           faqs=faqs,
+                           departments=departments,
+                           access=access,
+                           current_user=user)
 
 
 # ------------------ ADMIN: Department Services ------------------
@@ -2709,18 +2786,18 @@ def admin_department_services():
         if 'services_overview' in request.form:
             service_id = request.form.get('service_id')
             services_overview = request.form.get('services_overview')
-            
+
             service = DepartmentService.query.get_or_404(service_id)
             service.services_overview = services_overview
             db.session.commit()
-            
+
             # Regenerate department HTML
             department = Department.query.get(service.department_id)
             if department:
                 generate_department_html(department)
             flash("Services overview updated successfully!", "success")
             return redirect(url_for('admin_department_services'))
-        
+
         # Existing service management code
         service_id = request.form.get('service_id')
         department_id = request.form.get('department_id')
@@ -2738,7 +2815,8 @@ def admin_department_services():
                 icon = request.files['icon']
                 if icon and icon.filename != '':
                     filename = secure_filename(icon.filename)
-                    filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+                    filepath = os.path.join(
+                        app.config['UPLOAD_FOLDER'], filename)
                     icon.save(filepath)
                     service.icon_path = f'img/department/icons/{filename}'
 
@@ -2751,7 +2829,8 @@ def admin_department_services():
                 icon = request.files['icon']
                 if icon and icon.filename != '':
                     filename = secure_filename(icon.filename)
-                    filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+                    filepath = os.path.join(
+                        app.config['UPLOAD_FOLDER'], filename)
                     icon.save(filepath)
                     icon_path = f'img/department/icons/{filename}'
 
@@ -2785,6 +2864,7 @@ def admin_department_services():
         for module in modules:
             access[module] = getattr(user.access, module, False)
     return render_template("admin/department_services.html", services=services, departments=departments, access=access, current_user=user)
+
 
 @app.route('/admin/delete_overview/<int:id>', methods=['POST'])
 def delete_overview(id):
@@ -2902,22 +2982,23 @@ def update_doctors_order():
     try:
         data = request.get_json()
         order_data = data.get('order', [])
-        
+
         for doctor_data in order_data:
             doctor_id = doctor_data['id']
             display_order = doctor_data['display_order']
-            
+
             # Update the doctor's display_order in the database
             doctor = Doctor.query.get(doctor_data['id'])
             if doctor:
                 doctor.display_order = display_order
-                
+
         db.session.commit()
         return jsonify({'success': True, 'message': 'Doctor order updated successfully'})
-    
+
     except Exception as e:
         db.session.rollback()
         return jsonify({'success': False, 'message': str(e)}), 500
+
 
 @app.route('/doctors')
 def list_doctors():
@@ -2958,7 +3039,7 @@ def doctor_profile(slug):
 @login_required
 @permission_required("users")
 def admin_users():
-    
+
     modules = [
         "banners", "doctors", "counters", "testimonials", "specialities",
         "departments", "health_packages", "sports_packages", "department_content",
@@ -3040,7 +3121,7 @@ def admin_users():
 
     # GET REQUEST - FIXED LOGIC
     users = User.query.order_by(User.created_at.desc()).all()
-    
+
     # Process users with their access permissions
     users_with_access = []
     for user in users:
@@ -3073,13 +3154,15 @@ def admin_users():
     current_access = {module: False for module in modules}
     if current_admin.access:
         for module in modules:
-            current_access[module] = getattr(current_admin.access, module, False)
+            current_access[module] = getattr(
+                current_admin.access, module, False)
 
-    return render_template('admin/users.html', 
-                         users=users_with_access, 
-                         modules=modules, 
-                         access=current_access, 
-                         current_user=current_admin)
+    return render_template('admin/users.html',
+                           users=users_with_access,
+                           modules=modules,
+                           access=current_access,
+                           current_user=current_admin)
+
 
 @app.route('/admin/users/delete/<int:user_id>', methods=['POST'])
 def delete_user(user_id):
@@ -3307,26 +3390,29 @@ def export_reviews():
         mimetype="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
     )
 
+
 @app.route('/blog')
 def blog():
     departments = Department.query.filter_by(is_active=True).all()
     return render_template('blog.html', departments=departments)
+
 
 @app.route('/api/blogs')
 def api_blogs():
     try:
         department_slug = request.args.get('department', 'all')
         search_query = request.args.get('search', '')
-        
+
         # Base query for active blogs
         blog_query = Blog.query.filter_by(is_active=True)
-        
+
         # Filter by department if specified
         if department_slug != 'all':
-            department = Department.query.filter_by(slug=department_slug, is_active=True).first()
+            department = Department.query.filter_by(
+                slug=department_slug, is_active=True).first()
             if department:
                 blog_query = blog_query.filter_by(department_id=department.id)
-        
+
         # Filter by search query
         if search_query:
             blog_query = blog_query.filter(
@@ -3334,9 +3420,9 @@ def api_blogs():
                 (Blog.excerpt.ilike(f'%{search_query}%')) |
                 (Blog.content.ilike(f'%{search_query}%'))
             )
-        
+
         blogs = blog_query.order_by(Blog.created_at.desc()).all()
-        
+
         return jsonify([{
             'id': blog.id,
             'title': blog.title,
@@ -3351,20 +3437,21 @@ def api_blogs():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
+
 @app.route('/blog/<slug>')
 def blog_detail(slug):
     try:
         print(f"Looking for blog with slug: {slug}")  # Debug
         blog = Blog.query.filter_by(slug=slug, is_active=True).first()
-        
+
         if not blog:
             print("Blog not found")  # Debug
             flash("Blog not found", "error")
             return redirect(url_for('blog'))
-        
+
         print(f"Found blog: {blog.title}")  # Debug
         print(f"Blog department: {blog.department}")  # Debug
-        
+
         # Get related blogs from same department
         related_blogs = []
         if blog.department_id:
@@ -3373,12 +3460,12 @@ def blog_detail(slug):
                 Blog.id != blog.id,
                 Blog.is_active == True
             ).order_by(Blog.created_at.desc()).limit(3).all()
-        
+
         print(f"Found {len(related_blogs)} related blogs")  # Debug
-        
+
         # Make sure we're passing the blog variable
         return render_template('blog-detail.html', blog=blog, related_blogs=related_blogs)
-        
+
     except Exception as e:
         print(f"Error in blog_detail: {str(e)}")
         traceback.print_exc()
@@ -3386,6 +3473,8 @@ def blog_detail(slug):
         return redirect(url_for('blog'))
 
 # Admin Blog Management
+
+
 @app.route('/admin/blogs', methods=['GET', 'POST'])
 def admin_blogs():
     if request.method == 'POST':
@@ -3393,21 +3482,22 @@ def admin_blogs():
         if 'delete_id' in request.form:
             blog_id = request.form.get('delete_id')
             blog = Blog.query.get_or_404(blog_id)
-            
+
             # Delete associated image if exists
             if blog.image_path:
-                image_full_path = os.path.join(app.static_folder, blog.image_path)
+                image_full_path = os.path.join(
+                    app.static_folder, blog.image_path)
                 if os.path.exists(image_full_path):
                     os.remove(image_full_path)
-            
+
             db.session.delete(blog)
             db.session.commit()
             flash("Blog deleted successfully!", "success")
             return redirect(url_for('admin_blogs'))
-        
+
         # Add/Update Blog
         blog_id = request.form.get('blog_id')
-        
+
         # Handle image upload
         image_path = None
         if 'image' in request.files:
@@ -3415,15 +3505,17 @@ def admin_blogs():
             if image_file and image_file.filename != '':
                 if allowed_file(image_file.filename):
                     filename = secure_filename(image_file.filename)
-                    blogs_folder = os.path.join(app.static_folder, 'img', 'blogs')
+                    blogs_folder = os.path.join(
+                        app.static_folder, 'img', 'blogs')
                     os.makedirs(blogs_folder, exist_ok=True)
                     full_path = os.path.join(blogs_folder, filename)
                     image_file.save(full_path)
                     image_path = f'img/blogs/{filename}'
                 else:
-                    flash('Invalid file type for blog image. Allowed: png, jpg, jpeg, gif, webp', 'error')
+                    flash(
+                        'Invalid file type for blog image. Allowed: png, jpg, jpeg, gif, webp', 'error')
                     return redirect(url_for('admin_blogs'))
-        
+
         if blog_id:
             # Update existing blog
             blog = Blog.query.get_or_404(blog_id)
@@ -3432,16 +3524,17 @@ def admin_blogs():
             blog.excerpt = request.form.get('excerpt')
             blog.content = request.form.get('content')
             blog.department_id = request.form.get('department_id') or None
-            
+
             # Update image if new one uploaded
             if image_path:
                 # Delete old image if exists
                 if blog.image_path:
-                    old_image_path = os.path.join(app.static_folder, blog.image_path)
+                    old_image_path = os.path.join(
+                        app.static_folder, blog.image_path)
                     if os.path.exists(old_image_path):
                         os.remove(old_image_path)
                 blog.image_path = image_path
-            
+
             db.session.commit()
             flash("Blog updated successfully!", "success")
         else:
@@ -3451,13 +3544,13 @@ def admin_blogs():
             excerpt = request.form.get('excerpt')
             content = request.form.get('content')
             department_id = request.form.get('department_id') or None
-            
+
             # Check if blog with same slug exists
             existing = Blog.query.filter_by(slug=slug).first()
             if existing:
                 flash("A blog with this slug already exists.", "error")
                 return redirect(url_for('admin_blogs'))
-            
+
             blog = Blog(
                 title=title,
                 slug=slug,
@@ -3469,25 +3562,27 @@ def admin_blogs():
             db.session.add(blog)
             db.session.commit()
             flash("Blog added successfully!", "success")
-        
+
         return redirect(url_for('admin_blogs'))
-    
+
     blogs = Blog.query.order_by(Blog.created_at.desc()).all()
     departments = Department.query.filter_by(is_active=True).all()
-    
+
     admin_id = session.get("admin_id")
     user = User.query.get(admin_id)
     modules = ['banners', 'doctors', 'counters', 'testimonials', 'specialities',
-               'departments', 'health_packages', 'sports_packages', 'department_content', 
+               'departments', 'health_packages', 'sports_packages', 'department_content',
                'users', 'callback_requests', 'reviews', 'blogs']
     access = {module: False for module in modules}
     if user and user.access:
         for module in modules:
             access[module] = getattr(user.access, module, False)
-    
+
     return render_template('admin/blogs.html', blogs=blogs, departments=departments, access=access, current_user=user)
 
 # API endpoint for fetching blog data for editing
+
+
 @app.route('/api/blog/<int:blog_id>')
 def get_blog(blog_id):
     blog = Blog.query.get_or_404(blog_id)
@@ -3501,6 +3596,7 @@ def get_blog(blog_id):
         'image_path': blog.image_path or ''
     }
 
+
 @app.route('/api/toggle_blog/<int:blog_id>', methods=['POST'])
 def toggle_blog(blog_id):
     blog = Blog.query.get_or_404(blog_id)
@@ -3508,18 +3604,19 @@ def toggle_blog(blog_id):
     db.session.commit()
     return jsonify({'status': 'success', 'is_active': blog.is_active})
 
+
 @app.route('/test-blog-detail')
 def test_blog_detail():
     try:
         # Get the first blog from database
         blog = Blog.query.filter_by(is_active=True).first()
-        
+
         if not blog:
             return "No blogs found in database. Please create a blog first."
-        
+
         # Test the template rendering
         return render_template('blog-detail.html', blog=blog, related_blogs=[])
-        
+
     except Exception as e:
         return f"Error: {str(e)}"
 
@@ -3531,7 +3628,7 @@ def admin_upload():
     # Get current user info properly
     admin_id = session.get("admin_id")
     user = User.query.get(admin_id)
-    
+
     if not user:
         flash("Please log in first!", "warning")
         return redirect(url_for("admin_login"))
@@ -3560,11 +3657,12 @@ def admin_upload():
         return redirect(url_for('admin_upload'))
 
     # Show all PDFs
-    all_pdfs = BMWReportPDF.query.order_by(BMWReportPDF.uploaded_at.desc()).all()
+    all_pdfs = BMWReportPDF.query.order_by(
+        BMWReportPDF.uploaded_at.desc()).all()
 
     # Get user access for sidebar
     modules = ['banners', 'doctors', 'counters', 'testimonials', 'specialities',
-               'departments', 'health_packages', 'sports_packages', 'department_content', 
+               'departments', 'health_packages', 'sports_packages', 'department_content',
                'users', 'callback_requests', 'reviews', 'blogs', 'bmw_report']
     access = {module: False for module in modules}
     if user.access:
@@ -3577,8 +3675,6 @@ def admin_upload():
         access=access,
         current_user=user
     )
-
-
 
 
 # ---------------- DELETE PDF ---------------- #
@@ -3598,7 +3694,8 @@ def delete_pdf(pdf_id):
 # ---------------- FRONTEND BMW REPORT PAGE ---------------- #
 @app.route('/bmw_report')
 def bmw_report():
-    latest_pdf = BMWReportPDF.query.order_by(BMWReportPDF.uploaded_at.desc()).first()
+    latest_pdf = BMWReportPDF.query.order_by(
+        BMWReportPDF.uploaded_at.desc()).first()
     if latest_pdf:
         return redirect(url_for('serve_pdf', filename=latest_pdf.file_name))
     else:
@@ -3611,7 +3708,6 @@ def serve_pdf(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
 
-
 # ------------------ ADMIN: Department Testimonials Management ------------------
 @app.route('/admin/department_testimonials', methods=['GET', 'POST'])
 @login_required
@@ -3621,7 +3717,8 @@ def admin_department_testimonials():
         # Delete testimonial
         if 'delete_id' in request.form:
             testimonial_id = request.form.get('delete_id')
-            testimonial = DepartmentTestimonial.query.get_or_404(testimonial_id)
+            testimonial = DepartmentTestimonial.query.get_or_404(
+                testimonial_id)
             db.session.delete(testimonial)
             db.session.commit()
             flash("Testimonial deleted successfully!", "success")
@@ -3629,17 +3726,19 @@ def admin_department_testimonials():
 
         # Add/Update testimonial
         testimonial_id = request.form.get('testimonial_id')
-        
+
         if testimonial_id:
             # Update existing testimonial
-            testimonial = DepartmentTestimonial.query.get_or_404(testimonial_id)
+            testimonial = DepartmentTestimonial.query.get_or_404(
+                testimonial_id)
             testimonial.name = request.form.get('name')
             testimonial.comment = request.form.get('comment')
             testimonial.rating = int(request.form.get('rating', 5))
             testimonial.avatar_color = request.form.get('avatar_color')
             testimonial.department_id = request.form.get('department_id')
-            testimonial.display_order = int(request.form.get('display_order', 0))
-            
+            testimonial.display_order = int(
+                request.form.get('display_order', 0))
+
             db.session.commit()
             flash("Testimonial updated successfully!", "success")
         else:
@@ -3650,7 +3749,7 @@ def admin_department_testimonials():
             avatar_color = request.form.get('avatar_color')
             department_id = request.form.get('department_id')
             display_order = int(request.form.get('display_order', 0))
-            
+
             testimonial = DepartmentTestimonial(
                 name=name,
                 comment=comment,
@@ -3662,9 +3761,9 @@ def admin_department_testimonials():
             db.session.add(testimonial)
             db.session.commit()
             flash("Testimonial added successfully!", "success")
-        
+
         return redirect(url_for('admin_department_overview'))
-    
+
     # For GET requests, redirect to the main department overview page
     return redirect(url_for('admin_department_overview'))
 
@@ -3697,7 +3796,7 @@ def admin_faqs():
 
         # Add/Update FAQ
         faq_id = request.form.get('faq_id')
-        
+
         if faq_id:
             # Update existing FAQ
             faq = FAQ.query.get_or_404(faq_id)
@@ -3705,7 +3804,7 @@ def admin_faqs():
             faq.answer = request.form.get('answer')
             faq.department_id = request.form.get('department_id')
             faq.display_order = int(request.form.get('display_order', 0))
-            
+
             db.session.commit()
             flash("FAQ updated successfully!", "success")
         else:
@@ -3714,7 +3813,7 @@ def admin_faqs():
             answer = request.form.get('answer')
             department_id = request.form.get('department_id')
             display_order = int(request.form.get('display_order', 0))
-            
+
             faq = FAQ(
                 question=question,
                 answer=answer,
@@ -3724,9 +3823,9 @@ def admin_faqs():
             db.session.add(faq)
             db.session.commit()
             flash("FAQ added successfully!", "success")
-        
+
         return redirect(url_for('admin_department_overview'))
-    
+
     # For GET requests, redirect to the main department overview page
     return redirect(url_for('admin_department_overview'))
 
@@ -3779,6 +3878,8 @@ def delete_faq(faq_id):  # Changed from 'id' to 'faq_id'
     return redirect(url_for('admin_department_overview'))
 
 # ------------------ TOGGLE ROUTES ------------------
+
+
 @app.route('/check_timing')
 def check_timing():
     doctor = Doctor.query.first()

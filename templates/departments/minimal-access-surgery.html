@@ -1,7 +1,41 @@
 {% extends "base.html" %}
 
-{% block title %}{{ department.name }} - Aarogya Hastha{% endblock %}
+{% block title %}Minimal Access Surgery at Aarogya Hastha – Advanced Laparoscopic Procedures in Bengaluru{% endblock %}
 
+{% block head %}
+{{ super() }}
+<meta name="description"
+    content="Explore minimally invasive surgeries like laparoscopic hysterectomy, cholecystectomy, appendectomy, hernia repair, and nephrectomy at Aarogya Hastha. Book your consultation today!">
+<meta name="keywords" content="">
+<meta name="author" content="Aarogyahastha Pvt Ltd">
+<meta name="designer" content="Aarogyahastha Pvt Ltd">
+<link rel="canonical" href="https://aarogyahastha.com/departments/minimal-access-surgery" />
+<meta name="no-email-collection" content="http://www.unspam.com/noemailcollection/">
+<meta name="google-site-verification" content="T3QqCQjcJP8HqwIYaCHz3AZHCSXJDF-NJfE8GNiSb-Q" />
+<meta name="robots" content="index,follow">
+<meta name="revisit-after" content="7 days">
+<meta name="distribution" content="web">
+<meta name="robots" content="noodp">
+<meta name="web_author" content="Aarogyahastha Pvt Ltd">
+<meta name="rating" content="general">
+<meta name="rating" content="safe for kids">
+<meta name="subject" content="Healthcare">
+<meta name="copyright" content="Copyright © 2025">
+<meta name="reply-to" content="info@aarogyahastha.com">
+<meta name="abstract"
+    content="We provide timely and specialized medical attention for patients experiencing life-threatening conditions, ensuring their urgent needs are met with the highest level of care.">
+<meta name="city" content="Bangalore">
+<meta name="country" content="India">
+<meta name="distribution" content="global">
+<meta name="classification" content="Healthcare, Hospital">
+<base href="/">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+{% endblock %}
 {% block content %}
 <style>
     .breadcrumb-section {
@@ -39,15 +73,20 @@
         </nav>
     </div>
 </section>
+</section>
 <section class="department-banner" data-aos="fade-up" data-aos-offset="300" data-aos-easing="ease-in-sine">
     <div class="container">
-        <div class="banner">
+        <div class="banner" style="position: relative;">
             {% if department.banner_path %}
             <img loading="lazy" src="{{ url_for('static', filename=department.banner_path) }}"
-                alt="{{ department.name }}">
+                alt="{{ department.banner_alt_text or department.name }}"
+                style="width: 100%; height: 400px; object-fit: cover;">
             {% else %}
-            <img loading="lazy" src="/static/img/banners/default.jpg" alt="{{ department.name }}">
+            <img loading="lazy" src="/static/img/banners/default.jpg"
+                alt="{{ department.banner_alt_text or department.name }}"
+                style="width: 100%; height: 400px; object-fit: cover;">
             {% endif %}
+
             <div class="banner-content-transparent">
                 <div class="transparent-container">
                     <div class="text-content">

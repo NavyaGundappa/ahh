@@ -3,9 +3,10 @@
 {% block title %}{% if blog %}{{ blog.title }} - Aarogya Hastha{% else %}Blog - Aarogya Hastha{% endif %}{% endblock %}
 
 {% block content %}
+
 <div class="blog-detail-container">
     {% if blog %}
-    <!-- Updated Hero Section with Reduced Height -->
+    <!-- Hero Section -->
     <section class="hero-section">
         <div class="hero-image-container">
             {% if blog.image_path %}
@@ -16,53 +17,56 @@
             {% endif %}
             <div class="hero-overlay"></div>
             <div class="hero-content">
-                <!-- Department name on bottom-left -->
-                {% if blog.department %}
-                <div class="hero-department">
-                    <span class="category-badge">{{ blog.department.name }}</span>
-                </div>
-                {% endif %}
 
-                <!-- Blog title and meta on bottom-right -->
-                <div class="hero-blog-info">
+                <!-- Centered Title at Bottom -->
+                <!-- Centered Title at Bottom -->
+                <div class="hero-blog-info-centered">
                     <h1 class="blog-title">{{ blog.title }}</h1>
-                    <div class="blog-meta">
-                        <span class="meta-item">
-                            <i class="fas fa-calendar"></i>
-                            {{ blog.created_at.strftime('%b %d, %Y') }}
-                        </span>
-
-                    </div>
                 </div>
-            </div>
 
+                <style>
+                    .blog-title {
+                        white-space: pre-wrap;
+                        /* preserves line breaks and spaces */
+                        text-align: center;
+                        /* center alignment */
+                    }
+                </style>
+
+
+            </div>
         </div>
     </section>
-
-
-
-    <!-- Desktop Layout with Sidebar -->
+    <style>
+        .blog-title {
+            white-space: pre-wrap;
+            /* Keeps your line breaks and spacing */
+            word-wrap: break-word;
+            /* Breaks long words if needed */
+        }
+    </style>
     <div class="desktop-layout">
         <!-- Main Content -->
         <article class="main-content">
             {% if blog.excerpt %}
             <section class="intro-section">
                 <div class="intro-card">
-                    <div class="intro-icon">
-                        <i class="fas fa-quote-left"></i>
-                    </div>
-                    <p class="blog-intro">{{ blog.excerpt }}</p>
+                    <div class="intro-icon"><i class="fas fa-quote-left"></i></div>
+                    <p class="blog-intro" style="font-weight: bold;">{{ blog.excerpt }}</p>
                 </div>
             </section>
             {% endif %}
 
+
             <section class="content-section">
-                <div class="blog-body">
-                    {{ blog.content|safe }}
+                <div class="content-wrapper">
+                    <div class="blog-body quill-content ql-editor">
+                        {{ blog.content|safe }}
+                    </div>
                 </div>
             </section>
 
-            <!-- Mobile Related Articles - Inside Main Content for Mobile -->
+            <!-- Mobile Related Articles -->
             {% if related_blogs %}
             <section class="mobile-related-section">
                 <div class="mobile-widget-header">
@@ -86,11 +90,7 @@
                             <div class="mobile-related-content">
                                 <h4 class="mobile-related-title">{{ related_blog.title }}</h4>
                                 <div class="mobile-related-meta">
-                                    <span class="mobile-related-date">{{ related_blog.created_at.strftime('%b %d, %Y')
-                                        }}</span>
-                                    <span class="mobile-related-time">{{ related_blog.read_time or '5 min' }}</span>
                                 </div>
-                            </div>
                         </a>
                         {% endfor %}
                     </div>
@@ -99,13 +99,14 @@
             {% endif %}
         </article>
 
-        <!-- Sidebar with Related Articles for Desktop -->
+        <!-- Sidebar Related Articles for Desktop -->
         {% if related_blogs %}
         <aside class="sidebar">
             <div class="sidebar-widget">
                 <div class="widget-header">
                     <h3 class="widget-title">Related Articles</h3>
-                    <p class="widget-subtitle">More from {{ blog.department.name if blog.department else 'Health' }}</p>
+                    <p class="widget-subtitle">More from {{ blog.department.name if blog.department else 'Health' }}
+                    </p>
                 </div>
                 <div class="related-articles-container">
                     <div class="related-articles-scroll" id="desktopRelatedScroll">
@@ -125,7 +126,6 @@
                                 <div class="related-article-meta">
                                     <span class="related-article-date">{{ related_blog.created_at.strftime('%b %d, %Y')
                                         }}</span>
-                                    <span class="related-article-time">{{ related_blog.read_time or '5 min' }}</span>
                                 </div>
                             </div>
                         </a>
@@ -148,7 +148,7 @@
 <style>
     /* Modern CSS Variables */
     :root {
-        --color-primary: #3498db;
+        --color-primary: #000000;
         --color-primary-dark: #2980b9;
         --color-secondary: #2c3e50;
         --color-text: #7f8c8d;
@@ -173,31 +173,24 @@
         padding: 0;
     }
 
-    /* Updated Hero Section with Reduced Height */
+    /* Hero Section */
     .hero-section {
         width: 80%;
         margin: 0 auto var(--space-xl);
-        /* centers horizontally */
     }
 
     .hero-image-container {
         position: relative;
         width: 100%;
-        /* increased from 100% to 95% for better framing */
-        height: 80vh;
-        /* increased from 60vh */
-        min-height: 600px;
-        /* increased from 450px */
-        max-height: 800px;
-        /* increased from 600px */
+        height: 70vh;
+        min-height: 500px;
+        max-height: 750px;
         overflow: hidden;
         display: flex;
         align-items: center;
         justify-content: center;
         margin: 0 auto;
-        /* centers the container horizontally */
     }
-
 
     .hero-image {
         width: 100%;
@@ -208,18 +201,12 @@
         transition: transform 0.8s ease;
     }
 
-    .hero-image-container:hover .hero-image {
-        transform: scale(1.05);
+    .hero-image:hover {
+        transform: scale(1.1);
     }
 
-    .hero-overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-
-        z-index: 1;
+    .hero-image-container:hover .hero-image {
+        transform: scale(1.05);
     }
 
     .hero-content {
@@ -232,138 +219,44 @@
         padding: var(--space-xl);
     }
 
-    /* Department name bottom-left */
-    .hero-department {
+    .hero-blog-info-centered {
         position: absolute;
         bottom: 20px;
-        left: 20px;
-    }
-
-    /* Blog title and meta bottom-right */
-    .hero-blog-info {
-        position: absolute;
-        bottom: 20px;
-        right: 20px;
-        text-align: right;
-        max-width: 50%;
-    }
-
-    .blog-title {
-        font-size: 2.8rem;
-        font-weight: 800;
-        line-height: 1.2;
-        margin-bottom: var(--space-sm);
-        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-    }
-
-    .blog-meta {
-        display: flex;
-        gap: var(--space-md);
-        flex-wrap: wrap;
-        justify-content: flex-end;
-    }
-
-    .meta-item {
-        display: flex;
-        align-items: center;
-        gap: var(--space-xs);
-        font-size: 0.9rem;
-        color: var(--color-white);
-        font-weight: 500;
-        padding: var(--space-xs) var(--space-sm);
-        background: rgba(255, 255, 255, 0.15);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        border-radius: 8px;
-    }
-
-    .meta-item i {
-        font-size: 0.9rem;
-    }
-
-
-    .blog-category {
-        margin-bottom: var(--space-sm);
-    }
-
-    .category-badge {
+        /* slightly lower on image */
+        left: 50%;
+        transform: translateX(-50%);
         display: inline-block;
-        background: var(--color-accent);
-        color: var(--color-white);
-        padding: var(--space-xs) var(--space-md);
-        border-radius: 50px;
-        font-size: 0.9rem;
-        font-weight: 600;
-        letter-spacing: 0.5px;
-        text-transform: uppercase;
+        /* makes container fit content width */
+        background: rgba(0, 0, 0, 0.35);
+        /* subtle transparent black */
+        padding: 0.6rem 1.2rem;
+        /* balanced padding */
+        border-radius: 12px;
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        box-shadow: 0 4px 25px rgba(0, 0, 0, 0.25);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        transition: all 0.3s ease;
+        text-align: center;
+    }
+
+    .hero-blog-info-centered:hover {
+        background: rgba(0, 0, 0, 0.5);
+        transform: translateX(-50%) scale(1.02);
     }
 
     .blog-title {
-        font-size: 2.8rem;
-        font-weight: 800;
-        line-height: 1.2;
-        margin-bottom: var(--space-md);
-        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-        max-width: 100%;
-    }
-
-    .blog-excerpt {
-        font-size: 1.1rem;
-        line-height: 1.6;
-        margin-bottom: var(--space-lg);
-        opacity: 0.9;
-        font-weight: 400;
-        max-width: 600px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    .blog-meta {
-        display: flex;
-        gap: var(--space-md);
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-
-    .meta-item {
-        display: flex;
-        align-items: center;
-        gap: var(--space-xs);
-        font-size: 0.9rem;
-        color: var(--color-white);
+        font-family: 'Georgia', serif;
+        font-size: 1.6rem;
+        /* refined smaller size */
         font-weight: 500;
-        padding: var(--space-xs) var(--space-sm);
-        background: rgba(255, 255, 255, 0.15);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        border-radius: 8px;
+        /* light elegant look */
+        color: #fff;
+        text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+        margin: 0;
     }
 
-    .meta-item i {
-        font-size: 0.9rem;
-    }
-
-    /* Desktop Layout */
-    @media screen and (min-width: 1024px) {
-        .hero-text {
-            text-align: left;
-            /* Align left on desktop for more classic look */
-            padding: var(--space-xl);
-        }
-
-        .blog-title {
-            font-size: 3.2rem;
-        }
-
-        .blog-excerpt {
-            font-size: 1.2rem;
-        }
-
-        .blog-meta {
-            justify-content: flex-start;
-        }
-    }
-
+    /* Desktop Layout - Optimized spacing */
     .desktop-layout {
         display: block;
         max-width: 100%;
@@ -377,52 +270,126 @@
         padding: 0 var(--space-xl);
     }
 
+    /* Classic Intro Section */
     .intro-section {
         margin-bottom: var(--space-xl);
-        max-width: 1400px;
+        max-width: 900px;
         margin-left: auto;
         margin-right: auto;
     }
 
     .intro-card {
-        background: linear-gradient(135deg, #f8f9fa, #e8f4f8);
-        border-left: 4px solid var(--color-primary);
-        padding: var(--space-xl);
-        margin-bottom: var(--space-xl);
-        border-radius: 12px;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        background: var(--color-white);
+        border: 1px solid var(--color-border);
+        padding: 0.75rem 1rem;
+        /* reduced padding */
+        border-radius: 8px;
         display: flex;
         align-items: flex-start;
-        gap: var(--space-md);
+        gap: 0.5rem;
+        /* reduced gap between icon and text */
+        max-width: 100%;
+        width: 100%;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     }
 
     .intro-icon {
-        font-size: 1.5rem;
-        color: var(--color-primary);
-        margin-top: var(--space-xs);
+        font-size: 1.2rem;
+        color: var(--color-text);
+        margin-top: 2px;
         flex-shrink: 0;
     }
 
     .blog-intro {
-        font-size: 1.3rem;
+        font-size: 1.1rem;
         line-height: 1.7;
         color: var(--color-secondary);
-        font-weight: 500;
+        font-weight: 400;
         margin: 0;
+        font-style: italic;
     }
 
+    /* Classic Content Section */
     .content-section {
         margin-bottom: var(--space-xl);
-        max-width: 1400px;
+        max-width: 900px;
         margin-left: auto;
         margin-right: auto;
     }
 
+    /* Classic Content Wrapper */
+    .content-wrapper {
+        background: var(--color-white);
+        border: 1px solid var(--color-border);
+        border-radius: 8px;
+        padding: var(--space-xl);
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+        position: relative;
+        overflow: hidden;
+    }
+
+    /* CRITICAL: Blog body styles that preserve Quill image resizing */
     .blog-body {
-        font-size: 1.15rem;
+        font-size: 1.1rem;
         line-height: 1.8;
         color: var(--color-secondary);
         max-width: 100%;
+        font-family: 'Georgia', serif;
+    }
+
+    /* Preserve Quill image styles - THIS IS THE KEY FIX */
+    .blog-body img {
+        max-width: 100% !important;
+        height: auto !important;
+        display: block;
+        margin: var(--space-lg) 0;
+        border-radius: 6px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Ensure inline-styled images from Quill keep their dimensions */
+    .blog-body img[style*="width"] {
+        height: auto !important;
+    }
+
+    .blog-body img[style*="height"] {
+        width: auto !important;
+    }
+
+    /* Quill alignment classes */
+    .blog-body .ql-align-center {
+        text-align: center;
+    }
+
+    .blog-body .ql-align-center img {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .blog-body .ql-align-right {
+        text-align: right;
+    }
+
+    .blog-body .ql-align-right img {
+        margin-left: auto;
+        margin-right: 0;
+    }
+
+    .blog-body .ql-align-left {
+        text-align: left;
+    }
+
+    .blog-body .ql-align-left img {
+        margin-left: 0;
+        margin-right: auto;
+    }
+
+    /* Make sure images inside alignment divs maintain their styles */
+    .blog-body .ql-align-center img[style],
+    .blog-body .ql-align-right img[style],
+    .blog-body .ql-align-left img[style] {
+        max-width: 100% !important;
+        height: auto !important;
     }
 
     .blog-body h1,
@@ -432,35 +399,112 @@
         color: var(--color-secondary);
         margin: var(--space-xl) 0 var(--space-lg) 0;
         line-height: 1.4;
+        font-weight: 600;
     }
 
     .blog-body h1 {
-        font-size: 2.2rem;
+        font-size: 2rem;
+        border-bottom: 2px solid var(--color-border);
+        padding-bottom: var(--space-sm);
     }
 
     .blog-body h2 {
-        font-size: 2rem;
+        font-size: 1.8rem;
+        border-bottom: 1px solid var(--color-border);
+        padding-bottom: var(--space-xs);
     }
 
     .blog-body h3 {
-        font-size: 1.8rem;
+        font-size: 1.5rem;
     }
 
     .blog-body h4 {
-        font-size: 1.6rem;
+        font-size: 1.3rem;
     }
 
     .blog-body p {
         margin-bottom: var(--space-lg);
+        text-align: justify;
     }
 
-    .blog-body img {
-        width: 100%;
-        height: auto;
+    .blog-body blockquote {
+        border-left: 4px solid var(--color-border);
+        padding-left: var(--space-lg);
         margin: var(--space-lg) 0;
-        border-radius: 12px;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-        object-fit: contain;
+        font-style: italic;
+        color: var(--color-text);
+    }
+
+    /* CRITICAL FIX: Proper Quill list styling */
+    .blog-body ul,
+    .blog-body ol {
+        margin: var(--space-lg) 0;
+        padding-left: 1.5em;
+    }
+
+    .blog-body li {
+        margin-bottom: var(--space-sm);
+    }
+
+    /* Target Quill's specific list structure */
+    .blog-body .ql-editor ul,
+    .blog-body .ql-editor ol {
+        padding-left: 1.5em;
+        margin: 1em 0;
+    }
+
+    .blog-body .ql-editor li {
+        margin-bottom: 0.5em;
+    }
+
+    /* Ensure bullets and numbers are visible */
+    .blog-body .ql-editor ul li {
+        list-style-type: disc;
+    }
+
+    .blog-body .ql-editor ol li {
+        list-style-type: decimal;
+    }
+
+    /* Force list styling */
+    .blog-body ul li::before {
+        content: "•";
+        color: var(--color-primary);
+        font-weight: bold;
+        display: inline-block;
+        width: 1em;
+        margin-left: -1em;
+    }
+
+    .blog-body ol {
+        counter-reset: list-counter;
+    }
+
+    .blog-body ol li::before {
+        content: counter(list-counter) ".";
+        counter-increment: list-counter;
+        color: var(--color-primary);
+        font-weight: bold;
+        display: inline-block;
+        width: 2em;
+        margin-left: -2em;
+    }
+
+    .blog-body strong {
+        font-weight: 700;
+        color: #000000;
+    }
+
+    .blog-body em {
+        font-style: italic;
+    }
+
+    .blog-body code {
+        background: var(--color-background-light);
+        padding: 2px 6px;
+        border-radius: 3px;
+        font-family: 'Courier New', monospace;
+        font-size: 0.9em;
     }
 
     /* Mobile Related Articles Section */
@@ -469,9 +513,7 @@
         padding: var(--space-xl) 0;
         border-top: 1px solid var(--color-border);
         display: block;
-        max-width: 1400px;
-        margin-left: auto;
-        margin-right: auto;
+        max-width: 100%;
     }
 
     .mobile-widget-header {
@@ -494,7 +536,7 @@
 
     .mobile-related-container {
         width: 100%;
-        height: 350px;
+        height: 400px;
         overflow: hidden;
         position: relative;
     }
@@ -514,15 +556,15 @@
         background: var(--color-white);
         margin-bottom: var(--space-md);
         height: 120px;
-        border-radius: 12px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        border-radius: 8px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
     }
 
     .mobile-related-card:hover {
         background: var(--color-background-light);
         border-color: var(--color-primary);
         transform: translateY(-2px);
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
 
     .mobile-related-image {
@@ -534,14 +576,14 @@
         align-items: center;
         justify-content: center;
         background: var(--color-background-light);
-        border-radius: 8px;
+        border-radius: 6px;
     }
 
     .mobile-related-image img {
         width: 100%;
         height: 100%;
         object-fit: cover;
-        border-radius: 8px;
+        border-radius: 6px;
     }
 
     .mobile-related-content {
@@ -571,9 +613,9 @@
         color: var(--color-text);
     }
 
-    /* Auto-scroll animation for mobile */
+    /* Auto-scroll animation for mobile - Slower and Smoother */
     .auto-scroll-mobile {
-        animation: autoScrollMobile 12s linear infinite;
+        animation: autoScrollMobile 25s linear infinite;
     }
 
     .auto-scroll-mobile:hover {
@@ -594,34 +636,12 @@
     @media (min-width: 1024px) {
         .desktop-layout {
             display: grid;
-            grid-template-columns: 1fr 400px;
+            grid-template-columns: 1fr 320px;
             gap: var(--space-xl);
             padding: 0 var(--space-xl) var(--space-xl);
             max-width: 1400px;
             margin: 0 auto;
-        }
-
-        .hero-section {
-            margin-bottom: var(--space-xxl);
-        }
-
-        .hero-image-container {
-            height: 55vh;
-            /* Reduced from 75vh */
-            min-height: 550px;
-            /* Reduced from 700px */
-            max-height: 650px;
-            /* Reduced from 900px */
-        }
-
-        .blog-title {
-            font-size: 3.2rem;
-            /* Reduced from 4rem */
-        }
-
-        .blog-excerpt {
-            font-size: 1.2rem;
-            /* Reduced from 1.4rem */
+            align-items: start;
         }
 
         .main-content {
@@ -635,50 +655,64 @@
             display: none;
         }
 
-        /* Sidebar Styles */
+        /* Intro and Content sections - Full width within main content */
+        .intro-section {
+            max-width: 100%;
+            margin-left: 0;
+            margin-right: 0;
+        }
+
+        .content-section {
+            max-width: 100%;
+            margin-left: 0;
+            margin-right: 0;
+        }
+
+        /* Compact Sidebar on Right */
         .sidebar {
             position: sticky;
-            top: 120px;
-            height: 600px;
+            top: 100px;
+            height: 550px;
             overflow: hidden;
             display: block;
         }
 
         .sidebar-widget {
             background: var(--color-white);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-            border: 1px solid var(--color-border);
-            margin-bottom: var(--space-lg);
+            border: 1px solid var(--border-color);
             height: 100%;
             display: flex;
             flex-direction: column;
-            border-radius: 16px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
         }
 
         .widget-header {
-            padding: var(--space-lg) var(--space-lg) var(--space-md);
-            border-bottom: 1px solid var(--color-border);
+            padding: var(--space-md) var(--space-md) var(--space-sm);
+            border-bottom: 1px solid var(--border-color);
             flex-shrink: 0;
+            background: var(--color-white);
         }
 
         .widget-title {
-            font-size: 1.4rem;
+            font-size: 1.2rem;
             font-weight: 700;
             color: var(--color-secondary);
-            margin-bottom: var(--space-xs);
+            margin-bottom: 4px;
         }
 
         .widget-subtitle {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: var(--color-text);
             margin: 0;
         }
 
-        /* Desktop Auto-Scroll Related Articles */
+        /* Compact Auto-Scroll Related Articles */
         .related-articles-container {
-            padding: var(--space-md);
+            padding: var(--space-sm);
             flex: 1;
             overflow: hidden;
+            position: relative;
         }
 
         .related-articles-scroll {
@@ -693,29 +727,30 @@
             text-decoration: none;
             overflow: hidden;
             background: var(--color-white);
-            border: 1px solid var(--color-border);
+            border: 1px solid var(--border-color);
             transition: all 0.3s ease;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
-            margin-bottom: var(--space-md);
+            margin-bottom: var(--space-sm);
             height: auto;
-            min-height: 160px;
-            border-radius: 12px;
+            min-height: 140px;
+            border-radius: 6px;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
         }
 
         .related-article-card:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
             border-color: var(--color-primary);
         }
 
         .related-article-image {
             width: 100%;
-            height: 120px;
+            height: 100px;
             overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
             background: var(--color-background-light);
+            border-radius: 6px 6px 0 0;
         }
 
         .related-article-image img {
@@ -725,17 +760,17 @@
         }
 
         .related-article-content {
-            padding: var(--space-md);
+            padding: var(--space-sm);
             flex: 1;
             display: flex;
             flex-direction: column;
         }
 
         .related-article-title {
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 600;
             color: var(--color-secondary);
-            margin-bottom: var(--space-sm);
+            margin-bottom: var(--space-xs);
             line-height: 1.3;
             display: -webkit-box;
             -webkit-line-clamp: 2;
@@ -747,14 +782,14 @@
         .related-article-meta {
             display: flex;
             justify-content: space-between;
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             color: var(--color-text);
             margin-top: auto;
         }
 
-        /* Auto-scroll animation for desktop */
+        /* Smooth Auto-scroll animation */
         .auto-scroll-vertical {
-            animation: autoScrollVertical 15s linear infinite;
+            animation: autoScrollVertical 35s linear infinite;
         }
 
         .auto-scroll-vertical:hover {
@@ -776,10 +811,6 @@
     @media (max-width: 1023px) {
         .sidebar {
             display: none;
-        }
-
-        .hero-text {
-            padding: 0 var(--space-lg);
         }
 
         .main-content {
@@ -819,41 +850,25 @@
         border: none;
         cursor: pointer;
         font-size: 1.1rem;
-        border-radius: 8px;
-        box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+        border-radius: 6px;
+        box-shadow: 0 2px 8px rgba(52, 152, 219, 0.2);
     }
 
     .btn-primary:hover {
         background: var(--color-primary-dark);
         transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+        box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
     }
 
     /* Tablet Styles */
     @media (min-width: 768px) and (max-width: 1023px) {
         .hero-image-container {
-            height: 50vh;
-            /* Reduced from 70vh */
-            min-height: 400px;
-            /* Reduced from 500px */
+            height: 55vh;
+            min-height: 450px;
         }
 
         .blog-title {
-            font-size: 2.5rem;
-            /* Reduced from 3rem */
-        }
-
-        .blog-excerpt {
-            font-size: 1.1rem;
-            /* Reduced from 1.2rem */
-        }
-
-        .hero-content {
-            padding: var(--space-xl);
-        }
-
-        .main-content {
-            padding: 0 var(--space-lg);
+            font-size: 2rem;
         }
     }
 
@@ -861,94 +876,36 @@
     @media (max-width: 480px) {
         .hero-section {
             margin-bottom: var(--space-lg);
+            width: 95%;
         }
 
         .hero-image-container {
             height: 50vh;
-            /* Reduced from 60vh */
             min-height: 350px;
-            /* Reduced from 400px */
         }
 
         .hero-content {
             padding: var(--space-lg);
         }
 
-        .hero-text {
-            padding: 0;
-        }
-
         .blog-title {
-            font-size: 2rem;
-            /* Reduced from 2.2rem */
-            margin-bottom: var(--space-md);
-        }
-
-        .blog-excerpt {
-            font-size: 1rem;
-            /* Reduced from 1.1rem */
-            margin-bottom: var(--space-lg);
-        }
-
-        .blog-meta {
-            gap: var(--space-sm);
-        }
-
-        .meta-item {
-            font-size: 0.85rem;
-            /* Reduced from 0.9rem */
-            padding: var(--space-xs) var(--space-sm);
+            font-size: 1.6rem;
         }
 
         .main-content {
             padding: 0 var(--space-sm);
         }
 
-        .mobile-related-section {
-            padding: var(--space-lg) 0;
+        .intro-card {
+            padding: var(--space-md);
+        }
+
+        .content-wrapper {
+            padding: var(--space-md);
         }
 
         .mobile-related-container {
-            height: 300px;
-        }
-
-        .mobile-related-card {
-            flex-direction: column;
-            text-align: center;
-            height: auto;
-            min-height: 180px;
-        }
-
-        .mobile-related-image {
-            width: 100%;
-            height: 120px;
-            margin-bottom: var(--space-sm);
-        }
-    }
-
-    /* Touch-friendly improvements */
-    @media (hover: none) and (pointer: coarse) {
-
-        .related-article-card:hover,
-        .mobile-related-card:hover {
-            transform: none;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .related-article-card:active,
-        .mobile-related-card:active {
-            transform: scale(0.98);
-            background: var(--color-background-light);
-        }
-
-        .btn-primary:active {
-            transform: scale(0.98);
-        }
-
-        /* Disable hover pause on touch devices */
-        .auto-scroll-vertical:hover,
-        .auto-scroll-mobile:hover {
-            animation-play-state: running;
+            height: 350px;
         }
     }
 
@@ -961,15 +918,6 @@
             transition: none;
         }
 
-        .related-article-card:hover,
-        .mobile-related-card:hover {
-            transform: none;
-        }
-
-        .btn-primary:hover {
-            transform: none;
-        }
-
         .auto-scroll-vertical,
         .auto-scroll-mobile {
             animation: none;
@@ -978,29 +926,6 @@
         .hero-image {
             transition: none;
         }
-
-        .hero-image-container:hover .hero-image {
-            transform: none;
-        }
-    }
-
-    .blog-body {
-        font-size: 1.15rem;
-        line-height: 1.8;
-        color: #333333;
-    }
-
-    .blog-body p {
-        margin-bottom: 1.5rem;
-    }
-
-    .blog-body strong {
-        font-weight: 700;
-        color: #000000;
-    }
-
-    .blog-body em {
-        font-style: italic;
     }
 </style>
 
@@ -1009,7 +934,6 @@
         // Initialize auto-scroll for desktop related articles
         const desktopScroll = document.getElementById('desktopRelatedScroll');
         if (desktopScroll) {
-            // Duplicate content for seamless loop
             const originalContent = desktopScroll.innerHTML;
             desktopScroll.innerHTML = originalContent + originalContent;
             desktopScroll.classList.add('auto-scroll-vertical');
@@ -1018,32 +942,12 @@
         // Initialize auto-scroll for mobile related articles
         const mobileScroll = document.getElementById('mobileRelatedScroll');
         if (mobileScroll) {
-            // Duplicate content for seamless loop
             const originalContent = mobileScroll.innerHTML;
             mobileScroll.innerHTML = originalContent + originalContent;
             mobileScroll.classList.add('auto-scroll-mobile');
         }
 
-        // Smooth scroll for anchor links in blog content
-        const blogContent = document.querySelector('.blog-body');
-        if (blogContent) {
-            const anchorLinks = blogContent.querySelectorAll('a[href^="#"]');
-            anchorLinks.forEach(link => {
-                link.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('href');
-                    const targetElement = document.querySelector(targetId);
-                    if (targetElement) {
-                        targetElement.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
-                });
-            });
-        }
-
-        // Pause auto-scroll when user interacts with related articles
+        // Pause auto-scroll when user hovers
         const relatedCards = document.querySelectorAll('.related-article-card, .mobile-related-card');
         relatedCards.forEach(card => {
             card.addEventListener('mouseenter', function () {
@@ -1055,17 +959,37 @@
                 if (desktopScroll) desktopScroll.style.animationPlayState = 'running';
                 if (mobileScroll) mobileScroll.style.animationPlayState = 'running';
             });
-
-            card.addEventListener('focus', function () {
-                if (desktopScroll) desktopScroll.style.animationPlayState = 'paused';
-                if (mobileScroll) mobileScroll.style.animationPlayState = 'paused';
-            });
-
-            card.addEventListener('blur', function () {
-                if (desktopScroll) desktopScroll.style.animationPlayState = 'running';
-                if (mobileScroll) mobileScroll.style.animationPlayState = 'running';
-            });
         });
+
+        // Ensure Quill images maintain their styles
+        setTimeout(() => {
+            const images = document.querySelectorAll('.blog-body img');
+            images.forEach(img => {
+                // Preserve any inline styles from Quill
+                if (img.style.width || img.style.height) {
+                    img.style.maxWidth = '100%';
+                    img.style.height = 'auto';
+                }
+            });
+        }, 100);
+
+        // Force list styling after page load
+        setTimeout(() => {
+            const blogBody = document.querySelector('.blog-body');
+            if (blogBody) {
+                // Force list styles
+                const lists = blogBody.querySelectorAll('ul, ol');
+                lists.forEach(list => {
+                    list.style.listStylePosition = 'outside';
+                    list.style.paddingLeft = '1.5em';
+                });
+
+                const listItems = blogBody.querySelectorAll('li');
+                listItems.forEach(li => {
+                    li.style.display = 'list-item';
+                });
+            }
+        }, 500);
     });
 </script>
 {% endblock %}
