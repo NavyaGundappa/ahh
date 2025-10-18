@@ -1,15 +1,15 @@
 {% extends "base.html" %}
 
-{% block title %}Best Nephrology Hospital in Bangalore | Aarogya Hastha{% endblock %}
+{% block title %}Best Orthopedic Surgeon in Bangalore | Aarogya Hastha Hospitals.{% endblock %}
 
 {% block head %}
 {{ super() }}
 <meta name="description"
-    content="Expert kidney care at Aarogya Hastha, Bangalore. Advanced nephrology treatments with compassionate care. Book your appointment today!">
+    content="Discover advanced GI treatments at Aarogya Hastha—endoscopy, laparoscopic surgery, liver & pancreatic care. Book your consultation today!">
 <meta name="keywords" content="">
 <meta name="author" content="Aarogyahastha Pvt Ltd">
 <meta name="designer" content="Aarogyahastha Pvt Ltd">
-<link rel="canonical" href="https://aarogyahastha.com/departments/nephrology" />
+<link rel="canonical" href="https://aarogyahastha.com/departments/{{ department.name }}" />
 <meta name="no-email-collection" content="http://www.unspam.com/noemailcollection/">
 <meta name="google-site-verification" content="T3QqCQjcJP8HqwIYaCHz3AZHCSXJDF-NJfE8GNiSb-Q" />
 <meta name="robots" content="index,follow">
@@ -36,6 +36,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 {% endblock %}
+
 {% block content %}
 <style>
     .breadcrumb-section {
