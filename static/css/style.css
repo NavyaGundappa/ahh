@@ -5112,6 +5112,7 @@ main p {
 .link-item a:hover {
     color: #0056b3;
     text-decoration: underline;
+}
 
 /* Testimonials Section Styles */
 
@@ -5399,3 +5400,56 @@ main p {
 
 .duration-200 { transition-duration: 200ms; }
 .duration-300 { transition-duration: 300ms; }
+
+/* 3-11-25 */
+
+ h3.Aarogya_new_faq-question {
+    color: #000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .Aarogya_new_faq-answer p,
+  .Aarogya_new_faq-answer li {
+    color: #000;
+  }
+
+  .Aarogya_new_faq-section .Aarogya_new_faqs-container {
+    overflow: hidden;
+    background: #FFFFFF;
+    border-radius: 5px;
+  }
+
+  .Aarogya_new_faq-section .Aarogya_new_faq-singular {
+    position: relative;
+    border-bottom: 1px solid #9D9DA1;
+    padding: 20px 30px 20px 0;
+    width: 100%;
+  }
+
+  .Aarogya_new_faq-singular .Aarogya_new_faq-question {
+    margin: 0;
+    padding: 10px;
+    font-weight: 600;
+    font-size: 20px;
+    font-family: Poppins, sans-serif;
+    color: #103a60;
+    width: 100%;
+  }
+
+  .Aarogya_new_faq-toggle {
+    font-size: 18px;
+    color: #00969C;
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .Aarogya_new_faq-singular.active .Aarogya_new_faq-toggle i {
+    transform: rotate(180deg);
+  }
+
+  .Aarogya_new_faqs-container .Aarogya_new_faq-answer {
+    display: none;
+    padding: 20px 0px 20px 30px;
+  }
