@@ -5414,29 +5414,37 @@ main p {
   .Aarogya_new_faq-answer p,
   .Aarogya_new_faq-answer li {
     color: #000;
+    margin-bottom: 0;
+    font-size: 15px;
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 0.3px;
+  }
+
+  section.Aarogya_new_faq_main_section {
+      padding-bottom: 80px;
+      margin-top: -50px;
   }
 
   .Aarogya_new_faq-section .Aarogya_new_faqs-container {
     overflow: hidden;
-    background: #FFFFFF;
     border-radius: 5px;
   }
 
   .Aarogya_new_faq-section .Aarogya_new_faq-singular {
     position: relative;
     border-bottom: 1px solid #9D9DA1;
-    padding: 20px 30px 20px 0;
+    padding: 13px 10px 13px 0;
     width: 100%;
   }
 
   .Aarogya_new_faq-singular .Aarogya_new_faq-question {
     margin: 0;
-    padding: 10px;
+    padding: 10px 15px;
     font-weight: 600;
-    font-size: 20px;
-    font-family: Poppins, sans-serif;
+    font-size: 19px;
     color: #103a60;
     width: 100%;
+    font-family: 'Montserrat', sans-serif;
   }
 
   .Aarogya_new_faq-toggle {
