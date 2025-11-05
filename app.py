@@ -4038,6 +4038,32 @@ def check_timing():
     doctor = Doctor.query.first()
     return doctor.timings or "No timings"
 
+from flask import Flask, redirect, request
+
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+    return "Welcome to Aarogya Hastha"
+
+# ✅ You can add your other routes above this line
+
+
+# ✅ 301 Redirects (placed at the bottom, before if __name__ == '__main__')
+redirects = {
+    '/doctors/Dt%20Neelima%20Sharma': '/doctors/dt-neelima-sharma',
+    '/doctors/dr%20magesh%20b': '/doctors/dr-magesh-b',
+}
+
+@app.before_request
+def handle_redirects():
+    target = redirects.get(request.path)
+    if target:
+        return redirect(target, code=301)
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
 
 # admin routes end -------------------------------------------------------------------------------------------------------------------------
 migrate = Migrate(app, db)
