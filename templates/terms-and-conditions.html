@@ -12,16 +12,10 @@
     content="hospital Bangalore, multi-speciality hospital, healthcare India, medical facilities, expert doctors">
 <meta name="author" content="Aarogyahastha Pvt Ltd">
 <meta name="designer" content="Aarogyahastha Pvt Ltd">
-<link rel="canonical" href="https://aarogyahastha.com/terms-and-conditions" />
+<link rel="canonical" href="https://aarogyahastha.com/terms-and-conditions">
 <meta name="no-email-collection" content="http://www.unspam.com/noemailcollection/">
 <meta name="google-site-verification" content="T3QqCQjcJP8HqwIYaCHz3AZHCSXJDF-NJfE8GNiSb-Q" />
 <meta name="robots" content="index,follow">
-<meta name="revisit-after" content="7 days">
-<meta name="distribution" content="web">
-<meta name="robots" content="noodp">
-<meta name="web_author" content="Aarogyahastha Pvt Ltd">
-<meta name="rating" content="general">
-<meta name="rating" content="safe for kids">
 <meta name="subject" content="Healthcare">
 <meta name="copyright" content="Copyright © 2025">
 <meta name="reply-to" content="info@aarogyahastha.com">
@@ -29,21 +23,14 @@
     content="We provide timely and specialized medical attention for patients experiencing life-threatening conditions, ensuring their urgent needs are met with the highest level of care.">
 <meta name="city" content="Bangalore">
 <meta name="country" content="India">
-<meta name="distribution" content="global">
 <meta name="classification" content="Healthcare, Hospital">
 <base href="/">
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 {% endblock %}
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
 <link rel="stylesheet" href="/static/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
-<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 <link rel="stylesheet" href="/static/css/style.css">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-84XCMMFTS8"></script>
 <script>
@@ -56,9 +43,25 @@
 
 </head>
 <style>
+    /* --- START: New & Improved Styles --- */
+
+    :root {
+        --ah-primary: #0056b3;
+        /* A deeper, more professional blue */
+        --ah-secondary: #007bff;
+        /* Original blue, for accents */
+        --ah-text: #333;
+        --ah-text-light: #555;
+        --ah-bg: #ffffff;
+        --ah-bg-light: #f8f9fa;
+        --ah-border: #dee2e6;
+    }
+
+    /* --- Breadcrumbs --- */
     .breadcrumb-section {
         padding: 10px 0;
-        background-color: #f8f9fa;
+        background-color: var(--ah-bg-light);
+        border-bottom: 1px solid var(--ah-border);
     }
 
     .breadcrumb {
@@ -67,18 +70,204 @@
     }
 
     .breadcrumb-item+.breadcrumb-item::before {
-        content: ">>";
-        padding: 0 0.5rem;
+        content: "›";
+        /* More elegant separator */
+        padding: 0 0.6rem;
+        color: #6c757d;
     }
 
     .breadcrumb-item a {
-        color: #007bff;
+        color: var(--ah-primary);
         text-decoration: none;
+        font-weight: 500;
     }
 
     .breadcrumb-item.active {
         color: #6c757d;
+        font-weight: 500;
     }
+
+    /* --- Banner --- */
+    .department-banner {
+        position: relative;
+        color: #fff;
+    }
+
+    .department-banner .banner {
+        position: relative;
+        overflow: hidden;
+        border-radius: 8px;
+        /* Soften the edges */
+    }
+
+    .department-banner .banner img {
+        width: 100%;
+        display: block;
+        object-fit: cover;
+        max-height: 350px;
+        /* Constrain banner height */
+    }
+
+    /* Gradient overlay for text readability */
+    .department-banner .banner::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(90deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.2) 100%);
+        z-index: 1;
+    }
+
+    .department-banner .text-box-1 {
+        position: absolute;
+        bottom: 2rem;
+        left: 2rem;
+        z-index: 2;
+        /* Above the overlay */
+    }
+
+    .department-banner .text-box-1 h1 {
+        font-size: 2.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: #fff;
+        line-height: 1.2;
+        margin-bottom: 0;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+    }
+
+    /* --- Content Typography --- */
+    .contact-details {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        font-size: 1rem;
+        line-height: 1.7;
+        /* Increased for readability */
+        color: var(--ah-text-light);
+    }
+
+    .contact-details p {
+        margin-bottom: 1.5rem;
+    }
+
+    /* Make the intro paragraph stand out */
+    .contact-details>div>div>p:nth-of-type(1) {
+        font-size: 1.1rem;
+        color: var(--ah-text);
+        font-weight: 500;
+    }
+
+    .contact-details h2 {
+        font-size: 1.75rem;
+        font-weight: 600;
+        color: var(--ah-text);
+        margin-bottom: 0.75rem;
+        line-height: 1.3;
+    }
+
+    .contact-details h3 {
+        font-size: 1.4rem;
+        /* Sized for sub-headings */
+        font-weight: 600;
+        color: var(--ah-text);
+        margin-top: 2rem;
+        /* Replaces .mt-4 */
+        margin-bottom: 0.75rem;
+    }
+
+    .contact-details strong {
+        font-weight: 600;
+        color: var(--ah-text);
+    }
+
+    .contact-details a {
+        color: var(--ah-primary);
+        text-decoration: none;
+    }
+
+    .contact-details a:hover {
+        text-decoration: underline;
+    }
+
+    /* --- Numbered List Styling (Modern) --- */
+    .contact-details ol.big-marker {
+        list-style-type: none;
+        /* REMOVED DOUBLE NUMBER */
+        counter-reset: policy-section;
+        padding-left: 0;
+        margin-top: 2.5rem;
+    }
+
+    .contact-details ol.big-marker>li {
+        counter-increment: policy-section;
+        position: relative;
+        padding-left: 3rem;
+        /* ADJUSTED PADDING FOR SMALLER NUMBER BLOCK */
+        margin-bottom: 2.5rem;
+        /* Space between main points */
+    }
+
+    /* The styled number block */
+    .contact-details ol.big-marker>li::before {
+        content: counter(policy-section);
+        /* Just the number */
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 2.5rem;
+        /* REDUCED SIZE */
+        height: 2.5rem;
+        /* REDUCED SIZE */
+        line-height: 2.5rem;
+        /* REDUCED SIZE */
+        text-align: center;
+        font-size: 1.25rem;
+        /* REDUCED FONT SIZE */
+        font-weight: 700;
+        color: var(--ah-primary);
+        background-color: var(--ah-bg-light);
+        border-radius: 8px;
+        border: 1px solid var(--ah-border);
+    }
+
+    .contact-details ol.big-marker li h2 {
+        margin-top: 0;
+        padding-top: 0.3rem;
+        /* Align with number block */
+    }
+
+    /* --- Bullet Point List Styling --- */
+    .contact-details ul.with-bullet-point {
+        list-style-type: none;
+        padding-left: 1.5rem;
+        margin-top: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .contact-details ul.with-bullet-point li {
+        margin-bottom: 0.75rem;
+        position: relative;
+    }
+
+    /* Custom bullet */
+    .contact-details ul.with-bullet-point li::before {
+        content: '■';
+        /* Square bullet */
+        position: absolute;
+        left: -1.5rem;
+        top: 0;
+        color: var(--ah-secondary);
+        font-size: 0.8rem;
+        line-height: 1.7;
+    }
+
+    .contact-details ul.with-bullet-point li b {
+        font-weight: 600;
+        color: var(--ah-text);
+    }
+
+    /* --- END: New & Improved Styles --- */
 </style>
 <section class="breadcrumb-section">
     <div class="container">
@@ -93,7 +282,7 @@
 <section class="department-banner" data-aos="fade-up" data-aos-offset="300" data-aos-easing="ease-in-sine">
     <div class="container">
         <div class="banner">
-            <img loading="lazy" src="../static/img/banners/privacy-policy.jpg" alt="">
+            <img loading="lazy" src="../static/img/banners/privacy-policy.jpg" alt="Terms and Conditions Banner">
             <div class="text-box-1">
                 <h1>TERMS AND CONDITIONS</h1>
 
@@ -189,7 +378,7 @@
                     </li>
                     <li>
                         <h2>CANCELLATION & REFUND POLICY</h2>
-                        <h3 class="mt-4">Eligibility</h3>
+                        <h3>Eligibility</h3>
                         <p>A refund shall be provided to the <b>Patient or Payer</b> in the event of:</p>
                         <ul class="with-bullet-point">
                             <li>Non-delivery of scheduled medical services like cancelled procedures or appointments
@@ -199,7 +388,7 @@
                                 physicians.</li>
                             <li>Duplicate payments made for the same service.</li>
                         </ul>
-                        <h3 class="mt-4">Refund Amount</h3>
+                        <h3>Refund Amount</h3>
                         <p>The refund amount shall be <b>either the full amount or a prorated amount</b>, depending
                             on the nature of the issue:</p>
                         <ul class="with-bullet-point">
@@ -207,13 +396,13 @@
                             <li><b>Prorated refund</b> for partially delivered services, as assessed by the
                                 hospital's billing department.</li>
                         </ul>
-                        <h3 class="mt-4">Refund Process</h3>
+                        <h3>Refund Process</h3>
                         <p>The refund shall be processed within <b>7-15 business days</b> from the date the hospital
                             receives a valid refund request along with all necessary documentation (e.g., original
                             receipts, cancellation confirmation, etc.). For any queries or to submit your refund
                             request, please contact us at <a href="mailto:refunds@aarogyahastha.com"
                                 class="my-0 d-inline"><u>refunds@aarogyahastha.com</u></a>.</p>
-                        <h3 class="mt-4">Mode of Refund</h3>
+                        <h3>Mode of Refund</h3>
                         <p>The refund shall be made through <b>NEFT/RTGS</b> to the account used for the original
                             payment,</p>
                     </li>
@@ -262,7 +451,6 @@
 </section>
 
 
-<!-- scripts -->
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 <script src="static/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
@@ -327,6 +515,5 @@
 
 </script>
 <a href="#" id="scrollToTopBtn" class="scroll-to-top-btn" title="Scroll to top" aria-label="Scroll to top">
-    <i class="fa fa-arrow-up"></i> <!-- Simple up arrow -->
-</a>
+    <i class="fa fa-arrow-up"></i> </a>
 {% endblock %}
