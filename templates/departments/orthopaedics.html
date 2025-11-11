@@ -235,21 +235,23 @@
                     <!-- FAQ Section -->
                     <!-- FAQ Section -->
                     {% if faqs %}
-                    <div class="faq-section">
+                   <div class="faq-section" itemscope itemtype="https://schema.org/FAQPage">
                         <h3 class="section-header">Frequently Asked Questions</h3>
                         <div class="faq-container">
                             {% for faq in faqs %}
-                            <div class="faq-item">
+                            <div class="faq-item" itemprop="mainEntity" itemscope itemtype="https://schema.org/Question">
                                 <button class="faq-question">
-                                    <span class="faq-question-text">{{ faq.question }}</span>
+                                    <span class="faq-question-text" itemprop="name">{{ faq.question }}</span>
                                     <svg class="faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M19 9l-7 7-7-7"></path>
                                     </svg>
                                 </button>
-                                <div class="faq-answer">
-                                    {{ faq.answer|replace('
-                                    ', '<br>')|safe }}
+                                <div class="faq-answer" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer">
+                                    <div itemprop="text">
+                                        {{ faq.answer|replace('
+                                        ', '<br>')|safe }}
+                                    </div>
                                 </div>
                             </div>
                             {% endfor %}
@@ -1026,7 +1028,7 @@
 
 <script> $(document).ready(function () { initDepartmentPageActions(); }) </script>
 
-<script type="application/ld+json">
+<!-- <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "FAQPage",
@@ -1043,5 +1045,5 @@
     {% endfor %}
   ]
 }
-</script>
+</script> -->
 {% endblock %}
