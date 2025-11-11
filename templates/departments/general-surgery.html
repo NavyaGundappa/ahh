@@ -80,10 +80,12 @@
         <div class="banner" style="position: relative;">
             {% if department.banner_path %}
             <img loading="lazy" src="{{ url_for('static', filename=department.banner_path) }}"
+                title="{{ department.banner_alt_text or department.name }}"
                 alt="{{ department.banner_alt_text or department.name }}"
                 style="width: 100%; height: 400px; object-fit: cover;">
             {% else %}
             <img loading="lazy" src="/static/img/banners/default.jpg"
+                title="{{ department.banner_alt_text or department.name }}"
                 alt="{{ department.banner_alt_text or department.name }}"
                 style="width: 100%; height: 400px; object-fit: cover;">
             {% endif %}
