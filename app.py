@@ -447,6 +447,7 @@ def add_doctor_function(request, departments):
     talks_links = request.form.get('talks_links', '').strip()
     appointment_link = request.form.get('appointment_link', '').strip()
     department_slug = request.form.get('department_slug', '').strip()
+    doctor.slug = request.form.get('slug', '').strip()
 
     # ----- Collect timings with days -----
     time_from_hour = request.form.getlist('time_from_hour[]')
@@ -4038,16 +4039,6 @@ def check_timing():
     doctor = Doctor.query.first()
     return doctor.timings or "No timings"
 
-from flask import Flask, redirect, request
-
-app = Flask(__name__)
-
-@app.route('/')
-def home():
-    return "Welcome to Aarogya Hastha"
-
-# ✅ You can add your other routes above this line
-
 
 # ✅ 301 Redirects (placed at the bottom, before if __name__ == '__main__')
 redirects = {
@@ -4055,15 +4046,13 @@ redirects = {
     '/doctors/dr%20magesh%20b': '/doctors/dr-magesh-b',
 }
 
+
 @app.before_request
 def handle_redirects():
     target = redirects.get(request.path)
     if target:
         return redirect(target, code=301)
 
-
-if __name__ == '__main__':
-    app.run(debug=True)
 
 # admin routes end -------------------------------------------------------------------------------------------------------------------------
 migrate = Migrate(app, db)

@@ -61,10 +61,10 @@
         })(window, document, 'script', 'dataLayer', 'GTM-WGJFVPCB');</script>
     <!-- End Google Tag Manager -->
 
-     <script>(function (w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-TD2L5G6C');</script>
+    <script>(function (w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-TD2L5G6C');</script>
 
     <!-- start MedicalOrganization: -->
-        <script type="application/ld+json">
+    <script type="application/ld+json">
             {
               "@context": "https://schema.org",
               "@type": "MedicalOrganization",
@@ -85,7 +85,7 @@
     <!-- end MedicalOrganization: -->
 
     <!-- Start Medical Clinic -->
-        <script type="application/ld+json">
+    <script type="application/ld+json">
         {
           "@context": "https://schema.org",
           "@type": "MedicalClinic",
@@ -128,7 +128,7 @@
     <!-- end Medical Clinic -->
 
     <!-- start Website Schema: -->
-        <script type="application/ld+json">
+    <script type="application/ld+json">
         {
           "@context": "https://schema.org",
           "@type": "WebSite",
@@ -145,7 +145,7 @@
     <!-- end Website Schema: -->
 
 
-   
+
     <style>
         .login-modal-content {
             background-color: #fff;
@@ -946,6 +946,18 @@
         .chrome-btn--grey:hover {
             background: #dadce0;
         }
+
+        .header-logos {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .new-logo-wrapper .new-logo-img {
+            height: 60px;
+            /* Example size, adjust as needed */
+            width: auto;
+        }
     </style>
 </head>
 
@@ -982,8 +994,14 @@
         <div class="header-top-container">
             <div class="container header-top-content">
                 <a href="/" class="logo">
-                    <div class="logo-wrapper">
-                        <img src="static/img/logo.png" alt="Logo" class="header-logo-img">
+                    <div class="header-logos">
+                        <div class="logo-wrapper">
+                            <img src="static/img/logo.png" alt="AarogyaHastha Hospitals Logo" class="header-logo-img">
+                        </div>
+                        <div class="logo-wrapper new-logo-wrapper">
+                            <img src="static/img/NABH_Logo-01.png" alt="New Hospital Logo"
+                                class="header-logo-img new-logo-img">
+                        </div>
                     </div>
                 </a>
                 <button class="navbar-toggle d-lg-none" id="mobile-menu-toggle">

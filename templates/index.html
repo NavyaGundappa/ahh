@@ -5,9 +5,9 @@
 {% block head %}
 {{ super() }}
 <meta name="description"
-    content="Discover the best hospitals in Bangalore, India. Find expert care, advanced facilities & trusted doctors near you. Visit Aarogya Hastha Hospitals today!">
+  content="Discover the best hospitals in Bangalore, India. Find expert care, advanced facilities & trusted doctors near you. Visit Aarogya Hastha Hospitals today!">
 <meta name="keywords"
-    content="hospital Bangalore, multi-speciality hospital, healthcare India, medical facilities, expert doctors">
+  content="hospital Bangalore, multi-speciality hospital, healthcare India, medical facilities, expert doctors">
 <meta name="author" content="Aarogyahastha Pvt Ltd">
 <meta name="designer" content="Aarogyahastha Pvt Ltd">
 <link rel="canonical" href="https://aarogyahastha.com" />
@@ -24,7 +24,7 @@
 <meta name="copyright" content="Copyright © 2025">
 <meta name="reply-to" content="info@aarogyahastha.com">
 <meta name="abstract"
-    content="We provide timely and specialized medical attention for patients experiencing life-threatening conditions, ensuring their urgent needs are met with the highest level of care.">
+  content="We provide timely and specialized medical attention for patients experiencing life-threatening conditions, ensuring their urgent needs are met with the highest level of care.">
 <meta name="city" content="Bangalore">
 <meta name="country" content="India">
 <meta name="distribution" content="global">
@@ -38,195 +38,278 @@
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 {% endblock %}
 
+<style>
+  .breadcrumb-section {
+    /* ORIGINAL: padding: 15px 200px; */
+    /* MODIFIED: Add a left offset to clear the sidebar (~80px total width/padding) */
+    padding: 15px 200px 15px 80px;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+  }
+
+  .breadcrumb {
+    margin-bottom: 0;
+    background-color: transparent;
+    padding: 0;
+  }
+
+  .breadcrumb-item a {
+    color: #007bff;
+    text-decoration: none;
+  }
+
+  .breadcrumb-item a:hover {
+    text-decoration: underline;
+  }
+
+  .breadcrumb-item.active {
+    color: #6c757d;
+  }
+
+  .breadcrumb-item+.breadcrumb-item::before {
+    content: ">>";
+    padding: 0 0.75rem;
+    color: #6c757d;
+  }
+
+  .hero-section {
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .banner-container {
+    height: 260px !important;
+    /* MODIFIED: Reduced min-height */
+    min-height: 700px !important;
+  }
+
+  .banner {
+    /* MODIFIED: Set to 100% height to fill container */
+    height: 100% !important;
+    width: 100% !important;
+  }
+
+  #HomeSlider {
+    height: 100% !important;
+    /* MODIFIED: Set to 100% height */
+    width: 100% !important;
+  }
+
+  #HomeSlider .item {
+    /* MODIFIED: Reduced height */
+    height: 700px !important;
+    position: relative;
+  }
+
+  #HomeSlider .item img {
+    /* MODIFIED: Set height to 100% to fill the item */
+    height: 100% !important;
+    width: 100% !important;
+    object-fit: cover;
+    /* This ensures image covers entire area without distortion */
+  }
+
+  /* Remove the spacer gap */
+  .header-gap-spacer {
+    display: none;
+  }
+
+  .dedicated-section-one {
+    padding-top: 20px !important;
+    /* Reduced gap after hero */
+  }
+</style>
+
 {% block content %}
+
+<section class="breadcrumb-section" id="breadcrumb-nav">
+  <div class="container-fluid">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/"></a></li>
+      </ol>
+    </nav>
+  </div>
+</section>
 
 
 <section class="hero-section">
-    <div class="banner-container">
-        <div class="banner">
-            <div id="HomeSlider" class="owl-carousel owl-theme">
-
-                {% if banners %}
-                {% for banner in banners %}
-                <div class="item">
-                    <!-- Add 'img/' before banner.image_path -->
-                    <img src="{{ url_for('static', filename='img/' + banner.image_path) }}"
-                        alt="{{ banner.alt_text or banner.title or 'Banner' }}"
-                        class="img-fluid {{ banner.position_class or '' }}">
-                    <div class="cover">
-                        <div class="container">
-                            <div class="header-content">
-                                <h1>{{ banner.title or '' }}</h1>
-                                <a class="btn btn-primary" href="/appointments">Book an Appointment</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
-                {% else %}
-                <!-- Fallback if no banners are found -->
-                <div class="item">
-                    <img src="{{ url_for('static', filename='img/banners/default.jpg') }}" alt="Default Banner"
-                        class="img-fluid">
-                    <div class="cover">
-                        <div class="container">
-                            <div class="header-content">
-                                <h1>Welcome to AarogyaHastha</h1>
-                                <a class="btn btn-primary" href="/appointments">Book an Appointment</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+  <div class="banner-container">
+    <div class="banner">
+      <div id="HomeSlider" class="owl-carousel owl-theme">
+        {% if banners %}
+        {% for banner in banners %}
+        <div class="item">
+          <img loading="lazy" src="{{ url_for('static', filename='img/' + banner.image_path) }}"
+            alt="{{ banner.alt_text or banner.title or 'Banner' }}" class="img-fluid {{ banner.position_class or '' }}">
+          <div class="cover">
+            <div class="container">
+              <div class="header-content">
+                <h1>{{ banner.title or '' }}</h1>
+                {% if banner.button_text %}
+                <a class="btn btn-primary" href="{{ banner.button_link or '/appointments' }}">{{ banner.button_text
+                  }}</a>
                 {% endif %}
-
+              </div>
             </div>
+          </div>
         </div>
+        {% endfor %}
+        {% else %}
+        <div class="item">
+          <img src="{{ url_for('static', filename='img/banners/default.jpg') }}" alt="Default Banner" class="img-fluid">
+          <div class="cover">
+            <div class="container">
+              <div class="header-content">
+                <h1>Welcome to AarogyaHastha</h1>
+                <a class="btn btn-primary" href="/appointments">Book an Appointment</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+      </div>
     </div>
+  </div>
 </section>
 
 <section data-aos="fade-up" class="dedicated-section-one"
-    style="background: none; padding-top: 60px; padding-bottom: 60px;">
-    <div class="container">
-        <!-- Section heading centered -->
-        <div class="row">
-            <div class="col-12 text-center mb-5">
-                <h2 class="section-heading">Our Services</h2>
-            </div>
-        </div>
-
-        <!-- Image + content row -->
-        <div class="row align-items-center">
-            <!-- Image on left -->
-            <div class="col-lg-6 mb-4 mb-lg-0 image-column">
-                <img src="static/img/home/our-services.jpg" class="img-fluid rounded-lg shadow-lg w-100"
-                    alt="Our Services">
-            </div>
-
-
-            <!-- Content on right -->
-            <div class="col-lg-6">
-                <div class="service-item">
-                    <h3>Emergency and Critical Care</h3>
-                    <p>We provide timely and specialized medical attention for patients experiencing
-                        life-threatening conditions, ensuring their urgent needs are met with the highest level of
-                        care.</p>
-                </div>
-                <div class="service-item">
-                    <h3>Department of Diagnostics</h3>
-                    <p>We offer state-of-the-art diagnostic services and advanced technology to accurately diagnose
-                        and treat a wide range of medical conditions.</p>
-                </div>
-                <div class="service-item">
-                    <h3>Pharmacy</h3>
-                    <p>We offer comprehensive medication management services, patient education, and clinical
-                        support to ensure the safe and effective use of medications for our patients.</p>
-                </div>
-            </div>
-        </div>
+  style="background: none; padding-top: 10px; padding-bottom: 60px;">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center mb-5">
+        <h2 class="section-heading">Our Services</h2>
+      </div>
     </div>
+
+    <div class="row align-items-center">
+      <div class="col-lg-6 mb-4 mb-lg-0 image-column">
+        <img src="static/img/home/our-services.jpg" class="img-fluid rounded-lg shadow-lg w-100" alt="Our Services">
+      </div>
+
+
+      <div class="col-lg-6">
+        <div class="service-item">
+          <h3>Emergency and Critical Care</h3>
+          <p>We provide timely and specialized medical attention for patients experiencing
+            life-threatening conditions, ensuring their urgent needs are met with the highest level of
+            care.</p>
+        </div>
+        <div class="service-item">
+          <h3>Department of Diagnostics</h3>
+          <p>We offer state-of-the-art diagnostic services and advanced technology to accurately diagnose
+            and treat a wide range of medical conditions.</p>
+        </div>
+        <div class="service-item">
+          <h3>Pharmacy</h3>
+          <p>We offer comprehensive medication management services, patient education, and clinical
+            support to ensure the safe and effective use of medications for our patients.</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <section data-aos-easing="ease-in-sine" class="service-carousel-section">
-    <div class="container">
-        <h2 class="text-center mb-5">Our Specialities</h2>
-        <div class="owl-carousel specialities-carousel" data-items=3>
-            {% for speciality in specialities %}
-            {% if speciality.is_active %}
-            <a href="/departments/{{ speciality.slug }}" class="item" data-department="{{ speciality.slug }}">
-                {% if speciality.thumbnail_path %}
-                <img loading="lazy" src="{{ url_for('static', filename=speciality.thumbnail_path) }}"
-                    alt="{{ speciality.name }}">
-                {% else %}
-                <img loading="lazy" src="{{ url_for('static', filename='img/department/thumbs/default.jpg') }}"
-                    alt="{{ speciality.name }}">
-                {% endif %}
-                <h4 class="text-dark-blue my-md-3">{{ speciality.name }}</h4>
-                <p class="line-height-1em"><small>{{ speciality.description }}</small></p>
-            </a>
-            {% endif %}
-            {% endfor %}
-        </div>
+  <div class="container">
+    <h2 class="text-center mb-5">Our Specialities</h2>
+    <div class="owl-carousel specialities-carousel" data-items=3>
+      {% for speciality in specialities %}
+      {% if speciality.is_active %}
+      <a href="/departments/{{ speciality.slug }}" class="item" data-department="{{ speciality.slug }}">
+        {% if speciality.thumbnail_path %}
+        <img loading="lazy" src="{{ url_for('static', filename=speciality.thumbnail_path) }}"
+          alt="{{ speciality.name }}">
+        {% else %}
+        <img loading="lazy" src="{{ url_for('static', filename='img/department/thumbs/default.jpg') }}"
+          alt="{{ speciality.name }}">
+        {% endif %}
+        <h4 class="text-dark-blue my-md-3">{{ speciality.name }}</h4>
+        <p class="line-height-1em"><small>{{ speciality.description }}</small></p>
+      </a>
+      {% endif %}
+      {% endfor %}
     </div>
+  </div>
 </section>
 
 <section class="doctors-section">
-    <div class="container">
-        <h2 class="text-center mb-5">Meet Our Doctors</h2>
-        <div class="owl-carousel doctors-carousel">
-            {% for doctor in doctors %}
-            {# Normalize image path #}
-            {% if doctor.image_path %}
-            {% if doctor.image_path.startswith('img/doctors/') %}
-            {% set img_file = doctor.image_path %}
-            {% elif doctor.image_path.startswith('doctors/') %}
-            {% set img_file = 'img/' + doctor.image_path %}
-            {% else %}
-            {% set img_file = 'img/doctors/' + doctor.image_path %}
-            {% endif %}
-            {% else %}
-            {% set img_file = 'img/doctors/dr-he.JPG' %}
-            {% endif %}
+  <div class="container">
+    <h2 class="text-center mb-5">Meet Our Doctors</h2>
+    <div class="owl-carousel doctors-carousel">
+      {% for doctor in doctors %}
+      {# Normalize image path #}
+      {% if doctor.image_path %}
+      {% if doctor.image_path.startswith('img/doctors/') %}
+      {% set img_file = doctor.image_path %}
+      {% elif doctor.image_path.startswith('doctors/') %}
+      {% set img_file = 'img/' + doctor.image_path %}
+      {% else %}
+      {% set img_file = 'img/doctors/' + doctor.image_path %}
+      {% endif %}
+      {% else %}
+      {% set img_file = 'img/doctors/dr-he.JPG' %}
+      {% endif %}
 
-            <div class="item" data-key="{{ doctor.slug }}">
-                <div class="doctor-card">
-                    <img loading="lazy" src="{{ url_for('static', filename=img_file) }}" alt="Dr. {{ doctor.name }}">
-                    <h4 class="text-light-blue mt-3">{{ doctor.name }}</h4>
-                    <p>{{ doctor.specialization }}</p>
-                    <div class="learn-more-wrapper">
-                        <a href="{{ url_for('doctor_detail', slug=doctor.slug) }}" class="learn-more">
-                            Learn More <i class="fa fa-angle-right"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
+      <div class="item" data-key="{{ doctor.slug }}">
+        <div class="doctor-card">
+          <img loading="lazy" src="{{ url_for('static', filename=img_file) }}" alt="Dr. {{ doctor.name }}">
+          <h4 class="text-light-blue mt-3">{{ doctor.name }}</h4>
+          <p>{{ doctor.specialization }}</p>
+          <div class="learn-more-wrapper">
+            <a href="{{ url_for('doctor_detail', slug=doctor.slug) }}" class="learn-more">
+              Learn More <i class="fa fa-angle-right"></i>
+            </a>
+          </div>
         </div>
+      </div>
+      {% endfor %}
     </div>
+  </div>
 </section>
 
 <section data-aos="fade-up" class="stats-section dark-stats" id="stats-section">
-    <div class="container">
-        <div class="stats-row">
-            {% for counter in counters if counter.is_active %}
-            <div class="stat-item">
-                <div class="stat-icon">
-                    <img src="{{ url_for('static', filename=counter.icon_path or 'icons/default.svg') }}"
-                        alt="{{ counter.label }}" loading="lazy">
-                </div>
-                <div class="counter-wrap">
-                    <span class="number" data-count="{{ counter.count }}">0</span>
-                    {% if counter.suffix %}
-                    <span class="suffix">{{ counter.suffix }}</span>
-                    {% endif %}
-                </div>
-                <div class="label">{{ counter.label }}</div>
-            </div>
-            {% endfor %}
+  <div class="container">
+    <div class="stats-row">
+      {% for counter in counters if counter.is_active %}
+      <div class="stat-item">
+        <div class="stat-icon">
+          <img src="{{ url_for('static', filename=counter.icon_path or 'icons/default.svg') }}"
+            alt="{{ counter.label }}" loading="lazy">
         </div>
+        <div class="counter-wrap">
+          <span class="number" data-count="{{ counter.count }}">0</span>
+          {% if counter.suffix %}
+          <span class="suffix">{{ counter.suffix }}</span>
+          {% endif %}
+        </div>
+        <div class="label">{{ counter.label }}</div>
+      </div>
+      {% endfor %}
     </div>
+  </div>
 </section>
 
 
 <section data-aos="fade-up" class="feedback-section">
-    <div class="container">
-        <h2 class="text-center mb-5">Testimonials</h2>
-        <div class="owl-carousel feedback-carousel">
-            {% for testimonial in testimonials %}
-            <div class="item">
-                {% if testimonial.image_path %}
-                <img src="{{ url_for('static', filename='img/' + testimonial.image_path.replace('\\', '/')) }}"
-                    alt="{{ testimonial.alt_text or 'Patient Feedback' }}" class="img-fluid rounded shadow">
+  <div class="container">
+    <h2 class="text-center mb-5">Testimonials</h2>
+    <div class="owl-carousel feedback-carousel">
+      {% for testimonial in testimonials %}
+      <div class="item">
+        {% if testimonial.image_path %}
+        <img src="{{ url_for('static', filename='img/' + testimonial.image_path.replace('\\', '/')) }}"
+          alt="{{ testimonial.alt_text or 'Patient Feedback' }}" class="img-fluid rounded shadow">
 
-                {% else %}
-                <img src="{{ url_for('static', filename='img/default-testimonial.jpg') }}" alt="Default Feedback"
-                    class="img-fluid rounded shadow">
-                {% endif %}
-            </div>
-            {% endfor %}
-        </div>
+        {% else %}
+        <img src="{{ url_for('static', filename='img/default-testimonial.jpg') }}" alt="Default Feedback"
+          class="img-fluid rounded shadow">
+        {% endif %}
+      </div>
+      {% endfor %}
     </div>
+  </div>
 </section>
-<!-- Faq Section -->
 
 <section class="Aarogya_new_faq_main_section">
   <div class="Aarogya_new_faq-section">
@@ -242,7 +325,10 @@
           </h3>
           <div class="Aarogya_new_faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
             <div itemprop="text">
-              <p>When it’s about trusted healthcare, Bangalore never disappoints. It’s packed with trusted hospitals that handle everything from routine check-ups to major emergencies. Among them, Aarogya Hastha Hospital in Kasavanahalli stands out for its 24/7 emergency response, modern ICU, and expert doctors available round the clock.</p>
+              <p>When it’s about trusted healthcare, Bangalore never disappoints. It’s packed with trusted hospitals
+                that handle everything from routine check-ups to major emergencies. Among them, Aarogya Hastha Hospital
+                in Kasavanahalli stands out for its 24/7 emergency response, modern ICU, and expert doctors available
+                round the clock.</p>
             </div>
           </div>
         </div>
@@ -254,7 +340,12 @@
           </h3>
           <div class="Aarogya_new_faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
             <div itemprop="text">
-              <p>Aarogya Hastha Hospital has earned its spot among the best hospitals in Kasavanahalli by offering specialised treatment across 15+ departments, personalised patient care, and modern surgical facilities. The hospital is particularly renowned for its expert neurosurgery, advanced orthopaedic care, and specialised urology services, including kidney transplants. Its team of experienced doctors combines skill, technology, and a patient-first approach to deliver compassionate care and exceptional outcomes.</p>
+              <p>Aarogya Hastha Hospital has earned its spot among the best hospitals in Kasavanahalli by offering
+                specialised treatment across 15+ departments, personalised patient care, and modern surgical facilities.
+                The hospital is particularly renowned for its expert neurosurgery, advanced orthopaedic care, and
+                specialised urology services, including kidney transplants. Its team of experienced doctors combines
+                skill, technology, and a patient-first approach to deliver compassionate care and exceptional outcomes.
+              </p>
             </div>
           </div>
         </div>
@@ -266,7 +357,10 @@
           </h3>
           <div class="Aarogya_new_faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
             <div itemprop="text">
-              <p>If you’re searching for hospitals that balance quality and affordability, areas like Kasavanahalli, HSR Layout, and Sarjapur Road offer several options. Aarogya Hastha Hospital is known for transparent pricing, affordable health packages, and cashless insurance facilities, making it a top-rated choice for patients across Bangalore.</p>
+              <p>If you’re searching for hospitals that balance quality and affordability, areas like Kasavanahalli, HSR
+                Layout, and Sarjapur Road offer several options. Aarogya Hastha Hospital is known for transparent
+                pricing, affordable health packages, and cashless insurance facilities, making it a top-rated choice for
+                patients across Bangalore.</p>
             </div>
           </div>
         </div>
@@ -278,7 +372,9 @@
           </h3>
           <div class="Aarogya_new_faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
             <div itemprop="text">
-              <p>You can visit Aarogya Hastha Hospital anytime. The facility operates 24/7 for both emergency and outpatient care. Whether it’s a sudden health concern, routine consultation, or planned surgery, the hospital ensures expert medical attention without long waiting hours.</p>
+              <p>You can visit Aarogya Hastha Hospital anytime. The facility operates 24/7 for both emergency and
+                outpatient care. Whether it’s a sudden health concern, routine consultation, or planned surgery, the
+                hospital ensures expert medical attention without long waiting hours.</p>
             </div>
           </div>
         </div>
@@ -290,7 +386,10 @@
           </h3>
           <div class="Aarogya_new_faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
             <div itemprop="text">
-              <p>When selecting a hospital, look for three key things; experienced specialists, well-equipped infrastructure, and consistent patient feedback. The best hospitals in Bangalore also offer diagnostic and surgical services under one roof, much like Aarogya Hastha Hospital, which integrates multi-specialty care for better coordination and outcomes.</p>
+              <p>When selecting a hospital, look for three key things; experienced specialists, well-equipped
+                infrastructure, and consistent patient feedback. The best hospitals in Bangalore also offer diagnostic
+                and surgical services under one roof, much like Aarogya Hastha Hospital, which integrates
+                multi-specialty care for better coordination and outcomes.</p>
             </div>
           </div>
         </div>
@@ -302,7 +401,10 @@
           </h3>
           <div class="Aarogya_new_faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
             <div itemprop="text">
-              <p>Leading hospitals in Bangalore provide comprehensive patient facilities including advanced diagnostics, modular operation theatres, in-house pharmacies, ambulance services, and post-operative rehabilitation. Aarogya Hastha Hospital, for instance, extends all these under one roof — ensuring convenience and continuity of care.</p>
+              <p>Leading hospitals in Bangalore provide comprehensive patient facilities including advanced diagnostics,
+                modular operation theatres, in-house pharmacies, ambulance services, and post-operative rehabilitation.
+                Aarogya Hastha Hospital, for instance, extends all these under one roof — ensuring convenience and
+                continuity of care.</p>
             </div>
           </div>
         </div>
@@ -314,7 +416,9 @@
           </h3>
           <div class="Aarogya_new_faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
             <div itemprop="text">
-              <p>Yes, absolutely. Aarogya Hastha Hospital runs a fully equipped 24/7 emergency and trauma care unit supported by on-call specialists, ICU facilities, and ambulance services for quick response during critical situations.</p>
+              <p>Yes, absolutely. Aarogya Hastha Hospital runs a fully equipped 24/7 emergency and trauma care unit
+                supported by on-call specialists, ICU facilities, and ambulance services for quick response during
+                critical situations.</p>
             </div>
           </div>
         </div>
@@ -326,7 +430,9 @@
           </h3>
           <div class="Aarogya_new_faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
             <div itemprop="text">
-              <p>Treatment costs vary depending on the procedure, specialty, and facilities used. However, Aarogya Hastha Hospital is recognised for offering affordable packages and transparent billing, a big reason why many consider it one of the best hospitals in Bangalore for quality care at reasonable prices.</p>
+              <p>Treatment costs vary depending on the procedure, specialty, and facilities used. However, Aarogya
+                Hastha Hospital is recognised for offering affordable packages and transparent billing, a big reason why
+                many consider it one of the best hospitals in Bangalore for quality care at reasonable prices.</p>
             </div>
           </div>
         </div>
@@ -338,7 +444,9 @@
           </h3>
           <div class="Aarogya_new_faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
             <div itemprop="text">
-              <p>The hospital offers 15+ specialties including Orthopaedics, Cardiology, Gynaecology, Neurosurgery, Urology, ENT, General Medicine, Gastroenterology, and Physiotherapy. It also provides diagnostic imaging, pharmacy, and post-surgical care for complete medical support.</p>
+              <p>The hospital offers 15+ specialties including Orthopaedics, Cardiology, Gynaecology, Neurosurgery,
+                Urology, ENT, General Medicine, Gastroenterology, and Physiotherapy. It also provides diagnostic
+                imaging, pharmacy, and post-surgical care for complete medical support.</p>
             </div>
           </div>
         </div>
@@ -350,7 +458,9 @@
           </h3>
           <div class="Aarogya_new_faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
             <div itemprop="text">
-              <p>Yes, most multi-specialty hospitals in Kasavanahalli, including Aarogya Hastha Hospital, are empanelled with leading health insurance providers. Patients can easily avail of cashless admission and claim assistance for eligible treatments.</p>
+              <p>Yes, most multi-specialty hospitals in Kasavanahalli, including Aarogya Hastha Hospital, are empanelled
+                with leading health insurance providers. Patients can easily avail of cashless admission and claim
+                assistance for eligible treatments.</p>
             </div>
           </div>
         </div>
@@ -362,7 +472,8 @@
           </h3>
           <div class="Aarogya_new_faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
             <div itemprop="text">
-              <p>Booking an appointment is simple. Visit www.aarogyahastha.com, choose your department, and fill in the appointment form. You can also call their helpline for same-day consultations or emergency requests.</p>
+              <p>Booking an appointment is simple. Visit www.aarogyahastha.com, choose your department, and fill in the
+                appointment form. You can also call their helpline for same-day consultations or emergency requests.</p>
             </div>
           </div>
         </div>
@@ -374,7 +485,9 @@
           </h3>
           <div class="Aarogya_new_faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
             <div itemprop="text">
-              <p>Yes, Aarogya Hastha Hospital has a dedicated team of paediatricians and obstetricians experienced in child and maternal healthcare. From routine check-ups to advanced maternity services, the hospital ensures expert care in a safe and supportive environment.</p>
+              <p>Yes, Aarogya Hastha Hospital has a dedicated team of paediatricians and obstetricians experienced in
+                child and maternal healthcare. From routine check-ups to advanced maternity services, the hospital
+                ensures expert care in a safe and supportive environment.</p>
             </div>
           </div>
         </div>
@@ -386,7 +499,8 @@
           </h3>
           <div class="Aarogya_new_faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
             <div itemprop="text">
-              <p>Yes. The hospital houses its own diagnostic lab, radiology department, and pharmacy, enabling faster reports and medication access without patients having to step out of the facility.</p>
+              <p>Yes. The hospital houses its own diagnostic lab, radiology department, and pharmacy, enabling faster
+                reports and medication access without patients having to step out of the facility.</p>
             </div>
           </div>
         </div>
@@ -398,7 +512,9 @@
           </h3>
           <div class="Aarogya_new_faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
             <div itemprop="text">
-              <p>Patient feedback has been overwhelmingly positive. With an average rating of 4.7 stars on Google, most reviewers praise the hospital’s clean environment, caring staff, and prompt doctors, solidifying its reputation among the best hospitals in Kasavanahalli.</p>
+              <p>Patient feedback has been overwhelmingly positive. With an average rating of 4.7 stars on Google, most
+                reviewers praise the hospital’s clean environment, caring staff, and prompt doctors, solidifying its
+                reputation among the best hospitals in Kasavanahalli.</p>
             </div>
           </div>
         </div>
@@ -410,7 +526,9 @@
           </h3>
           <div class="Aarogya_new_faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
             <div itemprop="text">
-              <p>Yes. Aarogya Hastha’s Centre for Surgical Excellence is equipped for both major and minor procedures. The hospital also provides round-the-clock post-operative monitoring, physiotherapy support, and follow-up consultations for seamless recovery.</p>
+              <p>Yes. Aarogya Hastha’s Centre for Surgical Excellence is equipped for both major and minor procedures.
+                The hospital also provides round-the-clock post-operative monitoring, physiotherapy support, and
+                follow-up consultations for seamless recovery.</p>
             </div>
           </div>
         </div>
@@ -421,12 +539,11 @@
   </div>
 </section>
 
-<!-- Faq Section -->
-<section id="youtube-section" data-aos-easing="ease-in-sine" class="custom-video-section">
-    <div class="container-fluid position-relative">
-        <img src="https://i.ytimg.com/vi_webp/PpAr4GjuEsE/maxresdefault.webp" class="img-fluid">
-        <div data-vbg="https://www.youtube.com/watch?v=CgLJFg_9enI"></div>
-    </div>
+<section id="youtube-section" data-aos-easing="ease-in-sine" class="custom-video-section" style="margin-bottom: 40px;">
+  <div class="container-fluid position-relative">
+    <img src="https://i.ytimg.com/vi_webp/PpAr4GjuEsE/maxresdefault.webp" class="img-fluid">
+    <div data-vbg="https://www.youtube.com/watch?v=CgLJFg_9enI"></div>
+  </div>
 </section>
 
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
@@ -435,136 +552,174 @@
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script src="static/js/script.js"></script>
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
+  document.addEventListener("DOMContentLoaded", function () {
+    // Set larger heights for banner
+    const bannerContainer = document.querySelector('.banner-container');
+    const homeSlider = document.getElementById('HomeSlider');
 
-        // 1. FIX FOR SCROLL-TO-TOP ON REFRESH
-        // This forces the browser to scroll to the top of the page on reload.
-        if (history.scrollRestoration) {
-            history.scrollRestoration = 'manual';
-        }
-        window.scrollTo(0, 0);
+    if (bannerContainer && homeSlider) {
+      // Use viewport height or fixed large height
+      const viewportHeight = window.innerHeight;
+
+      // MODIFIED: Reduced min height from 900px to 700px and viewport from 90% to 80%
+      const bannerHeight = Math.max(700, viewportHeight * 0.8);
+
+      bannerContainer.style.height = bannerHeight + 'px';
+      bannerContainer.style.minHeight = bannerHeight + 'px';
+      homeSlider.style.height = '100%';
+
+      // Set individual item heights
+      const items = homeSlider.querySelectorAll('.item');
+      items.forEach(item => {
+        item.style.height = bannerHeight + 'px';
+        // Ensure images fill the container
+        const images = item.querySelectorAll('img');
+        images.forEach(img => {
+          img.style.height = '100%';
+          img.style.width = '100%';
+          img.style.objectFit = 'cover';
+        });
+      });
+    }
+
+    // Remove any gap spacers
+    const headerGapSpacer = document.querySelector('.header-gap-spacer');
+    if (headerGapSpacer) {
+      headerGapSpacer.remove();
+    }
+  });
 
 
-        // Function to hide/show sidebar based on scroll position
-        function toggleSidebarOnYouTubeSection() {
-            const youtubeSection = document.getElementById('youtube-section');
-            const sidebar = document.querySelector('.left-sidebar'); // Adjust selector as needed
+  document.addEventListener("DOMContentLoaded", function () {
 
-            if (!youtubeSection || !sidebar) return;
+    // 1. FIX FOR SCROLL-TO-TOP ON REFRESH
+    // This forces the browser to scroll to the top of the page on reload.
+    if (history.scrollRestoration) {
+      history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
 
-            const rect = youtubeSection.getBoundingClientRect();
-            const windowHeight = window.innerHeight || document.documentElement.clientHeight;
 
-            // Check if YouTube section is in view (with some threshold)
-            const isInView = rect.top <= windowHeight / 2 && rect.bottom >= windowHeight / 2;
+    // Function to hide/show sidebar based on scroll position
+    function toggleSidebarOnYouTubeSection() {
+      const youtubeSection = document.getElementById('youtube-section');
+      const sidebar = document.querySelector('.left-sidebar'); // Adjust selector as needed
 
-            if (isInView) {
-                sidebar.style.display = 'none';
-            } else {
-                sidebar.style.display = 'block'; // or whatever its default display value is
-            }
-        }
+      if (!youtubeSection || !sidebar) return;
 
-        // Add scroll event listener
-        window.addEventListener('scroll', toggleSidebarOnYouTubeSection);
+      const rect = youtubeSection.getBoundingClientRect();
+      const windowHeight = window.innerHeight || document.documentElement.clientHeight;
 
-        // Also call on page load in case the section is already in view
-        window.addEventListener('load', toggleSidebarOnYouTubeSection);
+      // Check if YouTube section is in view (with some threshold)
+      const isInView = rect.top <= windowHeight / 2 && rect.bottom >= windowHeight / 2;
 
-        function toggleSidebarOnYouTubeSection() {
-            const youtubeSection = document.getElementById('youtube-section');
-            const sidebar = document.querySelector('.left-sidebar');
+      if (isInView) {
+        sidebar.style.display = 'none';
+      } else {
+        sidebar.style.display = 'block'; // or whatever its default display value is
+      }
+    }
 
-            if (!youtubeSection || !sidebar) return;
+    // Add scroll event listener
+    window.addEventListener('scroll', toggleSidebarOnYouTubeSection);
 
-            const rect = youtubeSection.getBoundingClientRect();
-            const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+    // Also call on page load in case the section is already in view
+    window.addEventListener('load', toggleSidebarOnYouTubeSection);
 
-            const isInView = rect.top <= windowHeight / 2 && rect.bottom >= windowHeight / 2;
+    function toggleSidebarOnYouTubeSection() {
+      const youtubeSection = document.getElementById('youtube-section');
+      const sidebar = document.querySelector('.left-sidebar');
 
-            if (isInView) {
-                sidebar.classList.add('hidden');
-            } else {
-                sidebar.classList.remove('hidden');
-            }
-        }
+      if (!youtubeSection || !sidebar) return;
 
-        function debounce(func, wait) {
-            let timeout;
-            return function () {
-                const context = this, args = arguments;
-                clearTimeout(timeout);
-                timeout = setTimeout(() => func.apply(context, args), wait);
+      const rect = youtubeSection.getBoundingClientRect();
+      const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+
+      const isInView = rect.top <= windowHeight / 2 && rect.bottom >= windowHeight / 2;
+
+      if (isInView) {
+        sidebar.classList.add('hidden');
+      } else {
+        sidebar.classList.remove('hidden');
+      }
+    }
+
+
+    function debounce(func, wait) {
+      let timeout;
+      return function () {
+        const context = this, args = arguments;
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func.apply(context, args), wait);
+      };
+    }
+
+    window.addEventListener('scroll', debounce(toggleSidebarOnYouTubeSection, 10));
+
+    // Function to check if element is in viewport
+    function isInViewport(element) {
+      const rect = element.getBoundingClientRect();
+      return (
+        rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.9 &&
+        rect.bottom >= 0
+      );
+    }
+
+    // Function to animate counters
+    function animateCounters() {
+      const counters = document.querySelectorAll('.stat-number');
+      let animated = false;
+
+      return function () {
+        if (!animated && isInViewport(document.getElementById('stats-section'))) {
+          counters.forEach(counter => {
+            const target = +counter.getAttribute('data-count');
+            const duration = 1500; // 1.5 seconds
+            const increment = target / (duration / 16); // 60fps
+            let current = 0;
+
+            const updateCounter = () => {
+              current += increment;
+              if (current >= target) {
+                counter.textContent = target.toLocaleString() + '+';
+              } else {
+                counter.textContent = Math.floor(current).toLocaleString();
+                requestAnimationFrame(updateCounter);
+              }
             };
+
+            updateCounter();
+          });
+
+          animated = true;
         }
+      };
+    }
 
-        window.addEventListener('scroll', debounce(toggleSidebarOnYouTubeSection, 10));
+    // Create debounced version of the function
+    function debounce(func, wait) {
+      let timeout;
+      return function () {
+        const context = this, args = arguments;
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func.apply(context, args), wait);
+      };
+    }
 
-        // Function to check if element is in viewport
-        function isInViewport(element) {
-            const rect = element.getBoundingClientRect();
-            return (
-                rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.9 &&
-                rect.bottom >= 0
-            );
-        }
+    // Initialize the counter animation function
+    const checkCounters = animateCounters();
 
-        // Function to animate counters
-        function animateCounters() {
-            const counters = document.querySelectorAll('.stat-number');
-            let animated = false;
+    // Check on load and scroll
+    window.addEventListener('load', checkCounters);
+    window.addEventListener('scroll', debounce(checkCounters, 10));
 
-            return function () {
-                if (!animated && isInViewport(document.getElementById('stats-section'))) {
-                    counters.forEach(counter => {
-                        const target = +counter.getAttribute('data-count');
-                        const duration = 1500; // 1.5 seconds
-                        const increment = target / (duration / 16); // 60fps
-                        let current = 0;
-
-                        const updateCounter = () => {
-                            current += increment;
-                            if (current >= target) {
-                                counter.textContent = target.toLocaleString() + '+';
-                            } else {
-                                counter.textContent = Math.floor(current).toLocaleString();
-                                requestAnimationFrame(updateCounter);
-                            }
-                        };
-
-                        updateCounter();
-                    });
-
-                    animated = true;
-                }
-            };
-        }
-
-        // Create debounced version of the function
-        function debounce(func, wait) {
-            let timeout;
-            return function () {
-                const context = this, args = arguments;
-                clearTimeout(timeout);
-                timeout = setTimeout(() => func.apply(context, args), wait);
-            };
-        }
-
-        // Initialize the counter animation function
-        const checkCounters = animateCounters();
-
-        // Check on load and scroll
-        window.addEventListener('load', checkCounters);
-        window.addEventListener('scroll', debounce(checkCounters, 10));
-
-        // Also check immediately in case the section is already in view
-        checkCounters();
-    });
-    document.addEventListener("DOMContentLoaded", function () {
-        window.scrollTo(0, 0);
-    });
+    // Also check immediately in case the section is already in view
+    checkCounters();
+  });
+  document.addEventListener("DOMContentLoaded", function () {
+    window.scrollTo(0, 0);
+  });
 </script>
-<!-- FAQ Toggle Script -->
 <script>
   $(document).ready(function () {
     $(".Aarogya_new_faqs-container .Aarogya_new_faq-singular:first-child")
@@ -590,110 +745,107 @@
       }
     });
   });
-</script>
 
-<script>
-    // Add this JavaScript to handle the scroll behavior
-    document.addEventListener("DOMContentLoaded", function () {
-        const navbar = document.querySelector('.nav-container');
-        let lastScrollTop = 0;
-        const scrollThreshold = 100; // Adjust this value as needed
+  // Add this JavaScript to handle the scroll behavior
+  document.addEventListener("DOMContentLoaded", function () {
+    const navbar = document.querySelector('.nav-container');
+    let lastScrollTop = 0;
+    const scrollThreshold = 100; // Adjust this value as needed
 
-        window.addEventListener('scroll', function () {
-            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    window.addEventListener('scroll', function () {
+      let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
-            if (scrollTop > lastScrollTop && scrollTop > scrollThreshold) {
-                // Scrolling down
-                navbar.classList.remove('hide');
-            } else if (scrollTop < lastScrollTop) {
-                // Scrolling up
-                navbar.classList.add('hide');
-            }
+      if (scrollTop > lastScrollTop && scrollTop > scrollThreshold) {
+        // Scrolling down
+        navbar.classList.remove('hide');
+      } else if (scrollTop < lastScrollTop) {
+        // Scrolling up
+        navbar.classList.add('hide');
+      }
 
-            lastScrollTop = scrollTop;
+      lastScrollTop = scrollTop;
 
-            // --- 4. OWL CAROUSEL AND OTHER PLUGINS ---
-            if ($('.specialities-carousel').length) {
-                $('.specialities-carousel').owlCarousel({ loop: true, margin: 30, autoplay: true, autoplayTimeout: 2500, nav: true, responsive: { 0: { items: 1 }, 600: { items: 2 }, 1000: { items: 3 }, 1300: { items: 4 } } });
-            }
-            if ($('.doctors-carousel').length) {
-                $('.doctors-carousel').owlCarousel({ loop: true, margin: 40, autoplay: true, autoplayTimeout: 3500, nav: true, responsive: { 0: { items: 1 }, 600: { items: 2 }, 1000: { items: 4 } } });
-            }
-            if ($('.feedback-carousel').length) {
-                $('.feedback-carousel').owlCarousel({ loop: true, margin: 30, autoplay: true, autoplayTimeout: 4000, nav: true, dots: true, responsive: { 0: { items: 1 }, 1000: { items: 2 } } });
-            }
-            if ($('[data-vbg]').length) {
-                $('[data-vbg]').youtube_background({ 'play-button': true });
-            }
-            $(window).on('resize', () => {
-                $('[data-img-mob]').each(function () {
-                    $(this).attr('src', $(document).width() < 993 ? $(this).data('img-mob') : $(this).data('img-desk'));
-                });
-            }).trigger('resize');
+      // --- 4. OWL CAROUSEL AND OTHER PLUGINS ---
+      if ($('.specialities-carousel').length) {
+        $('.specialities-carousel').owlCarousel({ loop: true, margin: 30, autoplay: true, autoplayTimeout: 2500, nav: true, responsive: { 0: { items: 1 }, 600: { items: 2 }, 1000: { items: 3 }, 1300: { items: 4 } } });
+      }
+      if ($('.doctors-carousel').length) {
+        $('.doctors-carousel').owlCarousel({ loop: true, margin: 40, autoplay: true, autoplayTimeout: 3500, nav: true, responsive: { 0: { items: 1 }, 600: { items: 2 }, 1000: { items: 4 } } });
+      }
+      if ($('.feedback-carousel').length) {
+        $('.feedback-carousel').owlCarousel({ loop: true, margin: 30, autoplay: true, autoplayTimeout: 4000, nav: true, dots: true, responsive: { 0: { items: 1 }, 1000: { items: 2 } } });
+      }
+      if ($('[data-vbg]').length) {
+        $('[data-vbg]').youtube_background({ 'play-button': true });
+      }
+      $(window).on('resize', () => {
+        $('[data-img-mob]').each(function () {
+          $(this).attr('src', $(document).width() < 993 ? $(this).data('img-mob') : $(this).data('img-desk'));
         });
+      }).trigger('resize');
     });
+  });
 </script>
-
 <script>
-    // Counter animation function
-    function animateCounter(counter) {
-        const target = parseInt(counter.getAttribute('data-count'));
-        const duration = 2000; // 2 seconds
-        const increment = Math.ceil(target / (duration / 16)); // 60fps
-        let current = 0;
+  // Counter animation function
+  function animateCounter(counter) {
+    const target = parseInt(counter.getAttribute('data-count'));
+    const duration = 2000; // 2 seconds
+    const increment = Math.ceil(target / (duration / 16)); // 60fps
+    let current = 0;
 
-        const updateCounter = () => {
-            current += increment;
-            if (current >= target) {
-                counter.textContent = target;
-                if (counter.nextElementSibling && counter.nextElementSibling.classList.contains('suffix')) {
-                    counter.textContent = target + counter.nextElementSibling.textContent;
-                }
-            } else {
-                counter.textContent = current;
-                requestAnimationFrame(updateCounter);
-            }
-        };
+    const updateCounter = () => {
+      current += increment;
+      if (current >= target) {
+        counter.textContent = target;
+        if (counter.nextElementSibling && counter.nextElementSibling.classList.contains('suffix')) {
+          counter.textContent = target + counter.nextElementSibling.textContent;
+        }
+      } else {
+        counter.textContent = current;
+        requestAnimationFrame(updateCounter);
+      }
+    };
 
-        updateCounter();
-    }
+    updateCounter();
+  }
 
-    // Function to check if counters are in viewport
-    function isInViewport(element) {
-        const rect = element.getBoundingClientRect();
-        return (
-            rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.8 &&
-            rect.bottom >= 0
-        );
-    }
+  // Function to check if counters are in viewport
+  function isInViewport(element) {
+    const rect = element.getBoundingClientRect();
+    return (
+      rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.8 &&
+      rect.bottom >= 0
+    );
+  }
 
-    // Function to handle counter animation when scrolled into view
-    function handleCounterAnimation() {
-        const counters = document.querySelectorAll('.number');
-        let animated = false;
+  // Function to handle counter animation when scrolled into view
+  function handleCounterAnimation() {
+    const counters = document.querySelectorAll('.number');
+    let animated = false;
 
-        return function () {
-            if (!animated && document.getElementById('stats-section') &&
-                isInViewport(document.getElementById('stats-section'))) {
+    return function () {
+      if (!animated && document.getElementById('stats-section') &&
+        isInViewport(document.getElementById('stats-section'))) {
 
-                counters.forEach(counter => {
-                    animateCounter(counter);
-                });
+        counters.forEach(counter => {
+          animateCounter(counter);
+        });
 
-                animated = true;
-            }
-        };
-    }
+        animated = true;
+      }
+    };
+  }
 
-    // Initialize counter animation handler
-    const checkCounters = handleCounterAnimation();
+  // Initialize counter animation handler
+  const checkCounters = handleCounterAnimation();
 
-    // Check on load and scroll
-    window.addEventListener('load', checkCounters);
-    window.addEventListener('scroll', checkCounters);
+  // Check on load and scroll
+  window.addEventListener('load', checkCounters);
+  window.addEventListener('scroll', checkCounters);
 
-    // Also check immediately
-    checkCounters();
+  // Also check immediately
+  checkCounters();
 </script>
 
 

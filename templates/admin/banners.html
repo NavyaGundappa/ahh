@@ -27,6 +27,19 @@ Manage Banners - Admin Panel
             class="w-full px-3 py-2 border rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
     </div>
     <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="button_text_new">Button Text (Optional - e.g.,
+            Book
+            an Appointment)</label>
+        <input type="text" name="button_text" id="button_text_new"
+            class="w-full px-3 py-2 border rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+    </div>
+    <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="button_link_new">Button Link (Optional - e.g.,
+            /appointments or full URL)</label>
+        <input type="text" name="button_link" id="button_link_new" placeholder="/appointments"
+            class="w-full px-3 py-2 border rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+    </div>
+    <div class="mb-4">
         <label class="block text-gray-700 text-sm font-bold mb-2">Image</label>
         <input type="file" name="image"
             class="w-full px-3 py-2 border rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -83,36 +96,56 @@ Manage Banners - Admin Panel
 {% endif %}
 
 {% for banner in banners %}
-<div id="editModal-{{ banner.id }}"
-    class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden">
-    <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
-        <div class="mt-3 text-center">
-            <h3 class="text-lg leading-6 font-medium text-gray-900">Edit Banner</h3>
+<div id="editModal-{{ banner.id }}" class="modal fixed inset-0 z-50 overflow-auto bg-gray-900 bg-opacity-50 hidden">
+    <div class="relative top-20 mx-auto p-5 border w-full max-w-lg shadow-lg rounded-md bg-white">
+        <div class="mt-3">
+            <h3 class="text-lg leading-6 font-medium text-gray-900">Edit Banner: {{ banner.title }}</h3>
             <div class="mt-2 px-7 py-3">
-                <form method="POST" action="{{ url_for('edit_banner', banner_id=banner.id) }}"
+                <form action="{{ url_for('edit_banner', banner_id=banner.id) }}" method="POST"
                     enctype="multipart/form-data">
+
                     <div class="mb-4">
                         <label class="block text-gray-700 text-sm font-bold mb-2">Title</label>
                         <input type="text" name="title" value="{{ banner.title }}"
                             class="w-full px-3 py-2 border rounded shadow-sm" required>
                     </div>
+
                     <div class="mb-4">
                         <label class="block text-gray-700 text-sm font-bold mb-2">Alt Text</label>
-                        <input type="text" name="alt_text" value="{{ banner.alt_text }}"
+                        <input type="text" name="alt_text" value="{{ banner.alt_text or '' }}"
+                            class="w-full px-3 py-2 border rounded shadow-sm">
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2"
+                            for="button_text_{{ banner.id }}">Button Text (Optional)</label>
+                        <input type="text" name="button_text" id="button_text_{{ banner.id }}"
+                            value="{{ banner.button_text or '' }}" class="w-full px-3 py-2 border rounded shadow-sm">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2"
+                            for="button_link_{{ banner.id }}">Button Link (Optional)</label>
+                        <input type="text" name="button_link" id="button_link_{{ banner.id }}"
+                            value="{{ banner.button_link or '' }}" placeholder="/appointments"
                             class="w-full px-3 py-2 border rounded shadow-sm">
                     </div>
                     <div class="mb-4">
-                        <label class="block text-gray-700 text-sm font-bold mb-2">Current Image</label><br>
+                        <label class="block text-gray-700 text-sm font-bold mb-2">Current Image</label>
                         <img src="{{ url_for('static', filename='img/' + banner.image_path) }}"
-                            alt="{{ banner.alt_text }}" class="w-32 h-auto rounded mb-2">
+                            alt="Current Banner Image" class="max-w-xs h-auto mb-2">
+                        <input type="hidden" name="existing_image" value="{{ banner.image_path }}">
                     </div>
+
                     <div class="mb-4">
-                        <label class="block text-gray-700 text-sm font-bold mb-2">Upload New Image (optional)</label>
-                        <input type="file" name="image" class="w-full px-3 py-2 border rounded shadow-sm">
+                        <label class="block text-gray-700 text-sm font-bold mb-2">Upload New Image (Optional)</label>
+                        <input type="file" name="file" accept=".jpg, .jpeg, .png, .gif"
+                            class="w-full px-3 py-2 border rounded shadow-sm">
                     </div>
-                    <div class="flex items-center justify-between mt-4">
+
+                    <div class="items-center px-4 py-3">
                         <button type="submit"
-                            class="bg-blue-500 text-white px-4 py-2 rounded font-bold hover:bg-blue-700 transition">Update</button>
+                            class="bg-blue-500 text-white px-4 py-2 rounded font-bold hover:bg-blue-700 transition">Save
+                            Changes</button>
                         <button type="button" onclick="closeModal('editModal-{{ banner.id }}')"
                             class="bg-gray-500 text-white px-4 py-2 rounded font-bold hover:bg-gray-700 transition ml-2">Cancel</button>
                     </div>
