@@ -230,6 +230,8 @@ def admin_banners():
             # Path stored in DB should be relative to static/img
             # This will be "banners/filename.jpg"
             db_path = os.path.join('banners', filename).replace("\\", "/")
+            button_text = request.form.get('button_text')
+            button_link = request.form.get('button_link')
 
             # Save to DB
             banner = Banner(
@@ -237,6 +239,8 @@ def admin_banners():
                 # This will be used in templates like <img src="{{ url_for('static', filename='img/' + banner.image_path) }}">
                 image_path=db_path,
                 alt_text=alt_text,
+                button_text=button_text,  # <-- ADD THIS
+                button_link=button_link
 
             )
             db.session.add(banner)
@@ -281,6 +285,8 @@ def edit_banner(banner_id):
     if request.method == 'POST':
         banner.title = request.form.get('title')
         banner.alt_text = request.form.get('alt_text')
+        banner.button_text = request.form.get('button_text')
+        banner.button_link = request.form.get('button_link')
 
         # Check if a new file is uploaded
         if 'image' in request.files:

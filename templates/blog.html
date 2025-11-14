@@ -75,16 +75,27 @@
         /* Hide footer and scroll-to-top button to prevent scrolling issues */
     </style>
 
-    <section class="breadcrumb-section" id="breadcrumb-nav">
-        <div class="container-fluid">
+    <section class="breadcrumb-section">
+        <div class="container">
             <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="/">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Blog</li>
+                <ol class="breadcrumb" itemscope itemtype="http://schema.org/BreadcrumbList">
+                    <li class="breadcrumb-item" itemprop="itemListElement" itemscope
+                        itemtype="http://schema.org/ListItem">
+                        <a itemprop="item" href="/">
+                            <span itemprop="name">Home</span>
+                        </a>
+                        <meta itemprop="position" content="1">
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page" itemprop="itemListElement" itemscope
+                        itemtype="http://schema.org/ListItem">
+                        <span itemprop="name">Blog</span>
+                        <meta itemprop="position" content="2">
+                    </li>
                 </ol>
             </nav>
         </div>
     </section>
+
     <section class="search-filter-section">
         <div class="search-filter-container">
             <div class="search-box">

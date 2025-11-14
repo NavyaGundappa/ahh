@@ -2083,17 +2083,25 @@ h2 {
 }
 
 .owl-carousel.specialities-carousel .owl-stage {
-  align-items: start;
+  align-items: stretch;
 }
 
 .specialities-carousel .item {
   cursor: pointer;
   height: 100%;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: start;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 15px;
+  box-sizing: border-box;
+}
+
+.specialities-carousel .item p {
+  flex-grow: 1;
+  margin-bottom: 0;
+  font-size: 0.9em;
 }
 
 .owl-carousel.specialities-carousel .owl-stage .owl-item h4 {

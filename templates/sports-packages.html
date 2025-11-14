@@ -197,17 +197,26 @@
     transform: translateY(-2px);
   }
 </style>
-
 <section class="breadcrumb-section">
   <div class="container">
     <nav aria-label="breadcrumb">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="/">Home</a></li>
-        <li class="breadcrumb-item active">Sports Packages</li>
+      <ol class="breadcrumb" itemscope itemtype="http://schema.org/BreadcrumbList">
+        <li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+          <a itemprop="item" href="/">
+            <span itemprop="name">Home</span>
+          </a>
+          <meta itemprop="position" content="1">
+        </li>
+        <li class="breadcrumb-item active" aria-current="page" itemprop="itemListElement" itemscope
+          itemtype="http://schema.org/ListItem">
+          <span itemprop="name">Sports Packages</span>
+          <meta itemprop="position" content="2">
+        </li>
       </ol>
     </nav>
   </div>
 </section>
+
 
 <div class="health-packages-container">
   {% for package in packages %}

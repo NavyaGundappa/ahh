@@ -66,15 +66,28 @@
 <section class="breadcrumb-section">
     <div class="container">
         <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Home</a></li>
-                <li class="breadcrumb-item"><a href="/departments/">Departments</a></li>
-                <li class="breadcrumb-item active" aria-current="page">{{ department.name }}</li>
+            <ol class="breadcrumb" itemscope itemtype="http://schema.org/BreadcrumbList">
+                <li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                    <a itemprop="item" href="/">
+                        <span itemprop="name">Home</span>
+                    </a>
+                    <meta itemprop="position" content="1">
+                </li>
+                <li class="breadcrumb-item active" aria-current="page" itemprop="itemListElement" itemscope
+                    itemtype="http://schema.org/ListItem">
+                    <span itemprop="name">Departments</span>
+                    <meta itemprop="position" content="2">
+                </li>
+                <li class="breadcrumb-item active" aria-current="page" itemprop="itemListElement" itemscope
+                    itemtype="http://schema.org/ListItem">
+                    <span itemprop="name">Nephrology</span>
+                    <meta itemprop="position" content="3">
+                </li>
             </ol>
         </nav>
     </div>
 </section>
-</section>
+
 <section class="department-banner" data-aos="fade-up" data-aos-offset="300" data-aos-easing="ease-in-sine">
     <div class="container">
         <div class="banner" style="position: relative;">
@@ -757,8 +770,6 @@
                 margin-bottom: 1rem;
             }
         </style>
-
-
 
         <div class="tab-pane fade" id="blog-tab-pane" role="tabpanel" aria-labelledby="blog-tab">
             <section class="py-4">

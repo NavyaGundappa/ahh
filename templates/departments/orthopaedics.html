@@ -66,14 +66,26 @@
 <section class="breadcrumb-section">
     <div class="container">
         <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Home</a></li>
-                <li class="breadcrumb-item"><a href="/departments/">Departments</a></li>
-                <li class="breadcrumb-item active" aria-current="page">{{ department.name }}</li>
+            <ol class="breadcrumb" itemscope itemtype="http://schema.org/BreadcrumbList">
+                <li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                    <a itemprop="item" href="/">
+                        <span itemprop="name">Home</span>
+                    </a>
+                    <meta itemprop="position" content="1">
+                </li>
+                <li class="breadcrumb-item active" aria-current="page" itemprop="itemListElement" itemscope
+                    itemtype="http://schema.org/ListItem">
+                    <span itemprop="name">Departments</span>
+                    <meta itemprop="position" content="2">
+                </li>
+                <li class="breadcrumb-item active" aria-current="page" itemprop="itemListElement" itemscope
+                    itemtype="http://schema.org/ListItem">
+                    <span itemprop="name">Orthopaedics</span>
+                    <meta itemprop="position" content="3">
+                </li>
             </ol>
         </nav>
     </div>
-</section>
 </section>
 <section class="department-banner" data-aos="fade-up" data-aos-offset="300" data-aos-easing="ease-in-sine">
     <div class="container">
@@ -237,11 +249,12 @@
                     <!-- FAQ Section -->
                     <!-- FAQ Section -->
                     {% if faqs %}
-                   <div class="faq-section" itemscope itemtype="https://schema.org/FAQPage">
+                    <div class="faq-section" itemscope itemtype="https://schema.org/FAQPage">
                         <h3 class="section-header">Frequently Asked Questions</h3>
                         <div class="faq-container">
                             {% for faq in faqs %}
-                            <div class="faq-item" itemprop="mainEntity" itemscope itemtype="https://schema.org/Question">
+                            <div class="faq-item" itemprop="mainEntity" itemscope
+                                itemtype="https://schema.org/Question">
                                 <button class="faq-question">
                                     <span class="faq-question-text" itemprop="name">{{ faq.question }}</span>
                                     <svg class="faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -249,7 +262,8 @@
                                             d="M19 9l-7 7-7-7"></path>
                                     </svg>
                                 </button>
-                                <div class="faq-answer" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer">
+                                <div class="faq-answer" itemprop="acceptedAnswer" itemscope
+                                    itemtype="https://schema.org/Answer">
                                     <div itemprop="text">
                                         {{ faq.answer|replace('
                                         ', '<br>')|safe }}
