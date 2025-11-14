@@ -2268,12 +2268,20 @@ h2 {
   color: #fff;
 }
 
-#HomeSlider .item .cover .header-content h1 {
+#HomeSlider .item .cover .header-content h1,
+#HomeSlider .item .cover .header-content h2 {
   font-size: 2.4em;
   font-weight: 800;
   margin: 5px 0 20px;
   word-spacing: 3px;
   color: #fff;
+}
+
+section.home_headtag h1 {
+  font-size: 2.5rem;
+  width: 85%;
+  margin: auto auto 30px;
+
 }
 
 #HomeSlider .item .cover .header-content h4 {
@@ -5461,3 +5469,11 @@ main p {
     display: none;
     padding: 20px 0px 20px 30px;
   }
+
+@media screen and (max-width: 600px) {
+section.home_headtag h1 {
+    font-size: 32px;
+    width: 100%;
+    margin: auto auto 30px;
+}
+}
