@@ -88,13 +88,21 @@ class Counter(db.Model):
 
 class Testimonial(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    image_path = db.Column(db.String(300), nullable=False)
-    alt_text = db.Column(db.String(200))
+    patient_name = db.Column(db.String(200), nullable=False)
+    content = db.Column(db.Text, nullable=False)
+    doctor_id = db.Column(db.Integer, db.ForeignKey(
+        'doctors.id'), nullable=False)
+    doctor = db.relationship('Doctor', foreign_keys=[doctor_id], backref=db.backref(
+        'primary_testimonials', lazy=True))
+    doctor2_id = db.Column(
+        db.Integer, db.ForeignKey('doctors.id'), nullable=True)
+    doctor2 = db.relationship('Doctor', foreign_keys=[doctor2_id], backref=db.backref(
+        'secondary_testimonials', lazy=True))
     is_active = db.Column(db.Boolean, default=True)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
     def __repr__(self):
-        return f'<Testimonial {self.id}>'
+        return f'<Testimonial {self.patient_name}>'
 
 
 class Speciality(db.Model):

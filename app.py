@@ -26,6 +26,8 @@ from config import Config
 import os
 from functools import wraps
 import io
+from sqlalchemy.orm import joinedload
+from models import db, Banner, Doctor, Counter, Testimonial, Speciality, Department,  HealthPackage, SportsPackage, DepartmentOverview, DepartmentService, User, UserAccess, CallbackRequest, ReviewMessage, Blog, BMWReportPDF, FAQ, DepartmentTestimonial
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
@@ -61,7 +63,9 @@ def index():
         Banner.created_at.desc()).all()
     doctors = Doctor.query.filter_by(is_active=True).all()
     counters = Counter.query.filter_by(is_active=True).all()
-    testimonials = Testimonial.query.filter_by(is_active=True).all()
+    testimonials = Testimonial.query.filter_by(is_active=True).options(
+        joinedload(Testimonial.doctor)
+    ).order_by(Testimonial.created_at.desc()).all()
 
     # Add this line to get specialities/departments
     specialities = Speciality.query.filter_by(
@@ -453,7 +457,6 @@ def add_doctor_function(request, departments):
     talks_links = request.form.get('talks_links', '').strip()
     appointment_link = request.form.get('appointment_link', '').strip()
     department_slug = request.form.get('department_slug', '').strip()
-    doctor.slug = request.form.get('slug', '').strip()
 
     # ----- Collect timings with days -----
     time_from_hour = request.form.getlist('time_from_hour[]')
@@ -583,6 +586,7 @@ def edit_doctor_function(request, departments):
     doctor.talks_links = request.form.get('talks_links', '').strip()
     doctor.appointment_link = request.form.get('appointment_link', '').strip()
     doctor.department_slug = request.form.get('department_slug', '').strip()
+    doctor.slug = request.form.get('slug', '').strip()
 
     # ----- Collect timings with days -----
     time_from_hour = request.form.getlist('time_from_hour[]')
@@ -847,16 +851,14 @@ def generate_department_html(department):
     file_content = """
 {% extends "base.html" %}
 
-{% block title %}Best Orthopedic Surgeon in Bangalore | Aarogya Hastha Hospitals.{% endblock %}
+{% block title %}Best {{ department.name }} in Bangalore | Aarogya Hastha Hospitals.{% endblock %}
 
 {% block head %}
 {{ super() }}
-<meta name="description"
-    content="Discover advanced GI treatments at Aarogya Hastha—endoscopy, laparoscopic surgery, liver & pancreatic care. Book your consultation today!">
 <meta name="keywords" content="">
 <meta name="author" content="Aarogyahastha Pvt Ltd">
 <meta name="designer" content="Aarogyahastha Pvt Ltd">
-<link rel="canonical" href="https://aarogyahastha.com/departments/{{ department.name }}" />
+<link rel="canonical" href="https://aarogyahastha.com/departments/{{ department.name }}">
 <meta name="no-email-collection" content="http://www.unspam.com/noemailcollection/">
 <meta name="google-site-verification" content="T3QqCQjcJP8HqwIYaCHz3AZHCSXJDF-NJfE8GNiSb-Q" />
 <meta name="robots" content="index,follow">
@@ -913,10 +915,23 @@ def generate_department_html(department):
 <section class="breadcrumb-section">
     <div class="container">
         <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Home</a></li>
-                <li class="breadcrumb-item"><a href="/departments/">Departments</a></li>
-                <li class="breadcrumb-item active" aria-current="page">{{ department.name }}</li>
+            <ol class="breadcrumb" itemscope itemtype="http://schema.org/BreadcrumbList">
+                <li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                    <a itemprop="item" href="/">
+                        <span itemprop="name">Home</span>
+                    </a>
+                    <meta itemprop="position" content="1">
+                </li>
+                <li class="breadcrumb-item active" aria-current="page" itemprop="itemListElement" itemscope
+                    itemtype="http://schema.org/ListItem">
+                    <span itemprop="name">Departments</span>
+                    <meta itemprop="position" content="2">
+                </li>
+                <li class="breadcrumb-item active" aria-current="page" itemprop="itemListElement" itemscope
+                    itemtype="http://schema.org/ListItem">
+                    <span itemprop="name">{{ department.name }}</span>
+                    <meta itemprop="position" content="3">
+                </li>
             </ol>
         </nav>
     </div>
@@ -1970,40 +1985,46 @@ def delete_counter(counter_id):
     return redirect(url_for('admin_counters'))
 
 
+# [app.py]
 @app.route('/admin/testimonials', methods=['GET', 'POST'])
 @login_required
 @permission_required('testimonials')
 def admin_testimonials():
     if request.method == 'POST':
-        alt_text = request.form.get('alt_text', '')
+        # --- MODIFIED POST LOGIC ---
+        patient_name = request.form.get('patient_name')
+        content = request.form.get('content')
+        doctor1_id = request.form.get('doctor1_id')  # Changed from doctor_id
+        doctor2_id = request.form.get('doctor2_id')  # Added doctor2_id
 
-        if 'image' not in request.files:
-            flash('No file part', 'danger')
+        if not patient_name or not content or not doctor1_id:  # Updated validation
+            flash('Patient Name, Content, and Primary Doctor are required', 'danger')
             return redirect(request.url)
 
-        file = request.files['image']
-        if file.filename == '':
-            flash('No selected file', 'danger')
-            return redirect(request.url)
+        # Removed patient image logic
 
-        if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            filepath = os.path.join('testimonials', filename)
-            save_path = os.path.join(app.config['UPLOAD_FOLDER'], filepath)
+        testimonial = Testimonial(
+            patient_name=patient_name,
+            content=content,
+            doctor_id=int(doctor1_id),  # Use doctor1_id
+            # Use doctor2_id
+            doctor2_id=int(doctor2_id) if doctor2_id else None
+        )
+        # --- END MODIFIED POST LOGIC ---
 
-            # Ensure folder exists
-            os.makedirs(os.path.dirname(save_path), exist_ok=True)
+        db.session.add(testimonial)
+        db.session.commit()
+        flash('Testimonial added successfully!', 'success')
+        return redirect(url_for('admin_testimonials'))
 
-            file.save(save_path)
-
-            testimonial = Testimonial(image_path=filepath, alt_text=alt_text)
-            db.session.add(testimonial)
-            db.session.commit()
-            flash('Testimonial added successfully!', 'success')
-            return redirect(url_for('admin_testimonials'))
-
+    # --- MODIFIED GET LOGIC ---
     testimonials = Testimonial.query.order_by(
         Testimonial.created_at.desc()).all()
+
+    # Fetch doctors for the dropdown
+    doctors = Doctor.query.filter_by(
+        is_active=True).order_by(Doctor.name).all()
+
     admin_id = session.get("admin_id")
     user = User.query.get(admin_id)
     modules = ['banners', 'doctors', 'counters', 'testimonials', 'specialities',
@@ -2012,21 +2033,46 @@ def admin_testimonials():
     if user and user.access:
         for module in modules:
             access[module] = getattr(user.access, module, False)
-    return render_template('admin/testimonials.html', testimonials=testimonials, access=access, current_user=user)
 
-# Route to delete testimonial
+    return render_template(
+        'admin/testimonials.html',
+        testimonials=testimonials,
+        doctors=doctors,  # Pass doctors to the template
+        access=access,
+        current_user=user
+    )
+
+# [app.py]
+
+
+@app.route('/admin/testimonials/edit/<int:testimonial_id>', methods=['POST'])
+@login_required
+@permission_required('testimonials')
+def edit_testimonial(testimonial_id):
+    testimonial = Testimonial.query.get_or_404(testimonial_id)
+
+    patient_name = request.form.get('patient_name')
+    content = request.form.get('content')
+    doctor1_id = request.form.get('doctor1_id')
+    doctor2_id = request.form.get('doctor2_id')
+
+    if not patient_name or not content or not doctor1_id:
+        flash('Patient Name, Content, and Primary Doctor are required', 'danger')
+        return redirect(url_for('admin_testimonials'))
+
+    testimonial.patient_name = patient_name
+    testimonial.content = content
+    testimonial.doctor_id = int(doctor1_id)
+    testimonial.doctor2_id = int(doctor2_id) if doctor2_id else None
+
+    db.session.commit()
+    flash('Testimonial updated successfully!', 'success')
+    return redirect(url_for('admin_testimonials'))
 
 
 @app.route('/admin/testimonials/delete/<int:testimonial_id>', methods=['POST'])
 def delete_testimonial(testimonial_id):
     testimonial = Testimonial.query.get_or_404(testimonial_id)
-
-    # Delete image file from static folder if exists
-    if testimonial.image_path:
-        image_path = os.path.join(
-            app.config['UPLOAD_FOLDER'], testimonial.image_path)
-        if os.path.exists(image_path):
-            os.remove(image_path)
 
     db.session.delete(testimonial)
     db.session.commit()

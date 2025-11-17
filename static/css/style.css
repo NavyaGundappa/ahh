@@ -179,13 +179,19 @@ a:hover {
 }
 
 .hero-section .banner {
-  max-width: 1320px;
+  max-width: 100% !important;
   margin: 0 auto;
-  border-radius: 12px;
+  border-radius: 0;
   overflow: hidden;
   position: relative;
   height: 450px;
 }
+
+#hero-click-area {
+  cursor: pointer;
+}
+
+
 
 @media (max-width: 991.98px) {
   .hero-section .banner {
@@ -206,32 +212,41 @@ a:hover {
   display: block;
 }
 
+#hero-banner-image-container {
+  height: 80vh;
+  width: 100%;
+  background-image: url('path/to/your/image.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  background-attachment: fixed;
+}
+
 @media (max-width: 575.98px) {
   .hero-section .banner .item img {
-    object-fit: contain;
+    object-fit: cover;
     object-position: center;
     background-color: #f5f5f5;
   }
 }
 
-
-.hero-section {
-  position: relative;
-  padding: 0;
-  margin: 0;
+.banner-container,
+#HomeSlider .item {
+  height: auto !important;
+  min-height: 550px !important;
 }
 
 .hero-section .banner-container {
-  max-width: 1320px;
+  max-width: 85% !important;
   margin: 0 auto;
-  padding: 0 15px;
+  padding: 0 !important;
 }
 
 .banner {
-  width: 100%;
+  width: 100% !important;
   height: auto;
   aspect-ratio: 16 / 7;
-  border-radius: 12px;
+  border-radius: 0 !important;
   overflow: visible !important;
   position: relative;
 }
@@ -244,27 +259,28 @@ a:hover {
 
 .banner .item img {
   width: 100%;
-  height: 100%;
+  height: auto;
   object-fit: cover;
   object-position: center;
   border-radius: 12px;
 }
 
 .banner .item .cover {
-  position: absolute;
+  position: fixed;
   inset: 0;
+  z-index: 1050;
   background: rgba(0, 128, 128, 0.6);
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 20px;
   text-align: center;
+  margin-top: -150px;
 }
 
 .banner .header-content {
   color: #fff;
   max-width: 80%;
-  /* ✅ Keeps text inside container */
 }
 
 .banner .header-content h1 {
@@ -291,18 +307,15 @@ a:hover {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
-/* ✅ Tablet & mobile adjustments */
 @media (max-width: 991.98px) {
   .banner {
     aspect-ratio: 16 / 9;
-    /* taller on tablets */
   }
 }
 
 @media (max-width: 575.98px) {
   .banner {
     aspect-ratio: 4 / 3;
-    /* ✅ even taller for mobile */
   }
 
   .banner .header-content h1 {
@@ -522,7 +535,6 @@ h2 {
   height: 14px;
   border-radius: 50%;
   background: #363333 !important;
-  /* Light grey for inactive dots */
   border: 2px solid #aaa3a3 !important;
   transition: all 0.3s ease;
   padding: 0;
@@ -531,7 +543,6 @@ h2 {
 
 .doctors-carousel .owl-dots button.active {
   background: #666666 !important;
-  /* Dark grey for active dot */
   border-color: #666666 !important;
   transform: scale(1.2);
 }
@@ -566,11 +577,9 @@ h2 {
 
 .doctors-carousel .doctor-content {
   flex-grow: 1;
-  /* content stretches to push button down */
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  /* keeps content at top */
 }
 
 /* Owl Carousel Navigation */
@@ -764,22 +773,22 @@ h2 {
   padding-right: 50px;
 }
 
-/* Specific styling for the HomeSlider navigation arrows */
-/* ===== Home Slider Navigation ===== */
+/* ===== Home Slider Navigation - BIT CLOSER EXTERNAL ARROWS ===== */
 #HomeSlider.owl-carousel .owl-nav {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: 100%;
+  width: calc(100% +40px);
+  left: -60px;
   display: flex;
   justify-content: space-between;
-  padding: 0 20px;
+  padding: 0;
   z-index: 10;
 }
 
 #HomeSlider.owl-carousel .owl-nav .owl-prev,
 #HomeSlider.owl-carousel .owl-nav .owl-next {
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.9);
   color: var(--brand-dark);
   border: none;
   width: 50px;
@@ -792,14 +801,44 @@ h2 {
   font-size: 1.5em;
   transition: var(--transition);
   box-shadow: var(--shadow-sm);
+  position: relative;
 }
 
-#HomeSlider.owl-carousel .owl-nav .owl-prev:hover,
-#HomeSlider.owl-carousel .owl-nav .owl-next:hover {
-  background: var(--brand-teal);
-  color: white;
-  box-shadow: var(--shadow-md);
+#HomeSlider.owl-carousel .owl-nav .owl-prev {
+  left: -10px;
 }
+
+#HomeSlider.owl-carousel .owl-nav .owl-next {
+  right: -10px;
+}
+
+
+/* For larger screens */
+@media (min-width: 1200px) {
+  #HomeSlider.owl-carousel .owl-nav {
+    width: calc(105% + 40px);
+    left: -50px;
+  }
+
+  #HomeSlider.owl-carousel .owl-nav .owl-prev {
+    left: -5px;
+  }
+
+  #HomeSlider.owl-carousel .owl-nav .owl-next {
+    right: -5px;
+  }
+}
+
+/* Ensure hero section container has proper positioning */
+.hero-section .container {
+  position: relative;
+  overflow: visible;
+}
+
+.banner-container {
+  overflow: visible !important;
+}
+
 
 /* Dots styling for mobile */
 #HomeSlider.owl-carousel .owl-dots {
@@ -830,24 +869,20 @@ h2 {
 @media (max-width: 767px) {
   #HomeSlider.owl-carousel .owl-nav {
     display: none;
-    /* Hide arrows on mobile */
   }
 
   #HomeSlider.owl-carousel .owl-dots {
     display: flex;
-    /* Show dots on mobile */
   }
 }
 
 @media (min-width: 768px) {
   #HomeSlider.owl-carousel .owl-dots {
     display: none;
-    /* Hide dots on desktop */
   }
 
   #HomeSlider.owl-carousel .owl-nav {
     display: flex;
-    /* Show arrows on desktop */
   }
 }
 
@@ -911,14 +946,6 @@ h2 {
   height: auto;
 }
 
-/*.about-tab-section #who-we-are .text-box-1 {
-  max-width: 650px;
-  position: absolute;
-  background-color: white;
-  padding: 25px;
-  bottom: 50px;
-  right: 0;
-}*/
 .about-tab-section #who-we-are .text-box-1 {
   max-width: 650px;
   position: absolute;
@@ -1040,8 +1067,6 @@ h2 {
 .service-carousel-section img.dept-icon {
   max-width: 80px;
   height: auto;
-  /*  position: absolute;
-  top: 0;*/
 }
 
 .item .icon {
@@ -1307,15 +1332,10 @@ h2 {
   }
 }
 
-/* White Background Contact Section */
-/*
- * A clean and simple CSS style for the Contact section.
- * This style uses a minimalist approach for a modern and professional look.
- */
+
 
 .contact-details {
   background: #ffffff;
-  /* A clean white background */
   font-family: 'Poppins', sans-serif;
   padding: 5rem 0;
 }
@@ -3025,11 +3045,6 @@ ul {
   border: none !important;
 }
 
-/* Remove default margin on the first section to avoid extra space at the top */
-.hero-section {
-  padding-top: 0;
-}
-
 .dedicated-section-one .section-heading {
   text-align: center;
   /* centers the heading */
@@ -3714,12 +3729,7 @@ ul {
   filter: brightness(0) invert(1);
 }
 
-/* Make the card content a flex column */
-/* Make the card a flex container */
-/* Ensure card is a flex container */
-/* Ensure the card uses full height and flex column */
-/* Make all carousel items the same height */
-/* Ensure all doctor cards have the same height */
+
 .doctors-carousel .item {
   display: flex;
   flex-direction: column;
@@ -4065,6 +4075,193 @@ ul {
     padding: 40px 0;
   }
 }
+
+/* --- UPDATED TESTIMONIALS STYLING (REDUCED FIXED HEIGHT) --- */
+
+/* 1. Owl Carousel Stage & Item - Force equal height again */
+.feedback-carousel .owl-stage {
+  display: flex;
+  align-items: stretch;
+  /* Makes all items stretch to the same height */
+}
+
+.feedback-carousel .owl-item {
+  height: auto;
+}
+
+.feedback-carousel .item {
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 5px;
+
+}
+
+.testimonial-card-new {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: var(--shadow-md);
+  border-top: 4px solid var(--brand-teal);
+  padding: 20px;
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 380px;
+  overflow: hidden;
+  width: 100%;
+}
+
+.testimonial-card-new:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* 3. The Review Content (Takes up available space) */
+.review-content {
+  flex-grow: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding-top: 10px;
+  padding-right: 5px;
+  margin-bottom: 15px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--brand-teal) #f1f1f1;
+}
+
+.review-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.review-content::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.review-content::-webkit-scrollbar-thumb {
+  background: var(--brand-teal);
+  border-radius: 4px;
+}
+
+.review-content::-webkit-scrollbar-thumb:hover {
+  background: var(--brand-dark);
+}
+
+/* Quote Icon styling (remains largely the same) */
+.review-content::before {
+  content: "\201C";
+  font-family: sans-serif;
+  font-size: 4rem;
+  color: var(--brand-teal);
+  opacity: 0.15;
+  position: absolute;
+  top: -10px;
+  left: -5px;
+  line-height: 1;
+  z-index: 1;
+}
+
+/* 4. Patient Info */
+.patient-info {
+  margin-bottom: 10px;
+  z-index: 2;
+}
+
+.patient-name {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  color: var(--brand-dark);
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+/* 5. The Review Text */
+.review-text {
+  font-style: italic;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text-color);
+  margin-bottom: 15px;
+  flex-grow: 1;
+  /* Ensures text area expands to fill remaining space */
+  z-index: 2;
+  /* If content exceeds the fixed height, the overflow will still be visible */
+}
+
+.doctor-info-linked {
+  display: flex;
+  align-items: center;
+  /* Vertically center photos and text block */
+  gap: 10px;
+  /* Space between photos and text */
+  padding: 12px;
+  background: #f8f9fa;
+  border-radius: 10px;
+  border-left: 4px solid var(--brand-teal);
+  flex-shrink: 0;
+  margin-top: auto;
+  z-index: 2;
+  overflow: hidden;
+}
+
+.doctor-info-linked .doctor-name {
+  margin: 0;
+  font-size: 0.95rem;
+  /* UNIFIED FONT SIZE */
+  color: var(--brand-dark);
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.2;
+}
+
+.doctor-info-linked div {
+  flex: 1;
+  line-height: 1.3;
+}
+
+.doctor-info-linked .doctor-name {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--brand-dark);
+  font-weight: 700;
+}
+
+.doctor-info-linked .doctor-designation {
+  margin: 0;
+  font-size: 0.8rem;
+  color: #777;
+  font-weight: 400;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.2;
+}
+
+/* 7. Owl Carousel Dots */
+.feedback-carousel .owl-dots {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.feedback-carousel .owl-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #ccc !important;
+  margin: 0 5px;
+  transition: var(--transition);
+}
+
+.feedback-carousel .owl-dot.active {
+  background: var(--brand-teal) !important;
+  transform: scale(1.2);
+}
+
+
 
 .new-header {
   position: sticky;
@@ -5141,112 +5338,209 @@ main p {
   text-decoration: underline;
 }
 
-/* Testimonials Section Styles */
+/* --- Updated Testimonials Styling (Focusing on Doctor's Photo/Details) --- */
 
-/* Testimonials Section Styles */
-.testimonials-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.5rem;
-  margin-bottom: 2rem;
-}
-
-@media (min-width: 768px) {
-  .testimonials-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (min-width: 1024px) {
-  .testimonials-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
+/* 1. Reset/Base Card Styling */
 .testimonial-card {
-  background: white;
-  border-radius: 0.75rem;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  padding: 1.5rem;
-  border-left: 4px solid;
-  transition: all 0.3s ease;
-  height: fit-content;
+  background: #ffffff;
+  border-radius: 12px;
+  /* Use a shadow from existing variables for consistency */
+  box-shadow: var(--shadow-md);
+  /* Existing Shadow */
+  padding: 30px;
+  border-top: 4px solid var(--brand-teal);
+  /* Top border for a modern look */
+  transition: var(--transition);
+  /* Existing Transition */
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: left;
+  /* Align text content to the left */
 }
 
 .testimonial-card:hover {
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-  transform: translateY(-2px);
+  transform: translateY(-5px);
+  /* Slightly lift on hover */
+  box-shadow: var(--shadow-lg);
+  /* Larger shadow on hover */
 }
 
-.testimonial-card.blue {
-  border-left-color: #3b82f6;
-}
-
-.testimonial-card.green {
-  border-left-color: #10b981;
-}
-
-.testimonial-card.purple {
-  border-left-color: #8b5cf6;
-}
-
-.testimonial-header {
-  display: flex;
-  align-items: center;
-  margin-bottom: 1rem;
-}
-
-.testimonial-avatar {
-  width: 3rem;
-  height: 3rem;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-right: 1rem;
-  font-weight: bold;
-  font-size: 1.125rem;
-}
-
-.avatar-blue {
-  background-color: #dbeafe;
-  color: #1d4ed8;
-}
-
-.avatar-green {
-  background-color: #d1fae5;
-  color: #047857;
-}
-
-.avatar-purple {
-  background-color: #ede9fe;
-  color: #7c3aed;
-}
-
-.testimonial-info h4 {
-  font-weight: 600;
-  color: #1f2937;
-  margin: 0;
-  font-size: 1rem;
-}
-
-.testimonial-info p {
-  font-size: 0.875rem;
-  color: #6b7280;
-  margin: 0.25rem 0 0 0;
-}
-
-.testimonial-text {
-  color: #4b5563;
+/* 2. Testimonial Content Styling */
+.testimonial-card p {
   font-style: italic;
+  font-size: 1.05rem;
   line-height: 1.6;
-  margin-bottom: 0.75rem;
+  color: var(--text-color);
+  /* Lighter text color */
+  margin-bottom: 20px;
+  position: relative;
+  padding-top: 15px;
+  /* Space for the quote symbol */
+  flex-grow: 1;
+  /* Allows the content to fill available space */
 }
 
-.testimonial-rating {
+/* Quote Symbol */
+.testimonial-card p::before {
+  content: "\201C";
+  /* Left double quote */
+  font-family: sans-serif;
+  font-size: 4rem;
+  color: var(--brand-teal);
+  /* Use brand color */
+  opacity: 0.15;
+  position: absolute;
+  top: -10px;
+  left: 0;
+  line-height: 1;
+  z-index: 1;
+}
+
+/* 3. Doctor Details Wrapper (Flex layout for photo and text) */
+.doctor-details-wrapper {
   display: flex;
-  color: #fbbf24;
-  font-size: 1.125rem;
+  align-items: center;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+  /* Separator line */
+}
+
+.doctor-info-linked .doctor-photo {
+  width: 50px !important;
+  height: 50px !important;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid white;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Ensure the doctor info section aligns properly */
+.doctor-info-linked {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  background: #f8f9fa;
+  border-radius: 15px;
+  border-left: 4px solid var(--brand-teal);
+  margin-top: 15px;
+}
+
+.doctor-info-linked div {
+  flex: 1;
+  line-height: 1.3;
+  min-width: 0;
+}
+
+/* Photo Container and Image */
+.doctor-photo-container {
+  flex-shrink: 0;
+  /* Prevents the photo from shrinking */
+  width: 60px;
+  height: 60px;
+  margin-right: 15px;
+}
+
+.doctor-photo-stack {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 5px;
+  /* Space between photos if two exist */
+}
+
+.multi-doctor .doctor-photo-stack {
+  width: 110px;
+  display: flex;
+  gap: 5px;
+  position: relative;
+  justify-content: flex-start;
+}
+
+/* Position the first photo */
+.multi-doctor .photo-1 {
+  position: relative;
+}
+
+/* Position the second photo overlapped */
+.multi-doctor .photo-2 {
+  position: relative;
+  left: 0;
+}
+
+.multi-doctor .doctor-profile-split {
+  line-height: 1.2;
+}
+
+.multi-doctor .doctor-profile-split .doctor-name {
+  font-weight: 700;
+}
+
+.multi-doctor .doctor-name {
+  font-size: 0.95rem;
+  font-weight: 300;
+}
+
+.multi-doctor .doctor-designation {
+  font-size: 0.8rem;
+  font-weight: 400;
+}
+
+.multi-doctor .doctor-text-content {
+  justify-content: flex-start;
+  gap: 4px;
+}
+
+.doctor-photo-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  /* Circular photo */
+  border: 3px solid var(--brand-teal);
+  /* Small ring in brand color */
+}
+
+.doctor-text-content {
+  flex: 1;
+  /* Takes up the remaining space */
+  min-width: 0;
+  /* Prevents text overflow issues in flexbox */
+
+  /* Fixed height to ensure consistency regardless of content */
+  height: 70px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* Vertically center the text for single doctor */
+  gap: 2px;
+  /* Small gap between name and designation for single doctor */
+}
+
+/* Text Details (Name and Designation) */
+.doctor-text-details {
+  line-height: 1.2;
+}
+
+.doctor-text-details h4 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: var(--brand-dark);
+  /* Dark color for the name */
+  font-weight: 700;
+}
+
+.doctor-text-details p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #777777;
+  /* Subtler color for designation */
+  font-style: normal;
+  /* Important: reset font-style from the quote text */
+  padding-top: 2px;
 }
 
 /* FAQ Section Styles */

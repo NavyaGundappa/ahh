@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Best Cardiology Hospital in Bangalore | Aarogya Hastha{% endblock %}
+{% block title %}Best {{ department.name }} in Bangalore | Aarogya Hastha Hospitals.{% endblock %}
 
 {% block head %}
 {{ super() }}
@@ -9,7 +9,7 @@
 <meta name="keywords" content="">
 <meta name="author" content="Aarogyahastha Pvt Ltd">
 <meta name="designer" content="Aarogyahastha Pvt Ltd">
-<link rel="canonical" href="https://aarogyahastha.com/departments/cardiology">
+<link rel="canonical" href="https://aarogyahastha.com/departments/{{ department.name }}">
 <meta name="no-email-collection" content="http://www.unspam.com/noemailcollection/">
 <meta name="google-site-verification" content="T3QqCQjcJP8HqwIYaCHz3AZHCSXJDF-NJfE8GNiSb-Q" />
 <meta name="robots" content="index,follow">
@@ -63,7 +63,6 @@
         color: #6c757d;
     }
 </style>
-
 <section class="breadcrumb-section">
     <div class="container">
         <nav aria-label="breadcrumb">
@@ -81,7 +80,7 @@
                 </li>
                 <li class="breadcrumb-item active" aria-current="page" itemprop="itemListElement" itemscope
                     itemtype="http://schema.org/ListItem">
-                    <span itemprop="name">Cardiology</span>
+                    <span itemprop="name">{{ department.name }}</span>
                     <meta itemprop="position" content="3">
                 </li>
             </ol>
@@ -95,12 +94,10 @@
             {% if department.banner_path %}
             <img loading="lazy" src="{{ url_for('static', filename=department.banner_path) }}"
                 alt="{{ department.banner_alt_text or department.name }}"
-                title="{{ department.banner_alt_text or department.name }}"
                 style="width: 100%; height: 400px; object-fit: cover;">
             {% else %}
             <img loading="lazy" src="/static/img/banners/default.jpg"
                 alt="{{ department.banner_alt_text or department.name }}"
-                title="{{ department.banner_alt_text or department.name }}"
                 style="width: 100%; height: 400px; object-fit: cover;">
             {% endif %}
 
