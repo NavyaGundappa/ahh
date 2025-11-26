@@ -15,6 +15,7 @@ Manage Departments - Admin Panel
 
 <form method="POST" enctype="multipart/form-data" class="bg-white p-6 rounded shadow-md mb-4">
     <h3 class="font-semibold text-lg mb-4">Add New Department</h3>
+
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
             <label class="block text-gray-700 text-sm font-bold mb-2">Name</label>
@@ -55,7 +56,6 @@ Manage Departments - Admin Panel
                 rows="2"></textarea>
         </div>
 
-        <!-- ✅ NEW FIELDS: Specialists Section -->
         <div class="md:col-span-2 border-t pt-4 mt-2">
             <h4 class="font-semibold text-gray-700 mb-3">Specialists Section Content</h4>
             <div class="mb-3">
@@ -75,12 +75,41 @@ Manage Departments - Admin Panel
                 <p class="text-xs text-gray-500 mt-1">You can use HTML formatting for rich text content</p>
             </div>
         </div>
-    </div>
-    <button type="submit"
-        class="bg-blue-500 text-white px-4 py-2 rounded font-bold hover:bg-blue-700 transition mt-4">Add
-        Department</button>
-</form>
 
+        <div class="md:col-span-2 border-t pt-4 mt-2">
+            <h4 class="font-semibold text-gray-700 mb-3">SEO Settings</h4>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="md:col-span-2">
+                    <label class="block text-gray-700 text-sm font-bold mb-2">Meta Title</label>
+                    <input type="text" name="meta_title"
+                        class="w-full px-3 py-2 border rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        placeholder="e.g., Best Cardiology Hospital in Bangalore | Aarogya Hastha">
+                </div>
+
+                <div class="md:col-span-2">
+                    <label class="block text-gray-700 text-sm font-bold mb-2">Meta Description</label>
+                    <textarea name="meta_description"
+                        class="w-full px-3 py-2 border rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        rows="2" placeholder="e.g., We provide specialized cardiac care..."></textarea>
+                </div>
+
+                <div class="md:col-span-2">
+                    <label class="block text-gray-700 text-sm font-bold mb-2">Canonical URL</label>
+                    <input type="text" name="canonical_url"
+                        class="w-full px-3 py-2 border rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        placeholder="e.g., https://aarogyahastha.com/departments/cardiology">
+                    <p class="text-xs text-gray-500 mt-1">Leave empty to auto-generate based on slug.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button type="submit"
+        class="bg-blue-500 text-white px-4 py-2 rounded font-bold hover:bg-blue-700 transition mt-6 w-full md:w-auto">
+        Add Department
+    </button>
+</form>
 <h3 class="mb-3 text-lg font-bold">Current Departments</h3>
 
 <div class="mb-3">
@@ -108,10 +137,10 @@ Manage Departments - Admin Panel
                     Banner</th>
                 <th
                     class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                    Banner Alt Text</th>
+                    Alt Text</th>
                 <th
                     class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                    Specialists Content</th>
+                    SEO</th>
                 <th
                     class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                     Actions</th>
@@ -138,14 +167,12 @@ Manage Departments - Admin Panel
                     <span class="text-gray-500">No banner</span>
                     {% endif %}
                 </td>
+                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ dept.banner_alt_text or '-' }}</td>
                 <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                    {{ dept.banner_alt_text or 'Not set' }}
-                </td>
-                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                    {% if dept.specialists_heading or dept.specialists_content %}
-                    <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">✓ Configured</span>
+                    {% if dept.meta_title %}
+                    <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Set</span>
                     {% else %}
-                    <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full">Not set</span>
+                    <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full">Auto</span>
                     {% endif %}
                 </td>
                 <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
@@ -206,7 +233,6 @@ Manage Departments - Admin Panel
                         class="w-full px-3 py-2 border rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
                 </div>
 
-                <!-- ✅ NEW FIELDS: Specialists Section in Edit Modal -->
                 <div class="md:col-span-2 border-t pt-4 mt-2">
                     <h4 class="font-semibold text-gray-700 mb-3">Specialists Section Content</h4>
                     <div class="mb-3">
@@ -214,17 +240,37 @@ Manage Departments - Admin Panel
                         <input type="text" name="specialists_heading" class="w-full px-3 py-2 border rounded"
                             value="{{ dept.specialists_heading or '' }}"
                             placeholder="e.g., Meet Our Expert Team, Our Specialists">
-                        <p class="text-xs text-gray-500 mt-1">This will appear above the specialists list on the
-                            department page</p>
                     </div>
                     <div class="mb-3">
                         <label class="block text-gray-700 text-sm font-bold mb-2">Specialists Content</label>
                         <textarea name="specialists_content" class="w-full px-3 py-2 border rounded" rows="4"
-                            placeholder="e.g., Our team of highly qualified specialists is dedicated to providing the best care...">{{ dept.specialists_content or '' }}</textarea>
-                        <p class="text-xs text-gray-500 mt-1">You can use HTML formatting for rich text content</p>
+                            placeholder="e.g., Our team of highly qualified specialists...">{{ dept.specialists_content or '' }}</textarea>
+                    </div>
+                </div>
+
+                <div class="md:col-span-2 border-t pt-4 mt-2">
+                    <h4 class="font-semibold text-gray-700 mb-3">SEO Settings</h4>
+
+                    <div class="mb-3">
+                        <label class="block text-gray-700 text-sm font-bold mb-2">Meta Title</label>
+                        <input type="text" name="meta_title" class="w-full px-3 py-2 border rounded"
+                            value="{{ dept.meta_title or '' }}">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="block text-gray-700 text-sm font-bold mb-2">Meta Description</label>
+                        <textarea name="meta_description" class="w-full px-3 py-2 border rounded"
+                            rows="2">{{ dept.meta_description or '' }}</textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="block text-gray-700 text-sm font-bold mb-2">Canonical URL</label>
+                        <input type="text" name="canonical_url" class="w-full px-3 py-2 border rounded"
+                            value="{{ dept.canonical_url or '' }}">
                     </div>
                 </div>
             </div>
+
             <div class="flex items-center justify-end mt-4">
                 <button type="button" onclick="closeModal('editModal-{{ dept.id }}')"
                     class="bg-gray-500 text-white px-4 py-2 rounded font-bold hover:bg-gray-700 transition">Cancel</button>

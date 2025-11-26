@@ -1,15 +1,15 @@
 {% extends "base.html" %}
 
-{% block title %}Aarogya Hastha | Best Anaesthesiology Hospital in Bangalore | Expert Pain & Surgical Care{% endblock %}
+{% block title %}{{ department.meta_title }}{% endblock %}
 
 {% block head %}
 {{ super() }}
-<meta name="description"
-    content="Experience advanced anaesthesia and pain management at Aarogya Hastha, Bangalore’s trusted hospital. Safe, expert, and compassionate care—Book your consultation today!">
-<meta name="keywords" content="">
+<meta name="description" content="{{ department.meta_description }}">
+<meta name="keywords" content="{{ department.meta_keywords }}">
 <meta name="author" content="Aarogyahastha Pvt Ltd">
 <meta name="designer" content="Aarogyahastha Pvt Ltd">
-<link rel="canonical" href="https://aarogyahastha.com/departments/">
+<link rel="canonical"
+    href="{{ department.canonical_url or url_for('department_page', slug=department.slug, _external=True) }}">
 <meta name="no-email-collection" content="http://www.unspam.com/noemailcollection/">
 <meta name="google-site-verification" content="T3QqCQjcJP8HqwIYaCHz3AZHCSXJDF-NJfE8GNiSb-Q" />
 <meta name="robots" content="index,follow">
@@ -22,8 +22,7 @@
 <meta name="subject" content="Healthcare">
 <meta name="copyright" content="Copyright © 2025">
 <meta name="reply-to" content="info@aarogyahastha.com">
-<meta name="abstract"
-    content="We provide timely and specialized medical attention for patients experiencing life-threatening conditions, ensuring their urgent needs are met with the highest level of care.">
+<meta name="abstract" content="{{ department.meta_abstract }}">
 <meta name="city" content="Bangalore">
 <meta name="country" content="India">
 <meta name="distribution" content="global">
@@ -123,7 +122,6 @@
         </div>
     </div>
 </section>
-<!-- Overview -->
 <div class="container my-5">
     <ul class="nav nav-tabs" id="departmentTabs" role="tablist">
         <li class="nav-item" role="presentation">
@@ -152,46 +150,33 @@
     <div class="tab-content" id="departmentTabsContent">
 
         <div class="tab-pane fade show active" id="overview-tab-pane" role="tabpanel" aria-labelledby="overview-tab">
-            <section data-aos="fade-up" class="py-2"> <!-- Reduced py-4 to py-2 -->
-                {% if overview %}
+            <section data-aos="fade-up" class="py-2"> {% if overview %}
 
-                <!-- Transparent Container -->
                 <div class="bg-transparent border border-gray-200 rounded-lg p-4 backdrop-blur-sm">
-                    <!-- Reduced p-6 to p-4 -->
-
-                    <!-- Quote Section -->
                     {% if overview.quote %}
                     <blockquote class="relative border-l-4 border-blue-400 pl-4 italic text-gray-700 text-base mb-2">
-                        <!-- Reduced to mb-2 -->
                         <p class="mb-1 text-lg font-medium text-gray-800">"{{ overview.quote }}"</p>
-                        <!-- Reduced mb-2 to mb-1 -->
                         {% if overview.quote_author %}
                         <footer class="text-right text-sm font-medium text-gray-500 mt-1">— {{ overview.quote_author }}
-                        </footer> <!-- Added mt-1 -->
-                        {% endif %}
+                        </footer> {% endif %}
                     </blockquote>
                     {% endif %}
 
-                    <!-- Content Paragraphs -->
-                    <div class="text-gray-800 leading-relaxed mb-2"> <!-- Reduced to mb-2 -->
-                        {% for para in overview.content.split('</p>') if para.strip() %}
+                    <div class="text-gray-800 leading-relaxed mb-2"> {% for para in overview.content.split('</p>') if
+                        para.strip() %}
                         {% set para_clean = para.replace('<p>', '').strip() %}
                             {% if para_clean %}
                         <p class="mb-2 first-letter:text-2xl first-letter:font-bold first-letter:text-blue-500">
-                            <!-- Reduced mb-4 to mb-2 -->
                             {{ para_clean | safe }}
                         </p>
                         {% endif %}
                         {% endfor %}
                     </div>
 
-                    <!-- Testimonials Section -->
                     {% if testimonials %}
-                    <div class="mt-2"> <!-- Changed mb-4 to mt-2 and removed bottom margin -->
+                    <div class="mt-2">
                         <h3 class="section-header mb-2 text-lg">Testimonials</h3>
-                        <!-- Reduced margin and smaller font -->
-                        <div class="testimonials-grid mt-2"> <!-- Added mt-2 -->
-                            {% for testimonial in testimonials %}
+                        <div class="testimonials-grid mt-2"> {% for testimonial in testimonials %}
                             <div class="testimonial-card {{ ['blue', 'green', 'purple'][loop.index0 % 3] }}">
                                 <div class="testimonial-header">
                                     <div
@@ -199,21 +184,19 @@
                                         {{ testimonial.name[:2].upper() }}
                                     </div>
                                     <div class="testimonial-info">
-                                        <h4 class="text-sm">{{ testimonial.name }}</h4> <!-- Smaller text -->
+                                        <h4 class="text-sm">{{ testimonial.name }}</h4>
                                     </div>
                                 </div>
 
                                 <div class="testimonial-content">
                                     <p class="testimonial-text text-sm">"{{ testimonial.comment }}"</p>
-                                    <!-- Smaller text -->
                                 </div>
 
                                 <div class="testimonial-actions">
-                                    <div class="testimonial-rating text-base"> <!-- Adjusted star size -->
-                                        {{ '★' * testimonial.rating }}{{ '☆' * (5 - testimonial.rating) }}
+                                    <div class="testimonial-rating text-base"> {{ '★' * testimonial.rating }}{{ '☆' * (5
+                                        - testimonial.rating) }}
                                     </div>
                                     <button class="view-more-btn text-xs" style="display: none;">View More</button>
-                                    <!-- Smaller button -->
                                 </div>
                             </div>
                             {% endfor %}
@@ -247,8 +230,6 @@
                             /* remove pseudo-elements */
                         }
                     </style>
-                    <!-- FAQ Section -->
-                    <!-- FAQ Section -->
                     {% if faqs %}
                     <div class="faq-section">
                         <h3 class="section-header">Frequently Asked Questions</h3>
@@ -669,7 +650,6 @@
                     {% endfor %}
                 </div>
 
-                <!-- ✅ SERVICES OVERVIEW SECTION - Show first service that has overview content BELOW services -->
                 {% set found_overview = false %}
                 {% for service in services %}
                 {% if service.services_overview and not found_overview %}
@@ -971,7 +951,6 @@
     </div>
 </section>
 
-<!-- scripts -->
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 <script src="/static/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
@@ -1036,8 +1015,7 @@
 
 </script>
 <a href="#" id="scrollToTopBtn" class="scroll-to-top-btn" title="Scroll to top" aria-label="Scroll to top">
-    <i class="fa fa-arrow-up"></i> <!-- Simple up arrow -->
-</a>
+    <i class="fa fa-arrow-up"></i> </a>
 
 <script> $(document).ready(function () { initDepartmentPageActions(); }) </script>
 {% endblock %}

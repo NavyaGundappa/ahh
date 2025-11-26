@@ -136,6 +136,9 @@ class Department(db.Model):
     # ✅ NEW FIELDS for specialists section
     specialists_heading = db.Column(db.String(500), nullable=True)
     specialists_content = db.Column(db.Text, nullable=True)
+    meta_title = db.Column(db.String(255), nullable=True)
+    meta_description = db.Column(db.Text, nullable=True)
+    canonical_url = db.Column(db.String(500), nullable=True)
 
     is_active = db.Column(db.Boolean, default=True)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
@@ -330,6 +333,10 @@ class Blog(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(
         db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+
+    meta_title = db.Column(db.String(255), nullable=True)
+    meta_description = db.Column(db.Text, nullable=True)
+    canonical_url = db.Column(db.String(255), nullable=True)
 
     # Relationship
     department = db.relationship('Department', backref='blogs')

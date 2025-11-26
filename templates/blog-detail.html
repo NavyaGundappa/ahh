@@ -3,13 +3,21 @@
 {% block title %}{% if blog %}{{ blog.title }} - Aarogya Hastha{% else %}Blog - Aarogya Hastha{% endif %}{% endblock %}
 
 {% block head %}
-{{ super() }}
 
-{% if blog and blog.excerpt %}
-<link rel="canonical" href="https://aarogyahastha.com/blog/{{ blog.slug }}">
-<meta name="description"
-    content="Discover insightful articles, tutorials, and resources to help you grow your knowledge and stay updated with the latest trends.">
+<title>{{ blog.meta_title if blog.meta_title else blog.title }} | Your Site Name</title>
+
+{% if blog.meta_description %}
+<meta name="description" content="{{ blog.meta_description }}">
+{% else %}
+<meta name="description" content="{{ blog.excerpt or 'Read the latest blog post from Your Site Name.' }}">
 {% endif %}
+
+{% if blog.canonical_url %}
+<link rel="canonical" href="{{ blog.canonical_url }}">
+{% else %}
+<link rel="canonical" href="{{ url_for('blog_detail', slug=blog.slug, _external=True) }}">
+{% endif %}
+
 {% endblock %}
 
 {% block content %}
