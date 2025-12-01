@@ -39,39 +39,6 @@
 {% endblock %}
 
 <style>
-  .breadcrumb-section {
-    /* ORIGINAL: padding: 15px 200px; */
-    /* MODIFIED: Add a left offset to clear the sidebar (~80px total width/padding) */
-    padding: 15px 200px 15px 80px;
-    background-color: #f8f9fa;
-    border-bottom: 1px solid #dee2e6;
-  }
-
-  .breadcrumb {
-    margin-bottom: 0;
-    background-color: transparent;
-    padding: 0;
-  }
-
-  .breadcrumb-item a {
-    color: #007bff;
-    text-decoration: none;
-  }
-
-  .breadcrumb-item a:hover {
-    text-decoration: underline;
-  }
-
-  .breadcrumb-item.active {
-    color: #6c757d;
-  }
-
-  .breadcrumb-item+.breadcrumb-item::before {
-    content: ">>";
-    padding: 0 0.75rem;
-    color: #6c757d;
-  }
-
   /* === HERO SECTION FIX START === */
   .hero-section {
     width: 100%;
@@ -171,8 +138,9 @@
         {% if banners %}
         {% for banner in banners %}
         <div id="hero-banner-image-container" class="item">
-          <img loading="lazy" src="{{ url_for('static', filename='img/' + banner.image_path) }}"
-            alt="{{ banner.alt_text or banner.title or 'Banner' }}" class="img-fluid {{ banner.position_class or '' }}">
+          <img {% if loop.first %}loading="eager" fetchpriority="high" {% else %}loading="lazy" {% endif %}
+            src="{{ url_for('static', filename='img/' + banner.image_path) }}" alt="..."
+            class="img-fluid {{ banner.position_class or '' }}">
           <div class="cover">
             <div class="container">
               <div class="header-content">
@@ -328,6 +296,51 @@
   </div>
 </section>
 
+<section class="facilities-section" data-aos="fade-up">
+  <div class="container">
+    <h2 class="text-center mb-4" style="font-weight: 700; color: #103A60; font-size: 2.5rem;">Our Key Facilities</h2>
+
+    {# --- DATA DEFINITION START (14 items) --- #}
+    {% set facilities_list = [
+    {'icon': 'fas fa-ambulance', 'title': '24×7 Emergency and Trauma Care'},
+    {'icon': 'fas fa-capsules', 'title': '24x7 Pharmacy'},
+    {'icon': 'fas fa-procedures', 'title': '24x7 ICU, NICU, and Critical Care Units'},
+    {'icon': 'fas fa-microscope', 'title': 'Advanced Diagnostic & Imaging Services'},
+    {'icon': 'fas fa-hospital-user', 'title': 'State of the art Operation Theatres'},
+    {'icon': 'fas fa-flask', 'title': 'In-house Pharmacy & Laboratory'},
+    {'icon': 'fas fa-heartbeat', 'title': 'Preventive Health Check-up Packages'},
+    {'icon': 'fas fa-baby-carriage', 'title': 'Dedicated Women & Child Care Units'},
+    {'icon': 'fas fa-shuttle-van', 'title': 'Ambulance and Home Care Services'},
+    {'icon': 'fas fa-bed', 'title': 'Comfortable Private and Semi-private Rooms'},
+    {'icon': 'fas fa-coffee', 'title': 'Inhouse Cafeterias'},
+    {'icon': 'fas fa-walking', 'title': 'Advanced Physiotherapy with Home care'},
+    {'icon': 'fas fa-tint', 'title': 'Dialysis Facilities'},
+    {'icon': 'fas fa-truck-medical', 'title': 'Free Home Delivery of Medicines'}
+    ] %}
+    {# --- DATA DEFINITION END --- #}
+
+    <div class="facilities-grid">
+      {# This loop will create 14 cards, resulting in 6-6-2 centered on desktop #}
+      {% for item in facilities_list %}
+      <div class="facility-card">
+        <div class="facility-icon-wrapper">
+          <i class="{{ item.icon }}"></i>
+        </div>
+        <h4 class="facility-title">{{ item.title }}</h4>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="facilities-footer-card">
+      <i class="fas fa-shield-alt fa-2x mb-2"></i>
+      <p class="facilities-footer-text" style="font-size: 1.2rem; margin-bottom: 0;">
+        "Every corner of Aarogya Hastha is designed to provide a safe, hygienic, and comforting environment."
+      </p>
+    </div>
+
+  </div>
+</section>
+
 <section data-aos="fade-up" class="feedback-section">
   <div class="container">
     <h2 class="text-center mb-5">Testimonials</h2>
@@ -363,17 +376,17 @@
               {% if testimonial.doctor2 %}
               <div class="doctor-profile-split">
                 <h5 class="doctor-name">{{ testimonial.doctor.name }}</h5>
-                <p class="doctor-designation">{{ testimonial.doctor.specialization }}</p>
+                <p class="doctor-designation">
+                  {{ testimonial.doctor.designation or testimonial.doctor.specialization }}
+                </p>
               </div>
               <div class="doctor-profile-split">
                 <h5 class="doctor-name">{{ testimonial.doctor2.name }}</h5>
-                <p class="doctor-designation">{{ testimonial.doctor2.specialization }}</p>
+                <p class="doctor-designation">{{ testimonial.doctor.specialization }}</p>
               </div>
               {% else %}
               <h5 class="doctor-name">{{ testimonial.doctor.name }}</h5>
-              <p class="doctor-designation">{{ testimonial.doctor.designation or
-                testimonial.doctor.specialization }}
-              </p>
+              <p class="doctor-designation">{{ testimonial.doctor.specialization }}</p>
               {% endif %}
             </div>
           </div>
@@ -388,6 +401,123 @@
     </div>
   </div>
 </section>
+
+<section class="mission-section mission-spacing" data-aos="fade-up">
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div class="mission-card">
+          <h3 class="mission-title">Our Commitment to Care</h3>
+          <p class="mission-text">
+            Established on June 15, 2022, Aarogya Hastha Hospitals has rapidly grown into one of the best hospitals
+            in Kasavanhalli Bangalore, trusted for its ethical, transparent, and compassionate healthcare. We bring
+            together expert doctors, advanced medical technology, and a patient-centric approach that focuses on
+            healing the person, not just the illness.
+          </p>
+          <p class="mission-text">
+            From 24×7 emergency care to multi-speciality treatments, Aarogya Hastha Hospitals is committed to delivering
+            affordable and world-class healthcare to families across Bangalore, India. We believe that good health
+            is the foundation of a happy life and every life deserves quality care, dignity, and hope.
+          </p>
+          <h4 class="vision-title"><i class="fas fa-bullseye me-2" style="color: #103A60;"></i>Our Vision</h4>
+          <p class="mission-text" style="margin-bottom: 0;">
+            To redefine healthcare in Kasvanhalli, Bangalore through compassion, precision, and innovation, ensuring
+            that every patient receives world-class medical attention with a human touch.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="why-choose-us-section" data-aos="fade-up">
+  <div class="container">
+    <h2 class="text-center mb-5 section-heading">Why Choose Aarogya Hastha as Your Go-To Healthcare Partner</h2>
+    <div class="row">
+
+      <div class="col-lg-4 col-md-6 mb-4">
+        <div class="reason-card">
+          <div class="reason-icon"><i class="fas fa-user-md"></i><i class="fas fa-microscope"></i></div>
+          <h3 class="card-title">Expertise & Advanced Technology</h3>
+          <p class="detail-point">Our panel includes highly qualified and experienced specialists who bring decades
+            of expertise to every case.</p>
+          <p class="detail-point">We use cutting-edge medical equipment and digital diagnostics for accurate and
+            timely treatments.</p>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6 mb-4">
+        <div class="reason-card">
+          <div class="reason-icon"><i class="fas fa-hand-holding-usd"></i></div>
+          <h3 class="card-title">Affordable & Transparent Care</h3>
+          <p class="detail-point">We believe quality healthcare should never be a luxury — our pricing is transparent
+            and accessible for all families.</p>
+          <p class="detail-point">Ask about our affordable health packages and cashless insurance facilities.</p>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-12 mb-4">
+        <div class="reason-card">
+          <div class="reason-icon"><i class="fas fa-heartbeat"></i></div>
+          <h3 class="card-title">Patient-Centric Approach</h3>
+          <p class="detail-point">Compassion lies at the heart of our work. From consultation to recovery, every
+            patient is treated with empathy, clarity, and respect.</p>
+          <p class="detail-point">We focus on healing the person, not just the illness, ensuring dignity and hope.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="trust-us-section" data-aos="fade-up">
+  <div class="container">
+    <h2 class="text-center mb-5 section-heading">Why Families Trust Aarogya Hastha</h2>
+    <div class="row">
+
+      <div class="col-lg-3 col-md-6 mb-4">
+        <div class="trust-card">
+          <div class="trust-icon"><i class="fas fa-handshake"></i></div>
+          <h4 class="trust-title">Ethical & Transparent Care</h4>
+          <p class="trust-detail">No unnecessary procedures, no hidden charges — complete clarity in billing.</p>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6 mb-4">
+        <div class="trust-card">
+          <div class="trust-icon"><i class="fas fa-spa"></i></div>
+          <h4 class="trust-title">Holistic Healing</h4>
+          <p class="trust-detail">We address not only the body but also emotional and mental well-being.</p>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6 mb-4">
+        <div class="trust-card">
+          <div class="trust-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <h4 class="trust-title">Convenient Location</h4>
+          <p class="trust-detail">Situated in Kasavanahalli, easily accessible from major parts of Bangalore.</p>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6 mb-4">
+        <div class="trust-card">
+          <div class="trust-icon"><i class="fas fa-clock"></i></div>
+          <h4 class="trust-title">Round-the-Clock Support</h4>
+          <p class="trust-detail">Be it emergency, maternity, or routine consultation — we’re always ready, 24/7.</p>
+        </div>
+      </div>
+
+      <div class="col-12 mt-3">
+        <div class="trust-footer-bar">
+          <i class="fas fa-star-half-alt"></i>
+          Trusted Since 2022 — Thousands of patients have already made Aarogya Hastha their trusted healthcare home.
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 
 <section class="Aarogya_new_faq_main_section">
   <div class="Aarogya_new_faq-section">
@@ -651,10 +781,40 @@
   </div>
 </section>
 
-<section id="youtube-section" data-aos-easing="ease-in-sine" class="custom-video-section" style="margin-bottom: 40px;">
-  <div class="container-fluid position-relative">
+<section id="youtube-section" data-aos-easing="ease-in-sine" class="custom-video-section">
+  <div class=" container-fluid position-relative">
     <img src="https://i.ytimg.com/vi_webp/PpAr4GjuEsE/maxresdefault.webp" class="img-fluid">
     <div data-vbg="https://www.youtube.com/watch?v=CgLJFg_9enI"></div>
+  </div>
+</section>
+
+<section class="cta-appointment-section" data-aos="fade-up">
+  <div class="container">
+    <div class="row align-items-center">
+
+      <div class="col-lg-7 mb-4 mb-lg-0">
+        <div class="visit-us-content">
+          <h2 class="cta-main-title">Visit Us or Book an Appointment</h2>
+          <p class="cta-description">When health matters most, choose a hospital that truly cares.</p>
+          <p class="cta-text">
+            Visit <b>Aarogya Hastha Hospitals</b>, your trusted partner for holistic healthcare in Kasavanahalli,
+            Bangalore, India.
+            Choose Aarogya Hastha Hospitals, one of the most trusted hospitals in Kasavanahalli, as your trusted partner
+            for holistic healthcare.
+          </p>
+        </div>
+      </div>
+
+      <div class="col-lg-5">
+        <div class="book-appointment-box">
+          <h3 class="box-title"><i class="fas fa-calendar-check me-2"></i> Ready to Consult?</h3>
+          <p class="box-text">Book an appointment today or walk in for a consultation because your wellness is our
+            mission.</p>
+          <a href="/appointments" class="btn btn-lg cta-button">Book Your Appointment Now</a>
+        </div>
+      </div>
+
+    </div>
   </div>
 </section>
 

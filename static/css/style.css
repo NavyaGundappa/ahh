@@ -5788,6 +5788,7 @@ h3.Aarogya_new_faq-question {
 }
 
 section.Aarogya_new_faq_main_section {
+  padding-top: 40px;
   padding-bottom: 80px;
   margin-top: -50px;
 }
@@ -5827,4 +5828,408 @@ section.Aarogya_new_faq_main_section {
 .Aarogya_new_faqs-container .Aarogya_new_faq-answer {
   display: none;
   padding: 20px 0px 20px 30px;
+}
+
+.breadcrumb-section {
+  padding: 15px 20px;
+  /* Standard mobile padding */
+}
+
+@media (min-width: 992px) {
+  .breadcrumb-section {
+    padding: 15px 200px 15px 80px;
+    /* Restore desktop padding */
+  }
+}
+
+.breadcrumb {
+  margin-bottom: 0;
+  background-color: transparent;
+  padding: 0;
+}
+
+.breadcrumb-item a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.breadcrumb-item a:hover {
+  text-decoration: underline;
+}
+
+.breadcrumb-item.active {
+  color: #6c757d;
+}
+
+.breadcrumb-item+.breadcrumb-item::before {
+  content: ">>";
+  padding: 0 0.75rem;
+  color: #6c757d;
+}
+
+.facilities-section {
+  padding: 40px 0;
+  background-color: #f8fafc;
+}
+
+.facilities-grid {
+  display: grid;
+  gap: 0.75rem;
+
+  /* Mobile: 2 per row */
+  grid-template-columns: repeat(2, 1fr);
+}
+
+/* Tablet: 4 per row */
+@media (min-width: 768px) {
+  .facilities-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Desktop: 6 per row (To achieve 6-6-2 layout for 14 items) */
+@media (min-width: 1200px) {
+  .facilities-grid {
+    grid-template-columns: repeat(7, 1fr);
+  }
+
+}
+
+.facility-card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 15px 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  border: 1px solid #e2e8f0;
+  height: 100%;
+}
+
+.facility-card:hover {
+  transform: translateY(-3px);
+  border-color: #103A60;
+  box-shadow: 0 8px 15px rgba(37, 99, 235, 0.1);
+}
+
+.facility-icon-wrapper {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background-color: #eff6ff;
+  color: #103A60;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.75rem;
+  font-size: 1.1rem;
+}
+
+.facility-card:hover .facility-icon-wrapper {
+  background-color: #103A60;
+  color: #ffffff;
+}
+
+.facility-title {
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: #334155;
+  line-height: 1.3;
+  margin: 0;
+  word-wrap: break-word;
+}
+
+.mission-section {
+  padding: 60px 0;
+  background-color: #ffffff;
+  /* White background */
+}
+
+.mission-card {
+  background-color: #f1f5f9;
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+  text-align: center;
+}
+
+.mission-spacing {
+  margin-bottom: 60px;
+  /* Adds space below the mission section */
+}
+
+.mission-title {
+  font-weight: 700;
+  color: #103A60;
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
+  border-bottom: 3px solid #103A60;
+  display: inline-block;
+  padding-bottom: 5px;
+  text-align: center;
+}
+
+.vision-title {
+  font-weight: 600;
+  color: #334155;
+  font-size: 1.4rem;
+  margin-top: 1.5rem;
+}
+
+.mission-text {
+  color: #475569;
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+
+/* --- CSS for the Why Choose Us Section --- */
+/* --- CSS for the Why Choose Us Section --- */
+.why-choose-us-section {
+  padding: 60px 0;
+  background-color: #ffffff;
+}
+
+.section-heading {
+  color: #103A60;
+  /* Deep Navy */
+  font-weight: 700;
+  font-size: 2rem;
+}
+
+.reason-card {
+  text-align: center;
+  padding: 30px 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  height: 100%;
+  transition: transform 0.3s, box-shadow 0.3s;
+  background-color: #f8f9fa;
+  /* Kept light grey for card definition */
+  border-bottom: 4px solid #008080;
+  /* CHANGED: Accent color to Teal */
+}
+
+.reason-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.reason-icon {
+  font-size: 3rem;
+  color: #008080;
+  /* CHANGED: Icon color to Teal */
+  margin-bottom: 15px;
+}
+
+/* Specific styling for the dual icons in the first card */
+.reason-icon .fa-user-md {
+  margin-right: 5px;
+}
+
+.reason-icon .fa-microscope {
+  font-size: 2.5rem;
+}
+
+.card-title {
+  color: #103A60;
+  /* Deep Navy */
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.detail-point {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #103A60;
+  /* CHANGED: Body text to Navy for strict palette adherence */
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+.detail-point strong {
+  color: #008080;
+  /* CHANGED: Highlight/Strong text to Teal */
+}
+
+/* Footer compacting */
+.facilities-footer-card {
+  background: linear-gradient(135deg, #103A60 0%, #103A60 100%);
+  padding: 0.5rem 1.5rem;
+  /* Increased horizontal padding for breathing room */
+  color: white;
+  max-width: 1000px;
+  margin: 1rem auto 0;
+  border-radius: 8px;
+  /* Added border-radius for a polished look */
+
+  /* 🌟 Flexbox for Inline Layout 🌟 */
+  **display: flex;
+  ** **align-items: center;
+  **
+  /* Centers the icon and text vertically */
+  **justify-content: center;
+  **
+  /* Centers the content block horizontally */
+}
+
+.facilities-footer-card i {
+  font-size: 1.2rem;
+  margin-right: 12px;
+  flex-shrink: 0;
+}
+
+.facilities-footer-text {
+  /* Ensuring the text is treated as a single block */
+  display: inline;
+}
+
+/* --- CSS for the Why Families Trust Aarogya Hastha Section --- */
+.trust-us-section {
+  padding: 80px 0 60px;
+  /* More vertical space */
+  background-color: #e9ecef;
+  /* Light gray background to separate from white sections */
+}
+
+/* Reusing the general section heading style for consistency */
+/* .section-heading { ... defined previously ... } */
+
+.trust-card {
+  text-align: center;
+  padding: 30px 15px;
+  border-radius: 8px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  height: 100%;
+  transition: all 0.3s ease;
+}
+
+.trust-card:hover {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transform: translateY(-3px);
+  border-bottom: 5px solid #103A60;
+  /* Highlight on hover */
+}
+
+.trust-icon {
+  font-size: 2.5rem;
+  color: #008080;
+  /* Use the dark blue color for icons */
+  margin-bottom: 15px;
+}
+
+.trust-title {
+  color: #008080;
+  /* Primary blue for title */
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.trust-detail {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #6c757d;
+}
+
+/* Style for the "Trusted Since 2022" bar */
+.trust-footer-bar {
+  background-color: #103A60;
+  /* Dark blue background */
+  color: #ffffff;
+  /* White text */
+  padding: 15px 30px;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-top: 20px;
+}
+
+.trust-footer-bar i {
+  color: #008080;
+  /* Star color */
+  margin-right: 10px;
+}
+
+/* --- CSS for the Visit/Appointment CTA Section --- */
+.cta-appointment-section {
+  clear: both;
+  padding: 80px 0;
+  background-color: #103A60;
+  color: #ffffff;
+}
+
+.visit-us-content {
+  padding-right: 30px;
+  /* Spacing between content and the box on large screens */
+}
+
+.cta-main-title {
+  font-weight: 800;
+  font-size: 2.8rem;
+  margin-bottom: 15px;
+  color: #ffffff;
+}
+
+.cta-description {
+  font-size: 1.3rem;
+  font-style: italic;
+  font-weight: 300;
+  margin-bottom: 20px;
+}
+
+.cta-text {
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.cta-text strong {
+  color: #ffc107;
+  /* Highlight key names */
+}
+
+/* Styling for the Right-side Appointment Box */
+.book-appointment-box {
+  background-color: #ffffff;
+  color: #103A60;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.box-title {
+  font-weight: 700;
+  font-size: 1.75rem;
+  margin-bottom: 10px;
+  color: #096666;
+}
+
+.box-text {
+  font-size: 1rem;
+  margin-bottom: 25px;
+  color: #333333;
+}
+
+.cta-button {
+  background-color: #096666;
+  /* Use a bright secondary color (yellow/gold) for the button */
+  border-color: #ffc107;
+  color: #ffffff;
+  font-weight: 700;
+  padding: 12px 30px;
+  text-transform: uppercase;
+  transition: background-color 0.3s;
+}
+
+.cta-button:hover {
+  background-color: #4cb2b2;
+  /* Darker yellow on hover */
+  border-color: #e0a800;
+  color: #103A60;
 }

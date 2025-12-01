@@ -1087,6 +1087,8 @@ def edit_testimonial(testimonial_id):
     testimonial.doctor_id = int(doctor1_id)
     testimonial.doctor2_id = int(doctor2_id) if doctor2_id else None
 
+    db.session.expire(testimonial)
+
     db.session.commit()
     flash('Testimonial updated successfully!', 'success')
     return redirect(url_for('admin_testimonials'))

@@ -7,7 +7,8 @@
 <meta name="keywords" content="">
 <meta name="author" content="Aarogyahastha Pvt Ltd">
 <meta name="designer" content="Aarogyahastha Pvt Ltd">
-<meta name="description" content="Experience advanced cardiology services at Aarogya Hastha Hospital, Bangalore. Comprehensive heart care, diagnostics, and 24/7 emergency support.">
+<meta name="description"
+    content="Experience advanced cardiology services at Aarogya Hastha Hospital, Bangalore. Comprehensive heart care, diagnostics, and 24/7 emergency support.">
 <link rel="canonical" href="https://aarogyahastha.com/departments/cardiology">
 <meta name="no-email-collection" content="http://www.unspam.com/noemailcollection/">
 <meta name="google-site-verification" content="T3QqCQjcJP8HqwIYaCHz3AZHCSXJDF-NJfE8GNiSb-Q" />
@@ -21,7 +22,8 @@
 <meta name="subject" content="Healthcare">
 <meta name="copyright" content="Copyright © 2025">
 <meta name="reply-to" content="info@aarogyahastha.com">
-<meta name="abstract" content="We provide timely and specialized medical attention for patients experiencing life-threatening conditions, ensuring their urgent needs are met with the highest level of care.">
+<meta name="abstract"
+    content="We provide timely and specialized medical attention for patients experiencing life-threatening conditions, ensuring their urgent needs are met with the highest level of care.">
 <meta name="city" content="Bangalore">
 <meta name="country" content="India">
 <meta name="distribution" content="global">
@@ -64,21 +66,26 @@
 <section class="breadcrumb-section">
     <div class="container">
         <nav aria-label="breadcrumb">
-            <ol class="breadcrumb" itemscope itemtype="http://schema.org/BreadcrumbList">
-                <li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+            <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+                <li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
                     <a itemprop="item" href="/">
                         <span itemprop="name">Home</span>
                     </a>
                     <meta itemprop="position" content="1">
                 </li>
-                <li class="breadcrumb-item active" aria-current="page" itemprop="itemListElement" itemscope
-                    itemtype="http://schema.org/ListItem">
-                    <span itemprop="name">Departments</span>
+
+                <li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <a itemprop="item" href="/departments">
+                        <span itemprop="name">Departments</span>
+                    </a>
                     <meta itemprop="position" content="2">
                 </li>
+
                 <li class="breadcrumb-item active" aria-current="page" itemprop="itemListElement" itemscope
-                    itemtype="http://schema.org/ListItem">
-                    <span itemprop="name">{{ department.name }}</span>
+                    itemtype="https://schema.org/ListItem">
+                    <a itemprop="item" href="javascript:void(0)" style="cursor: unset;">
+                        <span itemprop="name">Cardiology</span>
+                    </a>
                     <meta itemprop="position" content="3">
                 </li>
             </ol>
@@ -154,7 +161,8 @@
                     <blockquote class="relative border-l-4 border-blue-400 pl-4 italic text-gray-700 text-base mb-2">
                         <p class="mb-1 text-lg font-medium text-gray-800">"{{ overview.quote }}"</p>
                         {% if overview.quote_author %}
-                        <footer class="text-right text-sm font-medium text-gray-500 mt-1">— {{ overview.quote_author }}</footer>
+                        <footer class="text-right text-sm font-medium text-gray-500 mt-1">— {{ overview.quote_author }}
+                        </footer>
                         {% endif %}
                     </blockquote>
                     {% endif %}
@@ -177,7 +185,8 @@
                             {% for testimonial in testimonials %}
                             <div class="testimonial-card {{ ['blue', 'green', 'purple'][loop.index0 % 3] }}">
                                 <div class="testimonial-header">
-                                    <div class="testimonial-avatar avatar-{{ ['blue', 'green', 'purple'][loop.index0 % 3] }}">
+                                    <div
+                                        class="testimonial-avatar avatar-{{ ['blue', 'green', 'purple'][loop.index0 % 3] }}">
                                         {{ testimonial.name[:2].upper() }}
                                     </div>
                                     <div class="testimonial-info">
@@ -200,9 +209,24 @@
                     {% endif %}
 
                     <style>
-                        .section-header { border: none !important; text-decoration: none !important; box-shadow: none !important; color: #2c3e50; font-weight: 600; margin-bottom: 1rem; }
-                        .section-header a { text-decoration: none !important; color: inherit; }
-                        .section-header::after, .section-header::before { content: none !important; }
+                        .section-header {
+                            border: none !important;
+                            text-decoration: none !important;
+                            box-shadow: none !important;
+                            color: #2c3e50;
+                            font-weight: 600;
+                            margin-bottom: 1rem;
+                        }
+
+                        .section-header a {
+                            text-decoration: none !important;
+                            color: inherit;
+                        }
+
+                        .section-header::after,
+                        .section-header::before {
+                            content: none !important;
+                        }
                     </style>
 
                     {% if faqs %}
@@ -214,12 +238,13 @@
                                 <button class="faq-question">
                                     <span class="faq-question-text">{{ faq.question }}</span>
                                     <svg class="faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M19 9l-7 7-7-7"></path>
                                     </svg>
                                 </button>
                                 <div class="faq-answer">
                                     {{ faq.answer|replace('
-', '<br>')|safe }}
+                                    ', '<br>')|safe }}
                                 </div>
                             </div>
                             {% endfor %}
@@ -236,44 +261,286 @@
         </div>
 
         <style>
-             /* Testimonials & FAQ Styles */
-            .testimonials-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin-bottom: 2rem; }
-            @media (min-width: 768px) { .testimonials-grid { grid-template-columns: repeat(2, 1fr); } }
-            @media (min-width: 1024px) { .testimonials-grid { grid-template-columns: repeat(3, 1fr); } }
-            .testimonial-card { background: #ffffff; border-radius: 0.5rem; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); padding: 1.5rem; border: 1px solid #f0f0f0; transition: all 0.3s ease; position: relative; display: flex; flex-direction: column; }
-            .testimonial-card:hover { box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12); transform: translateY(-2px); border-color: #e5e5e5; }
-            .testimonial-card::before { content: '"'; position: absolute; top: 1rem; left: 1.5rem; font-size: 3rem; color: #f8f8f8; font-family: Georgia, serif; line-height: 1; z-index: 1; }
-            .testimonial-header { display: flex; align-items: center; margin-bottom: 1rem; position: relative; z-index: 2; }
-            .testimonial-avatar { width: 2.5rem; height: 2.5rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 1rem; font-weight: 600; font-size: 0.875rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; }
-            .testimonial-info h4 { font-weight: 600; color: #2d3748; margin: 0 0 0.25rem 0; font-size: 1rem; font-family: 'Inter', sans-serif; }
-            .testimonial-info p { color: #718096; margin: 0; font-size: 0.875rem; font-weight: 400; }
-            .testimonial-content { position: relative; z-index: 2; flex: 1; }
-            .testimonial-text { color: #4a5568; line-height: 1.6; font-style: normal; font-size: 0.95rem; margin-bottom: 1rem; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; transition: all 0.3s ease; }
-            .testimonial-text.expanded { -webkit-line-clamp: unset; display: block; }
-            .testimonial-text:not(.expanded)::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2rem; background: linear-gradient(transparent, white); pointer-events: none; }
-            .testimonial-actions { display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 0.5rem; border-top: 1px solid #f7f7f7; }
-            .testimonial-rating { display: flex; color: #fbbf24; font-size: 3rem; gap: 0.1rem; }
-            .view-more-btn { background: none; border: none; color: #667eea; font-size: 0.875rem; font-weight: 500; cursor: pointer; padding: 0.25rem 0.5rem; border-radius: 0.25rem; transition: all 0.2s ease; text-decoration: underline; }
-            .view-more-btn:hover { color: #5a67d8; background: #f7fafc; }
-            .testimonial-card.cardiology { border-left: 3px solid #e53e3e; }
-            .testimonial-card.orthopedics { border-left: 3px solid #3182ce; }
-            .testimonial-card.neurology { border-left: 3px solid #805ad5; }
-            .testimonial-card.general { border-left: 3px solid #38a169; }
+            /* Testimonials & FAQ Styles */
+            .testimonials-grid {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                margin-bottom: 2rem;
+            }
+
+            @media (min-width: 768px) {
+                .testimonials-grid {
+                    grid-template-columns: repeat(2, 1fr);
+                }
+            }
+
+            @media (min-width: 1024px) {
+                .testimonials-grid {
+                    grid-template-columns: repeat(3, 1fr);
+                }
+            }
+
+            .testimonial-card {
+                background: #ffffff;
+                border-radius: 0.5rem;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+                padding: 1.5rem;
+                border: 1px solid #f0f0f0;
+                transition: all 0.3s ease;
+                position: relative;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .testimonial-card:hover {
+                box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+                transform: translateY(-2px);
+                border-color: #e5e5e5;
+            }
+
+            .testimonial-card::before {
+                content: '"';
+                position: absolute;
+                top: 1rem;
+                left: 1.5rem;
+                font-size: 3rem;
+                color: #f8f8f8;
+                font-family: Georgia, serif;
+                line-height: 1;
+                z-index: 1;
+            }
+
+            .testimonial-header {
+                display: flex;
+                align-items: center;
+                margin-bottom: 1rem;
+                position: relative;
+                z-index: 2;
+            }
+
+            .testimonial-avatar {
+                width: 2.5rem;
+                height: 2.5rem;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-right: 1rem;
+                font-weight: 600;
+                font-size: 0.875rem;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                color: white;
+            }
+
+            .testimonial-info h4 {
+                font-weight: 600;
+                color: #2d3748;
+                margin: 0 0 0.25rem 0;
+                font-size: 1rem;
+                font-family: 'Inter', sans-serif;
+            }
+
+            .testimonial-info p {
+                color: #718096;
+                margin: 0;
+                font-size: 0.875rem;
+                font-weight: 400;
+            }
+
+            .testimonial-content {
+                position: relative;
+                z-index: 2;
+                flex: 1;
+            }
+
+            .testimonial-text {
+                color: #4a5568;
+                line-height: 1.6;
+                font-style: normal;
+                font-size: 0.95rem;
+                margin-bottom: 1rem;
+                display: -webkit-box;
+                -webkit-line-clamp: 4;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+                transition: all 0.3s ease;
+            }
+
+            .testimonial-text.expanded {
+                -webkit-line-clamp: unset;
+                display: block;
+            }
+
+            .testimonial-text:not(.expanded)::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                height: 2rem;
+                background: linear-gradient(transparent, white);
+                pointer-events: none;
+            }
+
+            .testimonial-actions {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-top: auto;
+                padding-top: 0.5rem;
+                border-top: 1px solid #f7f7f7;
+            }
+
+            .testimonial-rating {
+                display: flex;
+                color: #fbbf24;
+                font-size: 3rem;
+                gap: 0.1rem;
+            }
+
+            .view-more-btn {
+                background: none;
+                border: none;
+                color: #667eea;
+                font-size: 0.875rem;
+                font-weight: 500;
+                cursor: pointer;
+                padding: 0.25rem 0.5rem;
+                border-radius: 0.25rem;
+                transition: all 0.2s ease;
+                text-decoration: underline;
+            }
+
+            .view-more-btn:hover {
+                color: #5a67d8;
+                background: #f7fafc;
+            }
+
+            .testimonial-card.cardiology {
+                border-left: 3px solid #e53e3e;
+            }
+
+            .testimonial-card.orthopedics {
+                border-left: 3px solid #3182ce;
+            }
+
+            .testimonial-card.neurology {
+                border-left: 3px solid #805ad5;
+            }
+
+            .testimonial-card.general {
+                border-left: 3px solid #38a169;
+            }
+
             /* FAQ Styles */
-            .faq-section { background: linear-gradient(135deg, #eff6ff 0%, #e0e7ff 100%); border-radius: 0.75rem; padding: 1.5rem; border: 1px solid #e5e7eb; }
-            .faq-container { display: flex; flex-direction: column; gap: 1rem; }
-            .faq-item { background: white; border-radius: 0.5rem; box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06); border: 1px solid #f3f4f6; overflow: hidden; transition: all 0.3s ease; }
-            .faq-item:hover { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); }
-            .faq-question { width: 100%; text-align: left; padding: 1rem; display: flex; justify-content: space-between; align-items: center; background: none; border: none; cursor: pointer; transition: background-color 0.2s ease; }
-            .faq-question:hover { background-color: #f9fafb; }
-            .faq-question-text { font-weight: 600; color: #1f2937; font-size: 1rem; }
-            .faq-icon { width: 1.25rem; height: 1.25rem; color: #6b7280; transform: rotate(0deg); transition: transform 0.3s ease; }
-            .faq-icon.rotated { transform: rotate(180deg); }
-            .faq-answer { padding: 1rem; background-color: #f9fafb; border-top: 1px solid #e5e7eb; color: #4b5563; line-height: 1.6; display: none; }
-            .faq-answer.show { display: block; animation: fadeIn 0.3s ease-in-out; }
-            @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
-            .section-header { font-size: 1.5rem; font-weight: bold; color: #1f2937; text-align: center; margin-bottom: 1.5rem; position: relative; }
-            .section-header::after { content: ''; position: absolute; bottom: -0.5rem; left: 50%; transform: translateX(-50%); width: 60px; height: 3px; background: linear-gradient(90deg, #3b82f6, #8b5cf6); border-radius: 2px; }
+            .faq-section {
+                background: linear-gradient(135deg, #eff6ff 0%, #e0e7ff 100%);
+                border-radius: 0.75rem;
+                padding: 1.5rem;
+                border: 1px solid #e5e7eb;
+            }
+
+            .faq-container {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .faq-item {
+                background: white;
+                border-radius: 0.5rem;
+                box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+                border: 1px solid #f3f4f6;
+                overflow: hidden;
+                transition: all 0.3s ease;
+            }
+
+            .faq-item:hover {
+                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            }
+
+            .faq-question {
+                width: 100%;
+                text-align: left;
+                padding: 1rem;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                background: none;
+                border: none;
+                cursor: pointer;
+                transition: background-color 0.2s ease;
+            }
+
+            .faq-question:hover {
+                background-color: #f9fafb;
+            }
+
+            .faq-question-text {
+                font-weight: 600;
+                color: #1f2937;
+                font-size: 1rem;
+            }
+
+            .faq-icon {
+                width: 1.25rem;
+                height: 1.25rem;
+                color: #6b7280;
+                transform: rotate(0deg);
+                transition: transform 0.3s ease;
+            }
+
+            .faq-icon.rotated {
+                transform: rotate(180deg);
+            }
+
+            .faq-answer {
+                padding: 1rem;
+                background-color: #f9fafb;
+                border-top: 1px solid #e5e7eb;
+                color: #4b5563;
+                line-height: 1.6;
+                display: none;
+            }
+
+            .faq-answer.show {
+                display: block;
+                animation: fadeIn 0.3s ease-in-out;
+            }
+
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(-10px);
+                }
+
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            .section-header {
+                font-size: 1.5rem;
+                font-weight: bold;
+                color: #1f2937;
+                text-align: center;
+                margin-bottom: 1.5rem;
+                position: relative;
+            }
+
+            .section-header::after {
+                content: '';
+                position: absolute;
+                bottom: -0.5rem;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 60px;
+                height: 3px;
+                background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+                border-radius: 2px;
+            }
         </style>
 
         <script>
@@ -368,7 +635,8 @@
                 {% if department.specialists_heading or department.specialists_content %}
                 <div class="specialists-header mb-4">
                     {% if department.specialists_heading %}
-                    <h2 class="section-title text-center mb-3" style="text-decoration: none; border-bottom: none;">{{ department.specialists_heading }}</h2>
+                    <h2 class="section-title text-center mb-3" style="text-decoration: none; border-bottom: none;">{{
+                        department.specialists_heading }}</h2>
                     {% endif %}
                     {% if department.specialists_content %}
                     <div class="specialists-content text-center mb-4">
@@ -388,9 +656,11 @@
                             <div class="specialist-card">
                                 <div class="img-box">
                                     {% if doctor.image_path %}
-                                    <img class="img-fluid" src="{{ url_for('static', filename=doctor.image_path) }}" alt="{{ doctor.name }}">
+                                    <img class="img-fluid" src="{{ url_for('static', filename=doctor.image_path) }}"
+                                        alt="{{ doctor.name }}">
                                     {% else %}
-                                    <img class="img-fluid" src="{{ url_for('static', filename='img/default-doctor.jpg') }}" alt="No Image">
+                                    <img class="img-fluid"
+                                        src="{{ url_for('static', filename='img/default-doctor.jpg') }}" alt="No Image">
                                     {% endif %}
                                 </div>
                                 <div class="content">
@@ -400,12 +670,16 @@
                                     <p class="details">
                                         <b>Timings:</b>
                                         {{ doctor.day_from }} - {{ doctor.day_to }},
-                                        {{ doctor.time_from_hour }}:{{ doctor.time_from_min }} {{ doctor.time_from_ampm }} -
+                                        {{ doctor.time_from_hour }}:{{ doctor.time_from_min }} {{ doctor.time_from_ampm
+                                        }} -
                                         {{ doctor.time_to_hour }}:{{ doctor.time_to_min }} {{ doctor.time_to_ampm }}
                                     </p>
                                     {% endif %}
-                                    <a class="book-btn" target="_blank" href="{{ doctor.appointment_link or 'https://app.fyndbetter.com/ahh_apt' }}">BOOK APPOINTMENT</a>
-                                    <a href="{{ url_for('doctor_detail', slug=doctor.slug) }}" class="action-btn profile-btn">View Profile</a>
+                                    <a class="book-btn" target="_blank"
+                                        href="{{ doctor.appointment_link or 'https://app.fyndbetter.com/ahh_apt' }}">BOOK
+                                        APPOINTMENT</a>
+                                    <a href="{{ url_for('doctor_detail', slug=doctor.slug) }}"
+                                        class="action-btn profile-btn">View Profile</a>
                                 </div>
                             </div>
                         </div>
@@ -421,11 +695,19 @@
                 </div>
             </section>
         </div>
-        
+
         <style>
             #specialists-tab-pane .section-title,
             #specialists-tab-pane .section-title::after,
-            #specialists-tab-pane .section-title::before { all: unset; display: block; font-size: 2rem; font-weight: 600; text-align: center; color: #000; margin-bottom: 1rem; }
+            #specialists-tab-pane .section-title::before {
+                all: unset;
+                display: block;
+                font-size: 2rem;
+                font-weight: 600;
+                text-align: center;
+                color: #000;
+                margin-bottom: 1rem;
+            }
         </style>
 
         <div class="tab-pane fade" id="blog-tab-pane" role="tabpanel" aria-labelledby="blog-tab">
@@ -440,15 +722,18 @@
                                 <div class="blog-card square">
                                     <div class="blog-image">
                                         {% if latest_blog.image_path %}
-                                        <img src="{{ url_for('static', filename=latest_blog.image_path) }}" alt="{{ latest_blog.title }}">
+                                        <img src="{{ url_for('static', filename=latest_blog.image_path) }}"
+                                            alt="{{ latest_blog.title }}">
                                         {% else %}
-                                        <img src="{{ url_for('static', filename='img/blogs/default-blog.jpg') }}" alt="{{ latest_blog.title }}">
+                                        <img src="{{ url_for('static', filename='img/blogs/default-blog.jpg') }}"
+                                            alt="{{ latest_blog.title }}">
                                         {% endif %}
                                     </div>
                                     <div class="blog-content">
                                         <h3 class="blog-title">{{ latest_blog.title }}</h3>
                                         <div class="read-more-container">
-                                            <a href="{{ url_for('blog_detail', slug=latest_blog.slug) }}" class="read-more-btn">Read More</a>
+                                            <a href="{{ url_for('blog_detail', slug=latest_blog.slug) }}"
+                                                class="read-more-btn">Read More</a>
                                         </div>
                                     </div>
                                 </div>
@@ -464,16 +749,97 @@
     </div>
 </div>
 <style>
-    .blogs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(18.75rem, 1fr)); gap: var(--space-lg); padding: var(--space-xl) var(--space-md); max-width: 75rem; margin: 0 auto; }
-    .blog-card { background: var(--color-white); overflow: hidden; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); cursor: pointer; border: 1px solid #f0f0f0; display: flex; flex-direction: column; width: 24rem; height: 25rem; margin: 0 auto; transition: all 0.3s ease; }
-    .blog-image { width: 18rem; height: 12rem; margin: 1.25rem auto 1rem auto; overflow: hidden; background: var(--color-background-light); }
-    .blog-image img { width: 100%; height: 100%; object-fit: cover; }
-    .blog-content { padding: 0 var(--space-md) var(--space-md) var(--space-md); flex: 1; display: flex; flex-direction: column; gap: 1rem; }
-    .blog-title { font-size: 1.2rem; font-weight: 700; color: var(--color-secondary); line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin: 0; text-align: center; }
-    .blog-date { font-size: 0.9rem; color: var(--color-text); font-weight: 500; margin: 0; text-align: center; }
-    .read-more-container { margin-top: 0.5rem; }
-    .read-more-btn { display: flex; align-items: center; justify-content: center; color: #ffffff; text-decoration: none; font-weight: 600; font-size: 0.9rem; padding: 0.5rem 0; width: 50%; border: 2px solid #16979D; background: linear-gradient(to bottom, #16979D, #103A60); transition: all 0.3s ease; margin: 0.5rem auto 0; border-radius: 6px; }
-    .read-more-btn:hover { background: linear-gradient(to bottom, #7FD1D5, #4D7FA3); color: #ffffff; }
+    .blogs-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(18.75rem, 1fr));
+        gap: var(--space-lg);
+        padding: var(--space-xl) var(--space-md);
+        max-width: 75rem;
+        margin: 0 auto;
+    }
+
+    .blog-card {
+        background: var(--color-white);
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        border: 1px solid #f0f0f0;
+        display: flex;
+        flex-direction: column;
+        width: 24rem;
+        height: 25rem;
+        margin: 0 auto;
+        transition: all 0.3s ease;
+    }
+
+    .blog-image {
+        width: 18rem;
+        height: 12rem;
+        margin: 1.25rem auto 1rem auto;
+        overflow: hidden;
+        background: var(--color-background-light);
+    }
+
+    .blog-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .blog-content {
+        padding: 0 var(--space-md) var(--space-md) var(--space-md);
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .blog-title {
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: var(--color-secondary);
+        line-height: 1.4;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        margin: 0;
+        text-align: center;
+    }
+
+    .blog-date {
+        font-size: 0.9rem;
+        color: var(--color-text);
+        font-weight: 500;
+        margin: 0;
+        text-align: center;
+    }
+
+    .read-more-container {
+        margin-top: 0.5rem;
+    }
+
+    .read-more-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #ffffff;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.9rem;
+        padding: 0.5rem 0;
+        width: 50%;
+        border: 2px solid #16979D;
+        background: linear-gradient(to bottom, #16979D, #103A60);
+        transition: all 0.3s ease;
+        margin: 0.5rem auto 0;
+        border-radius: 6px;
+    }
+
+    .read-more-btn:hover {
+        background: linear-gradient(to bottom, #7FD1D5, #4D7FA3);
+        color: #ffffff;
+    }
 </style>
 
 <section data-aos-easing="ease-in-sine" class="service-carousel-section py-5">
