@@ -2260,8 +2260,9 @@ def admin_login():
 
     return render_template("admin/login.html")
 
-
 # --- logout ---
+
+
 @app.route("/admin/logout")
 def admin_logout():
     session.pop("admin_logged_in", None)
