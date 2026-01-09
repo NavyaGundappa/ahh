@@ -3,6 +3,7 @@
 {% block title %}Manage Doctors - Admin Panel{% endblock %}
 
 {% block content %}
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -19,6 +20,16 @@
         max-height: 100px;
         border-radius: 5px;
         border: 1px solid #dee2e6;
+    }
+
+    /* Quill Editor Customization */
+    .ql-editor {
+        min-height: 150px;
+        background-color: white;
+    }
+
+    .ql-container {
+        font-size: 16px;
     }
 
     .timing-days {
@@ -298,13 +309,11 @@
 </style>
 
 <div class="container-fluid mt-4">
-    <!-- Auto Save Indicator -->
     <div id="autoSaveIndicator" class="auto-save-indicator">
         <i class="fas fa-check-circle me-2"></i>
         <span id="autoSaveMessage">Changes saved successfully</span>
     </div>
 
-    <!-- Header Section -->
     <div class="row mb-4">
         <div class="col-md-8">
             <h2 class="mb-1"><i class="fas fa-user-md me-2"></i>Manage Doctors</h2>
@@ -317,7 +326,6 @@
         </div>
     </div>
 
-    <!-- Stats Cards -->
     <div class="row mb-4">
         <div class="col-md-3">
             <div class="stats-card">
@@ -365,7 +373,6 @@
         </div>
     </div>
 
-    <!-- Search Section -->
     <div class="search-container">
         <div class="row">
             <div class="col-md-8">
@@ -427,7 +434,6 @@
         {% endif %}
     </div>
 
-    <!-- Doctors Table -->
     <div class="card">
         <div class="card-header bg-white d-flex justify-content-between align-items-center">
             <h5 class="card-title mb-0">
@@ -588,7 +594,6 @@
     </div>
 </div>
 
-<!-- Add Doctor Modal -->
 <div class="modal fade" id="addDoctorModal" tabindex="-1">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
@@ -601,7 +606,6 @@
                 </div>
                 <div class="modal-body">
                     <div class="row g-3">
-                        <!-- Basic Information Section -->
                         <div class="col-12 form-section">
                             <h6 class="form-section-title"><i class="fas fa-info-circle"></i> Basic Information</h6>
                             <div class="row">
@@ -658,7 +662,6 @@
                             </div>
                         </div>
 
-                        <!-- Timings Section -->
                         <div class="col-12 form-section">
                             <h6 class="form-section-title"><i class="fas fa-clock"></i> Availability Schedule</h6>
                             <button type="button" class="btn btn-sm btn-outline-primary add-timing-btn"
@@ -666,19 +669,17 @@
                                 <i class="fas fa-plus me-1"></i> Add Time Slot
                             </button>
                             <div id="add_timings_container">
-                                <!-- Timing entries will be added here dynamically -->
                             </div>
                         </div>
 
-                        <!-- Professional Details Section -->
                         <div class="col-12 form-section">
                             <h6 class="form-section-title"><i class="fas fa-graduation-cap"></i> Professional Details
                             </h6>
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-12 mb-3">
                                     <label class="form-label">Overview</label>
-                                    <textarea name="overview" class="form-control textarea-medium"
-                                        placeholder="Professional overview..."></textarea>
+                                    <div id="add_overview_editor"></div>
+                                    <input type="hidden" name="overview" id="add_overview_input">
                                 </div>
 
                                 <div class="col-md-12">
@@ -716,7 +717,6 @@
                             </div>
                         </div>
 
-                        <!-- Profile Section -->
                         <div class="col-12 form-section">
                             <h6 class="form-section-title"><i class="fas fa-user"></i> Profile Information</h6>
                             <div class="row">
@@ -727,10 +727,10 @@
                                     <img id="add_image_preview" class="img-preview mt-2">
                                 </div>
 
-                                <div class="col-md-12">
+                                <div class="col-md-12 mb-3">
                                     <label class="form-label">Bio</label>
-                                    <textarea name="bio" class="form-control textarea-medium" rows="3"
-                                        placeholder="Brief description about the doctor..."></textarea>
+                                    <div id="add_bio_editor"></div>
+                                    <input type="hidden" name="bio" id="add_bio_input">
                                 </div>
                             </div>
                         </div>
@@ -747,7 +747,6 @@
     </div>
 </div>
 
-<!-- Edit Doctor Modal -->
 <div class="modal fade" id="editDoctorModal" tabindex="-1">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
@@ -761,7 +760,6 @@
                 </div>
                 <div class="modal-body">
                     <div class="row g-3">
-                        <!-- Basic Information Section -->
                         <div class="col-12 form-section">
                             <h6 class="form-section-title"><i class="fas fa-info-circle"></i> Basic Information</h6>
                             <div class="row">
@@ -817,7 +815,6 @@
                             </div>
                         </div>
 
-                        <!-- Timings Section -->
                         <div class="col-12 form-section">
                             <h6 class="form-section-title"><i class="fas fa-clock"></i> Availability Schedule</h6>
                             <button type="button" class="btn btn-sm btn-outline-primary add-timing-btn"
@@ -825,19 +822,17 @@
                                 <i class="fas fa-plus me-1"></i> Add Time Slot
                             </button>
                             <div id="edit_timings_container">
-                                <!-- Timing entries will be populated dynamically -->
                             </div>
                         </div>
 
-                        <!-- Professional Details Section -->
                         <div class="col-12 form-section">
                             <h6 class="form-section-title"><i class="fas fa-graduation-cap"></i> Professional Details
                             </h6>
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-12 mb-3">
                                     <label class="form-label">Overview</label>
-                                    <textarea name="overview" id="edit_overview"
-                                        class="form-control textarea-medium"></textarea>
+                                    <div id="edit_overview_editor"></div>
+                                    <input type="hidden" name="overview" id="edit_overview_input">
                                 </div>
 
                                 <div class="col-md-12">
@@ -877,7 +872,6 @@
                             </div>
                         </div>
 
-                        <!-- Profile Section -->
                         <div class="col-12 form-section">
                             <h6 class="form-section-title"><i class="fas fa-user"></i> Profile Information</h6>
                             <div class="row">
@@ -888,10 +882,10 @@
                                     <img id="edit_image_preview" class="img-preview mt-2">
                                 </div>
 
-                                <div class="col-md-12">
+                                <div class="col-md-12 mb-3">
                                     <label class="form-label">Bio</label>
-                                    <textarea name="bio" id="edit_bio" class="form-control textarea-medium"
-                                        rows="3"></textarea>
+                                    <div id="edit_bio_editor"></div>
+                                    <input type="hidden" name="bio" id="edit_bio_input">
                                 </div>
                             </div>
                         </div>
@@ -909,7 +903,43 @@
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+
 <script>
+    // ===============================================
+    // 1. QUILL RICH TEXT EDITOR INITIALIZATION
+    // ===============================================
+
+    // Configuration module for all editors
+    const quillConfig = {
+        theme: 'snow',
+        modules: {
+            toolbar: [
+                [{ 'header': [1, 2, 3, false] }],
+                ['bold', 'italic', 'underline', 'strike'],
+                [{ 'color': [] }, { 'background': [] }],
+                [{ 'align': [] }],
+                [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+                ['blockquote', 'code-block'],
+                ['link', 'image'], // Link support enabled
+                ['clean']
+            ]
+        }
+    };
+
+    // Initialize Add Modal Editors
+    var addOverviewQuill = new Quill('#add_overview_editor', quillConfig);
+    var addBioQuill = new Quill('#add_bio_editor', quillConfig);
+
+    // Initialize Edit Modal Editors
+    var editOverviewQuill = new Quill('#edit_overview_editor', quillConfig);
+    var editBioQuill = new Quill('#edit_bio_editor', quillConfig);
+
+
+    // ===============================================
+    // 2. EXISTING FUNCTIONALITY (TIMINGS, ETC)
+    // ===============================================
+
     // Generate time options
     function generateTimeOptions(selectedValue = '00') {
         const times = ['00', '15', '30', '45'];
@@ -1115,6 +1145,10 @@
         }
     }
 
+    // ===============================================
+    // 3. FORM HANDLERS AND MODAL EVENTS
+    // ===============================================
+
     // Load doctor data in Edit modal
     const editModal = document.getElementById('editDoctorModal');
     editModal.addEventListener('show.bs.modal', function (event) {
@@ -1134,15 +1168,25 @@
         document.getElementById('edit_slug').value = doctor.slug || '';
 
         // Populate professional details
-        document.getElementById('edit_overview').value = doctor.overview || '';
+        // Note: Overview and Bio are now populated into Quill below
         document.getElementById('edit_field_of_expertise').value = doctor.field_of_expertise || '';
         document.getElementById('edit_fellowship_membership').value = doctor.fellowship_membership || '';
         document.getElementById('edit_fellowship_links').value = doctor.fellowship_links || '';
         document.getElementById('edit_talks_and_publications').value = doctor.talks_and_publications || '';
         document.getElementById('edit_talks_links').value = doctor.talks_links || '';
 
-        // Populate bio
-        document.getElementById('edit_bio').value = doctor.bio || '';
+        // Populate Quill Editors
+        if (doctor.overview) {
+            editOverviewQuill.root.innerHTML = doctor.overview;
+        } else {
+            editOverviewQuill.root.innerHTML = '';
+        }
+
+        if (doctor.bio) {
+            editBioQuill.root.innerHTML = doctor.bio;
+        } else {
+            editBioQuill.root.innerHTML = '';
+        }
 
         // Populate image preview
         if (doctor.image_path) {
@@ -1163,12 +1207,31 @@
         }
     });
 
-    // Initialize add modal with one timing entry
+    // Initialize add modal
     document.getElementById('addDoctorModal').addEventListener('show.bs.modal', function () {
         const container = document.getElementById('add_timings_container');
         container.innerHTML = '';
         addTimingEntry('add');
+
+        // Clear Quill Editors
+        addOverviewQuill.root.innerHTML = '';
+        addBioQuill.root.innerHTML = '';
     });
+
+    // Form Submission: Add Doctor
+    document.getElementById('addDoctorForm').addEventListener('submit', function (e) {
+        // Copy Quill content to hidden inputs
+        document.getElementById('add_overview_input').value = addOverviewQuill.root.innerHTML;
+        document.getElementById('add_bio_input').value = addBioQuill.root.innerHTML;
+    });
+
+    // Form Submission: Edit Doctor
+    document.getElementById('editDoctorForm').addEventListener('submit', function (e) {
+        // Copy Quill content to hidden inputs
+        document.getElementById('edit_overview_input').value = editOverviewQuill.root.innerHTML;
+        document.getElementById('edit_bio_input').value = editBioQuill.root.innerHTML;
+    });
+
 
     // Initialize when page loads
     document.addEventListener('DOMContentLoaded', function () {

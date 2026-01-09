@@ -5,6 +5,7 @@ Department Content Management - Admin Panel
 {% endblock %}
 
 {% block content %}
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 <h2 class="mb-4 text-2xl font-bold">Department Content Management</h2>
 <div class="flex justify-end mb-3 space-x-2">
     <a href="{{ url_for('admin_dashboard') }}"
@@ -33,12 +34,24 @@ Department Content Management - Admin Panel
         <table class="min-w-full leading-normal" id="overviewTable">
             <thead>
                 <tr>
-                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">ID</th>
-                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Department</th>
-                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Content Preview</th>
-                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Quote</th>
-                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Last Updated</th>
-                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Actions</th>
+                    <th
+                        class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                        ID</th>
+                    <th
+                        class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                        Department</th>
+                    <th
+                        class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                        Content Preview</th>
+                    <th
+                        class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                        Quote</th>
+                    <th
+                        class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                        Last Updated</th>
+                    <th
+                        class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                        Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -52,11 +65,15 @@ Department Content Management - Admin Panel
                         {% endif %}
                         {% endfor %}
                     </td>
-                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ overview.content[:50] }}{% if overview.content|length > 50 %}...{% endif %}</td>
-                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ overview.quote[:30] }}{% if overview.quote|length > 30 %}...{% endif %}</td>
-                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ overview.updated_at.strftime('%Y-%m-%d %H:%M') }}</td>
+                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ overview.content[:50] }}{% if
+                        overview.content|length > 50 %}...{% endif %}</td>
+                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ overview.quote[:30] }}{% if
+                        overview.quote|length > 30 %}...{% endif %}</td>
+                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{
+                        overview.updated_at.strftime('%Y-%m-%d %H:%M') }}</td>
                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm space-x-2">
-                        <button class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded text-xs edit-overview-btn"
+                        <button
+                            class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded text-xs edit-overview-btn"
                             data-id="{{ overview.id }}" data-content="{{ overview.content|e }}"
                             data-quote="{{ overview.quote }}" data-quote-author="{{ overview.quote_author }}"
                             data-department-id="{{ overview.department_id }}">
@@ -91,12 +108,24 @@ Department Content Management - Admin Panel
         <table class="min-w-full leading-normal">
             <thead>
                 <tr>
-                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">ID</th>
-                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Name</th>
-                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Department</th>
-                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Rating</th>
-                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Status</th>
-                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Actions</th>
+                    <th
+                        class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                        ID</th>
+                    <th
+                        class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                        Name</th>
+                    <th
+                        class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                        Department</th>
+                    <th
+                        class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                        Rating</th>
+                    <th
+                        class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                        Status</th>
+                    <th
+                        class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                        Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -117,29 +146,34 @@ Department Content Management - Admin Panel
                         </div>
                     </td>
                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                        <span class="px-2 py-1 text-xs rounded-full {{ 'bg-green-100 text-green-800' if testimonial.is_active else 'bg-red-100 text-red-800' }}">
+                        <span
+                            class="px-2 py-1 text-xs rounded-full {{ 'bg-green-100 text-green-800' if testimonial.is_active else 'bg-red-100 text-red-800' }}">
                             {{ 'Active' if testimonial.is_active else 'Inactive' }}
                         </span>
                     </td>
                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm space-x-2">
-                        <button class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded text-xs edit-testimonial-btn"
+                        <button
+                            class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded text-xs edit-testimonial-btn"
                             data-id="{{ testimonial.id }}" data-name="{{ testimonial.name }}"
                             data-comment="{{ testimonial.comment }}" data-rating="{{ testimonial.rating }}"
-                            data-avatar-color="{{ testimonial.avatar_color }}" data-department-id="{{ testimonial.department_id }}"
+                            data-avatar-color="{{ testimonial.avatar_color }}"
+                            data-department-id="{{ testimonial.department_id }}"
                             data-display-order="{{ testimonial.display_order }}">
                             <i class="fas fa-edit mr-1"></i> Edit
                         </button>
-                        <form action="{{ url_for('delete_department_testimonial', testimonial_id=testimonial.id) }}" method="POST" class="inline">
+                        <form action="{{ url_for('delete_department_testimonial', testimonial_id=testimonial.id) }}"
+                            method="POST" class="inline">
                             <button type="submit"
                                 class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded text-xs"
                                 onclick="return confirm('Are you sure you want to delete this testimonial?')">
                                 <i class="fas fa-trash mr-1"></i> Delete
                             </button>
                         </form>
-                        <form action="{{ url_for('toggle_department_testimonial', testimonial_id=testimonial.id) }}" method="POST" class="inline">
+                        <form action="{{ url_for('toggle_department_testimonial', testimonial_id=testimonial.id) }}"
+                            method="POST" class="inline">
                             <button type="submit"
                                 class="bg-{{ 'gray' if testimonial.is_active else 'green' }}-500 hover:bg-{{ 'gray' if testimonial.is_active else 'green' }}-700 text-white font-bold py-2 px-4 rounded text-xs">
-                                <i class="fas fa-{{ 'eye-slash' if testimonial.is_active else 'eye' }} mr-1"></i> 
+                                <i class="fas fa-{{ 'eye-slash' if testimonial.is_active else 'eye' }} mr-1"></i>
                                 {{ 'Deactivate' if testimonial.is_active else 'Activate' }}
                             </button>
                         </form>
@@ -165,18 +199,29 @@ Department Content Management - Admin Panel
         <table class="min-w-full leading-normal">
             <thead>
                 <tr>
-                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">ID</th>
-                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Question</th>
-                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Department</th>
-                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Status</th>
-                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Actions</th>
+                    <th
+                        class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                        ID</th>
+                    <th
+                        class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                        Question</th>
+                    <th
+                        class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                        Department</th>
+                    <th
+                        class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                        Status</th>
+                    <th
+                        class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                        Actions</th>
                 </tr>
             </thead>
             <tbody>
                 {% for faq in faqs %}
                 <tr class="hover:bg-gray-100 transition duration-150 ease-in-out">
                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ faq.id }}</td>
-                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ faq.question[:80] }}{% if faq.question|length > 80 %}...{% endif %}</td>
+                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ faq.question[:80] }}{% if
+                        faq.question|length > 80 %}...{% endif %}</td>
                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                         {% for department in departments %}
                         {% if department.id == faq.department_id %}
@@ -185,15 +230,16 @@ Department Content Management - Admin Panel
                         {% endfor %}
                     </td>
                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                        <span class="px-2 py-1 text-xs rounded-full {{ 'bg-green-100 text-green-800' if faq.is_active else 'bg-red-100 text-red-800' }}">
+                        <span
+                            class="px-2 py-1 text-xs rounded-full {{ 'bg-green-100 text-green-800' if faq.is_active else 'bg-red-100 text-red-800' }}">
                             {{ 'Active' if faq.is_active else 'Inactive' }}
                         </span>
                     </td>
                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm space-x-2">
-                        <button class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded text-xs edit-faq-btn"
-                            data-id="{{ faq.id }}" data-question="{{ faq.question }}"
-                            data-answer="{{ faq.answer }}" data-department-id="{{ faq.department_id }}"
-                            data-display-order="{{ faq.display_order }}">
+                        <button
+                            class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded text-xs edit-faq-btn"
+                            data-id="{{ faq.id }}" data-question="{{ faq.question }}" data-answer="{{ faq.answer }}"
+                            data-department-id="{{ faq.department_id }}" data-display-order="{{ faq.display_order }}">
                             <i class="fas fa-edit mr-1"></i> Edit
                         </button>
                         <form action="{{ url_for('delete_faq', faq_id=faq.id) }}" method="POST" class="inline">
@@ -206,7 +252,7 @@ Department Content Management - Admin Panel
                         <form action="{{ url_for('toggle_faq', faq_id=faq.id) }}" method="POST" class="inline">
                             <button type="submit"
                                 class="bg-{{ 'gray' if faq.is_active else 'green' }}-500 hover:bg-{{ 'gray' if faq.is_active else 'green' }}-700 text-white font-bold py-2 px-4 rounded text-xs">
-                                <i class="fas fa-{{ 'eye-slash' if faq.is_active else 'eye' }} mr-1"></i> 
+                                <i class="fas fa-{{ 'eye-slash' if faq.is_active else 'eye' }} mr-1"></i>
                                 {{ 'Deactivate' if faq.is_active else 'Activate' }}
                             </button>
                         </form>
@@ -226,230 +272,289 @@ Department Content Management - Admin Panel
 <script src="https://cdn.quilljs.com/1.3.7/quill.min.js"></script>
 
 <style>
-/* Custom font classes for Quill editor */
-.ql-font-arial { font-family: Arial, Helvetica, sans-serif; }
-.ql-font-comic-sans { font-family: "Comic Sans MS", cursive, sans-serif; }
-.ql-font-courier-new { font-family: "Courier New", Courier, monospace; }
-.ql-font-georgia { font-family: Georgia, serif; }
-.ql-font-helvetica { font-family: Helvetica, Arial, sans-serif; }
-.ql-font-impact { font-family: Impact, Charcoal, sans-serif; }
-.ql-font-lucida { font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif; }
-.ql-font-tahoma { font-family: Tahoma, Geneva, sans-serif; }
-.ql-font-times-new-roman { font-family: "Times New Roman", Times, serif; }
-.ql-font-trebuchet { font-family: "Trebuchet MS", Helvetica, sans-serif; }
-.ql-font-verdana { font-family: Verdana, Geneva, sans-serif; }
-.ql-font-palatino { font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif; }
-.ql-font-garamond { font-family: Garamond, serif; }
-.ql-font-brush-script { font-family: "Brush Script MT", cursive; }
-.ql-font-roboto { font-family: 'Roboto', sans-serif; }
-.ql-font-open-sans { font-family: 'Open Sans', sans-serif; }
-.ql-font-lato { font-family: 'Lato', sans-serif; }
-.ql-font-montserrat { font-family: 'Montserrat', sans-serif; }
-.ql-font-raleway { font-family: 'Raleway', sans-serif; }
-.ql-font-ubuntu { font-family: 'Ubuntu', sans-serif; }
+    /* Custom font classes for Quill editor */
+    .ql-font-arial {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .ql-font-comic-sans {
+        font-family: "Comic Sans MS", cursive, sans-serif;
+    }
+
+    .ql-font-courier-new {
+        font-family: "Courier New", Courier, monospace;
+    }
+
+    .ql-font-georgia {
+        font-family: Georgia, serif;
+    }
+
+    .ql-font-helvetica {
+        font-family: Helvetica, Arial, sans-serif;
+    }
+
+    .ql-font-impact {
+        font-family: Impact, Charcoal, sans-serif;
+    }
+
+    .ql-font-lucida {
+        font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    }
+
+    .ql-font-tahoma {
+        font-family: Tahoma, Geneva, sans-serif;
+    }
+
+    .ql-font-times-new-roman {
+        font-family: "Times New Roman", Times, serif;
+    }
+
+    .ql-font-trebuchet {
+        font-family: "Trebuchet MS", Helvetica, sans-serif;
+    }
+
+    .ql-font-verdana {
+        font-family: Verdana, Geneva, sans-serif;
+    }
+
+    .ql-font-palatino {
+        font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    }
+
+    .ql-font-garamond {
+        font-family: Garamond, serif;
+    }
+
+    .ql-font-brush-script {
+        font-family: "Brush Script MT", cursive;
+    }
+
+    .ql-font-roboto {
+        font-family: 'Roboto', sans-serif;
+    }
+
+    .ql-font-open-sans {
+        font-family: 'Open Sans', sans-serif;
+    }
+
+    .ql-font-lato {
+        font-family: 'Lato', sans-serif;
+    }
+
+    .ql-font-montserrat {
+        font-family: 'Montserrat', sans-serif;
+    }
+
+    .ql-font-raleway {
+        font-family: 'Raleway', sans-serif;
+    }
+
+    .ql-font-ubuntu {
+        font-family: 'Ubuntu', sans-serif;
+    }
 </style>
 
 <script>
-// Modal functions
-function openOverviewModal() {
-    document.getElementById('overviewModalLabel').textContent = 'Add Department Overview';
-    document.getElementById('overviewId').value = '';
-    document.getElementById('department_id').value = '';
-    quill.root.innerHTML = '';
-    document.getElementById('quote').value = '';
-    document.getElementById('quote_author').value = '';
-    document.getElementById('overviewModal').classList.remove('hidden');
-}
+    // Modal functions
+    function openOverviewModal() {
+        document.getElementById('overviewModalLabel').textContent = 'Add Department Overview';
+        document.getElementById('overviewId').value = '';
+        document.getElementById('department_id').value = '';
+        quill.root.innerHTML = '';
+        document.getElementById('quote').value = '';
+        document.getElementById('quote_author').value = '';
+        document.getElementById('overviewModal').classList.remove('hidden');
+    }
 
-function openTestimonialModal() {
-    document.getElementById('testimonialModalLabel').textContent = 'Add Testimonial';
-    document.getElementById('testimonialId').value = '';
-    document.getElementById('testimonial_name').value = '';
-    document.getElementById('testimonial_comment').value = '';
-    document.getElementById('testimonial_rating').value = '5';
-    document.getElementById('testimonial_avatar_color').value = '';
-    document.getElementById('testimonial_department_id').value = '';
-    document.getElementById('testimonial_display_order').value = '0';
-    document.getElementById('testimonialModal').classList.remove('hidden');
-}
+    function openTestimonialModal() {
+        document.getElementById('testimonialModalLabel').textContent = 'Add Testimonial';
+        document.getElementById('testimonialId').value = '';
+        document.getElementById('testimonial_name').value = '';
+        document.getElementById('testimonial_comment').value = '';
+        document.getElementById('testimonial_rating').value = '5';
+        document.getElementById('testimonial_avatar_color').value = '';
+        document.getElementById('testimonial_department_id').value = '';
+        document.getElementById('testimonial_display_order').value = '0';
+        document.getElementById('testimonialModal').classList.remove('hidden');
+    }
 
-function openFaqModal() {
-    document.getElementById('faqModalLabel').textContent = 'Add FAQ';
-    document.getElementById('faqId').value = '';
-    document.getElementById('faq_question').value = '';
-    document.getElementById('faq_answer').value = '';
-    document.getElementById('faq_department_id').value = '';
-    document.getElementById('faq_display_order').value = '0';
-    document.getElementById('faqModal').classList.remove('hidden');
-}
+    function openFaqModal() {
+        document.getElementById('faqModalLabel').textContent = 'Add FAQ';
+        document.getElementById('faqId').value = '';
+        document.getElementById('faq_question').value = '';
+        document.getElementById('faq_answer').value = '';
+        document.getElementById('faq_department_id').value = '';
+        document.getElementById('faq_display_order').value = '0';
+        document.getElementById('faqModal').classList.remove('hidden');
+    }
 
-function closeModal(modalId) {
-    document.getElementById(modalId).classList.add('hidden');
-}
+    function closeModal(modalId) {
+        document.getElementById(modalId).classList.add('hidden');
+    }
 
-// Quill initialization
-const Font = Quill.import('formats/font');
-Font.whitelist = [
-    'arial','comic-sans','courier-new','georgia','helvetica','impact','lucida','tahoma',
-    'times-new-roman','trebuchet','verdana','palatino','garamond','brush-script',
-    'roboto','open-sans','lato','montserrat','raleway','ubuntu'
-];
-Quill.register(Font, true);
+    // Quill initialization
+    const Font = Quill.import('formats/font');
+    Font.whitelist = [
+        'arial', 'comic-sans', 'courier-new', 'georgia', 'helvetica', 'impact', 'lucida', 'tahoma',
+        'times-new-roman', 'trebuchet', 'verdana', 'palatino', 'garamond', 'brush-script',
+        'roboto', 'open-sans', 'lato', 'montserrat', 'raleway', 'ubuntu'
+    ];
+    Quill.register(Font, true);
 
-var quill = new Quill('#contentEditor', {
-    theme: 'snow',
-    modules: {
-        toolbar: [
-            [{ 'font': Font.whitelist }, { 'size': ['small', false, 'large', 'huge'] }],
-            [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-            ['bold','italic','underline','strike'],
-            [{ 'color': [] }, { 'background': [] }],
-            [{ 'align': [] }],
-            [{ 'list': 'ordered'}, { 'list': 'bullet'}],
-            ['blockquote','code-block'],
-            ['link','image'],
-            ['clean']
+    var quill = new Quill('#contentEditor', {
+        theme: 'snow',
+        modules: {
+            toolbar: [
+                [{ 'font': Font.whitelist }, { 'size': ['small', false, 'large', 'huge'] }],
+                [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+                ['bold', 'italic', 'underline', 'strike'],
+                [{ 'color': [] }, { 'background': [] }],
+                [{ 'align': [] }],
+                [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+                ['blockquote', 'code-block'],
+                ['link', 'image'],
+                ['clean']
+            ]
+        },
+        formats: [
+            'font', 'size', 'header', 'bold', 'italic', 'underline', 'strike',
+            'color', 'background', 'align', 'list', 'bullet',
+            'blockquote', 'code-block', 'link', 'image'
         ]
-    },
-    formats: [
-        'font','size','header','bold','italic','underline','strike',
-        'color','background','align','list','bullet',
-        'blockquote','code-block','link','image'
-    ]
-});
+    });
 
-// Form submission handlers
-document.getElementById('overviewForm').onsubmit = function () {
-    document.getElementById('content').value = quill.root.innerHTML;
-};
+    // Form submission handlers
+    document.getElementById('overviewForm').onsubmit = function () {
+        document.getElementById('content').value = quill.root.innerHTML;
+    };
 
-// Edit buttons
-document.querySelectorAll('.edit-overview-btn').forEach(button => {
-    button.addEventListener('click', function () {
-        document.getElementById('overviewId').value = this.dataset.id;
-        quill.root.innerHTML = this.dataset.content;
-        document.getElementById('quote').value = this.dataset.quote;
-        document.getElementById('quote_author').value = this.dataset.quoteAuthor;
-        document.getElementById('department_id').value = this.dataset.departmentId;
-        document.getElementById('overviewModalLabel').textContent = 'Edit Department Overview';
+    // Edit buttons
+    document.querySelectorAll('.edit-overview-btn').forEach(button => {
+        button.addEventListener('click', function () {
+            document.getElementById('overviewId').value = this.dataset.id;
+            quill.root.innerHTML = this.dataset.content;
+            document.getElementById('quote').value = this.dataset.quote;
+            document.getElementById('quote_author').value = this.dataset.quoteAuthor;
+            document.getElementById('department_id').value = this.dataset.departmentId;
+            document.getElementById('overviewModalLabel').textContent = 'Edit Department Overview';
+            document.getElementById('overviewModal').classList.remove('hidden');
+        });
+    });
+
+    document.querySelectorAll('.edit-testimonial-btn').forEach(button => {
+        button.addEventListener('click', function () {
+            document.getElementById('testimonialId').value = this.dataset.id;
+            document.getElementById('testimonial_name').value = this.dataset.name;
+            document.getElementById('testimonial_comment').value = this.dataset.comment;
+            document.getElementById('testimonial_rating').value = this.dataset.rating;
+            document.getElementById('testimonial_avatar_color').value = this.dataset.avatarColor;
+            document.getElementById('testimonial_department_id').value = this.dataset.departmentId;
+            document.getElementById('testimonial_display_order').value = this.dataset.displayOrder;
+            document.getElementById('testimonialModalLabel').textContent = 'Edit Testimonial';
+            document.getElementById('testimonialModal').classList.remove('hidden');
+        });
+    });
+
+    document.querySelectorAll('.edit-faq-btn').forEach(button => {
+        button.addEventListener('click', function () {
+            document.getElementById('faqId').value = this.dataset.id;
+            document.getElementById('faq_question').value = this.dataset.question;
+            document.getElementById('faq_answer').value = this.dataset.answer;
+            document.getElementById('faq_department_id').value = this.dataset.departmentId;
+            document.getElementById('faq_display_order').value = this.dataset.displayOrder;
+            document.getElementById('faqModalLabel').textContent = 'Edit FAQ';
+            document.getElementById('faqModal').classList.remove('hidden');
+        });
+    });
+
+    // Search functionality
+    document.getElementById('searchInput').addEventListener('keyup', function () {
+        const filter = this.value.toLowerCase();
+        document.querySelectorAll('#overviewTable tbody tr').forEach(row => {
+            const department = row.cells[1].textContent.toLowerCase();
+            const content = row.cells[2].textContent.toLowerCase();
+            const quote = row.cells[3].textContent.toLowerCase();
+            row.style.display = (department.includes(filter) || content.includes(filter) || quote.includes(filter)) ? '' : 'none';
+        });
+    });
+
+    // Update modal functions to handle edit mode
+    function openOverviewModal() {
+        document.getElementById('overviewModalLabel').textContent = 'Add Department Overview';
+        document.getElementById('overviewId').value = '';
+        document.getElementById('department_id').value = '';
+        quill.root.innerHTML = '';
+        document.getElementById('quote').value = '';
+        document.getElementById('quote_author').value = '';
+        document.getElementById('overviewSubmitBtn').textContent = 'Save Overview';
         document.getElementById('overviewModal').classList.remove('hidden');
-    });
-});
+    }
 
-document.querySelectorAll('.edit-testimonial-btn').forEach(button => {
-    button.addEventListener('click', function () {
-        document.getElementById('testimonialId').value = this.dataset.id;
-        document.getElementById('testimonial_name').value = this.dataset.name;
-        document.getElementById('testimonial_comment').value = this.dataset.comment;
-        document.getElementById('testimonial_rating').value = this.dataset.rating;
-        document.getElementById('testimonial_avatar_color').value = this.dataset.avatarColor;
-        document.getElementById('testimonial_department_id').value = this.dataset.departmentId;
-        document.getElementById('testimonial_display_order').value = this.dataset.displayOrder;
-        document.getElementById('testimonialModalLabel').textContent = 'Edit Testimonial';
+    function openTestimonialModal() {
+        document.getElementById('testimonialModalLabel').textContent = 'Add Testimonial';
+        document.getElementById('testimonialId').value = '';
+        document.getElementById('testimonial_name').value = '';
+        document.getElementById('testimonial_comment').value = '';
+        document.getElementById('testimonial_rating').value = '5';
+        document.getElementById('testimonial_avatar_color').value = '';
+        document.getElementById('testimonial_department_id').value = '';
+        document.getElementById('testimonial_display_order').value = '0';
+        document.getElementById('testimonialSubmitBtn').textContent = 'Save Testimonial';
         document.getElementById('testimonialModal').classList.remove('hidden');
-    });
-});
+    }
 
-document.querySelectorAll('.edit-faq-btn').forEach(button => {
-    button.addEventListener('click', function () {
-        document.getElementById('faqId').value = this.dataset.id;
-        document.getElementById('faq_question').value = this.dataset.question;
-        document.getElementById('faq_answer').value = this.dataset.answer;
-        document.getElementById('faq_department_id').value = this.dataset.departmentId;
-        document.getElementById('faq_display_order').value = this.dataset.displayOrder;
-        document.getElementById('faqModalLabel').textContent = 'Edit FAQ';
+    function openFaqModal() {
+        document.getElementById('faqModalLabel').textContent = 'Add FAQ';
+        document.getElementById('faqId').value = '';
+        document.getElementById('faq_question').value = '';
+        document.getElementById('faq_answer').value = '';
+        document.getElementById('faq_department_id').value = '';
+        document.getElementById('faq_display_order').value = '0';
+        document.getElementById('faqSubmitBtn').textContent = 'Save FAQ';
         document.getElementById('faqModal').classList.remove('hidden');
+    }
+
+    // Enhanced Edit buttons with proper modal updates
+    document.querySelectorAll('.edit-overview-btn').forEach(button => {
+        button.addEventListener('click', function () {
+            document.getElementById('overviewId').value = this.dataset.id;
+            quill.root.innerHTML = this.dataset.content;
+            document.getElementById('quote').value = this.dataset.quote;
+            document.getElementById('quote_author').value = this.dataset.quoteAuthor;
+            document.getElementById('department_id').value = this.dataset.departmentId;
+            document.getElementById('overviewModalLabel').textContent = 'Edit Department Overview';
+            document.getElementById('overviewSubmitBtn').textContent = 'Update Overview';
+            document.getElementById('overviewModal').classList.remove('hidden');
+        });
     });
-});
 
-// Search functionality
-document.getElementById('searchInput').addEventListener('keyup', function () {
-    const filter = this.value.toLowerCase();
-    document.querySelectorAll('#overviewTable tbody tr').forEach(row => {
-        const department = row.cells[1].textContent.toLowerCase();
-        const content = row.cells[2].textContent.toLowerCase();
-        const quote = row.cells[3].textContent.toLowerCase();
-        row.style.display = (department.includes(filter) || content.includes(filter) || quote.includes(filter)) ? '' : 'none';
+    document.querySelectorAll('.edit-testimonial-btn').forEach(button => {
+        button.addEventListener('click', function () {
+            document.getElementById('testimonialId').value = this.dataset.id;
+            document.getElementById('testimonial_name').value = this.dataset.name;
+            document.getElementById('testimonial_comment').value = this.dataset.comment;
+            document.getElementById('testimonial_rating').value = this.dataset.rating;
+            document.getElementById('testimonial_avatar_color').value = this.dataset.avatarColor;
+            document.getElementById('testimonial_department_id').value = this.dataset.departmentId;
+            document.getElementById('testimonial_display_order').value = this.dataset.displayOrder;
+            document.getElementById('testimonialModalLabel').textContent = 'Edit Testimonial';
+            document.getElementById('testimonialSubmitBtn').textContent = 'Update Testimonial';
+            document.getElementById('testimonialModal').classList.remove('hidden');
+        });
     });
-});
 
-// Update modal functions to handle edit mode
-function openOverviewModal() {
-    document.getElementById('overviewModalLabel').textContent = 'Add Department Overview';
-    document.getElementById('overviewId').value = '';
-    document.getElementById('department_id').value = '';
-    quill.root.innerHTML = '';
-    document.getElementById('quote').value = '';
-    document.getElementById('quote_author').value = '';
-    document.getElementById('overviewSubmitBtn').textContent = 'Save Overview';
-    document.getElementById('overviewModal').classList.remove('hidden');
-}
-
-function openTestimonialModal() {
-    document.getElementById('testimonialModalLabel').textContent = 'Add Testimonial';
-    document.getElementById('testimonialId').value = '';
-    document.getElementById('testimonial_name').value = '';
-    document.getElementById('testimonial_comment').value = '';
-    document.getElementById('testimonial_rating').value = '5';
-    document.getElementById('testimonial_avatar_color').value = '';
-    document.getElementById('testimonial_department_id').value = '';
-    document.getElementById('testimonial_display_order').value = '0';
-    document.getElementById('testimonialSubmitBtn').textContent = 'Save Testimonial';
-    document.getElementById('testimonialModal').classList.remove('hidden');
-}
-
-function openFaqModal() {
-    document.getElementById('faqModalLabel').textContent = 'Add FAQ';
-    document.getElementById('faqId').value = '';
-    document.getElementById('faq_question').value = '';
-    document.getElementById('faq_answer').value = '';
-    document.getElementById('faq_department_id').value = '';
-    document.getElementById('faq_display_order').value = '0';
-    document.getElementById('faqSubmitBtn').textContent = 'Save FAQ';
-    document.getElementById('faqModal').classList.remove('hidden');
-}
-
-// Enhanced Edit buttons with proper modal updates
-document.querySelectorAll('.edit-overview-btn').forEach(button => {
-    button.addEventListener('click', function () {
-        document.getElementById('overviewId').value = this.dataset.id;
-        quill.root.innerHTML = this.dataset.content;
-        document.getElementById('quote').value = this.dataset.quote;
-        document.getElementById('quote_author').value = this.dataset.quoteAuthor;
-        document.getElementById('department_id').value = this.dataset.departmentId;
-        document.getElementById('overviewModalLabel').textContent = 'Edit Department Overview';
-        document.getElementById('overviewSubmitBtn').textContent = 'Update Overview';
-        document.getElementById('overviewModal').classList.remove('hidden');
+    document.querySelectorAll('.edit-faq-btn').forEach(button => {
+        button.addEventListener('click', function () {
+            document.getElementById('faqId').value = this.dataset.id;
+            document.getElementById('faq_question').value = this.dataset.question;
+            document.getElementById('faq_answer').value = this.dataset.answer;
+            document.getElementById('faq_department_id').value = this.dataset.departmentId;
+            document.getElementById('faq_display_order').value = this.dataset.displayOrder;
+            document.getElementById('faqModalLabel').textContent = 'Edit FAQ';
+            document.getElementById('faqSubmitBtn').textContent = 'Update FAQ';
+            document.getElementById('faqModal').classList.remove('hidden');
+        });
     });
-});
-
-document.querySelectorAll('.edit-testimonial-btn').forEach(button => {
-    button.addEventListener('click', function () {
-        document.getElementById('testimonialId').value = this.dataset.id;
-        document.getElementById('testimonial_name').value = this.dataset.name;
-        document.getElementById('testimonial_comment').value = this.dataset.comment;
-        document.getElementById('testimonial_rating').value = this.dataset.rating;
-        document.getElementById('testimonial_avatar_color').value = this.dataset.avatarColor;
-        document.getElementById('testimonial_department_id').value = this.dataset.departmentId;
-        document.getElementById('testimonial_display_order').value = this.dataset.displayOrder;
-        document.getElementById('testimonialModalLabel').textContent = 'Edit Testimonial';
-        document.getElementById('testimonialSubmitBtn').textContent = 'Update Testimonial';
-        document.getElementById('testimonialModal').classList.remove('hidden');
-    });
-});
-
-document.querySelectorAll('.edit-faq-btn').forEach(button => {
-    button.addEventListener('click', function () {
-        document.getElementById('faqId').value = this.dataset.id;
-        document.getElementById('faq_question').value = this.dataset.question;
-        document.getElementById('faq_answer').value = this.dataset.answer;
-        document.getElementById('faq_department_id').value = this.dataset.departmentId;
-        document.getElementById('faq_display_order').value = this.dataset.displayOrder;
-        document.getElementById('faqModalLabel').textContent = 'Edit FAQ';
-        document.getElementById('faqSubmitBtn').textContent = 'Update FAQ';
-        document.getElementById('faqModal').classList.remove('hidden');
-    });
-});
 </script>
 
 {% endblock %}

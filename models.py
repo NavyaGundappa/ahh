@@ -90,19 +90,57 @@ class Testimonial(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     patient_name = db.Column(db.String(200), nullable=False)
     content = db.Column(db.Text, nullable=False)
+    # --- ADD THIS LINE ---
+    youtube_link = db.Column(db.String(300), nullable=True)
+    # ---------------------
     doctor_id = db.Column(db.Integer, db.ForeignKey(
         'doctors.id'), nullable=False)
-    doctor = db.relationship('Doctor', foreign_keys=[doctor_id], backref=db.backref(
-        'primary_testimonials', lazy=True))
+    doctor = db.relationship('Doctor', foreign_keys=[
+                             doctor_id], backref=db.backref('primary_testimonials', lazy=True))
     doctor2_id = db.Column(
         db.Integer, db.ForeignKey('doctors.id'), nullable=True)
-    doctor2 = db.relationship('Doctor', foreign_keys=[doctor2_id], backref=db.backref(
-        'secondary_testimonials', lazy=True))
+    doctor2 = db.relationship('Doctor', foreign_keys=[
+                              doctor2_id], backref=db.backref('secondary_testimonials', lazy=True))
     is_active = db.Column(db.Boolean, default=True)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
     def __repr__(self):
         return f'<Testimonial {self.patient_name}>'
+
+
+class LifeMoment(db.Model):
+    __tablename__ = 'life_moments'
+
+    id = db.Column(db.Integer, primary_key=True)
+    # Categories: 'patient_stories', 'doctors_speak', 'general', 'health_days', 'events', 'written_testimonial'
+    category = db.Column(db.String(50), nullable=False)
+    title = db.Column(db.String(200), nullable=False)
+    description = db.Column(db.Text, nullable=True)
+
+    # For Videos (YouTube)
+    video_link = db.Column(db.String(300), nullable=True)
+    # Primary Doctor Link
+    doctor1_id = db.Column(
+        db.Integer, db.ForeignKey('doctors.id'), nullable=True)
+    doctor1 = db.relationship('Doctor', foreign_keys=[
+                              doctor1_id], backref='life_moments_as_doctor1')
+
+    # Secondary Doctor Link (NEW)
+    doctor2_id = db.Column(
+        db.Integer, db.ForeignKey('doctors.id'), nullable=True)
+    doctor2 = db.relationship('Doctor', foreign_keys=[
+                              doctor2_id], backref='life_moments_as_doctor2')
+
+    # For Images (Events/Health Days/Thumbnails)
+    image_path = db.Column(db.String(300), nullable=True)
+
+    is_active = db.Column(db.Boolean, default=True)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    updated_at = db.Column(
+        db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+
+    def __repr__(self):
+        return f'<LifeMoment {self.title} ({self.category})>'
 
 
 class Speciality(db.Model):
@@ -297,6 +335,7 @@ class UserAccess(db.Model):
     reviews = db.Column(db.Boolean, default=False)
     blogs = db.Column(db.Boolean, default=False)
     bmw_report = db.Column(db.Boolean, default=False)
+    life_moments = db.Column(db.Boolean, default=False)
 
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(

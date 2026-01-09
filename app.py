@@ -21,13 +21,12 @@ import flash
 from flask import Flask, render_template, request, redirect, url_for, flash, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.utils import secure_filename
-from models import db, Banner, Doctor, Counter, Testimonial, Speciality, Department,  HealthPackage, SportsPackage, DepartmentOverview, DepartmentService, User, UserAccess, CallbackRequest, ReviewMessage, Blog, BMWReportPDF, FAQ, DepartmentTestimonial
+from models import db, Banner, Doctor, Counter, Testimonial, Speciality, Department,  HealthPackage, SportsPackage, DepartmentOverview, DepartmentService, User, UserAccess, CallbackRequest, ReviewMessage, Blog, BMWReportPDF, FAQ, DepartmentTestimonial, LifeMoment
 from config import Config
 import os
 from functools import wraps
 import io
 from sqlalchemy.orm import joinedload
-from models import db, Banner, Doctor, Counter, Testimonial, Speciality, Department,  HealthPackage, SportsPackage, DepartmentOverview, DepartmentService, User, UserAccess, CallbackRequest, ReviewMessage, Blog, BMWReportPDF, FAQ, DepartmentTestimonial
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
@@ -67,6 +66,21 @@ def index():
         joinedload(Testimonial.doctor)
     ).order_by(Testimonial.created_at.desc()).all()
 
+    life_moments = LifeMoment.query.filter_by(
+        is_active=True).options(
+            joinedload(LifeMoment.doctor1),
+            joinedload(LifeMoment.doctor2)
+    ).order_by(LifeMoment.created_at.desc()).all()
+
+    for moment in life_moments:
+        if moment.video_link:
+            moment.video_id = get_youtube_id(moment.video_link)
+
+    processed_testimonials = []
+    for t in testimonials:
+        t.video_id = get_youtube_id(t.youtube_link)
+        processed_testimonials.append(t)
+
     # Add this line to get specialities/departments
     specialities = Speciality.query.filter_by(
         is_active=True).order_by(Speciality.name).all()
@@ -76,7 +90,7 @@ def index():
                            doctors=doctors,
                            counters=counters,
                            testimonials=testimonials,
-                           specialities=specialities)  # Add this parameter
+                           specialities=specialities, life_moments=life_moments)  # Add this parameter
 
 
 @app.route('/appointments')
@@ -189,7 +203,7 @@ def admin_dashboard():
         return redirect(url_for("admin_login"))
 
     modules = ['banners', 'doctors', 'counters', 'testimonials', 'specialities',
-               'departments', 'health_packages', 'sports_packages', 'department_content', 'users', 'callback_requests', 'reviews', 'blogs', 'bmw_report']
+               'departments', 'health_packages', 'sports_packages', 'department_content', 'users', 'callback_requests', 'reviews', 'blogs', 'bmw_report', 'life_moments']
 
     access = {module: False for module in modules}
     if user.access:
@@ -257,7 +271,7 @@ def admin_banners():
     admin_id = session.get("admin_id")
     user = User.query.get(admin_id)
     modules = ['banners', 'doctors', 'counters', 'testimonials', 'specialities',
-               'departments', 'health_packages', 'sports_packages', 'department_content', 'users', 'callback_requests', 'reviews''blog', 'bmw_report']
+               'departments', 'health_packages', 'sports_packages', 'department_content', 'users', 'callback_requests', 'reviews''blog', 'bmw_report', 'life_moments']
     access = {module: False for module in modules}
     if user and user.access:
         for module in modules:
@@ -324,7 +338,209 @@ def edit_banner(banner_id):
     return render_template('admin/edit_banner.html', banner=banner)
 
 
-# Helper function to handle file uploads
+def safe_int_or_none(value_str):
+    """
+    Safely converts a string from a form field to an integer or None.
+    Handles None, empty string '', and '0' (common for 'Select...' options)
+    as None, and catches ValueError on conversion attempt.
+    """
+    if not value_str or str(value_str).strip() in ('', '0'):
+        return None
+    try:
+        return int(value_str.strip())
+    except ValueError:
+        return None
+
+
+def get_youtube_id(link):
+    if not link:
+        return None
+
+    link = link.strip()
+
+    # Handle YouTube Shorts (Portrait videos) - ADD THIS BLOCK
+    if 'shorts/' in link:
+        return link.split('shorts/')[1].split('?')[0].split('&')[0]
+
+    # Handle embed links
+    if 'embed/' in link:
+        return link.split('embed/')[1].split('?')[0].split('&')[0]
+
+    # Handle watch links
+    if 'watch?v=' in link:
+        return link.split('watch?v=')[1].split('&')[0].split('?')[0]
+
+    # Handle short links (youtu.be)
+    if 'youtu.be/' in link:
+        return link.split('youtu.be/')[1].split('&')[0].split('?')[0]
+
+    return None
+
+
+@app.route('/our-stories')  # Choose a descriptive URL
+def our_stories():
+    """
+    Fetches all LifeMoment data, including doctor details, for the dedicated stories page.
+    """
+
+    initial_category = request.args.get('category_code', 'patient_stories')
+    highlight_id = request.args.get('highlight_id')
+    # Categories are needed to render the tabs
+    categories = [
+        ('patient_stories', 'Patient Stories'),
+        ('doctors_speak', 'Doctors Speak'),
+        ('general', 'General'),
+        ('health_days', 'Health Days'),
+        ('events', 'Events'),
+        ('written_testimonial', 'Written Reviews')
+    ]
+
+    # Fetching the same data as the homepage's life_moments section
+    life_moments = LifeMoment.query.filter_by(
+        is_active=True).options(
+            joinedload(LifeMoment.doctor1),
+            joinedload(LifeMoment.doctor2)
+    ).order_by(LifeMoment.created_at.desc()).all()
+
+    for moment in life_moments:
+        # Assuming get_youtube_id is defined and works as in your original route
+        if moment.video_link:
+            moment.video_id = get_youtube_id(moment.video_link)
+
+    return render_template('life_at_glance.html',
+                           life_moments=life_moments,
+                           initial_category=initial_category,
+                           highlight_id=highlight_id,
+                           categories=categories)
+
+
+@app.route('/admin/life_moments', methods=['GET', 'POST'])
+@login_required
+def admin_life_moments():
+    if request.method == 'POST':
+        # --- 1. Handle Delete ---
+        if 'delete_id' in request.form:
+            moment_id = request.form.get('delete_id')
+            moment = LifeMoment.query.get_or_404(moment_id)
+
+            # Delete image if exists
+            if moment.image_path:
+                try:
+                    os.remove(os.path.join(
+                        app.static_folder, moment.image_path))
+                except:
+                    # Ignore file not found errors during deletion
+                    pass
+
+            try:
+                db.session.delete(moment)
+                db.session.commit()
+                flash('Item deleted successfully!', 'success')
+            except IntegrityError:
+                db.session.rollback()
+                flash('Error: Could not delete item due to a related record.', 'danger')
+            except Exception as e:
+                db.session.rollback()
+                flash(
+                    f'An unexpected error occurred during deletion: {e}', 'danger')
+
+            return redirect(url_for('admin_life_moments'))
+
+        # --- 2. Handle Add/Update ---
+        moment_id = request.form.get('moment_id')
+        category = request.form.get('category')
+        title = request.form.get('title')
+        description = request.form.get('description')
+        video_link = request.form.get('video_link')
+
+        # *** MODIFIED: Use the robust conversion function for doctor IDs ***
+        doctor1_id = safe_int_or_none(request.form.get('doctor1_id'))
+        doctor2_id = safe_int_or_none(request.form.get('doctor2_id'))
+
+        # Your previous manual try-except blocks are no longer needed
+        # as they are replaced by the helper function.
+
+        # Handle Image Upload
+        image_path = None
+        if 'image' in request.files:
+            file = request.files['image']
+            # Assuming allowed_file is defined and checks extension
+            if file and file.filename != '' and allowed_file(file.filename):
+                filename = secure_filename(file.filename)
+                folder = os.path.join(app.static_folder, 'img', 'life_moments')
+                os.makedirs(folder, exist_ok=True)
+                file.save(os.path.join(folder, filename))
+                image_path = f'img/life_moments/{filename}'
+
+        # *** MODIFIED: Wrap database commit in try/except for graceful error handling ***
+        try:
+            if moment_id:  # Edit
+                moment = LifeMoment.query.get_or_404(moment_id)
+                moment.category = category
+                moment.title = title
+                moment.description = description
+                moment.video_link = video_link
+                moment.doctor1_id = doctor1_id
+                moment.doctor2_id = doctor2_id
+
+                # Only update image path if a new image was uploaded
+                if image_path:
+                    moment.image_path = image_path
+
+                db.session.commit()
+                flash('Item updated successfully!', 'success')
+            else:  # Add
+                new_moment = LifeMoment(
+                    category=category,
+                    title=title,
+                    description=description,
+                    video_link=video_link,
+                    image_path=image_path,
+                    doctor1_id=doctor1_id,
+                    doctor2_id=doctor2_id,
+                )
+                db.session.add(new_moment)
+                db.session.commit()
+                flash('Item added successfully!', 'success')
+
+        except IntegrityError:
+            db.session.rollback()
+            # This handles NOT NULL constraints or invalid foreign keys (e.g., doctor ID)
+            flash('Error: Could not save item. Ensure all required fields are filled and valid doctor IDs are selected.', 'danger')
+        except Exception as e:
+            db.session.rollback()
+            flash(f'An unexpected error occurred: {e}', 'danger')
+
+        return redirect(url_for('admin_life_moments'))
+
+    # --- GET Request (No change needed here) ---
+    moments = LifeMoment.query.order_by(
+        LifeMoment.category, LifeMoment.created_at.desc()).all()
+
+    doctors = Doctor.query.filter_by(
+        is_active=True).order_by(Doctor.name).all()
+
+    # User Access (for sidebar)
+    admin_id = session.get("admin_id")
+    user = User.query.get(admin_id)
+    modules = ['banners', 'doctors', 'counters', 'testimonials', 'specialities',
+               'departments', 'health_packages', 'sports_packages', 'department_content',
+               'users', 'callback_requests', 'reviews', 'blogs', 'bmw_report', 'life_moments']
+    access = {module: False for module in modules}
+    if user and user.access:
+        for module in modules:
+            access[module] = getattr(user.access, module, False)
+
+    return render_template('admin/life_moments.html', moments=moments, access=access, current_user=user, doctors=doctors)
+
+
+@app.route('/api/toggle_life_moment/<int:id>', methods=['POST'])
+def toggle_life_moment(id):
+    moment = LifeMoment.query.get_or_404(id)
+    moment.is_active = not moment.is_active
+    db.session.commit()
+    return jsonify({'status': 'success', 'is_active': moment.is_active})
+
 
 def handle_file_upload(file, folder_name):
     if file and file.filename != '' and allowed_file(file.filename):
@@ -1007,50 +1223,61 @@ def delete_counter(counter_id):
     return redirect(url_for('admin_counters'))
 
 
-# [app.py]
 @app.route('/admin/testimonials', methods=['GET', 'POST'])
 @login_required
 @permission_required('testimonials')
 def admin_testimonials():
+    # --- POST REQUEST (Adding data) ---
     if request.method == 'POST':
-        # --- MODIFIED POST LOGIC ---
         patient_name = request.form.get('patient_name')
         content = request.form.get('content')
-        doctor1_id = request.form.get('doctor1_id')  # Changed from doctor_id
-        doctor2_id = request.form.get('doctor2_id')  # Added doctor2_id
+        doctor1_id = request.form.get('doctor1_id')
+        doctor2_id = request.form.get('doctor2_id')
 
-        if not patient_name or not content or not doctor1_id:  # Updated validation
+        # --- NEW: Get YouTube Link ---
+        youtube_link = request.form.get('youtube_link', '').strip()
+
+        # Convert to embed format if needed
+        if youtube_link:
+            if "watch?v=" in youtube_link:
+                youtube_link = youtube_link.replace("watch?v=", "embed/")
+            elif "youtu.be/" in youtube_link:
+                youtube_link = youtube_link.replace(
+                    "youtu.be/", "www.youtube.com/embed/")
+        # -----------------------------
+
+        if not patient_name or not content or not doctor1_id:
             flash('Patient Name, Content, and Primary Doctor are required', 'danger')
             return redirect(request.url)
-
-        # Removed patient image logic
 
         testimonial = Testimonial(
             patient_name=patient_name,
             content=content,
-            doctor_id=int(doctor1_id),  # Use doctor1_id
-            # Use doctor2_id
+            youtube_link=youtube_link,
+            doctor_id=int(doctor1_id),
             doctor2_id=int(doctor2_id) if doctor2_id else None
         )
-        # --- END MODIFIED POST LOGIC ---
 
         db.session.add(testimonial)
         db.session.commit()
         flash('Testimonial added successfully!', 'success')
         return redirect(url_for('admin_testimonials'))
 
-    # --- MODIFIED GET LOGIC ---
+    # --- GET REQUEST (Rendering the page) ---
+    # This part was likely missing or indented incorrectly causing the error
     testimonials = Testimonial.query.order_by(
         Testimonial.created_at.desc()).all()
-
-    # Fetch doctors for the dropdown
     doctors = Doctor.query.filter_by(
         is_active=True).order_by(Doctor.name).all()
 
     admin_id = session.get("admin_id")
     user = User.query.get(admin_id)
+
     modules = ['banners', 'doctors', 'counters', 'testimonials', 'specialities',
-               'departments', 'health_packages', 'sports_packages', 'department_content', 'users', 'callback_requests', 'reviews']
+               'departments', 'health_packages', 'sports_packages',
+               'department_content', 'users', 'callback_requests', 'reviews',
+               'blogs', 'bmw_report', 'life_moments']
+
     access = {module: False for module in modules}
     if user and user.access:
         for module in modules:
@@ -1059,12 +1286,10 @@ def admin_testimonials():
     return render_template(
         'admin/testimonials.html',
         testimonials=testimonials,
-        doctors=doctors,  # Pass doctors to the template
+        doctors=doctors,
         access=access,
         current_user=user
     )
-
-# [app.py]
 
 
 @app.route('/admin/testimonials/edit/<int:testimonial_id>', methods=['POST'])
@@ -1078,18 +1303,28 @@ def edit_testimonial(testimonial_id):
     doctor1_id = request.form.get('doctor1_id')
     doctor2_id = request.form.get('doctor2_id')
 
+    # --- NEW: Get YouTube Link ---
+    youtube_link = request.form.get('youtube_link', '').strip()
+
+    # Convert to embed format if needed
+    if youtube_link and "watch?v=" in youtube_link:
+        youtube_link = youtube_link.replace("watch?v=", "embed/")
+    elif youtube_link and "youtu.be/" in youtube_link:
+        youtube_link = youtube_link.replace(
+            "youtu.be/", "www.youtube.com/embed/")
+    # -----------------------------
+
     if not patient_name or not content or not doctor1_id:
         flash('Patient Name, Content, and Primary Doctor are required', 'danger')
         return redirect(url_for('admin_testimonials'))
 
     testimonial.patient_name = patient_name
     testimonial.content = content
+    testimonial.youtube_link = youtube_link  # <--- Update it here
     testimonial.doctor_id = int(doctor1_id)
     testimonial.doctor2_id = int(doctor2_id) if doctor2_id else None
 
-    db.session.expire(testimonial)
-
-    db.session.commit()
+    db.session.commit()  # Removed db.session.expire(testimonial) as commit handles it
     flash('Testimonial updated successfully!', 'success')
     return redirect(url_for('admin_testimonials'))
 
@@ -1821,7 +2056,7 @@ def admin_department_overview():
     user = User.query.get(admin_id)
     modules = ['banners', 'doctors', 'counters', 'testimonials', 'specialities',
                'departments', 'health_packages', 'sports_packages', 'department_content',
-               'users', 'callback_requests', 'reviews', 'blogs', 'bmw_report']
+               'users', 'callback_requests', 'reviews', 'blogs', 'bmw_report', 'life_moments']
     access = {module: False for module in modules}
     if user and user.access:
         for module in modules:
@@ -2101,7 +2336,7 @@ def admin_users():
     modules = [
         "banners", "doctors", "counters", "testimonials", "specialities",
         "departments", "health_packages", "sports_packages", "department_content",
-        "users", "callback_requests", "reviews", "blogs", "bmw_report"
+        "users", "callback_requests", "reviews", "blogs", "bmw_report", "life_moments"
     ]
 
     if request.method == "POST":
@@ -2892,7 +3127,7 @@ def admin_upload():
     # Get user access for sidebar
     modules = ['banners', 'doctors', 'counters', 'testimonials', 'specialities',
                'departments', 'health_packages', 'sports_packages', 'department_content',
-               'users', 'callback_requests', 'reviews', 'blogs', 'bmw_report']
+               'users', 'callback_requests', 'reviews', 'blogs', 'bmw_report', 'life_moments']
     access = {module: False for module in modules}
     if user.access:
         for module in modules:
@@ -3106,28 +3341,6 @@ def delete_faq(faq_id):  # Changed from 'id' to 'faq_id'
     flash("FAQ deleted successfully!", "success")
     return redirect(url_for('admin_department_overview'))
 
-# ------------------ TOGGLE ROUTES ------------------
-
-
-@app.route('/check_timing')
-def check_timing():
-    doctor = Doctor.query.first()
-    return doctor.timings or "No timings"
-
-
-# ✅ 301 Redirects (placed at the bottom, before if __name__ == '__main__')
-redirects = {
-    '/doctors/Dt%20Neelima%20Sharma': '/doctors/dt-neelima-sharma',
-    '/doctors/dr%20magesh%20b': '/doctors/dr-magesh-b',
-}
-
-
-@app.before_request
-def handle_redirects():
-    target = redirects.get(request.path)
-    if target:
-        return redirect(target, code=301)
-
 
 # admin routes end -------------------------------------------------------------------------------------------------------------------------
 migrate = Migrate(app, db)
@@ -3141,4 +3354,4 @@ if __name__ == "__main__":
         print("Startup error:", e)
         traceback.print_exc()
 
-    app.run(host="0.0.0.0", port=2000, debug=True)
+    app.run(host="0.0.0.0", port=2020, debug=True)

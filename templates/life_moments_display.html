@@ -1,0 +1,391 @@
+{% extends 'base.html' %}
+
+{% block title %}Media Center - Stories & Reviews{% endblock %}
+
+{% block content %}
+<style>
+    /* -------------------------------------- */
+    /* GENERAL STYLES */
+    /* -------------------------------------- */
+    body {
+        background-color: #f4f7f6;
+    }
+
+    .media-header h1 {
+        font-weight: 800;
+        font-size: 2.8rem;
+        letter-spacing: 1px;
+    }
+
+    /* -------------------------------------- */
+    /* NAVIGATION TABS (No change here) */
+    /* -------------------------------------- */
+    .media-nav .nav-pills {
+        justify-content: center;
+        margin-bottom: 40px;
+        gap: 10px;
+        padding: 10px;
+        background-color: #ffffff;
+        border-radius: 15px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .media-nav .nav-link {
+        border-radius: 50px;
+        padding: 12px 25px;
+        font-weight: 600;
+        color: #555;
+        background-color: #fff;
+        border: 2px solid transparent;
+        transition: all 0.3s ease;
+    }
+
+    .media-nav .nav-link:hover {
+        color: #007bff;
+        border-color: #007bff;
+    }
+
+    .media-nav .nav-link.active {
+        background-color: #007bff;
+        color: #fff;
+        border-color: #007bff;
+        box-shadow: 0 4px 12px rgba(0, 123, 255, 0.4);
+        transform: translateY(-2px);
+    }
+
+    /* -------------------------------------- */
+    /* VIDEO/STORY CARDS (Horizontal Layout - No change here) */
+    /* -------------------------------------- */
+    .media-card {
+        border: none;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        transition: transform 0.4s ease, box-shadow 0.4s ease;
+        background: #ffffff;
+        height: 200px;
+    }
+
+    .media-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .media-card-link {
+        display: flex;
+        height: 100%;
+    }
+
+    .media-thumb {
+        width: 40%;
+        height: 100%;
+        position: relative;
+        overflow: hidden;
+        flex-shrink: 0;
+    }
+
+    .media-thumb img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.6s ease;
+    }
+
+    .media-card:hover .media-thumb img {
+        transform: scale(1.05);
+    }
+
+    .play-icon {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 2.5rem;
+        color: rgba(255, 255, 255, 0.95);
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+    }
+
+    .media-body {
+        width: 60%;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .media-cat-tag {
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        color: #28a745;
+        font-weight: 700;
+        margin-bottom: 5px;
+        display: block;
+        letter-spacing: 0.5px;
+    }
+
+    .media-title {
+        font-size: 1.1rem;
+        font-weight: 700;
+        margin-bottom: 8px;
+        line-height: 1.3;
+        color: #333;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .media-description {
+        font-size: 0.85rem;
+        color: #777;
+        margin-bottom: 0;
+    }
+
+    .media-footer {
+        padding-top: 10px;
+        border-top: 1px solid #eee;
+    }
+
+    /* -------------------------------------- */
+    /* WRITTEN REVIEW CARDS (Disturbance Fix) */
+    /* -------------------------------------- */
+    .review-card {
+        background: #ffffff;
+        /* Clean white background */
+        padding: 30px;
+        border-radius: 15px;
+        /* Subtle shadow, removed left border */
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        height: 100%;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .review-card:hover {
+        /* Lift the card slightly for interaction feedback */
+        transform: translateY(-3px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .review-content {
+        color: #444;
+        margin-bottom: 25px;
+        font-size: 1rem;
+        line-height: 1.6;
+        position: relative;
+        padding-left: 20px;
+        /* Space for the subtle quote icon */
+    }
+
+    .review-content:before {
+        content: "\f10d";
+        /* FontAwesome quote-left icon */
+        font-family: 'Font Awesome 5 Free';
+        font-weight: 900;
+        font-size: 1.5rem;
+        /* Reduced size */
+        color: #ccc;
+        /* Very light, subtle color */
+        opacity: 0.6;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    .review-author-block {
+        display: flex;
+        align-items: center;
+        /* Clean separator */
+        border-top: 1px solid #f0f0f0;
+        padding-top: 15px;
+    }
+
+    .review-author-icon {
+        margin-right: 15px;
+        font-size: 2rem;
+        /* Reduced size */
+        color: #007bff;
+        /* Use primary color for professionalism */
+    }
+
+    .review-meta div {
+        font-weight: 600;
+        color: #333;
+        font-size: 1.1rem;
+    }
+
+    .review-meta small {
+        display: block;
+        color: #777;
+    }
+
+    .review-date {
+        font-size: 0.75rem !important;
+        color: #aaa !important;
+        margin-top: 5px;
+    }
+
+    /* -------------------------------------- */
+    /* ADVANCED CSS: PURE CSS MASONRY LAYOUT */
+    /* -------------------------------------- */
+
+    .masonry-grid {
+        /* Implement pure CSS Masonry using multi-column layout */
+        column-count: 3;
+        column-gap: 1.5rem;
+        /* Gap between columns, replicating Bootstrap g-4 */
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .review-card-item {
+        /* CRITICAL: Prevents an item from being split across columns */
+        break-inside: avoid;
+        /* Ensure item uses the full width of its column */
+        width: 100%;
+        /* Vertical spacing between items */
+        margin-bottom: 1.5rem;
+        /* Necessary for break-inside: avoid to work reliably */
+        display: inline-block;
+    }
+
+    /* Responsive adjustments for Masonry */
+    @media (max-width: 992px) {
+        .masonry-grid {
+            /* 2 columns on tablet/medium screens (replaces col-md-6) */
+            column-count: 2;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .masonry-grid {
+            /* 1 column on mobile/small screens */
+            column-count: 1;
+        }
+    }
+</style>
+
+<div class="media-header text-center mb-5">
+    <div class="container">
+        <h1>Our Stories</h1>
+    </div>
+</div>
+
+<div class="container mb-5">
+
+    <div class="media-nav">
+        <ul class="nav nav-pills" id="media-tab" role="tablist">
+
+            {% for cat_name in categories %}
+            {# Create a safe ID by lowercasing and replacing spaces (e.g., "Patients Stories" -> "patients-stories") #}
+            {% set safe_id = cat_name|lower|replace(' ', '-') %}
+
+            <li class="nav-item" role="presentation">
+                <button class="nav-link {% if loop.first %}active{% endif %}" id="tab-{{ safe_id }}"
+                    data-bs-toggle="pill" data-bs-target="#content-{{ safe_id }}" type="button" role="tab"
+                    aria-controls="content-{{ safe_id }}"
+                    aria-selected="{% if loop.first %}true{% else %}false{% endif %}">
+                    {{ cat_name }}
+                </button>
+            </li>
+            {% endfor %}
+
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="tab-reviews" data-bs-toggle="pill" data-bs-target="#content-reviews"
+                    type="button" role="tab" aria-controls="content-reviews" aria-selected="false">
+                    <i class="fas fa-star me-2"></i> Written Reviews
+                </button>
+            </li>
+        </ul>
+    </div>
+
+    <div class="tab-content" id="media-tabContent">
+
+        {% for cat_name, moments in categories.items() %}
+        {# Generate the SAME safe ID used above #}
+        {% set safe_id = cat_name|lower|replace(' ', '-') %}
+
+        <div class="tab-pane fade {% if loop.first %}show active{% endif %}" id="content-{{ safe_id }}" role="tabpanel"
+            aria-labelledby="tab-{{ safe_id }}">
+
+            {% if moments %}
+            <div class="row g-4">
+                {% for moment in moments %}
+                <div class="col-md-6">
+                    <div class="media-card">
+                        <a href="{{ moment.video_link }}" target="_blank"
+                            class="text-decoration-none text-dark media-card-link">
+
+                            <div class="media-thumb">
+                                {% if moment.image_path %}
+                                <img src="{{ url_for('static', filename=moment.image_path) }}" alt="{{ moment.title }}">
+                                {% else %}
+                                <div
+                                    class="d-flex align-items-center justify-content-center h-100 bg-secondary text-white">
+                                    <i class="fas fa-video fa-4x"></i>
+                                </div>
+                                {% endif %}
+                                <div class="play-icon"><i class="far fa-play-circle"></i></div>
+                            </div>
+
+                            <div class="media-body">
+                                <div>
+                                    <span class="media-cat-tag">{{ cat_name }}</span>
+                                    <h5 class="media-title">{{ moment.title }}</h5>
+                                    <p class="media-description">{{ moment.description[:60] }}...</p>
+                                </div>
+
+                                {% if moment.doctor1 %}
+                                <div class="media-footer">
+                                    <small class="text-primary fw-bold">Featuring: Dr. {{ moment.doctor1.name }}</small>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="text-center py-5">
+                <h4 class="text-muted">No updates found in <strong>{{ cat_name }}</strong> yet.</h4>
+            </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+
+        <div class="tab-pane fade" id="content-reviews" role="tabpanel" aria-labelledby="tab-reviews">
+            {% if reviews %}
+            <div class="masonry-grid">
+                {% for review in reviews %}
+                <div class="review-card-item">
+                    <div class="review-card">
+                        <div class="review-content">
+                            {{ review.content }}
+                        </div>
+                        <div class="review-author-block">
+                            <i class="fas fa-user-circle review-author-icon"></i>
+                            <div class="review-meta">
+                                <div>{{ review.patient_name }}</div>
+                                {% if review.doctor %}
+                                <small>Patient of <strong>Dr. {{ review.doctor.name }}</strong></small>
+                                {% endif %}
+                                {% if review.created_at %}
+                                <div class="review-date">{{ review.created_at.strftime('%B %d, %Y') }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="text-center py-5">
+                <h4 class="text-muted">No patient reviews available yet.</h4>
+            </div>
+            {% endif %}
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
