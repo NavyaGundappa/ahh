@@ -1879,6 +1879,11 @@ def toggle_package(package_id):
 # sportspackage start
 
 
+@app.route('/test')
+def test():
+    return render_template('test.html')
+
+
 @app.route('/admin/sports-packages', methods=['GET', 'POST'])
 def admin_sports_packages():
     if request.method == 'POST':
