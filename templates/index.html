@@ -4099,7 +4099,7 @@
         </div>
         <div class="footer-bottom">
             <div class="container">
-                <p>Copyright © 2025, all Rights Reserved to Aarogya Hastha Hospitals Pvt Ltd | <a
+                <p>Copyright © 2026, all Rights Reserved to Aarogya Hastha Hospitals Pvt Ltd | <a
                         href="/terms-and-conditions">Terms & Conditions</a> | <a href="/privacy-policy">Privacy
                         Policy</a> | <a href="/disclaimer">Disclaimer</a></p>
             </div>
@@ -4136,6 +4136,57 @@
     <script type="text/javascript" src="https://unpkg.com/youtube-background/jquery.youtube-background.min.js"></script>
     <script src="static/js/js/myscript.js"></script>
 
+    <script>
+        // Video Modal Logic (Same as before)
+        function openVideoModal(videoId) {
+            // Simple check to ensure videoId is not a full URL if possible
+            if (videoId.includes('youtube.com') || videoId.includes('youtu.be')) {
+                try {
+                    const url = new URL(videoId);
+                    if (url.searchParams.has('v')) videoId = url.searchParams.get('v');
+                    else videoId = url.pathname.split('/').pop();
+                } catch (e) { console.warn('Error parsing video ID', e); }
+            }
+ 
+            const frame = document.getElementById('videoFrame');
+            // Set src with autoplay
+            frame.src = https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0;
+ 
+            // Show Modal
+            const myModal = new bootstrap.Modal(document.getElementById('videoModal'));
+            myModal.show();
+ 
+            // Stop video playback when the modal is closed
+            document.getElementById('videoModal').addEventListener('hidden.bs.modal', function () {
+                frame.src = '';
+            }, { once: true });
+        }
+ 
+        document.addEventListener('DOMContentLoaded', function () {
+            const targetId = 'life-moment-{{ highlight_id }}';
+            const targetElement = document.getElementById(targetId);
+ 
+            if (targetElement) {
+                // Scroll to the highlighted item
+                setTimeout(() => {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'center' // Centers the element in the viewport
+                    });
+ 
+                    // Optional: Add a temporary visual highlight (e.g., a subtle border)
+                    targetElement.style.transition = 'box-shadow 0.5s ease-in-out';
+                    targetElement.style.boxShadow = '0 0 0 5px rgba(255, 165, 0, 0.5)';
+ 
+                    // Remove the highlight after a few seconds
+                    setTimeout(() => {
+                        targetElement.style.boxShadow = '';
+                    }, 3000);
+ 
+                }, 200); // A slight delay (200ms) ensures the tab and carousel are fully rendered by Bootstrap/Owl Carousel
+            }
+        });
+    </script>
 
 
 
