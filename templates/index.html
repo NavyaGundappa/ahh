@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="google-site-verification" content="NCMNy8zyXscWLWKEoLYF2wgA_DyjPOp8Qnd_8_n6F2w" />
-    <link rel="icon" type="image/x-icon" href="https://aarogyahastha.com/static/img/fav.png/">
+    <link rel="icon" type="image/x-icon" href="/img/fav.png">
     <title>Aarogya Hastha Hospitals | Best [Multi-Speciality] Hospital in Bangalore, India</title>
     <meta name="description"
         content="Discover the best hospitals in Bangalore, India. Find expert care, advanced facilities & trusted doctors near you. Visit Aarogya Hastha Hospitals today!">
@@ -306,135 +306,74 @@
         </div>
     </section>
 
+
     <section class="hero-section py-4">
-
         <div class="hero-carousel-wrapper">
-
             <div id="heroCarousel" class="carousel slide shadow-lg rounded-4 overflow-hidden" data-bs-ride="carousel"
                 data-bs-interval="4000">
 
+                <!-- Indicators -->
                 <div class="carousel-indicators">
-
-                    <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active">
+                    {% for banner in banners %}
+                    <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="{{ loop.index0 }}"
+                        class="{% if loop.first %}active{% endif %}" aria-current="{% if loop.first %}true{% endif %}">
                     </button>
-
-                    <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1" class="">
-                    </button>
-
-                    <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2" class="">
-                    </button>
-
-                    <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="3" class="">
-                    </button>
-
+                    {% endfor %}
                 </div>
 
+                <!-- Slides -->
                 <div class="carousel-inner">
+                    {% if banners %}
+                    {% for banner in banners %}
+                    <div class="carousel-item {% if loop.first %}active{% endif %}">
+                        <a href="{{ banner.button_link or '/appointments' }}" target="_blank"
+                            class="banner-link-wrapper">
 
+                            <div class="hero-image-wrapper">
+                                <img src="{{ url_for('static', filename='img/' + banner.image_path) }}"
+                                    class="d-block w-100 hero-img {{ banner.position_class or '' }}"
+                                    alt="{{ banner.title or 'Hero Banner' }}" {% if loop.first %} loading="eager"
+                                    fetchpriority="high" {% else %} loading="lazy" {% endif %}>
+                                <div class="overlay"></div>
+                            </div>
+
+                            {% if banner.title or banner.button_text %}
+                            <div class="carousel-caption text-start">
+                                <div class="container">
+                                    {% if banner.title %}
+                                    <h2 class="display-5 fw-bold">{{ banner.title }}</h2>
+                                    {% endif %}
+
+                                    {% if banner.button_text %}
+                                    <span class="btn btn-primary mt-3">
+                                        {{ banner.button_text }}
+                                    </span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            {% endif %}
+
+                        </a>
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                    <!-- Fallback slide -->
                     <div class="carousel-item active">
-
-
-                        <a href="/appointments" target='_blank' class="banner-link-wrapper">
-
-                            <div class="hero-image-wrapper">
-                                <img src="static/img/img/Website.png" class="d-block w-100 hero-img" alt=" ">
-                                <div class="overlay"></div>
+                        <img src="{{ url_for('static', filename='img/banners/default.jpg') }}"
+                            class="d-block w-100 hero-img" alt="Default Banner">
+                        <div class="carousel-caption text-start">
+                            <div class="container">
+                                <h2 class="display-5 fw-bold">Welcome to AarogyaHastha</h2>
+                                <span class="btn btn-primary mt-3">Book an Appointment</span>
                             </div>
-
-                            <div class="carousel-caption text-start">
-                                <div class="container">
-                                    <h2 class="display-5 fw-bold"> </h2>
-
-                                </div>
-                            </div>
-
-                        </a>
-
+                        </div>
                     </div>
-
-                    <div class="carousel-item ">
-
-
-                        <a href="/appointments" target='_blank' class="banner-link-wrapper">
-
-                            <div class="hero-image-wrapper">
-                                <img src="static/img/img/dedicated-service.jpg" class="d-block w-100 hero-img"
-                                    alt="Empowering Health, Nurturing Life.">
-                                <div class="overlay"></div>
-                            </div>
-
-                            <div class="carousel-caption text-start">
-                                <div class="container">
-                                    <h2 class="display-5 fw-bold">Empowering Health, Nurturing Life.</h2>
-
-                                    <span class="btn btn-primary mt-3">
-                                        Book an Appointment
-                                    </span>
-
-                                </div>
-                            </div>
-
-                        </a>
-
-                    </div>
-
-                    <div class="carousel-item ">
-
-
-                        <a href="/appointments" target='_blank' class="banner-link-wrapper">
-
-                            <div class="hero-image-wrapper">
-                                <img src="static/img/img/compassionate-care.jpg" class="d-block w-100 hero-img"
-                                    alt="Compassionate Care, Dedicated Service">
-                                <div class="overlay"></div>
-                            </div>
-
-                            <div class="carousel-caption text-start">
-                                <div class="container">
-                                    <h2 class="display-5 fw-bold">Compassionate Care, Dedicated Service</h2>
-
-                                    <span class="btn btn-primary mt-3">
-                                        Book an Appointment
-                                    </span>
-
-                                </div>
-                            </div>
-
-                        </a>
-
-                    </div>
-
-                    <div class="carousel-item ">
-
-
-                        <a href="/appointments" target='_blank' class="banner-link-wrapper">
-
-                            <div class="hero-image-wrapper">
-                                <img src="static/img/img/empowering-health.jpg" class="d-block w-100 hero-img"
-                                    alt="Empowering Health, Nurturing Life.">
-                                <div class="overlay"></div>
-                            </div>
-
-                            <div class="carousel-caption text-start">
-                                <div class="container">
-                                    <h2 class="display-5 fw-bold">Empowering Health, Nurturing Life.</h2>
-
-                                    <span class="btn btn-primary mt-3">
-                                        Book an Appointment
-                                    </span>
-
-                                </div>
-                            </div>
-
-                        </a>
-
-                    </div>
-
+                    {% endif %}
                 </div>
-
             </div>
         </div>
 
+        <!-- Controls -->
         <button class="carousel-control-prev hero-control-outside" type="button" data-bs-target="#heroCarousel"
             data-bs-slide="prev">
             <span class="carousel-control-prev-icon"></span>
@@ -444,9 +383,7 @@
             data-bs-slide="next">
             <span class="carousel-control-next-icon"></span>
         </button>
-
     </section>
-
     <section class="home_headtag text-center" data-aos="fade-up">
         <div class="narrow-container">
             <h1>Aarogya Hastha Hospitals – Caring Responsibly for Your Health</h1>
@@ -495,184 +432,21 @@
         <div class="container">
             <h2 class="text-center mb-5">Our Specialities</h2>
             <div class="owl-carousel specialities-carousel" data-items=3>
-                <!-- 1 -->
-                <a href="/departments/anaesthesia" class="item" data-department="anaesthesia">
-                    <img loading="lazy" src="static/img/img/specialities/anaesthesia.jpg"
-                        alt="Anaesthesiology &amp; Critical Care">
-                    <h4 class="text-dark-blue my-md-3">Anaesthesiology &amp; Critical Care</h4>
-                    <p class="line-height-1em"><small>Aarogya Hastha Hospitals provides comprehensive anaesthesia
-                            services with the help of experienced anaesthesiologists and state-of-the-art
-                            equipment.</small></p>
+                {% for speciality in specialities %}
+                {% if speciality.is_active %}
+                <a href="/departments/{{ speciality.slug }}" class="item" data-department="{{ speciality.slug }}">
+                    {% if speciality.thumbnail_path %}
+                    <img loading="lazy" src="{{ url_for('static', filename=speciality.thumbnail_path) }}"
+                        alt="{{ speciality.name }}">
+                    {% else %}
+                    <img loading="lazy" src="{{ url_for('static', filename='img/department/thumbs/default.jpg') }}"
+                        alt="{{ speciality.name }}">
+                    {% endif %}
+                    <h4 class="text-dark-blue my-md-3">{{ speciality.name }}</h4>
+                    <p class="line-height-1em"><small>{{ speciality.description }}</small></p>
                 </a>
-                <!-- 2 -->
-                <a href="/departments/dermatology" class="item" data-department="dermatology">
-                    <img loading="lazy" src="static/img/img/specialities/dermatology.jpg" alt="Dermatology">
-                    <h4 class="text-dark-blue my-md-3">Dermatology</h4>
-                    <p class="line-height-1em"><small>Welcome to the Dermatology department at Aarogya Hastha Hospitals,
-                            where we strive to provide the best possible care for your skin, hair, and nail
-                            concerns.</small></p>
-                </a>
-                <!-- 3 -->
-                <a href="/departments/ent" class="item" data-department="ent">
-                    <img loading="lazy" src="static/img/img/specialities/ent.jpg" alt="Ear, Nose, and Throat (ENT)">
-                    <h4 class="text-dark-blue my-md-3">Ear, Nose, and Throat (ENT)</h4>
-                    <p class="line-height-1em"><small>Welcome to Aarogya Hastha Hospitals, a premier medical facility
-                            specializing in Ear, Nose, and Throat (ENT) care. We understand that the health of these
-                            vital organs plays a crucial role in your overall well-being, and therefore, we are
-                            dedicated to providing comprehensive and compassionate care for all your ENT needs.</small>
-                    </p>
-                </a>
-                <!-- 4 -->
-                <a href="/departments/emergency-medicine" class="item" data-department="emergency-medicine">
-                    <img loading="lazy" src="static/img/img/specialities/emergency-medicine.jpg"
-                        alt="Emergency Medicine">
-                    <h4 class="text-dark-blue my-md-3">Emergency Medicine</h4>
-                    <p class="line-height-1em"><small>Aarogya Hastha Hospitals understands that emergencies can happen
-                            at any time and require immediate attention. That&#39;s why we have a dedicated Emergency
-                            Medicine department that operates 24/7 to ensure that you receive the best medical care for
-                            any unforeseen and urgent healthcare needs.</small></p>
-                </a>
-                <!-- 5 -->
-                <a href="/departments/general-medicine" class="item" data-department="general-medicine">
-                    <img loading="lazy" src="static/img/img/specialities/general-medicine.jpg" alt="General Medicine">
-                    <h4 class="text-dark-blue my-md-3">General Medicine</h4>
-                    <p class="line-height-1em"><small>A shining beacon, combining the proven and age-old values of
-                            clinical skills.</small></p>
-                </a>
-                <!-- 6 -->
-                <a href="/departments/general-surgery" class="item" data-department="general-surgery">
-                    <img loading="lazy" src="static/img/img/specialities/general-surgery.jpg" alt="General Surgery">
-                    <h4 class="text-dark-blue my-md-3">General Surgery</h4>
-                    <p class="line-height-1em"><small>We offer a range of surgical procedures performed by highly
-                            skilled surgeons using the latest techniques and technology, providing patients with
-                            high-quality care for a variety of medical conditions.</small></p>
-                </a>
-                <!-- 7 -->
-                <a href="/departments/lab-medicine" class="item" data-department="lab-medicine">
-                    <img loading="lazy" src="static/img/img/specialities/lab-medicine.jpg" alt="Lab Medicine">
-                    <h4 class="text-dark-blue my-md-3">Lab Medicine</h4>
-                    <p class="line-height-1em"><small>The Laboratory Medicine Department, Aarogya Hastha Hospitals
-                            Diagnostics, conducts different investigations on clinical specimens to obtain information
-                            on the health of patients to aid in diagnosis, treatment, and prevention of disease.</small>
-                    </p>
-                </a>
-                <!-- 8 -->
-                <a href="/departments/medical-gastroenterology" class="item" data-department="medical-gastroenterology">
-                    <img loading="lazy" src="static/img/img/specialities/medical-gastroenterology.jpg"
-                        alt="Medical Gastroenterology">
-                    <h4 class="text-dark-blue my-md-3">Medical Gastroenterology</h4>
-                    <p class="line-height-1em"><small>Our team of expert gastroenterologists are dedicated to providing
-                            top-quality endoscopy and colonoscopy services to aid in the diagnosis and treatment of
-                            major digestive disorders.</small></p>
-                </a>
-                <!-- 9 -->
-                <a href="/departments/minimal-access-surgery" class="item" data-department="minimal-access-surgery">
-                    <img loading="lazy" src="static/img/img/specialities/minimal-access-surgery.jpg"
-                        alt="Minimal Access Surgery">
-                    <h4 class="text-dark-blue my-md-3">Minimal Access Surgery</h4>
-                    <p class="line-height-1em"><small>Welcome to Aarogya Hastha Hospitals webpage on Minimal Access
-                            Surgery (MAS), also known as Laparoscopy. We understand that facing any surgery can be a
-                            daunting experience, and we are dedicated to making your journey towards healing as smooth
-                            as possible.</small></p>
-                </a>
-                <!-- 10 -->
-                <a href="/departments/nephrology" class="item" data-department="nephrology">
-                    <img loading="lazy" src="static/img/img/specialities/nephrology.jpg" alt="Nephrology">
-                    <h4 class="text-dark-blue my-md-3">Nephrology</h4>
-                    <p class="line-height-1em"><small>Welcome to Aarogya Hastha Hospitals Nephrology department, where
-                            we offer top-quality care for all types of kidney diseases, disorders, and
-                            complications.</small></p>
-                </a>
-                <!-- 11 -->
-                <a href="/departments/neurosurgery" class="item" data-department="neurosurgery">
-                    <img loading="lazy" src="static/img/img/specialities/neurosurgery.jpg" alt="Neurosurgery">
-                    <h4 class="text-dark-blue my-md-3">Neurosurgery</h4>
-                    <p class="line-height-1em"><small>We offer advanced diagnostics and treatment for a wide range of
-                            neurological disorders, providing superior care and expertise in brain, spine, and nerve
-                            conditions.</small></p>
-                </a>
-                <!-- 12 -->
-                <a href="/departments/obg" class="item" data-department="obg">
-                    <img loading="lazy" src="static/img/img/specialities/obg.jpg" alt="Obstetrics &amp; Gynaecology">
-                    <h4 class="text-dark-blue my-md-3">Obstetrics &amp; Gynaecology</h4>
-                    <p class="line-height-1em"><small>Welcome to the Department of OBG that offers a complete range of
-                            services, including complete obstetrical and gynaecological care through prenatal diagnosis,
-                            infertility management, management of high-risk pregnancies, painless deliveries,
-                            contraception and family planning, menopause management, cosmetic gynaecology, laparoscopy,
-                            fibroid and ovarian cyst treatment and more.</small></p>
-                </a>
-                <!-- 13 -->
-                <a href="/departments/orthopaedics" class="item" data-department="orthopaedics">
-                    <img loading="lazy" src="static/img/img/specialities/orthopaedics.jpg" alt="Orthopaedics">
-
-                    <h4 class="text-dark-blue my-md-3">Orthopaedics</h4>
-                    <p class="line-height-1em"><small>Under the leadership of Dr Kushal Lakshmana, we offer
-                            comprehensive and specialized care for bone, joint, and musculoskeletal disorders using
-                            advanced techniques and treatments.</small></p>
-                </a>
-                <!-- 14 -->
-                <a href="/departments/paediatrics" class="item" data-department="paediatrics">
-                    <img loading="lazy" src="static/img/img/specialities/paediatrics.jpg" alt="Paediatrics">
-                    <h4 class="text-dark-blue my-md-3">Paediatrics</h4>
-                    <p class="line-height-1em"><small>At Aarogya Hastha Hospitals, we are dedicated to nurturing the
-                            well-being of our youngest patients. Our specialised paediatric care extends from the
-                            earliest moments of life through adolescence, encompassing comprehensive neonatal and
-                            paediatric services, including paediatric surgery.</small></p>
-                </a>
-                <!-- 15 -->
-                <a href="/departments/pain-medicine" class="item" data-department="pain-medicine">
-                    <img loading="lazy" src="static/img/img/specialities/pain-medicine.jpg" alt="Pain Medicine">
-                    <h4 class="text-dark-blue my-md-3">Pain Medicine</h4>
-                    <p class="line-height-1em"><small>The International Association for the Study of Pain (IASP) defines
-                            pain as &#39;an unpleasant sensory and emotional experience associated with actual or
-                            potential tissue damage, or described in terms of such damage&#39;.</small></p>
-                </a>
-                <!-- 16 -->
-                <a href="/departments/physiotherapy" class="item" data-department="physiotherapy">
-                    <img loading="lazy" src="static/img/img/specialities/physiotherapy.jpg" alt="Physiotherapy">
-                    <h4 class="text-dark-blue my-md-3">Physiotherapy</h4>
-                    <p class="line-height-1em"><small>At Aarogya Hastha Hospitals, our Physiotherapy Department offers
-                            comprehensive care aimed at helping patients restore movement, manage pain, and improve
-                            overall physical function. Our experienced physiotherapists use state-of-the-art techniques
-                            and equipment to provide personalized care, ensuring each patient receives a treatment plan
-                            tailored to their specific needs. Dedicated to guiding you on your journey to recovery with
-                            comfort and compassion are our priorities.</small></p>
-                </a>
-                <!-- 17 -->
-                <a href="/departments/plastic-surgery" class="item" data-department="plastic-surgery">
-                    <img loading="lazy" src="static/img/img/specialities/plastic-surgery.jpg" alt="Plastic Surgery">
-                    <h4 class="text-dark-blue my-md-3">Plastic Surgery</h4>
-                    <p class="line-height-1em"><small>Welcome to Aarogya Hastha Hospitals Plastic Surgery department.
-                            Our team of skilled surgeons and medical professionals is dedicated to providing our
-                            patients with the best and safest plastic surgery procedures.</small></p>
-                </a>
-                <!-- 18 -->
-                <a href="/departments/radiology" class="item" data-department="radiology">
-                    <img loading="lazy" src="static/img/img/specialities/radiology.jpg" alt="Radiology">
-                    <h4 class="text-dark-blue my-md-3">Radiology</h4>
-                    <p class="line-height-1em"><small>The Radiology Department at Aarogya Hastha Hospitals is always
-                            ready to provide comprehensive and advanced imaging services to aid in the detection,
-                            diagnosis, and treatment of various medical conditions.</small></p>
-                </a>
-                <!-- 19 -->
-                <a href="/departments/surgical-gastroenterology" class="item"
-                    data-department="surgical-gastroenterology">
-                    <img loading="lazy" src="static/img/img/specialities/surgical-gastroenterology.jpg"
-                        alt="Surgical Gastroenterology">
-
-                    <h4 class="text-dark-blue my-md-3">Surgical Gastroenterology</h4>
-                    <p class="line-height-1em"><small>Welcome to the Surgical Gastroenterology department at Aarogya
-                            Hastha Hospitals. We offer comprehensive care for patients with disorders of the digestive
-                            system.</small></p>
-                </a>
-                <!-- 20 -->
-                <a href="/departments/urology" class="item" data-department="urology">
-                    <img loading="lazy" src="static/img/img/specialities/urology.jpg" alt="Urology">
-                    <h4 class="text-dark-blue my-md-3">Urology</h4>
-                    <p class="line-height-1em"><small>Welcome to the Urology department at Aarogya Hastha Hospitals. We
-                            take pride in providing our patients with comprehensive and compassionate care for all their
-                            urologic needs.</small></p>
-                </a>
+                {% endif %}
+                {% endfor %}
             </div>
         </div>
     </section>
@@ -680,1794 +454,35 @@
     <section class="doctors-section">
         <div class="container">
             <h2 class="text-center mb-5">Meet Our Doctors</h2>
-            <div class="owl-carousel doctors-carousel owl-loaded owl-drag">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                <div class="owl-stage-outer">
-                    <div class="owl-stage"
-                        style="transform: translate3d(-15930px, 0px, 0px); transition: 0.25s; width: 27140px;">
-                        <div class="owl-item cloned" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr-srinivas-reddy">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/dr-he.jpg"
-                                        alt="Dr. Dr. Srinivas Reddy">
-                                    <h4 class="text-light-blue mt-3">Dr. Srinivas Reddy</h4>
-                                    <p>Consultant - Neuro Surgery</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr-srinivas-reddy" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item cloned" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr-sanjog-sharma">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/dr-he.jpg"
-                                        alt="Dr. Dr. Sanjog Sharma">
-                                    <h4 class="text-light-blue mt-3">Dr. Sanjog Sharma</h4>
-                                    <p>Consultant- Plastic Surgery and Cosmetology</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr-sanjog-sharma" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item cloned" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr-yogeshwarappa">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/dr-he.jpg"
-                                        alt="Dr. Dr. Yogeshwarappa">
-                                    <h4 class="text-light-blue mt-3">Dr. Yogeshwarappa</h4>
-                                    <p>Consultant- Plastic Surgery and Cosmetology</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr-yogeshwarappa" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item cloned" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr-atisha-modi">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/dr-he.jpg"
-                                        alt="Dr. Dr. Atisha Modi">
-                                    <h4 class="text-light-blue mt-3">Dr. Atisha Modi</h4>
-                                    <p>Consultant - ENT</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr-atisha-modi" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item cloned" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dt-neelima-sharma">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/neelima-sharma.jpg"
-                                        alt="Dr. Dt. Neelima Sharma">
-                                    <h4 class="text-light-blue mt-3">Dt. Neelima Sharma</h4>
-                                    <p>Consultant – Dietetics &amp; Nutrition</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dt-neelima-sharma" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item cloned" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr-magesh-b">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/dr-he.jpg" alt="Dr. Dr. Magesh B">
-                                    <h4 class="text-light-blue mt-3">Dr. Magesh B</h4>
-                                    <p>Consultant- Cardiology</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr-magesh-b" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item cloned" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr-sumanjitha-bora">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/dr-he.jpg"
-                                        alt="Dr. Dr. Sumajitha Bora">
-                                    <h4 class="text-light-blue mt-3">Dr. Sumajitha Bora</h4>
-                                    <p>Consultant - Cardiology</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr-sumanjitha-bora" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item cloned" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr.-surbhi-agrawal">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/surbhi-agrawal-01.jpg"
-                                        alt="Dr. Dr. Surbhi Agrawal">
-                                    <h4 class="text-light-blue mt-3">Dr. Surbhi Agrawal</h4>
-                                    <p>Consultant - Emergency Medicine</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr.-surbhi-agrawal" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item cloned" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr-chetan-kumar-a">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/chetan.png"
-                                        alt="Dr. Dr. Chetan Kumar A">
-                                    <h4 class="text-light-blue mt-3">Dr. Chetan Kumar A</h4>
-                                    <p>Consultant - Neurology</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr-chetan-kumar-a" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item cloned" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr-nithin-prabhu">
-                                <div class="doctor-card">
-                                    <img loading="lazy"
-                                        src="static/img/img/doctors/Gemini_Generated_Image_x8kn3ux8kn3ux8kn.png"
-                                        alt="Dr. Dr. Nithin Prabhu">
-                                    <h4 class="text-light-blue mt-3">Dr. Nithin Prabhu</h4>
-                                    <p>Consultant- Neuro Surgery</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr-nithin-prabhu" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item cloned" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr.-saraswathi-m">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/saraswathi.jpeg"
-                                        alt="Dr. Dr. Saraswathi M">
-                                    <h4 class="text-light-blue mt-3">Dr. Saraswathi M</h4>
-                                    <p>Consultant- Obstretics &amp; Gynaecology</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr.-saraswathi-m" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item cloned" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr-anil-kumar-m">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/dr-he.jpg"
-                                        alt="Dr. DR ANIL KUMAR M">
-                                    <h4 class="text-light-blue mt-3">DR ANIL KUMAR M</h4>
-                                    <p>Consultant - Emergency Medicine</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr-anil-kumar-m" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item cloned" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr.-vimal">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/dr-he.jpg" alt="Dr. Dr. VIMAL">
-                                    <h4 class="text-light-blue mt-3">Dr. VIMAL</h4>
-                                    <p>Consultant - Emergency Medicine</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr.-vimal" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item cloned" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr-advaith-kulkurni">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/dr-he.jpg"
-                                        alt="Dr. DR ADVAITH KULKURNI">
-                                    <h4 class="text-light-blue mt-3">DR ADVAITH KULKURNI</h4>
-                                    <p>Consultant - Neurology</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr-advaith-kulkurni" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item cloned" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr-sandhya-b">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/dr-he.jpg" alt="Dr. DR SANDHYA B">
-                                    <h4 class="text-light-blue mt-3">DR SANDHYA B</h4>
-                                    <p>Plastic Surgeon</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr-sandhya-b" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item cloned" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr.-pramod-s">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/dr-he.jpg" alt="Dr. Dr. PRAMOD S">
-                                    <h4 class="text-light-blue mt-3">Dr. PRAMOD S</h4>
-                                    <p>Pediatric surgeon</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr.-pramod-s" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item cloned" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr.-vedarth-dash">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/dr-he.jpg"
-                                        alt="Dr. DR. VEDARTH DASH">
-                                    <h4 class="text-light-blue mt-3">DR. VEDARTH DASH</h4>
-                                    <p>Pediatric surgeon</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr.-vedarth-dash" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item cloned" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr-santosh">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/dr-he.jpg" alt="Dr. DR SANTOSH">
-                                    <h4 class="text-light-blue mt-3">DR SANTOSH</h4>
-                                    <p>Consultant - Medical Gastroenterology</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr-santosh" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item cloned" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr-sanjay">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/dr-he.jpg" alt="Dr. DR SANJAY">
-                                    <h4 class="text-light-blue mt-3">DR SANJAY</h4>
-                                    <p>PSYCHIATRIST</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr-sanjay" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item cloned" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="ms.taruni-priya">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/dr-he.jpg"
-                                        alt="Dr. Ms.TARUNI PRIYA">
-                                    <h4 class="text-light-blue mt-3">Ms.TARUNI PRIYA</h4>
-                                    <p>Consultant - psychology</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/ms.taruni-priya" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item cloned" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="ms-manisha">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/dr-he.jpg" alt="Dr. MS MANISHA">
-                                    <h4 class="text-light-blue mt-3">MS MANISHA</h4>
-                                    <p>Audiologist and Speech Therapist</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/ms-manisha" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item cloned" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="ms-jhansi">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/dr-he.jpg" alt="Dr. MS JHANSI">
-                                    <h4 class="text-light-blue mt-3">MS JHANSI</h4>
-                                    <p>Audiologist and Speech Therapist</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/ms-jhansi" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item cloned" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr.-pratyush">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/dr-he.jpg" alt="Dr. Dr. PRATYUSH">
-                                    <h4 class="text-light-blue mt-3">Dr. PRATYUSH</h4>
-                                    <p>Medical Oncologist</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr.-pratyush" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr.-swetha-gutha">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/swetha-gutha.jpg"
-                                        alt="Dr. Dr. Swetha Gutha">
-                                    <h4 class="text-light-blue mt-3">Dr. Swetha Gutha</h4>
-                                    <p>Consultant – Dermatologist &amp; Cosmetologist</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr.-swetha-gutha" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr-sumalatha-c-b">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/sumalatha.jpg"
-                                        alt="Dr. Dr. Sumalatha C B">
-                                    <h4 class="text-light-blue mt-3">Dr. Sumalatha C B</h4>
-                                    <p>Consultant – Dermatology, Cosmetology, and Dermatologic Surgery</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr-sumalatha-c-b" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr-hiranmayi-seshu">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/hiranmai-seshu-01.jpg"
-                                        alt="Dr. Dr. Hiranmayi Seshu">
-                                    <h4 class="text-light-blue mt-3">Dr. Hiranmayi Seshu</h4>
-                                    <p>Senior Consultant - Internal Medicine and Diabetology</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr-hiranmayi-seshu" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr-sharat-honnatti">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/sharat-honnatti-01.jpg"
-                                        alt="Dr. Dr. Sharat Honnatti">
-                                    <h4 class="text-light-blue mt-3">Dr. Sharat Honnatti</h4>
-                                    <p>Consultant - Internal Medicine and Diabetology</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr-sharat-honnatti" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr-v-devendran">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/devendran-01.jpg"
-                                        alt="Dr. Dr. V Devendran">
-                                    <h4 class="text-light-blue mt-3">Dr. V Devendran</h4>
-                                    <p>Senior Consultant - General Surgery, Laparoscopic &amp; Laser Surgery, Proctology
-                                    </p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr-v-devendran" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr-rammohan-sripad-bhat">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/rammohan-bhat.jpg"
-                                        alt="Dr. Dr. Rammohan Sripad Bhat">
-                                    <h4 class="text-light-blue mt-3">Dr. Rammohan Sripad Bhat</h4>
-                                    <p>Senior Consultant – Interventional Nephrologist</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr-rammohan-sripad-bhat" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr-geetha-r">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/geetha-r-01.jpg"
-                                        alt="Dr. Dr. Geetha R">
-                                    <h4 class="text-light-blue mt-3">Dr. Geetha R</h4>
-                                    <p>Consultant - OBG, Laparoscopic Surgery &amp; Fertility Specialist</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr-geetha-r" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr-kushal-lakshmana">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/Dr._Kushal_1_1.jpeg"
-                                        alt="Dr. Dr. Kushal Lakshmana">
-                                    <h4 class="text-light-blue mt-3">Dr. Kushal Lakshmana</h4>
-                                    <p>Consultant &amp; HOD – Orthopaedics</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr-kushal-lakshmana" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr-mahima-shetty-kr">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/mahima-shetty.jpg"
-                                        alt="Dr. Dr. Mahima Shetty KR">
-                                    <h4 class="text-light-blue mt-3">Dr. Mahima Shetty KR</h4>
-                                    <p>Senior Consultant – Paediatrics</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr-mahima-shetty-kr" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr-shalini-g.-agasthi">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/shalini-agasthi.jpg"
-                                        alt="Dr. Dr. Shalini G. Agasthi">
-                                    <h4 class="text-light-blue mt-3">Dr. Shalini G. Agasthi</h4>
-                                    <p>Senior Consultant – Paediatrics</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr-shalini-g.-agasthi" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr-ankita-pandey">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/ankita-pandey.jpg"
-                                        alt="Dr. Dr. Ankita Pandey">
-                                    <h4 class="text-light-blue mt-3">Dr. Ankita Pandey</h4>
-                                    <p>Consultant – Physiotherapy</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr-ankita-pandey" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr-akash-mukherjee">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/akash-mukherjee-01.jpg"
-                                        alt="Dr. Dr. Akash Mukherjee">
-                                    <h4 class="text-light-blue mt-3">Dr. Akash Mukherjee</h4>
-                                    <p>Sr. Consultant &amp; HOD - Anaesthesia, Critical Care &amp; Pain Medicine</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr-akash-mukherjee" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr-soumya">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/dr-he.jpg" alt="Dr. Dr. Soumya">
-                                    <h4 class="text-light-blue mt-3">Dr. Soumya</h4>
-                                    <p>Consultant- Obstetrics &amp; Gynaecology</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr-soumya" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr-sharadhamma">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/dr-he.jpg"
-                                        alt="Dr. Dr. Sharadhamma">
-                                    <h4 class="text-light-blue mt-3">Dr. Sharadhamma</h4>
-                                    <p>Consultant- Obstetrics &amp; Gynaecology</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr-sharadhamma" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr-shobha">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/dr-he.jpg" alt="Dr. Dr. Shobha">
-                                    <h4 class="text-light-blue mt-3">Dr. Shobha</h4>
-                                    <p>Consultant- Radiology</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr-shobha" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr-deepika">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/dr-he.jpg" alt="Dr. Dr. Deepika">
-                                    <h4 class="text-light-blue mt-3">Dr. Deepika</h4>
-                                    <p>Consultant- Radiology</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr-deepika" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr-sulagna">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/dr-he.jpg" alt="Dr. Dr. Sulagna">
-                                    <h4 class="text-light-blue mt-3">Dr. Sulagna</h4>
-                                    <p>Consultant- Radiology</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr-sulagna" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr-c-l-karan-gowda">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/karan-gowda.jpg"
-                                        alt="Dr. Dr. C L Karan Gowda">
-                                    <h4 class="text-light-blue mt-3">Dr. C L Karan Gowda</h4>
-                                    <p>Consultant - Orthopaedics</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr-c-l-karan-gowda" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr-radhesh-menon">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/dr-he.jpg"
-                                        alt="Dr. Dr. Radhesh Menon">
-                                    <h4 class="text-light-blue mt-3">Dr. Radhesh Menon</h4>
-                                    <p>Consultant - Orthopaedics</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr-radhesh-menon" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr-deepak-a">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/dr-he.jpg" alt="Dr. Dr. Deepak A">
-                                    <h4 class="text-light-blue mt-3">Dr. Deepak A</h4>
-                                    <p>Consultant - Orthopaedics</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr-deepak-a" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr-mythreye-sm-r">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/dr-he.jpg"
-                                        alt="Dr. Dr. Mythreye SM R">
-                                    <h4 class="text-light-blue mt-3">Dr. Mythreye SM R</h4>
-                                    <p>Consultant - General Surgery</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr-mythreye-sm-r" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr-lohith">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/dr-he.jpg" alt="Dr. Dr. Lohith">
-                                    <h4 class="text-light-blue mt-3">Dr. Lohith</h4>
-                                    <p>Consultant - Surgical Gastroenterology</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr-lohith" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr-vivekanand">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/dr-he.jpg" alt="Dr. Dr. Vivekanand">
-                                    <h4 class="text-light-blue mt-3">Dr. Vivekanand</h4>
-                                    <p>Consultant - Urology</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr-vivekanand" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr-srinivas-reddy">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/dr-he.jpg"
-                                        alt="Dr. Dr. Srinivas Reddy">
-                                    <h4 class="text-light-blue mt-3">Dr. Srinivas Reddy</h4>
-                                    <p>Consultant - Neuro Surgery</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr-srinivas-reddy" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr-sanjog-sharma">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/dr-he.jpg"
-                                        alt="Dr. Dr. Sanjog Sharma">
-                                    <h4 class="text-light-blue mt-3">Dr. Sanjog Sharma</h4>
-                                    <p>Consultant- Plastic Surgery and Cosmetology</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr-sanjog-sharma" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr-yogeshwarappa">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/dr-he.jpg"
-                                        alt="Dr. Dr. Yogeshwarappa">
-                                    <h4 class="text-light-blue mt-3">Dr. Yogeshwarappa</h4>
-                                    <p>Consultant- Plastic Surgery and Cosmetology</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr-yogeshwarappa" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr-atisha-modi">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/dr-he.jpg"
-                                        alt="Dr. Dr. Atisha Modi">
-                                    <h4 class="text-light-blue mt-3">Dr. Atisha Modi</h4>
-                                    <p>Consultant - ENT</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr-atisha-modi" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dt-neelima-sharma">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/neelima-sharma.jpg"
-                                        alt="Dr. Dt. Neelima Sharma">
-                                    <h4 class="text-light-blue mt-3">Dt. Neelima Sharma</h4>
-                                    <p>Consultant – Dietetics &amp; Nutrition</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dt-neelima-sharma" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr-magesh-b">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/dr-he.jpg" alt="Dr. Dr. Magesh B">
-                                    <h4 class="text-light-blue mt-3">Dr. Magesh B</h4>
-                                    <p>Consultant- Cardiology</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr-magesh-b" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr-sumanjitha-bora">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/dr-he.jpg"
-                                        alt="Dr. Dr. Sumajitha Bora">
-                                    <h4 class="text-light-blue mt-3">Dr. Sumajitha Bora</h4>
-                                    <p>Consultant - Cardiology</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr-sumanjitha-bora" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr.-surbhi-agrawal">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/surbhi-agrawal-01.jpg"
-                                        alt="Dr. Dr. Surbhi Agrawal">
-                                    <h4 class="text-light-blue mt-3">Dr. Surbhi Agrawal</h4>
-                                    <p>Consultant - Emergency Medicine</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr.-surbhi-agrawal" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item active" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr-chetan-kumar-a">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/chetan.png"
-                                        alt="Dr. Dr. Chetan Kumar A">
-                                    <h4 class="text-light-blue mt-3">Dr. Chetan Kumar A</h4>
-                                    <p>Consultant - Neurology</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr-chetan-kumar-a" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item active" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr-nithin-prabhu">
-                                <div class="doctor-card">
-                                    <img loading="lazy"
-                                        src="static/img/img/doctors/Gemini_Generated_Image_x8kn3ux8kn3ux8kn.png"
-                                        alt="Dr. Dr. Nithin Prabhu">
-                                    <h4 class="text-light-blue mt-3">Dr. Nithin Prabhu</h4>
-                                    <p>Consultant- Neuro Surgery</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr-nithin-prabhu" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item active" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr.-saraswathi-m">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/saraswathi.jpeg"
-                                        alt="Dr. Dr. Saraswathi M">
-                                    <h4 class="text-light-blue mt-3">Dr. Saraswathi M</h4>
-                                    <p>Consultant- Obstretics &amp; Gynaecology</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr.-saraswathi-m" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item active" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr-anil-kumar-m">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/dr-he.jpg"
-                                        alt="Dr. DR ANIL KUMAR M">
-                                    <h4 class="text-light-blue mt-3">DR ANIL KUMAR M</h4>
-                                    <p>Consultant - Emergency Medicine</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr-anil-kumar-m" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr.-vimal">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/dr-he.jpg" alt="Dr. Dr. VIMAL">
-                                    <h4 class="text-light-blue mt-3">Dr. VIMAL</h4>
-                                    <p>Consultant - Emergency Medicine</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr.-vimal" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr-advaith-kulkurni">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/dr-he.jpg"
-                                        alt="Dr. DR ADVAITH KULKURNI">
-                                    <h4 class="text-light-blue mt-3">DR ADVAITH KULKURNI</h4>
-                                    <p>Consultant - Neurology</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr-advaith-kulkurni" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr-sandhya-b">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/dr-he.jpg" alt="Dr. DR SANDHYA B">
-                                    <h4 class="text-light-blue mt-3">DR SANDHYA B</h4>
-                                    <p>Plastic Surgeon</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr-sandhya-b" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr.-pramod-s">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/dr-he.jpg" alt="Dr. Dr. PRAMOD S">
-                                    <h4 class="text-light-blue mt-3">Dr. PRAMOD S</h4>
-                                    <p>Pediatric surgeon</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr.-pramod-s" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr.-vedarth-dash">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/dr-he.jpg"
-                                        alt="Dr. DR. VEDARTH DASH">
-                                    <h4 class="text-light-blue mt-3">DR. VEDARTH DASH</h4>
-                                    <p>Pediatric surgeon</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr.-vedarth-dash" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr-santosh">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/dr-he.jpg" alt="Dr. DR SANTOSH">
-                                    <h4 class="text-light-blue mt-3">DR SANTOSH</h4>
-                                    <p>Consultant - Medical Gastroenterology</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr-santosh" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr-sanjay">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/dr-he.jpg" alt="Dr. DR SANJAY">
-                                    <h4 class="text-light-blue mt-3">DR SANJAY</h4>
-                                    <p>PSYCHIATRIST</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr-sanjay" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="ms.taruni-priya">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/dr-he.jpg"
-                                        alt="Dr. Ms.TARUNI PRIYA">
-                                    <h4 class="text-light-blue mt-3">Ms.TARUNI PRIYA</h4>
-                                    <p>Consultant - psychology</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/ms.taruni-priya" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="ms-manisha">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/dr-he.jpg" alt="Dr. MS MANISHA">
-                                    <h4 class="text-light-blue mt-3">MS MANISHA</h4>
-                                    <p>Audiologist and Speech Therapist</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/ms-manisha" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="ms-jhansi">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/dr-he.jpg" alt="Dr. MS JHANSI">
-                                    <h4 class="text-light-blue mt-3">MS JHANSI</h4>
-                                    <p>Audiologist and Speech Therapist</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/ms-jhansi" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr.-pratyush">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/dr-he.jpg" alt="Dr. Dr. PRATYUSH">
-                                    <h4 class="text-light-blue mt-3">Dr. PRATYUSH</h4>
-                                    <p>Medical Oncologist</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr.-pratyush" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item cloned" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr.-swetha-gutha">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/swetha-gutha.jpg"
-                                        alt="Dr. Dr. Swetha Gutha">
-                                    <h4 class="text-light-blue mt-3">Dr. Swetha Gutha</h4>
-                                    <p>Consultant – Dermatologist &amp; Cosmetologist</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr.-swetha-gutha" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item cloned" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr-sumalatha-c-b">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/sumalatha.jpg"
-                                        alt="Dr. Dr. Sumalatha C B">
-                                    <h4 class="text-light-blue mt-3">Dr. Sumalatha C B</h4>
-                                    <p>Consultant – Dermatology, Cosmetology, and Dermatologic Surgery</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr-sumalatha-c-b" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item cloned" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr-hiranmayi-seshu">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/hiranmai-seshu-01.jpg"
-                                        alt="Dr. Dr. Hiranmayi Seshu">
-                                    <h4 class="text-light-blue mt-3">Dr. Hiranmayi Seshu</h4>
-                                    <p>Senior Consultant - Internal Medicine and Diabetology</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr-hiranmayi-seshu" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item cloned" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr-sharat-honnatti">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/sharat-honnatti-01.jpg"
-                                        alt="Dr. Dr. Sharat Honnatti">
-                                    <h4 class="text-light-blue mt-3">Dr. Sharat Honnatti</h4>
-                                    <p>Consultant - Internal Medicine and Diabetology</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr-sharat-honnatti" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item cloned" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr-v-devendran">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/devendran-01.jpg"
-                                        alt="Dr. Dr. V Devendran">
-                                    <h4 class="text-light-blue mt-3">Dr. V Devendran</h4>
-                                    <p>Senior Consultant - General Surgery, Laparoscopic &amp; Laser Surgery, Proctology
-                                    </p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr-v-devendran" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item cloned" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr-rammohan-sripad-bhat">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/rammohan-bhat.jpg"
-                                        alt="Dr. Dr. Rammohan Sripad Bhat">
-                                    <h4 class="text-light-blue mt-3">Dr. Rammohan Sripad Bhat</h4>
-                                    <p>Senior Consultant – Interventional Nephrologist</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr-rammohan-sripad-bhat" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item cloned" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr-geetha-r">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/geetha-r-01.jpg"
-                                        alt="Dr. Dr. Geetha R">
-                                    <h4 class="text-light-blue mt-3">Dr. Geetha R</h4>
-                                    <p>Consultant - OBG, Laparoscopic Surgery &amp; Fertility Specialist</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr-geetha-r" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item cloned" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr-kushal-lakshmana">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/Dr._Kushal_1_1.jpeg"
-                                        alt="Dr. Dr. Kushal Lakshmana">
-                                    <h4 class="text-light-blue mt-3">Dr. Kushal Lakshmana</h4>
-                                    <p>Consultant &amp; HOD – Orthopaedics</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr-kushal-lakshmana" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item cloned" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr-mahima-shetty-kr">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/mahima-shetty.jpg"
-                                        alt="Dr. Dr. Mahima Shetty KR">
-                                    <h4 class="text-light-blue mt-3">Dr. Mahima Shetty KR</h4>
-                                    <p>Senior Consultant – Paediatrics</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr-mahima-shetty-kr" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item cloned" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr-shalini-g.-agasthi">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/shalini-agasthi.jpg"
-                                        alt="Dr. Dr. Shalini G. Agasthi">
-                                    <h4 class="text-light-blue mt-3">Dr. Shalini G. Agasthi</h4>
-                                    <p>Senior Consultant – Paediatrics</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr-shalini-g.-agasthi" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item cloned" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr-ankita-pandey">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/ankita-pandey.jpg"
-                                        alt="Dr. Dr. Ankita Pandey">
-                                    <h4 class="text-light-blue mt-3">Dr. Ankita Pandey</h4>
-                                    <p>Consultant – Physiotherapy</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr-ankita-pandey" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item cloned" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr-akash-mukherjee">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/akash-mukherjee-01.jpg"
-                                        alt="Dr. Dr. Akash Mukherjee">
-                                    <h4 class="text-light-blue mt-3">Dr. Akash Mukherjee</h4>
-                                    <p>Sr. Consultant &amp; HOD - Anaesthesia, Critical Care &amp; Pain Medicine</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr-akash-mukherjee" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item cloned" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr-soumya">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/dr-he.jpg" alt="Dr. Dr. Soumya">
-                                    <h4 class="text-light-blue mt-3">Dr. Soumya</h4>
-                                    <p>Consultant- Obstetrics &amp; Gynaecology</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr-soumya" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item cloned" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr-sharadhamma">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/dr-he.jpg"
-                                        alt="Dr. Dr. Sharadhamma">
-                                    <h4 class="text-light-blue mt-3">Dr. Sharadhamma</h4>
-                                    <p>Consultant- Obstetrics &amp; Gynaecology</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr-sharadhamma" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item cloned" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr-shobha">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/dr-he.jpg" alt="Dr. Dr. Shobha">
-                                    <h4 class="text-light-blue mt-3">Dr. Shobha</h4>
-                                    <p>Consultant- Radiology</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr-shobha" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item cloned" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr-deepika">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/dr-he.jpg" alt="Dr. Dr. Deepika">
-                                    <h4 class="text-light-blue mt-3">Dr. Deepika</h4>
-                                    <p>Consultant- Radiology</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr-deepika" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item cloned" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr-sulagna">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/dr-he.jpg" alt="Dr. Dr. Sulagna">
-                                    <h4 class="text-light-blue mt-3">Dr. Sulagna</h4>
-                                    <p>Consultant- Radiology</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr-sulagna" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item cloned" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr-c-l-karan-gowda">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/karan-gowda.jpg"
-                                        alt="Dr. Dr. C L Karan Gowda">
-                                    <h4 class="text-light-blue mt-3">Dr. C L Karan Gowda</h4>
-                                    <p>Consultant - Orthopaedics</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr-c-l-karan-gowda" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item cloned" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr-radhesh-menon">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/dr-he.jpg"
-                                        alt="Dr. Dr. Radhesh Menon">
-                                    <h4 class="text-light-blue mt-3">Dr. Radhesh Menon</h4>
-                                    <p>Consultant - Orthopaedics</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr-radhesh-menon" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item cloned" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr-deepak-a">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/dr-he.jpg" alt="Dr. Dr. Deepak A">
-                                    <h4 class="text-light-blue mt-3">Dr. Deepak A</h4>
-                                    <p>Consultant - Orthopaedics</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr-deepak-a" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item cloned" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr-mythreye-sm-r">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/dr-he.jpg"
-                                        alt="Dr. Dr. Mythreye SM R">
-                                    <h4 class="text-light-blue mt-3">Dr. Mythreye SM R</h4>
-                                    <p>Consultant - General Surgery</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr-mythreye-sm-r" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item cloned" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr-lohith">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/dr-he.jpg" alt="Dr. Dr. Lohith">
-                                    <h4 class="text-light-blue mt-3">Dr. Lohith</h4>
-                                    <p>Consultant - Surgical Gastroenterology</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr-lohith" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="owl-item cloned" style="width: 255px; margin-right: 40px;">
-                            <div class="item" data-key="dr-vivekanand">
-                                <div class="doctor-card">
-                                    <img loading="lazy" src="static/img/img/doctors/dr-he.jpg" alt="Dr. Dr. Vivekanand">
-                                    <h4 class="text-light-blue mt-3">Dr. Vivekanand</h4>
-                                    <p>Consultant - Urology</p>
-                                    <div class="learn-more-wrapper">
-                                        <a href="/doctors/dr-vivekanand" class="learn-more">
-                                            Learn More <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
+            <div class="owl-carousel doctors-carousel">
+                {% for doctor in doctors %}
+                {# Normalize image path #}
+                {% if doctor.image_path %}
+                {% if doctor.image_path.startswith('img/doctors/') %}
+                {% set img_file = doctor.image_path %}
+                {% elif doctor.image_path.startswith('doctors/') %}
+                {% set img_file = 'img/' + doctor.image_path %}
+                {% else %}
+                {% set img_file = 'img/doctors/' + doctor.image_path %}
+                {% endif %}
+                {% else %}
+                {% set img_file = 'img/doctors/dr-he.JPG' %}
+                {% endif %}
+
+                <div class="item" data-key="{{ doctor.slug }}">
+                    <div class="doctor-card">
+                        <img loading="lazy" src="{{ url_for('static', filename=img_file) }}"
+                            alt="Dr. {{ doctor.name }}">
+                        <h4 class="text-light-blue mt-3">{{ doctor.name }}</h4>
+                        <p>{{ doctor.specialization }}</p>
+                        <div class="learn-more-wrapper">
+                            <a href="{{ url_for('doctor_detail', slug=doctor.slug) }}" class="learn-more">
+                                Learn More <i class="fa fa-angle-right"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
-                <div class="owl-nav"><button type="button" role="presentation" class="owl-prev"><span
-                            aria-label="Previous">‹</span></button><button type="button" role="presentation"
-                        class="owl-next"><span aria-label="Next">›</span></button></div>
-                <div class="owl-dots"><button role="button" class="owl-dot"><span></span></button><button role="button"
-                        class="owl-dot"><span></span></button><button role="button"
-                        class="owl-dot"><span></span></button><button role="button"
-                        class="owl-dot"><span></span></button><button role="button"
-                        class="owl-dot"><span></span></button><button role="button"
-                        class="owl-dot"><span></span></button><button role="button"
-                        class="owl-dot"><span></span></button><button role="button"
-                        class="owl-dot active"><span></span></button><button role="button"
-                        class="owl-dot"><span></span></button><button role="button"
-                        class="owl-dot"><span></span></button><button role="button"
-                        class="owl-dot"><span></span></button><button role="button"
-                        class="owl-dot"><span></span></button></div>
+                {% endfor %}
             </div>
         </div>
     </section>
@@ -2476,84 +491,22 @@
         <div class="container">
             <div class="stats-row">
                 <!--  -->
+                {% for counter in counters if counter.is_active %}
                 <div class="stat-item">
                     <div class="stat-icon">
-                        <img src="static/img/img/patients_treated.png" alt="Patients Treated" loading="lazy">
+                        <img src="{{ url_for('static', filename=counter.icon_path or 'icons/default.svg') }}"
+                            alt="{{ counter.label }}" loading="lazy">
                     </div>
                     <div class="counter-wrap">
-                        <span class="number" data-count="20000">0</span>
-                        <span class="suffix">+</span>
+                        <span class="number" data-count="{{ counter.count }}">0</span>
+                        {% if counter.suffix %}
+                        <span class="suffix">{{ counter.suffix }}</span>
+                        {% endif %}
                     </div>
-                    <div class="label">Patients Treated</div>
+                    <div class="label">{{ counter.label }}</div>
                 </div>
+                {% endfor %}
                 <!--  -->
-                <div class="stat-item">
-                    <div class="stat-icon">
-                        <img src="static/img/img/surgeries.png" alt="Surgeries" loading="lazy">
-                    </div>
-                    <div class="counter-wrap">
-                        <span class="number" data-count="500">0</span>
-                        <span class="suffix">+</span>
-                    </div>
-                    <div class="label">Surgeries</div>
-                </div>
-                <!--  -->
-                <div class="stat-item">
-                    <div class="stat-icon">
-                        <img src="static/img/img/hospital-bed.png" alt="Beds" loading="lazy">
-                    </div>
-                    <div class="counter-wrap">
-                        <span class="number" data-count="100">0</span>
-                        <span class="suffix">+</span>
-                    </div>
-                    <div class="label">Beds</div>
-                </div>
-                <!--  -->
-                <div class="stat-item">
-                    <div class="stat-icon">
-                        <img src="static/img/img/doctor.png" alt="Doctors" loading="lazy">
-                    </div>
-                    <div class="counter-wrap">
-                        <span class="number" data-count="50">0</span>
-                        <span class="suffix">+</span>
-                    </div>
-                    <div class="label">Doctors</div>
-                </div>
-                <!--  -->
-
-                <div class="stat-item">
-                    <div class="stat-icon">
-                        <img src="static/img/img/icu_beds.png" alt="ICU Beds" loading="lazy">
-                    </div>
-                    <div class="counter-wrap">
-                        <span class="number" data-count="13">0</span>
-                        <span class="suffix">+</span>
-                    </div>
-                    <div class="label">ICU Beds</div>
-                </div>
-                <!--  -->
-                <div class="stat-item">
-                    <div class="stat-icon">
-                        <img src="static/img/img/operation_theater.png" alt="Operation Theaters" loading="lazy">
-                    </div>
-                    <div class="counter-wrap">
-                        <span class="number" data-count="3">0</span>
-                        <span class="suffix">+</span>
-                    </div>
-                    <div class="label">Operation Theaters</div>
-                </div>
-                <!--  -->
-                <div class="stat-item">
-                    <div class="stat-icon">
-                        <img src="static/img/img/labs.png" alt="Lab" loading="lazy">
-                    </div>
-                    <div class="counter-wrap">
-                        <span class="number" data-count="2">0</span>
-                        <span class="suffix">+</span>
-                    </div>
-                    <div class="label">Lab</div>
-                </div>
-
             </div>
         </div>
     </section>
@@ -2562,105 +515,33 @@
         <div class="container">
             <h2 class="text-center mb-4" style="font-weight: 700; color: #103A60; font-size: 2.5rem;">Our Key Facilities
             </h2>
+            {% set facilities_list = [
+            {'icon': 'fas fa-ambulance', 'title': '24×7 Emergency and Trauma Care'},
+            {'icon': 'fas fa-capsules', 'title': '24x7 Pharmacy'},
+            {'icon': 'fas fa-procedures', 'title': '24x7 ICU, NICU, and Critical Care Units'},
+            {'icon': 'fas fa-microscope', 'title': 'Advanced Diagnostic & Imaging Services'},
+            {'icon': 'fas fa-hospital-user', 'title': 'State of the art Operation Theatres'},
+            {'icon': 'fas fa-flask', 'title': 'In-house Pharmacy & Laboratory'},
+            {'icon': 'fas fa-heartbeat', 'title': 'Preventive Health Check-up Packages'},
+            {'icon': 'fas fa-baby-carriage', 'title': 'Dedicated Women & Child Care Units'},
+            {'icon': 'fas fa-shuttle-van', 'title': 'Ambulance and Home Care Services'},
+            {'icon': 'fas fa-bed', 'title': 'Comfortable Private and Semi-private Rooms'},
+            {'icon': 'fas fa-coffee', 'title': 'Inhouse Cafeterias'},
+            {'icon': 'fas fa-walking', 'title': 'Advanced Physiotherapy with Home care'},
+            {'icon': 'fas fa-tint', 'title': 'Dialysis Facilities'},
+            {'icon': 'fas fa-truck-medical', 'title': 'Free Home Delivery of Medicines'}
+            ] %}
             <div class="facilities-grid">
                 <!--  -->
+                {# This loop will create 14 cards, resulting in 6-6-2 centered on desktop #}
+                {% for item in facilities_list %}
                 <div class="facility-card">
                     <div class="facility-icon-wrapper">
-                        <i class="fas fa-ambulance"></i>
+                        <i class="{{ item.icon }}"></i>
                     </div>
-                    <h4 class="facility-title">24×7 Emergency and Trauma Care</h4>
+                    <h4 class="facility-title">{{ item.title }}</h4>
                 </div>
-                <!--  -->
-                <div class="facility-card">
-                    <div class="facility-icon-wrapper">
-                        <i class="fas fa-capsules"></i>
-                    </div>
-                    <h4 class="facility-title">24x7 Pharmacy</h4>
-                </div>
-                <!--  -->
-                <div class="facility-card">
-                    <div class="facility-icon-wrapper">
-                        <i class="fas fa-procedures"></i>
-                    </div>
-                    <h4 class="facility-title">24x7 ICU, NICU, and Critical Care Units</h4>
-                </div>
-                <!--  -->
-                <div class="facility-card">
-                    <div class="facility-icon-wrapper">
-                        <i class="fas fa-microscope"></i>
-                    </div>
-                    <h4 class="facility-title">Advanced Diagnostic &amp; Imaging Services</h4>
-                </div>
-                <!--  -->
-                <div class="facility-card">
-                    <div class="facility-icon-wrapper">
-                        <i class="fas fa-hospital-user"></i>
-                    </div>
-                    <h4 class="facility-title">State of the art Operation Theatres</h4>
-                </div>
-                <!--  -->
-                <div class="facility-card">
-                    <div class="facility-icon-wrapper">
-                        <i class="fas fa-flask"></i>
-                    </div>
-                    <h4 class="facility-title">In-house Pharmacy &amp; Laboratory</h4>
-                </div>
-                <!--  -->
-                <div class="facility-card">
-                    <div class="facility-icon-wrapper">
-                        <i class="fas fa-heartbeat"></i>
-                    </div>
-                    <h4 class="facility-title">Preventive Health Check-up Packages</h4>
-                </div>
-                <!--  -->
-                <div class="facility-card">
-                    <div class="facility-icon-wrapper">
-                        <i class="fas fa-baby-carriage"></i>
-                    </div>
-                    <h4 class="facility-title">Dedicated Women &amp; Child Care Units</h4>
-                </div>
-                <!--  -->
-                <div class="facility-card">
-                    <div class="facility-icon-wrapper">
-                        <i class="fas fa-shuttle-van"></i>
-                    </div>
-                    <h4 class="facility-title">Ambulance and Home Care Services</h4>
-                </div>
-                <!--  -->
-                <div class="facility-card">
-                    <div class="facility-icon-wrapper">
-                        <i class="fas fa-bed"></i>
-                    </div>
-                    <h4 class="facility-title">Comfortable Private and Semi-private Rooms</h4>
-                </div>
-                <!--  -->
-                <div class="facility-card">
-                    <div class="facility-icon-wrapper">
-                        <i class="fas fa-coffee"></i>
-                    </div>
-                    <h4 class="facility-title">Inhouse Cafeterias</h4>
-                </div>
-                <!--  -->
-                <div class="facility-card">
-                    <div class="facility-icon-wrapper">
-                        <i class="fas fa-walking"></i>
-                    </div>
-                    <h4 class="facility-title">Advanced Physiotherapy with Home care</h4>
-                </div>
-                <!--  -->
-                <div class="facility-card">
-                    <div class="facility-icon-wrapper">
-                        <i class="fas fa-tint"></i>
-                    </div>
-                    <h4 class="facility-title">Dialysis Facilities</h4>
-                </div>
-                <!--  -->
-                <div class="facility-card">
-                    <div class="facility-icon-wrapper">
-                        <i class="fas fa-truck-medical"></i>
-                    </div>
-                    <h4 class="facility-title">Free Home Delivery of Medicines</h4>
-                </div>
+                {% endfor %}
                 <!--  -->
             </div>
 
@@ -3003,8 +884,8 @@
 
                 <div class="tab-pane fade " id="content-written_testimonial" role="tabpanel">
                     <div class="owl-carousel life-glance-carousel owl-theme">
+                        {% for testimonial in testimonials if testimonial.id != 7 %}
                         <div class="item h-100">
-
                             <div class="life-card testimonial-wide-card h-100 shadow-sm border-0 rounded bg-white">
                                 <div class="card-body d-flex flex-column h-100 p-0">
                                     <div class="p-4 flex-grow-1 position-relative">
@@ -3013,423 +894,86 @@
                                             <i class="fas fa-quote-left fa-3x"></i>
                                         </div>
 
-                                        <h5 class="life-patient-name fw-bold mb-3 mt-2" style="color: #103A60;">Mikki
-                                            Gurung</h5>
+                                        <h5 class="life-patient-name fw-bold mb-3 mt-2" style="color: #103A60;">{{
+                                            testimonial.patient_name }}</h5>
 
                                         <div class="review-text-scroll pe-2">
-
-                                            <p class="mb-0 text-muted fst-italic" style="line-height: 1.6;">
-                                                The nurses were very friendly and helpful. They did an exceptional work
-                                                to make the patient comfortable. Doctors were able to answer our queries
-                                                and did not mind we asking lot of questions. Dr Hiranmavi Seshu, Dr
-                                                Janakiram, Dr Ankita, Dr Shine J
-                                                Nurses: All across the shifts, the nurses did commendably job. I wish I
-                                                could write all the names of the nurses.﻿
-                                            </p>
-
+                                            <p class="mb-0 text-muted fst-italic" style="line-height: 1.6;">{{
+                                                testimonial.content }}</p>
                                         </div>
                                     </div>
 
+                                    {% if testimonial.doctor %}
                                     <div class="doctor-footer-box mt-auto p-3 m-3 rounded-3">
                                         <div class="row g-2 align-items-center">
+
+                                            <!-- Doctor 1 -->
                                             <div class="col-md-6 col-12">
                                                 <div class="d-flex align-items-center">
 
+                                                    {% if testimonial.doctor.image_path %}
                                                     <div class="flex-shrink-0">
-                                                        <img src="static/img/img/doctors/hiranmai-seshu-01.jpg"
-                                                            alt="Dr. Hiranmayi Seshu" class="doctor-avatar">
+                                                        <img src="{{ url_for('static', filename=testimonial.doctor.image_path) }}"
+                                                            alt="{{ testimonial.doctor.name }}" class="doctor-avatar">
                                                     </div>
+                                                    {% endif %}
 
                                                     <div class="flex-grow-1 ms-3 overflow-hidden">
                                                         <h6 class="mb-0 fw-bold text-dark text-truncate"
-                                                            title="Dr. Hiranmayi Seshu">
-                                                            Dr. Hiranmayi Seshu
+                                                            title="{{ testimonial.doctor.name }}">
+                                                            {{ testimonial.doctor.name }}
                                                         </h6>
+
                                                         <small class="text-muted d-block text-truncate"
-                                                            title="Senior Consultant - Internal Medicine and Diabetology">
-                                                            Senior Consultant - Internal Medicine and Diabetology
+                                                            title="{{ testimonial.doctor.designation or testimonial.doctor.specialization }}">
+                                                            {{ testimonial.doctor.designation or
+                                                            testimonial.doctor.specialization }}
                                                         </small>
                                                     </div>
+
                                                 </div>
                                             </div>
 
+                                            <!-- Doctor 2 (only if exists) -->
+                                            {% if testimonial.doctor2 %}
                                             <div class="col-md-6 col-12 border-start-md">
                                                 <div class="d-flex align-items-center ps-md-3">
 
+                                                    {% if testimonial.doctor2.image_path %}
                                                     <div class="flex-shrink-0">
-                                                        <img src="static/img/img/doctors/ankita-pandey.jpg"
-                                                            alt="Dr. Ankita Pandey" class="doctor-avatar">
+                                                        <img src="{{ url_for('static', filename=testimonial.doctor2.image_path) }}"
+                                                            alt="{{ testimonial.doctor2.name }}" class="doctor-avatar">
                                                     </div>
+                                                    {% endif %}
 
                                                     <div class="flex-grow-1 ms-3 overflow-hidden">
                                                         <h6 class="mb-0 fw-bold text-dark text-truncate"
-                                                            title="Dr. Ankita Pandey">
-                                                            Dr. Ankita Pandey
+                                                            title="{{ testimonial.doctor2.name }}">
+                                                            {{ testimonial.doctor2.name }}
                                                         </h6>
+
                                                         <small class="text-muted d-block text-truncate"
-                                                            title="Consultant-Physiotheraphy">
-                                                            Consultant-Physiotheraphy
+                                                            title="{{ testimonial.doctor2.designation or testimonial.doctor2.specialization }}">
+                                                            {{ testimonial.doctor2.designation or
+                                                            testimonial.doctor2.specialization }}
                                                         </small>
                                                     </div>
+
                                                 </div>
                                             </div>
+                                            {% endif %}
+
                                         </div>
                                     </div>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
-
-                        <div class="item h-100">
-                            <div class="life-card testimonial-wide-card h-100 shadow-sm border-0 rounded bg-white">
-                                <div class="card-body d-flex flex-column h-100 p-0">
-
-                                    <div class="p-4 flex-grow-1 position-relative">
-                                        <div
-                                            class="quote-mark text-primary opacity-25 position-absolute top-0 start-0 p-3">
-                                            <i class="fas fa-quote-left fa-3x"></i>
-                                        </div>
-
-                                        <h5 class="life-patient-name fw-bold mb-3 mt-2" style="color: #103A60;">Sarath
-                                            KB﻿</h5>
-
-                                        <div class="review-text-scroll pe-2">
-
-                                            <p class="mb-0 text-muted fst-italic" style="line-height: 1.6;">
-                                                I was admitted in Aarogya Hastha hopital under Dr. Devendran for a
-                                                minory surgery. Thank you to the whole team and Dr. Devendran for the
-                                                great service. Everything was patiently explained and i got excellent
-                                                care. Nursing staff- Sukanya and Lokapriya, Dr.Shine, Dr. Sreedevi, Dr.
-                                                Surabhi, Dr. Devaraj, Megh and Sagar from admin team were very helpful.
-                                                The rooms and facility are very well maintained too!﻿
-                                                Dietitians were very knowledgeable too.
-                                            </p>
-
-                                        </div>
-                                    </div>
-
-                                    <div class="doctor-footer-box mt-auto p-3 m-3 rounded-3">
-                                        <div class="row g-2 align-items-center">
-                                            <div class="col-md-6 col-12">
-                                                <div class="d-flex align-items-center">
-
-                                                    <div class="flex-shrink-0">
-                                                        <img src="static/img/img/doctors/devendran-01.jpg"
-                                                            alt="Dr. V Devendran" class="doctor-avatar">
-                                                    </div>
-
-                                                    <div class="flex-grow-1 ms-3 overflow-hidden">
-                                                        <h6 class="mb-0 fw-bold text-dark text-truncate"
-                                                            title="Dr. V Devendran">
-                                                            Dr. V Devendran
-                                                        </h6>
-                                                        <small class="text-muted d-block text-truncate"
-                                                            title="Senior Consultant - General Surgery, Laparoscopic &amp; Laser Surgery, Proctology">
-                                                            Senior Consultant - General Surgery, Laparoscopic &amp;
-                                                            Laser Surgery, Proctology
-                                                        </small>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-6 col-12 border-start-md">
-                                                <div class="d-flex align-items-center ps-md-3">
-
-                                                    <div class="flex-shrink-0">
-                                                        <img src="static/img/img/doctors/surbhi-agrawal-01.jpg"
-                                                            alt="Dr. Surbhi Agrawal" class="doctor-avatar">
-                                                    </div>
-
-                                                    <div class="flex-grow-1 ms-3 overflow-hidden">
-                                                        <h6 class="mb-0 fw-bold text-dark text-truncate"
-                                                            title="Dr. Surbhi Agrawal">
-                                                            Dr. Surbhi Agrawal
-                                                        </h6>
-                                                        <small class="text-muted d-block text-truncate"
-                                                            title="Consultant - Emergency Medicine">
-                                                            Consultant - Emergency Medicine
-                                                        </small>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
+                        {% else %}
+                        <div class="item">
+                            <p class="text-center">No testimonials yet. Check back soon!</p>
                         </div>
-
-                        <div class="item h-100">
-                            <div class="life-card testimonial-wide-card h-100 shadow-sm border-0 rounded bg-white">
-                                <div class="card-body d-flex flex-column h-100 p-0">
-
-                                    <div class="p-4 flex-grow-1 position-relative">
-                                        <div
-                                            class="quote-mark text-primary opacity-25 position-absolute top-0 start-0 p-3">
-                                            <i class="fas fa-quote-left fa-3x"></i>
-                                        </div>
-
-                                        <h5 class="life-patient-name fw-bold mb-3 mt-2" style="color: #103A60;">Nisha J
-                                        </h5>
-
-                                        <div class="review-text-scroll pe-2">
-
-                                            <p class="mb-0 text-muted fst-italic" style="line-height: 1.6;">
-                                                I just wanted to share my recent experience at the hospital with you. My
-                                                husband recently had surgery on his right hand, and I must say, the
-                                                doctor Karan Gowda did an amazing job. He handled the procedure with
-                                                utmost care and professionalism, and we are very grateful for his
-                                                expertise. Overall, the hospital itself was great. It was
-                                                well-maintained, and the staff were all very friendly and helpful. We
-                                                felt well taken care of throughout the entire process.﻿
-                                            </p>
-
-                                        </div>
-                                    </div>
-
-
-                                    <div class="doctor-footer-box mt-auto p-3 m-3 rounded-3">
-                                        <div class="row g-2 align-items-center">
-
-
-
-                                            <div class="col-md-6 col-12">
-                                                <div class="d-flex align-items-center">
-
-                                                    <div class="flex-shrink-0">
-                                                        <img src="static/img/img/doctors/karan-gowda.jpg"
-                                                            alt="Dr. C L Karan Gowda" class="doctor-avatar">
-                                                    </div>
-
-                                                    <div class="flex-grow-1 ms-3 overflow-hidden">
-                                                        <h6 class="mb-0 fw-bold text-dark text-truncate"
-                                                            title="Dr. C L Karan Gowda">
-                                                            Dr. C L Karan Gowda
-                                                        </h6>
-
-
-
-
-
-                                                        <small class="text-muted d-block text-truncate"
-                                                            title="Associate  Consultant - Orthopaedics">
-                                                            Associate Consultant - Orthopaedics
-                                                        </small>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-
-
-
-
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-
-
-
-
-
-
-                        </div>
-
-                        <div class="item h-100">
-
-
-
-
-
-                            <div class="life-card testimonial-wide-card h-100 shadow-sm border-0 rounded bg-white">
-                                <div class="card-body d-flex flex-column h-100 p-0">
-
-                                    <div class="p-4 flex-grow-1 position-relative">
-                                        <div
-                                            class="quote-mark text-primary opacity-25 position-absolute top-0 start-0 p-3">
-                                            <i class="fas fa-quote-left fa-3x"></i>
-                                        </div>
-
-                                        <h5 class="life-patient-name fw-bold mb-3 mt-2" style="color: #103A60;">Ashwini
-                                            Seshadhiri</h5>
-
-                                        <div class="review-text-scroll pe-2">
-
-                                            <p class="mb-0 text-muted fst-italic" style="line-height: 1.6;">
-                                                Last Friday mom got admited and kyphoplasty surgery done by Dr Srinivas
-                                                Reddy and now shes alryt wanna thank to Dr kushal and Dr Srinivas Reddy
-                                                for the imdiate attention to my mom over all good service from all the
-                                                staff wanna spl thanks to sis kalpana sis chandana sis Meenakshi
-                                                who&#39;s taking care of my mom with very kind and empathy. Even the h/k
-                                                service was very clean and neat. Over all very good service.
-                                            </p>
-
-                                        </div>
-                                    </div>
-
-
-                                    <div class="doctor-footer-box mt-auto p-3 m-3 rounded-3">
-                                        <div class="row g-2 align-items-center">
-
-
-
-                                            <div class="col-md-6 col-12">
-                                                <div class="d-flex align-items-center">
-
-                                                    <div class="flex-shrink-0">
-                                                        <img src="static/img/img/doctors/Dr._Kushal_1_1.jpeg"
-                                                            alt="Dr. Kushal Lakshmana" class="doctor-avatar">
-                                                    </div>
-
-                                                    <div class="flex-grow-1 ms-3 overflow-hidden">
-                                                        <h6 class="mb-0 fw-bold text-dark text-truncate"
-                                                            title="Dr. Kushal Lakshmana">
-                                                            Dr. Kushal Lakshmana
-                                                        </h6>
-
-
-
-
-
-                                                        <small class="text-muted d-block text-truncate"
-                                                            title="Consultant &amp; HOD – Orthopaedics">
-                                                            Consultant &amp; HOD – Orthopaedics
-                                                        </small>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-
-
-
-
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-
-
-
-
-
-
-                        </div>
-
-                        <div class="item h-100">
-
-
-
-
-
-                            <div class="life-card testimonial-wide-card h-100 shadow-sm border-0 rounded bg-white">
-                                <div class="card-body d-flex flex-column h-100 p-0">
-
-                                    <div class="p-4 flex-grow-1 position-relative">
-                                        <div
-                                            class="quote-mark text-primary opacity-25 position-absolute top-0 start-0 p-3">
-                                            <i class="fas fa-quote-left fa-3x"></i>
-                                        </div>
-
-                                        <h5 class="life-patient-name fw-bold mb-3 mt-2" style="color: #103A60;">Himesh
-                                            Bharat</h5>
-
-                                        <div class="review-text-scroll pe-2">
-
-                                            <p class="mb-0 text-muted fst-italic" style="line-height: 1.6;">
-                                                Had a major fracture which was treated by Dr Karan Gowda. He&#39;s my
-                                                savior. He understood the issue at hand (was a complicated surgery which
-                                                took 4 hours), didn&#39;t compromise on the quality and made sure
-                                                everything went well. Explained the whole process and next steps for
-                                                recovery in detailed. Very knowledgeable, patient and a reliable
-                                                surgeon. Highly recommended for complicated orthopedic surgeries.﻿
-                                                Also shout out to the nursing staff for all the great service (esp
-                                                Akshata madam, Chandana madam) and the helping staff were very
-                                                professional and helpful (shout out to Mani, Suresh). Physiotherapy
-                                                staff was excellent (shout out to Fazil sir and Anjali madam) Also,
-                                                Shout out to Neelima Sharma (dietician)﻿
-                                                Thanks Aarogya hastha team for helping me throughout the whole surgery
-                                                recovery phase.
-
-                                            </p>
-
-                                        </div>
-                                    </div>
-
-
-                                    <div class="doctor-footer-box mt-auto p-3 m-3 rounded-3">
-                                        <div class="row g-2 align-items-center">
-
-
-
-                                            <div class="col-md-6 col-12">
-                                                <div class="d-flex align-items-center">
-
-                                                    <div class="flex-shrink-0">
-                                                        <img src="static/img/img/doctors/dr-he.jpg" alt="Dr. Deepak A"
-                                                            class="doctor-avatar">
-                                                    </div>
-
-                                                    <div class="flex-grow-1 ms-3 overflow-hidden">
-                                                        <h6 class="mb-0 fw-bold text-dark text-truncate"
-                                                            title="Dr. Deepak A">
-                                                            Dr. Deepak A
-                                                        </h6>
-
-
-
-
-
-                                                        <small class="text-muted d-block text-truncate"
-                                                            title="Dr Deepak A">
-                                                            Dr Deepak A
-                                                        </small>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-
-
-
-                                            <div class="col-md-6 col-12 border-start-md">
-                                                <div class="d-flex align-items-center ps-md-3">
-
-                                                    <div class="flex-shrink-0">
-                                                        <img src="static/img/img/doctors/dr-he.jpg" alt="Dr. Magesh B"
-                                                            class="doctor-avatar">
-                                                    </div>
-
-                                                    <div class="flex-grow-1 ms-3 overflow-hidden">
-                                                        <h6 class="mb-0 fw-bold text-dark text-truncate"
-                                                            title="Dr. Magesh B">
-                                                            Dr. Magesh B
-                                                        </h6>
-
-
-
-
-
-                                                        <small class="text-muted d-block text-truncate"
-                                                            title="Consultant-  Cardiology">
-                                                            Consultant- Cardiology
-                                                        </small>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-
-
-
-
-
-
-                        </div>
+                        {% endfor %}
 
                     </div>
 
@@ -3947,7 +1491,7 @@
         </div>
     </section>
 
-    <section class="cta-appointment-section" data-aos="fade-up">
+    <section class="act-appointment-section d-none" data-aos="fade-up">
         <div class="container">
             <div class="row align-items-center">
 
@@ -3980,43 +1524,65 @@
         </div>
     </section>
 
-    <div id="review-modal" class="login-modal">
-        <div class="login-modal-content">
-            <!-- Close Button -->
-            <span class="close-button" id="close-review-modal">×</span>
+    <!-- map section -->
+    <section class="map_secmain">
+        <div class="container">
+            <div class="ah-visit-wrap">
+                <h2 class="ah-visit-title">Visit Us or Book an Appointment</h2>
 
-            <!-- Logo -->
-            <div style="text-align: center; margin-bottom: 10px;">
-                <img src="static/img/img/logo.png" alt="Company Logo" style="max-width: 160px; height: auto;">
+                <p class="ah-visit-address">
+                    Site No. 2, Kasavanahalli Main Rd, near 1st Cross Road, opposite HM Symphony, Bengaluru, Karnataka
+                    560035
+                </p>
+
+                <p class="ah-visit-desc">
+                    Aarogya Hastha Hospitals is centrally located, making it convenient for all patients to reach our
+                    facilities.
+                    Whether you’re dropping by for a consultation or need immediate medical attention,
+                </p>
+
+                <div class="ah-visit-card">
+                    <div class="ah-visit-grid">
+                        <!-- LEFT: MAP -->
+                        <div class="ah-visit-map">
+                            <!-- Replace with your exact Google Maps embed link -->
+                            <iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+                                src="https://www.google.com/maps?q=Aarogya%20Hastha%20Hospitals%20Kasavanahalli&output=embed">
+                            </iframe>
+
+                            <!-- Replace href with your Google Maps directions link -->
+                            <div class="ah-visit-directions">
+                                <div class="ah-visit-pin" aria-hidden="true">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M12 22s7-5.2 7-12A7 7 0 1 0 5 10c0 6.8 7 12 7 12Z"
+                                            stroke="currentColor" stroke-width="2" />
+                                        <path d="M12 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" stroke="currentColor"
+                                            stroke-width="2" />
+                                    </svg>
+                                </div>
+                                <a href="https://www.google.com/maps?q=Aarogya%20Hastha%20Hospitals%20Kasavanahalli"
+                                    target="_blank" rel="noopener">
+                                    Get Directions
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- RIGHT: CTA -->
+                        <aside class="ah-visit-cta">
+                            <h3>Ready to Consult?</h3>
+
+                            <!-- Replace phone number -->
+                            <a class="ah-visit-btn call" href="tel:08066668811">Call Us Now</a>
+
+                            <!-- Replace booking URL -->
+                            <a class="ah-visit-btn book" href="/appointments">BOOK AN APPOINTMENT</a>
+                        </aside>
+                    </div>
+                </div>
             </div>
-
-            <!-- Modal Title -->
-            <h2 style="margin-top: 0; margin-bottom: 15px; font-size: 1.5rem; text-align: center;">
-                Write to Management
-            </h2>
-
-            <!-- Form -->
-            <form id="review-form">
-                <div class="login-form-group">
-                    <input type="text" id="reviewer-name" name="reviewer-name" placeholder="Your Name" required>
-                </div>
-                <div class="login-form-group">
-                    <input type="number" id="reviewer-number" name="reviewer-number" placeholder="Mobile Number"
-                        required>
-                </div>
-                <div class="login-form-group">
-                    <input type="email" id="reviewer-email" name="reviewer-email" placeholder="Email Address" required>
-                </div>
-                <div class="login-form-group">
-                    <textarea id="review-message" name="review-message" rows="4" placeholder="Your Message..."
-                        required></textarea>
-                </div>
-                <div class="login-form-group">
-                    <button type="submit">Submit</button>
-                </div>
-            </form>
         </div>
-    </div>
+    </section>
 
     <footer class="site-footer">
         <div class="container">
@@ -4136,8 +1702,7 @@
     <script type="text/javascript" src="https://unpkg.com/youtube-background/jquery.youtube-background.min.js"></script>
     <script src="static/js/js/myscript.js"></script>
 
-    
-<script>
+    <script>
         // Video Modal Logic (Same as before)
         function openVideoModal(videoId) {
             // Simple check to ensure videoId is not a full URL if possible
