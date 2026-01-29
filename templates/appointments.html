@@ -1,0 +1,154 @@
+{% extends "base.html" %}
+
+{% block title %} Book an Appointment - Aarogya Hastha{% endblock %}
+
+{% block content %}
+
+<head>
+    <meta charset="utf-8">
+    <meta name="language" content="english">
+    <meta name="robots" content="index,follow">
+    <meta name="revisit-after" content="7 days">
+    <meta name="distribution" content="web">
+    <meta name="robots" content="noodp">
+    <meta name="distribution" content="web">
+    <meta name="subject" content="Healthcare">
+    <meta name="copyright" content="Copyright © 2025">
+    <meta name="reply-to" content="info@aarogyahastha.com">
+    <meta name="web_author" content="Aarogya Hastha Hospitals">
+    <meta name="rating" content="general">
+    <meta name="author" content="Aarogya Hastha Hospitals">
+    <meta name="designer" content="Aarogya Hastha Hospitals">
+    <meta name="publisher" content="Aarogya Hastha Hospitals">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="city" content="Bangalore">
+    <meta name="country" content="India">
+    <meta name="distribution" content="global">
+    <meta name="classification" content="Healthcare, Hospital ">
+    <base href="/">
+    <meta name="keywords" content="">
+    <link rel="canonical" href="https://aarogyahastha.com/appointments">
+</head>
+<style>
+    /* Styling for the breadcrumb navigation */
+    .breadcrumb-section {
+        /* ORIGINAL: padding: 15px 200px; */
+        /* MODIFIED: Add a left offset to clear the sidebar (~80px total width/padding) */
+        padding: 15px 200px 15px 80px;
+        background-color: #f8f9fa;
+        border-bottom: 1px solid #dee2e6;
+    }
+
+    .breadcrumb {
+        margin-bottom: 0;
+        background-color: transparent;
+        padding: 0;
+    }
+
+    .breadcrumb-item a {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+    .breadcrumb-item a:hover {
+        text-decoration: underline;
+    }
+
+    .breadcrumb-item.active {
+        color: #6c757d;
+    }
+
+    .breadcrumb-item+.breadcrumb-item::before {
+        content: ">>";
+        padding: 0 0.75rem;
+        color: #6c757d;
+    }
+
+    /* Styling for a seamless, full-page iframe experience */
+    .appointment-page-section {
+        padding: 0;
+        /* MODIFIED: Add a left offset to clear the sidebar */
+        padding-left: 20px;
+    }
+
+    .appointment-iframe-wrapper {
+        width: 100%;
+        overflow: hidden;
+    }
+
+    #appointment-page-iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+    }
+
+    /* Hide footer and scroll-to-top button to prevent scrolling issues */
+    .site-footer,
+    .scroll-to-top-btn {
+        display: none !important;
+    }
+</style>
+
+<section class="breadcrumb-section" id="breadcrumb-nav">
+    <div class="container-fluid">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb" itemscope itemtype="http://schema.org/BreadcrumbList">
+                <li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                    <a itemprop="item" href="/">
+                        <span itemprop="name">Home</span>
+                    </a>
+                    <meta itemprop="position" content="1">
+                </li>
+                <li class="breadcrumb-item active" aria-current="page" itemprop="itemListElement" itemscope
+                    itemtype="http://schema.org/ListItem">
+                    <span itemprop="name">Appointments</span>
+                    <meta itemprop="position" content="2">
+                </li>
+            </ol>
+        </nav>
+    </div>
+</section>
+
+<section class="appointment-page-section">
+    <div class="container-fluid">
+        <div class="appointment-iframe-wrapper">
+            <iframe id="appointment-page-iframe" src="https://app.fyndbetter.com/ahh_apt"
+                title="Appointment Booking Form">
+            </iframe>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // This script dynamically adjusts the iframe height to create a seamless, single-scroll experience.
+
+        function resizeIframe() {
+            const header = document.querySelector('.new-header');
+            const breadcrumbs = document.getElementById('breadcrumb-nav');
+            const iframeWrapper = document.querySelector('.appointment-iframe-wrapper');
+
+            if (header && breadcrumbs && iframeWrapper) {
+                const headerHeight = header.offsetHeight;
+                const breadcrumbsHeight = breadcrumbs.offsetHeight;
+
+                // Calculate the total height of fixed elements at the top (header + breadcrumbs)
+                const totalOffset = headerHeight + breadcrumbsHeight;
+
+                const availableHeight = window.innerHeight - totalOffset;
+
+                // Set the wrapper's height to fill the exact remaining vertical space
+                iframeWrapper.style.height = availableHeight + 'px';
+            }
+        }
+
+        // Adjust the iframe height on initial page load
+        resizeIframe();
+
+        // Add a resize event listener to handle screen size changes
+        window.addEventListener('resize', resizeIframe);
+    });
+</script>
+{% endblock %}

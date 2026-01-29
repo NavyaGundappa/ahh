@@ -1,0 +1,1249 @@
+{% extends "admin_layout.html" %}
+
+{% block title %}Manage Doctors - Admin Panel{% endblock %}
+
+{% block content %}
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.css">
+
+<style>
+    .modal-lg {
+        max-width: 90%;
+    }
+
+    .img-preview {
+        max-width: 100px;
+        max-height: 100px;
+        border-radius: 5px;
+        border: 1px solid #dee2e6;
+    }
+
+    /* Quill Editor Customization */
+    .ql-editor {
+        min-height: 150px;
+        background-color: white;
+    }
+
+    .ql-container {
+        font-size: 16px;
+    }
+
+    .timing-days {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-bottom: 5px;
+    }
+
+    .timing-row {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-bottom: 10px;
+    }
+
+    .timing-container {
+        border: 1px solid #ddd;
+        padding: 10px;
+        margin-top: 10px;
+        border-radius: 5px;
+        background: #f8f9fa;
+    }
+
+    .timing-group {
+        margin-bottom: 8px;
+        padding: 8px;
+        background: white;
+        border-radius: 4px;
+    }
+
+    .timing-label {
+        font-weight: bold;
+        width: 60px;
+        color: #495057;
+    }
+
+    .time-slot {
+        background: #e3f2fd;
+        padding: 4px 8px;
+        margin-right: 5px;
+        border-radius: 4px;
+        font-size: 0.9em;
+        border: 1px solid #bbdefb;
+    }
+
+    .on-call {
+        font-style: italic;
+        color: #6c757d;
+        background: #f8f9fa;
+        padding: 8px;
+        border-radius: 4px;
+        text-align: center;
+    }
+
+    .timing-entry {
+        border: 1px solid #dee2e6;
+        padding: 15px;
+        margin-bottom: 15px;
+        border-radius: 5px;
+        background: #f8f9fa;
+    }
+
+    .remove-timing {
+        color: #dc3545;
+        cursor: pointer;
+        transition: color 0.2s;
+    }
+
+    .remove-timing:hover {
+        color: #bd2130;
+    }
+
+    .add-timing-btn {
+        margin-bottom: 15px;
+    }
+
+    .search-container {
+        background: #f8f9fa;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        border: 1px solid #dee2e6;
+    }
+
+    .doctor-card {
+        transition: transform 0.2s, box-shadow 0.2s;
+        cursor: grab;
+    }
+
+    .doctor-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .doctor-card:active {
+        cursor: grabbing;
+    }
+
+    .doctor-card.sortable-ghost {
+        opacity: 0.4;
+        background: #f8f9fa;
+    }
+
+    .doctor-card.sortable-chosen {
+        background: #e3f2fd;
+        transform: rotate(2deg);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .doctor-card.sortable-drag {
+        cursor: grabbing;
+    }
+
+    .stats-card {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border-radius: 8px;
+        padding: 15px;
+        margin-bottom: 20px;
+    }
+
+    .action-buttons {
+        display: flex;
+        gap: 5px;
+        flex-wrap: wrap;
+    }
+
+    .table-actions {
+        white-space: nowrap;
+    }
+
+    .department-badge {
+        background: #e9ecef;
+        color: #495057;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 0.85em;
+    }
+
+    .time-select {
+        width: 80px !important;
+    }
+
+    .time-separator {
+        margin: 0 5px;
+        font-weight: bold;
+    }
+
+    .availability-badge {
+        font-size: 0.75em;
+        padding: 3px 8px;
+    }
+
+    .availability-scheduled {
+        background: #d1ecf1;
+        color: #0c5460;
+        border: 1px solid #bee5eb;
+    }
+
+    .availability-oncall {
+        background: #fff3cd;
+        color: #856404;
+        border: 1px solid #ffeaa7;
+    }
+
+    .drag-handle {
+        cursor: grab;
+        color: #6c757d;
+        padding: 8px;
+        margin-right: 10px;
+    }
+
+    .drag-handle:active {
+        cursor: grabbing;
+    }
+
+    .status-toggle {
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 1.1em;
+    }
+
+    .status-toggle.active {
+        color: #28a745;
+    }
+
+    .status-toggle.inactive {
+        color: #dc3545;
+    }
+
+    .auto-save-indicator {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 1050;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-weight: bold;
+        display: none;
+    }
+
+    .auto-save-success {
+        background: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+    }
+
+    .auto-save-error {
+        background: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+    }
+
+    .order-badge {
+        background: #6c757d;
+        color: white;
+        border-radius: 50%;
+        width: 24px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.75em;
+        font-weight: bold;
+        margin-right: 10px;
+    }
+
+    /* Make action buttons not draggable */
+    .action-buttons,
+    .action-buttons * {
+        cursor: default;
+    }
+
+    /* Make links not draggable */
+    a,
+    button {
+        cursor: pointer;
+    }
+
+    /* Ensure form elements are not draggable */
+    input,
+    select,
+    textarea {
+        cursor: auto;
+    }
+
+    .form-section {
+        border-bottom: 1px solid #dee2e6;
+        padding-bottom: 15px;
+        margin-bottom: 20px;
+    }
+
+    .form-section-title {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: #495057;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+    }
+
+    .form-section-title i {
+        margin-right: 8px;
+    }
+
+    .textarea-small {
+        min-height: 80px;
+        resize: vertical;
+    }
+
+    .textarea-medium {
+        min-height: 100px;
+        resize: vertical;
+    }
+</style>
+
+<div class="container-fluid mt-4">
+    <div id="autoSaveIndicator" class="auto-save-indicator">
+        <i class="fas fa-check-circle me-2"></i>
+        <span id="autoSaveMessage">Changes saved successfully</span>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h2 class="mb-1"><i class="fas fa-user-md me-2"></i>Manage Doctors</h2>
+            <p class="text-muted">Add, edit, and manage doctor profiles. Drag anywhere on the row to reorder.</p>
+        </div>
+        <div class="col-md-4 text-end">
+            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addDoctorModal">
+                <i class="fas fa-plus-circle me-1"></i> Add New Doctor
+            </button>
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="stats-card">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h4 class="mb-0">{{ doctors|length }}</h4>
+                        <small>Total Doctors</small>
+                    </div>
+                    <i class="fas fa-user-md fa-2x opacity-50"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="stats-card" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h4 class="mb-0">{{ departments|length }}</h4>
+                        <small>Departments</small>
+                    </div>
+                    <i class="fas fa-building fa-2x opacity-50"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="stats-card" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h4 class="mb-0">{{ doctors|selectattr('timings')|list|length }}</h4>
+                        <small>With Schedule</small>
+                    </div>
+                    <i class="fas fa-clock fa-2x opacity-50"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="stats-card" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h4 class="mb-0">{{ doctors|rejectattr('timings')|list|length }}</h4>
+                        <small>On Call Basis</small>
+                    </div>
+                    <i class="fas fa-phone fa-2x opacity-50"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="search-container">
+        <div class="row">
+            <div class="col-md-8">
+                <form method="GET" action="{{ url_for('admin_doctors') }}" class="row g-2">
+                    <div class="col-md-8">
+                        <div class="input-group">
+                            <span class="input-group-text bg-white border-end-0">
+                                <i class="fas fa-search text-muted"></i>
+                            </span>
+                            <input type="text" name="search" class="form-control border-start-0"
+                                placeholder="Search doctors by name, specialization, department, or designation..."
+                                value="{{ search_query }}" id="searchInput">
+                            {% if search_query %}
+                            <button type="button" class="btn btn-outline-secondary" onclick="clearSearch()">
+                                <i class="fas fa-times"></i>
+                            </button>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <button type="submit" class="btn btn-primary me-2">
+                            <i class="fas fa-search me-1"></i> Search
+                        </button>
+                        <a href="{{ url_for('admin_doctors') }}" class="btn btn-outline-secondary">
+                            <i class="fas fa-refresh me-1"></i> Reset
+                        </a>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-4 text-end">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown">
+                        <i class="fas fa-filter me-1"></i> Filter
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{{ url_for('admin_doctors') }}">All Doctors</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        {% for dept in departments %}
+                        <li><a class="dropdown-item" href="{{ url_for('admin_doctors') }}?search={{ dept.slug }}">{{
+                                dept.name }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        {% if search_query %}
+        <div class="mt-3">
+            <span class="badge bg-info">
+                Search results for: "{{ search_query }}"
+                <a href="{{ url_for('admin_doctors') }}" class="text-white ms-2">
+                    <i class="fas fa-times"></i>
+                </a>
+            </span>
+            <span class="badge bg-secondary ms-2">{{ doctors|length }} doctors found</span>
+        </div>
+        {% endif %}
+    </div>
+
+    <div class="card">
+        <div class="card-header bg-white d-flex justify-content-between align-items-center">
+            <h5 class="card-title mb-0">
+                <i class="fas fa-list me-2"></i>Doctors List
+                <span class="badge bg-primary ms-2">{{ doctors|length }}</span>
+            </h5>
+            <div class="text-muted">
+                <small><i class="fas fa-arrows-alt me-1"></i> Click and drag anywhere on a row to reorder
+                    (auto-saves)</small>
+            </div>
+        </div>
+        <div class="card-body p-0">
+            {% if doctors %}
+            <div class="table-responsive">
+                <table class="table table-hover table-striped mb-0">
+                    <thead class="table-dark">
+                        <tr>
+                            <th width="60" class="text-center">Order</th>
+                            <th>Doctor</th>
+                            <th>Specialization & Qualification</th>
+                            <th>Department</th>
+                            <th>Availability Status</th>
+                            <th width="200" class="text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="doctorsTableBody">
+                        {% for doctor in doctors %}
+                        <tr class="doctor-card" data-doctor-id="{{ doctor.id }}"
+                            data-order="{{ doctor.display_order or loop.index }}">
+                            <td class="text-center">
+                                <div class="d-flex align-items-center justify-content-center">
+                                    <div class="order-badge">{{ doctor.display_order or loop.index }}</div>
+                                    <i class="fas fa-arrows-alt drag-handle"></i>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    {% if doctor.image_path %}
+                                    <img src="{{ url_for('static', filename=doctor.image_path) }}"
+                                        class="img-preview me-3" alt="{{ doctor.name }}"
+                                        onerror="this.src='{{ url_for('static', filename='img/default-doctor.png') }}'">
+                                    {% else %}
+                                    <div
+                                        class="img-preview bg-light d-flex align-items-center justify-content-center me-3">
+                                        <i class="fas fa-user-md text-muted"></i>
+                                    </div>
+                                    {% endif %}
+                                    <div>
+                                        <div class="fw-bold">{{ doctor.name }}</div>
+                                        <small class="text-muted">{{ doctor.designation or 'No designation' }}</small>
+                                        {% if doctor.experience %}
+                                        <br><small class="text-muted"><i class="fas fa-briefcase me-1"></i>{{
+                                            doctor.experience }}</small>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="fw-semibold text-primary">{{ doctor.specialization }}</div>
+                                {% if doctor.qualification %}
+                                <small class="text-muted">{{ doctor.qualification }}</small>
+                                {% endif %}
+                                {% if doctor.languages %}
+                                <br><small class="text-muted"><i class="fas fa-language me-1"></i>{{ doctor.languages
+                                    }}</small>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <span class="department-badge">{{ doctor.department_slug }}</span>
+                            </td>
+                            <td>
+                                <div class="d-flex align-items-center gap-2">
+                                    {% if doctor.timings %}
+                                    <span class="badge availability-badge availability-scheduled">
+                                        <i class="fas fa-clock me-1"></i>Scheduled
+                                    </span>
+                                    {% else %}
+                                    <span class="badge availability-badge availability-oncall">
+                                        <i class="fas fa-phone me-1"></i>On Call
+                                    </span>
+                                    {% endif %}
+                                </div>
+                                {% if doctor.timings %}
+                                <div class="mt-1">
+                                    <small class="text-muted">
+                                        {% for t in doctor.timings %}
+                                        {% if loop.first %}
+                                        {{ t.days | join(', ') }}: {{ t.from }} {{ t.from_period }}-{{ t.to }} {{
+                                        t.to_period }}
+                                        {% endif %}
+                                        {% endfor %}
+                                        {% if doctor.timings|length > 1 %}
+                                        <br><em>+{{ doctor.timings|length - 1 }} more slot(s)</em>
+                                        {% endif %}
+                                    </small>
+                                </div>
+                                {% endif %}
+                            </td>
+                            <td class="table-actions text-center">
+                                <div class="action-buttons justify-content-center">
+                                    <button class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                                        data-bs-target="#editDoctorModal" data-doctor='{{ doctor | tojson | safe }}'
+                                        title="Edit Doctor">
+                                        <i class="fas fa-edit"></i> Edit
+                                    </button>
+                                    <a href="{{ url_for('delete_doctor', doctor_id=doctor.id) }}"
+                                        class="btn btn-danger btn-sm"
+                                        onclick="return confirm('Are you sure you want to delete Dr. {{ doctor.name }}? This action cannot be undone.');"
+                                        title="Delete Doctor">
+                                        <i class="fas fa-trash"></i> Delete
+                                    </a>
+                                </div>
+                                {% if doctor.appointment_link %}
+                                <div class="mt-1">
+                                    <a href="{{ doctor.appointment_link }}" class="btn btn-success btn-sm w-100"
+                                        target="_blank" title="Book Appointment">
+                                        <i class="fas fa-calendar-check me-1"></i> Book
+                                    </a>
+                                </div>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <div class="text-center py-5">
+                <div class="mb-3">
+                    <i class="fas fa-user-md fa-4x text-muted"></i>
+                </div>
+                <h4 class="text-muted">
+                    {% if search_query %}
+                    No doctors found matching "{{ search_query }}"
+                    {% else %}
+                    No doctors found
+                    {% endif %}
+                </h4>
+                <p class="text-muted mb-4">
+                    {% if search_query %}
+                    Try adjusting your search terms or <a href="{{ url_for('admin_doctors') }}">view all doctors</a>
+                    {% else %}
+                    Get started by adding your first doctor to the system
+                    {% endif %}
+                </p>
+                {% if not search_query %}
+                <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addDoctorModal">
+                    <i class="fas fa-plus-circle me-1"></i> Add First Doctor
+                </button>
+                {% else %}
+                <a href="{{ url_for('admin_doctors') }}" class="btn btn-outline-primary">
+                    <i class="fas fa-refresh me-1"></i> View All Doctors
+                </a>
+                {% endif %}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="addDoctorModal" tabindex="-1">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <form action="{{ url_for('admin_doctors') }}" method="POST" enctype="multipart/form-data"
+                id="addDoctorForm">
+                <input type="hidden" name="form_type" value="add">
+                <div class="modal-header bg-success text-white">
+                    <h5 class="modal-title"><i class="fas fa-plus-circle me-2"></i>Add New Doctor</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row g-3">
+                        <div class="col-12 form-section">
+                            <h6 class="form-section-title"><i class="fas fa-info-circle"></i> Basic Information</h6>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label class="form-label">Name *</label>
+                                    <input type="text" name="name" class="form-control" required
+                                        placeholder="Dr. John Smith">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Specialization *</label>
+                                    <input type="text" name="specialization" class="form-control" required
+                                        placeholder="Cardiology">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label">Department *</label>
+                                    <select name="department_slug" class="form-select" required>
+                                        <option value="">Select Department</option>
+                                        {% for dept in departments %}
+                                        <option value="{{ dept.slug }}">{{ dept.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Designation</label>
+                                    <input type="text" name="designation" class="form-control"
+                                        placeholder="Senior Consultant">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label">Experience</label>
+                                    <input type="text" name="experience" class="form-control" placeholder="15 years">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Qualification</label>
+                                    <input type="text" name="qualification" class="form-control" placeholder="MBBS, MD">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label">Languages</label>
+                                    <input type="text" name="languages" class="form-control"
+                                        placeholder="English, Hindi, Spanish">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Appointment Link</label>
+                                    <input type="url" name="appointment_link" class="form-control"
+                                        placeholder="https://">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label">Slug</label>
+                                    <input type="text" name="slug" class="form-control" placeholder="dr-john-smith">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 form-section">
+                            <h6 class="form-section-title"><i class="fas fa-clock"></i> Availability Schedule</h6>
+                            <button type="button" class="btn btn-sm btn-outline-primary add-timing-btn"
+                                onclick="addTimingEntry('add')">
+                                <i class="fas fa-plus me-1"></i> Add Time Slot
+                            </button>
+                            <div id="add_timings_container">
+                            </div>
+                        </div>
+
+                        <div class="col-12 form-section">
+                            <h6 class="form-section-title"><i class="fas fa-graduation-cap"></i> Professional Details
+                            </h6>
+                            <div class="row">
+                                <div class="col-md-12 mb-3">
+                                    <label class="form-label">Overview</label>
+                                    <div id="add_overview_editor"></div>
+                                    <input type="hidden" name="overview" id="add_overview_input">
+                                </div>
+
+                                <div class="col-md-12">
+                                    <label class="form-label">Field of Expertise</label>
+                                    <textarea name="field_of_expertise" class="form-control textarea-small"
+                                        placeholder="List areas of expertise, one per line&#10;• Cardiac Surgery&#10;• Interventional Cardiology&#10;• Heart Failure Management"></textarea>
+                                    <small class="text-muted">Enter each area of expertise on a new line</small>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <label class="form-label">Fellowship & Membership</label>
+                                    <textarea name="fellowship_membership" class="form-control textarea-small"
+                                        placeholder="List fellowships and memberships, one per line&#10;• Fellow, American College of Cardiology&#10;• Member, European Society of Cardiology&#10;• Fellow, Royal College of Physicians"></textarea>
+                                    <small class="text-muted">Enter each fellowship or membership on a new line</small>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label">Fellowship Links</label>
+                                    <input type="text" name="fellowship_links" class="form-control"
+                                        placeholder="Links to fellowship details">
+                                </div>
+
+                                <div class="col-md-12">
+                                    <label class="form-label">Talks & Publications</label>
+                                    <textarea name="talks_and_publications" class="form-control textarea-medium"
+                                        placeholder="List conference talks, publications, and research, one per line&#10;• 'Advances in Cardiac Care' - International Cardiology Conference 2023&#10;• 'Managing Heart Failure in Elderly Patients' - Journal of Cardiology&#10;• 'Innovations in Interventional Procedures' - National Medical Symposium"></textarea>
+                                    <small class="text-muted">Enter each talk or publication on a new line</small>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label">Talks Links</label>
+                                    <input type="text" name="talks_links" class="form-control"
+                                        placeholder="Links to talks and publications">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 form-section">
+                            <h6 class="form-section-title"><i class="fas fa-user"></i> Profile Information</h6>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label class="form-label">Profile Image</label>
+                                    <input type="file" name="image" class="form-control" accept="image/*"
+                                        onchange="previewImage(this, 'add_image_preview')">
+                                    <img id="add_image_preview" class="img-preview mt-2">
+                                </div>
+
+                                <div class="col-md-12 mb-3">
+                                    <label class="form-label">Bio</label>
+                                    <div id="add_bio_editor"></div>
+                                    <input type="hidden" name="bio" id="add_bio_input">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">
+                        <i class="fas fa-save me-1"></i> Add Doctor
+                    </button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="editDoctorModal" tabindex="-1">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <form action="{{ url_for('admin_doctors') }}" method="POST" enctype="multipart/form-data"
+                id="editDoctorForm">
+                <input type="hidden" name="form_type" value="edit">
+                <input type="hidden" name="doctor_id" id="edit_doctor_id">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title"><i class="fas fa-edit me-2"></i>Edit Doctor</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row g-3">
+                        <div class="col-12 form-section">
+                            <h6 class="form-section-title"><i class="fas fa-info-circle"></i> Basic Information</h6>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label class="form-label">Name *</label>
+                                    <input type="text" name="name" id="edit_name" class="form-control" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Specialization *</label>
+                                    <input type="text" name="specialization" id="edit_specialization"
+                                        class="form-control" required>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label">Department *</label>
+                                    <select name="department_slug" id="edit_department_slug" class="form-select"
+                                        required>
+                                        <option value="">Select Department</option>
+                                        {% for dept in departments %}
+                                        <option value="{{ dept.slug }}">{{ dept.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Designation</label>
+                                    <input type="text" name="designation" id="edit_designation" class="form-control">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label">Experience</label>
+                                    <input type="text" name="experience" id="edit_experience" class="form-control">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Qualification</label>
+                                    <input type="text" name="qualification" id="edit_qualification"
+                                        class="form-control">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label">Languages</label>
+                                    <input type="text" name="languages" id="edit_languages" class="form-control">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Appointment Link</label>
+                                    <input type="url" name="appointment_link" id="edit_appointment_link"
+                                        class="form-control">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label">Slug</label>
+                                    <input type="text" name="slug" id="edit_slug" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 form-section">
+                            <h6 class="form-section-title"><i class="fas fa-clock"></i> Availability Schedule</h6>
+                            <button type="button" class="btn btn-sm btn-outline-primary add-timing-btn"
+                                onclick="addTimingEntry('edit')">
+                                <i class="fas fa-plus me-1"></i> Add Time Slot
+                            </button>
+                            <div id="edit_timings_container">
+                            </div>
+                        </div>
+
+                        <div class="col-12 form-section">
+                            <h6 class="form-section-title"><i class="fas fa-graduation-cap"></i> Professional Details
+                            </h6>
+                            <div class="row">
+                                <div class="col-md-12 mb-3">
+                                    <label class="form-label">Overview</label>
+                                    <div id="edit_overview_editor"></div>
+                                    <input type="hidden" name="overview" id="edit_overview_input">
+                                </div>
+
+                                <div class="col-md-12">
+                                    <label class="form-label">Field of Expertise</label>
+                                    <textarea name="field_of_expertise" id="edit_field_of_expertise"
+                                        class="form-control textarea-small"
+                                        placeholder="List areas of expertise, one per line"></textarea>
+                                    <small class="text-muted">Enter each area of expertise on a new line</small>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <label class="form-label">Fellowship & Membership</label>
+                                    <textarea name="fellowship_membership" id="edit_fellowship_membership"
+                                        class="form-control textarea-small"
+                                        placeholder="List fellowships and memberships, one per line"></textarea>
+                                    <small class="text-muted">Enter each fellowship or membership on a new line</small>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label">Fellowship Links</label>
+                                    <input type="text" name="fellowship_links" id="edit_fellowship_links"
+                                        class="form-control">
+                                </div>
+
+                                <div class="col-md-12">
+                                    <label class="form-label">Talks & Publications</label>
+                                    <textarea name="talks_and_publications" id="edit_talks_and_publications"
+                                        class="form-control textarea-medium"
+                                        placeholder="List conference talks, publications, and research, one per line"></textarea>
+                                    <small class="text-muted">Enter each talk or publication on a new line</small>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label">Talks Links</label>
+                                    <input type="text" name="talks_links" id="edit_talks_links" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 form-section">
+                            <h6 class="form-section-title"><i class="fas fa-user"></i> Profile Information</h6>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label class="form-label">Profile Image</label>
+                                    <input type="file" name="image" class="form-control" accept="image/*"
+                                        onchange="previewImage(this, 'edit_image_preview')">
+                                    <img id="edit_image_preview" class="img-preview mt-2">
+                                </div>
+
+                                <div class="col-md-12 mb-3">
+                                    <label class="form-label">Bio</label>
+                                    <div id="edit_bio_editor"></div>
+                                    <input type="hidden" name="bio" id="edit_bio_input">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save me-1"></i> Save Changes
+                    </button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+
+<script>
+    // ===============================================
+    // 1. QUILL RICH TEXT EDITOR INITIALIZATION
+    // ===============================================
+
+    // Configuration module for all editors
+    const quillConfig = {
+        theme: 'snow',
+        modules: {
+            toolbar: [
+                [{ 'header': [1, 2, 3, false] }],
+                ['bold', 'italic', 'underline', 'strike'],
+                [{ 'color': [] }, { 'background': [] }],
+                [{ 'align': [] }],
+                [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+                ['blockquote', 'code-block'],
+                ['link', 'image'], // Link support enabled
+                ['clean']
+            ]
+        }
+    };
+
+    // Initialize Add Modal Editors
+    var addOverviewQuill = new Quill('#add_overview_editor', quillConfig);
+    var addBioQuill = new Quill('#add_bio_editor', quillConfig);
+
+    // Initialize Edit Modal Editors
+    var editOverviewQuill = new Quill('#edit_overview_editor', quillConfig);
+    var editBioQuill = new Quill('#edit_bio_editor', quillConfig);
+
+
+    // ===============================================
+    // 2. EXISTING FUNCTIONALITY (TIMINGS, ETC)
+    // ===============================================
+
+    // Generate time options
+    function generateTimeOptions(selectedValue = '00') {
+        const times = ['00', '15', '30', '45'];
+        return times.map(time =>
+            `<option value="${time}" ${time === selectedValue ? 'selected' : ''}>${time}</option>`
+        ).join('');
+    }
+
+    // Generate hour options
+    function generateHourOptions(selectedValue = '9') {
+        let options = '';
+        for (let i = 1; i <= 12; i++) {
+            options += `<option value="${i}" ${i == selectedValue ? 'selected' : ''}>${i}</option>`;
+        }
+        return options;
+    }
+
+    function createTimingEntry(prefix, index, timingData = null) {
+        const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun', 'On Call'];
+        const daysHtml = days.map(day => {
+            const checked = timingData && timingData.days && timingData.days.includes(day) ? 'checked' : '';
+            return `<label class="me-2 mb-1"><input type="checkbox" name="days[${index}][]" value="${day}" ${checked}> ${day}</label>`;
+        }).join('');
+
+        return `
+        <div class="timing-entry" data-index="${index}">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <div class="timing-days mb-3">
+                        ${daysHtml}
+                    </div>
+                    <div class="timing-row align-items-center">
+                        <label class="me-2 fw-semibold">Time:</label>
+                        <select name="time_from_hour[]" class="form-select form-select-sm time-select">
+                            ${generateHourOptions(timingData ? timingData.from_hour : '9')}
+                        </select>
+                        <span class="time-separator">:</span>
+                        <select name="time_from_minute[]" class="form-select form-select-sm time-select">
+                            ${generateTimeOptions(timingData ? timingData.from_minute : '00')}
+                        </select>
+                        <select name="time_from_period[]" class="form-select form-select-sm time-select">
+                            <option value="AM" ${timingData && timingData.from_period === 'AM' ? 'selected' : 'selected'}>AM</option>
+                            <option value="PM" ${timingData && timingData.from_period === 'PM' ? 'selected' : ''}>PM</option>
+                        </select>
+                        
+                        <span class="time-separator">to</span>
+                        
+                        <select name="time_to_hour[]" class="form-select form-select-sm time-select">
+                            ${generateHourOptions(timingData ? timingData.to_hour : '5')}
+                        </select>
+                        <span class="time-separator">:</span>
+                        <select name="time_to_minute[]" class="form-select form-select-sm time-select">
+                            ${generateTimeOptions(timingData ? timingData.to_minute : '00')}
+                        </select>
+                        <select name="time_to_period[]" class="form-select form-select-sm time-select">
+                            <option value="AM" ${timingData && timingData.to_period === 'AM' ? 'selected' : ''}>AM</option>
+                            <option value="PM" ${timingData && timingData.to_period === 'PM' ? 'selected' : 'selected'}>PM</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4 text-end">
+                    <button type="button" class="btn btn-sm btn-outline-danger remove-timing" onclick="removeTimingEntry('${prefix}', ${index})">
+                        <i class="fas fa-times me-1"></i> Remove Slot
+                    </button>
+                </div>
+            </div>
+        </div>`;
+    }
+
+    function addTimingEntry(prefix) {
+        const container = document.getElementById(`${prefix}_timings_container`);
+        const index = container.children.length;
+        container.insertAdjacentHTML('beforeend', createTimingEntry(prefix, index));
+    }
+
+    function removeTimingEntry(prefix, index) {
+        const container = document.getElementById(`${prefix}_timings_container`);
+        const entry = container.querySelector(`[data-index="${index}"]`);
+        if (entry) {
+            entry.remove();
+        }
+        // Reindex remaining entries
+        const entries = container.querySelectorAll('.timing-entry');
+        entries.forEach((entry, newIndex) => {
+            entry.setAttribute('data-index', newIndex);
+            // Update all input names with new index
+            const inputs = entry.querySelectorAll('input, select');
+            inputs.forEach(input => {
+                if (input.name.includes('[]')) {
+                    const baseName = input.name.split('[')[0];
+                    if (input.type === 'checkbox') {
+                        input.name = `days[${newIndex}][]`;
+                    } else {
+                        input.name = `${baseName}[]`;
+                    }
+                }
+            });
+        });
+    }
+
+    function previewImage(input, previewId) {
+        const file = input.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                document.getElementById(previewId).src = e.target.result;
+            }
+            reader.readAsDataURL(file);
+        }
+    }
+
+    function clearSearch() {
+        document.getElementById('searchInput').value = '';
+        window.location.href = "{{ url_for('admin_doctors') }}";
+    }
+
+    // Auto-save functions
+    function showAutoSaveMessage(message, isSuccess = true) {
+        const indicator = document.getElementById('autoSaveIndicator');
+        const messageEl = document.getElementById('autoSaveMessage');
+
+        indicator.className = `auto-save-indicator ${isSuccess ? 'auto-save-success' : 'auto-save-error'}`;
+        messageEl.textContent = message;
+        indicator.style.display = 'block';
+
+        setTimeout(() => {
+            indicator.style.display = 'none';
+        }, 3000);
+    }
+
+    async function saveDoctorOrder() {
+        const tableBody = document.getElementById('doctorsTableBody');
+        const rows = tableBody.querySelectorAll('tr');
+        const orderData = [];
+
+        rows.forEach((row, index) => {
+            const doctorId = row.getAttribute('data-doctor-id');
+            const orderBadge = row.querySelector('.order-badge');
+
+            if (doctorId && orderBadge) {
+                // Update the order badge
+                orderBadge.textContent = index + 1;
+
+                orderData.push({
+                    id: parseInt(doctorId),
+                    display_order: index + 1
+                });
+            }
+        });
+
+        try {
+            const response = await fetch("{{ url_for('update_doctors_orders') }}", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ order: orderData })
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                showAutoSaveMessage('Doctors order updated successfully!');
+            } else {
+                showAutoSaveMessage(result.message || 'Error updating order', false);
+            }
+        } catch (error) {
+            console.error('Error saving order:', error);
+            showAutoSaveMessage('Error saving order. Please try again.', false);
+        }
+    }
+
+    // Initialize drag and drop
+    function initializeDragAndDrop() {
+        const tableBody = document.getElementById('doctorsTableBody');
+
+        if (tableBody) {
+            new Sortable(tableBody, {
+                // Remove the handle option to make entire row draggable
+                // handle: '.drag-handle',
+                ghostClass: 'sortable-ghost',
+                chosenClass: 'sortable-chosen',
+                dragClass: 'sortable-drag',
+                animation: 150,
+                onEnd: function (evt) {
+                    saveDoctorOrder();
+                },
+                // Prevent dragging from action buttons and links
+                filter: '.action-buttons, .action-buttons *, a, button, input, select, textarea',
+                onMove: function (evt) {
+                    // Prevent dragging if the target is an action button or form element
+                    if (evt.related.classList.contains('action-buttons') ||
+                        evt.related.tagName === 'BUTTON' ||
+                        evt.related.tagName === 'A' ||
+                        evt.related.tagName === 'INPUT' ||
+                        evt.related.tagName === 'SELECT' ||
+                        evt.related.tagName === 'TEXTAREA') {
+                        return false;
+                    }
+                    return true;
+                }
+            });
+        }
+    }
+
+    // ===============================================
+    // 3. FORM HANDLERS AND MODAL EVENTS
+    // ===============================================
+
+    // Load doctor data in Edit modal
+    const editModal = document.getElementById('editDoctorModal');
+    editModal.addEventListener('show.bs.modal', function (event) {
+        const button = event.relatedTarget;
+        const doctor = JSON.parse(button.getAttribute('data-doctor'));
+
+        // Populate basic fields
+        document.getElementById('edit_doctor_id').value = doctor.id;
+        document.getElementById('edit_name').value = doctor.name || '';
+        document.getElementById('edit_specialization').value = doctor.specialization || '';
+        document.getElementById('edit_department_slug').value = doctor.department_slug || '';
+        document.getElementById('edit_designation').value = doctor.designation || '';
+        document.getElementById('edit_experience').value = doctor.experience || '';
+        document.getElementById('edit_qualification').value = doctor.qualification || '';
+        document.getElementById('edit_languages').value = doctor.languages || '';
+        document.getElementById('edit_appointment_link').value = doctor.appointment_link || '';
+        document.getElementById('edit_slug').value = doctor.slug || '';
+
+        // Populate professional details
+        // Note: Overview and Bio are now populated into Quill below
+        document.getElementById('edit_field_of_expertise').value = doctor.field_of_expertise || '';
+        document.getElementById('edit_fellowship_membership').value = doctor.fellowship_membership || '';
+        document.getElementById('edit_fellowship_links').value = doctor.fellowship_links || '';
+        document.getElementById('edit_talks_and_publications').value = doctor.talks_and_publications || '';
+        document.getElementById('edit_talks_links').value = doctor.talks_links || '';
+
+        // Populate Quill Editors
+        if (doctor.overview) {
+            editOverviewQuill.root.innerHTML = doctor.overview;
+        } else {
+            editOverviewQuill.root.innerHTML = '';
+        }
+
+        if (doctor.bio) {
+            editBioQuill.root.innerHTML = doctor.bio;
+        } else {
+            editBioQuill.root.innerHTML = '';
+        }
+
+        // Populate image preview
+        if (doctor.image_path) {
+            document.getElementById('edit_image_preview').src = '/static/' + doctor.image_path;
+        }
+
+        // Clear and populate timings
+        const container = document.getElementById('edit_timings_container');
+        container.innerHTML = '';
+
+        if (doctor.timings && doctor.timings.length > 0) {
+            doctor.timings.forEach((timing, index) => {
+                container.insertAdjacentHTML('beforeend', createTimingEntry('edit', index, timing));
+            });
+        } else {
+            // Add one empty timing entry
+            addTimingEntry('edit');
+        }
+    });
+
+    // Initialize add modal
+    document.getElementById('addDoctorModal').addEventListener('show.bs.modal', function () {
+        const container = document.getElementById('add_timings_container');
+        container.innerHTML = '';
+        addTimingEntry('add');
+
+        // Clear Quill Editors
+        addOverviewQuill.root.innerHTML = '';
+        addBioQuill.root.innerHTML = '';
+    });
+
+    // Form Submission: Add Doctor
+    document.getElementById('addDoctorForm').addEventListener('submit', function (e) {
+        // Copy Quill content to hidden inputs
+        document.getElementById('add_overview_input').value = addOverviewQuill.root.innerHTML;
+        document.getElementById('add_bio_input').value = addBioQuill.root.innerHTML;
+    });
+
+    // Form Submission: Edit Doctor
+    document.getElementById('editDoctorForm').addEventListener('submit', function (e) {
+        // Copy Quill content to hidden inputs
+        document.getElementById('edit_overview_input').value = editOverviewQuill.root.innerHTML;
+        document.getElementById('edit_bio_input').value = editBioQuill.root.innerHTML;
+    });
+
+
+    // Initialize when page loads
+    document.addEventListener('DOMContentLoaded', function () {
+        // Add one timing entry to add modal if it's empty
+        const addContainer = document.getElementById('add_timings_container');
+        if (addContainer && addContainer.children.length === 0) {
+            addTimingEntry('add');
+        }
+
+        // Initialize drag and drop
+        initializeDragAndDrop();
+    });
+</script>
+
+{% endblock %}

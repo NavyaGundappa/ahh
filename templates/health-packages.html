@@ -1,0 +1,318 @@
+{% extends "base.html" %}
+
+{% block title %} Health Packages - Aarogya Hastha{% endblock %}
+
+{% block content %}
+
+{% block head %}
+{{ super() }}
+<meta name="author" content="Aarogyahastha Pvt Ltd">
+<meta name="designer" content="Aarogyahastha Pvt Ltd">
+<meta name="publisher" content="Aarogyahastha Pvt Ltd">
+<link rel="canonical" href="https://aarogyahastha.com/health-packages">
+<meta name="no-email-collection" content="http://www.unspam.com/noemailcollection/">
+<meta name="robots" content="index,follow">
+<meta name="revisit-after" content="7 days">
+<meta name="distribution" content="web">
+<meta name="robots" content="noodp">
+<meta name="web_author" content="Aarogyahastha Pvt Ltd">
+<meta name="rating" content="general">
+<meta name="rating" content="safe for kids">
+<meta name="subject" content="Healthcare">
+<meta name="copyright" content="Copyright © 2025">
+<meta name="reply-to" content="info@aarogyahastha.com">
+<meta name="abstract"
+  content="We provide timely and specialized medical attention for patients experiencing life-threatening conditions, ensuring their urgent needs are met with the highest level of care.">
+<meta name="city" content="Bangalore">
+<meta name="country" content="India">
+<meta name="distribution" content="global">
+<meta name="classification" content="Healthcare, Hospital">
+<base href="/">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+{% endblock %}
+<style>
+  .breadcrumb-section {
+    padding: 10px 0;
+    background-color: #f8f9fa;
+  }
+
+  .breadcrumb {
+    margin-bottom: 0;
+    padding: 0.75rem 1rem;
+  }
+
+  .breadcrumb-item+.breadcrumb-item::before {
+    content: ">>";
+    padding: 0 0.5rem;
+  }
+
+  .breadcrumb-item a {
+    color: #007bff;
+    text-decoration: none;
+  }
+
+  .breadcrumb-item.active {
+    color: #6c757d;
+  }
+
+  /* Callback Modal */
+  .callback-modal {
+    display: none;
+    position: fixed;
+    z-index: 1050;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    background-color: rgba(0, 0, 0, 0.6);
+    font-family: 'Arial', sans-serif;
+    animation: fadeIn 0.3s forwards;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
+  .callback-modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 20px 25px;
+    max-width: 420px;
+    position: relative;
+    box-shadow: 0 8px 25px rgba(66, 64, 64, 0.2);
+
+    transform: scale(0.95);
+    animation: slideUp 0.3s forwards;
+    font-size: 14px;
+  }
+
+  @keyframes slideUp {
+    from {
+      transform: translateY(20px) scale(0.95);
+      opacity: 0;
+    }
+
+    to {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+    }
+  }
+
+  .close-btn {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    font-size: 28px;
+    font-weight: 300;
+    color: #999;
+    cursor: pointer;
+    transition: color 0.2s ease-in-out;
+  }
+
+  .close-btn:hover {
+    color: #333;
+  }
+
+  /* Centered header with logo and package name below */
+  .callback-modal-header {
+    text-align: center;
+    margin-bottom: 25px;
+  }
+
+  .callback-modal-header img {
+    height: 40px;
+    width: auto;
+    display: block;
+    margin: 0 auto;
+  }
+
+  .callback-modal-header .package-name {
+    font-size: 16px;
+    font-weight: 700;
+    /* bold */
+    color: #000;
+    /* black color */
+    margin-top: 12px;
+    /* moved a bit lower */
+    letter-spacing: 0.5px;
+  }
+
+  .callback-modal .form-group {
+    margin-bottom: 15px;
+  }
+
+  .callback-modal label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
+    color: #555;
+    font-size: 13px;
+  }
+
+  .callback-modal input.form-control {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+
+    font-size: 14px;
+    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  }
+
+  .callback-modal input.form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 6px rgba(0, 123, 255, 0.2);
+    outline: none;
+  }
+
+  .callback-modal button.btn-primary {
+    width: 50%;
+    padding: 8px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+
+    display: block;
+    margin: 0 auto;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+  }
+
+  .callback-modal button.btn-primary:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+  }
+</style>
+<section class="breadcrumb-section">
+  <div class="container">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb" itemscope itemtype="http://schema.org/BreadcrumbList">
+        <li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+          <a itemprop="item" href="/">
+            <span itemprop="name">Home</span>
+          </a>
+          <meta itemprop="position" content="1">
+        </li>
+        <li class="breadcrumb-item active" aria-current="page" itemprop="itemListElement" itemscope
+          itemtype="http://schema.org/ListItem">
+          <span itemprop="name">Health Packages</span>
+          <meta itemprop="position" content="2">
+        </li>
+      </ol>
+    </nav>
+  </div>
+</section>
+
+
+<div class="health-packages-container">
+  {% for package in packages %}
+  <div class="health-package-card">
+    <a href="#" class="package-link" onclick="openCallbackForm(event, '{{ package.title }}')">
+      <div class="package-header">
+        <h2>{{ package.title }}</h2>
+        {% if package.is_best_value %}
+        <div class="best-value-tag">BEST VALUE</div>
+        {% endif %}
+      </div>
+
+      <div class="package-content">
+        <div class="tests-columns">
+          {% set tests_list = package.tests.split(',') %}
+          {% set mid_point = (tests_list|length / 2)|round|int %}
+          <div class="tests-column">
+            {% for test in tests_list[:mid_point] %}
+            <div class="test-item">{{ test }}</div>
+            {% endfor %}
+          </div>
+          <div class="tests-column">
+            {% for test in tests_list[mid_point:] %}
+            <div class="test-item">{{ test }}</div>
+            {% endfor %}
+          </div>
+        </div>
+        <div class="price-section">
+          <div class="original-price">Usual Price: <span>₹ {{ package.original_price }}</span></div>
+          <div class="offer-price">Offer Price: ₹ {{ package.offer_price }}</div>
+          {% if package.discount_percentage %}
+          <div class="discount-badge">{{ package.discount_percentage|round }}% OFF</div>
+          {% endif %}
+        </div>
+      </div>
+    </a>
+  </div>
+  {% endfor %}
+
+  <!-- Callback Form Modal -->
+  <div id="callbackFormModal" class="callback-modal">
+    <div class="callback-modal-content">
+      <span class="close-btn" onclick="closeCallbackForm()">&times;</span>
+      <div class="callback-modal-header">
+        <img src="/static/img/logo.png" alt="Aarogya Hastha Logo">
+        <div class="package-name" id="packageNameDisplay"></div>
+      </div>
+      <form id="callbackForm">
+        <div class="form-group">
+          <label for="userName">Name</label>
+          <input type="text" id="userName" name="name" required class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="userPhone">Phone Number</label>
+          <input type="tel" id="userPhone" name="phone" required class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary">Call Back</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+  function openCallbackForm(event, packageTitle) {
+    event.preventDefault();
+    document.getElementById('packageNameDisplay').innerText = packageTitle;
+    document.getElementById('callbackFormModal').style.display = 'block';
+  }
+
+  function closeCallbackForm() {
+    document.getElementById('callbackFormModal').style.display = 'none';
+  }
+
+  window.onclick = function (event) {
+    const modal = document.getElementById('callbackFormModal');
+    if (event.target === modal) closeCallbackForm();
+  }
+
+  document.getElementById('callbackForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    const name = document.getElementById('userName').value;
+    const phone = document.getElementById('userPhone').value;
+    const packageName = document.getElementById('packageNameDisplay').innerText;
+
+    fetch('/request_callback', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, phone, package_name: packageName })
+    })
+      .then(res => res.json())
+      .then(data => {
+        alert(data.message);
+        if (data.status === 'success') {
+          closeCallbackForm();
+          document.getElementById('callbackForm').reset();
+        }
+      })
+      .catch(err => { console.error(err); alert('Something went wrong.'); });
+  });
+</script>
+
+{% endblock %}

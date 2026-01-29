@@ -1,0 +1,259 @@
+{% extends "base.html" %}
+
+{% block title %}Specialised Medical Departments | Aarogya Hastha Hospitals.{% endblock %}
+
+{% block content %}
+
+<head>
+    <meta charset="utf-8">
+    <meta name="language" content="english">
+    <meta http-equiv="content-type" content="text/html">
+    <meta name="format-detection" content="telephone=yes">
+    <meta name="HandheldFriendly" content="true">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Aarogyahastha Pvt Ltd">
+    <meta name="designer" content="Aarogyahastha Pvt Ltd">
+    <meta name="publisher" content="Aarogyahastha Pvt Ltd">
+    <meta name="no-email-collection" content="http://www.unspam.com/noemailcollection/">
+    <link rel="icon" type="image/x-icon" href="/static/img/fav.png">
+    <meta name="robots" content="index,follow">
+    <meta name="revisit-after" content="7 days">
+    <meta name="distribution" content="web">
+    <meta name="robots" content="noodp">
+    <meta name="distribution" content="web">
+    <meta name="web_author" content="Aarogyahastha Pvt Ltd">
+    <meta name="rating" content="general">
+    <meta name="rating" content="safe for kids">
+    <meta name="subject" content="Healthcare">
+    <meta name="copyright" content="Copyright © 2025">
+    <meta name="reply-to" content="info@aarogyahastha.com">
+    <meta name="abstract"
+        content="We provide timely and specialized medical attention for patients experiencing life-threatening conditions, ensuring their urgent needs are met with the highest level of care.">
+    <meta name="city" content="Bangalore">
+    <meta name="country" content="India">
+    <meta name="distribution" content="global">
+    <meta name="classification" content="Healthcare, Hospital ">
+    <base href="/">
+    <meta name="description"
+        content="Aarogya Hastha Hospitals offers diverse healthcare departments with expert doctors, modern technology, and compassionate care—designed to keep you and your family healthy.">
+    <meta name="keywords" content="">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="canonical" href="https://aarogyahastha.com/departments/">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-84XCMMFTS8"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-84XCMMFTS8');
+    </script>
+    <script>(function (w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-TD2L5G6C');</script>
+
+</head>
+<style>
+    .breadcrumb-section {
+        padding: 10px 0;
+        background-color: #f8f9fa;
+    }
+
+    .breadcrumb {
+        margin-bottom: 0;
+        padding: 0.75rem 1rem;
+    }
+
+    .breadcrumb-item+.breadcrumb-item::before {
+        content: ">>";
+        padding: 0 0.5rem;
+    }
+
+    .breadcrumb-item a {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+    .breadcrumb-item.active {
+        color: #6c757d;
+    }
+</style>
+
+<section class="breadcrumb-section">
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb" itemscope itemtype="http://schema.org/BreadcrumbList">
+                <li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                    <a itemprop="item" href="/">
+                        <span itemprop="name">Home</span>
+                    </a>
+                    <meta itemprop="position" content="1">
+                </li>
+                <li class="breadcrumb-item active" aria-current="page" itemprop="itemListElement" itemscope
+                    itemtype="http://schema.org/ListItem">
+                    <span itemprop="name">Departments</span>
+                    <meta itemprop="position" content="2">
+                </li>
+            </ol>
+        </nav>
+    </div>
+</section>
+
+<section class="department-banner" data-aos="fade-up" data-aos-offset="300" data-aos-easing="ease-in-sine">
+    <div class="container">
+        <div class="banner">
+            <img loading="lazy" src="/static/img/department/departments.jpg" alt="">
+            <div class="text-box-1">
+                <h1>Departments</h1>
+                <p>Aarogya Hastha Hospitals is dedicated to providing expert medical care across a wide range of
+                    specialities and promoting overall health and wellness.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="department-section section py-3">
+    <div class="container">
+        <h2 class="text-center py-2 pt-5">Departments</h2>
+        <div class="department-grid">
+            {% for dept in departments %}
+
+            {# Check if an icon path exists before using it #}
+            {% if dept.icon_path %}
+            <a href="{{ url_for('department_page', slug=dept.slug) }}" class="item"
+                style="--i:url('{{ url_for('static', filename=dept.icon_path) }}');" data-department="{{ dept.slug }}">
+
+                <img class="dept-icon" loading="lazy" src="{{ url_for('static', filename=dept.icon_path) }}"
+                    alt="{{ dept.name }}">
+
+                <div class="icon"></div>
+
+                <h4 class="text-dark-blue my-md-3">{{ dept.name }}</h4>
+            </a>
+            {% else %}
+            {# Fallback for departments without an icon #}
+            <a href="{{ url_for('department_page', slug=dept.slug) }}" class="item" data-department="{{ dept.slug }}">
+
+                <img class="dept-icon" loading="lazy" src="{{ url_for('static', filename='img/default-icon.png') }}"
+                    alt="{{ dept.name }}">
+
+                <div class="icon"></div>
+
+                <h4 class="text-dark-blue my-md-3">{{ dept.name }}</h4>
+            </a>
+            {% endif %}
+
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<div id="chrome-popup" class="chrome-popup" aria-hidden="true">
+    <div class="chrome-popup__content">
+        <p class="chrome-popup__title">Open WhatsApp?</p>
+        <p class="chrome-popup__url">https://api.whatsapp.com wants to open this application.</p>
+        <label class="chrome-popup__checkbox">
+            <input type="checkbox"> Always allow api.whatsapp.com to open links of this type in the associated app
+        </label>
+    </div>
+    <div class="chrome-popup__actions">
+        <a href="whatsapp://send?phone=919036092727" class="chrome-btn chrome-btn--blue">Open with App</a>
+        <a href="https://web.whatsapp.com/send?phone=9036092727" target="_blank"
+            class="chrome-btn chrome-btn--green">Open with Web</a>
+        <button class="chrome-btn chrome-btn--grey" onclick="hideChromePopup()">Cancel</button>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="static/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="static/js/script.js"></script>
+
+<a href="#" id="scrollToTopBtn" class="scroll-to-top-btn" title="Scroll to top" aria-label="Scroll to top">
+    <i class="fa fa-arrow-up"></i>
+</a>
+
+<script>
+    $(".book-apt").on('click', function () {
+        var url = $(this).data("url");
+        window.open(url, '_blank');
+    });
+
+    function showChromePopup() {
+        const popup = document.getElementById("chrome-popup");
+        popup.classList.add("is-visible");
+        popup.setAttribute("aria-hidden", "false");
+    }
+
+    function hideChromePopup() {
+        const popup = document.getElementById("chrome-popup");
+        popup.classList.remove("is-visible");
+        popup.setAttribute("aria-hidden", "true");
+    }
+
+    // ESC closes popup
+    document.addEventListener("keydown", e => {
+        if (e.key === "Escape") hideChromePopup();
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const scrollBtn = document.getElementById('scrollToTopBtn');
+        const scrollThreshold = 300;
+
+        function toggleScrollButton() {
+            if (window.pageYOffset > scrollThreshold ||
+                document.documentElement.scrollTop > scrollThreshold) {
+                scrollBtn.style.display = 'flex';
+            } else {
+                scrollBtn.style.display = 'none';
+            }
+        }
+
+        window.addEventListener('scroll', toggleScrollButton);
+
+        scrollBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+            // Add slight animation to the icon
+            this.querySelector('i').style.transform = 'translateY(-4px)';
+            setTimeout(() => {
+                this.querySelector('i').style.transform = '';
+            }, 300);
+        });
+
+        // Initialize on load
+        toggleScrollButton();
+    });
+
+    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+    const mobileNav = document.getElementById('mobile-nav');
+
+    mobileMenuToggle.addEventListener('click', function () {
+        mobileNav.classList.toggle('active');
+    });
+
+
+
+
+
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        AOS.init({
+            once: false, // animations will re-run
+            mirror: true // animate out when scrolling back
+        });
+    });
+</script>
+
+
+
+{% endblock %}

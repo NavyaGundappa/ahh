@@ -1,0 +1,530 @@
+{% extends "base.html" %}
+
+{% block title %}Terms and Packages - Aarogya Hastha{% endblock %}
+
+{% block content %}
+
+{% block head %}
+{{ super() }}
+<meta name="description"
+    content="Discover the best hospitals in Bangalore, India. Find expert care, advanced facilities & trusted doctors near you. Visit Aarogya Hastha Hospitals today!">
+<meta name="keywords"
+    content="hospital Bangalore, multi-speciality hospital, healthcare India, medical facilities, expert doctors">
+<meta name="author" content="Aarogyahastha Pvt Ltd">
+<meta name="designer" content="Aarogyahastha Pvt Ltd">
+<link rel="canonical" href="https://aarogyahastha.com/terms-and-conditions">
+<meta name="no-email-collection" content="http://www.unspam.com/noemailcollection/">
+<meta name="google-site-verification" content="T3QqCQjcJP8HqwIYaCHz3AZHCSXJDF-NJfE8GNiSb-Q">
+<meta name="robots" content="index,follow">
+<meta name="subject" content="Healthcare">
+<meta name="copyright" content="Copyright © 2025">
+<meta name="reply-to" content="info@aarogyahastha.com">
+<meta name="abstract"
+    content="We provide timely and specialized medical attention for patients experiencing life-threatening conditions, ensuring their urgent needs are met with the highest level of care.">
+<meta name="city" content="Bangalore">
+<meta name="country" content="India">
+<meta name="classification" content="Healthcare, Hospital">
+<base href="/">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+{% endblock %}
+<link rel="stylesheet" href="/static/css/bootstrap.min.css">
+<link rel="stylesheet" href="/static/css/style.css">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-84XCMMFTS8"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-84XCMMFTS8');
+</script>
+<script>(function (w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-TD2L5G6C');</script>
+
+</head>
+<style>
+    /* --- START: New & Improved Styles --- */
+
+    :root {
+        --ah-primary: #0056b3;
+        /* A deeper, more professional blue */
+        --ah-secondary: #007bff;
+        /* Original blue, for accents */
+        --ah-text: #333;
+        --ah-text-light: #555;
+        --ah-bg: #ffffff;
+        --ah-bg-light: #f8f9fa;
+        --ah-border: #dee2e6;
+    }
+
+    /* --- Breadcrumbs --- */
+    .breadcrumb-section {
+        padding: 10px 0;
+        background-color: var(--ah-bg-light);
+        border-bottom: 1px solid var(--ah-border);
+    }
+
+    .breadcrumb {
+        margin-bottom: 0;
+        padding: 0.75rem 1rem;
+    }
+
+    .breadcrumb-item+.breadcrumb-item::before {
+        content: "›";
+        /* More elegant separator */
+        padding: 0 0.6rem;
+        color: #6c757d;
+    }
+
+    .breadcrumb-item a {
+        color: var(--ah-primary);
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+    .breadcrumb-item.active {
+        color: #6c757d;
+        font-weight: 500;
+    }
+
+    /* --- Banner --- */
+    .department-banner {
+        position: relative;
+        color: #fff;
+    }
+
+    .department-banner .banner {
+        position: relative;
+        overflow: hidden;
+        border-radius: 8px;
+        /* Soften the edges */
+    }
+
+    .department-banner .banner img {
+        width: 100%;
+        display: block;
+        object-fit: cover;
+        max-height: 350px;
+        /* Constrain banner height */
+    }
+
+    /* Gradient overlay for text readability */
+    .department-banner .banner::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(90deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.2) 100%);
+        z-index: 1;
+    }
+
+    .department-banner .text-box-1 {
+        position: absolute;
+        bottom: 2rem;
+        left: 2rem;
+        z-index: 2;
+        /* Above the overlay */
+    }
+
+    .department-banner .text-box-1 h1 {
+        font-size: 2.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: #fff;
+        line-height: 1.2;
+        margin-bottom: 0;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+    }
+
+    /* --- Content Typography --- */
+    .contact-details {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        font-size: 1rem;
+        line-height: 1.7;
+        /* Increased for readability */
+        color: var(--ah-text-light);
+    }
+
+    .contact-details p {
+        margin-bottom: 1.5rem;
+    }
+
+    /* Make the intro paragraph stand out */
+    .contact-details>div>div>p:nth-of-type(1) {
+        font-size: 1.1rem;
+        color: var(--ah-text);
+        font-weight: 500;
+    }
+
+    .contact-details h2 {
+        font-size: 1.75rem;
+        font-weight: 600;
+        color: var(--ah-text);
+        margin-bottom: 0.75rem;
+        line-height: 1.3;
+    }
+
+    .contact-details h3 {
+        font-size: 1.4rem;
+        /* Sized for sub-headings */
+        font-weight: 600;
+        color: var(--ah-text);
+        margin-top: 2rem;
+        /* Replaces .mt-4 */
+        margin-bottom: 0.75rem;
+    }
+
+    .contact-details strong {
+        font-weight: 600;
+        color: var(--ah-text);
+    }
+
+    .contact-details a {
+        color: var(--ah-primary);
+        text-decoration: none;
+    }
+
+    .contact-details a:hover {
+        text-decoration: underline;
+    }
+
+    /* --- Numbered List Styling (Modern) --- */
+    .contact-details ol.big-marker {
+        list-style-type: none;
+        /* REMOVED DOUBLE NUMBER */
+        counter-reset: policy-section;
+        padding-left: 0;
+        margin-top: 2.5rem;
+    }
+
+    .contact-details ol.big-marker>li {
+        counter-increment: policy-section;
+        position: relative;
+        padding-left: 3rem;
+        /* ADJUSTED PADDING FOR SMALLER NUMBER BLOCK */
+        margin-bottom: 2.5rem;
+        /* Space between main points */
+    }
+
+    /* The styled number block */
+    .contact-details ol.big-marker>li::before {
+        content: counter(policy-section);
+        /* Just the number */
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 2.5rem;
+        /* REDUCED SIZE */
+        height: 2.5rem;
+        /* REDUCED SIZE */
+        line-height: 2.5rem;
+        /* REDUCED SIZE */
+        text-align: center;
+        font-size: 1.25rem;
+        /* REDUCED FONT SIZE */
+        font-weight: 700;
+        color: var(--ah-primary);
+        background-color: var(--ah-bg-light);
+        border-radius: 8px;
+        border: 1px solid var(--ah-border);
+    }
+
+    .contact-details ol.big-marker li h2 {
+        margin-top: 0;
+        padding-top: 0.3rem;
+        /* Align with number block */
+    }
+
+    /* --- Bullet Point List Styling --- */
+    .contact-details ul.with-bullet-point {
+        list-style-type: none;
+        padding-left: 1.5rem;
+        margin-top: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .contact-details ul.with-bullet-point li {
+        margin-bottom: 0.75rem;
+        position: relative;
+    }
+
+    /* Custom bullet */
+    .contact-details ul.with-bullet-point li::before {
+        content: '■';
+        /* Square bullet */
+        position: absolute;
+        left: -1.5rem;
+        top: 0;
+        color: var(--ah-secondary);
+        font-size: 0.8rem;
+        line-height: 1.7;
+    }
+
+    .contact-details ul.with-bullet-point li b {
+        font-weight: 600;
+        color: var(--ah-text);
+    }
+
+    /* --- END: New & Improved Styles --- */
+</style>
+
+<section class="breadcrumb-section">
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb" itemscope itemtype="http://schema.org/BreadcrumbList">
+                <li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                    <a itemprop="item" href="/">
+                        <span itemprop="name">Home</span>
+                    </a>
+                    <meta itemprop="position" content="1">
+                </li>
+                <li class="breadcrumb-item active" aria-current="page" itemprop="itemListElement" itemscope
+                    itemtype="http://schema.org/ListItem">
+                    <span itemprop="name">Terms and Conditions</span>
+                    <meta itemprop="position" content="2">
+                </li>
+            </ol>
+        </nav>
+    </div>
+</section>
+
+<section class="department-banner" data-aos="fade-up" data-aos-offset="300" data-aos-easing="ease-in-sine">
+    <div class="container">
+        <div class="banner">
+            <img loading="lazy" src="../static/img/banners/privacy-policy.jpg" alt="Terms and Conditions Banner">
+            <div class="text-box-1">
+                <h1>TERMS AND CONDITIONS</h1>
+
+            </div>
+        </div>
+    </div>
+</section>
+<section data-aos="fade-up" data-aos-offset="300" data-aos-easing="ease-in-sine" class="contact-details py-5 my-1">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-10 col-lg-9">
+                <p>Please carefully read the terms and conditions below before you decide to access the Website/App
+                    or avail yourself of the services made available by Aarogya Hastha Hospitals <strong>(from now
+                        on referred to as "Hospital")</strong>. If you proceed to access or use the Website/App, you
+                    agree to abide by the terms and conditions as set forth below. You may only access the
+                    Website/App if you agree to these terms.</p>
+                <ol class="big-marker">
+                    <li>
+                        <h2>USER ELIGIBILITY</h2>
+                        <p>The website is available only to persons and entities with the age of legal majority and
+                            are competent to enter into a legally binding agreement(s) under applicable law. You
+                            must qualify to be permitted to use the Website/App. </p>
+                    </li>
+                    <li>
+                        <h2>GENERAL DISCLAIMER AND LIMITATION OF LIABILITY</h2>
+                        <p>The information provided under this Website/App is for educational purposes only and for
+                            publishing health information for the public at large. No information obtained by you
+                            from the website shall create any liability/warranty, whether explicitly or impliedly
+                            stated by the Hospital in these terms of use. The information contained in the
+                            Website/App of the Hospital does not create any licensed medical professional/patient
+                            relationship between the Hospital and the user. The information contained shall not
+                            constitute a legal opinion or a diagnosis of any treatment of any particular condition;
+                            However, it is provided to assist the user with appropriate medical care and seek advice
+                            from a professional medical practitioner. </p>
+                        <p>The information on the website does not amount to an invitation or endorsement to take
+                            medical services from the Hospital, nor is such information a substitute for
+                            professional advice or solicitation regarding medical services/product labelling. The
+                            Hospital shall not be held liable in any way if an action is taken by you relying on
+                            such information, and the Hospital shall not be liable for any deficiency of services by
+                            any medical service provider you engage with using the website. </p>
+                        <p>While the Hospital makes all reasonable efforts to ensure that the information contained
+                            in this website is accurate, it cannot guarantee the accuracy or completeness of such
+                            information, and the use of the same is at the user's risk. </p>
+                        <p>You acknowledge and agree that the Hospital does not make any representation or warranty
+                            regarding any third-party products or services and shall not be liable to any third
+                            party for any claims from or in connection with such third-party products and services.
+                        </p>
+                        <p><strong>If provided, the medical records generated electronically are only for record and
+                                convenience, and the user is requested to collect the final and approved medical
+                                record from the Hospital. </strong></p>
+                    </li>
+                    <li>
+                        <h2>RESTRICTION ON THE USE OF THE WEBSITE</h2>
+                        <p>In addition to the terms set forth herein, you agree not to;</p>
+                        <ul class="with-bullet-point">
+                            <li>Place any false or misleading information on the website. </li>
+                            <li>Use or access the website or any services, information or software available via the
+                                website in a manner not expressly permitted by the Hospital. </li>
+                            <li>To input or add any details or files on the website that may contain virus or other
+                                programming contents that tend to damage, interfere with, and intercept the
+                                website’s </li>credibility.
+                            <li>Use the website in a manner that is detrimental or adversely effective to it's
+                                performance. </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h2>INTERACTION WITH MEDICAL SERVICE PROVIDERS</h2>
+                        <ul class="with-bullet-point">
+                            <li>While the Hospital will make honest efforts to ensure an appointment with the Doctor
+                                for a patient who requested the option to consult the Doctor online, the Hospital
+                                will not guarantee that the user will g</li>et a confirmed appointment.
+                            <li>The Hospital is not liable for any damages if the appointment is postponed,
+                                cancelled, or rescheduled, and medical services through the online medical service
+                                provider are available at the user's risk. </li>
+                        </ul>
+                        <p>At his own discretion, the Hospital may also provide Value-Added Services via Video call,
+                            Voice call, and Text Messages.</p>
+                    </li>
+                    <li>
+                        <h2>ONLINE PAYMENT ON THE WEBSITE</h2>
+                        <p>The Website allows the user to pay online through a third-party payment gateway. If the
+                            user chooses to pay online, they may be directed to a Third-party payment gateway to
+                            process the payment. The Third-party payments gateway's terms and conditions and privacy
+                            policy shall govern the transaction. </p>
+                        <h3>The Hospital shall not be liable for:</h3>
+                        <ul class="with-bullet-point">
+                            <li>If any transaction is not materialized or processed for any reason whatsoever. </li>
+                            <li>Any loss or damage arising from a decline in or acceptance of the transaction. </li>
+                        </ul>
+                        <p>The cancellation and refund policy also apply to the online payment option, wherein the
+                            amount will be refunded to the same source of payment within the given number of working
+                            days communicated by the Third-party payment gateway. </p>
+                    </li>
+                    <li>
+                        <h2>CANCELLATION & REFUND POLICY</h2>
+                        <h3>Eligibility</h3>
+                        <p>A refund shall be provided to the <b>Patient or Payer</b> in the event of:</p>
+                        <ul class="with-bullet-point">
+                            <li>Non-delivery of scheduled medical services like cancelled procedures or appointments
+                                where services were not rendered. </li>
+                            <li>Billing errors resulting in overpayment.</li>
+                            <li>If services are paid in advance and subsequently deemed unnecessary by the
+                                physicians.</li>
+                            <li>Duplicate payments made for the same service.</li>
+                        </ul>
+                        <h3>Refund Amount</h3>
+                        <p>The refund amount shall be <b>either the full amount or a prorated amount</b>, depending
+                            on the nature of the issue:</p>
+                        <ul class="with-bullet-point">
+                            <li><b>100% refund</b> for services not rendered.</li>
+                            <li><b>Prorated refund</b> for partially delivered services, as assessed by the
+                                hospital's billing department.</li>
+                        </ul>
+                        <h3>Refund Process</h3>
+                        <p>The refund shall be processed within <b>7-15 business days</b> from the date the hospital
+                            receives a valid refund request along with all necessary documentation (e.g., original
+                            receipts, cancellation confirmation, etc.). For any queries or to submit your refund
+                            request, please contact us at <a href="mailto:refunds@aarogyahastha.com"
+                                class="my-0 d-inline"><u>refunds@aarogyahastha.com</u></a>.</p>
+                        <h3>Mode of Refund</h3>
+                        <p>The refund shall be made through <b>NEFT/RTGS</b> to the account used for the original
+                            payment,</p>
+                    </li>
+                    <li>
+                        <h2>FEEDBACK AND REVIEWS</h2>
+                        <p>The user is solely responsible for the content that they choose to submit for publication
+                            on the website, including any feedback, reviews, or ratings. The Hospital shall not be
+                            liable for any comments, reviews, or ratings given by the user. </p>
+                    </li>
+                    <li>
+                        <h2>OWNERSHIP OF CONTENT AND COPYRIGHT </h2>
+                        <p>The information on the website and the website itself is subject to copyright protection.
+                            All the data displayed, transmitted, or carried by the Hospital and its related
+                            websites, including opinions, images, illustrations, trademarks, and service marks, is
+                            protected by copyright and other intellectual property laws. </p>
+                        <p>The Hospital also permits the user to utilize and copy the documents published on the
+                            website exclusively for personal, non-commercial use only, provided the trademarks,
+                            copyright, and any other intellectual property right is not removed while utilising the
+                            said information. The unauthorised usage of information with giving due credits to the
+                            copyright or trademarks is a punishable offense, and the respective user shall be held
+                            liable for such infringement. </p>
+                    </li>
+                    <li>
+                        <h2>INDEMNITY</h2>
+                        <p>The user agrees to indemnify and hold harmless the Hospital, its Managers, Directors,
+                            Officers and Employees from any Third-party claims, damages, losses, costs and expenses
+                            on account of using the website or the information available on the website. The
+                            Hospital shall notify such respective user of any such claim or damages caused by the
+                            user. </p>
+                    </li>
+                    <li>
+                        <h2>GENERAL </h2>
+                        <p>The Hospital operates this website from India. The website and the information contained
+                            in it are intended for use only by patients, customers, users, and medical practitioners
+                            who are residents of India. The Hospital shall have no sort of liability if a user uses
+                            the website from outside India, and the user is entirely responsible for compliance with
+                            local laws and third-party interactions. </p>
+                        <p>Suppose any provision of the terms set forth herein is invalid by any court having
+                            competent jurisdiction. In that case, the invalidity of such provision shall not affect
+                            the validity of the remaining portion of these terms of use. </p>
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="static/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="static/js/script.js"></script>
+<script>
+    $(".book-apt").on('click', function () {
+        var url = $(this).data("url");
+        window.open(url, '_blank');
+    });
+    function showChromePopup() {
+        const popup = document.getElementById("chrome-popup");
+        popup.classList.add("is-visible");
+        popup.setAttribute("aria-hidden", "false");
+    }
+    function hideChromePopup() {
+        const popup = document.getElementById("chrome-popup");
+        popup.classList.remove("is-visible");
+        popup.setAttribute("aria-hidden", "true");
+    }
+    // ESC closes popup
+    document.addEventListener("keydown", e => {
+        if (e.key === "Escape") hideChromePopup();
+    });
+    document.addEventListener('DOMContentLoaded', function () {
+        const scrollBtn = document.getElementById('scrollToTopBtn');
+        const scrollThreshold = 300;
+
+        function toggleScrollButton() {
+            if (window.pageYOffset > scrollThreshold ||
+                document.documentElement.scrollTop > scrollThreshold) {
+                scrollBtn.style.display = 'flex';
+            } else {
+                scrollBtn.style.display = 'none';
+            }
+        }
+
+        window.addEventListener('scroll', toggleScrollButton);
+
+        scrollBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+            // Add slight animation to the icon
+            this.querySelector('i').style.transform = 'translateY(-4px)';
+            setTimeout(() => {
+                this.querySelector('i').style.transform = '';
+            }, 300);
+        });
+
+        // Initialize on load
+        toggleScrollButton();
+    });
+    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+    const mobileNav = document.getElementById('mobile-nav');
+
+    mobileMenuToggle.addEventListener('click', function () {
+        mobileNav.classList.toggle('active'); // toggles visibility
+    });
+
+</script>
+<a href="#" id="scrollToTopBtn" class="scroll-to-top-btn" title="Scroll to top" aria-label="Scroll to top">
+    <i class="fa fa-arrow-up"></i> </a>
+{% endblock %}

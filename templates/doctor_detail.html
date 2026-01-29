@@ -1,0 +1,802 @@
+{% extends "base.html" %}
+
+{% block title %}{{ doctor.name }} - {{ doctor.specialization }} - Aarogya Hastha{% endblock %}
+
+{% block content %}
+{% block head %}
+{{ super() }}
+<meta name="author" content="Aarogyahastha Pvt Ltd">
+<meta name="designer" content="Aarogyahastha Pvt Ltd">
+<meta name="publisher" content="Aarogyahastha Pvt Ltd">
+<link rel="canonical" href="https://aarogyahastha.com/doctors">
+<meta name="no-email-collection" content="http://www.unspam.com/noemailcollection/">
+<meta name="robots" content="index,follow">
+<meta name="revisit-after" content="7 days">
+<meta name="distribution" content="web">
+<meta name="robots" content="noodp">
+<meta name="web_author" content="Aarogyahastha Pvt Ltd">
+<meta name="rating" content="general">
+<meta name="rating" content="safe for kids">
+<meta name="subject" content="Healthcare">
+<meta name="copyright" content="Copyright © 2025">
+<meta name="reply-to" content="info@aarogyahastha.com">
+<meta name="abstract"
+    content="We provide timely and specialized medical attention for patients experiencing life-threatening conditions, ensuring their urgent needs are met with the highest level of care.">
+<meta name="city" content="Bangalore">
+<meta name="country" content="India">
+<meta name="distribution" content="global">
+<meta name="classification" content="Healthcare, Hospital">
+<base href="/">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+{% endblock %}
+<style>
+    /* Scope everything under .doctor-profile-page */
+    .doctor-profile-page {
+        --primary-color: #103A60;
+        /* Aarogya Hastha Dark Blue */
+        --primary-hover: #0b2e4b;
+        /* Darker shade for hover */
+        --secondary-color: #f8f9fa;
+        /* Light Gray Background */
+        --card-bg: #ffffff;
+        /* White Card Background */
+        --text-color: #212529;
+        /* Dark Text */
+        --subtle-text-color: #6c757d;
+        /* Secondary Text */
+        --accent-color: #103A60;
+        /* Accent matches logo */
+        --tab-active-bg: linear-gradient(90deg, #103A60 0%, #103A60 100%);
+        --tab-hover-bg: #e0f7ff;
+        --tab-color: #495057;
+        --shadow-soft: 0 6px 20px rgba(0, 0, 0, 0.08);
+        --shadow-hover: 0 12px 28px rgba(0, 0, 0, 0.12);
+    }
+
+    /* Apply styles only inside .doctor-profile-page */
+    .doctor-profile-page .container {
+        max-width: 1180px;
+        margin: 2rem auto;
+        padding: 0 20px;
+        background: var(--secondary-color);
+    }
+
+    /* Back Button */
+    .doctor-profile-page .back-btn {
+        display: inline-block;
+        margin-bottom: 25px;
+        padding: 10px 20px;
+        border: 1px solid var(--primary-color);
+        border-radius: 12px;
+        color: var(--primary-color);
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        background: #fff;
+    }
+
+    .doctor-profile-page .back-btn:hover {
+        background-color: var(--primary-color);
+        color: #fff;
+        box-shadow: var(--shadow-hover);
+    }
+
+    /* Top container */
+    .doctor-profile-page .doctor-top-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+        background: var(--card-bg);
+        padding: 30px;
+        border-radius: 16px;
+        box-shadow: var(--shadow-soft);
+        align-items: center;
+        transition: all 0.3s ease;
+    }
+
+    .doctor-profile-page .doctor-top-container:hover {
+        box-shadow: var(--shadow-hover);
+        transform: translateY(-3px);
+    }
+
+    /* Doctor Image */
+    .doctor-profile-page .doctor-image-container {
+        flex: 0 0 350px;
+    }
+
+    .doctor-profile-page .doctor-image {
+        width: 100%;
+        height: 100%;
+        border-radius: 16px;
+        object-fit: cover;
+        box-shadow: var(--shadow-soft);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border: 4px solid var(--accent-color);
+    }
+
+    .doctor-profile-page .doctor-image:hover {
+        transform: scale(1.05);
+        box-shadow: var(--shadow-hover);
+    }
+
+    /* Doctor Info */
+    .doctor-profile-page .doctor-info-container {
+        flex: 1;
+    }
+
+    .doctor-profile-page .doctor-name {
+        font-size: 2.4em;
+        font-weight: 700;
+        margin-bottom: 8px;
+        color: var(--primary-color);
+    }
+
+    .doctor-profile-page .doctor-specialization {
+        font-size: 1.25em;
+        font-weight: 500;
+        color: #495057;
+        margin-bottom: 15px;
+    }
+
+    .doctor-profile-page .doctor-details p {
+        margin: 6px 0;
+        font-size: 1em;
+    }
+
+    .doctor-profile-page .doctor-details strong {
+        min-width: 140px;
+        display: inline-block;
+        color: var(--subtle-text-color);
+    }
+
+    .doctor-profile-page .text-muted {
+        color: var(--subtle-text-color) !important;
+        font-style: italic;
+    }
+
+    /* Buttons */
+    .doctor-profile-page .appointment-btn,
+    .doctor-profile-page .view-profile-btn {
+        display: inline-block;
+        padding: 12px 28px;
+        border-radius: 12px;
+        font-weight: 600;
+        text-decoration: none;
+        margin-top: 15px;
+        margin-right: 10px;
+        transition: all 0.3s ease;
+        box-shadow: var(--shadow-soft);
+    }
+
+    .doctor-profile-page .appointment-btn {
+        background: var(--tab-active-bg);
+        color: #fff;
+        border: none;
+    }
+
+    .doctor-profile-page .appointment-btn:hover {
+        background: linear-gradient(90deg, #103A60 0%, #103A60 100%);
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-hover);
+    }
+
+    .doctor-profile-page .view-profile-btn {
+        background-color: #fff;
+        color: var(--primary-color);
+        border: 2px solid var(--primary-color);
+    }
+
+    .doctor-profile-page .view-profile-btn:hover {
+        background: var(--primary-color);
+        color: #fff;
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-hover);
+    }
+
+    /* Tabs */
+    .doctor-profile-page .doctor-tabs-container {
+        background-color: var(--card-bg);
+        border-radius: 16px;
+        box-shadow: var(--shadow-soft);
+        margin-top: 20px;
+        overflow: hidden;
+    }
+
+    .doctor-profile-page .tab-navigation {
+        display: flex;
+        overflow-x: auto;
+        background-color: #e6f7ff;
+        border-radius: 16px 16px 0 0;
+        padding: 4px;
+    }
+
+    .doctor-profile-page .tab-navigation::-webkit-scrollbar {
+        display: none;
+    }
+
+    .doctor-profile-page .tab-button {
+        flex: 1;
+        text-align: center;
+        padding: 14px 0;
+        cursor: pointer;
+        font-size: 1em;
+        font-weight: 500;
+        color: var(--tab-color);
+        border-radius: 12px 12px 0 0;
+        margin: 0 6px;
+        background-color: transparent;
+        transition: all 0.3s ease;
+        position: relative;
+    }
+
+    .doctor-profile-page .tab-button.active {
+        color: #fff;
+        background: var(--tab-active-bg);
+        font-weight: 700;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .doctor-profile-page .tab-button:hover:not(.active) {
+        background-color: var(--tab-hover-bg);
+        color: var(--primary-color);
+        transform: translateY(-2px);
+    }
+
+    /* Tab Content */
+    .doctor-profile-page .tab-content {
+        padding: 30px;
+        background-color: #fff;
+        border-radius: 0 0 16px 16px;
+    }
+
+    .doctor-profile-page .tab-pane {
+        display: none;
+        animation: fadeIn 0.5s ease-in-out;
+    }
+
+    .doctor-profile-page .tab-pane.active {
+        display: block;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(12px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Sections */
+    .doctor-profile-page .doctor-section h4 {
+        color: var(--primary-color);
+        font-weight: 600;
+        margin-bottom: 14px;
+        font-size: 1.3em;
+        position: relative;
+    }
+
+    .doctor-profile-page .doctor-section h4::after {
+        content: '';
+        display: block;
+        width: 50px;
+        height: 3px;
+        background: var(--accent-color);
+        margin-top: 6px;
+        border-radius: 2px;
+    }
+
+    .doctor-profile-page .doctor-section p,
+    .doctor-profile-page .doctor-section ul,
+    .doctor-profile-page .doctor-section ol {
+        line-height: 1.75;
+        color: #495057;
+        font-size: 1em;
+    }
+
+    /* Responsive */
+    @media (max-width: 992px) {
+        .doctor-profile-page .doctor-top-container {
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .doctor-profile-page .doctor-image-container {
+            margin-bottom: 20px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .doctor-profile-page .doctor-name {
+            font-size: 2em;
+        }
+
+        .doctor-profile-page .doctor-specialization {
+            font-size: 1.1em;
+        }
+
+        .doctor-profile-page .tab-button {
+            padding: 10px 8px;
+            font-size: 0.95em;
+        }
+
+        .doctor-profile-page .tab-content {
+            padding: 20px;
+        }
+    }
+
+    /* File Links and Buttons */
+    .doctor-profile-page .file-link {
+        display: inline-flex;
+        align-items: center;
+        padding: 10px 16px;
+        margin: 8px 12px 8px 0;
+        background-color: #f8f9fa;
+        border: 1px solid #dee2e6;
+        border-radius: 8px;
+        color: var(--primary-color);
+        text-decoration: none;
+        transition: all 0.3s ease;
+        font-weight: 500;
+    }
+
+    .doctor-profile-page .file-link:hover {
+        background-color: var(--primary-color);
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-soft);
+    }
+
+    .doctor-profile-page .file-link i {
+        margin-right: 8px;
+        font-size: 1.1em;
+    }
+
+    .doctor-profile-page .links-container {
+        margin-top: 15px;
+    }
+
+    .doctor-profile-page .link-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+        padding: 8px 12px;
+        background-color: #f8f9fa;
+        border-radius: 6px;
+        border-left: 4px solid var(--primary-color);
+    }
+
+    .doctor-profile-page .link-item i {
+        margin-right: 10px;
+        color: var(--primary-color);
+        min-width: 20px;
+    }
+
+    /* Styled bullet lists */
+    /* Arrow-style bullets for all lists in doctor profile */
+    .doctor-profile-page ul.custom-list {
+        list-style: none;
+        /* Remove default bullets */
+        padding-left: 0;
+        /* Remove default left padding */
+        margin-left: 0;
+        /* Align to container */
+    }
+
+    .doctor-profile-page ul.custom-list li {
+        position: relative;
+        /* Needed for ::before positioning */
+        padding-left: 28px;
+        /* Space for arrow */
+        margin-bottom: 10px;
+        /* Spacing between items */
+        line-height: 1.7;
+        /* Matches your text spacing */
+        color: #495057;
+        /* Text color */
+        font-size: 1em;
+    }
+
+    .doctor-profile-page ul.custom-list li::before {
+        content: "➤";
+        /* Unicode arrow */
+        position: absolute;
+        left: 0;
+        /* Arrow on the left */
+        top: 2px;
+        /* Vertically align with text */
+        font-size: 0.95rem;
+        /* Slightly smaller than text */
+        color: var(--primary-color);
+        /* Matches theme color */
+    }
+
+    @media (max-width: 768px) {
+        .doctor-profile-page .doctor-top-container {
+            flex-direction: row;
+            /* image and buttons side by side */
+            align-items: flex-start;
+            /* top alignment */
+            text-align: left;
+            padding: 15px;
+            gap: 15px;
+            flex-wrap: wrap;
+            /* allow wrapping on very small screens */
+        }
+
+        .doctor-profile-page .doctor-image-container {
+            flex: 0 0 140px;
+            /* fixed size for image */
+            height: 140px;
+        }
+
+        .doctor-profile-page .doctor-image {
+            width: 100%;
+            height: 100%;
+            border-width: 3px;
+        }
+
+        .doctor-profile-page .doctor-info-container {
+            flex: 1;
+            /* remaining space for info */
+            min-width: 180px;
+            /* prevent too small container */
+        }
+
+        .doctor-profile-page .doctor-name {
+            font-size: 1.6em;
+            margin-bottom: 5px;
+        }
+
+        .doctor-profile-page .doctor-specialization {
+            font-size: 0.95em;
+            margin-bottom: 10px;
+        }
+
+        /* Details layout */
+        .doctor-profile-page .doctor-details {
+            display: grid;
+            grid-template-columns: 1fr;
+            /* single column for all details */
+            gap: 6px;
+            /* spacing between rows */
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .doctor-profile-page .doctor-details p,
+        .doctor-profile-page .doctor-details div {
+            margin: 0;
+            font-size: 0.95em;
+            line-height: 1.5;
+            display: grid;
+            grid-template-columns: 120px 1fr;
+            /* label & value */
+            gap: 8px;
+            align-items: center;
+            word-break: break-word;
+        }
+
+        .doctor-profile-page .doctor-details strong {
+            flex-shrink: 0;
+            font-weight: 600;
+            color: #495057;
+            display: inline-block;
+        }
+
+        /* Extra for timings (multiple slots) */
+        .doctor-profile-page .doctor-details .mb-2 {
+            display: grid;
+            grid-template-columns: 120px 1fr;
+            /* label and value */
+            gap: 8px;
+            align-items: center;
+            margin-bottom: 4px;
+        }
+
+        .doctor-profile-page .doctor-details .mb-2 strong {
+            width: 120px;
+            font-weight: 600;
+        }
+
+        /* Buttons below image */
+        .doctor-profile-page .appointment-btn,
+        .doctor-profile-page .view-profile-btn {
+            width: auto;
+            padding: 10px 18px;
+            margin: 6px 6px 0 0;
+            font-size: 0.95em;
+        }
+
+        .doctor-profile-page .tab-button {
+            padding: 8px 5px;
+            font-size: 0.85em;
+        }
+
+        .doctor-profile-page .tab-content {
+            padding: 12px;
+        }
+
+        .doctor-profile-page .file-link {
+            width: 100%;
+            justify-content: center;
+            margin: 5px 0;
+        }
+    }
+
+    .breadcrumb-section {
+        padding: 10px 0;
+        background-color: #f8f9fa;
+    }
+
+    .breadcrumb {
+        margin-bottom: 0;
+        padding: 0.75rem 1rem;
+    }
+
+    .breadcrumb-item+.breadcrumb-item::before {
+        content: ">>";
+        padding: 0 0.5rem;
+    }
+
+    .breadcrumb-item a {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+    .breadcrumb-item.active {
+        color: #6c757d;
+    }
+</style>
+<section class="breadcrumb-section">
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+                <li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                    <a itemprop="item" href="/">
+                        <span itemprop="name">Home</span>
+                    </a>
+                    <meta itemprop="position" content="1">
+                </li>
+
+                <li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <a itemprop="item" href="/doctors">
+                        <span itemprop="name">Doctors</span>
+                    </a>
+                    <meta itemprop="position" content="2">
+                </li>
+                <li class="breadcrumb-item active" aria-current="page" itemprop="itemListElement" itemscope
+                    itemtype="https://schema.org/ListItem">
+                    <a itemprop="item" href="javascript:void(0)" style="cursor: unset;">
+                        <span itemprop="name">{{ doctor.name }}</span>
+                    </a>
+                    <meta itemprop="position" content="3">
+                </li>
+            </ol>
+        </nav>
+    </div>
+</section>
+
+
+<div class="doctor-profile-page">
+    <div class="container">
+        <a href="{{ url_for('list_doctors') }}" class="back-btn">← Back to Doctors</a>
+
+        <div class="doctor-top-container">
+            <div class="doctor-image-container">
+                {% if doctor.image_path %}
+                <img src="{{ url_for('static', filename=doctor.image_path) }}" alt="{{ doctor.name }}"
+                    class="doctor-image">
+                {% else %}
+                <img src="{{ url_for('static', filename='img/doctors/dr-he.jpg') }}" alt="No image"
+                    class="doctor-image">
+                {% endif %}
+            </div>
+            <div class="doctor-info-container">
+                <h2 class="doctor-name">{{ doctor.name }}</h2>
+                <h3 class="doctor-specialization">{{ doctor.specialization }}</h3>
+                <div class="doctor-details">
+                    <!-- Always show qualification heading -->
+                    <p>
+                        <strong>Qualification:</strong>
+                        {% if doctor.qualification and doctor.qualification.strip() %}
+                        {{ doctor.qualification }}
+                        {% else %}
+                        <span class="text-muted">Not specified</span>
+                        {% endif %}
+                    </p>
+
+                    <!-- Always show designation heading -->
+
+                    <!-- Always show experience heading -->
+                    <p>
+                        <strong>Experience:</strong>
+                        {% if doctor.experience and doctor.experience.strip() %}
+                        {{ doctor.experience }}
+                        {% else %}
+                        <span class="text-muted">Not specified</span>
+                        {% endif %}
+                    </p>
+
+                    <!-- Timings section -->
+                    {% if doctor.timings_parsed %}
+                    {% for slot in doctor.timings_parsed %}
+                    <div class="mb-2">
+                        <strong>Day:</strong> {{ slot.days | join(', ') }}<br>
+                        <strong>Timings:</strong> {{ slot.from }} {{ slot.from_period }} - {{ slot.to }} {{
+                        slot.to_period }}
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                    <p><strong>Days:</strong> <span class="text-muted">No days available</span></p>
+                    <p><strong>Timings:</strong> <span class="text-muted">No timings available</span></p>
+                    {% endif %}
+                </div>
+
+                {% if doctor.appointment_link %}
+                <a href="{{ doctor.appointment_link }}" target="_blank" class="appointment-btn">
+                    <i class="fas fa-calendar-check"></i> Book Appointment
+                </a>
+                {% else %}
+                <a href="#" class="appointment-btn" style="pointer-events: none; opacity: 0.6;">
+                    <i class="fas fa-calendar-times"></i> No Appointment Link
+                </a>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="doctor-tabs-container">
+            <div class="tab-navigation">
+                <button class="tab-button active" data-tab="overview">Overview</button>
+                <button class="tab-button" data-tab="fellowship">Fellowship & Membership</button>
+                <button class="tab-button" data-tab="expertise">Field of Expertise</button>
+                <button class="tab-button" data-tab="languages">Languages Spoken</button>
+                <button class="tab-button" data-tab="publications">Talks & Publications</button>
+            </div>
+
+            <div class="tab-content">
+                <div id="overview" class="tab-pane active">
+                    <div class="doctor-section">
+                        <h4>Overview</h4>
+                        {% if doctor.overview and doctor.overview.strip() %}
+                        {% for para in doctor.overview.splitlines() if para.strip() %}
+                        <p>{{ para }}</p>
+                        {% endfor %}
+                        {% else %}
+                        <p class="text-muted">No overview available.</p>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div id="fellowship" class="tab-pane">
+                    <div class="doctor-section">
+                        <h4>Fellowships & Memberships</h4>
+                        {% if doctor.fellowship_membership and doctor.fellowship_membership.strip() %}
+                        <ul class="custom-list">
+                            {% for item in doctor.fellowship_membership.splitlines() if item.strip() %}
+                            <li>{{ item.strip() }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% else %}
+                        <p class="text-muted">No fellowship/membership information available.</p>
+                        {% endif %}
+
+                        {% if doctor.fellowship_links and doctor.fellowship_links.strip() %}
+                        <h5 class="mt-4">Related Links:</h5>
+                        <div class="links-container">
+                            {% for link in doctor.fellowship_links.split('\n') if link.strip() %}
+                            <div class="link-item">
+                                <i class="fas fa-link"></i>
+                                <a href="{{ link.strip() }}" target="_blank" class="text-decoration-none">
+                                    {{ link.strip() }}
+                                </a>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+
+                        {% if doctor.fellowship_file_path %}
+                        <h5 class="mt-4">Documents:</h5>
+                        <a href="{{ url_for('static', filename=doctor.fellowship_file_path) }}" target="_blank"
+                            class="file-link">
+                            <i class="fas fa-file-pdf"></i> View Fellowship Document
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div id="expertise" class="tab-pane">
+                    <div class="doctor-section">
+                        <h4>Field of Expertise</h4>
+                        {% if doctor.field_of_expertise and doctor.field_of_expertise.strip() %}
+                        <ul class="custom-list">
+                            {% for item in doctor.field_of_expertise.splitlines() if item.strip() %}
+                            <li>{{ item.strip() }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% else %}
+                        <p class="text-muted">No expertise information available.</p>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div id="languages" class="tab-pane">
+                    <div class="doctor-section">
+                        <h4>Languages Spoken</h4>
+                        {% if doctor.languages and doctor.languages.strip() %}
+                        <p>{{ doctor.languages }}</p>
+                        {% else %}
+                        <p class="text-muted">No language information available.</p>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div id="publications" class="tab-pane">
+                    <div class="doctor-section">
+                        <h4>Talks, Publications, & Research</h4>
+                        {% if doctor.talks_and_publications and doctor.talks_and_publications.strip() %}
+                        <ul class="custom-list">
+                            {% for item in doctor.talks_and_publications.splitlines() if item.strip() %}
+                            <li>{{ item.strip() }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% else %}
+                        <p class="text-muted">No talks or publications information available.</p>
+                        {% endif %}
+
+                        {% if doctor.talks_links and doctor.talks_links.strip() %}
+                        <h5 class="mt-4">Related Links:</h5>
+                        <div class="links-container">
+                            {% for link in doctor.talks_links.split('\n') if link.strip() %}
+                            <div class="link-item">
+                                <i class="fas fa-link"></i>
+                                <a href="{{ link.strip().split('|')[0] }}" target="_blank" class="text-decoration-none">
+                                    {% if '|' in link %}
+                                    {{ link.strip().split('|')[1] }}
+                                    {% else %}
+                                    Related Link {{ loop.index }}
+                                    {% endif %}
+                                </a>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+
+                        {% if doctor.talks_file_path %}
+                        <h5 class="mt-4">Documents:</h5>
+                        <a href="{{ url_for('static', filename=doctor.talks_file_path) }}" target="_blank"
+                            class="file-link">
+                            <i class="fas fa-file-pdf"></i> View Publications Document
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const tabs = document.querySelectorAll('.tab-button');
+        const panes = document.querySelectorAll('.tab-pane');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', function () {
+                tabs.forEach(t => t.classList.remove('active'));
+                panes.forEach(p => p.classList.remove('active'));
+
+                this.classList.add('active');
+                document.getElementById(this.getAttribute('data-tab')).classList.add('active');
+            });
+        });
+    });
+</script>
+
+{% endblock %}
