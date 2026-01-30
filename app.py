@@ -25,6 +25,7 @@ from models import db, Banner, Doctor, Counter, Testimonial, Speciality, Departm
 from config import Config
 import os
 from functools import wraps
+from sqlalchemy.exc import IntegrityError
 import io
 from sqlalchemy.orm import joinedload
 
@@ -2250,6 +2251,8 @@ def debug_departments():
 def doctor_detail(slug):
     doctor = Doctor.query.filter_by(slug=slug, is_active=True).first_or_404()
 
+    canonical_url = f"https://aarogyahastha.com/doctors/{doctor.slug}"
+
     # Ensure correct image path
     if doctor.image_path:
         if doctor.image_path.startswith('doctors/'):
@@ -2273,7 +2276,7 @@ def doctor_detail(slug):
         doctor.timings_parsed = []
         doctor.days_parsed = []
 
-    return render_template("doctor_detail.html", doctor=doctor, img_file=img_file)
+    return render_template("doctor_detail.html", doctor=doctor, img_file=img_file, canonical_url=canonical_url)
 
 
 app.secret_key = "your_secret_key_here"  # required for session
