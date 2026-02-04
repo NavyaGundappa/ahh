@@ -143,6 +143,47 @@ def privacy_policy():
 def disclaimer():
     return render_template('disclaimer.html')
 
+@app.route('/best-plastic-surgeon-in-bangalore')
+def expert_plastic_surgery():
+    doctors = Doctor.query.filter_by(is_active=True).all()
+
+    testimonials = Testimonial.query.filter_by(is_active=True).options(
+        joinedload(Testimonial.doctor)
+    ).order_by(Testimonial.created_at.desc()).all()
+
+    blogs = Blog.query.filter_by(is_active=True)\
+        .order_by(Blog.created_at.desc())\
+        .limit(5)\
+        .all()
+
+    return render_template(
+        'seopages/expert-plastic-surgery-in-bangalore.html',
+        doctors=doctors,
+        testimonials=testimonials,
+        blogs=blogs
+    )
+
+
+@app.route('/best-ent-surgeon-in-bangalore')
+def best_ent_surgeon():
+    doctors = Doctor.query.filter_by(is_active=True).all()
+
+    testimonials = Testimonial.query.filter_by(is_active=True).options(
+        joinedload(Testimonial.doctor)
+    ).order_by(Testimonial.created_at.desc()).all()
+
+    blogs = Blog.query.filter_by(is_active=True)\
+        .order_by(Blog.created_at.desc())\
+        .limit(5)\
+        .all()
+
+    return render_template(
+        'seopages/best-ent-surgeon-in-bangalore.html',
+        doctors=doctors,
+        testimonials=testimonials,
+        blogs=blogs
+    )
+
 
 def login_required(f):
     @wraps(f)
