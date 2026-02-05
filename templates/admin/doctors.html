@@ -683,17 +683,17 @@
                                 </div>
 
                                 <div class="col-md-12">
-                                    <label class="form-label">Field of Expertise</label>
-                                    <textarea name="field_of_expertise" class="form-control textarea-small"
-                                        placeholder="List areas of expertise, one per line&#10;• Cardiac Surgery&#10;• Interventional Cardiology&#10;• Heart Failure Management"></textarea>
-                                    <small class="text-muted">Enter each area of expertise on a new line</small>
-                                </div>
-
-                                <div class="col-md-12">
                                     <label class="form-label">Fellowship & Membership</label>
                                     <textarea name="fellowship_membership" class="form-control textarea-small"
                                         placeholder="List fellowships and memberships, one per line&#10;• Fellow, American College of Cardiology&#10;• Member, European Society of Cardiology&#10;• Fellow, Royal College of Physicians"></textarea>
                                     <small class="text-muted">Enter each fellowship or membership on a new line</small>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <label class="form-label">Field of Expertise</label>
+                                    <textarea name="field_of_expertise" class="form-control textarea-small"
+                                        placeholder="List areas of expertise, one per line..."></textarea>
+                                    <small class="text-muted">Enter each area of expertise on a new line</small>
                                 </div>
 
                                 <div class="col-md-6">
@@ -836,19 +836,18 @@
                                 </div>
 
                                 <div class="col-md-12">
-                                    <label class="form-label">Field of Expertise</label>
-                                    <textarea name="field_of_expertise" id="edit_field_of_expertise"
-                                        class="form-control textarea-small"
-                                        placeholder="List areas of expertise, one per line"></textarea>
-                                    <small class="text-muted">Enter each area of expertise on a new line</small>
-                                </div>
-
-                                <div class="col-md-12">
                                     <label class="form-label">Fellowship & Membership</label>
                                     <textarea name="fellowship_membership" id="edit_fellowship_membership"
                                         class="form-control textarea-small"
                                         placeholder="List fellowships and memberships, one per line"></textarea>
                                     <small class="text-muted">Enter each fellowship or membership on a new line</small>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <label class="form-label">Field of Expertise</label>
+                                    <textarea name="field_of_expertise" class="form-control textarea-small"
+                                        placeholder="List areas of expertise, one per line..."></textarea>
+                                    <small class="text-muted">Enter each area of expertise on a new line</small>
                                 </div>
 
                                 <div class="col-md-6">
@@ -921,7 +920,7 @@
                 [{ 'align': [] }],
                 [{ 'list': 'ordered' }, { 'list': 'bullet' }],
                 ['blockquote', 'code-block'],
-                ['link', 'image'], // Link support enabled
+                ['link', 'image'],
                 ['clean']
             ]
         }
@@ -935,9 +934,163 @@
     var editOverviewQuill = new Quill('#edit_overview_editor', quillConfig);
     var editBioQuill = new Quill('#edit_bio_editor', quillConfig);
 
+    // ===============================================
+    // 2. EDIT DOCTOR FUNCTION WITH DEBUGGING
+    // ===============================================
+
+    // Store the current modal instance
+    let currentEditModal = null;
+
+    function editDoctor(id, event) {
+        if (event) event.preventDefault();
+
+        console.log('Attempting to fetch doctor with ID:', id);
+
+        // Show loading state
+        const editButton = event ? event.target.closest('button') : null;
+        let originalText = '';
+        if (editButton) {
+            originalText = editButton.innerHTML;
+            editButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
+            editButton.disabled = true;
+        }
+
+        fetch(`/admin/get_doctor/${id}`)
+            .then(response => {
+                console.log('Response status:', response.status, response.statusText);
+
+                if (!response.ok) {
+                    return response.text().then(text => {
+                        console.error('Error response text:', text);
+                        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                    });
+                }
+                return response.json();
+            })
+            .then(doctor => {
+                console.log('Doctor data received:', doctor);
+
+                if (doctor.error) {
+                    throw new Error(doctor.error);
+                }
+
+                // Populate basic fields
+                document.getElementById('edit_doctor_id').value = doctor.id;
+                document.getElementById('edit_name').value = doctor.name || '';
+                document.getElementById('edit_specialization').value = doctor.specialization || '';
+                document.getElementById('edit_department_slug').value = doctor.department_slug || '';
+                document.getElementById('edit_designation').value = doctor.designation || '';
+                document.getElementById('edit_experience').value = doctor.experience || '';
+                document.getElementById('edit_qualification').value = doctor.qualification || '';
+                document.getElementById('edit_languages').value = doctor.languages || '';
+                document.getElementById('edit_appointment_link').value = doctor.appointment_link || '';
+                document.getElementById('edit_slug').value = doctor.slug || '';
+
+                // Populate professional details
+                const fieldOfExpertiseEl = document.querySelector('[name="field_of_expertise"]');
+                if (fieldOfExpertiseEl) {
+                    fieldOfExpertiseEl.value = doctor.field_of_expertise || '';
+                }
+
+                document.getElementById('edit_fellowship_membership').value = doctor.fellowship_membership || '';
+                document.getElementById('edit_fellowship_links').value = doctor.fellowship_links || '';
+                document.getElementById('edit_talks_and_publications').value = doctor.talks_and_publications || '';
+                document.getElementById('edit_talks_links').value = doctor.talks_links || '';
+
+                // Populate Quill Editors
+                if (doctor.overview) {
+                    editOverviewQuill.root.innerHTML = doctor.overview;
+                } else {
+                    editOverviewQuill.root.innerHTML = '';
+                }
+
+                if (doctor.bio) {
+                    editBioQuill.root.innerHTML = doctor.bio;
+                } else {
+                    editBioQuill.root.innerHTML = '';
+                }
+
+                // Populate image preview
+                const editImagePreview = document.getElementById('edit_image_preview');
+                if (doctor.image_path) {
+                    editImagePreview.src = '/static/' + doctor.image_path;
+                    editImagePreview.style.display = 'block';
+                } else {
+                    editImagePreview.src = '';
+                    editImagePreview.style.display = 'none';
+                }
+
+                // Clear and populate timings
+                const container = document.getElementById('edit_timings_container');
+                container.innerHTML = '';
+
+                if (doctor.timings && doctor.timings.length > 0) {
+                    console.log('Timings found:', doctor.timings);
+                    doctor.timings.forEach((timing, index) => {
+                        container.insertAdjacentHTML('beforeend', createTimingEntry('edit', index, timing));
+                    });
+                } else {
+                    console.log('No timings found, adding empty entry');
+                    // Add one empty timing entry
+                    addTimingEntry('edit');
+                }
+
+                // Restore button state
+                if (editButton) {
+                    editButton.innerHTML = originalText;
+                    editButton.disabled = false;
+                }
+
+                // Clear any existing modal backdrops
+                const existingBackdrops = document.querySelectorAll('.modal-backdrop');
+                existingBackdrops.forEach(backdrop => backdrop.remove());
+
+                // Remove modal-open class from body
+                document.body.classList.remove('modal-open');
+                document.body.style.overflow = '';
+                document.body.style.paddingRight = '';
+
+                // Show the modal
+                const editModalElement = document.getElementById('editDoctorModal');
+                currentEditModal = new bootstrap.Modal(editModalElement, {
+                    backdrop: true,
+                    keyboard: true
+                });
+
+                // Add event listener to properly handle modal hide
+                editModalElement.addEventListener('hidden.bs.modal', function () {
+                    console.log('Modal hidden');
+                    // Clear any remaining backdrop
+                    const backdrops = document.querySelectorAll('.modal-backdrop');
+                    backdrops.forEach(backdrop => backdrop.remove());
+
+                    // Reset body styles
+                    document.body.classList.remove('modal-open');
+                    document.body.style.overflow = '';
+                    document.body.style.paddingRight = '';
+
+                    // Reset modal instance
+                    currentEditModal = null;
+                });
+
+                // Show modal
+                currentEditModal.show();
+            })
+            .catch(error => {
+                console.error('Error fetching doctor data:', error);
+
+                // Restore button state
+                if (editButton) {
+                    editButton.innerHTML = originalText;
+                    editButton.disabled = false;
+                }
+
+                alert(`Error loading doctor data: ${error.message}\n\nPlease check browser console (F12) for details.`);
+            });
+    }
 
     // ===============================================
-    // 2. EXISTING FUNCTIONALITY (TIMINGS, ETC)
+    // 3. TIMING FUNCTIONS
     // ===============================================
 
     // Generate time options
@@ -1040,12 +1193,18 @@
         });
     }
 
+    // ===============================================
+    // 4. UTILITY FUNCTIONS
+    // ===============================================
+
     function previewImage(input, previewId) {
         const file = input.files[0];
         if (file) {
             const reader = new FileReader();
             reader.onload = function (e) {
-                document.getElementById(previewId).src = e.target.result;
+                const preview = document.getElementById(previewId);
+                preview.src = e.target.result;
+                preview.style.display = 'block';
             }
             reader.readAsDataURL(file);
         }
@@ -1055,6 +1214,61 @@
         document.getElementById('searchInput').value = '';
         window.location.href = "{{ url_for('admin_doctors') }}";
     }
+
+    // Function to clean up modal backdrops
+    function cleanupModalBackdrops() {
+        const existingBackdrops = document.querySelectorAll('.modal-backdrop');
+        existingBackdrops.forEach(backdrop => backdrop.remove());
+        document.body.classList.remove('modal-open');
+        document.body.style.overflow = '';
+        document.body.style.paddingRight = '';
+    }
+
+    // ===============================================
+    // 5. FORM HANDLERS
+    // ===============================================
+
+    // Initialize add modal
+    const addModalElement = document.getElementById('addDoctorModal');
+    if (addModalElement) {
+        addModalElement.addEventListener('show.bs.modal', function () {
+            const container = document.getElementById('add_timings_container');
+            container.innerHTML = '';
+            addTimingEntry('add');
+
+            // Clear Quill Editors
+            addOverviewQuill.root.innerHTML = '';
+            addBioQuill.root.innerHTML = '';
+
+            // Clear image preview
+            document.getElementById('add_image_preview').src = '';
+            document.getElementById('add_image_preview').style.display = 'none';
+
+            // Reset form fields
+            document.getElementById('addDoctorForm').reset();
+        });
+
+        // Clean up on hide
+        addModalElement.addEventListener('hidden.bs.modal', cleanupModalBackdrops);
+    }
+
+    // Form Submission: Add Doctor
+    document.getElementById('addDoctorForm').addEventListener('submit', function (e) {
+        // Copy Quill content to hidden inputs
+        document.getElementById('add_overview_input').value = addOverviewQuill.root.innerHTML;
+        document.getElementById('add_bio_input').value = addBioQuill.root.innerHTML;
+    });
+
+    // Form Submission: Edit Doctor
+    document.getElementById('editDoctorForm').addEventListener('submit', function (e) {
+        // Copy Quill content to hidden inputs
+        document.getElementById('edit_overview_input').value = editOverviewQuill.root.innerHTML;
+        document.getElementById('edit_bio_input').value = editBioQuill.root.innerHTML;
+    });
+
+    // ===============================================
+    // 6. DRAG AND DROP
+    // ===============================================
 
     // Auto-save functions
     function showAutoSaveMessage(message, isSuccess = true) {
@@ -1118,8 +1332,6 @@
 
         if (tableBody) {
             new Sortable(tableBody, {
-                // Remove the handle option to make entire row draggable
-                // handle: '.drag-handle',
                 ghostClass: 'sortable-ghost',
                 chosenClass: 'sortable-chosen',
                 dragClass: 'sortable-drag',
@@ -1127,10 +1339,8 @@
                 onEnd: function (evt) {
                     saveDoctorOrder();
                 },
-                // Prevent dragging from action buttons and links
                 filter: '.action-buttons, .action-buttons *, a, button, input, select, textarea',
                 onMove: function (evt) {
-                    // Prevent dragging if the target is an action button or form element
                     if (evt.related.classList.contains('action-buttons') ||
                         evt.related.tagName === 'BUTTON' ||
                         evt.related.tagName === 'A' ||
@@ -1146,95 +1356,13 @@
     }
 
     // ===============================================
-    // 3. FORM HANDLERS AND MODAL EVENTS
+    // 7. INITIALIZATION
     // ===============================================
-
-    // Load doctor data in Edit modal
-    const editModal = document.getElementById('editDoctorModal');
-    editModal.addEventListener('show.bs.modal', function (event) {
-        const button = event.relatedTarget;
-        const doctor = JSON.parse(button.getAttribute('data-doctor'));
-
-        // Populate basic fields
-        document.getElementById('edit_doctor_id').value = doctor.id;
-        document.getElementById('edit_name').value = doctor.name || '';
-        document.getElementById('edit_specialization').value = doctor.specialization || '';
-        document.getElementById('edit_department_slug').value = doctor.department_slug || '';
-        document.getElementById('edit_designation').value = doctor.designation || '';
-        document.getElementById('edit_experience').value = doctor.experience || '';
-        document.getElementById('edit_qualification').value = doctor.qualification || '';
-        document.getElementById('edit_languages').value = doctor.languages || '';
-        document.getElementById('edit_appointment_link').value = doctor.appointment_link || '';
-        document.getElementById('edit_slug').value = doctor.slug || '';
-
-        // Populate professional details
-        // Note: Overview and Bio are now populated into Quill below
-        document.getElementById('edit_field_of_expertise').value = doctor.field_of_expertise || '';
-        document.getElementById('edit_fellowship_membership').value = doctor.fellowship_membership || '';
-        document.getElementById('edit_fellowship_links').value = doctor.fellowship_links || '';
-        document.getElementById('edit_talks_and_publications').value = doctor.talks_and_publications || '';
-        document.getElementById('edit_talks_links').value = doctor.talks_links || '';
-
-        // Populate Quill Editors
-        if (doctor.overview) {
-            editOverviewQuill.root.innerHTML = doctor.overview;
-        } else {
-            editOverviewQuill.root.innerHTML = '';
-        }
-
-        if (doctor.bio) {
-            editBioQuill.root.innerHTML = doctor.bio;
-        } else {
-            editBioQuill.root.innerHTML = '';
-        }
-
-        // Populate image preview
-        if (doctor.image_path) {
-            document.getElementById('edit_image_preview').src = '/static/' + doctor.image_path;
-        }
-
-        // Clear and populate timings
-        const container = document.getElementById('edit_timings_container');
-        container.innerHTML = '';
-
-        if (doctor.timings && doctor.timings.length > 0) {
-            doctor.timings.forEach((timing, index) => {
-                container.insertAdjacentHTML('beforeend', createTimingEntry('edit', index, timing));
-            });
-        } else {
-            // Add one empty timing entry
-            addTimingEntry('edit');
-        }
-    });
-
-    // Initialize add modal
-    document.getElementById('addDoctorModal').addEventListener('show.bs.modal', function () {
-        const container = document.getElementById('add_timings_container');
-        container.innerHTML = '';
-        addTimingEntry('add');
-
-        // Clear Quill Editors
-        addOverviewQuill.root.innerHTML = '';
-        addBioQuill.root.innerHTML = '';
-    });
-
-    // Form Submission: Add Doctor
-    document.getElementById('addDoctorForm').addEventListener('submit', function (e) {
-        // Copy Quill content to hidden inputs
-        document.getElementById('add_overview_input').value = addOverviewQuill.root.innerHTML;
-        document.getElementById('add_bio_input').value = addBioQuill.root.innerHTML;
-    });
-
-    // Form Submission: Edit Doctor
-    document.getElementById('editDoctorForm').addEventListener('submit', function (e) {
-        // Copy Quill content to hidden inputs
-        document.getElementById('edit_overview_input').value = editOverviewQuill.root.innerHTML;
-        document.getElementById('edit_bio_input').value = editBioQuill.root.innerHTML;
-    });
-
 
     // Initialize when page loads
     document.addEventListener('DOMContentLoaded', function () {
+        console.log('Page loaded, initializing...');
+
         // Add one timing entry to add modal if it's empty
         const addContainer = document.getElementById('add_timings_container');
         if (addContainer && addContainer.children.length === 0) {
@@ -1243,6 +1371,46 @@
 
         // Initialize drag and drop
         initializeDragAndDrop();
+
+        // Set up event listeners for image previews
+        const addImageInput = document.querySelector('#addDoctorForm input[name="image"]');
+        const editImageInput = document.querySelector('#editDoctorForm input[name="image"]');
+
+        if (addImageInput) {
+            addImageInput.addEventListener('change', function () {
+                previewImage(this, 'add_image_preview');
+            });
+        }
+
+        if (editImageInput) {
+            editImageInput.addEventListener('change', function () {
+                previewImage(this, 'edit_image_preview');
+            });
+        }
+
+        // Add click event listeners to edit buttons
+        document.querySelectorAll('.btn-primary.btn-sm').forEach(button => {
+            if (button.textContent.includes('Edit') || button.innerHTML.includes('fa-edit')) {
+                button.addEventListener('click', function (event) {
+                    const doctorId = this.closest('tr').getAttribute('data-doctor-id');
+                    if (doctorId) {
+                        editDoctor(doctorId, event);
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                });
+            }
+        });
+
+        // Add escape key handler to close modal
+        document.addEventListener('keydown', function (event) {
+            if (event.key === 'Escape' && currentEditModal) {
+                currentEditModal.hide();
+            }
+        });
+
+        // Clean up any existing backdrops on page load
+        cleanupModalBackdrops();
     });
 </script>
 

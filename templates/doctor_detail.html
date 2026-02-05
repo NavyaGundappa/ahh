@@ -664,10 +664,13 @@
                 <div id="overview" class="tab-pane active">
                     <div class="doctor-section">
                         <h4>Overview</h4>
-                        {% if doctor.overview and doctor.overview.strip() %}
-                        {% for para in doctor.overview.splitlines() if para.strip() %}
-                        <p>{{ para }}</p>
-                        {% endfor %}
+                        {# Check if overview exists and isn't just an empty Quill paragraph #}
+                        {% if doctor.overview and doctor.overview.strip() and doctor.overview.strip() != '<p><br></p>'
+                        %}
+
+                        {# Use the 'safe' filter to render the HTML saved by Quill #}
+                        {{ doctor.overview | safe }}
+
                         {% else %}
                         <p class="text-muted">No overview available.</p>
                         {% endif %}

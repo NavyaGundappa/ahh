@@ -299,7 +299,7 @@
     const phone = document.getElementById('userPhone').value;
     const packageName = document.getElementById('packageNameDisplay').innerText;
 
-    fetch('/request_callback', {
+    fetch('/request_callback/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name, phone, package_name: packageName })

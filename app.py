@@ -143,6 +143,7 @@ def privacy_policy():
 def disclaimer():
     return render_template('disclaimer.html')
 
+
 @app.route('/best-plastic-surgeon-in-bangalore')
 def expert_plastic_surgery():
     doctors = Doctor.query.filter_by(is_active=True).all()
@@ -227,6 +228,47 @@ def permission_required(permission_name):
             return f(*args, **kwargs)
         return decorated_function
     return decorator
+
+
+@app.route('/admin/get_doctor/<int:id>')
+@login_required
+@permission_required('doctors')
+def get_doctor(id):
+    try:
+        doctor = Doctor.query.get_or_404(id)
+
+        # Parse timings safely
+        timings = []
+        if doctor.timings:
+            try:
+                timings = json.loads(doctor.timings)
+            except json.JSONDecodeError:
+                timings = []
+
+        return jsonify({
+            "id": doctor.id,
+            "name": doctor.name or "",
+            "specialization": doctor.specialization or "",
+            "designation": doctor.designation or "",
+            "experience": doctor.experience or "",
+            "languages": doctor.languages or "",
+            "qualification": doctor.qualification or "",
+            "appointment_link": doctor.appointment_link or "",
+            "department_slug": doctor.department_slug or "",
+            "slug": doctor.slug or "",
+            "field_of_expertise": doctor.field_of_expertise or "",
+            "overview": doctor.overview or "",
+            "bio": doctor.bio or "",
+            "fellowship_membership": doctor.fellowship_membership or "",
+            "fellowship_links": doctor.fellowship_links or "",
+            "talks_and_publications": doctor.talks_and_publications or "",
+            "talks_links": doctor.talks_links or "",
+            "image_path": doctor.image_path or "",
+            "timings": timings
+        })
+    except Exception as e:
+        print(f"Error in get_doctor route: {e}")
+        return jsonify({"error": str(e)}), 500
 
 
 @app.route("/admin")
@@ -2515,7 +2557,7 @@ def delete_user(user_id):
     return redirect(url_for('admin_users'))
 
 
-@app.route('/request_callback', methods=['POST'])
+@app.route('/request_callback/', methods=['POST'])
 def request_callback():
     try:
         data = request.get_json()
@@ -2542,64 +2584,51 @@ def request_callback():
 @login_required
 @permission_required('callback_requests')
 def admin_callbacks():
-    # --- FIX: Define admin_id and get user at the beginning ---
-    admin_id = session.get("admin_id")
-    user = User.query.get(admin_id)
+    # 1. Capture the form data from the URL
+    package_type = request.args.get('package_type', '')
+    specific_package_id = request.args.get('package', '')
+    start_date = request.args.get('start_date', '')
+    end_date = request.args.get('end_date', '')
 
-    # If the user is somehow invalid, redirect to login
-    if not user:
-        flash("Could not find user. Please log in again.", "warning")
-        return redirect(url_for("admin_login"))
+    # 2. Start the base query
+    query = CallbackRequest.query
 
-    # Get query parameters
-    package_type = request.args.get('package_type', 'health')
-    package_title = request.args.get('package', '')
-    start_date = request.args.get('start_date')
-    end_date = request.args.get('end_date')
+    # 3. Filter by Package Type (Health vs Sports)
+    # We check if 'Health' or 'Sports' is in the package_name string
+    if package_type == 'health':
+        query = query.filter(CallbackRequest.package_name.ilike('%health%'))
+    elif package_type == 'sports':
+        query = query.filter(CallbackRequest.package_name.ilike('%sports%'))
 
-    # Build the callback query
-    callbacks = CallbackRequest.query
-
-    if package_title:
-        callbacks = callbacks.filter_by(package_name=package_title)
-
+    # 4. Filter by Date Range
     if start_date:
-        start_dt = datetime.strptime(start_date, "%Y-%m-%d")
-        callbacks = callbacks.filter(CallbackRequest.created_at >= start_dt)
+        start_dt = datetime.strptime(start_date, '%Y-%m-%d')
+        query = query.filter(CallbackRequest.created_at >= start_dt)
 
     if end_date:
-        end_dt = datetime.strptime(end_date, "%Y-%m-%d")
-        # For 'less than or equal to', you might need to add a full day
-        end_dt = end_dt.replace(hour=23, minute=59, second=59)
-        callbacks = callbacks.filter(CallbackRequest.created_at <= end_dt)
+        # We add 1 day to the end date to include all requests from that specific day
+        end_dt = datetime.strptime(end_date, '%Y-%m-%d') + timedelta(days=1)
+        query = query.filter(CallbackRequest.created_at < end_dt)
 
-    callbacks = callbacks.order_by(CallbackRequest.created_at.desc()).all()
+    # 5. Execute query and order by latest first
+    callbacks = query.order_by(CallbackRequest.created_at.desc()).all()
 
-    # Get packages for the dropdown filter
-    if package_type == 'health':
-        packages = HealthPackage.query.filter_by(is_active=True).all()
-    else:
-        packages = SportsPackage.query.filter_by(is_active=True).all()
+    # 6. Fetch packages for the dropdown list (to populate the "Package" select)
+    all_packages = HealthPackage.query.all() + SportsPackage.query.all()
 
-    # --- FIX: Removed duplicated code for getting user access ---
-    modules = [
-        'banners', 'doctors', 'counters', 'testimonials', 'specialities',
-        'departments', 'health_packages', 'sports_packages',
-        'department_content', 'users', 'callback_requests', 'reviews'
-    ]
-    access = {module: False for module in modules}
-    if user.access:
-        for module in modules:
-            access[module] = getattr(user.access, module, False)
+    # Required sidebar/access data for your template
+    admin_id = session.get("admin_id")
+    user = User.query.get(admin_id)
+    modules = ['banners', 'doctors', 'counters', 'testimonials', 'specialities',
+               'departments', 'health_packages', 'sports_packages', 'users', 'callback_requests']
+    access = {m: getattr(user.access, m, False)
+              for m in modules if user.access}
 
-    return render_template(
-        'admin/admin_callbacks.html',
-        callbacks=callbacks,
-        packages=packages,
-        package_type=package_type,
-        access=access,
-        current_user=user
-    )
+    return render_template('admin/admin_callbacks.html',
+                           callbacks=callbacks,
+                           packages=all_packages,  # Passes the package list to HTML
+                           access=access,
+                           current_user=user)
 
 
 @app.route('/admin/callbacks/download')
