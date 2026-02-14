@@ -1415,6 +1415,15 @@
             display: contents
         }
 
+        .doc_gif img {
+            position: fixed;
+            right: 2rem;
+            width: 90px;
+            bottom: 4rem;
+            z-index: 9;
+        }
+
+
         @media (max-width:991.98px) {
             .footer-links-multi-column {
                 column-count: 2
@@ -1460,6 +1469,12 @@
         }
 
         @media (max-width:768px) {
+            .doc_gif img {
+                position: fixed;
+                right: 2rem;
+                width: 80px;
+                bottom: 4.3rem;
+            }
             .footer-content {
                 flex-direction: column;
                 text-align: center
@@ -1524,6 +1539,10 @@
                 class="chrome-btn chrome-btn--green">Open with Web</a>
             <button class="chrome-btn chrome-btn--grey" onclick="hideChromePopup()">Cancel</button>
         </div>
+    </div>
+
+     <div class="doc_gif">
+        <img src="static/img/output-onlinegiftools.gif" alt="">
     </div>
 
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
