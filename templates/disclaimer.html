@@ -1,404 +1,1122 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="en">
 
-{% block title %}Disclaimer - Aarogya Hastha{% endblock %}
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-{% block content %}
+    <title>{% block title %}{{ department.meta_title }}{% endblock %}</title>
+    <meta name="description" content="{{ department.meta_description }}">
+    <meta name="keywords" content="{{ department.meta_keywords }}">
+    <meta name="author" content="Aarogyahastha Pvt Ltd">
+    <meta name="designer" content="Aarogyahastha Pvt Ltd">
+    <link rel="canonical"
+        href="{{ department.canonical_url or url_for('department_page', slug=department.slug, _external=True) }}">
+    <meta name="no-email-collection" content="http://www.unspam.com/noemailcollection/">
+    <meta name="google-site-verification" content="T3QqCQjcJP8HqwIYaCHz3AZHCSXJDF-NJfE8GNiSb-Q" />
+    <meta name="robots" content="index,follow">
+    <meta name="revisit-after" content="7 days">
+    <meta name="distribution" content="web">
+    <meta name="robots" content="noodp">
+    <meta name="web_author" content="Aarogyahastha Pvt Ltd">
+    <meta name="rating" content="general">
+    <meta name="rating" content="safe for kids">
+    <meta name="subject" content="Healthcare">
+    <meta name="copyright" content="Copyright © 2025">
+    <meta name="reply-to" content="info@aarogyahastha.com">
+    <meta name="abstract" content="{{ department.meta_abstract }}">
+    <meta name="city" content="Bangalore">
+    <meta name="country" content="India">
+    <meta name="distribution" content="global">
+    <meta name="classification" content="Healthcare, Hospital">
+    <base href="/">
 
-{% block head %}
-{{ super() }}
-<meta name="author" content="Aarogyahastha Pvt Ltd">
-<meta name="designer" content="Aarogyahastha Pvt Ltd">
-<meta name="publisher" content="Aarogyahastha Pvt Ltd">
-<link rel="canonical" href="https://aarogyahastha.com/disclaimer">
-<meta name="no-email-collection" content="http://www.unspam.com/noemailcollection/">
-<meta name="robots" content="index,follow">
-<meta name="subject" content="Healthcare">
-<meta name="copyright" content="Copyright © 2025">
-<meta name="reply-to" content="info@aarogyahastha.com">
-<meta name="abstract"
-    content="We provide timely and specialized medical attention for patients experiencing life-threatening conditions, ensuring their urgent needs are met with the highest level of care.">
-<meta name="city" content="Bangalore">
-<meta name="country" content="India">
-<meta name="classification" content="Healthcare, Hospital">
-<base href="/">
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
-<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-{% endblock %}
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-84XCMMFTS8"></script>
-<script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-    gtag('config', 'G-84XCMMFTS8');
-</script>
-<script>(function (w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-TD2L5G6C');</script>
+    <link rel="icon" type="image/x-icon" href="https://aarogyahastha.com/static/img/fav.png/">
 
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Aarogya Hastha Hospitals" />
+    <meta property="og:title" content="{{ department.meta_title }}" />
+    <meta property="og:description" content="{{ department.meta_description }}" />
+    <meta property="og:url"
+        content="{{ department.canonical_url or url_for('department_page', slug=department.slug, _external=True) }}" />
+    <meta property="og:image" content="https://aarogyahastha.com/static/img/logo.png/" />
+
+    <link rel="stylesheet" href="/static/css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/css/style.css">
+
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-WGJFVPCB');</script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-84XCMMFTS8"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-84XCMMFTS8');
+    </script>
 </head>
-<style>
-    /* --- START: New & Improved Styles --- */
 
-    :root {
-        --ah-primary: #0056b3;
-        /* A deeper, more professional blue */
-        --ah-secondary: #007bff;
-        /* Original blue, for accents */
-        --ah-text: #333;
-        --ah-text-light: #555;
-        --ah-bg: #ffffff;
-        --ah-bg-light: #f8f9fa;
-        --ah-border: #dee2e6;
-    }
+<body>
 
-    /* --- Breadcrumbs --- */
-    .breadcrumb-section {
-        padding: 10px 0;
-        background-color: var(--ah-bg-light);
-        border-bottom: 1px solid var(--ah-border);
-    }
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WGJFVPCB" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
+    <div class="nav-overlay"></div>
 
-    .breadcrumb {
-        margin-bottom: 0;
-        padding: 0.75rem 1rem;
-    }
+    <div class="left-sidebar">
+        <a href="/appointments" class="icon-link">
+            <img src="/static/img/img/book-appointment.png" alt="Book Appointment Icon">
+            <span class="tooltip-text">Book an Appointment</span>
+        </a>
+        <a href="javascript:void(0)" onclick="showChromePopup()" class="icon-link">
+            <img src="/static/img/img/whatsapp.png" alt="WhatsApp Icon">
+            <span class="tooltip-text">WhatsApp</span>
+        </a>
+        <a href="/departments/" class="icon-link">
+            <img src="/static/img/img/find-doctors.png" alt="Find Doctors Icon">
+            <span class="tooltip-text">Find a Doctor</span>
+        </a>
+        <a href="tel:8066668800" class="icon-link">
+            <img src="/static/img/img/call-icon.png" alt="Call Icon">
+            <span class="tooltip-text">Call Us</span>
+        </a>
+    </div>
 
-    .breadcrumb-item+.breadcrumb-item::before {
-        content: "›";
-        /* More elegant separator */
-        padding: 0 0.6rem;
-        color: #6c757d;
-    }
-
-    .breadcrumb-item a {
-        color: var(--ah-primary);
-        text-decoration: none;
-        font-weight: 500;
-    }
-
-    .breadcrumb-item.active {
-        color: #6c757d;
-        font-weight: 500;
-    }
-
-    /* --- Banner --- */
-    .department-banner {
-        position: relative;
-        color: #fff;
-    }
-
-    .department-banner .banner {
-        position: relative;
-        overflow: hidden;
-        border-radius: 8px;
-        /* Soften the edges */
-    }
-
-    .department-banner .banner img {
-        width: 100%;
-        display: block;
-        object-fit: cover;
-        max-height: 350px;
-        /* Constrain banner height */
-    }
-
-    /* Gradient overlay for text readability */
-    .department-banner .banner::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: linear-gradient(90deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.2) 100%);
-        z-index: 1;
-    }
-
-    .department-banner .text-box-1 {
-        position: absolute;
-        bottom: 2rem;
-        left: 2rem;
-        z-index: 2;
-        /* Above the overlay */
-    }
-
-    .department-banner .text-box-1 h1 {
-        font-size: 2.75rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        color: #fff;
-        line-height: 1.2;
-        margin-bottom: 0;
-        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
-    }
-
-    /* --- Content Typography --- */
-    .contact-details {
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-        font-size: 1rem;
-        line-height: 1.7;
-        /* Increased for readability */
-        color: var(--ah-text-light);
-    }
-
-    .contact-details p {
-        margin-bottom: 1.5rem;
-    }
-
-    /* Make the intro paragraph stand out */
-    .contact-details>div>div>p:nth-of-type(1) {
-        font-size: 1.1rem;
-        color: var(--ah-text);
-        font-weight: 500;
-    }
-
-    .contact-details h2 {
-        font-size: 1.75rem;
-        font-weight: 600;
-        color: var(--ah-text);
-        margin-bottom: 0.75rem;
-        line-height: 1.3;
-    }
-
-    .contact-details h3 {
-        font-size: 1.4rem;
-        font-weight: 600;
-        color: var(--ah-text);
-        margin-top: 2rem;
-        margin-bottom: 0.75rem;
-    }
-
-    /* --- Numbered List Styling (Modern) --- */
-    .contact-details ol.big-marker {
-        list-style-type: none;
-        /* REMOVED DOUBLE NUMBER */
-        counter-reset: policy-section;
-        padding-left: 0;
-        margin-top: 2.5rem;
-    }
-
-    .contact-details ol.big-marker>li {
-        counter-increment: policy-section;
-        position: relative;
-        padding-left: 3rem;
-        /* REDUCED PADDING FOR SMALLER NUMBER BLOCK */
-        margin-bottom: 2.5rem;
-        /* Space between main points */
-    }
-
-    /* The styled number block */
-    .contact-details ol.big-marker>li::before {
-        content: counter(policy-section);
-        /* Just the number */
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 2.5rem;
-        /* REDUCED SIZE */
-        height: 2.5rem;
-        /* REDUCED SIZE */
-        line-height: 2.5rem;
-        /* REDUCED SIZE */
-        text-align: center;
-        font-size: 1.25rem;
-        /* REDUCED FONT SIZE */
-        font-weight: 700;
-        color: var(--ah-primary);
-        background-color: var(--ah-bg-light);
-        border-radius: 8px;
-        border: 1px solid var(--ah-border);
-    }
-
-    .contact-details ol.big-marker li h2 {
-        margin-top: 0;
-        padding-top: 0.3rem;
-        /* Align with number block */
-    }
-
-    /* --- Bullet Point List Styling (for consistency) --- */
-    .contact-details ul.with-bullet-point {
-        list-style-type: none;
-        padding-left: 1.5rem;
-        margin-top: 1rem;
-        margin-bottom: 1.5rem;
-    }
-
-    .contact-details ul.with-bullet-point li {
-        margin-bottom: 0.75rem;
-        position: relative;
-    }
-
-    .contact-details ul.with-bullet-point li::before {
-        content: '■';
-        position: absolute;
-        left: -1.5rem;
-        top: 0;
-        color: var(--ah-secondary);
-        font-size: 0.8rem;
-        line-height: 1.7;
-    }
-
-    /* --- END: New & Improved Styles --- */
-</style>
-
-<section class="breadcrumb-section">
-    <div class="container">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb" itemscope itemtype="http://schema.org/BreadcrumbList">
-                <li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
-                    <a itemprop="item" href="/">
-                        <span itemprop="name">Home</span>
+    <header class="new-header">
+        <div class="header-top-container">
+            <div class="container header-top-content">
+                <div class="mobile_head">
+                    <a href="/" class="logo">
+                        <div class="header-logos">
+                            <div class="logo-wrapper">
+                                <img src="/static/img/img/logo.png" alt="AarogyaHastha Hospitals Logo"
+                                    class="header-logo-img">
+                            </div>
+                            <div class="logo-wrapper new-logo-wrapper">
+                                <img src="/static/img/img/NABH_Logo-01.png" alt="New Hospital Logo"
+                                    class="header-logo-img new-logo-img">
+                            </div>
+                        </div>
                     </a>
-                    <meta itemprop="position" content="1">
-                </li>
-                <li class="breadcrumb-item active" aria-current="page" itemprop="itemListElement" itemscope
-                    itemtype="http://schema.org/ListItem">
-                    <span itemprop="name">Disclaimer</span>
-                    <meta itemprop="position" content="2">
-                </li>
-            </ol>
-        </nav>
-    </div>
-</section>
+                    <button class="navbar-toggle d-lg-none" id="mobile-menu-toggle">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                </div>
+                <div class="header-contact">
+                    <span class="appointment-number">
+                        <div class="contact-label">Appointments</div>
+                        <div class="contact-row">
+                            <i class="fa fa-phone"></i>
+                            <a href="tel:08066668811">080 6666 8811/22/33</a>
+                        </div>
+                    </span>
+                    <span class="emergency-number">
+                        <div class="contact-label">24/7 Ambulance</div>
+                        <div class="contact-row">
+                            <i class="fa fa-ambulance"></i>
+                            <a href="tel:08066668877">080 6666 8877/88</a>
+                        </div>
+                    </span>
+                </div>
+            </div>
 
-<section class="department-banner" data-aos="fade-up" data-aos-offset="300" data-aos-easing="ease-in-sine">
-    <div class="container">
-        <div class="banner">
-            <img loading="lazy" src="../static/img/banners/disclaimer.jpg" alt="Disclaimer Banner">
-            <div class="text-box-1">
-                <h1>DISCLAIMER</h1>
+            <div class="ambulance-animation-container">
+                <div class="ambulance-animation">
+                    <div class="ambulance-icon">
+                        <img src="/static/img/img/ambulance.png" alt="Ambulance" />
+                    </div>
+                    <div class="ambulance-number">
+                        <a href="tel:08066668877">Emergency: 080 6666 8877/88</a>
+                    </div>
+                </div>
+            </div>
 
+            <div class="nav-container">
+                <div class="container nav-content">
+                    <ul id="mobile-nav" class="nav-list d-lg-none">
+                        <button class="nav-close-btn" id="mobile-menu-close">×</button>
+                        <li><a class="nav-links" href="/">Home</a></li>
+                        <li><a class="nav-links" href="/appointments">Appointments</a></li>
+                        <li><a class="nav-links" href="/doctors">Doctors</a></li>
+                        <li><a class="nav-links" href="/departments/">Departments</a></li>
+                        <li><a class="nav-links" href="/health-packages">Health Packages</a></li>
+                        <li><a class="nav-links" href="/sports-packages">Sports Packages</a></li>
+                        <li><a class="nav-links" href="/blog">Blog</a></li>
+                        <li><a class="nav-links" href="/about">About Us</a></li>
+                        <li class="dropdown">
+                            <a class="nav-links" href="/contact">Contact</a>
+                            <ul class="dropdown-menu">
+                                <li><a
+                                        href="https://www.google.com/search?sca_esv=01d7d1da4f3739f4&sxsrf=AE3TifMajnR1cj7CV7KMp-OAhDhG6-ag5A:1757584508053&si=AMgyJEtREmoPL4P1I5IDCfuA8gybfVI2d5Uj7QMwYCZHKDZ-E67a9GN5xsFdNX82bZli0D47ZU-t7_RrF_VvCuEUJnWTI5SR80ndLu5MxI-lgdtIvv6GkmwZO2uyJfSHoUpzWU5bjtfVoFrfNvZ8hwgIvFvNDwqWmX3a7tdbZfx8SWbB5YgDksnqmrDV4yojH420D2gkt6js&q=AAROGYA+HASTHA+HOSPITALS+-+CENTRE+FOR+SURGICAL+EXCELLENCE+Reviews&sa=X&ved=2ahUKEwiMnY_CuNCPAxXKTGwGHZhvD64Q0bkNegQIKhAD&biw=1280&bih=585&dpr=1.5#lrd=0x3bae132a0bbeb64b:0x626c13b98813a8a3,3,,,,">Review
+                                        us</a>
+                                </li>
+                                <li><a href="#" class="write-review-btn">Write a message to ED</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <ul class="main-nav" id="main-navigation">
+                        <li><a class="nav-links" href="/">Home</a></li>
+                        <li><a class="nav-links" href="/appointments">Appointments</a></li>
+                        <li><a class="nav-links" href="/doctors">Doctors</a></li>
+                        <li><a class="nav-links" href="/departments/">Departments</a></li>
+                        <li><a class="nav-links" href="/health-packages">Health Packages</a></li>
+                        <li><a class="nav-links" href="/sports-packages">Sports Packages</a></li>
+                        <li><a class="nav-links" href="/blog">Blog</a></li>
+                        <li class="dropdown">
+                            <a class="nav-links" href="/about">About us <i class="fa fa-angle-down"></i></a>
+                            <ul class="dropdown-menu">
+
+                                <li>
+                                    <a href="/bmw_report" target="_blank">
+                                        <i class="fa-solid fa-circle-info"></i> BMW Report
+                                    </a>
+
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a class="nav-links" href="/contact">Contact <i class="fa fa-angle-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="https://www.google.com/search?sca_esv=01d7d1da4f3739f4&sxsrf=AE3TifONK5RnA4evxGz8cGk4CrHNvVAxYg:1757584553118&si=AMgyJEtREmoPL4P1I5IDCfuA8gybfVI2d5Uj7QMwYCZHKDZ-E67a9GN5xsFdNX82bZli0D47ZU-t7_RrF_VvCuEUJnWTI5SR80ndLu5MxI-lgdtIvv6GkmwZO2uyJfSHoUpzWU5bjtfVoFrfNvZ8hwgIvFvNDwqWmX3a7tdbZfx8SWbB5YgDksnqmrDV4yojH420D2gkt6js&q=AAROGYA+HASTHA+HOSPITALS+-+CENTRE+FOR+SURGICAL+EXCELLENCE+Reviews&sa=X&ved=2ahUKEwjU_M3XuNCPAxU-RmwGHaDaFFcQ0bkNegQIKBAD&biw=1280&bih=585&dpr=1.5#lrd=0x3bae132a0bbeb64b:0x626c13b98813a8a3,3,,,,"
+                                        target="_blank"><i class="fa-solid fa-star"></i> Review us</a></li>
+                                <li><a href="#" class="write-review-btn"><i class="fa-solid fa-envelope"></i> Write a
+                                        message to ED</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
-</section>
-<section data-aos="fade-up" data-aos-offset="300" data-aos-easing="ease-in-sine" class="contact-details py-5 my-1">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-10 col-lg-9">
-                <p>The information provided on this website is subject to the following terms and conditions. By
-                    accessing and using this website, you agree to be bound by these terms and conditions.</p>
-                <ol class="big-marker">
-                    <li>
-                        <h2>ACCURACY OF INFORMATION:</h2>
-                        <p>While we strive to keep the information on this website accurate and up-to-date, AHHPL
-                            makes no representation or warranties of any kind, express or implied, about the
-                            completeness, accuracy, reliability, suitability or availability with respect to the
-                            website information, products, services or related graphics contained on the website for
-                            any purpose. Any reliance you place on such information is strictly at your own risk.
-                        </p>
-                    </li>
-                    <li>
-                        <h2>MEDICAL ADVICE</h2>
-                        <p>The information on this website is for general information purposes only and is not
-                            intended as a substitute for professional medical advice, diagnosis or treatment. Always
-                            seek the advice of your physician or other qualified healthcare provider with any
-                            questions you may have regarding a medical condition. Any action taken by you solely
-                            based on the information garnered from the website shall strictly be at your own risk.
-                        </p>
-                    </li>
-                    <li>
-                        <h2>EXTERNAL LINKS:</h2>
-                        <p>This website may contain links to external websites that are not maintained or controlled
-                            by AHHPL. We do not endorse or make any representations about the accuracy or
-                            completeness of the information on external sites. The inclusion of any links does not
-                            imply a recommendation or endorse the views expressed within them. </p>
-                    </li>
-                    <li>
-                        <h2>AVAILABILITY OF SERVICES: </h2>
-                        <p>AHHPL reserves the right to modify, suspend, or discontinue any part or all of the
-                            website's content or services at any time without prior notice. We do not guarantee that
-                            access to the website, and its service will be available at all times. </p>
-                    </li>
-                    <li>
-                        <h2>LIMITATION OF LIABILITY: </h2>
-                        <p>In no event will AHHPL be liable for any loss or damage, including, without limitation,
-                            indirect or consequential loss or damage, or any loss or damage whatsoever arising from
-                            loss of data or profit arising out of, or in connection with, the use of this website.
-                        </p>
-                    </li>
-                    <li>
-                        <h2>SECURITY:</h2>
-                        <p>We take reasonable security measures as are statutorily required and conform to
-                            international standards. By using the services of the website, you implicitly accept the
-                            privacy policy of AHHPL.</p>
-                    </li>
-                    <li>
-                        <h2>CHANGE OF TERMS: </h2>
-                        <p>AHHPL reserves the right to update or change the instant disclaimer and the terms and
-                            conditions without prior notice. Your use of the website following any such changes
-                            constitutes your agreement to the same, and you shall be bound by the updated terms and
-                            conditions.</p>
-                    </li>
-                </ol>
-            </div>
-        </div>
-    </div>
-</section>
+    </header>
 
-<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-<script src="static/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script src="static/js/script.js"></script>
-<script>
-    $(".book-apt").on('click', function () {
-        var url = $(this).data("url");
-        window.open(url, '_blank');
-    });
-    function showChromePopup() {
-        const popup = document.getElementById("chrome-popup");
-        popup.classList.add("is-visible");
-        popup.setAttribute("aria-hidden", "false");
-    }
-    function hideChromePopup() {
-        const popup = document.getElementById("chrome-popup");
-        popup.classList.remove("is-visible");
-        popup.setAttribute("aria-hidden", "true");
-    }
-    // ESC closes popup
-    document.addEventListener("keydown", e => {
-        if (e.key === "Escape") hideChromePopup();
-    });
-    document.addEventListener('DOMContentLoaded', function () {
-        const scrollBtn = document.getElementById('scrollToTopBtn');
-        const scrollThreshold = 300;
+    <style>
+        /* Breadcrumb Styles */
+        .breadcrumb-section {
+            padding: 15px 0;
+            background-color: #f8f9fa;
+        }
 
-        function toggleScrollButton() {
-            if (window.pageYOffset > scrollThreshold ||
-                document.documentElement.scrollTop > scrollThreshold) {
-                scrollBtn.style.display = 'flex';
-            } else {
-                scrollBtn.style.display = 'none';
+        .breadcrumb {
+            margin-bottom: 0;
+            padding: 0;
+            background: transparent;
+        }
+
+        .breadcrumb-item+.breadcrumb-item::before {
+            content: "›";
+            color: #6c757d;
+        }
+
+        .breadcrumb-item a {
+            color: #103A60;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .breadcrumb-item.active {
+            color: #6c757d;
+        }
+
+        /* Department Banner Styles */
+        .department-banner {
+            position: relative;
+            margin-bottom: 30px;
+            height: 400px !important;
+            overflow: hidden;
+            /* Added to contain the banner properly */
+        }
+
+        .banner {
+            height: 50%;
+            /* Make banner fill the container */
+        }
+
+        .banner img {
+            width: 100%;
+            height: 50%;
+            /* Make image fill the banner */
+            object-fit: cover;
+            object-position: center;
+            /* Center the image focus */
+        }
+
+        .banner-content-transparent {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+            padding: 10px 0 180px;
+            /* Increased padding further */
+            color: white;
+            z-index: 10;
+            /* Ensure content is above image */
+        }
+
+        .text-content h1 {
+            font-size: 2rem;
+            /* Significant reduction from 2.5rem */
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
+            /* Thinner shadow */
+            line-height: 1.1;
+        }
+
+        .text-content p {
+            font-size: 0.95rem;
+            /* Standard paragraph size */
+            opacity: 0.9;
+            line-height: 1.5;
+            max-width: 600px;
+        }
+
+        .banner-buttons-transparent {
+            margin-top: 20px !important;
+        }
+
+        .btn-appointment-transparent,
+        .btn-call-transparent {
+            background-color: #16979D;
+            color: white;
+            padding: 8px 20px;
+            /* Slimmer buttons */
+            border-radius: 4px;
+            /* More modern, sharp corners */
+            margin-right: 12px;
+            font-weight: 500;
+            font-size: 0.85rem;
+            /* Small button text */
+            min-width: 160px;
+            text-align: center;
+        }
+
+        .btn-call-transparent {
+            background-color: #103A60;
+        }
+
+        .btn-appointment-transparent:hover,
+        .btn-call-transparent:hover {
+            transform: translateY(-5px);
+            /* More pronounced hover effect */
+            color: white;
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
+            text-decoration: none;
+        }
+
+        /* Optional: Add a subtle overlay for better text readability */
+        .banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 40%;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), transparent);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .doc_gif img {
+            position: fixed;
+            right: 2rem;
+            width: 90px;
+            bottom: 4rem;
+            z-index: 9;
+        }
+
+        @media (max-width: 768px) {
+            .doc_gif img {
+                position: fixed;
+                right: 2rem;
+                width: 80px;
+                bottom: 4.3rem;
+            }
+
+            .department-banner {
+                height: 400px !important;
+                /* Shorter banner container */
+            }
+
+            .text-content h1 {
+                font-size: 1.75rem;
+            }
+
+            .text-content p {
+                font-size: 0.9rem;
             }
         }
 
-        window.addEventListener('scroll', toggleScrollButton);
+        @media (max-width: 768px) {
+            .department-banner {
+                height: 350px !important;
+                /* Very compact mobile view */
+            }
 
-        scrollBtn.addEventListener('click', function (e) {
-            e.preventDefault();
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-            // Add slight animation to the icon
-            this.querySelector('i').style.transform = 'translateY(-4px)';
-            setTimeout(() => {
-                this.querySelector('i').style.transform = '';
-            }, 300);
+            .banner-content-transparent {
+                padding: 30px 0 20px;
+                /* Reduced vertical padding */
+            }
+
+            .text-content h1 {
+                font-size: 1.4rem;
+                /* Small mobile heading */
+            }
+
+            .text-content p {
+                font-size: 0.85rem;
+            }
+
+            .btn-appointment-transparent,
+            .btn-call-transparent {
+                padding: 6px 15px;
+                font-size: 0.8rem;
+                min-width: 140px;
+                margin-bottom: 8px;
+                display: block;
+                margin-right: 0;
+            }
+        }
+
+        /* Specialist Card Styling */
+        .specialist-card {
+            display: flex;
+            background: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            margin-bottom: 20px;
+            transition: all 0.3s;
+            border: 1px solid #eee;
+            height: 100%;
+        }
+
+        .specialist-card:hover {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .specialist-card .img-box {
+            width: 40%;
+            background: #f4f7f9;
+            min-height: 200px;
+        }
+
+        .specialist-card .img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .specialist-card .content {
+            width: 60%;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .specialist-card h3 {
+            color: #103A60;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .specialist-card h4 {
+            color: #16979D;
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+
+        .specialist-card .book-btn {
+            background: #103A60;
+            color: #fff;
+            text-align: center;
+            padding: 8px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 10px;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+
+        .specialist-card .book-btn:hover {
+            background: #16979D;
+        }
+
+        /* Service Carousel Styling Fixes */
+        .service-carousel-section .item {
+            text-align: center;
+            padding: 25px 15px;
+            border: 1px solid #eef2f6;
+            border-radius: 16px;
+            /* Softer rounded corners */
+            background: #ffffff;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            margin: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+        }
+
+        .service-carousel-section .item:hover .dept-icon {
+            background: #16979D;
+            /* Icon background turns teal on hover */
+            filter: brightness(0) invert(1);
+            /* Turns icon white if it's a dark SVG/PNG */
+        }
+
+        .service-carousel-section .item h4 {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #103A60;
+            margin-top: 5px;
+            line-height: 1.3;
+        }
+
+        /* INCREASED ICON SIZE HERE */
+        .service-carousel-section .dept-icon {
+            width: 55px !important;
+            /* Elegant, smaller size */
+            height: 55px !important;
+            padding: 10px;
+            /* Space inside the icon box */
+            background: #f0f9fa;
+            /* Very light tint of your brand teal */
+            border-radius: 12px;
+            /* Square-ish rounded icons */
+            margin-bottom: 15px;
+            object-fit: contain;
+            transition: 0.3s;
+        }
+
+
+        /* Responsive tweaks */
+        @media (max-width: 768px) {
+            .text-content h1 {
+                font-size: 2rem;
+            }
+
+            .specialist-card {
+                flex-direction: column;
+            }
+
+            .specialist-card .img-box,
+            .specialist-card .content {
+                width: 100%;
+            }
+
+            .specialist-card .img-box {
+                height: 250px;
+            }
+
+            /* Mobile adjustments for banner height */
+            .department-banner img {
+                height: 350px !important;
+            }
+        }
+    </style>
+
+    <section class="breadcrumb-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/departments">Departments</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ department.name }}</li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+
+    <section class="department-banner" data-aos="fade-up">
+        <div class="container">
+            <div class="banner"
+                style="position: relative; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                {% if department.banner_path %}
+                <img loading="lazy" src="{{ url_for('static', filename=department.banner_path) }}"
+                    alt="{{ department.banner_alt_text or department.name }}"
+                    style="width: 100%; height: 550px; object-fit: cover;">
+                {% else %}
+                <img loading="lazy" src="{{ url_for('static', filename='img/banners/default.jpg') }}"
+                    alt="{{ department.banner_alt_text or department.name }}"
+                    style="width: 100%; height: 550px; object-fit: cover;">
+                {% endif %}
+
+                <div class="banner-content-transparent">
+                    <div class="container">
+                        <div class="text-content">
+                            <h1>{{ department.name }}</h1>
+                            <p class="lead text-white">{{ department.description }}</p>
+                        </div>
+                        <div class="banner-buttons-transparent mt-4">
+                            <a href="https://app.fyndbetter.com/ahh_apt" target="_blank"
+                                class="btn btn-appointment-transparent">
+                                <i class="fas fa-calendar-check me-2"></i>Book Appointment
+                            </a>
+                            <a href="tel:+08066668811" class="btn btn-call-transparent">
+                                <i class="fas fa-phone me-2"></i>Call Us
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container my-5">
+        <ul class="nav nav-tabs" id="departmentTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="overview-tab" data-bs-toggle="tab"
+                    data-bs-target="#overview-tab-pane" type="button" role="tab">Overview</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="services-tab" data-bs-toggle="tab" data-bs-target="#services-tab-pane"
+                    type="button" role="tab">Our Services</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="specialists-tab" data-bs-toggle="tab"
+                    data-bs-target="#specialists-tab-pane" type="button" role="tab">Our Specialists</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="blog-tab" data-bs-toggle="tab" data-bs-target="#blog-tab-pane"
+                    type="button" role="tab">Blog</button>
+            </li>
+        </ul>
+
+        <div class="tab-content pt-4" id="departmentTabsContent">
+
+            <div class="tab-pane fade show active" id="overview-tab-pane" role="tabpanel">
+                <div class="row">
+                    <div class="col-lg-12">
+                        {% if overview %}
+                        <div class="bg-light p-4 rounded-3 border">
+                            {% if overview.quote %}
+                            <blockquote class="blockquote border-start border-4 border-primary ps-4 mb-4">
+                                <p class="fst-italic">"{{ overview.quote }}"</p>
+                                {% if overview.quote_author %}
+                                <footer class="blockquote-footer mt-2">{{ overview.quote_author }}</footer>
+                                {% endif %}
+                            </blockquote>
+                            {% endif %}
+
+                            <div class="content-body text-secondary">
+                                {{ overview.content | safe }}
+                            </div>
+
+                            {% if faqs %}
+                            <div class="mt-5">
+                                <h3 class="mb-4" style="color: #103A60;">Frequently Asked Questions</h3>
+                                <div class="accordion" id="deptFaqAccordion">
+                                    {% for faq in faqs %}
+                                    <div class="accordion-item mb-2 border rounded overflow-hidden">
+                                        <h2 class="accordion-header" id="heading{{ loop.index }}">
+                                            <button class="accordion-button collapsed fw-bold text-dark" type="button"
+                                                data-bs-toggle="collapse" data-bs-target="#collapse{{ loop.index }}">
+                                                {{ faq.question }}
+                                            </button>
+                                        </h2>
+                                        <div id="collapse{{ loop.index }}" class="accordion-collapse collapse"
+                                            data-bs-parent="#deptFaqAccordion">
+                                            <div class="accordion-body text-muted">
+                                                {{ faq.answer | safe }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            {% endif %}
+                        </div>
+                        {% else %}
+                        <div class="alert alert-light border">Overview content coming soon.</div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="services-tab-pane" role="tabpanel">
+                <div class="department-section">
+                    <h2 class="mb-4 text-center" style="color: #103A60;">Conditions Treated & Services</h2>
+                    <div class="row g-4">
+                        {% for service in services %}
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card service-card-wrapper h-100">
+                                <div class="d-flex align-items-center mb-3">
+                                    {% if service.icon_path %}
+                                    <div class="service-icon-box">
+                                        <img src="{{ url_for('static', filename=service.icon_path) }}" alt="Icon">
+                                    </div>
+                                    {% endif %}
+                                </div>
+
+                                <h4 class="service-card-title">{{ service.title }}</h4>
+
+                                <div class="card-body p-0">
+                                    {% if service.list_items %}
+                                    <ul class="service-list">
+                                        {% for item in service.get_list_items() %}
+                                        <li><i class="fas fa-check-circle"></i> {{ item }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                    {% endif %}
+
+                                    <p class="service-desc mb-0">{{ service.description }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="specialists-tab-pane" role="tabpanel">
+                <div class="container p-0">
+                    <div class="row g-4">
+                        {% for doctor in doctors %}
+                        {% if doctor.is_active %}
+                        <div class="col-lg-6">
+                            <div class="specialist-card">
+                                <div class="img-box">
+                                    {% if doctor.image_path %}
+                                    <img src="{{ url_for('static', filename=doctor.image_path) }}"
+                                        alt="{{ doctor.name }}">
+                                    {% else %}
+                                    <img src="{{ url_for('static', filename='img/doctors/default.jpg') }}"
+                                        alt="No Image">
+                                    {% endif %}
+                                </div>
+                                <div class="content">
+                                    <h3>{{ doctor.name }}</h3>
+                                    <h4>{{ doctor.specialization }}</h4>
+
+                                    {% if doctor.day_from %}
+                                    <p class="mb-2 text-muted small"><i class="far fa-clock me-1"></i> {{
+                                        doctor.day_from }} - {{ doctor.day_to }}</p>
+                                    {% endif %}
+
+                                    <div class="d-flex gap-2 mt-auto w-100">
+                                        <a class="book-btn flex-grow-1" href="https://app.fyndbetter.com/ahh_apt"
+                                            target="_blank">Book Appointment</a>
+                                        <a href="{{ url_for('doctor_detail', slug=doctor.slug) }}"
+                                            class="btn btn-outline-primary btn-sm flex-grow-1 mt-2 d-flex align-items-center justify-content-center"
+                                            style="border-radius:5px;">View Profile</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% else %}
+                        <div class="col-12 text-center py-5">
+                            <p class="text-muted">No specialists currently listed for this department.</p>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="blog-tab-pane" role="tabpanel">
+                <div class="container p-0">
+                    {% if blogs %}
+                    <div class="row g-4 justify-content-center">
+                        {% for blog in blogs %}
+                        <div class="col-md-4">
+                            <div class="card h-100 shadow-sm border-0">
+                                <div style="height: 200px; overflow: hidden; border-radius: 5px 5px 0 0;">
+                                    {% if blog.image_path %}
+                                    <img src="{{ url_for('static', filename=blog.image_path) }}"
+                                        class="w-100 h-100 object-fit-cover" alt="{{ blog.title }}">
+                                    {% else %}
+                                    <img src="{{ url_for('static', filename='img/blogs/default.jpg') }}"
+                                        class="w-100 h-100 object-fit-cover" alt="Blog">
+                                    {% endif %}
+                                </div>
+                                <div class="card-body d-flex flex-column">
+                                    <h5 class="card-title fw-bold" style="color: #103A60;">{{ blog.title }}</h5>
+                                    <p class="card-text text-muted small">{{ blog.date }}</p>
+                                    <a href="{{ url_for('blog_detail', slug=blog.slug) }}"
+                                        class="btn btn-outline-info mt-auto text-dark fw-bold border-2">Read More</a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    <div class="text-center py-5">
+                        <i class="fas fa-newspaper fa-3x text-muted mb-3"></i>
+                        <p class="text-muted">No recent blogs found for this department.</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <style>
+        .blogs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(18.75rem, 1fr));
+            gap: var(--space-lg);
+            padding: var(--space-xl) var(--space-md);
+            max-width: 75rem;
+            margin: 0 auto;
+        }
+
+        .blog-card {
+            background: var(--color-white);
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            border: 1px solid #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            width: 24rem;
+            /* ⬅️ Reduced width */
+            height: 25rem;
+            /* Keeps the taller card look */
+            margin: 0 auto;
+
+            transition: all 0.3s ease;
+        }
+
+
+
+
+
+        .blog-image {
+            width: 18rem;
+            height: 12rem;
+            margin: 1.25rem auto 1rem auto;
+            overflow: hidden;
+            background: var(--color-background-light);
+
+        }
+
+        .blog-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+
+        }
+
+
+        .blog-content {
+            padding: 0 var(--space-md) var(--space-md) var(--space-md);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .blog-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--color-secondary);
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            margin: 0;
+            text-align: center;
+        }
+
+        .blog-date {
+            font-size: 0.9rem;
+            color: var(--color-text);
+            font-weight: 500;
+            margin: 0;
+            text-align: center;
+        }
+
+        .read-more-container {
+            margin-top: 0.5rem;
+            /* reduced from 'auto' to bring it up */
+        }
+
+        .read-more-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            /* White text */
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            padding: 0.5rem 0;
+            width: 50%;
+            border: 2px solid #16979D;
+            /* matching gradient start */
+            background: linear-gradient(to bottom, #16979D, #103A60);
+            /* Gradient background */
+            transition: all 0.3s ease;
+            margin: 0.5rem auto 0;
+            /* Top margin reduced to move up */
+            border-radius: 6px;
+        }
+
+
+
+        .read-more-btn:hover {
+            background: linear-gradient(to bottom, #7FD1D5, #4D7FA3);
+            /* Even lighter gradient */
+            color: #ffffff;
+        }
+    </style>
+
+    <script>
+        function showDescription(index) {
+            // Get the hidden description
+            let desc = document.getElementById("desc-" + index).innerHTML;
+
+            // Place it into the container below the grid
+            document.getElementById("description-container").innerHTML = desc;
+        }
+    </script>
+
+    <section data-aos-easing="ease-in-sine" class="service-carousel-section py-5">
+        <div class="container d-flex justify-content-center">
+            <div class="owl-carousel service-carousel">
+                {% if departments %}
+                {% for dept in departments %}
+                {% if dept.is_active %}
+                <a href="{{ url_for('department_page', slug=dept.slug) }}" class="item"
+                    style="--i: url('{{ url_for('static', filename=dept.icon_path) if dept.icon_path else url_for('static', filename='img/department/icons/default.svg') }}');"
+                    data-department="{{ dept.slug }}">
+                    {% if dept.icon_path %}
+                    <img class="dept-icon" loading="lazy" src="{{ url_for('static', filename=dept.icon_path) }}"
+                        alt="{{ dept.name }}">
+                    {% else %}
+                    <img class="dept-icon" loading="lazy"
+                        src="{{ url_for('static', filename='img/department/icons/default.svg') }}"
+                        alt="{{ dept.name }}">
+                    {% endif %}
+                    <div class="icon"></div>
+                    <h4 class="text-dark-blue my-md-3">{{ dept.name }}</h4>
+                </a>
+                {% endif %}
+                {% endfor %}
+                {% else %}
+                <div class="alert alert-warning">
+                    No departments available.
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <div class="logo-wrapper"><img loading="lazy" src="/static/img/img/logo.png"
+                            alt="AarogyaHastha Hospitals Logo"></div>
+                    <p><a href="https://www.google.com/maps/dir//Site+No.+2,+No.+2816%2F2,+SY.87,+Kasavanahalli+Main+Rd,+near+1st+Cross+Road,+opposite+HM+Symphony,+Bengaluru,+Karnataka+560035/@12.9007391,77.6745367,21769m/data=!3m1!1e3!4m8!4m7!1m0!1m5!1m1!1s0x3bae132a0bbeb64b:0x626c13b98813a8a3!2m2!1d77.67569!2d12.9005956?entry=ttu&g_ep=EgoyMDI1MDkxNi4wIKXMDSoASAFQAw%3D%3D"
+                            target="_blank" style="text-decoration: none; color: inherit;">Site No. 2, Kasavanahalli
+                            Main Rd, near 1st
+                            Cross Road, opposite HM Symphony, Bengaluru, Karnataka 560035</a></p>
+                    <div class="social-icons mt-4">
+                        <a href="https://www.instagram.com/aarogyahastha/" target="_blank"><img
+                                src="/static/img/img/icon-insta.png" alt="Instagram"></a>
+                        <a href="https://www.facebook.com/aarogyahastha" target="_blank"><img
+                                src="/static/img/img/icon-fb.png" alt="Facebook"></a>
+                        <a href="https://www.linkedin.com/company/aarogya-hastha/" target="_blank"><img
+                                src="/static/img/img/icon-linkedin.png" alt="LinkedIn"></a>
+                        <a href="https://twitter.com/AarogyaHastha" target="_blank"><img
+                                src="/static/img/img/icon-twitter.png" alt="Twitter"></a>
+                        <a href="https://www.youtube.com/channel/UCeQv8lTLIT4btbjgLxYzYrw" target="_blank"><img
+                                src="/static/img/img/icon-youtube.png" alt="YouTube"></a>
+                        <a href="javascript:void(0)" onclick="showChromePopup()"><img
+                                src="/static/img/img/icon-whatsapp.png" alt="WhatsApp"></a>
+                    </div>
+                    <div class="app-download" style="margin-top: 25px;">
+                        <h4 style="font-size: 16px; margin-bottom: 15px;">Download App for more benefits</h4>
+                        <div class="app-download-buttons">
+
+                            <a href="https://play.google.com/store/apps/details?id=com.better.aarogyahastha"
+                                target="_blank" class="app-download-btn"><img src="/static/img/img/play-store.png"
+                                    alt="Get it on Google Play"></a>
+                            <a href="https://apps.apple.com/in/app/aarogya-hastha/id6739343936" target="_blank"
+                                class="app-download-btn"><img src="/static/img/img/app-store.png"
+                                    alt="Download on the App Store"></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-links-wrapper">
+                    <div class="footer-column">
+                        <h4>Quick Links</h4>
+                        <ul class="footer-links">
+                            <li><a href="/">Home</a></li>
+                            <li><a href="/appointments">Appointments</a></li>
+                            <li><a href="/doctors">Doctors</a></li>
+                            <li><a href="/departments/">Departments</a></li>
+                            <li><a href="/health-packages">Health Packages</a></li>
+                            <li><a href="/sports-packages">Sports Packages</a></li>
+                            <li><a href="/about">About Us</a></li>
+                            <li><a href="/contact">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column" style="flex: 2;">
+                        <h4>Our Departments</h4>
+                        <ul class="footer-links footer-links-multi-column">
+                            <li><a href="/departments/general-surgery">General Surgery</a></li>
+                            <li><a href="/departments/neurosurgery">Neurosurgery</a></li>
+                            <li><a href="/departments/orthopaedics">Orthopaedics</a></li>
+                            <li><a href="/departments/anaesthesia">Anaesthesiology</a></li>
+                            <li><a href="/departments/pain-medicine">Pain Medicine</a></li>
+                            <li><a href="/departments/general-medicine">General Medicine</a></li>
+                            <li><a href="/departments/lab-medicine">Lab Medicine</a></li>
+                            <li><a href="/departments/paediatrics">Paediatrics</a></li>
+                            <li><a href="/departments/physiotherapy">Physiotherapy</a></li>
+                            <li><a href="/departments/dermatology">Dermatology</a></li>
+                            <li><a href="/departments/ent">ENT</a></li>
+                            <li><a href="/departments/emergency-medicine">Emergency Medicine</a></li>
+                            <li><a href="/departments/nephrology">Nephrology</a></li>
+                            <li><a href="/departments/urology">Urology</a></li>
+                            <li><a href="/departments/medical-gastroenterology">Medical Gastroenterology</a></li>
+                            <li><a href="/departments/minimal-access-surgery">Minimal Access Surgery</a></li>
+                            <li><a href="/departments/plastic-surgery">Plastic Surgery</a></li>
+                            <li><a href="/departments/obg">Obstetrics & Gynaecology</a></li>
+                            <li><a href="/departments/surgical-gastroenterology">Surgical Gastroenterology</a></li>
+                            <li><a href="/departments/radiology">Radiology</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>Copyright © 2026, all Rights Reserved to Aarogya Hastha Hospitals Pvt Ltd | <a
+                        href="/terms-and-conditions">Terms & Conditions</a> | <a href="/privacy-policy">Privacy
+                        Policy</a> | <a href="/disclaimer">Disclaimer</a></p>
+            </div>
+        </div>
+    </footer>
+
+
+    <a href="#" id="scrollToTopBtn" class="scroll-to-top-btn" title="Scroll to top" aria-label="Scroll to top"><i
+            class="fa fa-arrow-up"></i></a>
+    <button id="mobile-sidebar-toggle" class="d-lg-none"><i class="fa fa-bars"></i></button>
+
+    <div id="chrome-popup" class="chrome-popup" aria-hidden="true">
+        <div class="chrome-popup__content">
+            <p class="chrome-popup__title">Open WhatsApp?</p>
+            <p class="chrome-popup__url">https://api.whatsapp.com wants to open this application.</p>
+            <label class="chrome-popup__checkbox">
+                <input type="checkbox"> Always allow api.whatsapp.com to open links of this type in the associated
+                app
+            </label>
+        </div>
+        <div class="chrome-popup__actions">
+            <a href="whatsapp://send?phone=919036092727" class="chrome-btn chrome-btn--blue">Open with App</a>
+            <a href="https://web.whatsapp.com/send?phone=9036092727" target="_blank"
+                class="chrome-btn chrome-btn--green">Open with Web</a>
+            <button class="chrome-btn chrome-btn--grey" onclick="hideChromePopup()">Cancel</button>
+        </div>
+    </div>
+
+    <div class="doc_gif">
+        <img src="/static/img/output-onlinegiftools.gif" alt="Doctor Chat">
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="/static/js/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://fyndbetter.com/chatbot/aarogya_chatbot"></script>
+
+    <script src="/static/js/js/myscript.js"></script>
+    <script src="/static/js/script.js"></script>
+
+    <script>
+        $(".book-apt").on('click', function () {
+            var url = $(this).data("url");
+            window.open(url, '_blank');
         });
+        function showChromePopup() {
+            const popup = document.getElementById("chrome-popup");
+            popup.classList.add("is-visible");
+            popup.setAttribute("aria-hidden", "false");
+        }
+        function hideChromePopup() {
+            const popup = document.getElementById("chrome-popup");
+            popup.classList.remove("is-visible");
+            popup.setAttribute("aria-hidden", "true");
+        }
+        // ESC closes popup
+        document.addEventListener("keydown", e => {
+            if (e.key === "Escape") hideChromePopup();
+        });
+        document.addEventListener('DOMContentLoaded', function () {
+            const scrollBtn = document.getElementById('scrollToTopBtn');
+            const scrollThreshold = 300;
 
-        // Initialize on load
-        toggleScrollButton();
-    });
-    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
-    const mobileNav = document.getElementById('mobile-nav');
+            function toggleScrollButton() {
+                if (window.pageYOffset > scrollThreshold ||
+                    document.documentElement.scrollTop > scrollThreshold) {
+                    scrollBtn.style.display = 'flex';
+                } else {
+                    scrollBtn.style.display = 'none';
+                }
+            }
 
-    mobileMenuToggle.addEventListener('click', function () {
-        mobileNav.classList.toggle('active'); // toggles visibility
-    });
+            window.addEventListener('scroll', toggleScrollButton);
 
-</script>
-<a href="#" id="scrollToTopBtn" class="scroll-to-top-btn" title="Scroll to top" aria-label="Scroll to top">
-    <i class="fa fa-arrow-up"></i> </a>
-{% endblock %}
+            scrollBtn.addEventListener('click', function (e) {
+                e.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+                // Add slight animation to the icon
+                this.querySelector('i').style.transform = 'translateY(-4px)';
+                setTimeout(() => {
+                    this.querySelector('i').style.transform = '';
+                }, 300);
+            });
+
+            // Initialize on load
+            toggleScrollButton();
+        });
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        const mobileNav = document.getElementById('mobile-nav');
+
+        // Ensure elements exist before adding event listeners to prevent errors
+        if (mobileMenuToggle && mobileNav) {
+            mobileMenuToggle.addEventListener('click', function () {
+                mobileNav.classList.toggle('active'); // toggles visibility
+            });
+
+            // Add close button functionality for mobile nav
+            const mobileMenuClose = document.getElementById('mobile-menu-close');
+            if (mobileMenuClose) {
+                mobileMenuClose.addEventListener('click', function () {
+                    mobileNav.classList.remove('active');
+                });
+            }
+        }
+
+    </script>
+    <script> $(document).ready(function () {
+            // Ensure initDepartmentPageActions exists before calling it
+            if (typeof initDepartmentPageActions === "function") {
+                initDepartmentPageActions();
+            }
+        }) </script>
+</body>
+
+</html>

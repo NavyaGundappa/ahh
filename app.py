@@ -10,11 +10,14 @@ from flask import Flask, render_template, send_file
 from flask import request, redirect, url_for, flash, render_template, jsonify
 import tempfile
 import zipfile
+from sqlalchemy.exc import IntegrityError
 from flask import flash, redirect, url_for, render_template, request
 from flask import Flask, render_template, request, redirect, url_for, session, jsonify, abort
 import pyodbc
+from sqlalchemy.orm import load_only
 from datetime import datetime, timedelta, time
 from flask_httpauth import HTTPBasicAuth
+from flask_caching import Cache
 from werkzeug.security import generate_password_hash, check_password_hash
 import traceback
 import flash
@@ -33,7 +36,12 @@ app.secret_key = 'your_secret_key'
 app.config.from_object(Config)
 db.init_app(app)
 
+app.config['MAX_CONTENT_LENGTH'] = 50 * 1024 * 1024
+
 GENERATED_BLOG_FOLDER = os.path.join(app.root_path, 'templates', 'blog_pages')
+cache = Cache(config={'CACHE_TYPE': 'SimpleCache',
+              'CACHE_DEFAULT_TIMEOUT': 300})
+cache.init_app(app)
 
 if not os.path.exists(GENERATED_BLOG_FOLDER):
     os.makedirs(GENERATED_BLOG_FOLDER)
@@ -57,6 +65,7 @@ def allowed_file(filename):
 
 
 @app.route('/')
+@cache.cached(timeout=3600)
 def index():
     banners = Banner.query.filter_by(is_active=True).order_by(
         Banner.created_at.desc()).all()
@@ -2092,7 +2101,6 @@ def department_page(slug):
     if os.path.exists(os.path.join(app.template_folder, template_path)):
         # If custom template exists, render it using the unpacked context dictionary
         return render_template(template_path, **context)
-
     # 4. Render the default template using the unpacked context dictionary
     return render_template("department.html", **context)
 
