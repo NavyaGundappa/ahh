@@ -1,132 +1,177 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="en">
 
-{% block content %}
-<style>
-    /* 1. LAYOUT FIX: Ensures footer stays at bottom without massive gaps */
-    /* Note: These styles work best if applied to the body in base.html, 
-       but placing them here will override the previous padding issues. */
-    html,
-    body {
-        height: 100%;
-        margin: 0;
-    }
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    body {
-        display: flex;
-        flex-direction: column;
-        min-height: 100vh;
-        /* Removed the 400px padding-bottom that caused the gap */
-        padding-bottom: 0 !important;
-    }
+    <title>{{ guide.title }} | Aarogya Hastha</title>
+    
+    <link rel="stylesheet" href="/static/css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/css/style.css">
 
-    /* This ensures the article takes up all available space, pushing footer down */
-    article.container {
-        flex: 1 0 auto;
-    }
+    <style>
+        /* LAYOUT & GUIDE SPECIFIC STYLES */
+        html, body { height: 100%; margin: 0; }
+        body { display: flex; flex-direction: column; min-height: 100vh; padding-bottom: 0 !important; }
+        
+        /* Ensures main content expands to push footer down */
+        .main-wrapper { flex: 1 0 auto; }
 
-    /* 2. BANNER: Clean and contained */
-    .banner-container {
-        margin-top: 2rem;
-        margin-bottom: 2rem;
-    }
-
-    .banner-wrapper {
-        position: relative;
-        height: 400px;
-        width: 100%;
-        border-radius: 15px;
-        overflow: hidden;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    }
-
-    .banner-wrapper img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: center;
-    }
-
-    .banner-overlay {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 60%);
-        display: flex;
-        align-items: flex-end;
-        padding: 40px;
-        color: white;
-    }
-
-    .banner-overlay h1 {
-        font-size: 2.5rem;
-        font-weight: 700;
-        margin: 0;
-        text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
-    }
-
-    /* 3. FOOTER & GRID FIX */
-    .footer-links-multi-column {
-        display: grid !important;
-        grid-template-columns: repeat(2, 1fr) !important;
-        gap: 10px !important;
-        list-style: none;
-        padding: 0;
-    }
-
-    /* 4. CONTENT AREA */
-    .content-main {
-        max-width: 900px;
-        margin: 0 auto;
-        line-height: 1.8;
-        font-size: 1.15rem;
-        color: #333;
-    }
-
-    @media (max-width: 768px) {
+        .banner-container { margin-top: 2rem; margin-bottom: 2rem; }
         .banner-wrapper {
-            height: 300px;
+            position: relative; height: 400px; width: 100%;
+            border-radius: 15px; overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
-
-        .banner-overlay h1 {
-            font-size: 1.8rem;
+        .banner-wrapper img { width: 100%; height: 100%; object-fit: cover; }
+        .banner-overlay {
+            position: absolute; bottom: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 60%);
+            display: flex; align-items: flex-end; padding: 40px; color: white;
         }
+        .banner-overlay h1 { font-size: 2.5rem; font-weight: 700; margin: 0; text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5); }
 
+        .content-main { max-width: 900px; margin: 0 auto; line-height: 1.8; font-size: 1.15rem; color: #333; }
+        
         .footer-links-multi-column {
-            grid-template-columns: 1fr !important;
+            display: grid !important; grid-template-columns: repeat(2, 1fr) !important;
+            gap: 10px !important; list-style: none; padding: 0;
         }
 
-        body {
-            padding-bottom: 0 !important;
+        .doc_gif img { position: fixed; right: 2rem; width: 90px; bottom: 4rem; z-index: 9; }
+
+        @media (max-width: 768px) {
+            .banner-wrapper { height: 300px; }
+            .banner-overlay h1 { font-size: 1.8rem; }
+            .footer-links-multi-column { grid-template-columns: 1fr !important; }
         }
-    }
-</style>
+    </style>
+</head>
 
-<div class="container banner-container">
-    <div class="banner-wrapper">
-        <img src="{{ url_for('static', filename=guide.header_image_path) }}" alt="{{ guide.title }}">
-        <div class="banner-overlay">
-            <h1>{{ guide.title }}</h1>
-        </div>
+<body>
+    <div class="left-sidebar">
+        <a href="/appointments" class="icon-link">
+            <img src="{{ url_for('static', filename='img/img/book-appointment.png') }}" alt="Book Appointment Icon">
+            <span class="tooltip-text">Book an Appointment</span>
+        </a>
+        <a href="tel:8066668800" class="icon-link">
+            <img src="{{ url_for('static', filename='img/img/call-icon.png') }}" alt="Call Icon">
+            <span class="tooltip-text">Call Us</span>
+        </a>
     </div>
-</div>
 
-<article class="container py-5">
-    <div class="content-main">
-        {% if guide.content_image_path %}
-        <div class="text-center mb-5">
-            <img src="{{ url_for('static', filename=guide.content_image_path) }}" class="img-fluid rounded shadow-sm"
-                alt="Main Illustration" style="max-height: 500px; width: 100%; object-fit: cover;">
-        </div>
-        {% endif %}
+    <header class="new-header">
+        <div class="header-top-container">
+            <div class="container header-top-content">
+                <div class="mobile_head">
+                    <a href="/" class="logo">
+                        <div class="header-logos">
+                            <div class="logo-wrapper">
+                                <img src="{{ url_for('static', filename='img/img/logo.png') }}" alt="Logo" class="header-logo-img">
+                            </div>
+                        </div>
+                    </a>
+                    <button class="navbar-toggle d-lg-none" id="mobile-menu-toggle"><i class="fa fa-bars"></i></button>
+                </div>
+                <div class="header-contact">
+                    <span class="appointment-number">
+                        <div class="contact-label">Appointments</div>
+                        <div class="contact-row"><i class="fa fa-phone"></i> <a href="tel:08066668811">080 6666 8811</a></div>
+                    </span>
+                </div>
+            </div>
 
-        <div class="guide-text">
-            {{ guide.content | safe }}
+            <div class="nav-container">
+                <div class="container nav-content">
+                    <ul class="main-nav" id="main-navigation">
+                        <li><a class="nav-links" href="/">Home</a></li>
+                        <li><a class="nav-links" href="/appointments">Appointments</a></li>
+                        <li><a class="nav-links" href="/doctors">Doctors</a></li>
+                        <li><a class="nav-links" href="/departments/">Departments</a></li>
+                        <li><a class="nav-links" href="/blog">Blog</a></li>
+                        <li><a class="nav-links" href="/about">About Us</a></li>
+                    </ul>
+                </div>
+            </div>
         </div>
+    </header>
+
+    <div class="main-wrapper">
+        <div class="container banner-container">
+            <div class="banner-wrapper">
+                <img src="{{ url_for('static', filename=guide.header_image_path) }}" alt="{{ guide.title }}">
+                <div class="banner-overlay">
+                    <h1>{{ guide.title }}</h1>
+                </div>
+            </div>
+        </div>
+
+        <article class="container py-5">
+            <div class="content-main">
+                {% if guide.content_image_path %}
+                <div class="text-center mb-5">
+                    <img src="{{ url_for('static', filename=guide.content_image_path) }}" class="img-fluid rounded shadow-sm"
+                        alt="Main Illustration" style="max-height: 500px; width: 100%; object-fit: cover;">
+                </div>
+                {% endif %}
+
+                <div class="guide-text">
+                    {{ guide.content | safe }}
+                </div>
+            </div>
+        </article>
     </div>
-</article>
 
-{# Removed the 100px spacer div to eliminate the extra gap #}
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <div class="logo-wrapper"><img src="{{ url_for('static', filename='img/img/logo.png') }}" alt="Logo"></div>
+                    <p>Site No. 2, Kasavanahalli Main Rd, Bengaluru, Karnataka 560035</p>
+                    <div class="social-icons mt-4">
+                        <a href="#"><img src="{{ url_for('static', filename='img/img/icon-insta.png') }}" alt="Instagram"></a>
+                        <a href="#"><img src="{{ url_for('static', filename='img/img/icon-fb.png') }}" alt="Facebook"></a>
+                    </div>
+                </div>
+                <div class="footer-links-wrapper">
+                    <div class="footer-column">
+                        <h4>Quick Links</h4>
+                        <ul class="footer-links">
+                            <li><a href="/">Home</a></li>
+                            <li><a href="/blog">Blog</a></li>
+                            <li><a href="/about">About Us</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column" style="flex: 2;">
+                        <h4>Our Departments</h4>
+                        <ul class="footer-links footer-links-multi-column">
+                            <li><a href="/departments/orthopaedics">Orthopaedics</a></li>
+                            <li><a href="/departments/dermatology">Dermatology</a></li>
+                            <li><a href="/departments/general-medicine">General Medicine</a></li>
+                            <li><a href="/departments/paediatrics">Paediatrics</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container text-center">
+                <p>Copyright © 2026 Aarogya Hastha Hospitals Pvt Ltd</p>
+            </div>
+        </div>
+    </footer>
 
-{% endblock %}
+    <div class="doc_gif">
+        <img src="/static/img/output-onlinegiftools.gif" alt="Doctor Chat">
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="{{ url_for('static', filename='js/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/js/myscript.js') }}"></script>
+</body>
+</html>
