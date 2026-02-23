@@ -24,7 +24,7 @@ import flash
 from flask import Flask, render_template, request, redirect, url_for, flash, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.utils import secure_filename
-from models import db, Banner, Doctor, Counter, Testimonial, Speciality, Department,  HealthPackage, SportsPackage, DepartmentOverview, DepartmentService, User, UserAccess, CallbackRequest, ReviewMessage, Blog, BMWReportPDF, FAQ, DepartmentTestimonial, LifeMoment
+from models import db, Banner, Doctor, Counter, Testimonial, Speciality, Department,  HealthPackage, SportsPackage, DepartmentOverview, DepartmentService, User, UserAccess, CallbackRequest, ReviewMessage, Blog, BMWReportPDF, FAQ, DepartmentTestimonial, LifeMoment, Guide
 from config import Config
 import os
 from functools import wraps
@@ -295,7 +295,7 @@ def admin_dashboard():
         return redirect(url_for("admin_login"))
 
     modules = ['banners', 'doctors', 'counters', 'testimonials', 'specialities',
-               'departments', 'health_packages', 'sports_packages', 'department_content', 'users', 'callback_requests', 'reviews', 'blogs', 'bmw_report', 'life_moments']
+               'departments', 'health_packages', 'sports_packages', 'department_content', 'users', 'callback_requests', 'reviews', 'blogs', 'bmw_report', 'life_moments', 'guides']
 
     access = {module: False for module in modules}
     if user.access:
@@ -363,13 +363,174 @@ def admin_banners():
     admin_id = session.get("admin_id")
     user = User.query.get(admin_id)
     modules = ['banners', 'doctors', 'counters', 'testimonials', 'specialities',
-               'departments', 'health_packages', 'sports_packages', 'department_content', 'users', 'callback_requests', 'reviews''blog', 'bmw_report', 'life_moments']
+               'departments', 'health_packages', 'sports_packages', 'department_content', 'users', 'callback_requests', 'reviews''blog', 'bmw_report', 'life_moments', 'guides']
     access = {module: False for module in modules}
     if user and user.access:
         for module in modules:
             access[module] = getattr(user.access, module, False)
 
     return render_template('admin/banners.html', banners=banners, access=access, current_user=user)
+
+
+@app.route('/admin/guides', methods=['GET', 'POST'])
+@login_required
+# @permission_required('guides')
+def admin_guides():
+    modules = ['banners', 'doctors', 'counters', 'testimonials', 'specialities',
+               'departments', 'health_packages', 'sports_packages', 'department_content',
+               'users', 'callback_requests', 'reviews', 'blogs', 'bmw_report', 'life_moments',
+               'guides']
+
+    # Handle POST requests
+    if request.method == 'POST':
+        # --- Handle Delete ---
+        if 'delete_id' in request.form:
+            guide_id = request.form.get('delete_id')
+            guide = Guide.query.get_or_404(guide_id)
+
+            # Clean up images
+            for img_path in [guide.header_image_path, guide.content_image_path]:
+                if img_path:
+                    full_path = os.path.join(app.static_folder, img_path)
+                    if os.path.exists(full_path):
+                        os.remove(full_path)
+
+            db.session.delete(guide)
+            db.session.commit()
+            flash('Guide deleted successfully!', 'success')
+            return redirect(url_for('admin_guides'))
+
+        # --- Handle Add / Update ---
+        guide_id = request.form.get('guide_id')
+        title = request.form.get('title')
+        slug = request.form.get('slug')
+        content = request.form.get('content')
+
+        # Only process if we have title and content (basic validation)
+        if title and content:
+            # Ensure slug uniqueness
+            if not slug:
+                slug = title.lower().replace(' ', '-')
+
+            original_slug = slug
+            counter = 1
+            query_filter = Guide.slug == slug
+            if guide_id:
+                query_filter = db.and_(
+                    Guide.slug == slug, Guide.id != guide_id)
+
+            while Guide.query.filter(query_filter).first():
+                slug = f"{original_slug}-{counter}"
+                counter += 1
+
+            # Handle Header Image
+            header_image_path = None
+            if 'header_image' in request.files:
+                file = request.files['header_image']
+                if file and allowed_file(file.filename):
+                    filename = secure_filename(file.filename)
+                    folder = os.path.join(app.static_folder, 'img', 'guides')
+                    os.makedirs(folder, exist_ok=True)
+                    file.save(os.path.join(folder, filename))
+                    header_image_path = f'img/guides/{filename}'
+
+            # Handle Content Image
+            content_image_path = None
+            if 'content_image' in request.files:
+                file = request.files['content_image']
+                if file and allowed_file(file.filename):
+                    filename = secure_filename(file.filename)
+                    folder = os.path.join(app.static_folder, 'img', 'guides')
+                    os.makedirs(folder, exist_ok=True)
+                    file.save(os.path.join(folder, filename))
+                    content_image_path = f'img/guides/{filename}'
+
+            if guide_id:  # Update
+                guide = Guide.query.get_or_404(guide_id)
+                guide.title = title
+                guide.slug = slug
+                guide.content = content
+                if header_image_path:
+                    guide.header_image_path = header_image_path
+                if content_image_path:
+                    guide.content_image_path = content_image_path
+                flash('Guide updated successfully!', 'success')
+            else:  # Add
+                guide = Guide(
+                    title=title,
+                    slug=slug,
+                    content=content,
+                    header_image_path=header_image_path,
+                    content_image_path=content_image_path
+                )
+                db.session.add(guide)
+                flash('Guide added successfully!', 'success')
+
+            db.session.commit()
+            return redirect(url_for('admin_guides'))
+        else:
+            flash('Title and Content are required!', 'danger')
+            return redirect(url_for('admin_guides'))
+
+    # GET request
+    guides = Guide.query.order_by(Guide.created_at.desc()).all()
+
+    # User Access for Sidebar
+    admin_id = session.get("admin_id")
+    user = User.query.get(admin_id)
+    access = {module: getattr(user.access, module, False)
+              for module in modules} if user and user.access else {}
+
+    return render_template('admin/guides.html', guides=guides, access=access, current_user=user)
+
+
+@app.route('/api/get_guide/<int:id>')
+@login_required
+def get_guide(id):
+    try:
+        guide = Guide.query.get_or_404(id)
+        return jsonify({
+            "id": guide.id,
+            "title": guide.title,
+            "slug": guide.slug,
+            "content": guide.content,
+            "header_image_path": guide.header_image_path,
+            "content_image_path": guide.content_image_path
+        })
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+@app.route('/admin/upload_ckeditor', methods=['POST'])
+@login_required
+def upload_ckeditor():
+    file = request.files.get('upload')
+    if file:
+        filename = secure_filename(file.filename)
+        # 1. Save to the correct physical path
+        upload_folder = os.path.join(app.static_folder, 'uploads', 'ckeditor')
+        os.makedirs(upload_folder, exist_ok=True)
+        file.save(os.path.join(upload_folder, filename))
+
+        # 2. Generate the URL (Absolute path)
+        # Result: http://127.0.0.1:5000/static/uploads/ckeditor/filename.jpg
+        file_url = url_for(
+            'static', filename=f'uploads/ckeditor/{filename}', _external=True)
+
+        return jsonify({
+            "uploaded": 1,
+            "fileName": filename,
+            "url": file_url
+        })
+    return jsonify({"uploaded": 0, "error": {"message": "Upload failed"}})
+
+
+@app.route('/api/toggle_guide/<int:id>', methods=['POST'])
+def toggle_guide(id):
+    guide = Guide.query.get_or_404(id)
+    guide.is_active = not guide.is_active
+    db.session.commit()
+    return jsonify({'status': 'success', 'is_active': guide.is_active})
 
 
 @app.route('/admin/banners/delete/<int:banner_id>', methods=['POST'])
@@ -2815,6 +2976,19 @@ def api_blogs():
         return jsonify({'error': str(e)}), 500
 
 
+@app.route('/guides')
+def list_guides():
+    # Fetch all active guides
+    guides = Guide.query.filter_by(is_active=True).order_by(
+        Guide.created_at.desc()).all()
+    return render_template('guides.html', guides=guides)
+
+
+@app.route('/guides/<slug>')
+def guide_detail(slug):
+    # Fetch a specific guide by its slug
+    guide = Guide.query.filter_by(slug=slug, is_active=True).first_or_404()
+    return render_template('guide_detail.html', guide=guide)
 # ----------------- BLOG HTML GENERATION FUNCTION -----------------
 
 
@@ -3211,7 +3385,7 @@ def admin_upload():
     # Get user access for sidebar
     modules = ['banners', 'doctors', 'counters', 'testimonials', 'specialities',
                'departments', 'health_packages', 'sports_packages', 'department_content',
-               'users', 'callback_requests', 'reviews', 'blogs', 'bmw_report', 'life_moments']
+               'users', 'callback_requests', 'reviews', 'blogs', 'bmw_report', 'life_moments', 'guides']
     access = {module: False for module in modules}
     if user.access:
         for module in modules:

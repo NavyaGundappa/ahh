@@ -1,0 +1,654 @@
+{% extends "admin_layout.html" %}
+{% block content %}
+
+<style>
+    /* --- Global Dashboard Variables & Typography --- */
+    :root {
+        --primary: #4f46e5;
+        --primary-hover: #4338ca;
+        --danger: #ef4444;
+        --danger-hover: #dc2626;
+        --text-main: #1f2937;
+        --text-muted: #6b7280;
+        --bg-body: #f3f4f6;
+        --border-color: #e5e7eb;
+    }
+
+    .dashboard-container {
+        padding: 2.5rem 1.5rem;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    .page-title {
+        font-weight: 700;
+        color: var(--text-main);
+        font-size: 1.75rem;
+        letter-spacing: -0.025em;
+    }
+
+    /* --- Card & Table Layout --- */
+    .dashboard-card {
+        background: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+        border: 1px solid var(--border-color);
+        overflow: hidden;
+    }
+
+    .table {
+        margin-bottom: 0;
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .table thead th {
+        background-color: #f9fafb;
+        color: var(--text-muted);
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        padding: 1rem 1.5rem;
+        border-bottom: 1px solid var(--border-color);
+        border-top: none;
+    }
+
+    .table tbody td {
+        padding: 1rem 1.5rem;
+        vertical-align: middle;
+        color: var(--text-main);
+        border-bottom: 1px solid var(--border-color);
+        font-size: 0.9rem;
+    }
+
+    .table tbody tr:hover {
+        background-color: #f9fafb;
+    }
+
+    .table tbody tr:last-child td {
+        border-bottom: none;
+    }
+
+    /* --- Image Thumbnails --- */
+    .guide-thumbnail {
+        width: 64px;
+        height: 40px;
+        border-radius: 6px;
+        object-fit: cover;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        border: 1px solid var(--border-color);
+        background-color: #f9fafb;
+    }
+
+    /* --- Buttons & Pills --- */
+    .btn-primary-custom {
+        background-color: var(--primary);
+        border-color: var(--primary);
+        color: white;
+        font-weight: 500;
+        border-radius: 8px;
+        padding: 0.6rem 1.2rem;
+        transition: all 0.2s;
+        cursor: pointer;
+    }
+
+    .btn-primary-custom:hover {
+        background-color: var(--primary-hover);
+        border-color: var(--primary-hover);
+        transform: translateY(-1px);
+        color: white;
+    }
+
+    .btn-action-edit {
+        color: var(--primary);
+        background: rgba(79, 70, 229, 0.1);
+        border: none;
+        font-weight: 500;
+        border-radius: 6px;
+        padding: 0.4rem 0.8rem;
+        transition: all 0.2s;
+        margin-right: 0.5rem;
+        display: inline-block;
+        cursor: pointer;
+    }
+
+    .btn-action-edit:hover {
+        background: var(--primary);
+        color: white;
+    }
+
+    .btn-action-delete {
+        color: var(--danger);
+        background: rgba(239, 68, 68, 0.1);
+        border: none;
+        font-weight: 500;
+        border-radius: 6px;
+        padding: 0.4rem 0.8rem;
+        transition: all 0.2s;
+        display: inline-block;
+        cursor: pointer;
+    }
+
+    .btn-action-delete:hover {
+        background: var(--danger);
+        color: white;
+    }
+
+    /* Status Pill Toggle */
+    .status-pill {
+        border-radius: 9999px;
+        padding: 0.25rem 0.75rem;
+        font-size: 0.75rem;
+        font-weight: 600;
+        border: none;
+        transition: all 0.2s;
+        cursor: pointer;
+    }
+
+    .status-active {
+        background-color: #d1fae5;
+        color: #065f46;
+    }
+
+    .status-active:hover {
+        background-color: #a7f3d0;
+    }
+
+    .status-inactive {
+        background-color: #f3f4f6;
+        color: #4b5563;
+    }
+
+    .status-inactive:hover {
+        background-color: #e5e7eb;
+    }
+
+    /* --- Modal & Forms --- */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .modal.show {
+        display: block;
+    }
+
+    .modal-dialog {
+        position: relative;
+        width: auto;
+        margin: 1.75rem auto;
+        max-width: 800px;
+    }
+
+    .modal-content {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        background-color: #fff;
+        border-radius: 16px;
+        border: none;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        outline: 0;
+    }
+
+    .modal-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1.5rem 1.5rem 1rem;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .modal-title {
+        font-weight: 700;
+        color: var(--text-main);
+        margin: 0;
+    }
+
+    .close {
+        font-size: 1.5rem;
+        border: none;
+        background: none;
+        color: var(--text-muted);
+        cursor: pointer;
+    }
+
+    .close:hover {
+        color: var(--text-main);
+    }
+
+    .modal-body {
+        padding: 1.5rem;
+    }
+
+    .modal-footer {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        padding: 1rem 1.5rem;
+        border-top: 1px solid var(--border-color);
+        background-color: #f9fafb;
+        border-radius: 0 0 16px 16px;
+        gap: 0.5rem;
+    }
+
+    .form-group {
+        margin-bottom: 1rem;
+    }
+
+    .form-group label {
+        font-weight: 600;
+        color: #374151;
+        font-size: 0.875rem;
+        margin-bottom: 0.5rem;
+        display: block;
+    }
+
+    .form-control {
+        display: block;
+        width: 100%;
+        padding: 0.6rem 1rem;
+        font-size: 0.95rem;
+        border-radius: 8px;
+        border: 1px solid #d1d5db;
+        transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .form-control:focus {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        outline: none;
+    }
+
+    .form-control-file {
+        display: block;
+        width: 100%;
+        padding: 0.6rem 1rem;
+        font-size: 0.95rem;
+        border-radius: 8px;
+        border: 1px solid #d1d5db;
+        background-color: #f9fafb;
+    }
+
+    .btn-light {
+        background-color: #f3f4f6;
+        border: 1px solid #d1d5db;
+        border-radius: 8px;
+        padding: 0.6rem 1.2rem;
+        cursor: pointer;
+    }
+
+    .btn-light:hover {
+        background-color: #e5e7eb;
+    }
+
+    .cke_dialog {
+        z-index: 10000 !important;
+    }
+
+    /* Current images display in edit modal */
+    .current-images {
+        background-color: #f9fafb;
+        border-radius: 8px;
+        padding: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .current-image-item {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .current-image-item img {
+        width: 100px;
+        height: 60px;
+        object-fit: cover;
+        border-radius: 4px;
+        border: 1px solid var(--border-color);
+    }
+
+    .image-info {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+    }
+</style>
+
+<div class="container-fluid dashboard-container">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="page-title">Manage Guides</h2>
+            <p class="text-muted mb-0" style="font-size: 0.9rem;">Create, edit, and manage user guides.</p>
+        </div>
+        <button class="btn btn-primary-custom" onclick="openModal('addGuideModal')">
+            + Add New Guide
+        </button>
+    </div>
+
+    <div class="dashboard-card bg-white">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th style="width: 25%;">Title</th>
+                        <th style="width: 20%;">Header Image</th>
+                        <th style="width: 20%;">Created At</th>
+                        <th style="width: 15%;">Status</th>
+                        <th style="width: 20%; text-align: right;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for guide in guides %}
+                    <tr>
+                        <td class="font-weight-bold">{{ guide.title }}</td>
+                        <td>
+                            <img src="{{ url_for('static', filename=guide.header_image_path) }}" class="guide-thumbnail"
+                                alt="Guide Header">
+                        </td>
+                        <td>{{ guide.created_at.strftime('%Y-%m-%d') }}</td>
+                        <td>
+                            <button class="status-pill {{ 'status-active' if guide.is_active else 'status-inactive' }}"
+                                onclick="toggleStatus({{ guide.id }})">
+                                {{ '● Active' if guide.is_active else '○ Inactive' }}
+                            </button>
+                        </td>
+                        <td class="text-right">
+                            <button class="btn-action-edit" onclick="editGuide({{ guide.id }})">Edit</button>
+                            <form method="POST" style="display:inline;"
+                                onsubmit="return confirm('Are you sure you want to permanently delete this guide?');">
+                                <input type="hidden" name="delete_id" value="{{ guide.id }}">
+                                <button type="submit" class="btn-action-delete">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="5" class="text-center py-5 text-muted">
+                            <i style="font-size: 2rem; color: #d1d5db;" class="mb-3 d-block">📄</i>
+                            <strong>No guides found</strong><br>
+                            <small>Click "Add New Guide" to create your first one.</small>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Add Guide Modal -->
+<div id="addGuideModal" class="modal">
+    <div class="modal-dialog modal-lg">
+        <form class="modal-content" method="POST" enctype="multipart/form-data">
+            <div class="modal-header">
+                <h5 class="modal-title">Create New Guide</h5>
+                <button type="button" class="close" onclick="closeModal('addGuideModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group mb-4">
+                    <label>Guide Title</label>
+                    <input type="text" name="title" class="form-control" placeholder="Enter a descriptive title..."
+                        required>
+                </div>
+
+                <div class="form-group mb-4">
+                    <label>Slug (URL)</label>
+                    <input type="text" name="slug" class="form-control" placeholder="leave-empty-to-auto-generate">
+                    <small class="text-muted mt-1 d-block">Leave empty to auto-generate from title</small>
+                </div>
+
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <label>Header Image (Banner)</label>
+                        <input type="file" name="header_image" class="form-control-file border p-2 bg-light rounded"
+                            accept="image/*">
+                        <small class="text-muted mt-1 d-block">Recommended: 1200x400px</small>
+                    </div>
+                    <div class="col-md-6">
+                        <label>Content Image (Body)</label>
+                        <input type="file" name="content_image" class="form-control-file border p-2 bg-light rounded"
+                            accept="image/*">
+                        <small class="text-muted mt-1 d-block">Used inside the guide content.</small>
+                    </div>
+                </div>
+
+                <div class="form-group mt-3">
+                    <label>Complete Content (Supports HTML/Headings)</label>
+                    <textarea name="content" id="editor" class="form-control"></textarea>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn-light px-4 mr-2" onclick="closeModal('addGuideModal')">Cancel</button>
+                <button type="submit" class="btn btn-primary-custom px-4">Save & Publish Guide</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Edit Guide Modal -->
+<div id="editGuideModal" class="modal">
+    <div class="modal-dialog modal-lg">
+        <form class="modal-content" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="guide_id" id="edit_guide_id">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Guide</h5>
+                <button type="button" class="close" onclick="closeModal('editGuideModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group mb-4">
+                    <label>Guide Title</label>
+                    <input type="text" name="title" id="edit_title" class="form-control"
+                        placeholder="Enter a descriptive title..." required>
+                </div>
+
+                <div class="form-group mb-4">
+                    <label>Slug (URL)</label>
+                    <input type="text" name="slug" id="edit_slug" class="form-control"
+                        placeholder="leave-empty-to-auto-generate">
+                    <small class="text-muted mt-1 d-block">Leave empty to auto-generate from title</small>
+                </div>
+
+                <!-- Current Images Display -->
+                <div class="current-images" id="currentImages">
+                    <label class="mb-2">Current Images:</label>
+                    <div class="current-image-item" id="currentHeaderImage">
+                        <img src="" alt="Current Header" id="currentHeaderImg">
+                        <div class="image-info">
+                            <strong>Header Image</strong><br>
+                            <small>Upload new image to replace</small>
+                        </div>
+                    </div>
+                    <div class="current-image-item" id="currentContentImage">
+                        <img src="" alt="Current Content" id="currentContentImg">
+                        <div class="image-info">
+                            <strong>Content Image</strong><br>
+                            <small>Upload new image to replace</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <label>New Header Image (Optional)</label>
+                        <input type="file" name="header_image" class="form-control-file border p-2 bg-light rounded"
+                            accept="image/*">
+                        <small class="text-muted mt-1 d-block">Leave empty to keep current image</small>
+                    </div>
+                    <div class="col-md-6">
+                        <label>New Content Image (Optional)</label>
+                        <input type="file" name="content_image" class="form-control-file border p-2 bg-light rounded"
+                            accept="image/*">
+                        <small class="text-muted mt-1 d-block">Leave empty to keep current image</small>
+                    </div>
+                </div>
+
+                <div class="form-group mt-3">
+                    <label>Complete Content (Supports HTML/Headings)</label>
+                    <textarea name="content" id="edit_editor" class="form-control"></textarea>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn-light px-4 mr-2" onclick="closeModal('editGuideModal')">Cancel</button>
+                <button type="submit" class="btn btn-primary-custom px-4">Update Guide</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="https://cdn.ckeditor.com/4.22.1/full-all/ckeditor.js"></script>
+
+<script>
+    // Initialize CKEditor for add modal
+    CKEDITOR.replace('editor', {
+        filebrowserUploadUrl: '/admin/upload_ckeditor',
+        filebrowserUploadMethod: 'xhr',
+        allowedContent: true,
+        extraPlugins: 'colorbutton,font,justify,image2',
+        height: 400,
+        removeDialogTabs: 'image:advanced;image:Link'
+    });
+
+    // Modal functions
+    function openModal(modalId) {
+        document.getElementById(modalId).classList.add('show');
+    }
+
+    function closeModal(modalId) {
+        document.getElementById(modalId).classList.remove('show');
+    }
+
+    // Close modal when clicking outside
+    window.onclick = function (event) {
+        if (event.target.classList.contains('modal')) {
+            event.target.classList.remove('show');
+        }
+    }
+
+    // Fix Modal Focus Issue for CKEditor Dialogs
+    if (typeof $.fn !== 'undefined') {
+        $.fn.modal.Constructor.prototype._enforceFocus = function () {
+            var $modalElement = this.$element;
+            $(document).on('focusin.modal', function (e) {
+                if ($modalElement[0] !== e.target && !$modalElement.has(e.target).length && $(e.target).parentsUntil('*[role="dialog"]').length === 0) {
+                    $modalElement.focus();
+                }
+            });
+        };
+    }
+
+    // Toggle Status API Call
+    function toggleStatus(id) {
+        fetch(`/api/toggle_guide/${id}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(res => res.json())
+            .then(data => location.reload())
+            .catch(err => console.error('Error toggling status:', err));
+    }
+
+    // Edit Guide Function
+    function editGuide(id) {
+        // Show loading state
+        console.log('Fetching guide data for ID:', id);
+
+        // Fetch guide data
+        fetch(`/api/get_guide/${id}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Guide data received:', data);
+
+                // Populate form fields
+                document.getElementById('edit_guide_id').value = data.id;
+                document.getElementById('edit_title').value = data.title || '';
+                document.getElementById('edit_slug').value = data.slug || '';
+
+                // Set current images
+                if (data.header_image_path) {
+                    document.getElementById('currentHeaderImage').style.display = 'flex';
+                    document.getElementById('currentHeaderImg').src = '/static/' + data.header_image_path;
+                } else {
+                    document.getElementById('currentHeaderImage').style.display = 'none';
+                }
+
+                if (data.content_image_path) {
+                    document.getElementById('currentContentImage').style.display = 'flex';
+                    document.getElementById('currentContentImg').src = '/static/' + data.content_image_path;
+                } else {
+                    document.getElementById('currentContentImage').style.display = 'none';
+                }
+
+                // Set CKEditor content
+                var editor = CKEDITOR.instances.edit_editor;
+                if (editor) {
+                    editor.setData(data.content || '');
+                } else {
+                    // Initialize CKEditor if not already done
+                    editor = CKEDITOR.replace('edit_editor', {
+                        filebrowserUploadUrl: '/admin/upload_ckeditor',
+                        filebrowserUploadMethod: 'xhr',
+                        allowedContent: true,
+                        extraPlugins: 'colorbutton,font,justify,image2',
+                        height: 400,
+                        removeDialogTabs: 'image:advanced;image:Link',
+                        on: {
+                            instanceReady: function () {
+                                this.setData(data.content || '');
+                            }
+                        }
+                    });
+                }
+
+                // Show the modal
+                openModal('editGuideModal');
+            })
+            .catch(error => {
+                console.error('Error fetching guide:', error);
+                alert('Failed to load guide data: ' + error.message);
+            });
+    }
+
+    // Handle modal close to properly destroy CKEditor instance
+    var editModal = document.getElementById('editGuideModal');
+    if (editModal) {
+        editModal.addEventListener('hidden', function () {
+            var editor = CKEDITOR.instances.edit_editor;
+            if (editor) {
+                editor.destroy();
+            }
+        });
+    }
+
+    // Auto-generate slug from title
+    document.querySelector('input[name="title"]').addEventListener('input', function () {
+        var slugInput = document.querySelector('input[name="slug"]');
+        if (slugInput && slugInput.value === '') {
+            var slug = this.value.toLowerCase()
+                .replace(/[^\w\s-]/g, '') // Remove special characters
+                .replace(/\s+/g, '-') // Replace spaces with hyphens
+                .replace(/--+/g, '-'); // Replace multiple hyphens with single hyphen
+            slugInput.value = slug;
+        }
+    });
+</script>
+
+{% endblock %}

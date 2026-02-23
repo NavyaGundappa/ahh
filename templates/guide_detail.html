@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    /* 1. LAYOUT FIX: Ensures footer stays at bottom without massive gaps */
+    /* Note: These styles work best if applied to the body in base.html, 
+       but placing them here will override the previous padding issues. */
+    html,
+    body {
+        height: 100%;
+        margin: 0;
+    }
+
+    body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        /* Removed the 400px padding-bottom that caused the gap */
+        padding-bottom: 0 !important;
+    }
+
+    /* This ensures the article takes up all available space, pushing footer down */
+    article.container {
+        flex: 1 0 auto;
+    }
+
+    /* 2. BANNER: Clean and contained */
+    .banner-container {
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    .banner-wrapper {
+        position: relative;
+        height: 400px;
+        width: 100%;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .banner-wrapper img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+    }
+
+    .banner-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 60%);
+        display: flex;
+        align-items: flex-end;
+        padding: 40px;
+        color: white;
+    }
+
+    .banner-overlay h1 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin: 0;
+        text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+    }
+
+    /* 3. FOOTER & GRID FIX */
+    .footer-links-multi-column {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 10px !important;
+        list-style: none;
+        padding: 0;
+    }
+
+    /* 4. CONTENT AREA */
+    .content-main {
+        max-width: 900px;
+        margin: 0 auto;
+        line-height: 1.8;
+        font-size: 1.15rem;
+        color: #333;
+    }
+
+    @media (max-width: 768px) {
+        .banner-wrapper {
+            height: 300px;
+        }
+
+        .banner-overlay h1 {
+            font-size: 1.8rem;
+        }
+
+        .footer-links-multi-column {
+            grid-template-columns: 1fr !important;
+        }
+
+        body {
+            padding-bottom: 0 !important;
+        }
+    }
+</style>
+
+<div class="container banner-container">
+    <div class="banner-wrapper">
+        <img src="{{ url_for('static', filename=guide.header_image_path) }}" alt="{{ guide.title }}">
+        <div class="banner-overlay">
+            <h1>{{ guide.title }}</h1>
+        </div>
+    </div>
+</div>
+
+<article class="container py-5">
+    <div class="content-main">
+        {% if guide.content_image_path %}
+        <div class="text-center mb-5">
+            <img src="{{ url_for('static', filename=guide.content_image_path) }}" class="img-fluid rounded shadow-sm"
+                alt="Main Illustration" style="max-height: 500px; width: 100%; object-fit: cover;">
+        </div>
+        {% endif %}
+
+        <div class="guide-text">
+            {{ guide.content | safe }}
+        </div>
+    </div>
+</article>
+
+{# Removed the 100px spacer div to eliminate the extra gap #}
+
+{% endblock %}

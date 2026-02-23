@@ -357,6 +357,19 @@ class ReviewMessage(db.Model):
         return f"<ReviewMessage {self.name}>"
 
 
+class Guide(db.Model):
+    __tablename__ = 'guides'
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(255), nullable=False)
+    slug = db.Column(db.String(255), unique=True, nullable=False)
+    header_image_path = db.Column(db.String(255))
+    content_image_path = db.Column(db.String(255))
+    # This will store the HTML from your admin WYSIWYG editor
+    content = db.Column(db.Text)
+    is_active = db.Column(db.Boolean, default=True)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+
 class Blog(db.Model):
     __tablename__ = 'blogs'
 
