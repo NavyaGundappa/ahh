@@ -195,6 +195,134 @@ def best_ent_surgeon():
     )
 
 
+@app.route('/best-hospital-in-bellandur-bangalore')
+def hospital_in_bellandur():
+    doctors = Doctor.query.filter_by(is_active=True).all()
+
+    testimonials = Testimonial.query.filter_by(is_active=True).options(
+        joinedload(Testimonial.doctor)
+    ).order_by(Testimonial.created_at.desc()).all()
+
+    blogs = Blog.query.filter_by(is_active=True)\
+        .order_by(Blog.created_at.desc())\
+        .limit(5)\
+        .all()
+
+    departments = Department.query.filter_by(is_active=True)\
+        .order_by(Department.name)\
+        .all()
+
+    return render_template(
+        'seopages/best-hospital-in-bellandur-bangalore.html',
+        doctors=doctors,
+        testimonials=testimonials,
+        blogs=blogs,
+        departments=departments
+    )
+
+@app.route('/best-hospital-in-hosa-road-bangalore')
+def hospital_in_hosa_road():
+    doctors = Doctor.query.filter_by(is_active=True).all()
+
+    testimonials = Testimonial.query.filter_by(is_active=True).options(
+        joinedload(Testimonial.doctor)
+    ).order_by(Testimonial.created_at.desc()).all()
+
+    blogs = Blog.query.filter_by(is_active=True)\
+        .order_by(Blog.created_at.desc())\
+        .limit(5)\
+        .all()
+
+    departments = Department.query.filter_by(is_active=True)\
+        .order_by(Department.name)\
+        .all()
+
+    return render_template(
+        'seopages/best-hospital-in-hosa-road-bangalore.html',
+        doctors=doctors,
+        testimonials=testimonials,
+        blogs=blogs,
+        departments=departments
+    )
+
+@app.route('/best-hospital-in-sarjapur-road-bangalore')
+def hospital_in_sarjapur_road():
+    doctors = Doctor.query.filter_by(is_active=True).all()
+
+    testimonials = Testimonial.query.filter_by(is_active=True).options(
+        joinedload(Testimonial.doctor)
+    ).order_by(Testimonial.created_at.desc()).all()
+
+    blogs = Blog.query.filter_by(is_active=True)\
+        .order_by(Blog.created_at.desc())\
+        .limit(5)\
+        .all()
+
+    departments = Department.query.filter_by(is_active=True)\
+        .order_by(Department.name)\
+        .all()
+
+    return render_template(
+        'seopages/best-hospital-in-sarjapur-road-bangalore.html',
+        doctors=doctors,
+        testimonials=testimonials,
+        blogs=blogs,
+        departments=departments
+    )
+
+
+@app.route('/best-hospital-in-hsr-bangalore')
+def hospital_in_hsr():
+    doctors = Doctor.query.filter_by(is_active=True).all()
+
+    testimonials = Testimonial.query.filter_by(is_active=True).options(
+        joinedload(Testimonial.doctor)
+    ).order_by(Testimonial.created_at.desc()).all()
+
+    blogs = Blog.query.filter_by(is_active=True)\
+        .order_by(Blog.created_at.desc())\
+        .limit(5)\
+        .all()
+
+    departments = Department.query.filter_by(is_active=True)\
+        .order_by(Department.name)\
+        .all()
+
+    return render_template(
+        'seopages/best-hospital-in-hsr-bangalore.html',
+        doctors=doctors,
+        testimonials=testimonials,
+        blogs=blogs,
+        departments=departments
+    )
+
+
+@app.route('/best-hospital-in-electronic-city-bangalore')
+def hospital_in_electronic_city():
+    doctors = Doctor.query.filter_by(is_active=True).all()
+
+    testimonials = Testimonial.query.filter_by(is_active=True).options(
+        joinedload(Testimonial.doctor)
+    ).order_by(Testimonial.created_at.desc()).all()
+
+    blogs = Blog.query.filter_by(is_active=True)\
+        .order_by(Blog.created_at.desc())\
+        .limit(5)\
+        .all()
+
+    departments = Department.query.filter_by(is_active=True)\
+        .order_by(Department.name)\
+        .all()
+
+    return render_template(
+        'seopages/best-hospital-in-electronic-city-bangalore.html',
+        doctors=doctors,
+        testimonials=testimonials,
+        blogs=blogs,
+        departments=departments
+    )
+
+
 def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
