@@ -1,0 +1,1853 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="language" content="english">
+    <meta http-equiv="content-type" content="text/html">
+    <meta name="format-detection" content="telephone=yes" />
+    <meta name="HandheldFriendly" content="true" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Aarogyahastha Pvt Ltd">
+    <meta name="designer" content="Aarogyahastha Pvt Ltd">
+    <meta name="publisher" content="Aarogyahastha Pvt Ltd">
+    <meta name="no-email-collection" content="http://www.unspam.com/noemailcollection/">
+    <link rel="icon" type="image/x-icon" href="/static/img/fav.png">
+    <meta name="robots" content="index,follow">
+    <meta name="revisit-after" content="7 days">
+    <meta name="distribution" content="web">
+    <meta name="robots" content="noodp">
+    <meta name="web_author" content="Aarogyahastha Pvt Ltd">
+    <meta name="rating" content="general">
+    <meta name="rating" content="safe for kids">
+    <meta name="subject" content="Healthcare">
+    <meta name="copyright" content="Copyright © 2025">
+    <meta name="reply-to" content="info@aarogyahastha.com">
+    <meta name="abstract"
+        content="We provide timely and specialized medical attention for patients experiencing life-threatening conditions, ensuring their urgent needs are met with the highest level of care.">
+    <meta name="city" content="Bangalore">
+    <meta name="country" content="India">
+    <meta name="distribution" content="global">
+    <meta name="classification" content="Healthcare, Hospital ">
+
+    <title>Page Not Found | Aarogya Hastha Hospitals</title>
+
+    <base href="/">
+    <meta name="keywords" content="">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        .error-container {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--dark-text);
+            text-rendering: optimizeLegibility;
+            flex: 1;
+            padding: 40px 15px;
+            /* Added padding */
+            min-height: 60vh;
+            /* Ensure it takes up some space */
+        }
+
+        .container-404 {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            max-width: 1300px;
+            width: 100%;
+            background: var(--light-text);
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.07);
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            padding: 50px 60px;
+            transform: scale(0.95);
+            opacity: 0;
+            animation: fadeInScale 0.6s 0.2s ease-out forwards;
+            margin: 20px 0;
+            /* Added margin for spacing */
+        }
+
+        .error-details {
+            flex: 1;
+            text-align: left;
+        }
+
+        .error-actions {
+            flex-shrink: 0;
+            width: 350px;
+        }
+
+        .illustration {
+            margin-bottom: 25px;
+            animation: slideInUp 0.7s ease-out;
+        }
+
+        .illustration svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .error-container h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: #103A60;
+            /* Brand color */
+            margin-bottom: 15px;
+            animation: slideInUp 0.7s ease-out 0.1s;
+            animation-fill-mode: both;
+        }
+
+        .error-code {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #16979D;
+            /* Brand color */
+            margin-bottom: 5px;
+            animation: slideInUp 0.7s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .error-container p {
+            font-size: 1.1rem;
+            color: #555;
+            /* Darker body text */
+            line-height: 1.8;
+            max-width: 500px;
+            animation: slideInUp 0.7s ease-out 0.2s;
+            animation-fill-mode: both;
+            margin-bottom: 30px;
+        }
+
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            animation: slideInUp 0.7s ease-out 0.3s;
+            animation-fill-mode: both;
+        }
+
+        .btn {
+            display: flex;
+            align-items: center;
+            padding: 16px 30px;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+            cursor: pointer;
+            border: none;
+            gap: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            width: 100%;
+            justify-content: flex-start;
+            color: #fff;
+            /* Ensure text is white */
+        }
+
+        .btn i {
+            font-size: 1.4rem;
+            flex-shrink: 0;
+        }
+
+        .btn span {
+            flex-grow: 1;
+            text-align: right;
+            margin-right: 10px;
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+        }
+
+        .btn-primary {
+            background-color: #103A60;
+            /* Brand primary */
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background-color: #0d2c49;
+            box-shadow: 0 8px 25px rgba(16, 58, 96, 0.2);
+        }
+
+        .btn-secondary {
+            background-color: #16979D;
+            /* Brand secondary */
+            color: #fff;
+        }
+
+        .btn-secondary:hover {
+            background-color: #13848a;
+            box-shadow: 0 8px 25px rgba(22, 151, 157, 0.2);
+        }
+
+        .btn-accent {
+            background-color: #d9534f;
+            /* Emergency red */
+            color: #fff;
+        }
+
+        .btn-accent:hover {
+            background-color: #c9302c;
+            box-shadow: 0 8px 25px rgba(217, 83, 79, 0.2);
+        }
+
+        /* Animation Keyframes */
+        @keyframes fadeInScale {
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .container-404 {
+                flex-direction: column;
+                text-align: center;
+                padding: 40px 30px;
+                gap: 40px;
+            }
+
+            .error-details {
+                text-align: center;
+            }
+
+            .error-actions {
+                width: 100%;
+                max-width: 400px;
+            }
+
+            .error-container p {
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container-404 {
+                padding: 30px 20px;
+                margin: 15px 0;
+            }
+
+            .error-container {
+                padding: 30px 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .error-container h1 {
+                font-size: 2.2rem;
+            }
+
+            .error-container p {
+                font-size: 1rem;
+            }
+
+            .btn {
+                padding: 14px 25px;
+            }
+
+            .btn i {
+                font-size: 1.2rem;
+            }
+
+            .container-404 {
+                padding: 25px 15px;
+            }
+        }
+    </style>
+
+    <link rel="stylesheet" href="/static/css/style.css">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-84XCMMFTS8"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-84XCMMFTS8');
+    </script>
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-WGJFVPCB');</script>
+    <script>(function (w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-TD2L5G6C');</script>
+
+    <style>
+        .login-modal-content {
+            background-color: #fff;
+            margin: auto;
+            top: 50px;
+            padding: 20px 25px;
+            border: 1px solid #ddd;
+            width: 90%;
+            max-width: 400px;
+            position: relative;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            animation-name: animatetop;
+            animation-duration: 0.4s;
+            transition: all 0.3s ease;
+        }
+
+        .login-form-group {
+            margin-bottom: 12px;
+        }
+
+        .login-form-group input,
+        .login-form-group textarea {
+            width: 100%;
+            padding: 10px 12px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            font-size: 14px;
+            color: #333;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .login-form-group input:focus,
+        .login-form-group textarea:focus {
+            outline: none;
+            border-color: #16979D;
+            box-shadow: 0 0 0 2px rgba(22, 151, 157, 0.2);
+        }
+
+        .login-form-group textarea {
+            resize: vertical;
+        }
+
+        .login-form-group button {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(to right, #16979D, #103A60);
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: background 0.3s ease, transform 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .login-form-group button:hover {
+            background: linear-gradient(to right, #103A60, #16979D);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        @keyframes animatetop {
+            from {
+                top: -300px;
+                opacity: 0
+            }
+
+            to {
+                top: 0;
+                opacity: 1
+            }
+        }
+
+        .close-button {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: 700;
+            z-index: 1001
+        }
+
+        .close-button:focus,
+        .close-button:hover {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer
+        }
+
+        .login-form-group {
+            margin-bottom: 15px
+        }
+
+        .login-form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 700
+        }
+
+        .login-form-group input,
+        .login-form-group textarea {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #000;
+        }
+
+        .login-form-group button {
+            width: 100%;
+            padding: 10px;
+            background: linear-gradient(to bottom, #103A60, #16979D);
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-size: 16px
+        }
+
+        .main-nav .dropdown {
+            position: relative
+        }
+
+        .main-nav .dropdown .dropdown-menu {
+            display: block;
+            position: absolute;
+            top: calc(100% + 5px);
+            left: 50%;
+            transform: translateX(-50%) translateY(5px);
+            min-width: 120px;
+            padding: 3px 0;
+            margin: 0;
+            list-style: none;
+            background-color: #fff;
+            border-radius: 6px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, .12);
+            border: 1px solid #eee;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity .3s ease, transform .3s ease, visibility .3s;
+        }
+
+        .main-nav .dropdown-menu li a {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 15px;
+            font-size: 14px;
+            text-decoration: none;
+            color: #333 !important;
+            background-color: transparent !important;
+            transition: background-color .2s ease, color .2s ease;
+            white-space: nowrap;
+        }
+
+        .main-nav .dropdown .dropdown-menu::before {
+            top: -5px;
+            width: 10px;
+            height: 10px;
+        }
+
+        .main-nav .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0)
+        }
+
+        .main-nav .dropdown-menu li a i {
+            color: #16979D;
+            width: 20px;
+            text-align: center
+        }
+
+        .main-nav .dropdown-menu li a:hover {
+            background-color: #f5f5f5 !important;
+            color: #103A60 !important
+        }
+
+        #mobile-nav .dropdown .dropdown-menu {
+            position: static;
+            display: block;
+            background-color: #f0f0f0;
+            box-shadow: none;
+            border: none;
+            padding-left: 15px
+        }
+
+        #mobile-nav .dropdown>a {
+            font-weight: 700
+        }
+
+        .left-sidebar {
+            position: fixed;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            padding: 15px 10px;
+            z-index: 1000;
+            transition: opacity .3s, visibility .3s
+        }
+
+        .left-sidebar.hidden {
+            opacity: 0;
+            visibility: hidden
+        }
+
+        .left-sidebar .icon-link {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, .2);
+            background: linear-gradient(to bottom, #16979D, #103A60);
+            transition: all .3s cubic-bezier(.25, .8, .25, 1)
+        }
+
+        .left-sidebar .icon-link:hover {
+            background: linear-gradient(to bottom, #103A60, #16979D);
+            transform: scale(1.1);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, .3)
+        }
+
+        .left-sidebar .icon-link img {
+            width: 24px;
+            height: 24px;
+            transition: transform .3s ease-in-out
+        }
+
+        .left-sidebar .tooltip-text {
+            visibility: hidden;
+            opacity: 0;
+            position: absolute;
+            left: 40px;
+            top: 50%;
+            transform: translateY(-50%) translateX(-15px);
+            margin-left: 10px;
+            padding: 8px 12px;
+            background: linear-gradient(to bottom, #16979D, #103A60);
+            color: #fff;
+            white-space: nowrap;
+            border-radius: 999px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, .2);
+            transition: opacity .4s ease-in-out, transform .4s cubic-bezier(.175, .885, .32, 1.275)
+        }
+
+        .left-sidebar .icon-link:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+            transform: translateY(-50%) translateX(0)
+        }
+
+        @media (max-width:768px) {
+            .left-sidebar {
+                background-color: #fff;
+                box-shadow: 0 0 15px rgba(0, 0, 0, .2);
+                padding: 15px 10px;
+                border-top-right-radius: 8px;
+                border-bottom-right-radius: 8px;
+                left: 0;
+                transform: translate(-100%, -50%);
+                transition: transform .3s ease-in-out;
+                z-index: 1040
+            }
+
+            .left-sidebar.show-mobile-sidebar {
+                transform: translate(0, -50%)
+            }
+
+            .left-sidebar .tooltip-text {
+                display: none
+            }
+
+            .left-sidebar .icon-link:hover {
+                transform: none;
+            }
+
+            #mobile-sidebar-toggle {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: fixed;
+                left: 0;
+                top: 300px;
+                z-index: 1030;
+                background: linear-gradient(to bottom, #16979D, #103A60);
+                color: #fff;
+                border: none;
+                border-top-right-radius: 8px;
+                border-bottom-right-radius: 8px;
+                border-top-left-radius: 0;
+                border-bottom-left-radius: 0;
+                width: 30px;
+                height: 45px;
+                font-size: 20px;
+                box-shadow: 2px 0 10px rgba(0, 0, 0, .2);
+                cursor: pointer;
+                transition: opacity .3s ease-in-out;
+            }
+
+            #mobile-sidebar-toggle .fa-bars {
+                transform: rotate(90deg);
+                transition: transform 0.3s ease;
+            }
+        }
+
+        .counter-number-section {
+            background: linear-gradient(135deg, #0d2c49, #133e5c);
+            padding: 50px 0;
+            text-align: center;
+            font-family: 'Montserrat', sans-serif;
+            color: #fff
+        }
+
+        .counter-item {
+            padding: 20px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, .05);
+            margin: 10px;
+            transition: transform .3s ease, background-color .3s ease
+        }
+
+        .counter-item:hover {
+            transform: translateY(-6px);
+            background: rgba(255, 255, 255, .08)
+        }
+
+        .icon-wrap img {
+            width: 70px;
+            height: 70px;
+            margin-bottom: 10px;
+            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, .3))
+        }
+
+        .counter-wrap {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #ffd700;
+            line-height: 1;
+            display: flex;
+            justify-content: center;
+            align-items: baseline;
+            gap: 3px
+        }
+
+        .counter-wrap .suffix {
+            font-size: 1.2rem;
+            color: #ffd700
+        }
+
+        .label {
+            font-size: 1rem;
+            font-weight: 500;
+            margin-top: 5px;
+            letter-spacing: .5px;
+            color: #f0f0f0;
+            text-decoration: none !important;
+            border: none !important
+        }
+
+        .hero-section,
+        .dedicated-section-one,
+        .service-carousel-section,
+        .doctors-section,
+        .counter-number-section,
+        .feedback-section,
+        .video-section {
+            padding: 80px 0
+        }
+
+        .hero-section {
+            padding-top: 0
+        }
+
+        .dedicated-section-one .section-heading {
+            text-align: center;
+            font-size: 2.5rem;
+            padding-bottom: 10px;
+            margin: 0 auto
+        }
+
+        @media (max-width:991px) {
+            .dedicated-section-one .section-heading {
+                font-size: 2rem
+            }
+        }
+
+        @media (max-width:576px) {
+            .dedicated-section-one .section-heading {
+                font-size: 1.7rem
+            }
+        }
+
+        .dedicated-section-one .image-column {
+            align-self: flex-start;
+            margin-top: -20px
+        }
+
+        @media (max-width:991px) {
+            .dedicated-section-one .image-column {
+                margin-top: 0;
+                align-self: center
+            }
+        }
+
+        @media (max-width:768px) {
+            .icon-wrap img {
+                width: 50px;
+                height: 50px
+            }
+
+            .counter-wrap {
+                font-size: 2rem
+            }
+
+            .counter-wrap .suffix {
+                font-size: 1rem
+            }
+
+            .dedicated-section-one,
+            .service-carousel-section,
+            .doctors-section,
+            .counter-number-section,
+            .feedback-section,
+            .video-section {
+                padding: 40px 0
+            }
+        }
+
+        .scroll-to-top-btn {
+            display: none;
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            z-index: 999;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #16979D, #103A60);
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-size: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, .2);
+            transition: all .3s cubic-bezier(.25, .8, .25, 1);
+            align-items: center;
+            justify-content: center;
+            text-decoration: none
+        }
+
+        .scroll-to-top-btn:hover {
+            background: linear-gradient(135deg, #103A60, #16979D);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, .25)
+        }
+
+        .scroll-to-top-btn i {
+            transition: transform .3s ease;
+            margin-top: 2px
+        }
+
+        .scroll-to-top-btn:hover i {
+            transform: translateY(-2px)
+        }
+
+        @media (max-width:768px) {
+            .scroll-to-top-btn {
+                left: 20px;
+                bottom: 20px;
+                width: 45px;
+                height: 45px;
+                font-size: 18px
+            }
+        }
+
+        .dedicated-section-one .col-lg-6:first-child img {
+            margin-top: 2rem;
+            transform: translateY(10px)
+        }
+
+        .dedicated-section-one img {
+            align-self: flex-start;
+            width: 100%
+        }
+
+        #mobile-nav {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            background-color: #fff;
+            flex-direction: column;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, .1);
+            max-height: 60vh;
+            overflow-y: auto
+        }
+
+        #mobile-nav li a {
+            display: block;
+            padding: 8px 12px;
+            color: #103A60;
+            text-decoration: none;
+            border-bottom: 1px solid #eee;
+            transition: all .3s ease;
+            font-size: .95rem
+        }
+
+        #mobile-nav li a:hover {
+            color: #1a9cb7;
+            background-color: #f8f9fa
+        }
+
+        @media (min-width:992px) {
+            #mobile-nav {
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                gap: 10px;
+                background-color: transparent;
+                border-top: none;
+                box-shadow: none;
+                max-height: none;
+                overflow-y: visible;
+                padding: 5px 0
+            }
+
+            #mobile-nav li a {
+                border-bottom: none;
+                padding: 8px 12px;
+                border-radius: 4px
+            }
+
+            #mobile-nav li a:hover {
+                background-color: #e6f7f8;
+                transform: translateY(-1px)
+            }
+
+            .navbar-toggle {
+                display: none
+            }
+        }
+
+        @media (max-width:991px) {
+            #mobile-nav {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 280px;
+                height: 100%;
+                z-index: 1050;
+                transform: translateX(-100%);
+                transition: transform .3s ease-in-out;
+                padding-top: 50px;
+                background-color: #fff;
+                overflow-y: auto;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, .1)
+            }
+
+            #mobile-nav.active {
+                transform: translateX(0)
+            }
+        }
+
+        .nav-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, .5);
+            z-index: 1045;
+            opacity: 0;
+            transition: opacity .3s ease-in-out
+        }
+
+        .nav-overlay.active {
+            display: block;
+            opacity: 1
+        }
+
+        #mobile-nav li a {
+            padding: 10px 15px
+        }
+
+        .navbar-toggle {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            position: fixed;
+            right: 15px;
+            top: 15px;
+            z-index: 1001;
+            background: rgba(255, 255, 255, .9);
+            border-radius: 4px;
+            padding: 0;
+            line-height: 1;
+            height: auto
+        }
+
+        .nav-close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: 0 0;
+            border: none;
+            font-size: 2rem;
+            color: #103A60;
+            cursor: pointer;
+            padding: 5px;
+            line-height: 1;
+            display: none
+        }
+
+        @media (max-width:991px) {
+            .nav-close-btn {
+                display: block
+            }
+        }
+
+        .ambulance-animation-container {
+            overflow: hidden;
+            height: 35px;
+            position: relative;
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #ddd
+        }
+
+        .ambulance-animation {
+            position: absolute;
+            top: 0;
+            white-space: nowrap;
+            animation: move-ambulance 10s linear infinite;
+            display: flex;
+            align-items: center;
+            height: 100%
+        }
+
+        .ambulance-animation:hover {
+            animation-play-state: paused
+        }
+
+        .ambulance-icon img {
+            height: 40px;
+            margin-right: 15px
+        }
+
+        .ambulance-number a {
+            font-weight: 700;
+            color: #d9534f;
+            text-decoration: none;
+            font-size: 1.1rem
+        }
+
+        @keyframes move-ambulance {
+            0% {
+                transform: translateX(100vw)
+            }
+
+            100% {
+                transform: translateX(-100%)
+            }
+        }
+
+        @media (max-width:768px) {
+            .ambulance-animation-container {
+                height: 40px
+            }
+
+            .ambulance-icon img {
+                height: 30px
+            }
+
+            .ambulance-number a {
+                font-size: .9rem
+            }
+        }
+
+        .chrome-popup {
+            position: fixed;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-120%);
+            width: min(480px, 96vw);
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
+            padding: 16px;
+            color: #333;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            z-index: 9999;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.25s ease;
+        }
+
+        .chrome-popup.is-visible {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .chrome-popup__title {
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #333;
+        }
+
+        .chrome-popup__url {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .chrome-popup__checkbox {
+            font-size: 12px;
+            color: #666;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 14px;
+        }
+
+        .chrome-popup__actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        .chrome-btn {
+            font-size: 13px;
+            border-radius: 18px;
+            padding: 6px 16px;
+            cursor: pointer;
+            border: none;
+            text-decoration: none;
+            line-height: 1.4;
+        }
+
+        .chrome-btn--blue {
+            background: #44a5a6;
+            color: #fff;
+        }
+
+        .chrome-btn--blue:hover {
+            background: #9ededf;
+        }
+
+        .chrome-btn--green {
+            background: #44a5a6;
+            color: #fff;
+        }
+
+        .chrome-btn--green:hover {
+            background: #9ededf;
+        }
+
+        .chrome-btn--grey {
+            background: #e8eaed;
+            color: #202124;
+        }
+
+        .chrome-btn--grey:hover {
+            background: #dadce0;
+        }
+
+        .header-logos {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .new-logo-wrapper .new-logo-img {
+            height: 60px;
+            width: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WGJFVPCB" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TD2L5G6C" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
+
+    <div class="nav-overlay"></div>
+    <div class="left-sidebar">
+        <a href="/appointments" class="icon-link">
+            <img src="/static/img/book-appointment.png" alt="Book Appointment Icon">
+            <span class="tooltip-text">Book an Appointment</span>
+        </a>
+        <a href="javascript:void(0)" onclick="showChromePopup()" class="icon-link">
+            <img src="/static/img/whatsapp.png" alt="WhatsApp Icon">
+            <span class="tooltip-text">WhatsApp</span>
+        </a>
+        <a href="/departments/" class="icon-link">
+            <img src="/static/img/find-doctors.png" alt="Find Doctors Icon">
+            <span class="tooltip-text">Find a Doctor</span>
+        </a>
+        <a href="tel:8066668800" class="icon-link">
+            <img src="/static/img/call-icon.png" alt="Call Icon">
+            <span class="tooltip-text">Call Us</span>
+        </a>
+    </div>
+
+    <header class="new-header">
+        <div class="header-top-container">
+            <div class="container header-top-content">
+                <a href="/" class="logo">
+                    <div class="header-logos">
+                        <div class="logo-wrapper">
+                            <img src="/static/img/logo.png" alt="AarogyaHastha Hospitals Logo" class="header-logo-img">
+                        </div>
+                        <div class="logo-wrapper new-logo-wrapper">
+                            <img src="/static/img/NABH_Logo-01.png" alt="New Hospital Logo"
+                                class="header-logo-img new-logo-img">
+                        </div>
+                    </div>
+                </a>
+                <button class="navbar-toggle d-lg-none" id="mobile-menu-toggle">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <div class="header-contact">
+                    <span class="appointment-number">
+                        <div class="contact-label">Appointments</div>
+                        <div class="contact-row">
+                            <i class="fa fa-phone"></i>
+                            <a href="tel:08066668811">080 6666 8811/22/33</a>
+                        </div>
+                    </span>
+                    <span class="emergency-number">
+                        <div class="contact-label">24/7 Ambulance</div>
+                        <div class="contact-row">
+                            <i class="fa fa-ambulance"></i>
+                            <a href="tel:08066668877">080 6666 8877/88</a>
+                        </div>
+                    </span>
+                </div>
+            </div>
+
+            <div class="ambulance-animation-container">
+                <div class="ambulance-animation">
+                    <div class="ambulance-icon">
+                        <img src="/static/img/ambulance.png" alt="Ambulance" />
+                    </div>
+                    <div class="ambulance-number">
+                        <a href="tel:08066668877">Emergency: 080 6666 8877/88</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="nav-container">
+                <div class="container nav-content">
+                    <ul id="mobile-nav" class="nav-list d-lg-none">
+                        <button class="nav-close-btn" id="mobile-menu-close">×</button>
+                        <li><a class="nav-links" href="/">Home</a></li>
+                        <li><a class="nav-links" href="/appointments">Appointments</a></li>
+                        <li><a class="nav-links" href="/doctors">Doctors</a></li>
+                        <li><a class="nav-links" href="/departments/">Departments</a></li>
+                        <li><a class="nav-links" href="/health-packages">Health Packages</a></li>
+                        <li><a class="nav-links" href="/sports-packages">Sports Packages</a></li>
+                        <li><a class="nav-links" href="/blog">Blog</a></li>
+                        <li><a class="nav-links" href="/about">About Us</a></li>
+                        <li class="dropdown">
+                            <a class="nav-links" href="/contact">Contact</a>
+                            <ul class="dropdown-menu">
+                                <li><a
+                                        href="https://www.google.com/search?sca_esv=01d7d1da4f3739f4&sxsrf=AE3TifMajnR1cj7CV7KMp-OAhDhG6-ag5A:1757584508053&si=AMgyJEtREmoPL4P1I5IDCfuA8gybfVI2d5Uj7QMwYCZHKDZ-E67a9GN5xsFdNX82bZli0D47ZU-t7_RrF_VvCuEUJnWTI5SR80ndLu5MxI-lgdtIvv6GkmwZO2uyJfSHoUpzWU5bjtfVoFrfNvZ8hwgIvFvNDwqWmX3a7tdbZfx8SWbB5YgDksnqmrDV4yojH420D2gkt6js&q=AAROGYA+HASTHA+HOSPITALS+-+CENTRE+FOR+SURGICAL+EXCELLENCE+Reviews&sa=X&ved=2ahUKEwiMnY_CuNCPAxXKTGwGHZhvD64Q0bkNegQIKhAD&biw=1280&bih=585&dpr=1.5#lrd=0x3bae132a0bbeb64b:0x626c13b98813a8a3,3,,,,">Review
+                                        us</a>
+                                </li>
+                                <li><a href="#" class="write-review-btn">Write a message to ED</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <ul class="main-nav" id="main-navigation">
+                        <li><a class="nav-links" href="/">Home</a></li>
+                        <li><a class="nav-links" href="/appointments">Appointments</a></li>
+                        <li><a class="nav-links" href="/doctors">Doctors</a></li>
+                        <li><a class="nav-links" href="/departments/">Departments</a></li>
+                        <li><a class="nav-links" href="/health-packages">Health Packages</a></li>
+                        <li><a class="nav-links" href="/sports-packages">Sports Packages</a></li>
+                        <li><a class="nav-links" href="/blog">Blog</a></li>
+                        <li class="dropdown">
+                            <a class="nav-links" href="/about">About us <i class="fa fa-angle-down"></i></a>
+                            <ul class="dropdown-menu">
+
+                                <li>
+                                    <a href="/bmw_report" target="_blank">
+                                        <i class="fa-solid fa-circle-info"></i> BMW Report
+                                    </a>
+
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a class="nav-links" href="/contact">Contact <i class="fa fa-angle-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="https://www.google.com/search?sca_esv=01d7d1da4f3739f4&sxsrf=AE3TifONK5RnA4evxGz8cGk4CrHNvVAxYg:1757584553118&si=AMgyJEtREmoPL4P1I5IDCfuA8gybfVI2d5Uj7QMwYCZHKDZ-E67a9GN5xsFdNX82bZli0D47ZU-t7_RrF_VvCuEUJnWTI5SR80ndLu5MxI-lgdtIvv6GkmwZO2uyJfSHoUpzWU5bjtfVoFrfNvZ8hwgIvFvNDwqWmX3a7tdbZfx8SWbB5YgDksnqmrDV4yojH420D2gkt6js&q=AAROGYA+HASTHA+HOSPITALS+-+CENTRE+FOR+SURGICAL+EXCELLENCE+Reviews&sa=X&ved=2ahUKEwjU_M3XuNCPAxU-RmwGHaDaFFcQ0bkNegQIKBAD&biw=1280&bih=585&dpr=1.5#lrd=0x3bae132a0bbeb64b:0x626c13b98813a8a3,3,,,,"
+                                        target="_blank"><i class="fa-solid fa-star"></i> Review us</a></li>
+                                <li><a href="#" class="write-review-btn"><i class="fa-solid fa-envelope"></i> Write a
+                                        message to ED</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="error-container">
+        <div class="container-404">
+            <div class="error-details">
+                <div class="illustration">
+                    <svg width="200" height="150" viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" style="stop-color:#16979D;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#103A60;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <path d="M 10 75 L 40 75 L 50 55 L 60 95 L 70 70 L 80 80 L 90 75 L 190 75" stroke="url(#grad1)"
+                            stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                        <circle cx="100" cy="75" r="50" fill="rgba(16, 58, 96, 0.1)" />
+                        <circle cx="100" cy="75" r="40" fill="rgba(16, 58, 96, 0.15)" />
+                        <g transform="translate(88, 63) scale(1.2)">
+                            <rect x="0" y="5" width="20" height="4" rx="2" fill="#2c3e50" />
+                            <rect x="8" y="-3" width="4" height="20" rx="2" fill="#2c3e50" />
+                        </g>
+                        <text x="10" y="140" font-family="Poppins, sans-serif" font-size="16" font-weight="500"
+                            fill="#bdc3c7">Status: Page Not Found</text>
+                    </svg>
+                </div>
+                <div class="error-code">ERROR 404</div>
+                <h1>We can't find that page.</h1>
+                <p>It seems the page you're looking for has been moved, deleted, or was never here. Let's get you back
+                    to a
+                    healthy starting point.</p>
+            </div>
+
+            <div class="error-actions">
+                <div class="button-container">
+                    <a href="/appointments" class="btn btn-primary">
+                        <i class="fas fa-calendar-check"></i>
+                        <span>Book Appointment</span>
+                    </a>
+                    <a href="/departments/" class="btn btn-secondary">
+                        <i class="fas fa-stethoscope"></i>
+                        <span>View Departments</span>
+                    </a>
+                    <a href="tel:08066668877" class="btn btn-accent">
+                        <i class="fas fa-phone-alt"></i>
+                        <span>Call Emergency</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="review-modal" class="login-modal">
+        <div class="login-modal-content">
+            <span class="close-button" id="close-review-modal">×</span>
+
+            <div style="text-align: center; margin-bottom: 10px;">
+                <img src="/static/img/logo.png" alt="Company Logo" style="max-width: 160px; height: auto;">
+            </div>
+
+            <h2 style="margin-top: 0; margin-bottom: 15px; font-size: 1.5rem; text-align: center;">
+                Write to Management
+            </h2>
+
+            <form id="review-form">
+                <div class="login-form-group">
+                    <input type="text" id="reviewer-name" name="reviewer-name" placeholder="Your Name" required>
+                </div>
+                <div class="login-form-group">
+                    <input type="number" id="reviewer-number" name="reviewer-number" placeholder="Mobile Number"
+                        required>
+                </div>
+                <div class="login-form-group">
+                    <input type="email" id="reviewer-email" name="reviewer-email" placeholder="Email Address" required>
+                </div>
+                <div class="login-form-group">
+                    <textarea id="review-message" name="review-message" rows="4" placeholder="Your Message..."
+                        required></textarea>
+                </div>
+                <div class="login-form-group">
+                    <button type="submit">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <div class="logo-wrapper"><img loading="lazy" src="/static/img/logo.png"
+                            alt="AarogyaHastha Hospitals Logo"></div>
+                    <p><a href="https://www.google.com/maps/dir//Site+No.+2,+No.+2816%2F2,+SY.87,+Kasavanahalli+Main+Rd,+near+1st+Cross+Road,+opposite+HM+Symphony,+Bengaluru,+Karnataka+560035/@12.9007391,77.6745367,21769m/data=!3m1!1e3!4m8!4m7!1m0!1m5!1m1!1s0x3bae132a0bbeb64b:0x626c13b98813a8a3!2m2!1d77.67569!2d12.9005956?entry=ttu&g_ep=EgoyMDI1MDkxNi4wIKXMDSoASAFQAw%3D%3D"
+                            target="_blank" style="text-decoration: none; color: inherit;">Site No. 2, Kasavanahalli
+                            Main Rd, near 1st
+                            Cross Road, opposite HM Symphony, Bengaluru, Karnataka 560035</a></p>
+                    <div class="social-icons mt-4">
+                        <a href="https://www.instagram.com/aarogyahastha/" target="_blank"><img
+                                src="/static/img/icon-insta.png" alt="Instagram"></a>
+                        <a href="https://www.facebook.com/aarogyahastha" target="_blank"><img
+                                src="/static/img/icon-fb.png" alt="Facebook"></a>
+                        <a href="https://www.linkedin.com/company/aarogya-hastha/" target="_blank"><img
+                                src="/static/img/icon-linkedin.png" alt="LinkedIn"></a>
+                        <a href="https://twitter.com/AarogyaHastha" target="_blank"><img
+                                src="/static/img/icon-twitter.png" alt="Twitter"></a>
+                        <a href="https://www.youtube.com/channel/UCeQv8lTLIT4btbjgLxYzYrw" target="_blank"><img
+                                src="/static/img/icon-youtube.png" alt="YouTube"></a>
+                        <a href="javascript:void(0)" onclick="showChromePopup()"><img
+                                src="/static/img/icon-whatsapp.png" alt="WhatsApp"></a>
+                    </div>
+                    <div class="app-download" style="margin-top: 25px;">
+                        <h4 style="font-size: 16px; margin-bottom: 15px;">Download App for more benefits</h4>
+                        <div class="app-download-buttons">
+
+                            <a href="https://play.google.com/store/apps/details?id=com.better.aarogyahastha"
+                                target="_blank" class="app-download-btn"><img
+                                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Google_Play_Store_badge_EN.svg/2560px-Google_Play_Store_badge_EN.svg.png"
+                                    alt="Get it on Google Play"></a>
+                            <a href="https://apps.apple.com/in/app/aarogya-hastha/id6739343936" target="_blank"
+                                class="app-download-btn"><img
+                                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Download_on_the_App_Store_Badge.svg/2560px-Download_on_the_App_Store_Badge.svg.png"
+                                    alt="Download on the App Store"></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-links-wrapper">
+                    <div class="footer-column">
+                        <h4>Quick Links</h4>
+                        <ul class="footer-links">
+                            <li><a href="/">Home</a></li>
+                            <li><a href="/appointments">Appointments</a></li>
+                            <li><a href="/doctors">Doctors</a></li>
+                            <li><a href="/departments/">Departments</a></li>
+                            <li><a href="/health-packages">Health Packages</a></li>
+                            <li><a href="/sports-packages">Sports Packages</a></li>
+                            <li><a href="/about">About Us</a></li>
+                            <li><a href="/contact">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column" style="flex: 2;">
+                        <h4>Our Departments</h4>
+                        <ul class="footer-links footer-links-multi-column">
+                            <li><a href="/departments/general-surgery">General Surgery</a></li>
+                            <li><a href="/departments/neurosurgery">Neurosurgery</a></li>
+                            <li><a href="/departments/orthopaedics">Orthopaedics</a></li>
+                            <li><a href="/departments/anaesthesia">Anaesthesiology</a></li>
+                            <li><a href="/departments/pain-medicine">Pain Medicine</a></li>
+                            <li><a href="/departments/general-medicine">General Medicine</a></li>
+                            <li><a href="/departments/lab-medicine">Lab Medicine</a></li>
+                            <li><a href="/departments/paediatrics">Paediatrics</a></li>
+                            <li><a href="/departments/physiotherapy">Physiotherapy</a></li>
+                            <li><a href="/departments/dermatology">Dermatology</a></li>
+                            <li><a href="/departments/ent">ENT</a></li>
+                            <li><a href="/departments/emergency-medicine">Emergency Medicine</a></li>
+                            <li><a href="/departments/nephrology">Nephrology</a></li>
+                            <li><a href="/departments/urology">Urology</a></li>
+                            <li><a href="/departments/medical-gastroenterology">Medical Gastroenterology</a></li>
+                            <li><a href="/departments/minimal-access-surgery">Minimal Access Surgery</a></li>
+                            <li><a href="/departments/plastic-surgery">Plastic Surgery</a></li>
+                            <li><a href="/departments/obg">Obstetrics & Gynaecology</a></li>
+                            <li><a href="/departments/surgical-gastroenterology">Surgical Gastroenterology</a></li>
+                            <li><a href="/departments/radiology">Radiology</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>Copyright © 2025, all Rights Reserved to Aarogya Hastha Hospitals Pvt Ltd | <a
+                        href="/terms-and-conditions">Terms & Conditions</a> | <a href="/privacy-policy">Privacy
+                        Policy</a> | <a href="/disclaimer">Disclaimer</a></p>
+            </div>
+        </div>
+    </footer>
+    <style>
+        .copyright-top-section {
+            padding: 10px 0;
+            margin-top: -56px;
+            margin-left: 90px;
+            text-align: center;
+            border-bottom: 1px solid rgba(0, 0, 0, .1)
+        }
+
+        .copyright-top-section .copyright-text {
+            font-size: .9em;
+            margin: 0;
+            color: #333
+        }
+
+        .copyright-top-section .copyright-text a {
+            color: #103A60;
+            text-decoration: none;
+            font-weight: 600
+        }
+
+        .copyright-top-section .copyright-text a:hover {
+            text-decoration: underline;
+            color: #16979D
+        }
+
+        .main-footer-content {
+            padding: 40px 0 20px
+        }
+
+        @media (max-width:768px) {
+            .copyright-top-section {
+                padding: 12px 0
+            }
+
+            .copyright-top-section .copyright-text {
+                font-size: .8em;
+                line-height: 1.4
+            }
+
+            .main-footer-content {
+                padding: 30px 0 15px
+            }
+        }
+
+        .site-footer {
+            background-color: #fff;
+            color: #555;
+            padding: 50px 0 0;
+            font-size: 15px;
+            border-top: 1px solid #e9e9e9;
+            box-shadow: 0 -4px 12px rgba(0, 0, 0, .05)
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            padding-bottom: 40px
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 250px
+        }
+
+        .footer-column .logo-wrapper img {
+            height: 50px;
+            margin-bottom: 15px
+        }
+
+        .footer-column h4 {
+            color: #103A60;
+            font-size: 18px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px
+        }
+
+        .footer-column h4::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 2px;
+            background-color: #16979D
+        }
+
+        .footer-column p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+            color: #555
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0
+        }
+
+        .app-download {
+            margin-top: 25px
+        }
+
+        .app-download-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-start
+        }
+
+        .app-download-btn {
+            display: block;
+            height: 40px;
+            transition: transform .3s ease
+        }
+
+        .app-download-btn:hover {
+            transform: translateY(-2px)
+        }
+
+        .app-download-btn img {
+            height: 100%;
+            width: auto
+        }
+
+        .footer-links li {
+            margin-bottom: 12px
+        }
+
+        .footer-links a {
+            color: #555;
+            text-decoration: none;
+            transition: color .3s, padding-left .3s;
+            display: inline-block
+        }
+
+        .footer-links a:hover {
+            color: #1a6db3;
+            padding-left: 5px
+        }
+
+        .footer-links a::before {
+            content: '\f105';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            margin-right: 8px;
+            color: #16979D
+        }
+
+        .footer-links-multi-column {
+            column-count: 3;
+            column-gap: 25px
+        }
+
+        .footer-links-multi-column li {
+            -webkit-column-break-inside: avoid;
+            page-break-inside: avoid;
+            break-inside: avoid
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px
+        }
+
+        .social-icons a {
+            color: #103A60;
+            background-color: #e8eaed;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            text-decoration: none;
+            transition: background-color .3s, color .3s, transform .3s
+        }
+
+        .social-icons a:hover {
+            background-color: #103A60;
+            color: #fff;
+            transform: translateY(-3px)
+        }
+
+        .social-icons a img {
+            height: 20px;
+            width: 20px
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #e9e9e9;
+            text-align: center;
+            padding: 20px 0
+        }
+
+        .footer-bottom p {
+            margin: 0;
+            font-size: 14px;
+            color: #666
+        }
+
+        .footer-links-wrapper {
+            display: contents
+        }
+
+        @media (max-width:991.98px) {
+            .footer-links-multi-column {
+                column-count: 2
+            }
+        }
+
+        @media (max-width:991.98px) {
+            .header-top-content {
+                position: relative;
+                padding-top: 10px;
+                padding-bottom: 10px;
+                flex-wrap: wrap;
+                justify-content: center
+            }
+
+            .logo {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                order: 1
+            }
+
+            .header-logo-img {
+                height: 50px;
+                width: auto;
+                max-width: 200px;
+                object-fit: contain
+            }
+
+            .navbar-toggle {
+                position: absolute;
+                top: 50%;
+                right: 15px;
+                transform: translateY(-50%)
+            }
+
+            .header-contact {
+                flex-basis: 100%;
+                justify-content: center;
+                margin-top: 10px;
+                order: 2
+            }
+        }
+
+        @media (max-width:768px) {
+            .footer-content {
+                flex-direction: column;
+                text-align: center
+            }
+
+            .footer-column {
+                min-width: 100%
+            }
+
+            .footer-column h4::after {
+                left: 50%;
+                transform: translateX(-50%)
+            }
+
+            .app-download-buttons {
+                justify-content: center
+            }
+
+            .footer-links-wrapper {
+                display: flex;
+                flex-direction: row;
+                gap: 20px;
+                width: 100%;
+                text-align: left
+            }
+
+            .footer-links-wrapper .footer-column {
+                min-width: 0
+            }
+
+            .footer-links-wrapper .footer-column h4::after {
+                left: 0;
+                transform: none
+            }
+
+            .footer-links-multi-column {
+                column-count: 2
+            }
+
+            .social-icons {
+                justify-content: center
+            }
+        }
+    </style>
+
+    <a href="#" id="scrollToTopBtn" class="scroll-to-top-btn" title="Scroll to top" aria-label="Scroll to top"><i
+            class="fa fa-arrow-up"></i></a>
+    <button id="mobile-sidebar-toggle" class="d-lg-none"><i class="fa fa-bars"></i></button>
+
+    <div id="chrome-popup" class="chrome-popup" aria-hidden="true">
+        <div class="chrome-popup__content">
+            <p class="chrome-popup__title">Open WhatsApp?</p>
+            <p class="chrome-popup__url">https://api.whatsapp.com wants to open this application.</p>
+            <label class="chrome-popup__checkbox">
+                <input type="checkbox"> Always allow api.whatsapp.com to open links of this type in the associated
+                app
+            </label>
+        </div>
+        <div class="chrome-popup__actions">
+            <a href="whatsapp://send?phone=919036092727" class="chrome-btn chrome-btn--blue">Open with App</a>
+            <a href="https://web.whatsapp.com/send?phone=9036092727" target="_blank"
+                class="chrome-btn chrome-btn--green">Open with Web</a>
+            <button class="chrome-btn chrome-btn--grey" onclick="hideChromePopup()">Cancel</button>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://fyndbetter.com/chatbot/aarogya_chatbot"></script>
+    <script type="text/javascript" src="https://unpkg.com/youtube-background/jquery.youtube-background.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            // --- 1. MOBILE NAVIGATION LOGIC ---
+            const mobileMenuToggle = $('#mobile-menu-toggle');
+            const mobileMenuClose = $('#mobile-menu-close');
+            const mobileNav = $('#mobile-nav');
+            const navOverlay = $('.nav-overlay');
+
+            if (mobileMenuToggle.length) {
+                const openNav = () => {
+                    mobileNav.addClass('active');
+                    navOverlay.addClass('active');
+                    $('body').css('overflow', 'hidden');
+                };
+                const closeNav = () => {
+                    mobileNav.removeClass('active');
+                    navOverlay.removeClass('active');
+                    $('body').css('overflow', '');
+                };
+
+                // MODIFIED: This now toggles the menu
+                mobileMenuToggle.on('click', () => {
+                    if (mobileNav.hasClass('active')) {
+                        closeNav();
+                    } else {
+                        openNav();
+                    }
+                });
+
+                mobileMenuClose.on('click', closeNav);
+                navOverlay.on('click', closeNav);
+            }
+
+            // --- 2. MOBILE SIDEBAR LOGIC ---
+            const mobileSidebarToggle = $('#mobile-sidebar-toggle');
+            const sidebar = $('.left-sidebar');
+
+            if (mobileSidebarToggle.length && sidebar.length) {
+                const toggleSidebar = () => {
+                    sidebar.toggleClass('show-mobile-sidebar');
+                };
+                mobileSidebarToggle.on('click', function (event) {
+                    event.stopPropagation();
+                    toggleSidebar();
+                });
+                $(document).on('click', function (event) {
+                    if (sidebar.hasClass('show-mobile-sidebar') && !sidebar.is(event.target) && sidebar.has(event.target).length === 0 && !mobileSidebarToggle.is(event.target) && mobileSidebarToggle.has(event.target).length === 0) {
+                        toggleSidebar();
+                    }
+                });
+            }
+
+            // --- 3. SCROLL-TO-TOP BUTTON ---
+            const scrollBtn = $('#scrollToTopBtn');
+            if (scrollBtn.length) {
+                $(window).on('scroll', function () {
+                    if ($(window).scrollTop() > 300) {
+                        scrollBtn.css('display', 'flex');
+                    } else {
+                        scrollBtn.hide();
+                    }
+                });
+                scrollBtn.on('click', function (e) {
+                    e.preventDefault();
+                    $('html, body').animate({ scrollTop: 0 }, 'smooth');
+                });
+            }
+
+
+        });
+
+        // Standalone Functions and Modal Logic
+        function showChromePopup() {
+            const popup = document.getElementById("chrome-popup");
+            if (popup) popup.classList.add("is-visible");
+        }
+        function hideChromePopup() {
+            const popup = document.getElementById("chrome-popup");
+            if (popup) popup.classList.remove("is-visible");
+        }
+        document.addEventListener("keydown", e => {
+            if (e.key === "Escape") hideChromePopup();
+        });
+
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const reviewModal = document.getElementById('review-modal');
+            if (reviewModal) {
+                // Open modal
+                document.querySelectorAll('.write-review-btn').forEach(btn => {
+                    btn.addEventListener('click', e => {
+                        e.preventDefault();
+                        reviewModal.style.display = 'flex';
+                    });
+                });
+
+                // Close modal on X
+                reviewModal.querySelector('.close-button').addEventListener('click', () => {
+                    reviewModal.style.display = 'none';
+                });
+
+                // Close modal if clicking outside
+                window.addEventListener('click', e => {
+                    if (e.target === reviewModal) reviewModal.style.display = 'none';
+                });
+
+                // Handle form submit with AJAX
+                reviewModal.querySelector('#review-form').addEventListener('submit', async e => {
+                    e.preventDefault();
+
+                    const form = e.target;
+                    const formData = new FormData(form);
+
+                    try {
+                        const res = await fetch("/submit-review", {
+                            method: "POST",
+                            body: formData
+                        });
+
+                        if (res.ok) {
+                            alert("✅ Your message has been submitted successfully!");
+                            form.reset(); // clear form fields
+                            reviewModal.style.display = "none"; // close modal
+                        } else {
+                            alert("❌ Error submitting message. Please try again.");
+                        }
+                    } catch (err) {
+                        console.error(err);
+                        alert("⚠️ Something went wrong. Please try later.");
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>

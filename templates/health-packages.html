@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="google-site-verification" content="NCMNy8zyXscWLWKEoLYF2wgA_DyjPOp8Qnd_8_n6F2w" />
+  <link rel="icon" type="image/x-icon" href="https://aarogyahastha.com/static/img/fav.png/">
+
+  <title>Health Packages - Aarogya Hastha</title>
+
+  <meta name="description"
+    content="We provide timely and specialized medical attention for patients experiencing life-threatening conditions.">
+  <link rel="canonical" href="https://aarogyahastha.com/health-packages">
+
+  <base href="/">
+
+  <link rel="stylesheet" href="static/css/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+  <link rel="stylesheet" href="static/css/css/style.css">
+
+  <link rel="stylesheet" type="text/css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+  <script>(function (w, d, s, l, i) {
+      w[l] = w[l] || []; w[l].push({
+        'gtm.start':
+          new Date().getTime(), event: 'gtm.js'
+      }); var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+          'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-WGJFVPCB');</script>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-84XCMMFTS8"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-84XCMMFTS8');
+  </script>
+
+  <style>
+    /* Fix for header spacing if necessary */
+    body {
+      padding-top: 0 !important;
+      background-color: #fcfcfc;
+    }
+
+    /* Breadcrumbs */
+    .breadcrumb-section {
+      padding: 15px 0;
+      background-color: #f9f9f9;
+      border-bottom: 1px solid #e9ecef;
+      margin-bottom: 40px;
+    }
+
+    .breadcrumb {
+      margin: 0;
+      padding: 0;
+      background: transparent;
+    }
+
+    .breadcrumb-item a {
+      color: #0056b3;
+      text-decoration: none;
+    }
+
+    .breadcrumb-item.active {
+      color: #6c757d;
+    }
+
+    /* --- GRID CONTAINER --- */
+    .health-packages-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .health-package-card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+      border: 1px solid #e0e6ed;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .health-package-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+    }
+
+    .package-header {
+      background: linear-gradient(135deg, #b4d3f2 0%, #79cdd1 100%);
+      color: white;
+      padding: 20px;
+      position: relative;
+    }
+
+    .package-header h2 {
+      margin: 0;
+      font-size: 1.2rem;
+      text-align: center;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .best-value-tag {
+      position: absolute;
+      top: 13px;
+      right: -20px;
+      width: 90px;
+      background: #e53e3e;
+      color: white;
+      text-align: center;
+      padding: 5px 0;
+      transform: rotate(45deg);
+      font-size: 0.6rem;
+      font-weight: 600;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .package-content {
+      padding: 25px;
+    }
+
+    .tests-columns {
+      display: flex;
+      gap: 30px;
+    }
+
+    .tests-column {
+      flex: 1;
+    }
+
+    .test-item {
+      padding: 8px 0;
+      font-size: 0.95rem;
+      color: #4a5568;
+      position: relative;
+      padding-left: 20px;
+    }
+
+    .test-item::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 14px;
+      width: 6px;
+      height: 6px;
+      background: #16979D;
+      border-radius: 50%;
+    }
+
+    .price-section {
+      margin-top: 25px;
+      padding-top: 20px;
+      border-top: 1px dashed #e2e8f0;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .original-price {
+      color: #a0aec0;
+      font-size: 1rem;
+      font-weight: 500;
+    }
+
+    .original-price span {
+      text-decoration: line-through;
+    }
+
+    .offer-price {
+      color: #103A60;
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+
+    .discount-badge {
+      background: rgba(229, 62, 62, 0.1);
+      color: #e53e3e;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .doc_gif img {
+      position: fixed;
+      right: 2rem;
+      width: 90px;
+      bottom: 4rem;
+      z-index: 9;
+    }
+
+    @media (max-width: 768px) {
+      .doc_gif img {
+        position: fixed;
+        right: 2rem;
+        width: 80px;
+        bottom: 4.3rem;
+      }
+
+      .health-packages-container {
+        grid-template-columns: 1fr;
+      }
+
+      .tests-columns {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .price-section {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+    }
+
+
+
+    .contact-details {
+      background: #ffffff;
+      font-family: 'Poppins', sans-serif;
+      padding: 5rem 0;
+    }
+
+
+    /* --- MODAL STYLES --- */
+    .callback-modal {
+      display: none;
+      position: fixed;
+      z-index: 10000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(3px);
+    }
+
+    .callback-modal-content {
+      background-color: #fff;
+      margin: 8% auto;
+      padding: 30px;
+      width: 90%;
+      max-width: 420px;
+      border-radius: 12px;
+      position: relative;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+      animation: slideDown 0.3s ease-out;
+    }
+
+    @keyframes slideDown {
+      from {
+        transform: translateY(-50px);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 28px;
+      cursor: pointer;
+      color: #aaa;
+      transition: color 0.2s;
+    }
+
+    .close-btn:hover {
+      color: #333;
+    }
+
+    .modal-logo {
+      width: 140px;
+      display: block;
+      margin: 0 auto 15px;
+    }
+
+    .modal-title-pkg {
+      text-align: center;
+      font-weight: bold;
+      font-size: 1.1rem;
+      margin-bottom: 20px;
+      color: #0056b3;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ced4da;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+
+    .form-control:focus {
+      border-color: #007bff;
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+    }
+
+    .btn-submit {
+      width: 100%;
+      background: #0056b3;
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .btn-submit:hover {
+      background: #004494;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .health-packages-container {
+        grid-template-columns: 1fr;
+      }
+
+      .package-header h2 {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WGJFVPCB" height="0" width="0"
+      style="display:none;visibility:hidden"></iframe></noscript>
+
+  <div class="nav-overlay"></div>
+  <div class="left-sidebar">
+    <a href="/appointments" class="icon-link">
+      <img src="static/img/img/book-appointment.png" alt="Book Appointment Icon">
+      <span class="tooltip-text">Book an Appointment</span>
+    </a>
+    <a href="javascript:void(0)" onclick="showChromePopup()" class="icon-link">
+      <img src="static/img/img/whatsapp.png" alt="WhatsApp Icon">
+      <span class="tooltip-text">WhatsApp</span>
+    </a>
+    <a href="/departments/" class="icon-link">
+      <img src="static/img/img/find-doctors.png" alt="Find Doctors Icon">
+      <span class="tooltip-text">Find a Doctor</span>
+    </a>
+    <a href="tel:8066668800" class="icon-link">
+      <img src="static/img/img/call-icon.png" alt="Call Icon">
+      <span class="tooltip-text">Call Us</span>
+    </a>
+  </div>
+
+  <header class="new-header">
+    <div class="header-top-container">
+      <div class="container header-top-content">
+        <div class="mobile_head">
+          <a href="/" class="logo">
+            <div class="header-logos">
+              <div class="logo-wrapper">
+                <img src="static/img/img/logo.png" alt="AarogyaHastha Hospitals Logo" class="header-logo-img">
+              </div>
+              <div class="logo-wrapper new-logo-wrapper">
+                <img src="static/img/img/NABH_Logo-01.png" alt="New Hospital Logo" class="header-logo-img new-logo-img">
+              </div>
+            </div>
+          </a>
+          <button class="navbar-toggle d-lg-none" id="mobile-menu-toggle">
+            <i class="fa fa-bars"></i>
+          </button>
+        </div>
+        <div class="header-contact">
+          <span class="appointment-number">
+            <div class="contact-label">Appointments</div>
+            <div class="contact-row">
+              <i class="fa fa-phone"></i>
+              <a href="tel:08066668811">080 6666 8811/22/33</a>
+            </div>
+          </span>
+          <span class="emergency-number">
+            <div class="contact-label">24/7 Ambulance</div>
+            <div class="contact-row">
+              <i class="fa fa-ambulance"></i>
+              <a href="tel:08066668877">080 6666 8877/88</a>
+            </div>
+          </span>
+        </div>
+      </div>
+
+      <div class="ambulance-animation-container">
+        <div class="ambulance-animation">
+          <div class="ambulance-icon">
+            <img src="static/img/img/ambulance.png" alt="Ambulance" />
+          </div>
+          <div class="ambulance-number">
+            <a href="tel:08066668877">Emergency: 080 6666 8877/88</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-container">
+        <div class="container nav-content">
+          <ul id="mobile-nav" class="nav-list d-lg-none">
+            <button class="nav-close-btn" id="mobile-menu-close">×</button>
+            <li><a class="nav-links" href="/">Home</a></li>
+            <li><a class="nav-links" href="/appointments">Appointments</a></li>
+            <li><a class="nav-links" href="/doctors">Doctors</a></li>
+            <li><a class="nav-links" href="/departments/">Departments</a></li>
+            <li><a class="nav-links" href="/health-packages">Health Packages</a></li>
+            <li><a class="nav-links" href="/sports-packages">Sports Packages</a></li>
+            <li><a class="nav-links" href="/blog">Blog</a></li>
+            <li><a class="nav-links" href="/about">About Us</a></li>
+            <li class="dropdown">
+              <a class="nav-links" href="/contact">Contact</a>
+              <ul class="dropdown-menu">
+                <li><a href="https://www.google.com/search?q=AAROGYA+HASTHA+HOSPITALS+Reviews" target="_blank">Review
+                    us</a></li>
+                <li><a href="#" class="write-review-btn">Write a message to ED</a></li>
+              </ul>
+            </li>
+          </ul>
+
+          <ul class="main-nav" id="main-navigation">
+            <li><a class="nav-links" href="/">Home</a></li>
+            <li><a class="nav-links" href="/appointments">Appointments</a></li>
+            <li><a class="nav-links" href="/doctors">Doctors</a></li>
+            <li><a class="nav-links" href="/departments/">Departments</a></li>
+            <li><a class="nav-links" href="/health-packages">Health Packages</a></li>
+            <li><a class="nav-links" href="/sports-packages">Sports Packages</a></li>
+            <li><a class="nav-links" href="/blog">Blog</a></li>
+            <li class="dropdown">
+              <a class="nav-links" href="/about">About us <i class="fa fa-angle-down"></i></a>
+              <ul class="dropdown-menu">
+                <li><a href="/bmw_report" target="_blank"><i class="fa-solid fa-circle-info"></i> BMW Report</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a class="nav-links" href="/contact">Contact <i class="fa fa-angle-down"></i></a>
+              <ul class="dropdown-menu">
+                <li><a href="https://www.google.com/search?q=AAROGYA+HASTHA+HOSPITALS+Reviews" target="_blank"><i
+                      class="fa-solid fa-star"></i> Review us</a></li>
+                <li><a href="#" class="write-review-btn"><i class="fa-solid fa-envelope"></i> Write a message to ED</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="breadcrumb-section">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb" itemscope itemtype="http://schema.org/BreadcrumbList">
+          <li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+            <a itemprop="item" href="/">
+              <span itemprop="name">Home</span>
+            </a>
+            <meta itemprop="position" content="1">
+          </li>
+          <li class="breadcrumb-item active" aria-current="page" itemprop="itemListElement" itemscope
+            itemtype="http://schema.org/ListItem">
+            <span itemprop="name">Health Packages</span>
+            <meta itemprop="position" content="2">
+          </li>
+        </ol>
+      </nav>
+    </div>
+  </section>
+
+  <div class="health-packages-container">
+    {% for package in packages %}
+    <div class="health-package-card">
+      <a href="#" class="package-link" onclick="openCallbackForm(event, '{{ package.title }}')">
+
+        <div class="package-header">
+          <h2>{{ package.title }}</h2>
+          {% if package.is_best_value %}
+          <div class="best-value-tag">BEST VALUE</div>
+          {% endif %}
+        </div>
+
+        <div class="package-content">
+          <div class="tests-columns">
+            {% set tests_list = package.tests.split(',') %}
+            {% set mid_point = (tests_list|length / 2)|round|int %}
+            <div class="tests-column">
+              {% for test in tests_list[:mid_point] %}
+              <div class="test-item">{{ test }}</div>
+              {% endfor %}
+            </div>
+            <div class="tests-column">
+              {% for test in tests_list[mid_point:] %}
+              <div class="test-item">{{ test }}</div>
+              {% endfor %}
+            </div>
+          </div>
+
+          <div class="price-section">
+            <div class="original-price">Usual Price: <span>₹ {{ package.original_price }}</span></div>
+            <div class="offer-price">Offer Price: ₹ {{ package.offer_price }}</div>
+            {% if package.discount_percentage %}
+            <div class="discount-badge">{{ package.discount_percentage|round }}% OFF</div>
+            {% endif %}
+          </div>
+        </div>
+      </a>
+    </div>
+    {% endfor %}
+  </div>
+
+  <div id="callbackFormModal" class="callback-modal">
+    <div class="callback-modal-content">
+      <span class="close-btn" onclick="closeCallbackForm()">×</span>
+      <img src="/static/img/logo.png" alt="Logo" class="modal-logo">
+      <div class="modal-title-pkg" id="packageNameDisplay"></div>
+
+      <form id="callbackForm">
+        <div class="form-group">
+          <label for="userName">Name</label>
+          <input type="text" id="userName" name="name" required class="form-control" placeholder="Enter your name">
+        </div>
+        <div class="form-group">
+          <label for="userPhone">Phone Number</label>
+          <input type="tel" id="userPhone" name="phone" required class="form-control"
+            placeholder="Enter your mobile number">
+        </div>
+        <button type="submit" class="btn-submit">Request Call Back</button>
+      </form>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-column">
+          <div class="logo-wrapper"><img loading="lazy" src="static/img/img/logo.png"
+              alt="AarogyaHastha Hospitals Logo">
+          </div>
+          <p><a
+              href="https://www.google.com/maps/dir//Site+No.+2,+No.+2816%2F2,+SY.87,+Kasavanahalli+Main+Rd,+near+1st+Cross+Road,+opposite+HM+Symphony,+Bengaluru,+Karnataka+560035/@12.9007391,77.6745367,21769m/data=!3m1!1e3!4m8!4m7!1m0!1m5!1m1!1s0x3bae132a0bbeb64b:0x626c13b98813a8a3!2m2!1d77.67569!2d12.9005956?entry=ttu&g_ep=EgoyMDI1MDkxNi4wIKXMDSoASAFQAw%3D%3D"
+              target="_blank" style="text-decoration: none; color: inherit;">Site No. 2, Kasavanahalli
+              Main Rd, near 1st Cross Road, opposite HM Symphony, Bengaluru, Karnataka 560035</a></p>
+          <div class="social-icons mt-4">
+            <a href="https://www.instagram.com/aarogyahastha/" target="_blank"><img src="static/img/img/icon-insta.png"
+                alt="Insta"></a>
+            <a href="https://www.facebook.com/aarogyahastha" target="_blank"><img src="static/img/img/icon-fb.png"
+                alt="FB"></a>
+            <a href="https://www.linkedin.com/company/aarogya-hastha/" target="_blank"><img
+                src="static/img/img/icon-linkedin.png" alt="LinkedIn"></a>
+            <a href="https://twitter.com/AarogyaHastha" target="_blank"><img src="static/img/img/icon-twitter.png"
+                alt="Twitter"></a>
+            <a href="https://www.youtube.com/channel/UCeQv8lTLIT4btbjgLxYzYrw" target="_blank"><img
+                src="static/img/img/icon-youtube.png" alt="YT"></a>
+            <a href="javascript:void(0)" onclick="showChromePopup()"><img src="static/img/img/icon-whatsapp.png"
+                alt="WA"></a>
+          </div>
+          <div class="app-download" style="margin-top: 25px;">
+            <h4 style="font-size: 16px; margin-bottom: 15px;">Download App for more benefits</h4>
+            <div class="app-download-buttons">
+              <a href="https://play.google.com/store/apps/details?id=com.better.aarogyahastha" target="_blank"
+                class="app-download-btn"><img src="static/img/img/play-store.png" alt="Get it on Google Play"></a>
+              <a href="https://apps.apple.com/in/app/aarogya-hastha/id6739343936" target="_blank"
+                class="app-download-btn"><img src="static/img/img/app-store.png" alt="Download on the App Store"></a>
+            </div>
+          </div>
+        </div>
+        <div class="footer-links-wrapper">
+          <div class="footer-column">
+            <h4>Quick Links</h4>
+            <ul class="footer-links">
+              <li><a href="/">Home</a></li>
+              <li><a href="/appointments">Appointments</a></li>
+              <li><a href="/doctors">Doctors</a></li>
+              <li><a href="/departments/">Departments</a></li>
+              <li><a href="/health-packages">Health Packages</a></li>
+              <li><a href="/sports-packages">Sports Packages</a></li>
+              <li><a href="/about">About Us</a></li>
+              <li><a href="/contact">Contact</a></li>
+            </ul>
+          </div>
+          <div class="footer-column" style="flex: 2;">
+            <h4>Our Departments</h4>
+            <ul class="footer-links footer-links-multi-column">
+              <li><a href="/departments/general-surgery">General Surgery</a></li>
+              <li><a href="/departments/neurosurgery">Neurosurgery</a></li>
+              <li><a href="/departments/orthopaedics">Orthopaedics</a></li>
+              <li><a href="/departments/anaesthesia">Anaesthesiology</a></li>
+              <li><a href="/departments/pain-medicine">Pain Medicine</a></li>
+              <li><a href="/departments/general-medicine">General Medicine</a></li>
+              <li><a href="/departments/lab-medicine">Lab Medicine</a></li>
+              <li><a href="/departments/paediatrics">Paediatrics</a></li>
+              <li><a href="/departments/physiotherapy">Physiotherapy</a></li>
+              <li><a href="/departments/dermatology">Dermatology</a></li>
+              <li><a href="/departments/ent">ENT</a></li>
+              <li><a href="/departments/emergency-medicine">Emergency Medicine</a></li>
+              <li><a href="/departments/nephrology">Nephrology</a></li>
+              <li><a href="/departments/urology">Urology</a></li>
+              <li><a href="/departments/medical-gastroenterology">Medical Gastroenterology</a></li>
+              <li><a href="/departments/minimal-access-surgery">Minimal Access Surgery</a></li>
+              <li><a href="/departments/plastic-surgery">Plastic Surgery</a></li>
+              <li><a href="/departments/obg">Obstetrics & Gynaecology</a></li>
+              <li><a href="/departments/surgical-gastroenterology">Surgical Gastroenterology</a></li>
+              <li><a href="/departments/radiology">Radiology</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <p>Copyright © 2026, all Rights Reserved to Aarogya Hastha Hospitals Pvt Ltd | <a
+            href="/terms-and-conditions">Terms & Conditions</a> | <a href="/privacy-policy">Privacy
+            Policy</a> | <a href="/disclaimer">Disclaimer</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <a href="#" id="scrollToTopBtn" class="scroll-to-top-btn" title="Scroll to top"><i class="fa fa-arrow-up"></i></a>
+  <button id="mobile-sidebar-toggle" class="d-lg-none"><i class="fa fa-bars"></i></button>
+
+  <div id="chrome-popup" class="chrome-popup" aria-hidden="true">
+    <div class="chrome-popup__content">
+      <p class="chrome-popup__title">Open WhatsApp?</p>
+      <div class="chrome-popup__actions">
+        <a href="whatsapp://send?phone=919036092727" class="chrome-btn chrome-btn--blue">Open with App</a>
+        <a href="https://web.whatsapp.com/send?phone=9036092727" target="_blank"
+          class="chrome-btn chrome-btn--green">Open with Web</a>
+        <button class="chrome-btn chrome-btn--grey" onclick="hideChromePopup()">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="doc_gif">
+    <img src="/static/img/output-onlinegiftools.gif" alt="Doctor Chat">
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+  <script src="static/js/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="static/js/js/myscript.js"></script>
+  <script src="https://fyndbetter.com/chatbot/aarogya_chatbot"></script>
+
+  <script>
+    function openCallbackForm(event, packageTitle) {
+      event.preventDefault();
+      document.getElementById('packageNameDisplay').innerText = packageTitle;
+      document.getElementById('callbackFormModal').style.display = 'block';
+    }
+
+    function closeCallbackForm() {
+      document.getElementById('callbackFormModal').style.display = 'none';
+    }
+
+    window.onclick = function (event) {
+      const modal = document.getElementById('callbackFormModal');
+      if (event.target === modal) closeCallbackForm();
+    }
+
+    document.getElementById('callbackForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const name = document.getElementById('userName').value;
+      const phone = document.getElementById('userPhone').value;
+      const packageName = document.getElementById('packageNameDisplay').innerText;
+
+      fetch('/request_callback/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, phone, package_name: packageName })
+      })
+        .then(res => res.json())
+        .then(data => {
+          alert(data.message);
+          if (data.status === 'success') {
+            closeCallbackForm();
+            document.getElementById('callbackForm').reset();
+          }
+        })
+        .catch(err => { console.error(err); alert('Something went wrong.'); });
+    });
+  </script>
+
+</body>
+
+</html>

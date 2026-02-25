@@ -1,0 +1,352 @@
+{% extends "admin_layout.html" %}
+
+{% block title %}Manage Life at a Glance{% endblock %}
+
+{% block content %}
+<div class="flex justify-between items-center mb-6">
+    <h2 class="text-2xl font-bold text-gray-800">Life at a Glance Management</h2>
+    <button onclick="openModal('addModal')"
+        class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow">
+        <i class="fas fa-plus mr-2"></i> Add New Item
+    </button>
+</div>
+
+<div class="mb-6 border-b border-gray-200">
+    <nav class="-mb-px flex space-x-8 overflow-x-auto" aria-label="Tabs">
+        {% set categories = [
+        ('all', 'All Items'),
+        ('patient_stories', 'Patient Stories'),
+        ('doctors_speak', 'Doctors Speak'),
+        ('general', 'General'),
+        ('health_days', 'Health Days'),
+        ('events', 'Events'),
+        ('written_testimonial', 'Written Reviews')
+        ] %}
+        {% for code, label in categories %}
+        <a href="#" onclick="filterAdminTab('{{ code }}'); return false;"
+            class="admin-tab-link border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm transition-colors duration-200"
+            data-tab="{{ code }}">
+            {{ label }}
+        </a>
+        {% endfor %}
+    </nav>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    {% for moment in moments %}
+    <div class="bg-white rounded-lg shadow hover:shadow-lg transition item-card" data-category="{{ moment.category }}">
+
+        {% if moment.category == 'written_testimonial' %}
+        <div
+            class="h-48 bg-blue-50 rounded-t-lg p-6 flex flex-col justify-center items-center text-center overflow-hidden">
+            <i class="fas fa-quote-left text-3xl text-blue-200 mb-2"></i>
+            <p class="text-gray-700 italic text-sm line-clamp-3">"{{ moment.description }}"</p>
+            <p class="text-xs text-blue-600 font-bold mt-2">- {{ moment.title }}</p>
+        </div>
+
+        {% else %}
+        <div class="relative h-48 bg-gray-200 rounded-t-lg overflow-hidden group">
+            {% if moment.video_link %}
+            <iframe class="w-full h-full" src="{{ moment.video_link.replace('watch?v=', 'embed/') }}" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+            </iframe>
+            {% elif moment.image_path %}
+            <img src="{{ url_for('static', filename=moment.image_path) }}" class="w-full h-full object-cover">
+            {% else %}
+            <div class="flex items-center justify-center h-full text-gray-400">
+                <i class="fas fa-image text-4xl"></i>
+            </div>
+            {% endif %}
+
+            <span
+                class="absolute top-2 right-2 px-2 py-1 bg-gray-900 bg-opacity-75 text-white text-xs rounded uppercase tracking-wide pointer-events-none">
+                {{ moment.category.replace('_', ' ') }}
+            </span>
+        </div>
+        {% endif %}
+
+        <div class="p-4">
+            <h3 class="font-bold text-lg mb-2 truncate" title="{{ moment.title }}">
+                {{ moment.title }}
+            </h3>
+
+            {% if moment.category == 'written_testimonial' %}
+            <div class="mb-4">
+                <p class="text-xs text-gray-500"><strong>Pri. Doc:</strong> {{ moment.doctor_name if moment.doctor_name
+                    else 'N/A' }}</p>
+                {% if moment.doctor2_id %}
+                <p class="text-xs text-gray-500"><strong>Sec. Doc:</strong> ID: {{ moment.doctor2_id }}</p>
+                {% endif %}
+            </div>
+            {% else %}
+            <p class="text-gray-600 text-sm h-12 overflow-hidden mb-4">{{ moment.description[:100] }}...</p>
+            {% endif %}
+
+            <div class="flex justify-between items-center pt-2 border-t border-gray-100">
+                <label class="flex items-center cursor-pointer">
+                    <div class="relative">
+                        <input type="checkbox" class="sr-only" onchange="toggleStatus({{ moment.id }})" {{ 'checked' if
+                            moment.is_active else '' }}>
+                        <div class="w-10 h-6 bg-gray-200 rounded-full shadow-inner"></div>
+                        <div
+                            class="dot absolute w-4 h-4 bg-white rounded-full shadow -left-1 -top-1 transition {{ 'transform translate-x-full bg-green-500' if moment.is_active else '' }}">
+                        </div>
+                    </div>
+                </label>
+
+                <div class="space-x-2">
+                    <button onclick="editItem({{ moment.id }})"
+                        class="text-blue-600 hover:text-blue-800 text-sm font-semibold">Edit</button>
+                    <button onclick="deleteItem({{ moment.id }})"
+                        class="text-red-600 hover:text-red-800 text-sm font-semibold">Delete</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="data-{{ moment.id }}" class="hidden">
+            <span class="title">{{ moment.title }}</span>
+            <span class="desc">{{ moment.description }}</span>
+            <span class="cat">{{ moment.category }}</span>
+            <span class="vid">{{ moment.video_link }}</span>
+            <span class="doc1_id">{{ moment.doctor1_id if moment.doctor1_id else '' }}</span>
+            <span class="doc2_id">{{ moment.doctor2_id if moment.doctor2_id else '' }}</span>
+            <span class="img_path">{{ moment.image_path if moment.image_path else '' }}</span>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<div id="addModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 overflow-y-auto">
+    <div class="flex items-center justify-center min-h-screen p-4">
+        <div class="bg-white rounded-lg w-full max-w-lg p-6 shadow-xl relative">
+            <h3 class="text-xl font-bold mb-4" id="modalTitle">Add Life Moment</h3>
+            <form method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="moment_id" id="moment_id">
+
+                <div class="mb-4">
+                    <label class="block text-gray-700 font-bold mb-2">Category</label>
+                    <select name="category" id="modalCategory" class="w-full border rounded px-3 py-2 bg-white"
+                        onchange="toggleModalFields()" required>
+                        <option value="patient_stories">Patient Stories</option>
+                        <option value="doctors_speak">Doctors Speak</option>
+                        <option value="general">General</option>
+                        <option value="health_days">Health Days</option>
+                        <option value="events">Events</option>
+                        <option value="written_testimonial">Written Reviews</option>
+                    </select>
+                </div>
+
+                <div class="mb-4">
+                    <label class="block text-gray-700 font-bold mb-2" id="labelTitle">Title</label>
+                    <input type="text" name="title" id="modalTitleInput" class="w-full border rounded px-3 py-2"
+                        required placeholder="Name or Title">
+                </div>
+
+                <div class="mb-4">
+                    <label class="block text-gray-700 font-bold mb-2" id="labelDesc">Description</label>
+                    <textarea name="description" id="modalDesc" rows="3"
+                        class="w-full border rounded px-3 py-2"></textarea>
+                </div>
+
+                <div id="doctors-section" style="display: none;">
+                    <div class="mb-4">
+                        <label for="modalDoctor1" class="block text-sm font-medium text-gray-700">Primary Doctor</label>
+                        <select name="doctor1_id" id="modalDoctor1" class="w-full border rounded px-3 py-2 bg-white">
+                            <option value="0">-- Select Primary Doctor --</option>
+                            {% for doctor in doctors %}
+                            <option value="{{ doctor.id }}">
+                                {{ doctor.name }}
+                                ({% if 'Ankita' in doctor.name %}Consultant-Physiotheraphy{% else %}{{
+                                doctor.specialization }}{% endif %})
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="modalDoctor2" class="block text-sm font-medium text-gray-700">Secondary Doctor
+                            (Optional)</label>
+                        <select name="doctor2_id" id="modalDoctor2" class="w-full border rounded px-3 py-2 bg-white">
+                            <option value="0">-- Select Secondary Doctor --</option>
+                            {% for doctor in doctors %}
+                            <option value="{{ doctor.id }}">
+                                {{ doctor.name }}
+                                {# Logic for Ankita Pandey's designation #}
+                                ({% if 'Ankita' in doctor.name %}Consultant-Physiotheraphy{% else %}{{
+                                doctor.specialization or 'Consultant'
+                                }}{% endif %})
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+
+                <div id="media-section" style="display: none;">
+                    <div class="mb-4">
+                        <label class="block text-gray-700 font-bold mb-2">YouTube Link</label>
+                        <input type="text" name="video_link" id="modalVideo" class="w-full border rounded px-3 py-2"
+                            placeholder="https://youtube.com/watch?v=...">
+                        <p class="text-xs text-gray-500 mt-1">This video will display on the card.</p>
+                    </div>
+
+                    <div id="image-preview-container" class="mb-2"></div>
+
+                    <div class="mb-4">
+                        <label class="block text-gray-700 font-bold mb-2">Thumbnail / Image (Optional)</label>
+                        <input type="file" name="image" id="modalImage" class="w-full border rounded px-3 py-2">
+                    </div>
+                </div>
+
+                <div class="flex justify-end gap-2 mt-6">
+                    <button type="button" onclick="closeModal('addModal')"
+                        class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400">Cancel</button>
+                    <button type="submit"
+                        class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div id="deleteModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 overflow-y-auto">
+    <div class="flex items-center justify-center min-h-screen p-4">
+        <div class="bg-white rounded-lg w-full max-w-sm p-6 shadow-xl text-center">
+            <div class="text-red-500 mb-4"><i class="fas fa-trash-alt text-4xl"></i></div>
+            <h3 class="text-lg font-bold mb-2">Confirm Deletion</h3>
+            <p class="text-gray-600 mb-6">Are you sure? This cannot be undone.</p>
+            <form method="POST">
+                <input type="hidden" name="delete_id" id="deleteId">
+                <div class="flex justify-center gap-3">
+                    <button type="button" onclick="closeModal('deleteModal')"
+                        class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400">Cancel</button>
+                    <button type="submit"
+                        class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">Delete</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    function filterAdminTab(category) {
+        const rows = document.querySelectorAll('.item-card');
+        const links = document.querySelectorAll('.admin-tab-link');
+
+        links.forEach(link => {
+            if (link.getAttribute('data-tab') === category) {
+                link.classList.add('border-blue-500', 'text-blue-600');
+                link.classList.remove('border-transparent', 'text-gray-500');
+            } else {
+                link.classList.remove('border-blue-500', 'text-blue-600');
+                link.classList.add('border-transparent', 'text-gray-500');
+            }
+        });
+
+        rows.forEach(row => {
+            const rowCategory = row.getAttribute('data-category');
+            if (category === 'all' || rowCategory === category) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    }
+
+    // Logic updated to match requirement
+    function toggleModalFields() {
+        const category = document.getElementById('modalCategory').value;
+        const mediaSection = document.getElementById('media-section');
+        const doctorsSection = document.getElementById('doctors-section');
+        const titleLabel = document.getElementById('labelTitle');
+        const descLabel = document.getElementById('labelDesc');
+
+        // Requirement: Written Testimonial = Doctors only (No media). Everything else = Media (No doctors).
+        const isWrittenReview = (category === 'written_testimonial');
+
+        if (isWrittenReview) {
+            // SHOW Doctors, HIDE Media
+            doctorsSection.style.display = 'block';
+            mediaSection.style.display = 'none';
+
+            titleLabel.innerText = 'Patient Name';
+            descLabel.innerText = 'Testimonial';
+        } else {
+            // HIDE Doctors, SHOW Media (Name, Desc, Link)
+            doctorsSection.style.display = 'none';
+            mediaSection.style.display = 'block';
+
+            titleLabel.innerText = 'Title / Name';
+            descLabel.innerText = 'Description';
+        }
+    }
+
+    function openModal(id) {
+        if (id === 'addModal') {
+            document.getElementById('moment_id').value = '';
+            document.getElementById('modalTitleInput').value = '';
+            document.getElementById('modalDesc').value = '';
+            document.getElementById('modalVideo').value = '';
+            document.getElementById('modalImage').value = '';
+            document.getElementById('image-preview-container').innerHTML = '';
+            document.getElementById('modalDoctor1').value = '0';
+            document.getElementById('modalDoctor2').value = '0';
+
+            document.getElementById('modalTitle').innerText = 'Add Life Moment';
+            document.getElementById('modalCategory').value = 'patient_stories';
+            toggleModalFields();
+            document.getElementById('addModal').classList.remove('hidden');
+        }
+    }
+
+    function editItem(id) {
+        const data = document.getElementById('data-' + id);
+        const cat = data.querySelector('.cat').innerText;
+
+        document.getElementById('moment_id').value = id;
+        document.getElementById('modalCategory').value = cat;
+        document.getElementById('modalTitleInput').value = data.querySelector('.title').innerText;
+        document.getElementById('modalDesc').value = data.querySelector('.desc').innerText;
+        document.getElementById('modalVideo').value = data.querySelector('.vid').innerText;
+        document.getElementById('modalImage').value = '';
+
+        const doc1Span = data.querySelector('.doc1_id');
+        document.getElementById('modalDoctor1').value = (doc1Span && doc1Span.innerText.trim() !== "") ? doc1Span.innerText.trim() : "0";
+
+        const doc2Span = data.querySelector('.doc2_id');
+        document.getElementById('modalDoctor2').value = (doc2Span && doc2Span.innerText.trim() !== "") ? doc2Span.innerText.trim() : "0";
+
+        const imagePathSpan = data.querySelector('.img_path');
+        const imagePath = imagePathSpan ? imagePathSpan.innerText : '';
+        const previewContainer = document.getElementById('image-preview-container');
+        previewContainer.innerHTML = '';
+        if (imagePath) {
+            previewContainer.innerHTML = `<p class="text-sm text-gray-500 mb-2">Current Image:</p>
+                                          <img src="{{ url_for('static', filename='${imagePath}') }}" class="w-32 h-32 object-cover rounded-md border" alt="Current Image">`;
+        }
+
+        document.getElementById('modalTitle').innerText = 'Edit Life Moment';
+        toggleModalFields();
+        document.getElementById('addModal').classList.remove('hidden');
+    }
+
+    function deleteItem(id) {
+        document.getElementById('deleteId').value = id;
+        document.getElementById('deleteModal').classList.remove('hidden');
+    }
+
+    function closeModal(id) {
+        document.getElementById(id).classList.add('hidden');
+    }
+
+    function toggleStatus(id) {
+        console.log(`Toggling status for moment ID: ${id}`);
+        // Add AJAX fetch here to update backend
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        filterAdminTab('all');
+        document.getElementById('modalCategory').addEventListener('change', toggleModalFields);
+    });
+</script>
+{% endblock %}

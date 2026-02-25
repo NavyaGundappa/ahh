@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>{{ guide.title }} | Aarogya Hastha</title>
+    <link rel="canonical" href="https://aarogyahastha.com/guide/{{ guide.slug }}" />
+    <meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+    <meta property="og:image" content="https://aarogyahastha.com/static/img/fav.png/" />
+    <link rel="stylesheet" type="text/css" href="static/seopages/css/style.css">
+    <link rel="stylesheet" type="text/css" href="static/seopages/css/style.css">
+    <link rel="stylesheet" type="text/css" href="static/seopages/css/owl.carousel.min.css">
+    <link rel="stylesheet" type="text/css" href="static/seopages/css/bootstrap.min.css">
+    <script type="text/javascript" src="static/seopages/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="stylesheet" href="/static/css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/css/style.css">
+
+    <style>
+        /* 1. LAYOUT & SPACING FIXES */
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding-top: 0;
+            background-color: #fbfbfb;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            padding-bottom: 0 !important;
+        }
+
+        .main-wrapper {
+            flex: 1 0 auto;
+        }
+
+        /* 2. BREADCRUMB STYLING (Matched to Departments) */
+        .breadcrumb-section {
+            background-color: #f9f9f9;
+            padding: 10px 0;
+            margin-top: 0;
+        }
+
+        .breadcrumb {
+            margin-bottom: 0;
+            background: transparent;
+            padding: 0;
+            font-size: 14px;
+        }
+
+        .breadcrumb-item a {
+            color: #0092db;
+            text-decoration: none;
+        }
+
+        .breadcrumb-item.active {
+            color: #666;
+        }
+
+        /* 3. GUIDE BANNER STYLING */
+        .banner-container {
+            width: 92%;
+            max-width: 1700px;
+            margin: 20px auto 40px;
+        }
+
+        .banner-wrapper {
+            position: relative;
+            height: 350px;
+            width: 100%;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .banner-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Gradient overlay strictly at the bottom for readability */
+        .banner-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 30px 40px;
+            color: white;
+        }
+
+        .banner-overlay h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin: 0;
+            color: #ffffff;
+            text-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5);
+            line-height: 1.2;
+        }
+
+        /* 4. CONTENT AREA STYLING */
+        .content-main {
+            max-width: 2000px;
+            margin: 60px auto 20px;
+            /* Pulls the card up over the banner slightly */
+            line-height: 1.8;
+            font-size: 1.15rem;
+            color: #333;
+            background: #fff;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            /* Floating effect from image_b6403e */
+            position: relative;
+            z-index: 5;
+        }
+
+        .guide-text {
+            width: 100%;
+            overflow: hidden;
+        }
+
+        /* Typography Polish inside Guide */
+        .guide-text h2,
+        .guide-text h3 {
+            color: #002D5B;
+            font-weight: 600;
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .guide-text p {
+            margin-bottom: 1.2rem;
+        }
+
+        .guide-text a {
+            color: #0092db;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .guide-text a:hover {
+            text-decoration: underline;
+            color: #002D5B;
+        }
+
+        .guide-text ul,
+        .guide-text ol {
+            padding-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .guide-text li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* 1. Base image styling (removed strict display:block and margin overrides) */
+        .guide-text img {
+            max-width: 100% !important;
+            height: auto !important;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        /* 2. Handle Left-Aligned Images */
+        .guide-text img[style*="float: left"],
+        .guide-text figure.image-style-align-left,
+        .guide-text figure.image-style-align-left img {
+            float: left;
+            margin: 10px 25px 15px 0 !important;
+            /* Adds breathing room between image and text */
+        }
+
+        /* 3. Handle Right-Aligned Images */
+        .guide-text img[style*="float: right"],
+        .guide-text figure.image-style-align-right,
+        .guide-text figure.image-style-align-right img {
+            float: right;
+            margin: 10px 0 15px 25px !important;
+            /* Adds breathing room between text and image */
+        }
+
+        /* 4. Handle Centered Images */
+        .guide-text img[style*="margin-left: auto"],
+        .guide-text figure.image-style-align-center,
+        .guide-text figure.image-style-align-center img {
+            display: block;
+            margin: 25px auto !important;
+            /* Centers image and adds top/bottom spacing */
+        }
+
+        /* 5. Ensure text doesn't overflow outside the container when using floats */
+        .guide-text::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        /* 6. Clean up figure margins generated by the CKEditor image2 plugin */
+        .guide-text figure {
+            max-width: 100%;
+        }
+
+        .float-img-right {
+            float: right;
+            margin-left: 25px;
+            max-width: 40%;
+            /* Keeps it from taking over the text */
+        }
+
+        /* Floating elements */
+        .doc_gif img {
+            position: fixed;
+            right: 2rem;
+            width: 90px;
+            bottom: 4rem;
+            z-index: 9;
+        }
+
+        @media (max-width: 768px) {
+            .banner-wrapper {
+                height: 250px;
+            }
+
+            .banner-overlay h1 {
+                font-size: 1.8rem;
+            }
+
+            .content-main {
+                margin-top: 20px;
+                padding: 20px;
+                width: 95%;
+            }
+
+            .float-img-right {
+                float: none;
+                max-width: 100%;
+                margin-left: 0;
+            }
+
+            .footer-links-multi-column {
+                grid-template-columns: 1fr !important;
+            }
+
+            .doc_gif img {
+                width: 80px;
+                bottom: 4.3rem;
+                right: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="nav-overlay"></div>
+    <div class="left-sidebar">
+        <a href="/appointments" class="icon-link">
+            <img src="/static/img/img/book-appointment.png" alt="Book Appointment Icon">
+            <span class="tooltip-text">Book an Appointment</span>
+        </a>
+        <a href="javascript:void(0)" onclick="showChromePopup()" class="icon-link">
+            <img src="/static/img/img/whatsapp.png" alt="WhatsApp Icon">
+            <span class="tooltip-text">WhatsApp</span>
+        </a>
+        <a href="/departments/" class="icon-link">
+            <img src="/static/img/img/find-doctors.png" alt="Find Doctors Icon">
+            <span class="tooltip-text">Find a Doctor</span>
+        </a>
+        <a href="tel:8066668800" class="icon-link">
+            <img src="/static/img/img/call-icon.png" alt="Call Icon">
+            <span class="tooltip-text">Call Us</span>
+        </a>
+    </div>
+
+    <header class="new-header">
+        <div class="header-top-container">
+            <div class="container header-top-content">
+                <div class="mobile_head">
+                    <a href="/" class="logo">
+                        <div class="header-logos">
+                            <div class="logo-wrapper">
+                                <img src="/static/img/img/logo.png" alt="AarogyaHastha Hospitals Logo"
+                                    class="header-logo-img">
+                            </div>
+                            <div class="logo-wrapper new-logo-wrapper">
+                                <img src="/static/img/img/NABH_Logo-01.png" alt="New Hospital Logo"
+                                    class="header-logo-img new-logo-img">
+                            </div>
+                        </div>
+                    </a>
+                    <button class="navbar-toggle d-lg-none" id="mobile-menu-toggle">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                </div>
+                <div class="header-contact">
+                    <span class="appointment-number">
+                        <div class="contact-label">Appointments</div>
+                        <div class="contact-row">
+                            <i class="fa fa-phone"></i>
+                            <a href="tel:08066668811">080 6666 8811/22/33</a>
+                        </div>
+                    </span>
+                    <span class="emergency-number">
+                        <div class="contact-label">24/7 Ambulance</div>
+                        <div class="contact-row">
+                            <i class="fa fa-ambulance"></i>
+                            <a href="tel:08066668877">080 6666 8877/88</a>
+                        </div>
+                    </span>
+                </div>
+            </div>
+
+            <div class="ambulance-animation-container">
+                <div class="ambulance-animation">
+                    <div class="ambulance-icon">
+                        <img src="/static/img/img/ambulance.png" alt="Ambulance" />
+                    </div>
+                    <div class="ambulance-number">
+                        <a href="tel:08066668877">Emergency: 080 6666 8877/88</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="nav-container">
+                <div class="container nav-content">
+                    <ul id="mobile-nav" class="nav-list d-lg-none">
+                        <button class="nav-close-btn" id="mobile-menu-close">×</button>
+                        <li><a class="nav-links" href="/">Home</a></li>
+                        <li><a class="nav-links" href="/appointments">Appointments</a></li>
+                        <li><a class="nav-links" href="/doctors">Doctors</a></li>
+                        <li><a class="nav-links" href="/departments/">Departments</a></li>
+                        <li><a class="nav-links" href="/health-packages">Health Packages</a></li>
+                        <li><a class="nav-links" href="/sports-packages">Sports Packages</a></li>
+                        <li><a class="nav-links" href="/blog">Blog</a></li>
+                        <li><a class="nav-links" href="/about">About Us</a></li>
+                        <li class="dropdown">
+                            <a class="nav-links" href="/contact">Contact</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Review us</a></li>
+                                <li><a href="#" class="write-review-btn">Write a message to ED</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <ul class="main-nav" id="main-navigation">
+                        <li><a class="nav-links" href="/">Home</a></li>
+                        <li><a class="nav-links" href="/appointments">Appointments</a></li>
+                        <li><a class="nav-links" href="/doctors">Doctors</a></li>
+                        <li><a class="nav-links" href="/departments/">Departments</a></li>
+                        <li><a class="nav-links" href="/health-packages">Health Packages</a></li>
+                        <li><a class="nav-links" href="/sports-packages">Sports Packages</a></li>
+                        <li><a class="nav-links" href="/blog">Blog</a></li>
+                        <li class="dropdown">
+                            <a class="nav-links" href="/about">About us <i class="fa fa-angle-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/bmw_report" target="_blank"><i class="fa-solid fa-circle-info"></i> BMW
+                                        Report</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a class="nav-links" href="/contact">Contact <i class="fa fa-angle-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#" target="_blank"><i class="fa-solid fa-star"></i> Review us</a></li>
+                                <li><a href="#" class="write-review-btn"><i class="fa-solid fa-envelope"></i> Write a
+                                        message to ED</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-wrapper">
+
+        <section class="breadcrumb-section">
+            <div class="container">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb" itemscope itemtype="http://schema.org/BreadcrumbList">
+                        <li class="breadcrumb-item" itemprop="itemListElement" itemscope
+                            itemtype="http://schema.org/ListItem">
+                            <a itemprop="item" href="/"><span itemprop="name">Home</span></a>
+                            <meta itemprop="position" content="1">
+                        </li>
+                        <li class="breadcrumb-item" itemprop="itemListElement" itemscope
+                            itemtype="http://schema.org/ListItem">
+                            <a itemprop="item" href="/guide"><span itemprop="name">Guides</span></a>
+                            <meta itemprop="position" content="2">
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page" itemprop="itemListElement" itemscope
+                            itemtype="http://schema.org/ListItem">
+                            <span itemprop="name">{{ guide.title }}</span>
+                            <meta itemprop="position" content="3">
+                        </li>
+                    </ol>
+                </nav>
+            </div>
+        </section>
+
+        <div class="banner-container" data-aos="fade-up">
+            <div class="banner-wrapper">
+                <img loading="lazy" src="{{ url_for('static', filename=guide.header_image_path) }}"
+                    alt="{{ guide.title }}">
+                <div class="banner-overlay">
+                    <h1>{{ guide.title }}</h1>
+                </div>
+            </div>
+        </div>
+
+        <article class="container pb-5" data-aos="fade-up">
+            <div class="content-main">
+                {% if guide.content_image_path %}
+                <div class="text-center mb-5">
+                    <img src="{{ url_for('static', filename=guide.content_image_path) }}"
+                        class="img-fluid rounded shadow-sm" alt="Main Illustration"
+                        style="max-height: 500px; width: 100%; object-fit: cover;">
+                </div>
+                {% endif %}
+
+                <div class="guide-text">
+                    {{ guide.content | safe }}
+                </div>
+            </div>
+        </article>
+    </div>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <div class="logo-wrapper">
+                        <img loading="lazy" src="/static/img/img/logo.png" alt="AarogyaHastha Hospitals Logo">
+                    </div>
+                    <p><a href="https://www.google.com/maps/dir//Site+No.+2,+No.+2816%2F2,+SY.87,+Kasavanahalli+Main+Rd,+near+1st+Cross+Road,+opposite+HM+Symphony,+Bengaluru,+Karnataka+560035/@12.9007391,77.6745367,21769m/data=!3m1!1e3!4m8!4m7!1m0!1m5!1m1!1s0x3bae132a0bbeb64b:0x626c13b98813a8a3!2m2!1d77.67569!2d12.9005956?entry=ttu&g_ep=EgoyMDI1MDkxNi4wIKXMDSoASAFQAw%3D%3D"
+                            target="_blank" style="text-decoration: none; color: inherit;">Site No. 2, Kasavanahalli
+                            Main Rd, near 1st Cross Road, opposite HM Symphony, Bengaluru, Karnataka 560035</a></p>
+                    <div class="social-icons mt-4">
+                        <a href="https://www.instagram.com/aarogyahastha/" target="_blank"><img
+                                src="/static/img/img/icon-insta.png" alt="Instagram"></a>
+                        <a href="https://www.facebook.com/aarogyahastha" target="_blank"><img
+                                src="/static/img/img/icon-fb.png" alt="Facebook"></a>
+                        <a href="https://www.linkedin.com/company/aarogya-hastha/" target="_blank"><img
+                                src="/static/img/img/icon-linkedin.png" alt="LinkedIn"></a>
+                        <a href="https://twitter.com/AarogyaHastha" target="_blank"><img
+                                src="/static/img/img/icon-twitter.png" alt="Twitter"></a>
+                        <a href="https://www.youtube.com/channel/UCeQv8lTLIT4btbjgLxYzYrw" target="_blank"><img
+                                src="/static/img/img/icon-youtube.png" alt="YouTube"></a>
+                        <a href="javascript:void(0)" onclick="showChromePopup()"><img
+                                src="/static/img/img/icon-whatsapp.png" alt="WhatsApp"></a>
+                    </div>
+                    <div class="app-download" style="margin-top: 25px;">
+                        <h4 style="font-size: 16px; margin-bottom: 15px;">Download App for more benefits</h4>
+                        <div class="app-download-buttons">
+                            <a href="https://play.google.com/store/apps/details?id=com.better.aarogyahastha"
+                                target="_blank" class="app-download-btn"><img src="/static/img/img/play-store.png"
+                                    alt="Get it on Google Play"></a>
+                            <a href="https://apps.apple.com/in/app/aarogya-hastha/id6739343936" target="_blank"
+                                class="app-download-btn"><img src="/static/img/img/app-store.png"
+                                    alt="Download on the App Store"></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-links-wrapper">
+                    <div class="footer-column">
+                        <h4>Quick Links</h4>
+                        <ul class="footer-links">
+                            <li><a href="/">Home</a></li>
+                            <li><a href="/appointments">Appointments</a></li>
+                            <li><a href="/doctors">Doctors</a></li>
+                            <li><a href="/departments/">Departments</a></li>
+                            <li><a href="/health-packages">Health Packages</a></li>
+                            <li><a href="/sports-packages">Sports Packages</a></li>
+                            <li><a href="/about">About Us</a></li>
+                            <li><a href="/contact">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column" style="flex: 2;">
+                        <h4>Our Departments</h4>
+                        <ul class="footer-links footer-links-multi-column">
+                            <li><a href="/departments/general-surgery">General Surgery</a></li>
+                            <li><a href="/departments/neurosurgery">Neurosurgery</a></li>
+                            <li><a href="/departments/orthopaedics">Orthopaedics</a></li>
+                            <li><a href="/departments/anaesthesia">Anaesthesiology</a></li>
+                            <li><a href="/departments/pain-medicine">Pain Medicine</a></li>
+                            <li><a href="/departments/general-medicine">General Medicine</a></li>
+                            <li><a href="/departments/lab-medicine">Lab Medicine</a></li>
+                            <li><a href="/departments/paediatrics">Paediatrics</a></li>
+                            <li><a href="/departments/physiotherapy">Physiotherapy</a></li>
+                            <li><a href="/departments/dermatology">Dermatology</a></li>
+                            <li><a href="/departments/ent">ENT</a></li>
+                            <li><a href="/departments/emergency-medicine">Emergency Medicine</a></li>
+                            <li><a href="/departments/nephrology">Nephrology</a></li>
+                            <li><a href="/departments/urology">Urology</a></li>
+                            <li><a href="/departments/medical-gastroenterology">Medical Gastroenterology</a></li>
+                            <li><a href="/departments/minimal-access-surgery">Minimal Access Surgery</a></li>
+                            <li><a href="/departments/plastic-surgery">Plastic Surgery</a></li>
+                            <li><a href="/departments/obg">Obstetrics & Gynaecology</a></li>
+                            <li><a href="/departments/surgical-gastroenterology">Surgical Gastroenterology</a></li>
+                            <li><a href="/departments/radiology">Radiology</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>Copyright © 2026, all Rights Reserved to Aarogya Hastha Hospitals Pvt Ltd | <a
+                        href="/terms-and-conditions">Terms & Conditions</a> | <a href="/privacy-policy">Privacy
+                        Policy</a> | <a href="/disclaimer">Disclaimer</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <a href="#" id="scrollToTopBtn" class="scroll-to-top-btn" title="Scroll to top"><i class="fa fa-arrow-up"></i></a>
+    <button id="mobile-sidebar-toggle" class="d-lg-none"><i class="fa fa-bars"></i></button>
+
+    <div id="chrome-popup" class="chrome-popup" aria-hidden="true">
+        <div class="chrome-popup__content">
+            <p class="chrome-popup__title">Open WhatsApp?</p>
+            <div class="chrome-popup__actions">
+                <a href="https://web.whatsapp.com/send?phone=9036092727" target="_blank"
+                    class="chrome-btn chrome-btn--green">Open with Web</a>
+                <button class="chrome-btn chrome-btn--grey" onclick="hideChromePopup()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="doc_gif">
+        <img src="/static/img/output-onlinegiftools.gif" alt="Doctor Chat">
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="/static/js/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="/static/js/js/myscript.js"></script>
+    <script src="https://fyndbetter.com/chatbot/aarogya_chatbot"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            AOS.init({ once: false, mirror: true });
+        });
+    </script>
+</body>
+
+</html>

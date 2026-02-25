@@ -1,0 +1,101 @@
+{% extends "admin_layout.html" %}
+
+{% block title %}
+Callback Requests - Admin Panel
+{% endblock %}
+
+{% block content %}
+<div class="flex justify-between items-center mb-4">
+    <h2 class="text-2xl font-bold text-gray-800">Callback Requests</h2>
+    <a href="{{ url_for('admin_dashboard') }}"
+        class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded transition">
+        Back to Dashboard
+    </a>
+</div>
+
+<form id="filterForm" method="GET" action="{{ url_for('admin_callbacks') }}"
+    class="bg-white p-4 rounded shadow-md mb-4 grid grid-cols-1 md:grid-cols-6 gap-4 items-end">
+    <div class="md:col-span-1">
+        <label class="block text-gray-700 text-sm font-bold mb-2">Package Type:</label>
+        <select name="package_type"
+            class="w-full px-3 py-2 border rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <option value="">All</option>
+            <option value="health" {% if request.args.get('package_type')=='health' %}selected{% endif %}>Health Package
+            </option>
+            <option value="sports" {% if request.args.get('package_type')=='sports' %}selected{% endif %}>Sports Package
+            </option>
+        </select>
+    </div>
+    <div class="md:col-span-1">
+        <label class="block text-gray-700 text-sm font-bold mb-2">Package:</label>
+        <select name="package"
+            class="w-full px-3 py-2 border rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <option value="">All</option>
+            {% for pkg in packages %}
+            <option value="{{ pkg.id }}" {% if request.args.get('package')==pkg.id|string %}selected{% endif %}>
+                {{ pkg.title }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="md:col-span-1">
+        <label class="block text-gray-700 text-sm font-bold mb-2">Start Date:</label>
+        <input type="date" name="start_date" value="{{ request.args.get('start_date', '') }}"
+            class="w-full px-3 py-2 border rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+    </div>
+    <div class="md:col-span-1">
+        <label class="block text-gray-700 text-sm font-bold mb-2">End Date:</label>
+        <input type="date" name="end_date" value="{{ request.args.get('end_date', '') }}"
+            class="w-full px-3 py-2 border rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+    </div>
+    <div class="md:col-span-2 flex space-x-2">
+        <button type="submit"
+            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition">Filter</button>
+        <a href="{{ url_for('admin_callbacks') }}"
+            class="w-full text-center bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded transition">Clear</a>
+    </div>
+</form>
+
+<div class="mb-4">
+    <a href="{{ url_for('download_callbacks', package_type=request.args.get('package_type',''), package=request.args.get('package',''), start_date=request.args.get('start_date',''), end_date=request.args.get('end_date','')) }}"
+        class="inline-block bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded transition">
+        Download Excel
+    </a>
+</div>
+
+
+<div class="overflow-x-auto bg-white rounded shadow-md">
+    <table class="min-w-full leading-normal">
+        <thead>
+            <tr>
+                <th
+                    class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                    Name</th>
+                <th
+                    class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                    Phone</th>
+                <th
+                    class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                    Package</th>
+                <th
+                    class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                    Requested At</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for c in callbacks %}
+            <tr>
+                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ c.name }}</td>
+                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ c.phone }}</td>
+                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ c.package_name }}</td>
+                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ c.created_at.strftime('%Y-%m-%d
+                    %H:%M:%S') }}</td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="4" class="text-center py-5">No requests yet</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

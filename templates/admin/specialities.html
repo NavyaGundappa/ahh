@@ -1,0 +1,169 @@
+{% extends "admin_layout.html" %}
+
+{% block title %}
+Manage Specialities - Admin Panel
+{% endblock %}
+
+{% block content %}
+<div class="flex justify-between items-center mb-4">
+    <h2 class="text-2xl font-bold">Manage Our Specialities</h2>
+    <div>
+        <a href="{{ url_for('admin_dashboard') }}"
+            class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded transition">Back to
+            Dashboard</a>
+        <button type="button"
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition ml-2"
+            onclick="toggleAddForm()">Add Speciality</button>
+    </div>
+</div>
+
+<div id="addForm" class="hidden bg-white p-6 rounded shadow-md mb-6">
+    <h3 class="font-semibold text-lg mb-4">Add New Speciality</h3>
+    <form method="POST" action="{{ url_for('admin_specialities') }}" enctype="multipart/form-data">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            <div><label class="block text-sm font-bold mb-2">Speciality Name</label><input type="text" name="name"
+                    class="w-full px-3 py-2 border rounded" required></div>
+            <div><label class="block text-sm font-bold mb-2">Slug</label><input type="text" name="slug"
+                    class="w-full px-3 py-2 border rounded" required></div>
+        </div>
+        <div class="mb-4"><label class="block text-sm font-bold mb-2">Description</label><textarea name="description"
+                class="w-full px-3 py-2 border rounded" rows="3" required></textarea></div>
+        <div class="mb-4"><label class="block text-sm font-bold mb-2">Thumbnail Image</label><input type="file"
+                name="thumbnail" class="w-full px-3 py-2 border rounded" required></div>
+        <div class="flex gap-2">
+            <button type="submit"
+                class="bg-blue-500 text-white px-4 py-2 rounded font-bold hover:bg-blue-700">Add</button>
+            <button type="button" class="bg-gray-500 text-white px-4 py-2 rounded font-bold hover:bg-gray-700"
+                onclick="toggleAddForm()">Cancel</button>
+        </div>
+    </form>
+</div>
+
+<div class="bg-white p-6 rounded shadow-md">
+    <input type="text" id="searchInput" class="w-full px-3 py-2 border rounded mb-4"
+        placeholder="Search by name or slug...">
+    <div class="overflow-x-auto">
+        <table class="min-w-full leading-normal" id="specialityTable">
+            <thead>
+                <tr>
+                    <th
+                        class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold uppercase">
+                        Thumbnail</th>
+                    <th
+                        class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold uppercase">
+                        Name</th>
+                    <th
+                        class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold uppercase">
+                        Status</th>
+                    <th
+                        class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold uppercase">
+                        Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for speciality in specialities %}
+                <tr class="speciality-item">
+                    <td class="px-5 py-3 border-b border-gray-200 text-sm"><img
+                            src="{{ url_for('static', filename=speciality.thumbnail_path) }}"
+                            class="w-16 h-16 object-cover rounded"></td>
+                    <td class="px-5 py-3 border-b border-gray-200 text-sm">
+                        <p class="font-bold">{{ speciality.name }}</p>
+                        <p class="text-xs text-gray-600">{{ speciality.slug }}</p>
+                    </td>
+                    <td class="px-5 py-3 border-b border-gray-200 text-sm"><span
+                            class="relative inline-block px-3 py-1 font-semibold leading-tight {{ 'text-green-900' if speciality.is_active else 'text-red-900' }}"><span
+                                aria-hidden
+                                class="absolute inset-0 {{ 'bg-green-200' if speciality.is_active else 'bg-red-200' }} opacity-50 rounded-full"></span><span
+                                class="relative">{{ 'Active' if speciality.is_active else 'Inactive' }}</span></span>
+                    </td>
+                    <td class="px-5 py-3 border-b border-gray-200 text-sm">
+                        <form method="POST" action="{{ url_for('toggle_speciality', speciality_id=speciality.id) }}"
+                            class="inline-block">
+                            <button type="submit"
+                                class="text-white font-bold py-1 px-3 rounded text-xs {{ 'bg-gray-500 hover:bg-gray-700' if speciality.is_active else 'bg-green-500 hover:bg-green-700' }}">{{
+                                'Deactivate' if speciality.is_active else 'Activate' }}</button>
+                        </form>
+                        <button
+                            class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-1 px-3 rounded text-xs ml-1"
+                            onclick="toggleEditForm({{ speciality.id }})">Edit</button>
+                        <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-3 rounded text-xs ml-1"
+                            onclick="openModal('deleteModal-{{ speciality.id }}')">Delete</button>
+                    </td>
+                </tr>
+                <tr id="editForm-{{ speciality.id }}" class="hidden">
+                    <td colspan="4" class="p-4 bg-gray-50">
+                        <h5 class="font-semibold mb-2">Edit {{ speciality.name }}</h5>
+                        <form method="POST" action="{{ url_for('admin_specialities') }}" enctype="multipart/form-data">
+                            <input type="hidden" name="speciality_id" value="{{ speciality.id }}">
+                            <div class="grid md:grid-cols-2 gap-4 mb-3"><input type="text" name="name"
+                                    class="w-full px-3 py-2 border rounded" value="{{ speciality.name }}"
+                                    required><input type="text" name="slug" class="w-full px-3 py-2 border rounded"
+                                    value="{{ speciality.slug }}" required></div>
+                            <textarea name="description" class="w-full px-3 py-2 border rounded mb-3" rows="3"
+                                required>{{ speciality.description }}</textarea>
+                            <input type="file" name="thumbnail" class="w-full px-3 py-2 border rounded mb-3">
+                            <div class="flex gap-2"><button type="submit"
+                                    class="bg-blue-500 text-white px-4 py-2 rounded font-bold hover:bg-blue-700">Update</button><button
+                                    type="button"
+                                    class="bg-gray-500 text-white px-4 py-2 rounded font-bold hover:bg-gray-700"
+                                    onclick="toggleEditForm({{ speciality.id }})">Cancel</button></div>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% for speciality in specialities %}
+<div id="deleteModal-{{ speciality.id }}"
+    class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden">
+    <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+        <div class="mt-3 text-center">
+            <h3 class="text-lg leading-6 font-medium text-gray-900">Delete Speciality</h3>
+            <p class="text-sm text-gray-500 mt-2">Are you sure you want to delete "{{ speciality.name }}"?</p>
+            <div class="flex justify-center items-center px-4 py-3 mt-4">
+                <form method="POST" action="{{ url_for('admin_specialities') }}">
+                    <input type="hidden" name="delete_id" value="{{ speciality.id }}">
+                    <button type="button" onclick="closeModal('deleteModal-{{ speciality.id }}')"
+                        class="bg-gray-500 text-white px-4 py-2 rounded font-bold hover:bg-gray-700 transition">Cancel</button>
+                    <button type="submit"
+                        class="bg-red-500 text-white px-4 py-2 rounded font-bold hover:bg-red-700 transition ml-2">Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+
+<script>
+    function openModal(modalId) { document.getElementById(modalId).classList.remove('hidden'); }
+    function closeModal(modalId) { document.getElementById(modalId).classList.add('hidden'); }
+
+    function toggleAddForm() {
+        document.getElementById('addForm').classList.toggle('hidden');
+        document.querySelectorAll('[id^="editForm-"]').forEach(form => form.classList.add('hidden'));
+    }
+
+    function toggleEditForm(id) {
+        const editForm = document.getElementById(`editForm-${id}`);
+        const isHidden = editForm.classList.contains('hidden');
+        document.querySelectorAll('[id^="editForm-"]').forEach(form => form.classList.add('hidden'));
+        if (isHidden) editForm.classList.remove('hidden');
+    }
+
+    document.getElementById('searchInput').addEventListener('keyup', function () {
+        const filter = this.value.toLowerCase();
+        document.querySelectorAll('#specialityTable tbody tr.speciality-item').forEach(row => {
+            const nameCell = row.cells[1];
+            if (nameCell && nameCell.textContent.toLowerCase().includes(filter)) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    });
+</script>
+{% endblock %}

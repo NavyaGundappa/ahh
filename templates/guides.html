@@ -1,0 +1,268 @@
+{% extends "base.html" %}
+
+{% block title %}Guides | Aarogya Hastha Hospital {% endblock %}
+{% block head %}
+<meta name="description"
+    content="Explore expert healthcare guides from Aarogya Hastha covering treatments, wellness tips, medical procedures, and patient care information to help you make informed health decisions." />
+<link rel="canonical" href="https://aarogyahastha.com/guide" />
+<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+<meta property="og:image" content="https://aarogyahastha.com/static/img/fav.png/" />
+{{ super() }}
+<link rel="stylesheet" type="text/css" href="static/seopages/css/style.css">
+<link rel="stylesheet" type="text/css" href="static/seopages/css/style.css">
+<link rel="stylesheet" type="text/css" href="static/seopages/css/owl.carousel.min.css">
+<link rel="stylesheet" type="text/css" href="static/seopages/css/bootstrap.min.css">
+<script type="text/javascript" src="static/seopages/js/bootstrap.bundle.min.js"></script>
+
+{% endblock %}
+{% block content %}
+
+<style>
+    /* Breadcrumb Styling */
+    .breadcrumb-section {
+        background-color: #f9f9f9;
+        padding: 10px 0;
+        margin-top: 0;
+    }
+
+    .breadcrumb {
+        margin-bottom: 0;
+        background: transparent;
+        padding: 0;
+        font-size: 14px;
+    }
+
+    .breadcrumb-item a {
+        color: #0092db;
+        text-decoration: none;
+    }
+
+    /* Banner Styling */
+    .department-banner {
+        position: relative;
+        width: 92%;
+        max-width: 1700px;
+        margin: 20px auto 40px;
+        height: 350px;
+        overflow: hidden;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        background-color: #002D5B;
+        /* Fallback color if image fails to load */
+    }
+
+    .department-banner img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .department-banner .text-box-1 {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        padding: 30px 40px;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 100%);
+        text-align: left;
+    }
+
+    .department-banner h1 {
+        margin: 0;
+        font-size: 3rem;
+        font-weight: 700;
+        color: #ffffff;
+        text-transform: capitalize;
+    }
+
+    .department-banner p {
+        margin: 5px 0 0;
+        font-size: 1.1rem;
+        color: #ffffff;
+        text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Search Bar Styling */
+    .search-input-group {
+        display: flex;
+        align-items: center;
+        background: #ffffff;
+        border: 1px solid #eef2f6;
+        border-radius: 50px;
+        padding: 12px 25px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        max-width: 600px;
+        margin: -30px auto 40px;
+        width: 90%;
+        position: relative;
+        z-index: 10;
+    }
+
+    .search-input-group input {
+        border: none !important;
+        outline: none !important;
+        width: 100%;
+        margin-left: 10px;
+    }
+
+    /* Enhanced Guides Grid Styling */
+    .guide-card {
+        border: none;
+        border-radius: 15px;
+        transition: all 0.3s ease-in-out;
+        background: #fff;
+        overflow: hidden;
+    }
+
+    .guide-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 35px rgba(0, 146, 219, 0.15) !important;
+    }
+
+    .guide-img-container {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .guide-card img {
+        transition: transform 0.5s ease;
+    }
+
+    .guide-card:hover img {
+        transform: scale(1.08);
+    }
+
+    .guide-date {
+        font-size: 0.85rem;
+        color: #0092db;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .guide-title {
+        color: #002D5B;
+        font-size: 1.25rem;
+        font-weight: 700;
+        margin-top: 10px;
+        line-height: 1.4;
+    }
+
+    .read-more-link {
+        color: #0092db;
+        font-weight: 700;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        margin-top: 15px;
+    }
+
+    .read-more-link i {
+        margin-left: 8px;
+        transition: transform 0.3s ease;
+    }
+
+    .guide-card:hover .read-more-link i {
+        transform: translateX(5px);
+    }
+
+    @media (max-width: 768px) {
+        .department-banner {
+            height: 220px;
+        }
+
+        .department-banner h1 {
+            font-size: 1.8rem;
+        }
+
+        .department-banner p {
+            display: none;
+        }
+    }
+</style>
+
+<section class="breadcrumb-section">
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item active">Health Guides</li>
+            </ol>
+        </nav>
+    </div>
+</section>
+
+<section class="department-banner">
+    <img src="{{ url_for('static', filename='img/banners/guide1.jpg') }}" alt="Health Guides Banner"
+        onerror="this.style.display='none'">
+    <div class="text-box-1">
+        <div class="container">
+            <h1>Health Guides</h1>
+            <p>Read our expert-curated health guides to stay informed and take charge of your wellness journey.</p>
+        </div>
+    </div>
+</section>
+
+<div class="search-input-group">
+    <i class="fa fa-search" style="color: #0092db;"></i>
+    <input type="text" id="guideSearch" placeholder="What are you looking for today?" onkeyup="filterGuides()">
+</div>
+
+<div class="container pb-5">
+    <div class="row" id="guidesGrid">
+        {% for guide in guides %}
+        <div class="col-md-4 mb-5 guide-item">
+            <div class="card h-100 shadow-sm guide-card">
+                <div class="guide-img-container">
+                    {% if guide.header_image_path %}
+                    <img src="{{ url_for('static', filename=guide.header_image_path) }}" class="card-img-top"
+                        alt="{{ guide.title }}" style="height: 240px; object-fit: cover;">
+                    {% else %}
+                    <div
+                        style="height: 240px; background-color: #eef2f6; display: flex; align-items: center; justify-content: center;">
+                        <i class="fa fa-heartbeat" style="font-size: 3rem; color: #0092db;"></i>
+                    </div>
+                    {% endif %}
+                </div>
+
+                <div class="card-body d-flex flex-column p-4">
+                    <span class="guide-date">
+                        <i class="far fa-calendar-alt mr-1"></i>
+                        {{ guide.created_at.strftime('%b %d, %Y') }}
+                    </span>
+
+                    <h5 class="guide-title">{{ guide.title }}</h5>
+
+                    <div class="mt-auto">
+                        <a href="{{ url_for('guide_detail', slug=guide.slug) }}" class="read-more-link stretched-link">
+                            Read Full Guide <i class="fa fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <div class="col-12 text-center py-5">
+            <h3 style="color: #002D5B;">No guides found.</h3>
+            <p>Please check back later for new health resources.</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<script src="https://fyndbetter.com/chatbot/aarogya_chatbot"></script>
+<script>
+    function filterGuides() {
+        let input = document.getElementById('guideSearch').value.toLowerCase();
+        let items = document.getElementsByClassName('guide-item');
+        for (let i = 0; i < items.length; i++) {
+            let title = items[i].querySelector('.guide-title').innerText.toLowerCase();
+            if (title.includes(input)) {
+                items[i].style.display = "block";
+            } else {
+                items[i].style.display = "none";
+            }
+        }
+    }
+</script>
+
+{% endblock %}

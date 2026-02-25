@@ -1,0 +1,213 @@
+{% extends "base.html" %}
+
+{% block title %}About Us - Aarogya Hastha{% endblock %}
+
+{% block content %}
+{% block head %}
+{{ super() }}
+<meta name="author" content="Aarogyahastha Pvt Ltd">
+<meta name="designer" content="Aarogyahastha Pvt Ltd">
+<meta name="publisher" content="Aarogyahastha Pvt Ltd">
+<link rel="canonical" href="https://aarogyahastha.com/about">
+<meta name="no-email-collection" content="http://www.unspam.com/noemailcollection/">
+<meta name="robots" content="index,follow">
+<meta name="revisit-after" content="7 days">
+<meta name="distribution" content="web">
+<meta name="robots" content="noodp">
+<meta name="web_author" content="Aarogyahastha Pvt Ltd">
+<meta name="rating" content="general">
+<meta name="rating" content="safe for kids">
+<meta name="subject" content="Healthcare">
+<meta name="copyright" content="Copyright © 2025">
+<meta name="reply-to" content="info@aarogyahastha.com">
+<meta name="abstract"
+    content="We provide timely and specialized medical attention for patients experiencing life-threatening conditions, ensuring their urgent needs are met with the highest level of care.">
+<meta name="city" content="Bangalore">
+<meta name="country" content="India">
+<meta name="distribution" content="global">
+<meta name="classification" content="Healthcare, Hospital">
+<base href="/">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+{% endblock %}
+
+<style>
+    .breadcrumb-section {
+        padding: 10px 0;
+        background-color: #f8f9fa;
+    }
+
+    .breadcrumb {
+        margin-bottom: 0;
+        padding: 0.75rem 1rem;
+    }
+
+    .breadcrumb-item+.breadcrumb-item::before {
+        content: ">>";
+        padding: 0 0.5rem;
+    }
+
+    .breadcrumb-item a {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+    .breadcrumb-item.active {
+        color: #6c757d;
+    }
+</style>
+<section class="breadcrumb-section">
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb" itemscope itemtype="http://schema.org/BreadcrumbList">
+                <li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                    <a itemprop="item" href="/">
+                        <span itemprop="name">Home</span>
+                    </a>
+                    <meta itemprop="position" content="1">
+                </li>
+                <li class="breadcrumb-item active" aria-current="page" itemprop="itemListElement" itemscope
+                    itemtype="http://schema.org/ListItem">
+                    <span itemprop="name">About</span>
+                    <meta itemprop="position" content="2">
+                </li>
+            </ol>
+        </nav>
+    </div>
+</section>
+<section class="department-banner" data-aos="fade-up" data-aos-offset="300" data-aos-easing="ease-in-sine">
+    <div class="container">
+        <div class="banner">
+            <img loading="lazy" src="/static/img/about/about-banner.jpg" alt="">
+            <div class="text-box-1">
+                <h1>Compassionate Care<br />Dedicated Service</h1>
+                <p>Aarogya Hastha is a premier healthcare facility that provides quality medical treatment with over
+                    15 specialities.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section data-aos="fade-up" data-aos-offset="300" data-aos-easing="ease-in-sine" class="about-tab-section py-3">
+    <div class="container">
+        <ul class="tab-list">
+            <li class="tab-item active" data-id="#chairman">Chairman's Message</li>
+            <li class="tab-item" data-id="#who-we-are">Who We Are</li>
+            <li class="tab-item d-none" data-id="#our-team">Our Team</li>
+        </ul>
+
+        <div class="about-tab" id="chairman">
+            <img loading="lazy" src="{{ url_for('static', filename='img/about/chairmans-message.jpg') }}" alt="">
+            <div class="text-box-1">
+                <h2>Chairman's Message</h2>
+                <p>
+                    Aarogya Hastha Hospital is proud to provide our patients and their families with the highest
+                    quality healthcare services. We strive to provide an environment that encourages recovery and
+                    wellness while ensuring that our staff takes all the necessary steps to help protect our patients
+                    from any potential harm. Our staff and clinicians are highly experienced and dedicated to providing
+                    our patients and families with exceptional care. We also encourage our patients to ask questions,
+                    provide feedback, and discuss any concerns they have in order to ensure that we’re doing our
+                    part to provide the best care possible. We consider ourselves part of the local community and are
+                    continually searching for new methods and techniques for helping our patients get better. Thank
+                    you for choosing our hospital for your healthcare needs.
+                </p>
+            </div>
+        </div>
+
+        <div class="about-tab" id="who-we-are" style="display: none;">
+            <img loading="lazy" src="{{ url_for('static', filename='img/about/who-we-are-bg.jpg') }}" alt="">
+            <div class="text-box-1">
+                <h2>Who We Are</h2>
+                <p>
+                    At Aarogya Hastha Hospital, our mission is to provide the utmost care and commitment to the
+                    overall wellbeing of our patients and the community at large. The hospital team is dedicated to
+                    consistently delivering exceptional service and quality care with empathy and compassion. Our
+                    passionate vision is to revolutionise healthcare by disrupting traditional models and introducing
+                    patient-centred approaches.
+                </p>
+
+                <p>
+                    We strive to create a culture where our team members are respected and nurtured to develop new
+                    and innovative ideas to improve care and services. We are determined to supply the most advanced
+                    treatments and technologies to ensure the best possible outcomes for our patients. By dedicating
+                    ourselves to creating policies and procedures that promote collaboration and efficiency, we take
+                    a proactive approach to problem-solving. Our aim is to create an environment that is conducive to
+                    growth and progress, while focusing on the principles of care, respect, and diligence.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- scripts -->
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+<script>
+    $(".book-apt").on('click', function () {
+        var url = $(this).data("url");
+        window.open(url, '_blank');
+    });
+
+    function showChromePopup() {
+        const popup = document.getElementById("chrome-popup");
+        popup.classList.add("is-visible");
+        popup.setAttribute("aria-hidden", "false");
+    }
+    function hideChromePopup() {
+        const popup = document.getElementById("chrome-popup");
+        popup.classList.remove("is-visible");
+        popup.setAttribute("aria-hidden", "true");
+    }
+    // ESC closes popup
+    document.addEventListener("keydown", e => {
+        if (e.key === "Escape") hideChromePopup();
+    });
+    document.addEventListener('DOMContentLoaded', function () {
+        const scrollBtn = document.getElementById('scrollToTopBtn');
+        const scrollThreshold = 300;
+
+        function toggleScrollButton() {
+            if (window.pageYOffset > scrollThreshold ||
+                document.documentElement.scrollTop > scrollThreshold) {
+                scrollBtn.style.display = 'flex';
+            } else {
+                scrollBtn.style.display = 'none';
+            }
+        }
+
+        window.addEventListener('scroll', toggleScrollButton);
+
+        scrollBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+            // Add slight animation to the icon
+            this.querySelector('i').style.transform = 'translateY(-4px)';
+            setTimeout(() => {
+                this.querySelector('i').style.transform = '';
+            }, 300);
+        });
+
+        // Initialize on load
+        toggleScrollButton();
+    });
+
+    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+    const mobileNav = document.getElementById('mobile-nav');
+    mobileMenuToggle.addEventListener('click', function () {
+        mobileNav.classList.toggle('active'); // toggles visibility
+    });
+</script>
+
+<a href="#" id="scrollToTopBtn" class="scroll-to-top-btn" title="Scroll to top" aria-label="Scroll to top">
+    <i class="fa fa-arrow-up"></i> <!-- Simple up arrow -->
+</a>
+{% endblock %}

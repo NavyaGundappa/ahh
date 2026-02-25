@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Emergency Medicine Department | 24/7 Trauma & Paediatric Care | Aarogya Hastha Hospitals</title>
+    <meta name="description"
+        content="Need urgent care? Aarogya Hastha's Emergency Medicine department offers 24/7 trauma, paediatric, and ambulance services. Call 080 6666 8877/88 now!">
+    <link rel="canonical" href="https://aarogyahastha.com/departments/emergency-medicine" />
+    <meta name="google-site-verification" content="NCMNy8zyXscWLWKEoLYF2wgA_DyjPOp8Qnd_8_n6F2w" />
+    <link rel="icon" type="image/x-icon" href="https://aarogyahastha.com/static/img/fav.png/">
+
+   <meta name="robots" content="index,follow">
+    <meta name="revisit-after" content="7 days">
+    <meta name="distribution" content="web">
+    <meta name="robots" content="noodp">
+    <meta name="web_author" content="Aarogyahastha Pvt Ltd">
+    <meta name="rating" content="general">
+    <meta name="rating" content="safe for kids">
+    <meta name="subject" content="Healthcare">
+    <meta name="copyright" content="Copyright © 2025">
+    <meta name="reply-to" content="info@aarogyahastha.com">
+    <meta name="abstract"
+        content="We provide timely and specialized medical attention for patients experiencing life-threatening conditions, ensuring their urgent needs are met with the highest level of care.">
+    <meta name="city" content="Bangalore">
+    <meta name="country" content="India">
+    <meta name="distribution" content="global">
+    <meta name="classification" content="Healthcare, Hospital">
+    <base href="/">
+
+    <link rel="stylesheet" href="/static/css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/css/style.css">
+
+    <style>
+        /* Breadcrumb Styles */
+        .breadcrumb-section {
+            padding: 15px 0;
+            background-color: #f8f9fa;
+        }
+
+        .breadcrumb {
+            margin-bottom: 0;
+            padding: 0;
+            background: transparent;
+        }
+
+        .breadcrumb-item+.breadcrumb-item::before {
+            content: "›";
+            color: #6c757d;
+        }
+
+        .breadcrumb-item a {
+            color: #103A60;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .breadcrumb-item.active {
+            color: #6c757d;
+        }
+
+        /* Department Banner Styles */
+        .department-banner {
+            position: relative;
+            margin-bottom: 30px;
+            height: 400px !important;
+            overflow: hidden;
+            /* Added to contain the banner properly */
+        }
+
+        .banner {
+            height: 50%;
+            /* Make banner fill the container */
+        }
+
+        .banner img {
+            width: 100%;
+            height: 50%;
+            /* Make image fill the banner */
+            object-fit: cover;
+            object-position: center;
+            /* Center the image focus */
+        }
+
+        .banner-content-transparent {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+            padding: 10px 0 180px;
+            /* Increased padding further */
+            color: white;
+            z-index: 10;
+            /* Ensure content is above image */
+        }
+
+        .text-content h1 {
+            font-size: 2rem;
+            /* Significant reduction from 2.5rem */
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
+            /* Thinner shadow */
+            line-height: 1.1;
+        }
+
+        .text-content p {
+            font-size: 0.95rem;
+            /* Standard paragraph size */
+            opacity: 0.9;
+            line-height: 1.5;
+            max-width: 600px;
+        }
+
+        .banner-buttons-transparent {
+            margin-top: 20px !important;
+        }
+
+        .btn-appointment-transparent,
+        .btn-call-transparent {
+            background-color: #16979D;
+            color: white;
+            padding: 8px 20px;
+            /* Slimmer buttons */
+            border-radius: 4px;
+            /* More modern, sharp corners */
+            margin-right: 12px;
+            font-weight: 500;
+            font-size: 0.85rem;
+            /* Small button text */
+            min-width: 160px;
+            text-align: center;
+        }
+
+        .btn-call-transparent {
+            background-color: #103A60;
+        }
+
+        .btn-appointment-transparent:hover,
+        .btn-call-transparent:hover {
+            transform: translateY(-5px);
+            /* More pronounced hover effect */
+            color: white;
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
+            text-decoration: none;
+        }
+
+        /* Optional: Add a subtle overlay for better text readability */
+        .banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 40%;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), transparent);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .doc_gif img {
+            position: fixed;
+            right: 2rem;
+            width: 90px;
+            bottom: 4rem;
+            z-index: 9;
+        }
+
+        @media (max-width: 768px) {
+            .doc_gif img {
+                position: fixed;
+                right: 2rem;
+                width: 80px;
+                bottom: 4.3rem;
+            }
+
+            .department-banner {
+                height: 400px !important;
+                /* Shorter banner container */
+            }
+
+            .text-content h1 {
+                font-size: 1.75rem;
+            }
+
+            .text-content p {
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .department-banner {
+                height: 350px !important;
+                /* Very compact mobile view */
+            }
+
+            .banner-content-transparent {
+                padding: 30px 0 20px;
+                /* Reduced vertical padding */
+            }
+
+            .text-content h1 {
+                font-size: 1.4rem;
+                /* Small mobile heading */
+            }
+
+            .text-content p {
+                font-size: 0.85rem;
+            }
+
+            .btn-appointment-transparent,
+            .btn-call-transparent {
+                padding: 6px 15px;
+                font-size: 0.8rem;
+                min-width: 140px;
+                margin-bottom: 8px;
+                display: block;
+                margin-right: 0;
+            }
+        }
+
+        /* Enhanced Services Card CSS */
+        .service-card-wrapper {
+            transition: all 0.3s ease;
+            height: 100%;
+            border: none;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            border-top: 4px solid #16979D;
+            padding: 25px;
+        }
+
+        .service-card-wrapper:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-icon-box {
+            width: 60px;
+            height: 60px;
+            background: rgba(22, 151, 157, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .service-icon-box img {
+            width: 35px;
+            height: 35px;
+            object-fit: contain;
+        }
+
+        .service-card-title {
+            color: #103A60;
+            font-weight: 700;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+
+        .service-list {
+            padding-left: 0;
+            list-style: none;
+            margin-bottom: 15px;
+        }
+
+        .service-list li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 8px;
+            color: #555;
+            font-size: 0.95rem;
+        }
+
+        .service-list li i {
+            position: absolute;
+            left: 0;
+            top: 4px;
+            color: #16979D;
+        }
+
+        .service-desc {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* Tabs Styling */
+        .nav-tabs {
+            border-bottom: 2px solid #e9ecef;
+            gap: 5px;
+        }
+
+        .nav-tabs .nav-link {
+            border: none;
+            color: #666;
+            font-weight: 600;
+            padding: 12px 20px;
+            border-radius: 5px 5px 0 0;
+            background: #f8f9fa;
+        }
+
+        .nav-tabs .nav-link.active {
+            color: #103A60;
+            background-color: #fff;
+            border-bottom: 3px solid #103A60;
+        }
+
+        .nav-tabs .nav-link:hover {
+            background-color: #e9ecef;
+            color: #103A60;
+        }
+
+        /* Specialist Card Styling */
+        .specialist-card {
+            display: flex;
+            background: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            margin-bottom: 20px;
+            transition: all 0.3s;
+            border: 1px solid #eee;
+            height: 100%;
+        }
+
+        .specialist-card:hover {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .specialist-card .img-box {
+            width: 40%;
+            background: #f4f7f9;
+            min-height: 200px;
+        }
+
+        .specialist-card .img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .specialist-card .content {
+            width: 60%;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .specialist-card h3 {
+            color: #103A60;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .specialist-card h4 {
+            color: #16979D;
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+
+        .specialist-card .book-btn {
+            background: #103A60;
+            color: #fff;
+            text-align: center;
+            padding: 8px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 10px;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+
+        .specialist-card .book-btn:hover {
+            background: #16979D;
+        }
+
+        /* Service Carousel Styling Fixes */
+        .service-carousel-section .item {
+            text-align: center;
+            padding: 25px 15px;
+            border: 1px solid #eef2f6;
+            border-radius: 16px;
+            /* Softer rounded corners */
+            background: #ffffff;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            margin: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+        }
+
+        .service-carousel-section .item:hover .dept-icon {
+            background: #16979D;
+            /* Icon background turns teal on hover */
+            filter: brightness(0) invert(1);
+            /* Turns icon white if it's a dark SVG/PNG */
+        }
+
+        .service-carousel-section .item h4 {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #103A60;
+            margin-top: 5px;
+            line-height: 1.3;
+        }
+
+        /* INCREASED ICON SIZE HERE */
+        .service-carousel-section .dept-icon {
+            width: 55px !important;
+            /* Elegant, smaller size */
+            height: 55px !important;
+            padding: 10px;
+            /* Space inside the icon box */
+            background: #f0f9fa;
+            /* Very light tint of your brand teal */
+            border-radius: 12px;
+            /* Square-ish rounded icons */
+            margin-bottom: 15px;
+            object-fit: contain;
+            transition: 0.3s;
+        }
+
+
+        /* Responsive tweaks */
+        @media (max-width: 768px) {
+            .text-content h1 {
+                font-size: 2rem;
+            }
+
+            .specialist-card {
+                flex-direction: column;
+            }
+
+            .specialist-card .img-box,
+            .specialist-card .content {
+                width: 100%;
+            }
+
+            .specialist-card .img-box {
+                height: 250px;
+            }
+
+            /* Mobile adjustments for banner height */
+            .department-banner img {
+                height: 350px !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="nav-overlay"></div>
+    <div class="left-sidebar">
+        <a href="/appointments" class="icon-link">
+            <img src="{{ url_for('static', filename='img/img/book-appointment.png') }}" alt="Book Appointment Icon">
+            <span class="tooltip-text">Book an Appointment</span>
+        </a>
+        <a href="javascript:void(0)" onclick="showChromePopup()" class="icon-link">
+            <img src="{{ url_for('static', filename='img/img/whatsapp.png') }}" alt="WhatsApp Icon">
+            <span class="tooltip-text">WhatsApp</span>
+        </a>
+        <a href="/departments/" class="icon-link">
+            <img src="{{ url_for('static', filename='img/img/find-doctors.png') }}" alt="Find Doctors Icon">
+            <span class="tooltip-text">Find a Doctor</span>
+        </a>
+        <a href="tel:8066668800" class="icon-link">
+            <img src="{{ url_for('static', filename='img/img/call-icon.png') }}" alt="Call Icon">
+            <span class="tooltip-text">Call Us</span>
+        </a>
+    </div>
+
+    <header class="new-header">
+        <div class="header-top-container">
+            <div class="container header-top-content">
+                <div class="mobile_head">
+                    <a href="/" class="logo">
+                        <div class="header-logos">
+                            <div class="logo-wrapper">
+                                <img src="{{ url_for('static', filename='img/img/logo.png') }}"
+                                    alt="AarogyaHastha Hospitals Logo" class="header-logo-img">
+                            </div>
+                            <div class="logo-wrapper new-logo-wrapper">
+                                <img src="{{ url_for('static', filename='img/img/NABH_Logo-01.png') }}"
+                                    alt="New Hospital Logo" class="header-logo-img new-logo-img">
+                            </div>
+                        </div>
+                    </a>
+                    <button class="navbar-toggle d-lg-none" id="mobile-menu-toggle">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                </div>
+                <div class="header-contact">
+                    <span class="appointment-number">
+                        <div class="contact-label">Appointments</div>
+                        <div class="contact-row">
+                            <i class="fa fa-phone"></i>
+                            <a href="tel:08066668811">080 6666 8811/22/33</a>
+                        </div>
+                    </span>
+                    <span class="emergency-number">
+                        <div class="contact-label">24/7 Ambulance</div>
+                        <div class="contact-row">
+                            <i class="fa fa-ambulance"></i>
+                            <a href="tel:08066668877">080 6666 8877/88</a>
+                        </div>
+                    </span>
+                </div>
+            </div>
+
+            <div class="ambulance-animation-container">
+                <div class="ambulance-animation">
+                    <div class="ambulance-icon">
+                        <img src="{{ url_for('static', filename='img/img/ambulance.png') }}" alt="Ambulance" />
+                    </div>
+                    <div class="ambulance-number">
+                        <a href="tel:08066668877">Emergency: 080 6666 8877/88</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="nav-container">
+                <div class="container nav-content">
+                    <ul id="mobile-nav" class="nav-list d-lg-none">
+                        <button class="nav-close-btn" id="mobile-menu-close">×</button>
+                        <li><a class="nav-links" href="/">Home</a></li>
+                        <li><a class="nav-links" href="/appointments">Appointments</a></li>
+                        <li><a class="nav-links" href="/doctors">Doctors</a></li>
+                        <li><a class="nav-links" href="/departments/">Departments</a></li>
+                        <li><a class="nav-links" href="/health-packages">Health Packages</a></li>
+                        <li><a class="nav-links" href="/sports-packages">Sports Packages</a></li>
+                        <li><a class="nav-links" href="/blog">Blog</a></li>
+                        <li><a class="nav-links" href="/about">About Us</a></li>
+                        <li class="dropdown">
+                            <a class="nav-links" href="/contact">Contact</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Review us</a></li>
+                                <li><a href="#" class="write-review-btn">Write a message to ED</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <ul class="main-nav" id="main-navigation">
+                        <li><a class="nav-links" href="/">Home</a></li>
+                        <li><a class="nav-links" href="/appointments">Appointments</a></li>
+                        <li><a class="nav-links" href="/doctors">Doctors</a></li>
+                        <li><a class="nav-links" href="/departments/">Departments</a></li>
+                        <li><a class="nav-links" href="/health-packages">Health Packages</a></li>
+                        <li><a class="nav-links" href="/sports-packages">Sports Packages</a></li>
+                        <li><a class="nav-links" href="/blog">Blog</a></li>
+                        <li class="dropdown">
+                            <a class="nav-links" href="/about">About us <i class="fa fa-angle-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/bmw_report" target="_blank"><i class="fa-solid fa-circle-info"></i> BMW
+                                        Report</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a class="nav-links" href="/contact">Contact <i class="fa fa-angle-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#" target="_blank"><i class="fa-solid fa-star"></i> Review us</a></li>
+                                <li><a href="#" class="write-review-btn"><i class="fa-solid fa-envelope"></i> Write a
+                                        message to ED</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="breadcrumb-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/departments">Departments</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ department.name }}</li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+
+    <section class="department-banner" data-aos="fade-up">
+        <div class="container">
+            <div class="banner"
+                style="position: relative; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                {% if department.banner_path %}
+                <img loading="lazy" src="{{ url_for('static', filename=department.banner_path) }}"
+                    alt="{{ department.banner_alt_text or department.name }}"
+                    style="width: 100%; height: 550px; object-fit: cover;">
+                {% else %}
+                <img loading="lazy" src="{{ url_for('static', filename='img/banners/default.jpg') }}"
+                    alt="{{ department.banner_alt_text or department.name }}"
+                    style="width: 100%; height: 550px; object-fit: cover;">
+                {% endif %}
+
+                <div class="banner-content-transparent">
+                    <div class="container">
+                        <div class="text-content">
+                            <h1>{{ department.name }}</h1>
+                            <p class="lead text-white">{{ department.description }}</p>
+                        </div>
+                        <div class="banner-buttons-transparent mt-4">
+                            <a href="https://app.fyndbetter.com/ahh_apt" target="_blank"
+                                class="btn btn-appointment-transparent">
+                                <i class="fas fa-calendar-check me-2"></i>Book Appointment
+                            </a>
+                            <a href="tel:+08066668811" class="btn btn-call-transparent">
+                                <i class="fas fa-phone me-2"></i>Call Us
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container my-5">
+        <ul class="nav nav-tabs" id="departmentTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="overview-tab" data-bs-toggle="tab"
+                    data-bs-target="#overview-tab-pane" type="button" role="tab">Overview</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="services-tab" data-bs-toggle="tab" data-bs-target="#services-tab-pane"
+                    type="button" role="tab">Our Services</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="specialists-tab" data-bs-toggle="tab"
+                    data-bs-target="#specialists-tab-pane" type="button" role="tab">Our Specialists</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="blog-tab" data-bs-toggle="tab" data-bs-target="#blog-tab-pane"
+                    type="button" role="tab">Blog</button>
+            </li>
+        </ul>
+
+        <div class="tab-content pt-4" id="departmentTabsContent">
+
+            <div class="tab-pane fade show active" id="overview-tab-pane" role="tabpanel">
+                <div class="row">
+                    <div class="col-lg-12">
+                        {% if overview %}
+                        <div class="bg-light p-4 rounded-3 border">
+                            {% if overview.quote %}
+                            <blockquote class="blockquote border-start border-4 border-primary ps-4 mb-4">
+                                <p class="fst-italic">"{{ overview.quote }}"</p>
+                                {% if overview.quote_author %}
+                                <footer class="blockquote-footer mt-2">{{ overview.quote_author }}</footer>
+                                {% endif %}
+                            </blockquote>
+                            {% endif %}
+
+                            <div class="content-body text-secondary">
+                                {{ overview.content | safe }}
+                            </div>
+
+                            {% if faqs %}
+                            <div class="mt-5">
+                                <h3 class="mb-4" style="color: #103A60;">Frequently Asked Questions</h3>
+                                <div class="accordion" id="deptFaqAccordion">
+                                    {% for faq in faqs %}
+                                    <div class="accordion-item mb-2 border rounded overflow-hidden">
+                                        <h2 class="accordion-header" id="heading{{ loop.index }}">
+                                            <button class="accordion-button collapsed fw-bold text-dark" type="button"
+                                                data-bs-toggle="collapse" data-bs-target="#collapse{{ loop.index }}">
+                                                {{ faq.question }}
+                                            </button>
+                                        </h2>
+                                        <div id="collapse{{ loop.index }}" class="accordion-collapse collapse"
+                                            data-bs-parent="#deptFaqAccordion">
+                                            <div class="accordion-body text-muted">
+                                                {{ faq.answer | safe }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            {% endif %}
+                        </div>
+                        {% else %}
+                        <div class="alert alert-light border">Overview content coming soon.</div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="services-tab-pane" role="tabpanel">
+                <div class="department-section">
+                    <h2 class="mb-4 text-center" style="color: #103A60;">Conditions Treated & Services</h2>
+                    <div class="row g-4">
+                        {% for service in services %}
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card service-card-wrapper h-100">
+                                <div class="d-flex align-items-center mb-3">
+                                    {% if service.icon_path %}
+                                    <div class="service-icon-box">
+                                        <img src="{{ url_for('static', filename=service.icon_path) }}" alt="Icon">
+                                    </div>
+                                    {% endif %}
+                                </div>
+
+                                <h4 class="service-card-title">{{ service.title }}</h4>
+
+                                <div class="card-body p-0">
+                                    {% if service.list_items %}
+                                    <ul class="service-list">
+                                        {% for item in service.get_list_items() %}
+                                        <li><i class="fas fa-check-circle"></i> {{ item }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                    {% endif %}
+
+                                    <p class="service-desc mb-0">{{ service.description }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="specialists-tab-pane" role="tabpanel">
+                <div class="container p-0">
+                    <div class="row g-4">
+                        {% for doctor in doctors %}
+                        {% if doctor.is_active %}
+                        <div class="col-lg-6">
+                            <div class="specialist-card">
+                                <div class="img-box">
+                                    {% if doctor.image_path %}
+                                    <img src="{{ url_for('static', filename=doctor.image_path) }}"
+                                        alt="{{ doctor.name }}">
+                                    {% else %}
+                                    <img src="{{ url_for('static', filename='img/doctors/default.jpg') }}"
+                                        alt="No Image">
+                                    {% endif %}
+                                </div>
+                                <div class="content">
+                                    <h3>{{ doctor.name }}</h3>
+                                    <h4>{{ doctor.specialization }}</h4>
+
+                                    {% if doctor.day_from %}
+                                    <p class="mb-2 text-muted small"><i class="far fa-clock me-1"></i> {{
+                                        doctor.day_from }} - {{ doctor.day_to }}</p>
+                                    {% endif %}
+
+                                    <div class="d-flex gap-2 mt-auto w-100">
+                                        <a class="book-btn flex-grow-1" href="https://app.fyndbetter.com/ahh_apt"
+                                            target="_blank">Book Appointment</a>
+                                        <a href="{{ url_for('doctor_detail', slug=doctor.slug) }}"
+                                            class="btn btn-outline-primary btn-sm flex-grow-1 mt-2 d-flex align-items-center justify-content-center"
+                                            style="border-radius:5px;">View Profile</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% else %}
+                        <div class="col-12 text-center py-5">
+                            <p class="text-muted">No specialists currently listed for this department.</p>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="blog-tab-pane" role="tabpanel">
+                <div class="container p-0">
+                    {% if blogs %}
+                    <div class="row g-4 justify-content-center">
+                        {% for blog in blogs %}
+                        <div class="col-md-4">
+                            <div class="card h-100 shadow-sm border-0">
+                                <div style="height: 200px; overflow: hidden; border-radius: 5px 5px 0 0;">
+                                    {% if blog.image_path %}
+                                    <img src="{{ url_for('static', filename=blog.image_path) }}"
+                                        class="w-100 h-100 object-fit-cover" alt="{{ blog.title }}">
+                                    {% else %}
+                                    <img src="{{ url_for('static', filename='img/blogs/default.jpg') }}"
+                                        class="w-100 h-100 object-fit-cover" alt="Blog">
+                                    {% endif %}
+                                </div>
+                                <div class="card-body d-flex flex-column">
+                                    <h5 class="card-title fw-bold" style="color: #103A60;">{{ blog.title }}</h5>
+                                    <p class="card-text text-muted small">{{ blog.date }}</p>
+                                    <a href="{{ url_for('blog_detail', slug=blog.slug) }}"
+                                        class="btn btn-outline-info mt-auto text-dark fw-bold border-2">Read More</a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    <div class="text-center py-5">
+                        <i class="fas fa-newspaper fa-3x text-muted mb-3"></i>
+                        <p class="text-muted">No recent blogs found for this department.</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <section class="service-carousel-section py-5" style="background-color: #f9f9f9;">
+        <div class="container">
+            <h2 class="text-center mb-5" style="color: #103A60;">Explore Our Other Specialities</h2>
+            <div class="owl-carousel service-carousel">
+                {% if departments %}
+                {% for dept in departments %}
+                {% if dept.is_active %}
+                <a href="{{ url_for('department_page', slug=dept.slug) }}" class="item"
+                    data-department="{{ dept.slug }}">
+                    {% if dept.icon_path %}
+                    <img class="dept-icon" loading="lazy" src="{{ url_for('static', filename=dept.icon_path) }}"
+                        alt="{{ dept.name }}">
+                    {% else %}
+                    <img class="dept-icon" loading="lazy"
+                        src="{{ url_for('static', filename='img/department/icons/default.svg') }}"
+                        alt="{{ dept.name }}">
+                    {% endif %}
+                    <h4 class="text-dark-blue mt-3">{{ dept.name }}</h4>
+                </a>
+                {% endif %}
+                {% endfor %}
+                {% else %}
+                <div class="alert alert-warning text-center">
+                    No departments available.
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <div class="logo-wrapper"><img loading="lazy"
+                            src="{{ url_for('static', filename='img/img/logo.png') }}"
+                            alt="AarogyaHastha Hospitals Logo"></div>
+                    <p><a href="https://www.google.com/maps/dir//Site+No.+2,+No.+2816%2F2,+SY.87,+Kasavanahalli+Main+Rd,+near+1st+Cross+Road,+opposite+HM+Symphony,+Bengaluru,+Karnataka+560035/@12.9007391,77.6745367,21769m/data=!3m1!1e3!4m8!4m7!1m0!1m5!1m1!1s0x3bae132a0bbeb64b:0x626c13b98813a8a3!2m2!1d77.67569!2d12.9005956?entry=ttu&g_ep=EgoyMDI1MDkxNi4wIKXMDSoASAFQAw%3D%3D"
+                            target="_blank" style="text-decoration: none; color: inherit;">Site No. 2, Kasavanahalli
+                            Main Rd, near 1st
+                            Cross Road, opposite HM Symphony, Bengaluru, Karnataka 560035</a></p>
+                    <div class="social-icons mt-4">
+                        <a href="https://www.instagram.com/aarogyahastha/" target="_blank"><img
+                                src="{{ url_for('static', filename='img/img/icon-insta.png') }}" alt="Instagram"></a>
+                        <a href="https://www.facebook.com/aarogyahastha" target="_blank"><img
+                                src="{{ url_for('static', filename='img/img/icon-fb.png') }}" alt="Facebook"></a>
+                        <a href="https://www.linkedin.com/company/aarogya-hastha/" target="_blank"><img
+                                src="{{ url_for('static', filename='img/img/icon-linkedin.png') }}" alt="LinkedIn"></a>
+                        <a href="https://twitter.com/AarogyaHastha" target="_blank"><img
+                                src="{{ url_for('static', filename='img/img/icon-twitter.png') }}" alt="Twitter"></a>
+                        <a href="https://www.youtube.com/channel/UCeQv8lTLIT4btbjgLxYzYrw" target="_blank"><img
+                                src="{{ url_for('static', filename='img/img/icon-youtube.png') }}" alt="YouTube"></a>
+                    </div>
+                    <div class="app-download" style="margin-top: 25px;">
+                        <h4 style="font-size: 16px; margin-bottom: 15px;">Download App for more benefits</h4>
+                        <div class="app-download-buttons">
+                            <a href="https://play.google.com/store/apps/details?id=com.better.aarogyahastha"
+                                target="_blank" class="app-download-btn"><img
+                                    src="{{ url_for('static', filename='img/img/play-store.png') }}"
+                                    alt="Get it on Google Play"></a>
+                            <a href="https://apps.apple.com/in/app/aarogya-hastha/id6739343936" target="_blank"
+                                class="app-download-btn"><img
+                                    src="{{ url_for('static', filename='img/img/app-store.png') }}"
+                                    alt="Download on the App Store"></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-links-wrapper">
+                    <div class="footer-column">
+                        <h4>Quick Links</h4>
+                        <ul class="footer-links">
+                            <li><a href="/">Home</a></li>
+                            <li><a href="/appointments">Appointments</a></li>
+                            <li><a href="/doctors">Doctors</a></li>
+                            <li><a href="/departments/">Departments</a></li>
+                            <li><a href="/health-packages">Health Packages</a></li>
+                            <li><a href="/sports-packages">Sports Packages</a></li>
+                            <li><a href="/about">About Us</a></li>
+                            <li><a href="/contact">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column" style="flex: 2;">
+                        <h4>Our Departments</h4>
+                        <ul class="footer-links footer-links-multi-column">
+                            <li><a href="/departments/general-surgery">General Surgery</a></li>
+                            <li><a href="/departments/neurosurgery">Neurosurgery</a></li>
+                            <li><a href="/departments/orthopaedics">Orthopaedics</a></li>
+                            <li><a href="/departments/anaesthesia">Anaesthesiology</a></li>
+                            <li><a href="/departments/pain-medicine">Pain Medicine</a></li>
+                            <li><a href="/departments/general-medicine">General Medicine</a></li>
+                            <li><a href="/departments/lab-medicine">Lab Medicine</a></li>
+                            <li><a href="/departments/paediatrics">Paediatrics</a></li>
+                            <li><a href="/departments/physiotherapy">Physiotherapy</a></li>
+                            <li><a href="/departments/dermatology">Dermatology</a></li>
+                            <li><a href="/departments/ent">ENT</a></li>
+                            <li><a href="/departments/emergency-medicine">Emergency Medicine</a></li>
+                            <li><a href="/departments/nephrology">Nephrology</a></li>
+                            <li><a href="/departments/urology">Urology</a></li>
+                            <li><a href="/departments/medical-gastroenterology">Medical Gastroenterology</a></li>
+                            <li><a href="/departments/minimal-access-surgery">Minimal Access Surgery</a></li>
+                            <li><a href="/departments/plastic-surgery">Plastic Surgery</a></li>
+                            <li><a href="/departments/obg">Obstetrics & Gynaecology</a></li>
+                            <li><a href="/departments/surgical-gastroenterology">Surgical Gastroenterology</a></li>
+                            <li><a href="/departments/radiology">Radiology</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>Copyright © 2026, all Rights Reserved to Aarogya Hastha Hospitals Pvt Ltd | <a
+                        href="/terms-and-conditions">Terms & Conditions</a> | <a href="/privacy-policy">Privacy
+                        Policy</a> | <a href="/disclaimer">Disclaimer</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <div id="chrome-popup" class="chrome-popup" aria-hidden="true">
+        <div class="chrome-popup__content">
+            <p class="chrome-popup__title">Open WhatsApp?</p>
+            <p class="chrome-popup__url">https://api.whatsapp.com wants to open this application.</p>
+            <label class="chrome-popup__checkbox">
+                <input type="checkbox"> Always allow api.whatsapp.com to open links of this type in the associated
+                app
+            </label>
+        </div>
+        <div class="chrome-popup__actions">
+            <a href="whatsapp://send?phone=919036092727" class="chrome-btn chrome-btn--blue">Open with App</a>
+            <a href="https://web.whatsapp.com/send?phone=9036092727" target="_blank"
+                class="chrome-btn chrome-btn--green">Open with Web</a>
+            <button class="chrome-btn chrome-btn--grey" onclick="hideChromePopup()">Cancel</button>
+        </div>
+    </div>
+
+    <div class="doc_gif">
+        <img src="/static/img/output-onlinegiftools.gif" alt="Doctor Chat">
+    </div>
+
+    <a href="#" id="scrollToTopBtn" class="scroll-to-top-btn" title="Scroll to top" aria-label="Scroll to top">
+        <i class="fa fa-arrow-up"></i>
+    </a>
+
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="{{ url_for('static', filename='js/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://fyndbetter.com/chatbot/aarogya_chatbot"></script>
+    <script src="{{ url_for('static', filename='js/js/myscript.js') }}"></script>
+
+    <script>
+        // Init Animations
+        AOS.init();
+
+        // Popup Logic
+        function showChromePopup() {
+            const popup = document.getElementById("chrome-popup");
+            popup.classList.add("is-visible");
+            popup.setAttribute("aria-hidden", "false");
+        }
+        function hideChromePopup() {
+            const popup = document.getElementById("chrome-popup");
+            popup.classList.remove("is-visible");
+            popup.setAttribute("aria-hidden", "true");
+        }
+        document.addEventListener("keydown", e => { if (e.key === "Escape") hideChromePopup(); });
+
+        // Scroll Top Logic
+        document.addEventListener('DOMContentLoaded', function () {
+            const scrollBtn = document.getElementById('scrollToTopBtn');
+            window.addEventListener('scroll', function () {
+                if (window.pageYOffset > 300) scrollBtn.style.display = 'flex';
+                else scrollBtn.style.display = 'none';
+            });
+            scrollBtn.addEventListener('click', function (e) {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            // Initialize Owl Carousel for Departments if present
+            $('.service-carousel').owlCarousel({
+                loop: true,
+                margin: 20,
+                nav: true,
+                dots: false,
+                autoplay: true,
+                autoplayTimeout: 3000,
+                responsive: {
+                    0: { items: 1 },
+                    600: { items: 2 },
+                    1000: { items: 4 }
+                }
+            });
+        });
+
+        // Mobile Menu Logic
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        const mobileNav = document.getElementById('mobile-nav');
+        const mobileMenuClose = document.getElementById('mobile-menu-close');
+
+        if (mobileMenuToggle) {
+            mobileMenuToggle.addEventListener('click', function () {
+                mobileNav.classList.add('active');
+            });
+        }
+        if (mobileMenuClose) {
+            mobileMenuClose.addEventListener('click', function () {
+                mobileNav.classList.remove('active');
+            });
+        }
+    </script>
+</body>
+
+</html>

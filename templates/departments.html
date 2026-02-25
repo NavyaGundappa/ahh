@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Specialised Medical Departments | Aarogya Hastha Hospitals</title>
+    <meta name="description"
+        content="Aarogya Hastha Hospitals offers diverse healthcare departments with expert doctors, modern technology, and compassionate care—designed to keep you and your family healthy.">
+    <link rel="icon" type="image/x-icon" href="https://aarogyahastha.com/static/img/fav.png/">
+    <link rel="canonical" href="https://aarogyahastha.com/departments/">
+
+   <meta name="robots" content="index,follow">
+    <meta name="revisit-after" content="7 days">
+    <meta name="distribution" content="web">
+    <meta name="robots" content="noodp">
+    <meta name="web_author" content="Aarogyahastha Pvt Ltd">
+    <meta name="rating" content="general">
+    <meta name="rating" content="safe for kids">
+    <meta name="subject" content="Healthcare">
+    <meta name="copyright" content="Copyright © 2025">
+    <meta name="reply-to" content="info@aarogyahastha.com">
+    <meta name="abstract"
+        content="We provide timely and specialized medical attention for patients experiencing life-threatening conditions, ensuring their urgent needs are met with the highest level of care.">
+    <meta name="city" content="Bangalore">
+    <meta name="country" content="India">
+    <meta name="distribution" content="global">
+    <meta name="classification" content="Healthcare, Hospital">
+    <base href="/">
+
+    <link rel="stylesheet" href="/static/css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/css/style.css">
+
+    <style>
+        /* 1. Spacing Fix: Removed large top margins */
+        body {
+            padding-top: 0;
+        }
+
+        .breadcrumb-section {
+            background-color: #f9f9f9;
+            padding: 10px 0;
+            /* If the header overlaps the content, increase this value (e.g., 80px). 
+               Currently set to 0 to remove the gap. */
+            margin-top: 0;
+        }
+
+        .breadcrumb {
+            margin-bottom: 0;
+            background: transparent;
+            padding: 0;
+            font-size: 14px;
+        }
+
+        .breadcrumb-item a {
+            color: #0092db;
+            /* Hospital Blue */
+            text-decoration: none;
+        }
+
+        .breadcrumb-item.active {
+            color: #666;
+        }
+
+        /* 2. Banner Styling */
+        .department-banner {
+            position: relative;
+
+            /* 1. Width & Centering Settings */
+            width: 92%;
+            /* Leaves some space on the sides on mobile/tablet */
+            max-width: 1700px;
+            /* Limits the maximum width so it's not too wide on desktop */
+            margin: 20px auto 40px;
+            height: 350px;
+            overflow: hidden;
+            border-radius: 20px;
+            /* Stronger rounded corners to match the image */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            /* Optional: Adds a subtle depth/shadow */
+        }
+
+        .department-banner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .department-banner .text-box-1 {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 30px 40px;
+            /* More padding on the left */
+
+            /* REMOVED the solid background-color */
+            background: transparent;
+
+            /* Added a subtle gradient only at the bottom to make white text pop 
+       without blocking the image, mostly transparent */
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 100%);
+
+            text-align: left;
+            /* Aligned left instead of center */
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+
+        .department-banner h1 {
+            margin: 0;
+            font-size: 3rem;
+            /* Larger font */
+            font-weight: 700;
+            color: #002D5B;
+            /* Deep Navy Blue to match the reference image */
+            text-transform: capitalize;
+            line-height: 1.2;
+        }
+
+        .department-banner p {
+            margin: 5px 0 0;
+            font-size: 1.1rem;
+            color: #ffffff;
+            /* White text */
+            font-weight: 400;
+            max-width: 700px;
+            /* Prevents text from stretching too wide */
+            text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.5);
+            /* Slight shadow to ensure readability */
+        }
+
+        /* 3. Grid Layout Fix */
+        .department-grid {
+            display: grid;
+            /* Creates a responsive grid that fits as many columns as possible */
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+            padding-bottom: 50px;
+        }
+
+        /* Card Item Styling */
+        .department-grid .item {
+            position: relative;
+            background: #fff;
+            border: 1px solid #eee;
+            border-radius: 10px;
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            /* Ensures equal height in row */
+        }
+
+        .department-grid .item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border-color: #0092db;
+        }
+
+        /* Icon Styling */
+        .dept-icon {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .department-grid .item:hover .dept-icon {
+            transform: scale(1.1);
+        }
+
+        /* Text Styling */
+        .department-grid .item h4 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #333;
+            margin: 0;
+        }
+
+        .department-grid .item:hover h4 {
+            color: #0092db;
+        }
+
+        .doc_gif img {
+            position: fixed;
+            right: 2rem;
+            width: 90px;
+            bottom: 4rem;
+            z-index: 9;
+        }
+
+        @media (max-width: 768px) {
+            .doc_gif img {
+                position: fixed;
+                right: 2rem;
+                width: 80px;
+                bottom: 4.3rem;
+            }
+
+            .department-banner {
+                height: 200px;
+            }
+
+            .department-banner h1 {
+                font-size: 1.8rem;
+            }
+
+            .department-banner p {
+                font-size: 0.9rem;
+                display: none;
+            }
+        }
+
+        /* Minimalist Floating Search */
+        .search-input-group {
+            display: flex;
+            align-items: center;
+            background: #ffffff;
+            border: 1px solid #eef2f6;
+            border-radius: 50px;
+            padding: 12px 25px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            /* Softer shadow for floating effect */
+
+            max-width: 600px;
+            margin: -30px auto 30px;
+            /* Negative top margin pulls it closer to banner */
+            width: 90%;
+            position: relative;
+            z-index: 10;
+            /* Ensures it stays above other elements */
+        }
+
+        /* Remove the black outline/box when clicking the input (seen in your 2nd image) */
+        .search-input-group input {
+            border: none !important;
+            outline: none !important;
+            box-shadow: none !important;
+            width: 100%;
+            font-size: 1rem;
+            color: #333;
+        }
+
+        /* Tighten the space for the grid below */
+        .department-section {
+            padding-top: 0px !important;
+            margin-top: 0px !important;
+        }
+    </style>
+
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-WGJFVPCB');</script>
+</head>
+
+<body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WGJFVPCB" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
+
+    <div class="nav-overlay"></div>
+    <div class="left-sidebar">
+        <a href="/appointments" class="icon-link">
+            <img src="/static/img/img/book-appointment.png" alt="Book Appointment Icon">
+            <span class="tooltip-text">Book an Appointment</span>
+        </a>
+        <a href="javascript:void(0)" onclick="showChromePopup()" class="icon-link">
+            <img src="/static/img/img/whatsapp.png" alt="WhatsApp Icon">
+            <span class="tooltip-text">WhatsApp</span>
+        </a>
+        <a href="/departments/" class="icon-link">
+            <img src="/static/img/img/find-doctors.png" alt="Find Doctors Icon">
+            <span class="tooltip-text">Find a Doctor</span>
+        </a>
+        <a href="tel:8066668800" class="icon-link">
+            <img src="/static/img/img/call-icon.png" alt="Call Icon">
+            <span class="tooltip-text">Call Us</span>
+        </a>
+    </div>
+
+    <header class="new-header">
+        <div class="header-top-container">
+            <div class="container header-top-content">
+                <div class="mobile_head">
+                    <a href="/" class="logo">
+                        <div class="header-logos">
+                            <div class="logo-wrapper">
+                                <img src="/static/img/img/logo.png" alt="AarogyaHastha Hospitals Logo"
+                                    class="header-logo-img">
+                            </div>
+                            <div class="logo-wrapper new-logo-wrapper">
+                                <img src="/static/img/img/NABH_Logo-01.png" alt="New Hospital Logo"
+                                    class="header-logo-img new-logo-img">
+                            </div>
+                        </div>
+                    </a>
+                    <button class="navbar-toggle d-lg-none" id="mobile-menu-toggle">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                </div>
+                <div class="header-contact">
+                    <span class="appointment-number">
+                        <div class="contact-label">Appointments</div>
+                        <div class="contact-row">
+                            <i class="fa fa-phone"></i>
+                            <a href="tel:08066668811">080 6666 8811/22/33</a>
+                        </div>
+                    </span>
+                    <span class="emergency-number">
+                        <div class="contact-label">24/7 Ambulance</div>
+                        <div class="contact-row">
+                            <i class="fa fa-ambulance"></i>
+                            <a href="tel:08066668877">080 6666 8877/88</a>
+                        </div>
+                    </span>
+                </div>
+            </div>
+
+            <div class="ambulance-animation-container">
+                <div class="ambulance-animation">
+                    <div class="ambulance-icon">
+                        <img src="/static/img/img/ambulance.png" alt="Ambulance" />
+                    </div>
+                    <div class="ambulance-number">
+                        <a href="tel:08066668877">Emergency: 080 6666 8877/88</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="nav-container">
+                <div class="container nav-content">
+                    <ul id="mobile-nav" class="nav-list d-lg-none">
+                        <button class="nav-close-btn" id="mobile-menu-close">×</button>
+                        <li><a class="nav-links" href="/">Home</a></li>
+                        <li><a class="nav-links" href="/appointments">Appointments</a></li>
+                        <li><a class="nav-links" href="/doctors">Doctors</a></li>
+                        <li><a class="nav-links" href="/departments/">Departments</a></li>
+                        <li><a class="nav-links" href="/health-packages">Health Packages</a></li>
+                        <li><a class="nav-links" href="/sports-packages">Sports Packages</a></li>
+                        <li><a class="nav-links" href="/blog">Blog</a></li>
+                        <li><a class="nav-links" href="/about">About Us</a></li>
+                        <li class="dropdown">
+                            <a class="nav-links" href="/contact">Contact</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Review us</a></li>
+                                <li><a href="#" class="write-review-btn">Write a message to ED</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <ul class="main-nav" id="main-navigation">
+                        <li><a class="nav-links" href="/">Home</a></li>
+                        <li><a class="nav-links" href="/appointments">Appointments</a></li>
+                        <li><a class="nav-links" href="/doctors">Doctors</a></li>
+                        <li><a class="nav-links" href="/departments/">Departments</a></li>
+                        <li><a class="nav-links" href="/health-packages">Health Packages</a></li>
+                        <li><a class="nav-links" href="/sports-packages">Sports Packages</a></li>
+                        <li><a class="nav-links" href="/blog">Blog</a></li>
+                        <li class="dropdown">
+                            <a class="nav-links" href="/about">About us <i class="fa fa-angle-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/bmw_report" target="_blank"><i class="fa-solid fa-circle-info"></i> BMW
+                                        Report</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a class="nav-links" href="/contact">Contact <i class="fa fa-angle-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#" target="_blank"><i class="fa-solid fa-star"></i> Review us</a></li>
+                                <li><a href="#" class="write-review-btn"><i class="fa-solid fa-envelope"></i> Write a
+                                        message to ED</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="breadcrumb-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb" itemscope itemtype="http://schema.org/BreadcrumbList">
+                    <li class="breadcrumb-item" itemprop="itemListElement" itemscope
+                        itemtype="http://schema.org/ListItem">
+                        <a itemprop="item" href="/">
+                            <span itemprop="name">Home</span>
+                        </a>
+                        <meta itemprop="position" content="1">
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page" itemprop="itemListElement" itemscope
+                        itemtype="http://schema.org/ListItem">
+                        <a itemprop="item" href="/departments">
+                            <span itemprop="name">Departments</span>
+                        </a>
+                        <meta itemprop="position" content="2">
+                    </li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+
+    <section class="department-banner" data-aos="fade-up">
+        <img loading="lazy" src="/static/img/department/department.jpg" alt="Aarogya Hastha Departments">
+        <div class="text-box-1">
+            <div class="container">
+                <h1>Departments</h1>
+                <p>Dedicated to providing expert medical care across a wide range of specialities.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="search-input-group" data-aos="fade-up">
+        <i class="fa fa-search"></i>
+        <input type="text" id="deptSearch" placeholder="Search for a department..." onkeyup="filterDepartments()">
+    </div>
+
+
+    <section class="department-section section">
+        <div class="container">
+            <div class="department-grid">
+                {% for dept in departments %}
+                <a href="{{ url_for('department_page', slug=dept.slug) }}" class="item"
+                    data-department="{{ dept.slug }}">
+                    {% if dept.icon_path %}
+                    <img class="dept-icon" loading="lazy" src="{{ url_for('static', filename=dept.icon_path) }}"
+                        alt="{{ dept.name }}">
+                    {% else %}
+                    <img class="dept-icon" loading="lazy" src="{{ url_for('static', filename='img/default-icon.png') }}"
+                        alt="{{ dept.name }}">
+                    {% endif %}
+
+                    <h4>{{ dept.name }}</h4>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <div class="logo-wrapper"><img loading="lazy" src="/static/img/img/logo.png"
+                            alt="AarogyaHastha Hospitals Logo"></div>
+                    <p><a href="https://www.google.com/maps/dir//Site+No.+2,+No.+2816%2F2,+SY.87,+Kasavanahalli+Main+Rd,+near+1st+Cross+Road,+opposite+HM+Symphony,+Bengaluru,+Karnataka+560035/@12.9007391,77.6745367,21769m/data=!3m1!1e3!4m8!4m7!1m0!1m5!1m1!1s0x3bae132a0bbeb64b:0x626c13b98813a8a3!2m2!1d77.67569!2d12.9005956?entry=ttu&g_ep=EgoyMDI1MDkxNi4wIKXMDSoASAFQAw%3D%3D"
+                            target="_blank" style="text-decoration: none; color: inherit;">Site No. 2, Kasavanahalli
+                            Main Rd, near 1st
+                            Cross Road, opposite HM Symphony, Bengaluru, Karnataka 560035</a></p>
+                    <div class="social-icons mt-4">
+                        <a href="https://www.instagram.com/aarogyahastha/" target="_blank"><img
+                                src="/static/img/img/icon-insta.png" alt="Instagram"></a>
+                        <a href="https://www.facebook.com/aarogyahastha" target="_blank"><img
+                                src="/static/img/img/icon-fb.png" alt="Facebook"></a>
+                        <a href="https://www.linkedin.com/company/aarogya-hastha/" target="_blank"><img
+                                src="/static/img/img/icon-linkedin.png" alt="LinkedIn"></a>
+                        <a href="https://twitter.com/AarogyaHastha" target="_blank"><img
+                                src="/static/img/img/icon-twitter.png" alt="Twitter"></a>
+                        <a href="https://www.youtube.com/channel/UCeQv8lTLIT4btbjgLxYzYrw" target="_blank"><img
+                                src="/static/img/img/icon-youtube.png" alt="YouTube"></a>
+                        <a href="javascript:void(0)" onclick="showChromePopup()"><img
+                                src="/static/img/img/icon-whatsapp.png" alt="WhatsApp"></a>
+                    </div>
+                    <div class="app-download" style="margin-top: 25px;">
+                        <h4 style="font-size: 16px; margin-bottom: 15px;">Download App for more benefits</h4>
+                        <div class="app-download-buttons">
+
+                            <a href="https://play.google.com/store/apps/details?id=com.better.aarogyahastha"
+                                target="_blank" class="app-download-btn"><img src="/static/img/img/play-store.png"
+                                    alt="Get it on Google Play"></a>
+                            <a href="https://apps.apple.com/in/app/aarogya-hastha/id6739343936" target="_blank"
+                                class="app-download-btn"><img src="/static/img/img/app-store.png"
+                                    alt="Download on the App Store"></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-links-wrapper">
+                    <div class="footer-column">
+                        <h4>Quick Links</h4>
+                        <ul class="footer-links">
+                            <li><a href="/">Home</a></li>
+                            <li><a href="/appointments">Appointments</a></li>
+                            <li><a href="/doctors">Doctors</a></li>
+                            <li><a href="/departments/">Departments</a></li>
+                            <li><a href="/health-packages">Health Packages</a></li>
+                            <li><a href="/sports-packages">Sports Packages</a></li>
+                            <li><a href="/about">About Us</a></li>
+                            <li><a href="/contact">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column" style="flex: 2;">
+                        <h4>Our Departments</h4>
+                        <ul class="footer-links footer-links-multi-column">
+                            <li><a href="/departments/general-surgery">General Surgery</a></li>
+                            <li><a href="/departments/neurosurgery">Neurosurgery</a></li>
+                            <li><a href="/departments/orthopaedics">Orthopaedics</a></li>
+                            <li><a href="/departments/anaesthesia">Anaesthesiology</a></li>
+                            <li><a href="/departments/pain-medicine">Pain Medicine</a></li>
+                            <li><a href="/departments/general-medicine">General Medicine</a></li>
+                            <li><a href="/departments/lab-medicine">Lab Medicine</a></li>
+                            <li><a href="/departments/paediatrics">Paediatrics</a></li>
+                            <li><a href="/departments/physiotherapy">Physiotherapy</a></li>
+                            <li><a href="/departments/dermatology">Dermatology</a></li>
+                            <li><a href="/departments/ent">ENT</a></li>
+                            <li><a href="/departments/emergency-medicine">Emergency Medicine</a></li>
+                            <li><a href="/departments/nephrology">Nephrology</a></li>
+                            <li><a href="/departments/urology">Urology</a></li>
+                            <li><a href="/departments/medical-gastroenterology">Medical Gastroenterology</a></li>
+                            <li><a href="/departments/minimal-access-surgery">Minimal Access Surgery</a></li>
+                            <li><a href="/departments/plastic-surgery">Plastic Surgery</a></li>
+                            <li><a href="/departments/obg">Obstetrics & Gynaecology</a></li>
+                            <li><a href="/departments/surgical-gastroenterology">Surgical Gastroenterology</a></li>
+                            <li><a href="/departments/radiology">Radiology</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>Copyright © 2026, all Rights Reserved to Aarogya Hastha Hospitals Pvt Ltd | <a
+                        href="/terms-and-conditions">Terms & Conditions</a> | <a href="/privacy-policy">Privacy
+                        Policy</a> | <a href="/disclaimer">Disclaimer</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <a href="#" id="scrollToTopBtn" class="scroll-to-top-btn" title="Scroll to top"><i class="fa fa-arrow-up"></i></a>
+    <button id="mobile-sidebar-toggle" class="d-lg-none"><i class="fa fa-bars"></i></button>
+
+    <div id="chrome-popup" class="chrome-popup" aria-hidden="true">
+        <div class="chrome-popup__content">
+            <p class="chrome-popup__title">Open WhatsApp?</p>
+            <div class="chrome-popup__actions">
+                <a href="https://web.whatsapp.com/send?phone=9036092727" target="_blank"
+                    class="chrome-btn chrome-btn--green">Open with Web</a>
+                <button class="chrome-btn chrome-btn--grey" onclick="hideChromePopup()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="doc_gif">
+        <img src="/static/img/output-onlinegiftools.gif" alt="Doctor Chat">
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="/static/js/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://fyndbetter.com/chatbot/aarogya_chatbot"></script>
+    <script src="/static/js/js/myscript.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            AOS.init({ once: false, mirror: true });
+        });
+
+        function filterDepartments() {
+            // 1. Get the text from the search box
+            let input = document.getElementById('deptSearch').value.toLowerCase();
+
+            // 2. Select all the department cards
+            let grid = document.querySelector('.department-grid');
+            let cards = grid.getElementsByClassName('item');
+
+            // 3. Loop through cards and hide/show based on the name
+            for (let i = 0; i < cards.length; i++) {
+                let deptName = cards[i].getElementsByTagName('h4')[0].innerText.toLowerCase();
+
+                if (deptName.includes(input)) {
+                    cards[i].style.display = "flex"; // Show it
+                } else {
+                    cards[i].style.display = "none"; // Hide it
+                }
+            }
+        }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,592 @@
+{% extends "base.html" %}
+
+{% block title %}Our Doctors - Aarogya Hastha{% endblock %}
+
+{% block content %}
+{% block head %}
+{{ super() }}
+<meta name="author" content="Aarogyahastha Pvt Ltd">
+<meta name="designer" content="Aarogyahastha Pvt Ltd">
+<meta name="publisher" content="Aarogyahastha Pvt Ltd">
+<link rel="canonical" href="https://aarogyahastha.com/doctors">
+<meta name=" no-email-collection" content="http://www.unspam.com/noemailcollection/">
+<meta name="robots" content="index,follow">
+<meta name="revisit-after" content="7 days">
+<meta name="distribution" content="web">
+<meta name="robots" content="noodp">
+<meta name="web_author" content="Aarogyahastha Pvt Ltd">
+<meta name="rating" content="general">
+<meta name="rating" content="safe for kids">
+<meta name="subject" content="Healthcare">
+<meta name="copyright" content="Copyright © 2025">
+<meta name="reply-to" content="info@aarogyahastha.com">
+<meta name="abstract"
+    content="We provide timely and specialized medical attention for patients experiencing life-threatening conditions, ensuring their urgent needs are met with the highest level of care.">
+<meta name="city" content="Bangalore">
+<meta name="country" content="India">
+<meta name="distribution" content="global">
+<meta name="classification" content="Healthcare, Hospital">
+<base href="/">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+{% endblock %}
+<style>
+    .doctor-page {
+        --doctor-primary: #103A60;
+        --doctor-accent: #1e5a96;
+        --doctor-card-bg: #ffffff;
+        --doctor-text: #1e293b;
+        --doctor-border: #e2e8f0;
+        --doctor-light: #f8fafc;
+        --doctor-text-light: #64748b;
+    }
+
+    .doctor-page .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px 20px 40px 20px;
+    }
+
+    .doctor-page .page-header {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    .doctor-page .page-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: var(--doctor-primary);
+        margin-bottom: 16px;
+    }
+
+    .doctor-page .doctor-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+        margin-bottom: 40px;
+    }
+
+    .doctor-page .doctor-card {
+        background: var(--doctor-card-bg);
+        border: 1px solid var(--doctor-border);
+
+        overflow: hidden;
+        transition: all 0.3s ease;
+        animation: cardEntrance 0.6s ease-out;
+        display: flex;
+        flex-direction: column;
+        /* Significantly wider aspect ratio */
+        aspect-ratio: 1.4 / 1;
+        min-height: 280px;
+        max-height: 280px;
+    }
+
+    .doctor-page .doctor-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+        border-color: var(--doctor-accent);
+    }
+
+    .doctor-page .card-header {
+        padding: 16px;
+        display: flex;
+        gap: 12px;
+        align-items: flex-start;
+        flex-shrink: 0;
+    }
+
+    .doctor-page .doctor-image {
+        width: 70px;
+        height: 70px;
+        object-fit: cover;
+        border: 2px solid var(--doctor-primary);
+
+        flex-shrink: 0;
+    }
+
+    .doctor-page .doctor-info {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .doctor-page .doctor-name {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--doctor-text);
+        margin: 0 0 8px 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .doctor-page .doctor-specialization {
+        color: var(--doctor-primary);
+        font-weight: 600;
+        font-size: 0.85rem;
+        padding: 4px 8px;
+        background: rgba(16, 58, 96, 0.08);
+
+        display: inline-block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        cursor: default;
+    }
+
+    .doctor-page .timing-section {
+        padding: 10px 16px;
+        border-top: 1px solid var(--doctor-border);
+        background: var(--doctor-light);
+        flex-shrink: 0;
+    }
+
+    .timing-container {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .timing-group {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+    }
+
+    .timing-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        align-items: flex-start;
+    }
+
+    .timing-label {
+        font-weight: 600;
+        color: var(--doctor-text);
+        width: 40px;
+        flex-shrink: 0;
+        font-size: 0.8rem;
+    }
+
+    .timing-content {
+        color: var(--doctor-text-light);
+        font-size: 0.8rem;
+        flex: 1;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+        line-height: 1.3;
+    }
+
+    .time-slot {
+        display: inline;
+    }
+
+    .doctor-page .card-body {
+        padding: 8px 16px;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        font-size: 0.8rem;
+        color: var(--doctor-text-light);
+        overflow: hidden;
+    }
+
+    .on-call {
+        font-style: italic;
+        text-align: center;
+        color: var(--doctor-text-light);
+        margin: 0;
+        font-size: 0.85rem;
+    }
+
+    .card-footer {
+        padding: 10px 16px;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        align-items: center;
+        border-top: 1px solid var(--doctor-border);
+        gap: 8px;
+        flex-shrink: 0;
+    }
+
+    .footer-left {
+        display: flex;
+        gap: 8px;
+    }
+
+    .footer-right {
+        display: flex;
+        gap: 8px;
+    }
+
+    .action-btn {
+        padding: 6px 10px;
+        font-weight: 600;
+        font-size: 0.8rem;
+        text-align: center;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+        transition: all 0.2s ease;
+        min-width: 100px;
+
+        text-decoration: none;
+        border: none;
+        cursor: pointer;
+    }
+
+    .btn-primary {
+        background: var(--doctor-primary);
+        color: white;
+    }
+
+    .btn-primary:hover {
+        background: var(--doctor-accent);
+        transform: translateY(-1px);
+    }
+
+    .btn-outline {
+        background: transparent;
+        color: var(--doctor-primary);
+        border: 1px solid var(--doctor-primary);
+    }
+
+    .btn-outline:hover {
+        background: var(--doctor-primary);
+        color: white;
+        transform: translateY(-1px);
+    }
+
+    .btn-disabled {
+        background: var(--doctor-border);
+        color: var(--doctor-text-light);
+        cursor: not-allowed;
+        opacity: 0.6;
+    }
+
+    .loading-indicator {
+        text-align: center;
+        padding: 20px;
+        color: var(--doctor-text-light);
+        display: none;
+    }
+
+    .loading-indicator.active {
+        display: block;
+    }
+
+    .loading-spinner {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 2px solid rgba(16, 58, 96, 0.3);
+        border-radius: 50%;
+        border-top-color: var(--doctor-primary);
+        animation: spin 1s ease-in-out infinite;
+        margin-right: 8px;
+        vertical-align: middle;
+    }
+
+    .end-message {
+        text-align: center;
+        padding: 20px;
+        color: var(--doctor-text-light);
+        font-style: italic;
+        display: none;
+        font-size: 0.9rem;
+    }
+
+    .end-message.active {
+        display: block;
+    }
+
+    @media (max-width: 1024px) {
+        .doctor-page .doctor-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (max-width: 768px) {
+        .doctor-page .doctor-grid {
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+
+        .doctor-page .doctor-card {
+            aspect-ratio: auto;
+            min-height: auto;
+            max-height: none;
+        }
+
+        .card-footer {
+            flex-direction: column;
+            align-items: stretch;
+            gap: 8px;
+        }
+
+        .footer-left,
+        .footer-right {
+            justify-content: center;
+        }
+    }
+
+    @keyframes cardEntrance {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes spin {
+        to {
+            transform: rotate(360deg);
+        }
+    }
+</style>
+<style>
+    /* Styling for the breadcrumb navigation */
+    .breadcrumb-section {
+        /* ORIGINAL: padding: 15px 200px; */
+        /* MODIFIED: Add a left offset to clear the sidebar (~80px total width/padding) */
+        padding: 15px 200px 15px 80px;
+        background-color: #f8f9fa;
+        border-bottom: 1px solid #dee2e6;
+    }
+
+    .breadcrumb {
+        margin-bottom: 0;
+        background-color: transparent;
+        padding: 0;
+    }
+
+    .breadcrumb-item a {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+    .breadcrumb-item a:hover {
+        text-decoration: underline;
+    }
+
+    .breadcrumb-item.active {
+        color: #6c757d;
+    }
+
+    .breadcrumb-item+.breadcrumb-item::before {
+        content: ">>";
+        padding: 0 0.75rem;
+        color: #6c757d;
+    }
+
+    /* Styling for a seamless, full-page iframe experience */
+    .appointment-page-section {
+        padding: 0;
+        /* MODIFIED: Add a left offset to clear the sidebar */
+        padding-left: 20px;
+    }
+
+    .appointment-iframe-wrapper {
+        width: 100%;
+        overflow: hidden;
+    }
+
+    #appointment-page-iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+    }
+
+    /* Hide footer and scroll-to-top button to prevent scrolling issues */
+    .site-footer,
+    .scroll-to-top-btn {
+        display: none !important;
+    }
+</style>
+<section class="breadcrumb-section">
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+                <li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                    <a itemprop="item" href="/">
+                        <span itemprop="name">Home</span>
+                    </a>
+                    <meta itemprop="position" content="1">
+                </li>
+                <li class="breadcrumb-item active" aria-current="page" itemprop="itemListElement" itemscope
+                    itemtype="https://schema.org/ListItem">
+                    <span itemprop="name">Doctors</span>
+                    <meta itemprop="position" content="2">
+                </li>
+            </ol>
+        </nav>
+    </div>
+</section>
+
+
+<div class="doctor-page">
+    <div class="container">
+        <div class="page-header">
+            <h1 class="page-title">Meet Our Experties</h1>
+        </div>
+
+        <div class="doctor-grid" id="doctorGrid">
+            {% for doctor in doctors %}
+            <div class="doctor-card" data-doctor-id="{{ doctor.id }}">
+                <div class="card-header">
+                    <img src="{{ url_for('static', filename=doctor.image_path if doctor.image_path else 'img/doctors/dr-he.jpg') }}"
+                        class="doctor-image" alt="{{ doctor.name }}">
+                    <div class="doctor-info">
+                        <h2 class="doctor-name">{{ doctor.name }}</h2>
+                        <div class="doctor-specialization" title="{{ doctor.specialization }}">
+                            {{ doctor.specialization }}
+                        </div>
+                    </div>
+                </div>
+
+                {% set valid_timings = doctor.timings_parsed | selectattr('from') | selectattr('to') | list %}
+                {% if valid_timings %}
+                <div class="timing-section">
+                    {% set grouped_days = {} %}
+                    {% for t in valid_timings %}
+                    {% if t.days %}
+                    {% set days_key = t.days | map('capitalize') | join(', ') %}
+                    {% set time_slot = t.from ~ ' ' ~ t.from_period ~ ' - ' ~ t.to ~ ' ' ~ t.to_period %}
+                    {% if days_key in grouped_days %}
+                    {% set _ = grouped_days[days_key].append(time_slot) %}
+                    {% else %}
+                    {% set _ = grouped_days.update({days_key: [time_slot]}) %}
+                    {% endif %}
+                    {% endif %}
+                    {% endfor %}
+
+                    <div class="timing-container">
+                        {% for days, times in grouped_days.items() %}
+                        <div class="timing-group">
+                            <div class="timing-row">
+                                <div class="timing-label">Day</div>
+                                <div class="timing-content">{{ days }}</div>
+                            </div>
+                            <div class="timing-row">
+                                <div class="timing-label">Time</div>
+                                <div class="timing-content">
+                                    {% for time in times %}
+                                    <span class="time-slot">{{ time }}{% if not loop.last %} |{% endif %}</span>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% else %}
+                <div class="timing-section">
+                    <div class="on-call">Available on call basis</div>
+                </div>
+                {% endif %}
+
+                <div class="card-body">
+                    <!-- Additional doctor information can go here if needed -->
+                    <!-- Currently empty but structure is maintained for future content -->
+                </div>
+
+                <div class="card-footer">
+                    <div class="footer-left">
+                        {% if doctor.appointment_link %}
+                        <a href="{{ doctor.appointment_link }}" target="_blank" class="action-btn btn-primary">
+                            Book Appointment
+                        </a>
+                        {% else %}
+                        <a href="#" class="action-btn btn-disabled">Unavailable</a>
+                        {% endif %}
+                    </div>
+                    <div class="footer-right">
+                        <a href="{{ url_for('doctor_detail', slug=doctor.slug) }}" class="action-btn btn-outline">
+                            View Profile
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="loading-indicator" id="loadingIndicator">
+            <div class="loading-spinner"></div>
+            Loading more doctors...
+        </div>
+
+        <div class="end-message" id="endMessage">
+            You've reached the end of our doctors list.
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const doctorGrid = document.getElementById('doctorGrid');
+        const loadingIndicator = document.getElementById('loadingIndicator');
+        const endMessage = document.getElementById('endMessage');
+
+        let currentPage = 1;
+        let isLoading = false;
+        let hasMoreDoctors = true;
+
+        function checkScroll() {
+            if (isLoading || !hasMoreDoctors) return;
+
+            const scrollPosition = window.innerHeight + window.scrollY;
+            const pageHeight = document.documentElement.scrollHeight;
+            const threshold = 500;
+
+            if (scrollPosition >= pageHeight - threshold) {
+                loadMoreDoctors();
+            }
+        }
+
+        function loadMoreDoctors() {
+            if (isLoading || !hasMoreDoctors) return;
+
+            isLoading = true;
+            loadingIndicator.classList.add('active');
+
+            currentPage++;
+
+            fetch(`/doctors?page=${currentPage}&ajax=1`)
+                .then(response => response.text())
+                .then(html => {
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, 'text/html');
+                    const newDoctors = doc.querySelectorAll('.doctor-card');
+
+                    if (newDoctors.length > 0) {
+                        newDoctors.forEach(doctor => doctorGrid.appendChild(doctor));
+                    } else {
+                        hasMoreDoctors = false;
+                        endMessage.classList.add('active');
+                    }
+
+                    isLoading = false;
+                    loadingIndicator.classList.remove('active');
+                })
+                .catch(error => {
+                    console.error('Error loading more doctors:', error);
+                    isLoading = false;
+                    loadingIndicator.classList.remove('active');
+                    hasMoreDoctors = false;
+                });
+        }
+
+        window.addEventListener('scroll', checkScroll);
+        setTimeout(checkScroll, 100);
+    });
+</script>
+{% endblock %}
