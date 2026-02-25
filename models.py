@@ -333,6 +333,7 @@ class UserAccess(db.Model):
     users = db.Column(db.Boolean, default=False)
     callback_requests = db.Column(db.Boolean, default=False)
     reviews = db.Column(db.Boolean, default=False)
+    guides = db.Column(db.Boolean, default=False)
     blogs = db.Column(db.Boolean, default=False)
     bmw_report = db.Column(db.Boolean, default=False)
     life_moments = db.Column(db.Boolean, default=False)

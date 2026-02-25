@@ -503,7 +503,7 @@ def admin_banners():
 
 @app.route('/admin/guide', methods=['GET', 'POST'])
 @login_required
-# @permission_required('guides')
+@permission_required('guides')
 def admin_guides():
     modules = ['banners', 'doctors', 'counters', 'testimonials', 'specialities',
                'departments', 'health_packages', 'sports_packages', 'department_content',
@@ -2736,7 +2736,7 @@ def admin_users():
     modules = [
         "banners", "doctors", "counters", "testimonials", "specialities",
         "departments", "health_packages", "sports_packages", "department_content",
-        "users", "callback_requests", "reviews", "blogs", "bmw_report", "life_moments"
+        "users", "callback_requests", "reviews", "blogs", "bmw_report", "life_moments", "guides"
     ]
 
     if request.method == "POST":
