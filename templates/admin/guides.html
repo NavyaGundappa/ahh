@@ -422,6 +422,27 @@
                     </div>
                 </div>
 
+                <hr style="border-top: 1px solid var(--border-color); margin: 2rem 0 1.5rem;">
+                <h6 style="font-weight: 700; color: var(--text-main); margin-bottom: 1rem;">SEO Settings</h6>
+
+                <div class="form-group mb-3">
+                    <label>Meta Title</label>
+                    <input type="text" name="meta_title" id="edit_meta_title" class="form-control"
+                        placeholder="SEO optimized title (optional)">
+                </div>
+
+                <div class="form-group mb-3">
+                    <label>Meta Description</label>
+                    <textarea name="meta_description" id="edit_meta_description" class="form-control" rows="2"
+                        placeholder="Brief description for search engines..."></textarea>
+                </div>
+
+                <div class="form-group mb-4">
+                    <label>Canonical URL</label>
+                    <input type="url" name="canonical_url" id="edit_canonical_url" class="form-control"
+                        placeholder="https://example.com/guide/your-guide-slug">
+                </div>
+
                 <div class="form-group mt-3">
                     <label>Complete Content (Supports HTML/Headings)</label>
                     <textarea name="content" id="editor" class="form-control"></textarea>
@@ -478,6 +499,27 @@
                     </div>
                 </div>
 
+                <hr style="border-top: 1px solid var(--border-color); margin: 2rem 0 1.5rem;">
+                <h6 style="font-weight: 700; color: var(--text-main); margin-bottom: 1rem;">SEO Settings</h6>
+
+                <div class="form-group mb-3">
+                    <label>Meta Title</label>
+                    <input type="text" name="meta_title" class="form-control"
+                        placeholder="SEO optimized title (optional)">
+                </div>
+
+                <div class="form-group mb-3">
+                    <label>Meta Description</label>
+                    <textarea name="meta_description" class="form-control" rows="2"
+                        placeholder="Brief description for search engines..."></textarea>
+                </div>
+
+                <div class="form-group mb-4">
+                    <label>Canonical URL</label>
+                    <input type="url" name="canonical_url" class="form-control"
+                        placeholder="https://example.com/guide/your-guide-slug">
+                </div>
+
                 <div class="row mb-4">
                     <div class="col-md-6">
                         <label>New Header Image (Optional)</label>
@@ -510,6 +552,7 @@
 <script src="https://cdn.ckeditor.com/4.22.1/full-all/ckeditor.js"></script>
 
 <script>
+    console.warn = function () { };
     // Initialize CKEditor for add modal
     CKEDITOR.replace('editor', {
         filebrowserUploadUrl: '/admin/upload_ckeditor',
@@ -582,6 +625,12 @@
                 document.getElementById('edit_title').value = data.title || '';
                 document.getElementById('edit_slug').value = data.slug || '';
 
+                // Fix: Properly set SEO fields - they need unique IDs
+                // First, let's add IDs to these fields in the HTML
+                document.querySelector('#editGuideModal input[name="meta_title"]').value = data.meta_title || '';
+                document.querySelector('#editGuideModal textarea[name="meta_description"]').value = data.meta_description || '';
+                document.querySelector('#editGuideModal input[name="canonical_url"]').value = data.canonical_url || '';
+
                 // Set current images
                 if (data.header_image_path) {
                     document.getElementById('currentHeaderImage').style.display = 'flex';
@@ -626,7 +675,6 @@
                 alert('Failed to load guide data: ' + error.message);
             });
     }
-
     // Handle modal close to properly destroy CKEditor instance
     var editModal = document.getElementById('editGuideModal');
     if (editModal) {

@@ -65,7 +65,6 @@ def allowed_file(filename):
 
 
 @app.route('/')
-@cache.cached(timeout=3600)
 def index():
     banners = Banner.query.filter_by(is_active=True).order_by(
         Banner.created_at.desc()).all()
@@ -536,6 +535,10 @@ def admin_guides():
         slug = request.form.get('slug')
         content = request.form.get('content')
 
+        meta_title = request.form.get('meta_title')
+        meta_description = request.form.get('meta_description')
+        canonical_url = request.form.get('canonical_url')
+
         # Only process if we have title and content (basic validation)
         if title and content:
             # Ensure slug uniqueness
@@ -580,6 +583,9 @@ def admin_guides():
                 guide.title = title
                 guide.slug = slug
                 guide.content = content
+                guide.meta_title = meta_title
+                guide.meta_description = meta_description
+                guide.canonical_url = canonical_url
                 if header_image_path:
                     guide.header_image_path = header_image_path
                 if content_image_path:
@@ -591,7 +597,10 @@ def admin_guides():
                     slug=slug,
                     content=content,
                     header_image_path=header_image_path,
-                    content_image_path=content_image_path
+                    content_image_path=content_image_path,
+                    meta_title=meta_title,
+                    meta_description=meta_description,
+                    canonical_url=canonical_url
                 )
                 db.session.add(guide)
                 flash('Guide added successfully!', 'success')
@@ -625,7 +634,10 @@ def get_guide(id):
             "slug": guide.slug,
             "content": guide.content,
             "header_image_path": guide.header_image_path,
-            "content_image_path": guide.content_image_path
+            "content_image_path": guide.content_image_path,
+            "meta_title": guide.meta_title,
+            "meta_description": guide.meta_description,
+            "canonical_url": guide.canonical_url
         })
     except Exception as e:
         return jsonify({"error": str(e)}), 500

@@ -364,8 +364,14 @@ class Guide(db.Model):
     slug = db.Column(db.String(255), unique=True, nullable=False)
     header_image_path = db.Column(db.String(255))
     content_image_path = db.Column(db.String(255))
-    # This will store the HTML from your admin WYSIWYG editor
     content = db.Column(db.Text)
+
+    # --- NEW SEO FIELDS ---
+    meta_title = db.Column(db.String(255), nullable=True)
+    meta_description = db.Column(db.Text, nullable=True)
+    canonical_url = db.Column(db.String(500), nullable=True)
+    # ----------------------
+
     is_active = db.Column(db.Boolean, default=True)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
