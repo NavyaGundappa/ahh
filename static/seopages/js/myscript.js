@@ -110,6 +110,10 @@ $(".meet_our_div").owlCarousel({
   dots: true,
   navText: false,
   autoplayHoverPause: true,
+  navText: [
+    '<i class="fa-solid fa-arrow-left"></i>',
+    '<i class="fa-solid fa-arrow-right"></i>'
+  ],
   responsive: {
     0: {
       items: 1
