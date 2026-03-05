@@ -1719,6 +1719,7 @@ section.neighboring_sec {
   color: #00969C;
   padding: 13px 14px;
   border-radius: 30px;
+  border: 1px solid #00969C;
 }
 
 .service-carouselseo .owl-stage-outer.owl-height {
@@ -1733,6 +1734,19 @@ section.neighboring_sec {
   content: ">";
   color: #6c757d;
 }
+
+.meet_our_div.owl-carousel button.owl-prev {
+    left: 0 !important;
+}
+
+.meet_our_div.owl-carousel button.owl-next {
+    right: 0 !important;
+}
+
+.meet_our_div.owl-carousel .owl-nav button i {
+    font-size: 15px;
+}
+
 
 /* responsive */
 @media screen and (max-width:1300px) {
@@ -1871,6 +1885,23 @@ section.neighboring_sec {
   .neighboring_sec .neighboring_main .item {
     width: 30%;
   }
+  .meet_our_div.owl-carousel button.owl-prev, .service-carousel.owl-carousel button.owl-prev {
+    left: -6% !important;
+}
+
+.meet_our_div.owl-carousel button.owl-next, .service-carousel.owl-carousel button.owl-next {
+    right: -6% !important;
+}
+.service-carouselseo.service-carousel-section .owl-nav {
+        display: block !important;
+}
+section.service-carouselseo.service-carousel-section {
+    padding: 50px 10px;
+}
+.service-carousel .owl-nav button i {
+    font-size: 13px;
+    padding: 10px 10px;
+}
 }
 
 @media screen and (max-width:800px) {
