@@ -3785,7 +3785,7 @@ section.map_secmain {
   }
 
   .footer-links-multi-column {
-    column-count: 2
+    column-count: 1 !important;
   }
 
   .hero-carousel-wrapper {
