@@ -12,7 +12,7 @@
     <meta name="google-site-verification" content="NCMNy8zyXscWLWKEoLYF2wgA_DyjPOp8Qnd_8_n6F2w" />
     <link rel="icon" type="image/x-icon" href="https://aarogyahastha.com/static/img/fav.png/">
 
-  <meta name="robots" content="index,follow">
+    <meta name="robots" content="index,follow">
     <meta name="revisit-after" content="7 days">
     <meta name="distribution" content="web">
     <meta name="robots" content="noodp">
@@ -37,6 +37,107 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="/static/css/css/style.css">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-84XCMMFTS8"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-84XCMMFTS8');
+    </script>
+    <!-- Google Tag Manager -->
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-WGJFVPCB');</script>
+    <!-- End Google Tag Manager -->
+
+    <script>(function (w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-TD2L5G6C');</script>
+
+    <!-- start MedicalOrganization: -->
+    <script type="application/ld+json">
+            {
+              "@context": "https://schema.org",
+              "@type": "MedicalOrganization",
+              "name": "Aarogya Hastha Hospitals",
+              "alternateName": "Aarogya Hastha Hospitals",
+              "url": "https://aarogyahastha.com/",
+              "logo": "https://aarogyahastha.com/static/img/logo.png",
+              "sameAs": [
+                "https://www.facebook.com/aarogyahastha",
+                "https://x.com/AarogyaHastha",
+                "https://www.instagram.com/aarogyahastha/",
+                "https://www.youtube.com/channel/UCeQv8lTLIT4btbjgLxYzYrw",
+                "https://www.linkedin.com/company/aarogya-hastha/"
+              ]
+            }
+        </script>
+
+    <!-- end MedicalOrganization: -->
+
+    <!-- Start Medical Clinic -->
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "MedicalClinic",
+          "name": "Aarogya Hastha Hospitals",
+          "image": "https://aarogyahastha.com/static/img/logo.png",
+          "@id": "",
+          "url": "https://aarogyahastha.com/",
+          "telephone": "080666 68800",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Site No. 2, No. 2816/2, SY.87, Kasavanahalli Main Rd, near 1st Cross Road, opposite HM Symphony",
+            "addressLocality": "Bengaluru",
+            "postalCode": "560035",
+            "addressCountry": "IN"
+          },
+          "openingHoursSpecification": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday",
+              "Sunday"
+            ],
+            "opens": "00:00",
+            "closes": "23:59"
+          },
+          "sameAs": [
+            "https://www.facebook.com/aarogyahastha",
+            "https://x.com/AarogyaHastha",
+            "https://www.instagram.com/aarogyahastha/",
+            "https://www.youtube.com/channel/UCeQv8lTLIT4btbjgLxYzYrw",
+            "https://www.linkedin.com/company/aarogya-hastha/"
+          ] 
+        }
+        </script>
+
+    <!-- end Medical Clinic -->
+
+    <!-- start Website Schema: -->
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "name": "Aarogya Hastha Hospitals",
+          "url": "https://aarogyahastha.com/",
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://aarogyahastha.com/search?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        }
+        </script>
+
+    <!-- end Website Schema: -->
+
     <style>
         /* Breadcrumb Styles */
         .breadcrumb-section {
@@ -586,10 +687,30 @@
     <section class="breadcrumb-section">
         <div class="container">
             <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="/">Home</a></li>
-                    <li class="breadcrumb-item"><a href="/departments">Departments</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">{{ department.name }}</li>
+                <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+                    <li class="breadcrumb-item" itemprop="itemListElement" itemscope
+                        itemtype="https://schema.org/ListItem">
+                        <a itemprop="item" href="/">
+                            <span itemprop="name">Home</span>
+                        </a>
+                        <meta itemprop="position" content="1">
+                    </li>
+
+                    <li class="breadcrumb-item" itemprop="itemListElement" itemscope
+                        itemtype="https://schema.org/ListItem">
+                        <a itemprop="item" href="/departments">
+                            <span itemprop="name">Departments</span>
+                        </a>
+                        <meta itemprop="position" content="2">
+                    </li>
+
+                    <li class="breadcrumb-item active" aria-current="page" itemprop="itemListElement" itemscope
+                        itemtype="https://schema.org/ListItem">
+                        <a itemprop="item" href="javascript:void(0)" style="cursor: unset;">
+                            <span itemprop="name">General Medicine</span>
+                        </a>
+                        <meta itemprop="position" content="3">
+                    </li>
                 </ol>
             </nav>
         </div>
