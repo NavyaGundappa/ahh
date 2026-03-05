@@ -202,11 +202,21 @@
         toggleScrollButton();
     });
 
+   document.addEventListener('DOMContentLoaded', function () {
     const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
     const mobileNav = document.getElementById('mobile-nav');
-    mobileMenuToggle.addEventListener('click', function () {
-        mobileNav.classList.toggle('active'); // toggles visibility
-    });
+    const mobileMenuClose = document.getElementById('mobile-menu-close');
+    if (mobileMenuToggle && mobileNav) {
+        mobileMenuToggle.addEventListener('click', function () {
+            mobileNav.classList.add('active');
+        });
+    }
+    if (mobileMenuClose && mobileNav) {
+        mobileMenuClose.addEventListener('click', function () {
+            mobileNav.classList.remove('active');
+        });
+    }
+});
 </script>
 
 <a href="#" id="scrollToTopBtn" class="scroll-to-top-btn" title="Scroll to top" aria-label="Scroll to top">
