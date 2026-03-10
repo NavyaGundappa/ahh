@@ -2,7 +2,6 @@
 
 {% block title %}About Us - Aarogya Hastha{% endblock %}
 
-{% block content %}
 {% block head %}
 {{ super() }}
 <meta name="author" content="Aarogyahastha Pvt Ltd">
@@ -26,13 +25,9 @@
 <meta name="country" content="India">
 <meta name="distribution" content="global">
 <meta name="classification" content="Healthcare, Hospital">
-<base href="/">
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
-<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 {% endblock %}
 
+{% block content %}
 <style>
     .breadcrumb-section {
         padding: 10px 0;
@@ -44,13 +39,11 @@
         padding: 0.75rem 1rem;
     }
 
-    .breadcrumb-item+.breadcrumb-item::before {
+    .breadcrumb-item + .breadcrumb-item::before {
         content: ">>";
         padding: 0 0.5rem;
     }
-.about-tab img {
-    width: 100%;
-}
+
     .breadcrumb-item a {
         color: #007bff;
         text-decoration: none;
@@ -59,7 +52,18 @@
     .breadcrumb-item.active {
         color: #6c757d;
     }
+
+    .about-tab img {
+        width: 100%;
+    }
+
+    @media (max-width: 768px) {
+        .footer-links-multi-column {
+            column-count: 1 !important;
+        }
+    }
 </style>
+
 <section class="breadcrumb-section">
     <div class="container">
         <nav aria-label="breadcrumb">
@@ -79,14 +83,17 @@
         </nav>
     </div>
 </section>
+
 <section class="department-banner" data-aos="fade-up" data-aos-offset="300" data-aos-easing="ease-in-sine">
     <div class="container">
         <div class="banner">
-            <img loading="lazy" src="/static/img/about/about-banner.jpg" alt="">
+            <img loading="lazy" src="/static/img/about/about-banner.jpg" alt="About Aarogya Hastha">
             <div class="text-box-1">
-                <h1>Compassionate Care<br />Dedicated Service</h1>
-                <p>Aarogya Hastha is a premier healthcare facility that provides quality medical treatment with over
-                    15 specialities.</p>
+                <h1>Compassionate Care<br>Dedicated Service</h1>
+                <p>
+                    Aarogya Hastha is a premier healthcare facility that provides quality medical treatment with over
+                    15 specialities.
+                </p>
             </div>
         </div>
     </div>
@@ -101,7 +108,7 @@
         </ul>
 
         <div class="about-tab" id="chairman">
-            <img loading="lazy" src="{{ url_for('static', filename='img/about/chairmans-message.jpg') }}" alt="">
+            <img loading="lazy" src="{{ url_for('static', filename='img/about/chairmans-message.jpg') }}" alt="Chairman's Message">
             <div class="text-box-1">
                 <h2>Chairman's Message</h2>
                 <p>
@@ -119,7 +126,7 @@
         </div>
 
         <div class="about-tab" id="who-we-are" style="display: none;">
-            <img loading="lazy" src="{{ url_for('static', filename='img/about/who-we-are-bg.jpg') }}" alt="">
+            <img loading="lazy" src="{{ url_for('static', filename='img/about/who-we-are-bg.jpg') }}" alt="Who We Are">
             <div class="text-box-1">
                 <h2>Who We Are</h2>
                 <p>
@@ -143,83 +150,37 @@
     </div>
 </section>
 
-<!-- scripts -->
-<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+<a href="#" id="scrollToTopBtn" class="scroll-to-top-btn" title="Scroll to top" aria-label="Scroll to top">
+    <i class="fa fa-arrow-up"></i>
+</a>
+{% endblock %}
 
+{% block scripts %}
 <script>
-    $(".book-apt").on('click', function () {
-        var url = $(this).data("url");
-        window.open(url, '_blank');
-    });
-
-    function showChromePopup() {
-        const popup = document.getElementById("chrome-popup");
-        popup.classList.add("is-visible");
-        popup.setAttribute("aria-hidden", "false");
-    }
-    function hideChromePopup() {
-        const popup = document.getElementById("chrome-popup");
-        popup.classList.remove("is-visible");
-        popup.setAttribute("aria-hidden", "true");
-    }
-    // ESC closes popup
-    document.addEventListener("keydown", e => {
-        if (e.key === "Escape") hideChromePopup();
-    });
     document.addEventListener('DOMContentLoaded', function () {
-        const scrollBtn = document.getElementById('scrollToTopBtn');
-        const scrollThreshold = 300;
-
-        function toggleScrollButton() {
-            if (window.pageYOffset > scrollThreshold ||
-                document.documentElement.scrollTop > scrollThreshold) {
-                scrollBtn.style.display = 'flex';
-            } else {
-                scrollBtn.style.display = 'none';
-            }
+        if (typeof AOS !== 'undefined') {
+            AOS.init();
         }
 
-        window.addEventListener('scroll', toggleScrollButton);
+        const tabItems = document.querySelectorAll('.tab-item');
+        const tabContents = document.querySelectorAll('.about-tab');
 
-        scrollBtn.addEventListener('click', function (e) {
-            e.preventDefault();
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
+        tabItems.forEach(item => {
+            item.addEventListener('click', function () {
+                tabItems.forEach(tab => tab.classList.remove('active'));
+                this.classList.add('active');
+
+                const targetId = this.getAttribute('data-id');
+                tabContents.forEach(content => {
+                    content.style.display = 'none';
+                });
+
+                const targetEl = document.querySelector(targetId);
+                if (targetEl) {
+                    targetEl.style.display = 'block';
+                }
             });
-            // Add slight animation to the icon
-            this.querySelector('i').style.transform = 'translateY(-4px)';
-            setTimeout(() => {
-                this.querySelector('i').style.transform = '';
-            }, 300);
         });
-
-        // Initialize on load
-        toggleScrollButton();
     });
-
-   document.addEventListener('DOMContentLoaded', function () {
-    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
-    const mobileNav = document.getElementById('mobile-nav');
-    const mobileMenuClose = document.getElementById('mobile-menu-close');
-    if (mobileMenuToggle && mobileNav) {
-        mobileMenuToggle.addEventListener('click', function () {
-            mobileNav.classList.add('active');
-        });
-    }
-    if (mobileMenuClose && mobileNav) {
-        mobileMenuClose.addEventListener('click', function () {
-            mobileNav.classList.remove('active');
-        });
-    }
-});
 </script>
-
-<a href="#" id="scrollToTopBtn" class="scroll-to-top-btn" title="Scroll to top" aria-label="Scroll to top">
-    <i class="fa fa-arrow-up"></i> <!-- Simple up arrow -->
-</a>
 {% endblock %}
