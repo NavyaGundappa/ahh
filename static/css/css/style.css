@@ -808,7 +808,9 @@ main p {
     white-space: nowrap;
   }
 }
-
+.breadcrumb-section {
+    padding: 10px;
+}
 .app-download {
   margin-top: 25px;
 }
@@ -3476,7 +3478,7 @@ section.map_secmain {
 
   .new-logo-wrapper .new-logo-img,
   .logo-wrapper img {
-    height: 35px;
+    height: 20px;
     width: auto;
   }
 
@@ -3641,6 +3643,9 @@ section.map_secmain {
     width: 80px;
     bottom: 4.3rem;
   }
+  ol.big-marker {
+    padding: 0;
+}
   .scroll-to-top-btn {
     left: 20px;
     bottom: 20px;
@@ -3951,7 +3956,7 @@ section.map_secmain {
   }
 
   .facilities-grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
@@ -3961,7 +3966,7 @@ section.map_secmain {
 @media screen and (max-width: 600px) {
 
   .facilities-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(1, 1fr);
   }
 
   .quick-link-wrapper {
