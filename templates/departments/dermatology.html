@@ -602,9 +602,9 @@
                             </div>
                         </div>
                     </a>
-                    <button class="navbar-toggle d-lg-none" id="mobile-menu-toggle">
-                        <i class="fa fa-bars"></i>
-                    </button>
+<button class="navbar-toggle d-lg-none" id="mobile-menu-toggle" type="button" aria-label="Open menu">
+    <i class="fa fa-bars"></i>
+</button>
                 </div>
                 <div class="header-contact">
                     <span class="appointment-number">
@@ -637,8 +637,8 @@
 
             <div class="nav-container">
                 <div class="container nav-content">
-                    <ul id="mobile-nav" class="nav-list d-lg-none">
-                        <button class="nav-close-btn" id="mobile-menu-close">×</button>
+<ul id="mobile-nav" class="nav-list d-lg-none">
+    <button class="nav-close-btn" id="mobile-menu-close" type="button" aria-label="Close menu">×</button>
                         <li><a class="nav-links" href="/">Home</a></li>
                         <li><a class="nav-links" href="/appointments">Appointments</a></li>
                         <li><a class="nav-links" href="/doctors">Doctors</a></li>
@@ -1091,66 +1091,65 @@
     <script src="https://fyndbetter.com/chatbot/aarogya_chatbot"></script>
     <script src="{{ url_for('static', filename='js/js/myscript.js') }}"></script>
 
-    <script>
-        // Init Animations
-        AOS.init();
-
-        // Popup Logic
+     <script>
         function showChromePopup() {
             const popup = document.getElementById("chrome-popup");
-            popup.classList.add("is-visible");
-            popup.setAttribute("aria-hidden", "false");
+            if (popup) {
+                popup.classList.add("is-visible");
+                popup.setAttribute("aria-hidden", "false");
+            }
         }
+
         function hideChromePopup() {
             const popup = document.getElementById("chrome-popup");
-            popup.classList.remove("is-visible");
-            popup.setAttribute("aria-hidden", "true");
+            if (popup) {
+                popup.classList.remove("is-visible");
+                popup.setAttribute("aria-hidden", "true");
+            }
         }
-        document.addEventListener("keydown", e => { if (e.key === "Escape") hideChromePopup(); });
 
-        // Scroll Top Logic
         document.addEventListener('DOMContentLoaded', function () {
-            const scrollBtn = document.getElementById('scrollToTopBtn');
-            window.addEventListener('scroll', function () {
-                if (window.pageYOffset > 300) scrollBtn.style.display = 'flex';
-                else scrollBtn.style.display = 'none';
-            });
-            scrollBtn.addEventListener('click', function (e) {
-                e.preventDefault();
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
+            AOS.init();
 
-            // Initialize Owl Carousel for Departments if present
-            $('.service-carousel').owlCarousel({
-                loop: true,
-                margin: 20,
-                nav: true,
-                dots: false,
-                autoplay: true,
-                autoplayTimeout: 3000,
-                responsive: {
-                    0: { items: 1 },
-                    600: { items: 2 },
-                    1000: { items: 4 }
+            const scrollBtn = document.getElementById('scrollToTopBtn');
+
+            if (scrollBtn) {
+                window.addEventListener('scroll', function () {
+                    if (window.pageYOffset > 300) {
+                        scrollBtn.style.display = 'flex';
+                    } else {
+                        scrollBtn.style.display = 'none';
+                    }
+                });
+
+                scrollBtn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
+
+            if (typeof $ !== 'undefined' && $('.service-carousel').length) {
+                $('.service-carousel').owlCarousel({
+                    loop: true,
+                    margin: 20,
+                    nav: true,
+                    dots: false,
+                    autoplay: true,
+                    autoplayTimeout: 3000,
+                    responsive: {
+                        0: { items: 1 },
+                        600: { items: 2 },
+                        1000: { items: 4 }
+                    }
+                });
+            }
+
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape') {
+                    hideChromePopup();
                 }
             });
         });
-
-        // Mobile Menu Logic
-        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
-        const mobileNav = document.getElementById('mobile-nav');
-        const mobileMenuClose = document.getElementById('mobile-menu-close');
-
-        if (mobileMenuToggle) {
-            mobileMenuToggle.addEventListener('click', function () {
-                mobileNav.classList.add('active');
-            });
-        }
-        if (mobileMenuClose) {
-            mobileMenuClose.addEventListener('click', function () {
-                mobileNav.classList.remove('active');
-            });
-        }
     </script>
 </body>
 
