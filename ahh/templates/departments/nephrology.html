@@ -1,0 +1,368 @@
+{% extends "base.html" %}
+
+{% block title %}About Us - Aarogya Hastha{% endblock %}
+
+{% block content %}
+    <section class="department-banner" data-aos="fade-up" data-aos-offset="300" data-aos-easing="ease-in-sine">
+        <div class="container">
+            <div class="banner">
+                <img loading="lazy" src="/static/img/department/nephrology.jpg" alt="" style="width: 100%;">
+                <div class="text-box-1">
+                    <h1>Nephrology</h1>
+                    <p>Strengthening the foundation of your health: your kidneys</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- appointment section -->
+    <section class="pb-5" data-aos="fade-up" data-aos-offset="300" data-aos-easing="ease-in-sine">
+        <div class="container">
+            <div class="row p-5 mx-0 shadow rounded align-items-center">
+                <!-- <div class="col-lg-5 order-lg-2">
+                <blockquote class="blockquote blockquote-custom p-4">
+                    <div class="blockquote-custom-icon shadow-sm"><i class="fa fa-quote-left text-white"></i></div>
+                    <p class="mb-0 mt-2 font-italic">"A child must know he is a miracle , that since the beginning of the world there hasn't been, and until the end of the world there will not be, another child like him."</p>
+                    <div class="blockquote-footer mt-4"><cite title="Source Title">Pablo Casals</cite>
+                    </div>
+                </blockquote>
+            </div> -->
+                <div class="col-lg-12 order-lg-1 p-4">
+                    <p>Welcome to Aarogya Hastha Hospital's Nephrology department, where we offer top-quality care for
+                        all types of kidney diseases, disorders, and complications. Our team of dedicated nephrologists,
+                        nurses and support staff work together to provide personalized treatment and care plans to help
+                        our patients achieve optimal kidney health.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="pb-5" data-aos="fade-up" data-aos-offset="300" data-aos-easing="ease-in-sine">
+        <div class="container">
+            <h4>Our Services:</h4>
+            <div class="row deaprtment-services pb-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="card-sl">
+                        <div class="card-heading">
+                            Diagnosis and Treatment of Kidney Diseases
+                        </div>
+                        <div class="card-text">
+                            Our department is equipped with state-of-the-art diagnostic technology, including
+                            ultrasound, MRI, and CT scans, to diagnose any type of kidney disease accurately. Our team
+                            of experienced nephrologists then work closely with patients to create personalized
+                            treatment plans, which may include medication, specialized diets, and other therapies.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card-sl">
+                        <div class="card-heading">
+                            Hemodialysis and Peritoneal Dialysis
+                        </div>
+                        <div class="card-text">
+                            We offer in-centre hemodialysis and at-home peritoneal dialysis services for patients with
+                            chronic kidney disease. Our dialysis units are fully equipped with modern machines and
+                            trained staff to provide safe and efficient dialysis treatments.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card-sl">
+                        <div class="card-heading">
+                            Kidney Transplant
+                        </div>
+                        <div class="card-text">
+                            Our nephrology department has a successful kidney transplant program for patients whose
+                            kidneys have failed and need a transplant as a treatment option. Our team of experienced
+                            transplant surgeons perform both live donor as well as deceased donor transplants, providing
+                            comprehensive pre-and post-operative care.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card-sl">
+                        <div class="card-heading">
+                            Hypertension Management
+                        </div>
+                        <div class="card-text">
+                            High blood pressure is one of the leading causes of kidney disease. Our nephrologists
+                            specialize in managing and treating this condition, helping patients to maintain healthy
+                            blood pressure levels and prevent kidney damage.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card-sl">
+                        <div class="card-heading">
+                            Diabetic Kidney Disease Management
+                        </div>
+                        <div class="card-text">
+                            Diabetes is another common cause of kidney disease. Our nephrology team works closely with
+                            our endocrinologists and other diabetes specialists to help patients manage their blood
+                            sugar levels and prevent or slow down the progression of diabetic kidney disease.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card-sl">
+                        <div class="card-heading">
+                            Comprehensive Kidney Stone Treatment
+                        </div>
+                        <div class="card-text">
+                            Our nephrologists work closely with our urologists to provide a comprehensive treatment plan
+                            for patients with kidney stones, including medication, diet changes, and minimally invasive
+                            procedures such as lithotripsy.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section data-aos="fade-up" data-aos-offset="300" data-aos-easing="ease-in-sine"
+        class="department-section py-3 mb-5">
+        <div class="container">
+            <p class="content-highlight">At Aarogya Hastha Hospital, we also prioritize education and prevention. Our
+                department also has specialized facilities for specific kidney conditions, such as glomerulonephritis,
+                polycystic kidney disease, and inherited kidney disorders, to provide targeted and comprehensive care
+                for our patients.</p>
+        </div>
+    </section>
+
+    <section class=" py-3">
+        <div class="container">
+            <h2>Our Specialists</h2>
+            <div id="doctors-list" class="appointment-section">
+                <div class="doctor-section mb-5">
+                    <div class="row g-3">
+                        <div class="col-lg-6 doctor-item" data-doctor="rammohan-bhat">
+                            <div class="img-box"><img class="img-fluid" src="/static/img/doctors/rammohan-bhat.jpg"></a>
+                            </div>
+                            <div class="doctor-box">
+                                <h3>Dr. Rammohan Sripad Bhat</h3>
+                                <h4>Senior Consultant – Interventional Nephrologist</h4>
+                                <p class="mt-4"><small><b>Languages spoken:</b> <br />English, Hindi, Telugu, and
+                                        Kannada</small></p><a class="book-btn" href="https://app.fyndbetter.com/ahh_apt"
+                                    target="_blank">BOOK APPOINTMENT</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section data-aos-easing="ease-in-sine" class="service-carousel-section py-5">
+        <div class="container d-flex justify-content-center">
+            <div class="owl-carousel service-carousel">
+                <a href="/departments/general_surgery" class="item"
+                    style="--i:url(https://aarogyahastha.com/img/department/icons/general-surgery.svg);"
+                    data-department="general-surgery"><img class="dept-icon" loading="lazy"
+                        src="/static/img/department/icons/general-surgery.svg">
+                    <div class="icon"></div>
+                    <h4 class="text-dark-blue my-md-3">General Surgery</h4>
+                </a><a href="/departments/neurosurgery" class="item"
+                    style="--i:url(https://aarogyahastha.com/img/department/icons/neurosurgery.svg);"
+                    data-department="neurosurgery"><img class="dept-icon" loading="lazy"
+                        src="/static/img/department/icons/neurosurgery.svg">
+                    <div class="icon"></div>
+                    <h4 class="text-dark-blue my-md-3">Neurosurgery</h4>
+                </a><a href="/departments/orthopaedics" class="item"
+                    style="--i:url(https://aarogyahastha.com/img/department/icons/orthopaedics.svg);"
+                    data-department="orthopaedics"><img class="dept-icon" loading="lazy"
+                        src="/static/img/department/icons/orthopaedics.svg">
+                    <div class="icon"></div>
+                    <h4 class="text-dark-blue my-md-3">Orthopaedics</h4>
+                </a><a href="/departments/anaesthesia" class="item"
+                    style="--i:url(https://aarogyahastha.com/img/department/icons/anaesthesia.svg);"
+                    data-department="anaesthesia"><img class="dept-icon" loading="lazy"
+                        src="/static/img/department/icons/anaesthesia.svg">
+                    <div class="icon"></div>
+                    <h4 class="text-dark-blue my-md-3"> Anaesthesiology & Critical Care</h4>
+                </a><a href="/departments/pain_medicine" class="item"
+                    style="--i:url(https://aarogyahastha.com/img/department/icons/pain-medicine.svg);"
+                    data-department="pain-medicine"><img class="dept-icon" loading="lazy"
+                        src="/static/img/department/icons/pain-medicine.svg">
+                    <div class="icon"></div>
+                    <h4 class="text-dark-blue my-md-3">Pain Medicine</h4>
+                </a><a href="/departments/general_medicine" class="item"
+                    style="--i:url(https://aarogyahastha.com/img/department/icons/general-medicine.svg);"
+                    data-department="general-medicine"><img class="dept-icon" loading="lazy"
+                        src="/static/img/department/icons/general-medicine.svg">
+                    <div class="icon"></div>
+                    <h4 class="text-dark-blue my-md-3">General Medicine</h4>
+                </a><a href="/departments/lab_medicine" class="item"
+                    style="--i:url(https://aarogyahastha.com/img/department/icons/lab-medicine.svg);"
+                    data-department="lab-medicine"><img class="dept-icon" loading="lazy"
+                        src="/static/img/department/icons/lab-medicine.svg">
+                    <div class="icon"></div>
+                    <h4 class="text-dark-blue my-md-3">Lab Medicine</h4>
+                </a><a href="/departments/paediatrics" class="item"
+                    style="--i:url(https://aarogyahastha.com/img/department/icons/paediatrics.svg);"
+                    data-department="paediatrics"><img class="dept-icon" loading="lazy"
+                        src="/static/img/department/icons/paediatrics.svg">
+                    <div class="icon"></div>
+                    <h4 class="text-dark-blue my-md-3">Paediatrics</h4>
+                </a><a href="/departments/physiotherapy" class="item"
+                    style="--i:url(https://aarogyahastha.com/img/department/icons/physiotherapy.svg);"
+                    data-department="physiotherapy"><img class="dept-icon" loading="lazy"
+                        src="/static/img/department/icons/physiotherapy.svg">
+                    <div class="icon"></div>
+                    <h4 class="text-dark-blue my-md-3">Physiotherapy</h4>
+                </a><a href="/departments/dermatology" class="item"
+                    style="--i:url(https://aarogyahastha.com/img/department/icons/dermatology.svg);"
+                    data-department="dermatology"><img class="dept-icon" loading="lazy"
+                        src="/static/img/department/icons/dermatology.svg">
+                    <div class="icon"></div>
+                    <h4 class="text-dark-blue my-md-3">Dermatology</h4>
+                </a><a href="/departments/ent" class="item"
+                    style="--i:url(https://aarogyahastha.com/img/department/icons/ent.svg);" data-department="ent"><img
+                        class="dept-icon" loading="lazy" src="/static/img/department/icons/ent.svg">
+                    <div class="icon"></div>
+                    <h4 class="text-dark-blue my-md-3"> Ear, Nose, and Throat (ENT)</h4>
+                </a><a href="/departments/emergency_medicine" class="item"
+                    style="--i:url(https://aarogyahastha.com/img/department/icons/emergency-medicine.svg);"
+                    data-department="emergency-medicine"><img class="dept-icon" loading="lazy"
+                        src="/static/img/department/icons/emergency-medicine.svg">
+                    <div class="icon"></div>
+                    <h4 class="text-dark-blue my-md-3">Emergency Medicine</h4>
+                </a><a href="/departments/nephrology" class="item"
+                    style="--i:url(https://aarogyahastha.com/img/department/icons/nephrology.svg);"
+                    data-department="nephrology"><img class="dept-icon" loading="lazy"
+                        src="/static/img/department/icons/nephrology.svg">
+                    <div class="icon"></div>
+                    <h4 class="text-dark-blue my-md-3">Nephrology</h4>
+                </a><a href="/departments/urology" class="item"
+                    style="--i:url(https://aarogyahastha.com/img/department/icons/urology.svg);"
+                    data-department="urology"><img class="dept-icon" loading="lazy"
+                        src="/static/img/department/icons/urology.svg">
+                    <div class="icon"></div>
+                    <h4 class="text-dark-blue my-md-3">Urology</h4>
+                </a><a href="/departments/medical_gastroenterology" class="item"
+                    style="--i:url(https://aarogyahastha.com/img/department/icons/medical-gastroenterology.svg);"
+                    data-department="medical-gastroenterology"><img class="dept-icon" loading="lazy"
+                        src="/static/img/department/icons/medical-gastroenterology.svg">
+                    <div class="icon"></div>
+                    <h4 class="text-dark-blue my-md-3">Medical Gastroenterology</h4>
+                </a><a href="/departments/minimal_access_surgery" class="item"
+                    style="--i:url(https://aarogyahastha.com/img/department/icons/minimal-access-surgery.svg);"
+                    data-department="minimal-access-surgery"><img class="dept-icon" loading="lazy"
+                        src="/static/img/department/icons/minimal-access-surgery.svg">
+                    <div class="icon"></div>
+                    <h4 class="text-dark-blue my-md-3">Minimal Access Surgery</h4>
+                </a><a href="/departments/plastic_surgery" class="item"
+                    style="--i:url(https://aarogyahastha.com/img/department/icons/plastic-surgery.svg);"
+                    data-department="plastic-surgery"><img class="dept-icon" loading="lazy"
+                        src="/static/img/department/icons/plastic-surgery.svg">
+                    <div class="icon"></div>
+                    <h4 class="text-dark-blue my-md-3">Plastic Surgery</h4>
+                </a><a href="/departments/obg" class="item"
+                    style="--i:url(https://aarogyahastha.com/img/department/icons/obg.svg);" data-department="obg"><img
+                        class="dept-icon" loading="lazy" src="/static/img/department/icons/obg.svg">
+                    <div class="icon"></div>
+                    <h4 class="text-dark-blue my-md-3">Obstetrics & Gynaecology</h4>
+                </a><a href="/departments/surgical_gastroenterology" class="item"
+                    style="--i:url(https://aarogyahastha.com/img/department/icons/surgical-gastroenterology.svg);"
+                    data-department="surgical-gastroenterology"><img class="dept-icon" loading="lazy"
+                        src="/static/img/department/icons/surgical-gastroenterology.svg">
+                    <div class="icon"></div>
+                    <h4 class="text-dark-blue my-md-3">Surgical Gastroenterology</h4>
+                </a><a href="/departments/radiology" class="item"
+                    style="--i:url(https://aarogyahastha.com/img/department/icons/radiology.svg);"
+                    data-department="radiology"><img class="dept-icon" loading="lazy"
+                        src="/static/img/department/icons/radiology.svg">
+                    <div class="icon"></div>
+                    <h4 class="text-dark-blue my-md-3">Radiology</h4>
+                </a>
+            </div>
+        </div>
+    </section>
+    <style>
+        .video-section {
+            display: none;
+        }
+    </style>
+    <!-- video section -->
+    <section class="video-section py-3">
+        <div class="container">
+            <h2 class="text-center">Compassionate Care Dedicated Service
+            </h2>
+            <video poster="/static/video/thumb.jpg" controls>
+                <source src="/static/video/video.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </section>
+     
+
+    <!-- scripts -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <!-- custom script -->
+    <script src="/static/js/script.js"></script>
+
+    <a href="#" id="scrollToTopBtn" class="scroll-to-top-btn" title="Scroll to top" aria-label="Scroll to top">
+        <i class="fa fa-arrow-up"></i> <!-- Simple up arrow -->
+    </a>
+
+<script>
+    $(document).ready(function () {
+        $('.item').on('click', function () {
+            location.href = 'departments/' + $(this).data('department');
+        })
+    })
+    function showChromePopup() {
+        const popup = document.getElementById("chrome-popup");
+        popup.classList.add("is-visible");
+        popup.setAttribute("aria-hidden", "false");
+    }
+    function hideChromePopup() {
+        const popup = document.getElementById("chrome-popup");
+        popup.classList.remove("is-visible");
+        popup.setAttribute("aria-hidden", "true");
+    }
+    // ESC closes popup
+    document.addEventListener("keydown", e => {
+        if (e.key === "Escape") hideChromePopup();
+    });
+    document.addEventListener('DOMContentLoaded', function () {
+        const scrollBtn = document.getElementById('scrollToTopBtn');
+        const scrollThreshold = 300;
+
+        function toggleScrollButton() {
+            if (window.pageYOffset > scrollThreshold ||
+                document.documentElement.scrollTop > scrollThreshold) {
+                scrollBtn.style.display = 'flex';
+            } else {
+                scrollBtn.style.display = 'none';
+            }
+        }
+
+        window.addEventListener('scroll', toggleScrollButton);
+
+        scrollBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+            // Add slight animation to the icon
+            this.querySelector('i').style.transform = 'translateY(-4px)';
+            setTimeout(() => {
+                this.querySelector('i').style.transform = '';
+            }, 300);
+        });
+
+        // Initialize on load
+        toggleScrollButton();
+    });
+    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+    const mobileNav = document.getElementById('mobile-nav');
+
+    mobileMenuToggle.addEventListener('click', function () {
+        mobileNav.classList.toggle('active'); // toggles visibility
+    });
+
+</script>
+
+{% endblock %}

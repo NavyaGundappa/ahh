@@ -1,0 +1,186 @@
+{% extends "base.html" %}
+
+{% block title %}About Us - Aarogya Hastha{% endblock %}
+
+{% block head %}
+{{ super() }}
+<meta name="author" content="Aarogyahastha Pvt Ltd">
+<meta name="designer" content="Aarogyahastha Pvt Ltd">
+<meta name="publisher" content="Aarogyahastha Pvt Ltd">
+<link rel="canonical" href="https://aarogyahastha.com/about">
+<meta name="no-email-collection" content="http://www.unspam.com/noemailcollection/">
+<meta name="robots" content="index,follow">
+<meta name="revisit-after" content="7 days">
+<meta name="distribution" content="web">
+<meta name="robots" content="noodp">
+<meta name="web_author" content="Aarogyahastha Pvt Ltd">
+<meta name="rating" content="general">
+<meta name="rating" content="safe for kids">
+<meta name="subject" content="Healthcare">
+<meta name="copyright" content="Copyright © 2025">
+<meta name="reply-to" content="info@aarogyahastha.com">
+<meta name="abstract"
+    content="We provide timely and specialized medical attention for patients experiencing life-threatening conditions, ensuring their urgent needs are met with the highest level of care.">
+<meta name="city" content="Bangalore">
+<meta name="country" content="India">
+<meta name="distribution" content="global">
+<meta name="classification" content="Healthcare, Hospital">
+{% endblock %}
+
+{% block content %}
+<style>
+    .breadcrumb-section {
+        padding: 10px 0;
+        background-color: #f8f9fa;
+    }
+
+    .breadcrumb {
+        margin-bottom: 0;
+        padding: 0.75rem 1rem;
+    }
+
+    .breadcrumb-item + .breadcrumb-item::before {
+        content: ">>";
+        padding: 0 0.5rem;
+    }
+
+    .breadcrumb-item a {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+    .breadcrumb-item.active {
+        color: #6c757d;
+    }
+
+    .about-tab img {
+        width: 100%;
+    }
+
+    @media (max-width: 768px) {
+        .footer-links-multi-column {
+            column-count: 1 !important;
+        }
+    }
+</style>
+
+<section class="breadcrumb-section">
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb" itemscope itemtype="http://schema.org/BreadcrumbList">
+                <li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                    <a itemprop="item" href="/">
+                        <span itemprop="name">Home</span>
+                    </a>
+                    <meta itemprop="position" content="1">
+                </li>
+                <li class="breadcrumb-item active" aria-current="page" itemprop="itemListElement" itemscope
+                    itemtype="http://schema.org/ListItem">
+                    <span itemprop="name">About</span>
+                    <meta itemprop="position" content="2">
+                </li>
+            </ol>
+        </nav>
+    </div>
+</section>
+
+<section class="department-banner" data-aos="fade-up" data-aos-offset="300" data-aos-easing="ease-in-sine">
+    <div class="container">
+        <div class="banner">
+            <img loading="lazy" src="/static/img/about/about-banner.jpg" alt="About Aarogya Hastha">
+            <div class="text-box-1">
+                <h1>Compassionate Care<br>Dedicated Service</h1>
+                <p>
+                    Aarogya Hastha is a premier healthcare facility that provides quality medical treatment with over
+                    15 specialities.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section data-aos="fade-up" data-aos-offset="300" data-aos-easing="ease-in-sine" class="about-tab-section py-3">
+    <div class="container">
+        <ul class="tab-list">
+            <li class="tab-item active" data-id="#chairman">Chairman's Message</li>
+            <li class="tab-item" data-id="#who-we-are">Who We Are</li>
+            <li class="tab-item d-none" data-id="#our-team">Our Team</li>
+        </ul>
+
+        <div class="about-tab" id="chairman">
+            <img loading="lazy" src="{{ url_for('static', filename='img/about/chairmans-message.jpg') }}" alt="Chairman's Message">
+            <div class="text-box-1">
+                <h2>Chairman's Message</h2>
+                <p>
+                    Aarogya Hastha Hospital is proud to provide our patients and their families with the highest
+                    quality healthcare services. We strive to provide an environment that encourages recovery and
+                    wellness while ensuring that our staff takes all the necessary steps to help protect our patients
+                    from any potential harm. Our staff and clinicians are highly experienced and dedicated to providing
+                    our patients and families with exceptional care. We also encourage our patients to ask questions,
+                    provide feedback, and discuss any concerns they have in order to ensure that we’re doing our
+                    part to provide the best care possible. We consider ourselves part of the local community and are
+                    continually searching for new methods and techniques for helping our patients get better. Thank
+                    you for choosing our hospital for your healthcare needs.
+                </p>
+            </div>
+        </div>
+
+        <div class="about-tab" id="who-we-are" style="display: none;">
+            <img loading="lazy" src="{{ url_for('static', filename='img/about/who-we-are-bg.jpg') }}" alt="Who We Are">
+            <div class="text-box-1">
+                <h2>Who We Are</h2>
+                <p>
+                    At Aarogya Hastha Hospital, our mission is to provide the utmost care and commitment to the
+                    overall wellbeing of our patients and the community at large. The hospital team is dedicated to
+                    consistently delivering exceptional service and quality care with empathy and compassion. Our
+                    passionate vision is to revolutionise healthcare by disrupting traditional models and introducing
+                    patient-centred approaches.
+                </p>
+
+                <p>
+                    We strive to create a culture where our team members are respected and nurtured to develop new
+                    and innovative ideas to improve care and services. We are determined to supply the most advanced
+                    treatments and technologies to ensure the best possible outcomes for our patients. By dedicating
+                    ourselves to creating policies and procedures that promote collaboration and efficiency, we take
+                    a proactive approach to problem-solving. Our aim is to create an environment that is conducive to
+                    growth and progress, while focusing on the principles of care, respect, and diligence.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<a href="#" id="scrollToTopBtn" class="scroll-to-top-btn" title="Scroll to top" aria-label="Scroll to top">
+    <i class="fa fa-arrow-up"></i>
+</a>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        if (typeof AOS !== 'undefined') {
+            AOS.init();
+        }
+
+        const tabItems = document.querySelectorAll('.tab-item');
+        const tabContents = document.querySelectorAll('.about-tab');
+
+        tabItems.forEach(item => {
+            item.addEventListener('click', function () {
+                tabItems.forEach(tab => tab.classList.remove('active'));
+                this.classList.add('active');
+
+                const targetId = this.getAttribute('data-id');
+                tabContents.forEach(content => {
+                    content.style.display = 'none';
+                });
+
+                const targetEl = document.querySelector(targetId);
+                if (targetEl) {
+                    targetEl.style.display = 'block';
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,333 @@
+{% extends "admin_layout.html" %}
+
+{% block title %}
+Manage Departments - Admin Panel
+{% endblock %}
+
+{% block content %}
+<h2 class="mb-4 text-2xl font-bold">Manage Departments</h2>
+<div class="flex justify-end mb-3">
+    <a href="{{ url_for('admin_dashboard') }}"
+        class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded transition">
+        Back to Dashboard
+    </a>
+</div>
+
+<form method="POST" enctype="multipart/form-data" class="bg-white p-6 rounded shadow-md mb-4">
+    <h3 class="font-semibold text-lg mb-4">Add New Department</h3>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+            <label class="block text-gray-700 text-sm font-bold mb-2">Name</label>
+            <input type="text" name="name"
+                class="w-full px-3 py-2 border rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required>
+        </div>
+        <div>
+            <label class="block text-gray-700 text-sm font-bold mb-2">Slug</label>
+            <input type="text" name="slug"
+                class="w-full px-3 py-2 border rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="general-surgery" required>
+        </div>
+        <div>
+            <label class="block text-gray-700 text-sm font-bold mb-2">Icon</label>
+            <input type="file" name="icon"
+                class="w-full px-3 py-2 border rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                accept=".png,.jpg,.jpeg,.gif,.svg">
+        </div>
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2">Banner</label>
+            <input type="file" name="banner"
+                class="w-full px-3 py-2 border rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                accept=".png,.jpg,.jpeg,.gif,.svg">
+        </div>
+
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2">Banner Alt Text</label>
+            <input type="text" name="banner_alt_text" value=""
+                placeholder="Enter a short descriptive alt text for the banner"
+                class="w-full px-3 py-2 border rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+        </div>
+
+        <div class="md:col-span-2">
+            <label class="block text-gray-700 text-sm font-bold mb-2">Description</label>
+            <textarea name="description"
+                class="w-full px-3 py-2 border rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                rows="2"></textarea>
+        </div>
+
+        <div class="md:col-span-2 border-t pt-4 mt-2">
+            <h4 class="font-semibold text-gray-700 mb-3">Specialists Section Content</h4>
+            <div class="mb-3">
+                <label class="block text-gray-700 text-sm font-bold mb-2">Specialists Heading</label>
+                <input type="text" name="specialists_heading"
+                    class="w-full px-3 py-2 border rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="e.g., Meet Our Expert Team, Our Specialists">
+                <p class="text-xs text-gray-500 mt-1">This will appear above the specialists list on the department page
+                </p>
+            </div>
+            <div class="mb-3">
+                <label class="block text-gray-700 text-sm font-bold mb-2">Specialists Content</label>
+                <textarea name="specialists_content"
+                    class="w-full px-3 py-2 border rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    rows="4"
+                    placeholder="e.g., Our team of highly qualified specialists is dedicated to providing the best care..."></textarea>
+                <p class="text-xs text-gray-500 mt-1">You can use HTML formatting for rich text content</p>
+            </div>
+        </div>
+
+        <div class="md:col-span-2 border-t pt-4 mt-2">
+            <h4 class="font-semibold text-gray-700 mb-3">SEO Settings</h4>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="md:col-span-2">
+                    <label class="block text-gray-700 text-sm font-bold mb-2">Meta Title</label>
+                    <input type="text" name="meta_title"
+                        class="w-full px-3 py-2 border rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        placeholder="e.g., Best Cardiology Hospital in Bangalore | Aarogya Hastha">
+                </div>
+
+                <div class="md:col-span-2">
+                    <label class="block text-gray-700 text-sm font-bold mb-2">Meta Description</label>
+                    <textarea name="meta_description"
+                        class="w-full px-3 py-2 border rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        rows="2" placeholder="e.g., We provide specialized cardiac care..."></textarea>
+                </div>
+
+                <div class="md:col-span-2">
+                    <label class="block text-gray-700 text-sm font-bold mb-2">Canonical URL</label>
+                    <input type="text" name="canonical_url"
+                        class="w-full px-3 py-2 border rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        placeholder="e.g., https://aarogyahastha.com/departments/cardiology">
+                    <p class="text-xs text-gray-500 mt-1">Leave empty to auto-generate based on slug.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button type="submit"
+        class="bg-blue-500 text-white px-4 py-2 rounded font-bold hover:bg-blue-700 transition mt-6 w-full md:w-auto">
+        Add Department
+    </button>
+</form>
+<h3 class="mb-3 text-lg font-bold">Current Departments</h3>
+
+<div class="mb-3">
+    <input type="text" id="departmentSearch"
+        class="w-full px-3 py-2 border rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+        placeholder="Search departments by name...">
+</div>
+
+{% if departments %}
+<div class="overflow-x-auto bg-white rounded shadow-md">
+    <table class="min-w-full leading-normal" id="departmentsTable">
+        <thead>
+            <tr>
+                <th
+                    class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                    Name</th>
+                <th
+                    class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                    Slug</th>
+                <th
+                    class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                    Icon</th>
+                <th
+                    class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                    Banner</th>
+                <th
+                    class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                    Alt Text</th>
+                <th
+                    class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                    SEO</th>
+                <th
+                    class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                    Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for dept in departments %}
+            <tr>
+                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ dept.name }}</td>
+                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ dept.slug }}</td>
+                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                    {% if dept.icon_path %}
+                    <img src="{{ url_for('static', filename=dept.icon_path) }}" alt="{{ dept.name }}"
+                        class="w-10 h-10 rounded">
+                    {% else %}
+                    <span class="text-gray-500">No icon</span>
+                    {% endif %}
+                </td>
+                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                    {% if dept.banner_path %}
+                    <img src="{{ url_for('static', filename=dept.banner_path) }}"
+                        alt="{{ dept.banner_alt_text or dept.name }}" class="w-20 h-auto rounded">
+                    {% else %}
+                    <span class="text-gray-500">No banner</span>
+                    {% endif %}
+                </td>
+                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ dept.banner_alt_text or '-' }}</td>
+                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                    {% if dept.meta_title %}
+                    <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Set</span>
+                    {% else %}
+                    <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full">Auto</span>
+                    {% endif %}
+                </td>
+                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                    <button class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded text-xs"
+                        onclick="openModal('editModal-{{ dept.id }}')">Edit</button>
+                    <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded text-xs"
+                        onclick="openModal('deleteModal-{{ dept.id }}')">Delete</button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+<p class="text-gray-500">No departments found.</p>
+{% endif %}
+
+{% for dept in departments %}
+<div id="editModal-{{ dept.id }}" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden">
+    <div class="relative top-20 mx-auto p-5 border w-full max-w-2xl shadow-lg rounded-md bg-white">
+        <h3 class="text-lg leading-6 font-medium text-gray-900 mb-4">Edit Department - {{ dept.name }}</h3>
+        <form method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="department_id" value="{{ dept.id }}">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-gray-700 text-sm font-bold mb-2">Name</label>
+                    <input type="text" name="name" class="w-full px-3 py-2 border rounded" value="{{ dept.name }}"
+                        required>
+                </div>
+                <div>
+                    <label class="block text-gray-700 text-sm font-bold mb-2">Slug</label>
+                    <input type="text" name="slug" class="w-full px-3 py-2 border rounded" value="{{ dept.slug }}"
+                        required>
+                </div>
+                <div class="md:col-span-2">
+                    <label class="block text-gray-700 text-sm font-bold mb-2">Description</label>
+                    <textarea name="description" class="w-full px-3 py-2 border rounded"
+                        rows="2">{{ dept.description }}</textarea>
+                </div>
+                <div>
+                    <label class="block text-gray-700 text-sm font-bold mb-2">Icon (leave empty to keep)</label>
+                    <input type="file" name="icon" class="w-full px-3 py-2 border rounded">
+                    {% if dept.icon_path %}
+                    <p class="text-xs text-gray-500 mt-1">Current: {{ dept.icon_path }}</p>
+                    {% endif %}
+                </div>
+                <div>
+                    <label class="block text-gray-700 text-sm font-bold mb-2">Banner (leave empty to keep)</label>
+                    <input type="file" name="banner" class="w-full px-3 py-2 border rounded">
+                    {% if dept.banner_path %}
+                    <p class="text-xs text-gray-500 mt-1">Current: {{ dept.banner_path }}</p>
+                    {% endif %}
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2">Banner Alt Text</label>
+                    <input type="text" name="banner_alt_text" value="{{ dept.banner_alt_text or '' }}"
+                        placeholder="Enter a short descriptive alt text for the banner"
+                        class="w-full px-3 py-2 border rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+
+                <div class="md:col-span-2 border-t pt-4 mt-2">
+                    <h4 class="font-semibold text-gray-700 mb-3">Specialists Section Content</h4>
+                    <div class="mb-3">
+                        <label class="block text-gray-700 text-sm font-bold mb-2">Specialists Heading</label>
+                        <input type="text" name="specialists_heading" class="w-full px-3 py-2 border rounded"
+                            value="{{ dept.specialists_heading or '' }}"
+                            placeholder="e.g., Meet Our Expert Team, Our Specialists">
+                    </div>
+                    <div class="mb-3">
+                        <label class="block text-gray-700 text-sm font-bold mb-2">Specialists Content</label>
+                        <textarea name="specialists_content" class="w-full px-3 py-2 border rounded" rows="4"
+                            placeholder="e.g., Our team of highly qualified specialists...">{{ dept.specialists_content or '' }}</textarea>
+                    </div>
+                </div>
+
+                <div class="md:col-span-2 border-t pt-4 mt-2">
+                    <h4 class="font-semibold text-gray-700 mb-3">SEO Settings</h4>
+
+                    <div class="mb-3">
+                        <label class="block text-gray-700 text-sm font-bold mb-2">Meta Title</label>
+                        <input type="text" name="meta_title" class="w-full px-3 py-2 border rounded"
+                            value="{{ dept.meta_title or '' }}">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="block text-gray-700 text-sm font-bold mb-2">Meta Description</label>
+                        <textarea name="meta_description" class="w-full px-3 py-2 border rounded"
+                            rows="2">{{ dept.meta_description or '' }}</textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="block text-gray-700 text-sm font-bold mb-2">Canonical URL</label>
+                        <input type="text" name="canonical_url" class="w-full px-3 py-2 border rounded"
+                            value="{{ dept.canonical_url or '' }}">
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex items-center justify-end mt-4">
+                <button type="button" onclick="closeModal('editModal-{{ dept.id }}')"
+                    class="bg-gray-500 text-white px-4 py-2 rounded font-bold hover:bg-gray-700 transition">Cancel</button>
+                <button type="submit"
+                    class="bg-blue-500 text-white px-4 py-2 rounded font-bold hover:bg-blue-700 transition ml-2">Save
+                    Changes</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="deleteModal-{{ dept.id }}"
+    class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden">
+    <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+        <div class="mt-3 text-center">
+            <h3 class="text-lg leading-6 font-medium text-gray-900">Delete Department</h3>
+            <p class="text-sm text-gray-500 mt-2">Are you sure you want to delete the department "{{ dept.name }}"?</p>
+            <div class="flex justify-center items-center px-4 py-3 mt-4">
+                <form method="POST">
+                    <input type="hidden" name="delete_id" value="{{ dept.id }}">
+                    <button type="button" onclick="closeModal('deleteModal-{{ dept.id }}')"
+                        class="bg-gray-500 text-white px-4 py-2 rounded font-bold hover:bg-gray-700 transition">Cancel</button>
+                    <button type="submit"
+                        class="bg-red-500 text-white px-4 py-2 rounded font-bold hover:bg-red-700 transition ml-2">Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+<script>
+    function openModal(modalId) {
+        document.getElementById(modalId).classList.remove('hidden');
+    }
+
+    function closeModal(modalId) {
+        document.getElementById(modalId).classList.add('hidden');
+    }
+
+    const deptSearchInput = document.getElementById('departmentSearch');
+    const deptTableBody = document.querySelector('#departmentsTable tbody');
+    const deptRows = deptTableBody.getElementsByTagName('tr');
+
+    deptSearchInput.addEventListener('keyup', function () {
+        const filter = this.value.toLowerCase();
+        for (let i = 0; i < deptRows.length; i++) {
+            const nameCell = deptRows[i].getElementsByTagName('td')[0];
+            if (nameCell) {
+                const nameText = nameCell.textContent || nameCell.innerText;
+                if (nameText.toLowerCase().indexOf(filter) > -1) {
+                    deptRows[i].style.display = "";
+                } else {
+                    deptRows[i].style.display = "none";
+                }
+            }
+        }
+    });
+</script>
+{% endblock %}

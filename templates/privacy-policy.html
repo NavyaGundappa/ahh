@@ -1,0 +1,346 @@
+{% extends "base.html" %}
+
+{% block title %}Privacy-Policy - Aarogya Hastha{% endblock %}
+
+{% block head %}
+{{ super() }}
+<meta name="description"
+    content="Discover the best hospitals in Bangalore, India. Find expert care, advanced facilities & trusted doctors near you. Visit Aarogya Hastha Hospitals today!">
+<meta name="keywords"
+    content="hospital Bangalore, multi-speciality hospital, healthcare India, medical facilities, expert doctors">
+<meta name="author" content="Aarogyahastha Pvt Ltd">
+<meta name="designer" content="Aarogyahastha Pvt Ltd">
+<link rel="canonical" href="https://aarogyahastha.com/privacy-policy">
+<meta name="no-email-collection" content="http://www.unspam.com/noemailcollection/">
+<meta name="google-site-verification" content="T3QqCQjcJP8HqwIYaCHz3AZHCSXJDF-NJfE8GNiSb-Q">
+<meta name="robots" content="index,follow">
+<meta name="subject" content="Healthcare">
+<meta name="copyright" content="Copyright © 2025">
+<meta name="reply-to" content="info@aarogyahastha.com">
+<meta name="abstract"
+    content="We provide timely and specialized medical attention for patients experiencing life-threatening conditions, ensuring their urgent needs are met with the highest level of care.">
+<meta name="city" content="Bangalore">
+<meta name="country" content="India">
+<meta name="classification" content="Healthcare, Hospital">
+{% endblock %}
+
+{% block content %}
+<style>
+    :root {
+        --ah-primary: #0056b3;
+        --ah-secondary: #007bff;
+        --ah-text: #333;
+        --ah-text-light: #555;
+        --ah-bg: #ffffff;
+        --ah-bg-light: #f8f9fa;
+        --ah-border: #dee2e6;
+    }
+
+    .breadcrumb-section {
+        padding: 10px 0;
+        background-color: var(--ah-bg-light);
+        border-bottom: 1px solid var(--ah-border);
+    }
+
+    .breadcrumb {
+        margin-bottom: 0;
+        padding: 0.75rem 1rem;
+    }
+
+    .breadcrumb-item + .breadcrumb-item::before {
+        content: "›";
+        padding: 0 0.6rem;
+        color: #6c757d;
+    }
+
+    .breadcrumb-item a {
+        color: var(--ah-primary);
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+    .breadcrumb-item.active {
+        color: #6c757d;
+        font-weight: 500;
+    }
+
+    .department-banner {
+        position: relative;
+        color: #fff;
+    }
+
+    .department-banner .banner {
+        position: relative;
+        overflow: hidden;
+        border-radius: 8px;
+    }
+
+    .department-banner .banner img {
+        width: 100%;
+        display: block;
+        object-fit: cover;
+        max-height: 350px;
+    }
+
+    .department-banner .banner::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(90deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.2) 100%);
+        z-index: 1;
+    }
+
+    .department-banner .text-box-1 {
+        position: absolute;
+        bottom: 2rem;
+        left: 2rem;
+        z-index: 2;
+    }
+
+    .department-banner .text-box-1 h1 {
+        font-size: 2.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: #fff;
+        line-height: 1.2;
+        margin-bottom: 0;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+    }
+
+    .contact-details {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        font-size: 1rem;
+        line-height: 1.7;
+        color: var(--ah-text-light);
+    }
+
+    .contact-details p {
+        margin-bottom: 1.5rem;
+    }
+
+    .contact-details > div > div > p:nth-of-type(1),
+    .contact-details > div > div > p:nth-of-type(2) {
+        font-size: 1.1rem;
+        color: var(--ah-text);
+    }
+
+    .contact-details h2 {
+        font-size: 1.75rem;
+        font-weight: 600;
+        color: var(--ah-text);
+        margin-bottom: 0.75rem;
+        line-height: 1.3;
+    }
+
+    .contact-details h3 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #444;
+        margin-top: 1.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .contact-details ol.big-marker {
+        list-style-type: none;
+        counter-reset: policy-section;
+        padding-left: 0;
+    }
+
+    .contact-details ol.big-marker > li {
+        counter-increment: policy-section;
+        position: relative;
+        padding-left: 4.5rem;
+        margin-bottom: 2.5rem;
+    }
+
+    .contact-details ol.big-marker > li::before {
+        content: counter(policy-section);
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 2.5rem;
+        height: 2.5rem;
+        line-height: 2.5rem;
+        text-align: center;
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--ah-primary);
+        background-color: var(--ah-bg-light);
+        border-radius: 8px;
+        border: 1px solid var(--ah-border);
+    }
+
+    .contact-details ol.big-marker li h2 {
+        margin-top: 0;
+        padding-top: 0;
+    }
+
+    .contact-details ul.with-bullet-point {
+        list-style-type: none;
+        padding-left: 1.5rem;
+        margin-top: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .contact-details ul.with-bullet-point li {
+        margin-bottom: 0.75rem;
+        position: relative;
+    }
+
+    .contact-details ul.with-bullet-point li::before {
+        content: '■';
+        position: absolute;
+        left: -1.5rem;
+        top: 0;
+        color: var(--ah-secondary);
+        font-size: 0.8rem;
+        line-height: 1.7;
+    }
+
+    .contact-details ul.with-bullet-point li b {
+        font-weight: 600;
+        color: var(--ah-text);
+    }
+</style>
+
+<section class="breadcrumb-section">
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb" itemscope itemtype="http://schema.org/BreadcrumbList">
+                <li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                    <a itemprop="item" href="/">
+                        <span itemprop="name">Home</span>
+                    </a>
+                    <meta itemprop="position" content="1">
+                </li>
+                <li class="breadcrumb-item active" aria-current="page" itemprop="itemListElement" itemscope
+                    itemtype="http://schema.org/ListItem">
+                    <span itemprop="name">Privacy Policy</span>
+                    <meta itemprop="position" content="2">
+                </li>
+            </ol>
+        </nav>
+    </div>
+</section>
+
+<section class="department-banner" data-aos="fade-up" data-aos-offset="300" data-aos-easing="ease-in-sine">
+    <div class="container">
+        <div class="banner">
+            <img loading="lazy" src="/static/img/banners/privacy-policy.jpg" alt="Privacy Policy Banner">
+            <div class="text-box-1">
+                <h1>Privacy Policy</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section data-aos="fade-up" data-aos-offset="300" data-aos-easing="ease-in-sine" class="contact-details py-5 my-1">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-10 col-lg-9">
+                <p>
+                    This privacy policy elucidated the information handling practices of AHHPL (hereinafter referred
+                    to as “the Hospital,” “we,” or “our”) in accordance with prevalent Indian legislation, rules,
+                    and regulations, including Information Technology (Reasonable Security Practices and procedures
+                    and Sensitive Personal Data or Information) Rules 2011 under the Information Technology Act,
+                    2000, as well as international standards.
+                </p>
+
+                <p>
+                    We are committed to protecting the privacy rights of all individuals whose personal data is
+                    provided to us. The instant policy is established by keeping the foremost standards and with the
+                    commitment to protect privacy and personal information. All services provided and any use or
+                    access of the services are subject to the instant privacy policy.
+                </p>
+
+                <ol class="big-marker">
+                    <li>
+                        <h2>CATEGORIES OF DATA COLLECTED:</h2>
+                        <p>We collect and process diverse categories of data, encompassing but not limited to:</p>
+                        <ul class="with-bullet-point">
+                            <li><b>Personal Identifiable Information (PII):</b> Including but not limited to name, date of birth, contact details, addresses and other demographic information/data.</li>
+                            <li><b>Health Information (HI):</b> Comprising medical histories, treatment records, diagnostic reports, and other health-related information.</li>
+                            <li><b>Financial Data:</b> This includes payment particulars, insurance information, billing records, banking partners, etc.</li>
+                            <li><b>Electronic Information:</b> This includes IP addresses, cookies, and technical data generated during the interaction with our online platform.</li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <h2>PURPOSE OF DATA PROCESSING:</h2>
+                        <p>We undertake data processing for the following lawful purposes:</p>
+                        <ul class="with-bullet-point">
+                            <li><b>Provision of Healthcare Services:</b> To manage appointments, facilitate treatments and administer healthcare services.</li>
+                            <li><b>Administrative Operations:</b> Including billing, insurance processing, and internal record-keeping to maintain the efficiency of hospital functions.</li>
+                            <li><b>Legal Compliances:</b> To adhere to statutory and regulatory obligations and other necessary legal requirements.</li>
+                            <li><b>Enhancement of Services:</b> Analysing data to improve the quality and efficacy of healthcare services provided by the Hospital.</li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <h2>DATA DISCLOSURE:</h2>
+                        <p>We may disclose data collected to the following entities.</p>
+                        <ul class="with-bullet-point">
+                            <li><b>Healthcare Professionals:</b> Authorised medical personnel directly involved in your care.</li>
+                            <li><b>Business Associates:</b> Third-party service providers who assist in the delivery and administration of healthcare services.</li>
+                            <li><b>Legal Authorities:</b> In instances where we are compelled by law or during the course of legal proceedings.</li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <h2>INFORMATION SECURITY MEASURES:</h2>
+                        <p>
+                            The Hospital employs robust and reasonable security measures to safeguard data against
+                            unauthorised access, disclosure, alteration, and destruction. Such measures include, but
+                            are not limited to, encryption protocols, access controls and regular security audits as
+                            prescribed by law. We ensure strict compliance with all data protection laws.
+                        </p>
+                    </li>
+
+                    <li>
+                        <h2>DATA SUBJECT RIGHTS:</h2>
+                        <p>Data subjects have the following rights:</p>
+                        <ul class="with-bullet-point">
+                            <li><b>Access and Copy:</b> The right to access and obtain a copy of their health information.</li>
+                            <li><b>Correction:</b> The right to request correction to any inaccuracies or incompleteness in their information.</li>
+                            <li><b>Objection:</b> The right to object to the processing of their information for certain purposes.</li>
+                            <li><b>Right to be forgotten:</b> The right to request for deletion of data collected.</li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <h2>CONSENT MECHANISM:</h2>
+                        <p>
+                            By availing of the Hospital's services, individuals implicitly consent to the
+                            stipulations delineated in this policy and acknowledge that it is part of the terms of
+                            use of the website and other services. By affirming this policy, you provide your
+                            consent to such collection of data as required under applicable law.
+                        </p>
+                    </li>
+
+                    <li>
+                        <h2>POLICY AMENDMENT:</h2>
+                        <p>
+                            This Privacy Policy may be amended periodically, and any revision will be made effective
+                            and available on the official website of the Hospital on its date of amendment.
+                        </p>
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+<a href="#" id="scrollToTopBtn" class="scroll-to-top-btn" title="Scroll to top" aria-label="Scroll to top">
+    <i class="fa fa-arrow-up"></i>
+</a>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        if (typeof AOS !== 'undefined') {
+            AOS.init();
+        }
+    });
+</script>
+{% endblock %}

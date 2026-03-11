@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Path Test</title>
+    <style>
+        .test {
+            padding: 20px;
+            margin: 10px;
+            border: 1px solid #ccc;
+        }
+
+        .success {
+            background: #d4edda;
+        }
+
+        .error {
+            background: #f8d7da;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Testing Asset Paths</h1>
+
+    <div id="css-test" class="test">Testing CSS...</div>
+    <div id="js-test" class="test">Testing JS...</div>
+    <div id="img-test" class="test">Testing Images...</div>
+
+    <script>
+        // Test CSS
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = 'css/style.css';
+        link.onload = () => {
+            document.getElementById('css-test').innerHTML = '✅ CSS loaded successfully';
+            document.getElementById('css-test').classList.add('success');
+        };
+        link.onerror = () => {
+            document.getElementById('css-test').innerHTML = '❌ CSS failed to load';
+            document.getElementById('css-test').classList.add('error');
+        };
+        document.head.appendChild(link);
+
+        // Test Image
+        const img = new Image();
+        img.src = 'img/logo.png';
+        img.onload = () => {
+            document.getElementById('img-test').innerHTML = '✅ Image loaded successfully';
+            document.getElementById('img-test').classList.add('success');
+            document.getElementById('img-test').appendChild(img);
+        };
+        img.onerror = () => {
+            document.getElementById('img-test').innerHTML = '❌ Image failed to load';
+            document.getElementById('img-test').classList.add('error');
+        };
+    </script>
+</body>
+
+</html>

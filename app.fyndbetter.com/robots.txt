@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /version-test/
+Disallow: /msr_appointment/
+Disallow:/suguna_appointment/

@@ -1,0 +1,83 @@
+{% extends "admin_layout.html" %}
+
+{% block title %}
+Review Messages - Admin Panel
+{% endblock %}
+
+{% block content %}
+<h2 class="text-2xl font-bold text-gray-800 mb-4">Submitted Messages</h2>
+
+<div class="flex justify-between items-center mb-4">
+    <a href="{{ url_for('admin_dashboard') }}"
+        class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded transition">
+        Back to Dashboard
+    </a>
+    <div class="flex items-center space-x-2">
+        <input type="text" id="searchInput"
+            class="px-3 py-2 border rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="Search messages...">
+        <a href="{{ url_for('export_reviews') }}"
+            class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded transition">
+            Download Excel
+        </a>
+    </div>
+</div>
+
+<div class="overflow-x-auto bg-white rounded shadow-md">
+    <table id="reviewsTable" class="min-w-full leading-normal">
+        <thead>
+            <tr>
+                <th
+                    class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                    ID</th>
+                <th
+                    class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                    Date</th>
+                <th
+                    class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                    Name</th>
+                <th
+                    class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                    Mobile</th>
+                <th
+                    class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                    Email</th>
+                <th
+                    class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                    Message</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for r in reviews %}
+            <tr>
+                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ r.id }}</td>
+                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ r.created_at.strftime("%Y-%m-%d
+                    %H:%M") }}</td>
+                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ r.name }}</td>
+                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ r.mobile_number }}</td>
+                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ r.email }}</td>
+                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ r.message }}</td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="6" class="text-center py-5">No messages yet.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<script>
+    document.getElementById('searchInput').addEventListener('keyup', function () {
+        const filter = this.value.toLowerCase();
+        const rows = document.querySelectorAll("#reviewsTable tbody tr");
+        rows.forEach(row => {
+            if (row.innerText.toLowerCase().includes(filter)) {
+                row.style.display = "";
+            } else {
+                row.style.display = "none";
+            }
+        });
+    });
+</script>
+{% endblock %}

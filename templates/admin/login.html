@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login - Hospital Management System</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    :root {
+      --primary-color: #40e0d0;
+      --primary-hover: #2ab7a9;
+      --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    }
+
+    body {
+      background: var(--bg-gradient);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      padding: 20px;
+    }
+
+    .login-container {
+      background: #fff;
+      border-radius: 15px;
+      overflow: hidden;
+      max-width: 900px;
+      width: 100%;
+      display: flex;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .login-left {
+      flex: 1;
+      padding: 50px 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .login-right {
+      flex: 1;
+      background: var(--primary-color);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 40px;
+    }
+
+    .login-logo {
+      max-width: 150px;
+      margin-bottom: 30px;
+    }
+
+    .login-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: #2c3e50;
+    }
+
+    .login-subtitle {
+      color: #6c757d;
+      margin-bottom: 30px;
+    }
+
+    .form-control {
+      border-radius: 8px;
+      padding: 12px 15px;
+      border: 2px solid #e9ecef;
+      margin-bottom: 15px;
+    }
+
+    .form-control:focus {
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 0.2rem rgba(64, 224, 208, 0.25);
+    }
+
+    .btn-login {
+      background-color: var(--primary-color);
+      border: none;
+      font-weight: bold;
+      padding: 12px;
+      font-size: 1rem;
+      border-radius: 8px;
+      transition: all 0.3s;
+    }
+
+    .btn-login:hover {
+      background-color: var(--primary-hover);
+      transform: translateY(-2px);
+    }
+
+    .doctor-image {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: url("{{ url_for('static', filename='img/doctor.png') }}") no-repeat center center;
+      background-size: cover;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      margin-bottom: 20px;
+    }
+
+    .feature-list {
+      text-align: left;
+      margin-top: 30px;
+    }
+
+    .feature-list li {
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+    }
+
+    .feature-list i {
+      color: rgba(255, 255, 255, 0.9);
+      margin-right: 10px;
+      font-size: 1.2rem;
+    }
+
+    .alert {
+      border-radius: 8px;
+      margin-bottom: 15px;
+    }
+
+    @media (max-width: 768px) {
+      .login-container {
+        flex-direction: column;
+      }
+
+      .login-right {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="login-container">
+
+    <!-- Left Side (Login Form) -->
+    <div class="login-left">
+      <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Hospital Logo" class="login-logo">
+      <h2 class="login-title">Admin Login</h2>
+      <p class="login-subtitle">Enter your credentials to access the dashboard</p>
+
+      <!-- Flash Messages -->
+
+      <!-- Login Form -->
+      <form method="POST" action="{{ url_for('admin_login') }}">
+        <input type="text" name="emp_id" class="form-control" placeholder="Employee ID" required>
+        <input type="password" name="password" class="form-control" placeholder="Password" required>
+        <button type="submit" class="btn btn-login w-100">Login</button>
+      </form>
+    </div>
+
+    <!-- Right Side (Doctor Image & Features) -->
+    <div class="login-right">
+      <div class="doctor-image"></div>
+      <h3>Website Management System</h3>
+      <p>Complete administrative control panel</p>
+      <ul class="feature-list">
+        <li><i class="fas fa-check-circle"></i> Manage Doctors & Staff</li>
+        <li><i class="fas fa-check-circle"></i> Update Website Content</li>
+        <li><i class="fas fa-check-circle"></i> Monitor Appointments</li>
+        <li><i class="fas fa-check-circle"></i> Generate Reports</li>
+        <li><i class="fas fa-check-circle"></i> User Access Control</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

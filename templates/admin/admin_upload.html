@@ -1,0 +1,51 @@
+{% extends "admin_layout.html" %}
+
+{% block title %}BMW Report - Admin Panel{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <div class="bg-white p-6 rounded-xl shadow-md max-w-lg mx-auto">
+        <h2 class="text-2xl font-bold text-gray-800 mb-4 text-center">Upload BMW Report</h2>
+
+        <form action="{{ url_for('admin_upload') }}" method="POST" enctype="multipart/form-data">
+          <div class="mb-4">
+            <input type="file" name="pdf_file" accept=".pdf"
+              class="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+            <p class="text-sm text-gray-500 mt-1">Only PDF files are allowed</p>
+          </div>
+          <button type="submit"
+            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition">
+            Upload PDF
+          </button>
+        </form>
+
+        {% if all_pdfs %}
+        <div class="mt-6">
+          <h3 class="text-lg font-semibold mb-3">Uploaded Reports</h3>
+          <ul class="divide-y divide-gray-200">
+            {% for pdf in all_pdfs %}
+            <li class="py-3 flex justify-between items-center">
+              <div>
+                <span class="font-medium">{{ pdf.file_name }}</span>
+                <p class="text-sm text-gray-500">Uploaded: {{ pdf.uploaded_at.strftime('%Y-%m-%d %H:%M') }}</p>
+              </div>
+              <form action="{{ url_for('delete_pdf', pdf_id=pdf.id) }}" method="POST"
+                onsubmit="return confirm('Are you sure you want to delete this PDF?');">
+                <button type="submit" class="bg-red-500 hover:bg-red-700 text-white py-1 px-3 rounded text-sm">
+                  Delete
+                </button>
+              </form>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% else %}
+        <p class="text-center text-gray-500 mt-6">No reports uploaded yet</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

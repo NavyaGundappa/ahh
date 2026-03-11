@@ -1,0 +1,453 @@
+{% extends "base.html" %}
+
+{% block title %}Our Stories & Patient Experiences | Aarogya Hastha Hospitals{% endblock %}
+
+{% block head %}
+{{ super() }}
+<meta name="description"
+    content="Discover patient stories, doctor insights, and hospital events at Aarogya Hastha Hospitals. Our commitment to care, one life at a time.">
+<style>
+    /* Custom Fonts/Colors (Assuming Bootstrap is in use) */
+    :root {
+        --primary-color: #264063;
+        /* Dark Blue */
+        --accent-color: #FFD700;
+        /* Gold/Yellow Accent */
+        --light-bg: #f5f5f7;
+        --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    /* Page Header */
+    .stories-page-section {
+        padding: 20px 0;
+        background-color: var(--light-bg);
+    }
+
+    .stories-heading {
+        color: var(--primary-color);
+        font-weight: 900;
+        font-size: 3rem;
+        margin-bottom: 10px;
+        letter-spacing: -0.5px;
+    }
+
+    .stories-subheading {
+        color: #6c757d;
+        font-size: 1.25rem;
+        margin-bottom: 60px;
+    }
+
+    /* Tab Styles - Modern Pill Button */
+    .nav-pills .nav-link {
+        color: var(--primary-color);
+        border: 1px solid var(--primary-color);
+        margin: 5px;
+        padding: 10px 22px;
+        border-radius: 30px;
+        transition: all 0.3s;
+        font-weight: 600;
+        background-color: #ffffff;
+    }
+
+    .nav-pills .nav-link.active,
+    .nav-pills .nav-link:hover {
+        background-color: var(--primary-color);
+        color: #ffffff;
+        border-color: var(--primary-color);
+    }
+
+    .nav-pills {
+        margin-bottom: 50px;
+    }
+
+    /* ZIGZAG/Alternating Layout (For Media/Content stories) */
+    .story-row {
+        margin-bottom: 50px;
+        background: #ffffff;
+        border-radius: 12px;
+        box-shadow: var(--card-shadow);
+        transition: transform 0.3s ease;
+    }
+
+    .story-row:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .story-media-container {
+        padding: 0;
+        border-radius: 12px;
+        overflow: hidden;
+    }
+
+    .story-media {
+        position: relative;
+        padding-top: 60%;
+        /* Aspect Ratio for the image/video area */
+        cursor: pointer;
+        background-color: #e9ecef;
+        height: 100%;
+        /* Important for full height in flex/grid */
+    }
+
+    .story-media img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: opacity 0.3s;
+    }
+
+    .play-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: rgba(0, 0, 0, 0.3);
+        transition: background 0.3s;
+    }
+
+    .story-row:hover .play-overlay {
+        background: rgba(0, 0, 0, 0.5);
+    }
+
+    .play-circle {
+        width: 70px;
+        height: 70px;
+        background-color: var(--accent-color);
+        color: var(--primary-color);
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.5rem;
+        box-shadow: 0 0 0 10px rgba(255, 215, 0, 0.4);
+    }
+
+    .story-content-container {
+        padding: 30px 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .story-card-title {
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        margin-bottom: 10px;
+        line-height: 1.2;
+    }
+
+    .story-card-desc {
+        color: #555;
+        line-height: 1.7;
+        font-size: 1rem;
+        margin-bottom: 20px;
+    }
+
+    .story-category-tag {
+        display: inline-block;
+        background-color: var(--accent-color);
+        color: var(--primary-color);
+        padding: 6px 15px;
+        border-radius: 25px;
+        font-size: 0.85rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        margin-top: 10px;
+    }
+
+
+    /* TESTIMONIAL CARD GRID (Retaining a dedicated grid for these smaller elements) */
+    .testimonial-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+    }
+
+    .testimonial-card {
+        background: #ffffff;
+        border-left: 5px solid var(--accent-color);
+        border-radius: 8px;
+        padding: 25px;
+        box-shadow: var(--card-shadow);
+        transition: transform 0.3s;
+    }
+
+    .testimonial-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+    }
+
+    .quote-icon {
+        font-size: 1.8rem;
+        color: var(--primary-color);
+        opacity: 0.15;
+        margin-bottom: 15px;
+    }
+
+    .review-text-content {
+        font-size: 0.95rem;
+        font-style: italic;
+        color: #495057;
+        line-height: 1.6;
+        margin-bottom: 20px;
+    }
+
+    .doctor-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-right: 10px;
+        border: 2px solid #ced4da;
+    }
+
+    .doctor-detail-box {
+        background-color: var(--light-bg);
+        padding: 10px;
+        border-radius: 5px;
+        margin-top: 10px;
+    }
+
+    .doctor-detail-box small {
+        display: block;
+        line-height: 1.2;
+    }
+
+    /* Responsiveness adjustments */
+    @media (max-width: 991px) {
+        .story-content-container {
+            padding: 25px 30px;
+        }
+
+        .story-card-title {
+            font-size: 1.7rem;
+        }
+
+        .story-media {
+            padding-top: 0;
+            /* Let height be natural on smaller screens */
+            height: 250px;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<section class="breadcrumb-section" id="breadcrumb-nav">
+</section>
+
+<section class="stories-page-section">
+    <div class="container">
+        <h1 class="text-center stories-heading">Our Stories</h1>
+        <p class="text-center stories-subheading"></p>
+
+        {# --- Tab Navigation --- #}
+        <ul class="nav nav-pills justify-content-center" id="storiesTabs" role="tablist">
+            {% for code, label in categories %}
+            <li class="nav-item" role="presentation">
+                <button class="nav-link {% if loop.first %}active{% endif %}" id="tab-{{ code }}-full"
+                    data-bs-toggle="pill" data-bs-target="#content-{{ code }}-full" type="button" role="tab"
+                    aria-controls="content-{{ code }}-full"
+                    aria-selected="{% if loop.first %}true{% else %}false{% endif %}">
+                    {{ label }}
+                </button>
+            </li>
+            {% endfor %}
+        </ul>
+
+        {# --- Tab Content --- #}
+        <div class="tab-content" id="storiesTabsContent">
+            {% for code, label in categories %}
+            <div class="tab-pane fade {% if loop.first %}show active{% endif %}" id="content-{{ code }}-full"
+                role="tabpanel" tabindex="0">
+
+                {% set items = life_moments | selectattr("category", "equalto", code) | list %}
+
+                {% if items %}
+
+                {# ========================================== #}
+                {# LAYOUT 1: WRITTEN REVIEWS (Dedicated Grid) #}
+                {# ========================================== #}
+                {% if code == 'written_testimonial' %}
+                <div class="testimonial-grid">
+                    {% for item in items %}
+                    <div class="testimonial-card">
+                        <i class="fas fa-quote-right quote-icon"></i>
+                        <h5 class="fw-bold mb-3 text-dark">{{ item.title }}</h5>
+
+                        <p class="review-text-content">
+                            {{ item.description | truncate(350, True, '...') }}
+                        </p>
+
+                        <p class="fw-bold mb-1 text-primary">{{ item.patient_name | default("Our Valued Patient", True)
+                            }}</p>
+
+                        {% if item.doctor1 or item.doctor2 %}
+                        <div class="row g-1 mt-2">
+                            {% if item.doctor1 %}
+                            <div class="col-md-6">
+                                <div class="d-flex align-items-center doctor-detail-box">
+                                    {% set d1_img = url_for('static', filename=item.doctor1.image_path) if
+                                    item.doctor1.image_path else url_for('static',
+                                    filename='img/doctors/dr-placeholder.jpg') %}
+                                    <img src="{{ d1_img }}" alt="{{ item.doctor1.name }}" class="doctor-avatar">
+                                    <div>
+                                        <small class="fw-bold text-dark">{{ item.doctor1.name }}</small>
+                                        <small class="text-muted d-block">{{ item.doctor1.designation }}</small>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% if item.doctor2 %}
+                            <div class="col-md-6">
+                                <div class="d-flex align-items-center doctor-detail-box">
+                                    {% set d2_img = url_for('static', filename=item.doctor2.image_path) if
+                                    item.doctor2.image_path else url_for('static',
+                                    filename='img/doctors/dr-placeholder.jpg') %}
+                                    <img src="{{ d2_img }}" alt="{{ item.doctor2.name }}" class="doctor-avatar">
+                                    <div>
+                                        <small class="fw-bold text-dark">{{ item.doctor2.name }}</small>
+                                        <small class="text-muted d-block">{{ item.doctor2.designation }}</small>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+                        </div>
+                        {% endif %}
+                        <span class="story-category-tag mt-3">{{ label }}</span>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                {# ========================================== #}
+                {# LAYOUT 2: MEDIA/CONTENT (Zigzag/Z-Pattern) #}
+                {# ========================================== #}
+                {% else %}
+                {% for item in items %}
+                <div class="row story-row gx-0">
+                    {# Calculate order: Media on Left for 1st, 3rd, 5th... (Odd index, which is even loop.index0) #}
+                    {# Media on Right for 2nd, 4th, 6th... (Even index, which is odd loop.index0) #}
+                    {% set media_order = 'order-md-1' if loop.index0 % 2 == 0 else 'order-md-2' %}
+                    {% set content_order = 'order-md-2' if loop.index0 % 2 == 0 else 'order-md-1' %}
+
+                    <div class="col-md-6 story-media-container {{ media_order }}">
+                        <div class="story-media" data-video-id="{{ item.video_id }}" id="story-media-{{ item.id }}" {%
+                            if item.video_id %}onclick="openVideoModal('{{ item.video_id }}')" {% endif %}>
+
+                            {% if item.video_id %}
+                            <img src="https://img.youtube.com/vi/{{ item.video_id }}/hqdefault.jpg"
+                                alt="{{ item.title }}">
+                            <a href="javascript:void(0)" class="play-overlay">
+                                <div class="play-circle"><i class="fas fa-play"></i></div>
+                            </a>
+                            {% elif item.image_path %}
+                            <img src="{{ url_for('static', filename=item.image_path) }}" alt="{{ item.title }}">
+                            {% else %}
+                            <div class="d-flex align-items-center justify-content-center h-100 bg-light text-secondary">
+                                <i class="fas fa-image fa-3x"></i>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 story-content-container {{ content_order }}">
+                        <h2 class="story-card-title">{{ item.title }}</h2>
+                        {% if item.description %}
+                        <p class="story-card-desc">{{ item.description }}</p>
+                        {% endif %}
+                        <span class="story-category-tag">{{ label }}</span>
+                    </div>
+                </div>
+                {% endfor %}
+                {% endif %}
+                {% else %}
+                <div class="stories-empty-state">
+                    <div class="mb-3"><i class="fas fa-folder-open fa-4x"></i></div>
+                    <p class="lead">No {{ label }} content has been updated yet.</p>
+                </div>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<div class="modal fade" id="videoModal" tabindex="-1" aria-hidden="true" style="z-index: 9999;">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content bg-black border-0">
+            <div class="modal-header border-0 p-2 position-absolute w-100" style="z-index: 10; top: 0;">
+                <button type="button" class="btn-close btn-close-white ms-auto shadow-none" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-0">
+                <div class="ratio ratio-16x9">
+                    <iframe id="videoFrame" src="" allowfullscreen allow="autoplay"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Video Modal Logic (Same as before)
+    function openVideoModal(videoId) {
+        // Simple check to ensure videoId is not a full URL if possible
+        if (videoId.includes('youtube.com') || videoId.includes('youtu.be')) {
+            try {
+                const url = new URL(videoId);
+                if (url.searchParams.has('v')) videoId = url.searchParams.get('v');
+                else videoId = url.pathname.split('/').pop();
+            } catch (e) { console.warn('Error parsing video ID', e); }
+        }
+
+        const frame = document.getElementById('videoFrame');
+        // Set src with autoplay
+        frame.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
+
+        // Show Modal
+        const myModal = new bootstrap.Modal(document.getElementById('videoModal'));
+        myModal.show();
+
+        // Stop video playback when the modal is closed
+        document.getElementById('videoModal').addEventListener('hidden.bs.modal', function () {
+            frame.src = '';
+        }, { once: true });
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const targetId = 'life-moment-{{ highlight_id }}';
+        const targetElement = document.getElementById(targetId);
+
+        if (targetElement) {
+            // Scroll to the highlighted item
+            setTimeout(() => {
+                targetElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'center' // Centers the element in the viewport
+                });
+
+                // Optional: Add a temporary visual highlight (e.g., a subtle border)
+                targetElement.style.transition = 'box-shadow 0.5s ease-in-out';
+                targetElement.style.boxShadow = '0 0 0 5px rgba(255, 165, 0, 0.5)';
+
+                // Remove the highlight after a few seconds
+                setTimeout(() => {
+                    targetElement.style.boxShadow = '';
+                }, 3000);
+
+            }, 200); // A slight delay (200ms) ensures the tab and carousel are fully rendered by Bootstrap/Owl Carousel
+        }
+    });
+</script>
+
+{% endblock %}
