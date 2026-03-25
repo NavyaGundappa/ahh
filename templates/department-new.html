@@ -4,6 +4,12 @@
 {% block keywords %}{{ department.meta_Keyword }}{% endblock %}
 {% block head %}
 <meta name="description" content="{{ department.meta_description }}" />
+<meta name="robots" content="{{ department.meta_robots }}">
+<!-- <link rel="canonical" href="{{ request.url }}" /> -->
+<meta property="og:title" content="{{ department.meta_title }} " />
+<meta property="og:description" content="{{ department.meta_description }}" />
+<meta property="og:url" content="{{ request.url }}">
+<meta property="og:image" content="https://aarogyahastha.com/static/img/fav.png/" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
   integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
   crossorigin="anonymous" referrerpolicy="no-referrer" />
