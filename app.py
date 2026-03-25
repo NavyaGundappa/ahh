@@ -3743,7 +3743,57 @@ def delete_faq(faq_id):  # Changed from 'id' to 'faq_id'
     return redirect(url_for('admin_department_overview'))
 
 
-# ------------------ ADMIN: Department list New ------------------
+# ------------------ ADMIN: Department  New ------------------
+
+
+@app.route('/departments-new/<slug>')
+def departmentnew_page(slug):
+
+    department = DepartmentNew.query.filter_by(
+        slug=slug,
+        is_active=True
+    ).first_or_404()
+
+    doctors = (
+        Doctor.query
+        .filter_by(
+            department_slug=department.slug,
+            is_active=True
+        )
+        .order_by(Doctor.id.asc())  # or Doctor.created_at.desc()
+        .limit(4)
+        .all()
+    )
+
+    blogs = Blog.query.filter_by(is_active=True)\
+        .order_by(Blog.created_at.desc())\
+        .limit(3)\
+        .all()
+        
+    testimonials = Testimonial.query.filter_by(is_active=True).options(
+        joinedload(Testimonial.doctor)
+    ).order_by(Testimonial.created_at.desc()).all()
+
+    context = _fetch_department_data(department)
+    context["doctors"] = doctors
+    context["blogs"] = blogs   # ✅ REQUIRED
+    context["testimonials"] = testimonials
+
+    template_path = f"departments-new/{slug}.html"
+
+    if os.path.exists(os.path.join(app.template_folder, template_path)):
+        return render_template(template_path, **context)
+
+    return render_template("department-new.html", **context)
+
+
+
+@app.template_filter('loads')
+def json_loads(value):
+    try:
+        return json.loads(value)
+    except:
+        return []
 
 @app.route('/admin/departments-new')
 @login_required
