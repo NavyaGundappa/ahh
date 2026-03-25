@@ -1,0 +1,1208 @@
+{% extends "admin_layout.html" %}
+
+{% block title %}
+Edit Department - Admin Panel
+{% endblock %}
+
+{% block content %}
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+<script src="https://cdn.ckeditor.com/4.14.1/standard-all/ckeditor.js"></script>
+<style>
+    .tab-buttons {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+    }
+
+    .tab-button {
+        padding: 10px 20px;
+        background: #ddd;
+        border: none;
+        cursor: pointer;
+        border-radius: 4px;
+        transition: all 0.3s;
+    }
+
+    .tab-button.active {
+        background: #0066cc;
+        color: white;
+    }
+
+    .tab-content {
+        display: none;
+    }
+
+    .tab-content.active {
+        display: block;
+    }
+
+    .form-section {
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 15px;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-group label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+        color: #333;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-family: Arial;
+    }
+
+    .form-group textarea {
+        resize: vertical;
+    }
+
+    .cke_notification_warning {
+        display: none;
+    }
+
+    .grid-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+    }
+
+    .grid-1 {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+
+    div#hero-stats-wrapper .stat-row,
+    .hero-stats-wrapper .approach-item,
+    .hero-stats-wrapper .why-item-row,
+    .hero-stats-wrapper .services-item,
+    .hero-stats-wrapper .facilities-item,
+    .hero-stats-wrapper .faq-item {
+        display: flex;
+        gap: 10px;
+        margin: 10px;
+        align-items: start;
+    }
+
+
+    div#faq-wrapper .form-group {
+        width: 44%;
+    }
+
+    .hero-stats-wrapper .form-group {
+        width: 33%;
+    }
+
+    .hero-stats-wrapper button {
+        margin-top: 25px;
+    }
+
+    .hero-stats-wrapper .form-group .preview {
+        margin-right: 10px;
+    }
+
+
+    @media (max-width: 768px) {
+        .grid-2 {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .ql-editor {
+        min-height: 150px;
+        background: white;
+    }
+
+    button {
+        padding: 10px 20px;
+        background: #0066cc;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+
+    button:hover {
+        background: #0052a3;
+    }
+
+    .back-btn {
+        background: #666;
+    }
+
+    .back-btn:hover {
+        background: #444;
+    }
+</style>
+
+<h2 class="mb-4" style="font-size: 28px; font-weight: bold;">Edit Department: {{ department.name }}</h2>
+<div style="text-align: right; margin-bottom: 20px;">
+    <a href="{{ url_for('admin_departmentsnew') }}" style="text-decoration: none;">
+        <button type="button" class="back-btn">Back to Departments</button>
+    </a>
+</div>
+
+<form method="POST" enctype="multipart/form-data">
+    <!-- TAB NAVIGATION -->
+    <div class="tab-buttons">
+        <button type="button" class="tab-button active" onclick="showTab('basic')">Basic Info</button>
+        <button type="button" class="tab-button" onclick="showTab('hero')">Hero Section</button>
+        <button type="button" class="tab-button" onclick="showTab('overview')">Overview</button>
+        <button type="button" class="tab-button" onclick="showTab('approach')">Approach</button>
+        <button type="button" class="tab-button" onclick="showTab('services')">Services</button>
+        <button type="button" class="tab-button" onclick="showTab('journey')">Journey</button>
+        <button type="button" class="tab-button" onclick="showTab('facilities')">Facilities</button>
+        <button type="button" class="tab-button" onclick="showTab('recommend')">Why Recommend</button>
+        <button type="button" class="tab-button" onclick="showTab('advanced')">Advanced Care</button>
+        <button type="button" class="tab-button" onclick="showTab('cta')">CTA Section</button>
+        <button type="button" class="tab-button" onclick="showTab('faq')">FAQ</button>
+        <button type="button" class="tab-button" onclick="showTab('seo')">SEO</button>
+    </div>
+
+    <!-- BASIC INFO TAB -->
+    <div id="basic" class="tab-content active form-section">
+        <h3>Basic Information</h3>
+        <div class="grid-2">
+            <div class="form-group">
+                <label>Department Name</label>
+                <input type="text" name="name" value="{{ department.name }}" required>
+            </div>
+            <div class="form-group">
+                <label>Slug</label>
+                <input type="text" name="slug" value="{{ department.slug }}" required>
+            </div>
+            <div class="form-group">
+                <label>Status</label>
+                <select name="is_active" id="is_active">
+                    <option value="0" {% if not department.is_active %}selected{% endif %}>In Active</option>
+                    <option value="1" {% if department.is_active %}selected{% endif %}>Active</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <!-- HERO SECTION TAB -->
+    <div id="hero" class="tab-content form-section">
+        <h3>Hero Section</h3>
+        <div class="form-group">
+            <label>Main Heading (HTML Supported)</label>
+            <!-- <div id="heroMainHeadingEditor" style="border: 1px solid #ccc; border-radius: 4px;"></div> -->
+            <!-- <input type="hidden" id="heroMainHeading" name="hero_main_heading"> -->
+            <input type="text" name="hero_main_heading" value="{{ department.hero_main_heading or '' }}">
+        </div>
+        <div class="form-group">
+            <label>Description/Tagline</label>
+            <textarea name="hero_description" rows="3">{{ department.hero_description or '' }}</textarea>
+        </div>
+        <div class="form-group">
+            <label>Phone Number</label>
+            <input type="text" name="hero_phone" value="{{ department.hero_phone or '' }}"
+                placeholder="e.g., 080 4677 8188">
+        </div>
+        <div class="form-group">
+            <label>Hero Stats</label>
+
+            <div class="hero-stats-wrapper" id="hero-stats-wrapper"></div>
+            <button type="button" class="bg-danger text-white" onclick="addStat()">Add Stat</button>
+
+            <input type="hidden" name="hero_stats" id="hero_stats_input">
+        </div>
+    </div>
+
+    <!-- OVERVIEW TAB -->
+    <div id="overview" class="tab-content form-section">
+
+        <h3>Overview Section</h3>
+        <div class="form-group">
+            <label>Overview Heading</label>
+            <input type="text" name="overview_heading" value="{{ department.overview_heading or '' }}">
+        </div>
+        <div class="form-group">
+            <label>Overview Content</label>
+            <textarea name="overview_content" id="overview_content" hidden>
+            {{ department.overview_content or '' }}
+            </textarea>
+        </div>
+        <div class="form-group">
+            <label>Why Choose Heading</label>
+            <input type="text" name="why_choose_title" value="{{ department.why_choose_title or '' }}">
+        </div>
+        <div class="form-group">
+            <label>Why Choose Items</label>
+            <input type="hidden" id="why_data" value='{{ department.why_choose_items | tojson | safe }}'>
+
+            <div class="hero-stats-wrapper" id="why-choose-wrapper"></div>
+
+            <button type="button" onclick="addWhyChoose()">Add Item</button>
+
+            <input type="hidden" name="why_choose_items" id="why_choose_items_input">
+        </div>
+    </div>
+
+    <!-- APPROACH TAB -->
+    <div id="approach" class="tab-content form-section">
+        <h3>Our Approach Section</h3>
+        <div class="form-group">
+            <label>Approach Heading</label>
+            <input type="text" name="approach_heading" value="{{ department.approach_heading or '' }}">
+        </div>
+        <div class="form-group">
+            <label>Approach Subheading</label>
+            <textarea name="approach_subheading" rows="2">{{ department.approach_subheading or '' }}</textarea>
+        </div>
+        <div class="form-group">
+            <label>Approach Cards</label>
+
+            <div id="approach-wrapper" class="hero-stats-wrapper"></div>
+
+            <button type="button" onclick="addApproach()">Add Card</button>
+
+            <input type="hidden" name="approach_cards" id="approach_cards_input">
+        </div>
+    </div>
+
+    <!-- SERVICES TAB -->
+    <div id="services" class="tab-content form-section">
+        <h3>Services/Conditions Section</h3>
+        <div class="form-group">
+            <label>Services Heading</label>
+            <input type="text" name="services_heading" value="{{ department.services_heading or '' }}">
+        </div>
+        <div class="form-group">
+            <label>Services Data</label>
+
+            <div id="services-wrapper" class="hero-stats-wrapper"></div>
+
+            <button type="button" onclick="addServices()">Add Card</button>
+
+            <input type="hidden" name="services_data" id="services_data_input">
+        </div>
+    </div>
+
+    <!-- JOURNEY TAB -->
+    <div id="journey" class="tab-content form-section">
+        <h3>Care Journey Section</h3>
+        <div class="form-group">
+            <label>Journey Heading</label>
+            <input type="text" name="journey_heading" value="{{ department.journey_heading or '' }}">
+        </div>
+        <div class="form-group">
+            <label>Journey Items (JSON Format)</label>
+            <textarea name="journey_items" class="description" id="description" rows="4"
+                placeholder='Description'>{{ department.journey_items or '' }}</textarea>
+        </div>
+        <div class="form-group">
+            <label>Journey Section Image</label>
+
+            <input type="file" name="journey_image_file" accept="image/*">
+
+            <!-- hidden field to store saved path -->
+            <input type="hidden" name="journey_image" id="journey_image" value="{{ department.journey_image }}">
+
+            {% if department.journey_image %}
+            <img src="{{ department.journey_image }}" width="120" style="margin-top:10px;border:1px solid;">
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- FACILITIES TAB -->
+    <div id="facilities" class="tab-content form-section">
+        <h3>Facilities Section</h3>
+        <div class="form-group">
+            <label>Facilities Heading</label>
+            <input type="text" name="facilities_heading" value="{{ department.facilities_heading or '' }}">
+        </div>
+
+        <div class="form-group">
+            <label>Facilities Cards</label>
+            <div id="facilities-wrapper" class="hero-stats-wrapper"></div>
+            <button type="button" onclick="addfacilities()">Add Card</button>
+            <input type="hidden" name="facilities_cards" id="facilities_cards_input">
+        </div>
+    </div>
+
+    <!-- WHY RECOMMEND TAB -->
+    <div id="recommend" class="tab-content form-section">
+        <h3>Why Patients Recommend Us</h3>
+        <div class="form-group">
+            <label>Heading</label>
+            <input type="text" name="recommend_heading" value="{{ department.recommend_heading or '' }}">
+        </div>
+        <div class="form-group">
+            <label>Description</label>
+            <textarea name="recommend_items" id="recommend_items" rows="4"
+                placeholder='Description'>{{ department.recommend_items or '' }}</textarea>
+        </div>
+        <div class="form-group">
+            <label>Section Image</label>
+
+            <input type="file" name="recommend_image_file" accept="image/*">
+
+            <!-- hidden field to store saved path -->
+            <input type="hidden" name="recommend_image" id="recommend_image" value="{{ department.recommend_image }}">
+
+            {% if department.recommend_image %}
+            <img src="{{ department.recommend_image }}" width="120" style="margin-top:10px;border:1px solid;">
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- ADVANCED CARE TAB -->
+    <div id="advanced" class="tab-content form-section">
+        <h3>Advanced Care Section</h3>
+        <div class="form-group">
+            <label>Heading</label>
+            <input type="text" name="advanced_heading" value="{{ department.advanced_heading or '' }}">
+        </div>
+        <div class="form-group">
+            <label>Content</label>
+            <textarea name="advanced_content" id="advanced_content"
+                rows="3">{{ department.advanced_content or '' }}</textarea>
+        </div>
+        <div class="form-group">
+            <label>Section Image</label>
+
+            <input type="file" name="advanced_image_file" accept="image/*">
+
+            <!-- hidden field to store saved path -->
+            <input type="hidden" name="advanced_image" id="advanced_image" value="{{ department.advanced_image }}">
+
+            {% if department.advanced_image %}
+            <img src="{{ department.advanced_image }}" width="120" style="margin-top:10px;border:1px solid;">
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- CTA SECTION TAB -->
+    <div id="cta" class="tab-content form-section">
+        <h3>Call-to-Action Section</h3>
+        <div class="form-group">
+            <label>CTA Heading</label>
+            <input type="text" name="cta_heading" value="{{ department.cta_heading or '' }}">
+        </div>
+        <div class="form-group">
+            <label>CTA Content (Multiple paragraphs separated by ||)</label>
+            <textarea name="cta_content" id="cta_content" rows="4">{{ department.cta_content or '' }}</textarea>
+        </div>
+        <div class="form-group">
+            <label>CTA Phone Number</label>
+            <input type="text" name="cta_phone" value="{{ department.cta_phone or '' }}">
+        </div>
+    </div>
+
+    <!-- Faq TAB -->
+    <div id="faq" class="tab-content form-section">
+        <div class="form-group">
+            <label>Faq Section</label>
+            <div id="faq-wrapper" class="hero-stats-wrapper"></div>
+            <input type="hidden" id="faq_raw" value='{{ department.faq_content | safe }}'>
+            <input type="hidden" name="faq_content" id="faq_content_input">
+            <button type="button" onclick="addFaq()">Add FAQ</button>
+        </div>
+    </div>
+
+    <!-- SEO TAB -->
+    <div id="seo" class="tab-content form-section">
+        <h3>SEO Fields</h3>
+        <div class="form-group">
+            <label>Meta Title</label>
+            <input type="text" name="meta_title" value="{{ department.meta_title or '' }}">
+        </div>
+        <div class="form-group">
+            <label>Meta Keywords</label>
+            <input type="text" name="meta_Keyword" value="{{ department.meta_Keyword or '' }}">
+        </div>
+        <div class="form-group">
+            <label>Meta Description</label>
+            <textarea name="meta_description" rows="3">{{ department.meta_description or '' }}</textarea>
+        </div>
+        <div class="form-group">
+            <label>Meta Robots</label>
+            <select name="meta_robots" id="meta_robots">
+                <option value="index, follow" {% if department.meta_robots=='index, follow' %}selected{% endif %}>Index,
+                    Follow</option>
+                <option value="noindex, nofollow" {% if department.meta_robots=='noindex, nofollow' %}selected{% endif
+                    %}>No Index, No Follow</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- SUBMIT BUTTON -->
+    <div style="margin-top: 30px; text-align: center;">
+        <button type="submit">💾 Save Changes</button>
+    </div>
+</form>
+
+{% endblock %}
+{% block script %}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+
+        if (window.CKEDITOR) {
+
+            ['description', 'overview_content', 'recommend_items', 'advanced_content', 'cta_content'].forEach(id => {
+                let el = document.getElementById(id);
+                if (el) {
+                    CKEDITOR.replace(id, {
+                        height: 250
+                    });
+                }
+            });
+
+        }
+    });
+
+
+    function showTab(tabName) {
+        // Hide all tabs
+        const tabs = document.querySelectorAll('.tab-content');
+        tabs.forEach(tab => tab.classList.remove('active'));
+
+        // Remove active class from all buttons
+        const buttons = document.querySelectorAll('.tab-button');
+        buttons.forEach(btn => btn.classList.remove('active'));
+
+        // Show selected tab
+        document.getElementById(tabName).classList.add('active');
+
+        // Add active class to clicked button
+        event.target.classList.add('active');
+    }
+</script>
+
+<script>
+    let statsData = [];
+
+    try {
+        let raw = `{{ department.hero_stats | default('') | safe }}`;
+
+        if (raw.includes('<div')) {
+            // ✅ OLD HTML → convert to JSON
+            let tempDiv = document.createElement('div');
+            tempDiv.innerHTML = raw;
+
+            let items = tempDiv.querySelectorAll('.stat');
+
+            items.forEach(el => {
+                let number = el.querySelector('.stat-num')?.innerText || '';
+                let label = el.querySelector('.stat-label')?.innerText || '';
+
+                statsData.push({ number, label });
+            });
+
+        } else {
+            // ✅ JSON
+            statsData = raw ? JSON.parse(raw) : [];
+        }
+
+    } catch (e) {
+        console.error('Error parsing hero_stats:', e);
+        statsData = [];
+    }
+
+    function renderStats() {
+        let wrapper = document.getElementById('hero-stats-wrapper');
+        wrapper.innerHTML = '';
+
+        statsData.forEach((item, index) => {
+            wrapper.innerHTML += `
+            <div class="stat-row">
+                <div class=form-group>
+                    <lable><b>Number</b></lable>
+                <input type="text" value="${item.number || ''}" 
+                    onchange="updateStat(${index}, 'number', this.value)">
+                </div>
+                <div class=form-group>
+                    <lable><b>Content</b></lable>
+                <input type="text" value="${item.label || ''}" 
+                    onchange="updateStat(${index}, 'label', this.value)">
+                </div>
+                <button type="button" class="bg-danger text-white" onclick="removeStat(${index})">X</button>
+            </div>
+        `;
+        });
+
+        document.getElementById('hero_stats_input').value = JSON.stringify(statsData);
+    }
+
+    function addStat() {
+        statsData.push({ number: '', label: '' });
+        renderStats();
+    }
+
+    function updateStat(index, key, value) {
+        statsData[index][key] = value;
+        document.getElementById('hero_stats_input').value = JSON.stringify(statsData);
+    }
+
+    function removeStat(index) {
+        statsData.splice(index, 1);
+        renderStats();
+    }
+
+    // Init
+    renderStats();
+</script>
+
+<!-- why choose -->
+
+<script>
+    function addWhyChoose(title = '', content = '', image = '') {
+        let wrapper = document.getElementById('why-choose-wrapper');
+
+        let div = document.createElement('div');
+        div.classList.add('why-item-row');
+
+        div.innerHTML = `
+        ${image ? `<img src="${image}" width="60" style="display:block;margin-top:5px;border:1px solid;">` : ''}
+         <div class=form-group>
+        <lable><b>Image</b></lable>
+        <input type="file" accept="image/*" class="why-image">
+       
+        <input type="hidden" class="why-image-path" value="${image}">
+        </div>
+        <div class=form-group>
+        <lable><b>Title</b></lable>
+        <input type="text" placeholder="Title" value="${title}" class="why-title">
+        </div>
+        <div class=form-group>
+        <lable><b>Content</b></lable>
+        <textarea placeholder="Content" class="why-content">${content}</textarea>
+        </div>
+        <button type="button" onclick="this.parentElement.remove()">X</button>
+    `;
+
+        wrapper.appendChild(div);
+    }
+
+    // Convert image → base64
+    function toBase64(file) {
+        return new Promise((resolve) => {
+            let reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result);
+        });
+    }
+
+
+    // Submit handler
+    document.addEventListener("change", function (e) {
+        if (e.target.classList.contains("why-image")) {
+
+            let row = e.target.closest(".why-item-row");
+
+            let formData = new FormData();
+            formData.append("image", e.target.files[0]);
+
+            fetch("/upload-image", {
+                method: "POST",
+                body: formData
+            })
+                .then(res => res.json())
+                .then(res => {
+
+                    if (!res.path) return;
+
+                    row.querySelector(".why-image-path").value = res.path;
+
+                    let oldImg = row.querySelector("img");
+                    if (oldImg) oldImg.remove();
+
+                    let img = document.createElement("img");
+                    img.src = res.path;
+                    img.width = 60;
+                    img.style.cssText = "display:block;margin-top:5px;border:1px solid;";
+
+                    row.prepend(img);
+                });
+        }
+    });
+
+    document.querySelector("form").addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        let items = [];
+
+        document.querySelectorAll(".why-item-row").forEach(row => {
+
+            let title = row.querySelector(".why-title").value;
+            let content = row.querySelector(".why-content").value;
+            let image = row.querySelector(".why-image-path").value;
+
+            if (title || content) {
+                items.push({ title, content, image });
+            }
+        });
+
+        document.getElementById("why_choose_items_input").value = JSON.stringify(items);
+
+        e.target.submit();
+    });
+
+    document.querySelector("form").addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        let items = [];
+
+        document.querySelectorAll(".why-item-row").forEach(row => {
+
+            let title = row.querySelector(".why-title").value;
+            let content = row.querySelector(".why-content").value;
+            let image = row.querySelector(".why-image-path").value;
+
+            if (title || content) {
+                items.push({ title, content, image });
+            }
+        });
+
+        document.getElementById("why_choose_items_input").value = JSON.stringify(items);
+
+        e.target.submit();
+    });
+
+    // Old data
+    document.addEventListener("DOMContentLoaded", function () {
+
+        let existing = [];
+        let dataEl = document.getElementById("why_data");
+
+        if (dataEl && dataEl.value) {
+            try {
+                existing = JSON.parse(dataEl.value);
+
+                // handle double JSON (if still exists)
+                if (typeof existing === "string") {
+                    existing = JSON.parse(existing);
+                }
+
+            } catch (e) {
+                console.error("Invalid JSON", e);
+            }
+        }
+
+        // populate form
+        existing.forEach(item => {
+            addWhyChoose(
+                item.title || '',
+                item.content || '',
+                item.image || ''
+            );
+        });
+
+    });
+</script>
+
+<!-- Approach -->
+<script>
+    function addApproach(data = {}) {
+        const wrapper = document.getElementById('approach-wrapper');
+
+        const html = `
+    <div class="approach-item">
+
+        <div class="form-group">
+            <label><b>Image</b></label>
+        <div class="flex">
+        <div class="preview">
+            ${data.image ? `<img src="${data.image}" width="80" style="border:1px solid;">` : ''}
+        </div>
+
+            <input type="file" accept="image/*" class="file-input" />
+            <input type="hidden" class="image" value="${data.image || ''}" />
+        </div>
+        </div>
+
+        <div class="form-group">
+            <label><b>Title</b></label>
+            <input type="text" class="title" value="${data.title || ''}" />
+        </div>
+
+        <div class="form-group">
+            <label><b>Content</b></label>
+            <textarea class="description">${data.description || ''}</textarea>
+        </div>
+
+        <button type="button" onclick="removeApproach(this)">X</button>
+    </div>
+    `;
+
+        wrapper.insertAdjacentHTML('beforeend', html);
+        updateApproachJSON();
+    }
+
+    // REMOVE ITEM
+    function removeApproach(btn) {
+        btn.closest('.approach-item').remove();
+        updateApproachJSON();
+    }
+
+    // UPDATE JSON
+    function updateApproachJSON() {
+        const items = document.querySelectorAll('.approach-item');
+        let data = [];
+
+        items.forEach(item => {
+            data.push({
+                title: item.querySelector('.title').value,
+                description: item.querySelector('.description').value,
+                image: item.querySelector('.image').value
+            });
+        });
+
+        document.getElementById('approach_cards_input').value = JSON.stringify(data);
+    }
+
+    // AUTO UPDATE
+    document.addEventListener('input', function (e) {
+        if (e.target.closest('.approach-item')) {
+            updateApproachJSON();
+        }
+    });
+
+    // IMAGE UPLOAD
+    document.addEventListener('change', function (e) {
+        if (e.target.classList.contains("file-input")) {
+            let item = e.target.closest('.approach-item');
+
+            let formData = new FormData();
+            formData.append('image', e.target.files[0]);
+
+            fetch('/upload-image', {
+                method: 'POST',
+                body: formData
+            })
+                .then(res => res.json())
+                .then(res => {
+
+                    if (!res.path) return;
+
+                    item.querySelector('.image').value = res.path;
+
+                    item.querySelector('.preview').innerHTML =
+                        `<img src="${res.path}" width="80" style="border:1px solid;">`;
+
+                    updateApproachJSON();
+                });
+        }
+    });
+    // old data
+    document.addEventListener('DOMContentLoaded', function () {
+        let existing = `{{ department.approach_cards | safe }}`;
+
+        if (existing) {
+            try {
+                let parsed = JSON.parse(existing);
+                parsed.forEach(item => addApproach(item));
+            } catch (e) {
+                addApproach(); // fallback
+            }
+        } else {
+            addApproach(); // default one
+        }
+    });
+</script>
+
+
+<!-- Services -->
+<script>
+    function addServices(data = {}) {
+        const wrapper = document.getElementById('services-wrapper');
+
+        const html = `
+        <div class="services-item">
+
+            <div class=form-group>
+            <lable><b>Image</b></lable>
+            <div class="flex">
+            <div class="preview">
+            ${data.image ? `<img src="${data.image}" width="80" style="border:1px solid;">` : ''}
+            </div>
+            <input type="file" accept="image/*" class="file-input" />
+
+            <input type="hidden" class="image" value="${data.image || ''}" />
+            </div>
+            </div>
+            <div class=form-group>
+            <lable><b>Title</b></lable>
+            <input type="text" placeholder="Title" class="title" value="${data.title || ''}" />
+            </div>
+            <div class=form-group>
+            <lable><b>Description</b></lable>
+            <textarea placeholder="Description" class="description">${data.description || ''}</textarea>
+            </div>
+            <button type="button" onclick="removeServices(this)">X</button>
+        </div>
+    `;
+
+        wrapper.insertAdjacentHTML('beforeend', html);
+        updateServicesJSON();
+    }
+
+    // REMOVE ITEM
+    function removeServices(btn) {
+        btn.closest('.services-item').remove();
+        updateServicesJSON();
+    }
+
+    // UPDATE JSON
+    function updateServicesJSON() {
+        const items = document.querySelectorAll('.services-item');
+        let data = [];
+
+        items.forEach(item => {
+            data.push({
+                title: item.querySelector('.title').value,
+                description: item.querySelector('.description').value,
+                image: item.querySelector('.image').value
+            });
+        });
+
+        document.getElementById('services_data_input').value = JSON.stringify(data);
+    }
+
+    // AUTO UPDATE
+    document.addEventListener('input', function (e) {
+        if (e.target.closest('.services-item')) {
+            updateServicesJSON();
+        }
+    });
+
+    // IMAGE UPLOAD
+    document.addEventListener('change', function (e) {
+        if (e.target.classList.contains('file-input')) {
+
+            let item = e.target.closest('.services-item');
+
+            if (!e.target.files.length) return;
+
+            let formData = new FormData();
+            formData.append('image', e.target.files[0]);
+
+            fetch('/upload-image', {
+                method: 'POST',
+                body: formData
+            })
+                .then(res => res.json())
+                .then(res => {
+
+                    console.log("UPLOAD RESPONSE:", res);
+
+                    if (!res.path) return;
+
+                    // save path
+                    item.querySelector('.image').value = res.path;
+
+                    // FIXED preview update
+                    item.querySelector('.preview').innerHTML =
+                        `<img src="${res.path}" width="80" style="border:1px solid;">`;
+
+                    updateServicesJSON();
+                })
+                .catch(err => console.error('Upload error:', err));
+        }
+    });
+
+    // Old data 
+
+    document.addEventListener('DOMContentLoaded', function () {
+        let existing = `{{ department.services_data | safe }}`;
+
+        if (existing) {
+            try {
+                let parsed = JSON.parse(existing);
+                parsed.forEach(item => addServices(item));
+            } catch (e) {
+                addServices(); // fallback
+            }
+        } else {
+            addServices(); // default one
+        }
+    });
+</script>
+
+<!--  -->
+
+
+<!-- Facilities -->
+<script>
+    function addfacilities(data = {}) {
+        const wrapper = document.getElementById('facilities-wrapper');
+
+        const html = `
+        <div class="facilities-item">
+
+            <div class=form-group>
+            <lable><b>Image</b></lable>
+            <div class="flex">
+            <div class="preview">
+            ${data.image ? `<img src="${data.image}" width="80" style="border:1px solid;">` : ''}
+            </div>
+            <input type="file" accept="image/*" class="file-input" />
+                
+            <input type="hidden" class="image" value="${data.image || ''}" />
+            </div>
+            </div>
+            <div class=form-group>
+            <lable><b>Title</b></lable>
+            <input type="text" placeholder="Title" class="title" value="${data.title || ''}" />
+            </div>
+            <div class=form-group>
+            <lable><b>Description</b></lable>
+            <textarea placeholder="Description" class="description">${data.description || ''}</textarea>
+            </div>
+            <button type="button" onclick="removefacilities(this)">X</button>
+        </div>
+    `;
+
+        wrapper.insertAdjacentHTML('beforeend', html);
+        updatefacilitiesJSON();
+    }
+
+    // REMOVE ITEM
+    function removefacilities(btn) {
+        btn.closest('.facilities-item').remove();
+        updatefacilitiesJSON();
+    }
+
+    // UPDATE JSON
+    function updatefacilitiesJSON() {
+        const items = document.querySelectorAll('.facilities-item');
+        let data = [];
+
+        items.forEach(item => {
+            data.push({
+                title: item.querySelector('.title').value,
+                description: item.querySelector('.description').value,
+                image: item.querySelector('.image').value
+            });
+        });
+
+        document.getElementById('facilities_cards_input').value = JSON.stringify(data);
+    }
+    // AUTO UPDATE
+    document.addEventListener('input', function (e) {
+        if (e.target.closest('.facilities-item')) {
+            updatefacilitiesJSON();
+        }
+    });
+
+    // IMAGE UPLOAD
+    document.addEventListener('change', function (e) {
+        if (e.target.classList.contains('file-input')) {
+
+            let item = e.target.closest('.facilities-item');
+
+            if (!e.target.files.length) return;
+
+            let formData = new FormData();
+            formData.append('image', e.target.files[0]);
+
+            fetch('/upload-image', {
+                method: 'POST',
+                body: formData
+            })
+                .then(res => res.json())
+                .then(res => {
+
+                    if (!res.path) return;
+
+                    item.querySelector('.image').value = res.path;
+
+                    item.querySelector('.preview').innerHTML =
+                        `<img src="${res.path}" width="80" style="border:1px solid;">`;
+
+                    updatefacilitiesJSON();
+                });
+        }
+    });
+
+    // old data
+    document.addEventListener('DOMContentLoaded', function () {
+        let existing = `{{ department.facilities_cards | safe }}`;
+
+        if (existing) {
+            try {
+                let parsed = JSON.parse(existing);
+                parsed.forEach(item => addfacilities(item));
+            } catch (e) {
+                addfacilities(); // fallback
+            }
+        } else {
+            addfacilities(); // default one
+        }
+    });
+</script>
+
+
+
+<!-- Image Section -->
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+
+        function bindImageUpload(fileSelector, hiddenInputId, previewClass) {
+
+            const input = document.querySelector(fileSelector);
+            if (!input) return;
+
+            input.addEventListener('change', function (e) {
+
+                if (!e.target.files.length) return;
+
+                let formData = new FormData();
+                formData.append('image', e.target.files[0]);
+
+                fetch('/upload-image', {
+                    method: 'POST',
+                    body: formData
+                })
+                    .then(res => res.json())
+                    .then(res => {
+
+                        if (!res.path) return;
+
+                        // set hidden input
+                        const hidden = document.getElementById(hiddenInputId);
+                        if (hidden) hidden.value = res.path;
+
+                        // preview
+                        let preview = document.querySelector('.' + previewClass);
+
+                        if (!preview) {
+                            preview = document.createElement('img');
+                            preview.className = previewClass;
+                            preview.style.width = '120px';
+                            preview.style.marginTop = '10px';
+                            preview.style.border = '1px solid';
+                            input.closest('.form-group').appendChild(preview);
+                        }
+
+                        preview.src = res.path;
+                    })
+                    .catch(err => console.error('Upload error:', err));
+            });
+        }
+
+        bindImageUpload('input[name="journey_image_file"]', 'journey_image', 'journey-preview');
+        bindImageUpload('input[name="recommend_image_file"]', 'recommend_image', 'recommend-preview');
+        bindImageUpload('input[name="advanced_image_file"]', 'advanced_image', 'advanced-preview');
+
+    });
+</script>
+
+<!-- faq -->
+<script>
+    function addFaq(data = {}) {
+        const wrapper = document.getElementById('faq-wrapper');
+
+        const uniqueId = 'faq_answer_' + Date.now() + '_' + Math.floor(Math.random() * 1000);
+
+        const html = `
+        <div class="faq-item">
+            <div class="form-group">
+                <label><b>Question</b></label>
+                <input type="text" class="question" value="${data.question || ''}" />
+            </div>
+
+            <div class="form-group">
+                <label><b>Answer</b></label>
+                <textarea class="answer faq_answer" id="${uniqueId}">${data.answer || ''}</textarea>
+            </div>
+
+            <button type="button" onclick="removeFaq(this)">X</button>
+        </div>
+    `;
+
+        wrapper.insertAdjacentHTML('beforeend', html);
+
+        // ✅ init CKEditor immediately (no timeout)
+        if (window.CKEDITOR) {
+            CKEDITOR.replace(uniqueId, { height: 150 });
+
+            CKEDITOR.instances[uniqueId].on('change', function () {
+                updateFaqJSON();
+            });
+        }
+
+        updateFaqJSON();
+    }
+
+    // UPDATE JSON
+    function updateFaqJSON() {
+        const items = document.querySelectorAll('.faq-item');
+        let data = [];
+
+        items.forEach(item => {
+            let textarea = item.querySelector('.answer');
+            let value = '';
+
+            if (textarea.id && CKEDITOR.instances[textarea.id]) {
+                value = CKEDITOR.instances[textarea.id].getData();
+            }
+
+            data.push({
+                question: item.querySelector('.question').value,
+                answer: value
+            });
+        });
+
+        document.getElementById('faq_content_input').value = JSON.stringify(data);
+    }
+
+    function removeFaq(btn) {
+        let item = btn.closest('.faq-item');
+        let textarea = item.querySelector('.answer');
+
+        if (textarea.id && CKEDITOR.instances[textarea.id]) {
+            CKEDITOR.instances[textarea.id].destroy(true);
+        }
+
+        item.remove();
+        updateFaqJSON();
+    }
+
+    // AUTO UPDATE
+    document.addEventListener('input', function (e) {
+        if (e.target.closest('.faq-item')) {
+            updateFaqJSON();
+        }
+    });
+    document.addEventListener('DOMContentLoaded', function () {
+
+        let raw = document.getElementById('faq_raw').value;
+        let existing = [];
+
+        try {
+            existing = raw ? JSON.parse(raw) : [];
+        } catch (e) {
+            existing = [];
+        }
+
+        const wrapper = document.getElementById('faq-wrapper');
+        wrapper.innerHTML = '';
+
+        if (Array.isArray(existing) && existing.length > 0) {
+            existing.forEach(item => addFaq(item));
+        } else {
+            addFaq();
+        }
+
+    });
+</script>
+
+{% endblock %}

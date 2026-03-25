@@ -1,0 +1,961 @@
+{% extends "admin_layout.html" %}
+
+{% block title %}
+Create Department - Admin Panel
+{% endblock %}
+
+{% block content %}
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+<script src="https://cdn.ckeditor.com/4.14.1/standard-all/ckeditor.js"></script>
+
+<style>
+    .tab-buttons {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+    }
+
+    .tab-button {
+        padding: 10px 20px;
+        background: #ddd;
+        border: none;
+        cursor: pointer;
+        border-radius: 4px;
+        transition: all 0.3s;
+    }
+
+    .tab-button.active {
+        background: #0066cc;
+        color: white;
+    }
+
+    .tab-content {
+        display: none;
+    }
+
+    .tab-content.active {
+        display: block;
+    }
+
+    .form-section {
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 15px;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-group label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+        color: #333;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-family: Arial;
+    }
+
+    .form-group textarea {
+        resize: vertical;
+    }
+
+    .cke_notification_warning {
+        display: none;
+    }
+
+    .grid-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+    }
+
+    .grid-1 {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+
+    div#hero-stats-wrapper .stat-row,
+    .hero-stats-wrapper .approach-item,
+    .hero-stats-wrapper .why-item-row,
+    .hero-stats-wrapper .services-item,
+    .hero-stats-wrapper .facilities-item,
+    .hero-stats-wrapper .faq-item {
+        display: flex;
+        gap: 10px;
+        margin: 10px 0;
+        align-items: start;
+        flex-wrap: wrap;
+    }
+
+    .hero-stats-wrapper .form-group {
+        width: 30%;
+    }
+
+    .hero-stats-wrapper button {
+        margin-top: 25px;
+    }
+
+    .preview {
+        min-width: 60px;
+        margin-right: 5px;
+    }
+
+    div#faq-wrapper .form-group {
+        width: 44%;
+    }
+
+    @media (max-width: 768px) {
+        .grid-2 {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .ql-editor {
+        min-height: 150px;
+        background: white;
+    }
+
+    button {
+        padding: 10px 20px;
+        background: #0066cc;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+
+    button:hover {
+        background: #0052a3;
+    }
+
+    .back-btn {
+        background: #666;
+    }
+
+    .back-btn:hover {
+        background: #444;
+    }
+</style>
+
+<h2 class="mb-4" style="font-size: 28px; font-weight: bold;">Create Department</h2>
+<div style="text-align: right; margin-bottom: 20px;">
+    <a href="{{ url_for('admin_departmentsnew') }}" style="text-decoration: none;">
+        <button type="button" class="back-btn">Back to Departments</button>
+    </a>
+</div>
+
+<form method="POST" enctype="multipart/form-data">
+    <div class="tab-buttons">
+        <button type="button" class="tab-button active" onclick="showTab('basic', this)">Basic Info</button>
+        <button type="button" class="tab-button" onclick="showTab('hero', this)">Hero Section</button>
+        <button type="button" class="tab-button" onclick="showTab('overview', this)">Overview</button>
+        <button type="button" class="tab-button" onclick="showTab('approach', this)">Approach</button>
+        <button type="button" class="tab-button" onclick="showTab('services', this)">Services</button>
+        <button type="button" class="tab-button" onclick="showTab('journey', this)">Journey</button>
+        <button type="button" class="tab-button" onclick="showTab('facilities', this)">Facilities</button>
+        <button type="button" class="tab-button" onclick="showTab('recommend', this)">Why Recommend</button>
+        <button type="button" class="tab-button" onclick="showTab('advanced', this)">Advanced Care</button>
+        <button type="button" class="tab-button" onclick="showTab('cta', this)">CTA Section</button>
+        <button type="button" class="tab-button" onclick="showTab('faq', this)">FAQ</button>
+        <button type="button" class="tab-button" onclick="showTab('seo', this)">SEO</button>
+    </div>
+
+    <!-- BASIC INFO -->
+    <div id="basic" class="tab-content active form-section">
+        <h3>Basic Information</h3>
+        <div class="grid-2">
+            <div class="form-group">
+                <label>Department Name</label>
+                <input type="text" name="name" required>
+            </div>
+            <div class="form-group">
+                <label>Slug</label>
+                <input type="text" name="slug" required>
+            </div>
+            <div class="form-group">
+                <label>Status</label>
+                <select name="is_active" id="is_active">
+                    <option value="1" selected>Active</option>
+                    <option value="0">In Active</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <!-- HERO -->
+    <div id="hero" class="tab-content form-section">
+        <h3>Hero Section</h3>
+        <div class="form-group">
+            <label>Main Heading (HTML Supported)</label>
+            <input type="text" name="hero_main_heading">
+        </div>
+        <div class="form-group">
+            <label>Description/Tagline</label>
+            <textarea name="hero_description" rows="3"></textarea>
+        </div>
+        <div class="form-group">
+            <label>Phone Number</label>
+            <input type="text" name="hero_phone" placeholder="e.g., 080 4677 8188">
+        </div>
+        <div class="form-group">
+            <label>Hero Stats</label>
+            <div class="hero-stats-wrapper" id="hero-stats-wrapper"></div>
+            <button type="button" onclick="addStat()">Add Stat</button>
+            <input type="hidden" name="hero_stats" id="hero_stats_input">
+        </div>
+    </div>
+
+    <!-- OVERVIEW -->
+    <div id="overview" class="tab-content form-section">
+        <h3>Overview Section</h3>
+        <div class="form-group">
+            <label>Overview Heading</label>
+            <input type="text" name="overview_heading">
+        </div>
+        <div class="form-group">
+            <label>Overview Content</label>
+            <textarea name="overview_content" id="overview_content"></textarea>
+        </div>
+        <div class="form-group">
+            <label>Why Choose Heading</label>
+            <input type="text" name="why_choose_title">
+        </div>
+        <div class="form-group">
+            <label>Why Choose Items</label>
+            <div class="hero-stats-wrapper" id="why-choose-wrapper"></div>
+            <button type="button" onclick="addWhyChoose()">Add Item</button>
+            <input type="hidden" name="why_choose_items" id="why_choose_items_input">
+        </div>
+    </div>
+
+    <!-- APPROACH -->
+    <div id="approach" class="tab-content form-section">
+        <h3>Our Approach Section</h3>
+        <div class="form-group">
+            <label>Approach Heading</label>
+            <input type="text" name="approach_heading">
+        </div>
+        <div class="form-group">
+            <label>Approach Subheading</label>
+            <textarea name="approach_subheading" rows="2"></textarea>
+        </div>
+        <div class="form-group">
+            <label>Approach Cards</label>
+            <div id="approach-wrapper" class="hero-stats-wrapper"></div>
+            <button type="button" onclick="addApproach()">Add Card</button>
+            <input type="hidden" name="approach_cards" id="approach_cards_input">
+        </div>
+    </div>
+
+    <!-- SERVICES -->
+    <div id="services" class="tab-content form-section">
+        <h3>Services/Conditions Section</h3>
+        <div class="form-group">
+            <label>Services Heading</label>
+            <input type="text" name="services_heading">
+        </div>
+        <div class="form-group">
+            <label>Services Data</label>
+            <div id="services-wrapper" class="hero-stats-wrapper"></div>
+            <button type="button" onclick="addServices()">Add Card</button>
+            <input type="hidden" name="services_data" id="services_data_input">
+        </div>
+    </div>
+
+    <!-- JOURNEY -->
+    <div id="journey" class="tab-content form-section">
+        <h3>Care Journey Section</h3>
+        <div class="form-group">
+            <label>Journey Heading</label>
+            <input type="text" name="journey_heading">
+        </div>
+        <div class="form-group">
+            <label>Journey Items (JSON Format)</label>
+            <textarea name="journey_items" id="description" rows="4" placeholder="Description"></textarea>
+        </div>
+        <div class="form-group">
+            <label>Journey Section Image</label>
+            <input type="file" name="journey_image_file" accept="image/*">
+            <input type="hidden" name="journey_image" id="journey_image">
+        </div>
+    </div>
+
+    <!-- FACILITIES -->
+    <div id="facilities" class="tab-content form-section">
+        <h3>Facilities Section</h3>
+        <div class="form-group">
+            <label>Facilities Heading</label>
+            <input type="text" name="facilities_heading">
+        </div>
+        <div class="form-group">
+            <label>Facilities Cards</label>
+            <div id="facilities-wrapper" class="hero-stats-wrapper"></div>
+            <button type="button" onclick="addfacilities()">Add Card</button>
+            <input type="hidden" name="facilities_cards" id="facilities_cards_input">
+        </div>
+    </div>
+
+    <!-- WHY RECOMMEND -->
+    <div id="recommend" class="tab-content form-section">
+        <h3>Why Patients Recommend Us</h3>
+        <div class="form-group">
+            <label>Heading</label>
+            <input type="text" name="recommend_heading">
+        </div>
+        <div class="form-group">
+            <label>Description</label>
+            <textarea name="recommend_items" id="recommend_items" rows="4" placeholder="Description"></textarea>
+        </div>
+        <div class="form-group">
+            <label>Section Image</label>
+            <input type="file" name="recommend_image_file" accept="image/*">
+            <input type="hidden" name="recommend_image" id="recommend_image">
+        </div>
+    </div>
+
+    <!-- ADVANCED -->
+    <div id="advanced" class="tab-content form-section">
+        <h3>Advanced Care Section</h3>
+        <div class="form-group">
+            <label>Heading</label>
+            <input type="text" name="advanced_heading">
+        </div>
+        <div class="form-group">
+            <label>Content</label>
+            <textarea name="advanced_content" id="advanced_content" rows="3"></textarea>
+        </div>
+        <div class="form-group">
+            <label>Section Image</label>
+            <input type="file" name="advanced_image_file" accept="image/*">
+            <input type="hidden" name="advanced_image" id="advanced_image">
+        </div>
+    </div>
+
+    <!-- CTA -->
+    <div id="cta" class="tab-content form-section">
+        <h3>Call-to-Action Section</h3>
+        <div class="form-group">
+            <label>CTA Heading</label>
+            <input type="text" name="cta_heading">
+        </div>
+        <div class="form-group">
+            <label>CTA Content (Multiple paragraphs separated by ||)</label>
+            <textarea name="cta_content" id="cta_content" rows="4"></textarea>
+        </div>
+        <div class="form-group">
+            <label>CTA Phone Number</label>
+            <input type="text" name="cta_phone">
+        </div>
+    </div>
+
+    <!-- FAQ -->
+    <div id="faq" class="tab-content form-section">
+        <div class="form-group">
+            <label>Faq Section</label>
+            <div id="faq-wrapper" class="hero-stats-wrapper"></div>
+            <input type="hidden" name="faq_content" id="faq_content_input">
+            <button type="button" onclick="addFaq()">Add FAQ</button>
+        </div>
+    </div>
+
+    <!-- SEO -->
+    <div id="seo" class="tab-content form-section">
+        <h3>SEO Fields</h3>
+        <div class="form-group">
+            <label>Meta Title</label>
+            <input type="text" name="meta_title">
+        </div>
+        <div class="form-group">
+            <label>Meta Keywords</label>
+            <input type="text" name="meta_Keyword">
+        </div>
+        <div class="form-group">
+            <label>Meta Description</label>
+            <textarea name="meta_description" rows="3"></textarea>
+        </div>
+        <div class="form-group">
+            <label>Meta Robots</label>
+            <select name="meta_robots" id="meta_robots">
+                <option value="index, follow" selected>Index, Follow</option>
+                <option value="noindex, nofollow">No Index, No Follow</option>
+            </select>
+        </div>
+    </div>
+
+    <div style="margin-top: 30px; text-align: center;">
+        <button type="submit">💾 Save Department</button>
+    </div>
+</form>
+
+{% endblock %}
+
+{% block script %}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        if (window.CKEDITOR) {
+            ['description', 'overview_content', 'recommend_items', 'advanced_content', 'cta_content'].forEach(id => {
+                let el = document.getElementById(id);
+                if (el) {
+                    CKEDITOR.replace(id, { height: 250 });
+                }
+            });
+        }
+    });
+
+    function showTab(tabName, btn) {
+        const tabs = document.querySelectorAll('.tab-content');
+        tabs.forEach(tab => tab.classList.remove('active'));
+
+        const buttons = document.querySelectorAll('.tab-button');
+        buttons.forEach(button => button.classList.remove('active'));
+
+        document.getElementById(tabName).classList.add('active');
+        btn.classList.add('active');
+    }
+</script>
+
+<!-- Hero Stats -->
+<script>
+    let statsData = [];
+
+    function renderStats() {
+        let wrapper = document.getElementById('hero-stats-wrapper');
+        wrapper.innerHTML = '';
+
+        statsData.forEach((item, index) => {
+            wrapper.innerHTML += `
+                <div class="stat-row">
+                    <div class="form-group">
+                        <label><b>Number</b></label>
+                        <input type="text" value="${item.number || ''}" onchange="updateStat(${index}, 'number', this.value)">
+                    </div>
+                    <div class="form-group">
+                        <label><b>Content</b></label>
+                        <input type="text" value="${item.label || ''}" onchange="updateStat(${index}, 'label', this.value)">
+                    </div>
+                    <button type="button" onclick="removeStat(${index})">X</button>
+                </div>
+            `;
+        });
+
+        document.getElementById('hero_stats_input').value = JSON.stringify(statsData);
+    }
+
+    function addStat() {
+        statsData.push({ number: '', label: '' });
+        renderStats();
+    }
+
+    function updateStat(index, key, value) {
+        statsData[index][key] = value;
+        document.getElementById('hero_stats_input').value = JSON.stringify(statsData);
+    }
+
+    function removeStat(index) {
+        statsData.splice(index, 1);
+        renderStats();
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        renderStats();
+    });
+</script>
+
+<!-- Why Choose -->
+<script>
+    function addWhyChoose(title = '', content = '', image = '') {
+        let wrapper = document.getElementById('why-choose-wrapper');
+
+        let div = document.createElement('div');
+        div.classList.add('why-item-row');
+
+        div.innerHTML = `
+            <div class="form-group">
+            <label><b>Image</b></label>
+            <div class="flex">
+            <input type="file" accept="image/*" class="why-image">
+            <input type="hidden" class="why-image-path" value="${image}">
+            <div class="preview">
+                ${image ? `<img src="${image}" width="100" style="display:block;border:1px solid;">` : ''}
+            </div>
+            </div>
+            </div>
+            <div class="form-group">
+                <label><b>Title</b></label>
+                <input type="text" placeholder="Title" value="${title}" class="why-title">
+            </div>
+            <div class="form-group">
+                <label><b>Content</b></label>
+                <textarea placeholder="Content" class="why-content">${content}</textarea>
+            </div>
+            <button type="button" onclick="this.parentElement.remove(); updateWhyChooseJSON();">X</button>
+        `;
+
+        wrapper.appendChild(div);
+        updateWhyChooseJSON();
+    }
+
+    function updateWhyChooseJSON() {
+        let items = [];
+        document.querySelectorAll(".why-item-row").forEach(row => {
+            let title = row.querySelector(".why-title").value;
+            let content = row.querySelector(".why-content").value;
+            let image = row.querySelector(".why-image-path").value;
+
+            if (title || content || image) {
+                items.push({ title, content, image });
+            }
+        });
+
+        document.getElementById("why_choose_items_input").value = JSON.stringify(items);
+    }
+
+    document.addEventListener("change", function (e) {
+        if (e.target.classList.contains("why-image")) {
+            let row = e.target.closest(".why-item-row");
+            let formData = new FormData();
+            formData.append("image", e.target.files[0]);
+
+            fetch("/upload-image", {
+                method: "POST",
+                body: formData
+            })
+                .then(res => res.json())
+                .then(res => {
+                    if (!res.path) return;
+
+                    row.querySelector(".why-image-path").value = res.path;
+                    row.querySelector(".preview").innerHTML = `<img src="${res.path}" width="60" style="display:block;margin-top:5px;border:1px solid;">`;
+                    updateWhyChooseJSON();
+                });
+        }
+    });
+
+    document.addEventListener("input", function (e) {
+        if (e.target.closest(".why-item-row")) {
+            updateWhyChooseJSON();
+        }
+    });
+</script>
+
+<!-- Approach -->
+<script>
+    function addApproach(data = {}) {
+        const wrapper = document.getElementById('approach-wrapper');
+
+        const html = `
+            <div class="approach-item">
+            <div class="form-group">
+            <label><b>Image</b></label>
+            <div class="flex">
+                <input type="file" accept="image/*" class="file-input approach-file-input" />
+                <input type="hidden" class="image" value="${data.image || ''}" />
+                <div class="preview">
+                    ${data.image ? `<img src="${data.image}" width="80" style="display:block;border:1px solid;">` : ''}
+                </div>
+                </div>
+            </div>
+                <div class="form-group">
+                    <label><b>Title</b></label>
+                    <input type="text" placeholder="Title" class="title" value="${data.title || ''}" />
+                </div>
+                <div class="form-group">
+                    <label><b>Content</b></label>
+                    <textarea placeholder="Description" class="description">${data.description || ''}</textarea>
+                </div>
+                <button type="button" onclick="removeApproach(this)">X</button>
+            </div>
+        `;
+
+        wrapper.insertAdjacentHTML('beforeend', html);
+        updateApproachJSON();
+    }
+
+    function removeApproach(btn) {
+        btn.closest('.approach-item').remove();
+        updateApproachJSON();
+    }
+
+    function updateApproachJSON() {
+        const items = document.querySelectorAll('.approach-item');
+        let data = [];
+
+        items.forEach(item => {
+            data.push({
+                title: item.querySelector('.title').value,
+                description: item.querySelector('.description').value,
+                image: item.querySelector('.image').value
+            });
+        });
+
+        document.getElementById('approach_cards_input').value = JSON.stringify(data);
+    }
+
+    document.addEventListener('input', function (e) {
+        if (e.target.closest('.approach-item')) {
+            updateApproachJSON();
+        }
+    });
+
+    document.addEventListener('change', function (e) {
+        if (e.target.classList.contains('approach-file-input')) {
+            let item = e.target.closest('.approach-item');
+            if (!e.target.files.length) return;
+
+            let formData = new FormData();
+            formData.append('image', e.target.files[0]);
+
+            fetch('/upload-image', {
+                method: 'POST',
+                body: formData
+            })
+                .then(res => res.json())
+                .then(res => {
+                    if (!res.path) return;
+                    item.querySelector('.image').value = res.path;
+                    item.querySelector('.preview').innerHTML = `<img src="${res.path}" width="80" style="display:block;margin-top:5px;border:1px solid;">`;
+                    updateApproachJSON();
+                });
+        }
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        addApproach();
+    });
+</script>
+
+<!-- Services -->
+<script>
+    function addServices(data = {}) {
+        const wrapper = document.getElementById('services-wrapper');
+
+        const html = `
+            <div class="services-item">
+                <div class="form-group">
+                <label><b>Image</b></label>
+                <div class="flex">
+                    <input type="file" accept="image/*" class="file-input services-file-input" />
+                    <input type="hidden" class="image" value="${data.image || ''}" />
+                    <div class="preview">
+                        ${data.image ? `<img src="${data.image}" width="80" style="border:1px solid;">` : ''}
+                    </div>
+                </div>
+                </div>
+                <div class="form-group">
+                    <label><b>Title</b></label>
+                    <input type="text" placeholder="Title" class="title" value="${data.title || ''}" />
+                </div>
+                <div class="form-group">
+                    <label><b>Description</b></label>
+                    <textarea placeholder="Description" class="description">${data.description || ''}</textarea>
+                </div>
+                <button type="button" onclick="removeServices(this)">X</button>
+            </div>
+        `;
+
+        wrapper.insertAdjacentHTML('beforeend', html);
+        updateServicesJSON();
+    }
+
+    function removeServices(btn) {
+        btn.closest('.services-item').remove();
+        updateServicesJSON();
+    }
+
+    function updateServicesJSON() {
+        const items = document.querySelectorAll('.services-item');
+        let data = [];
+
+        items.forEach(item => {
+            data.push({
+                title: item.querySelector('.title').value,
+                description: item.querySelector('.description').value,
+                image: item.querySelector('.image').value
+            });
+        });
+
+        document.getElementById('services_data_input').value = JSON.stringify(data);
+    }
+
+    document.addEventListener('input', function (e) {
+        if (e.target.closest('.services-item')) {
+            updateServicesJSON();
+        }
+    });
+
+    document.addEventListener('change', function (e) {
+        if (e.target.classList.contains('services-file-input')) {
+            let item = e.target.closest('.services-item');
+            if (!e.target.files.length) return;
+
+            let formData = new FormData();
+            formData.append('image', e.target.files[0]);
+
+            fetch('/upload-image', {
+                method: 'POST',
+                body: formData
+            })
+                .then(res => res.json())
+                .then(res => {
+                    if (!res.path) return;
+                    item.querySelector('.image').value = res.path;
+                    item.querySelector('.preview').innerHTML = `<img src="${res.path}" width="80" style="border:1px solid;">`;
+                    updateServicesJSON();
+                });
+        }
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        addServices();
+    });
+</script>
+
+<!-- Facilities -->
+<script>
+    function addfacilities(data = {}) {
+        const wrapper = document.getElementById('facilities-wrapper');
+
+        const html = `
+            <div class="facilities-item">
+                <div class="form-group">
+                <label><b>Image</b></label>
+                <div class="flex">
+                    <input type="file" accept="image/*" class="file-input facilities-file-input" />
+                    <input type="hidden" class="image" value="${data.image || ''}" />
+                <div class="preview">
+                    ${data.image ? `<img src="${data.image}" width="80" style="border:1px solid;">` : ''}
+                </div>
+                </div>
+                </div>
+                <div class="form-group">
+                    <label><b>Title</b></label>
+                    <input type="text" placeholder="Title" class="title" value="${data.title || ''}" />
+                </div>
+                <div class="form-group">
+                    <label><b>Description</b></label>
+                    <textarea placeholder="Description" class="description">${data.description || ''}</textarea>
+                </div>
+                <button type="button" onclick="removefacilities(this)">X</button>
+            </div>
+        `;
+
+        wrapper.insertAdjacentHTML('beforeend', html);
+        updatefacilitiesJSON();
+    }
+
+    function removefacilities(btn) {
+        btn.closest('.facilities-item').remove();
+        updatefacilitiesJSON();
+    }
+
+    function updatefacilitiesJSON() {
+        const items = document.querySelectorAll('.facilities-item');
+        let data = [];
+
+        items.forEach(item => {
+            data.push({
+                title: item.querySelector('.title').value,
+                description: item.querySelector('.description').value,
+                image: item.querySelector('.image').value
+            });
+        });
+
+        document.getElementById('facilities_cards_input').value = JSON.stringify(data);
+    }
+
+    document.addEventListener('input', function (e) {
+        if (e.target.closest('.facilities-item')) {
+            updatefacilitiesJSON();
+        }
+    });
+
+    document.addEventListener('change', function (e) {
+        if (e.target.classList.contains('facilities-file-input')) {
+            let item = e.target.closest('.facilities-item');
+            if (!e.target.files.length) return;
+
+            let formData = new FormData();
+            formData.append('image', e.target.files[0]);
+
+            fetch('/upload-image', {
+                method: 'POST',
+                body: formData
+            })
+                .then(res => res.json())
+                .then(res => {
+                    if (!res.path) return;
+                    item.querySelector('.image').value = res.path;
+                    item.querySelector('.preview').innerHTML = `<img src="${res.path}" width="80" style="border:1px solid;">`;
+                    updatefacilitiesJSON();
+                });
+        }
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        addfacilities();
+    });
+</script>
+
+<!-- Single Image Uploads -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+
+        function bindImageUpload(fileSelector, hiddenInputId, previewClass) {
+            const input = document.querySelector(fileSelector);
+            if (!input) return;
+
+            input.addEventListener('change', function (e) {
+                if (!e.target.files.length) return;
+
+                let formData = new FormData();
+                formData.append('image', e.target.files[0]);
+
+                fetch('/upload-image', {
+                    method: 'POST',
+                    body: formData
+                })
+                    .then(res => res.json())
+                    .then(res => {
+                        if (!res.path) return;
+
+                        const hidden = document.getElementById(hiddenInputId);
+                        if (hidden) hidden.value = res.path;
+
+                        let preview = document.querySelector('.' + previewClass);
+                        if (!preview) {
+                            preview = document.createElement('img');
+                            preview.className = previewClass;
+                            preview.style.width = '120px';
+                            preview.style.marginTop = '10px';
+                            preview.style.border = '1px solid';
+                            input.closest('.form-group').appendChild(preview);
+                        }
+
+                        preview.src = res.path;
+                    })
+                    .catch(err => console.error('Upload error:', err));
+            });
+        }
+
+        bindImageUpload('input[name="journey_image_file"]', 'journey_image', 'journey-preview');
+        bindImageUpload('input[name="recommend_image_file"]', 'recommend_image', 'recommend-preview');
+        bindImageUpload('input[name="advanced_image_file"]', 'advanced_image', 'advanced-preview');
+    });
+</script>
+
+<!-- FAQ -->
+<script>
+    function addFaq(data = {}) {
+        const wrapper = document.getElementById('faq-wrapper');
+
+        const html = `
+            <div class="faq-item">
+                <div class="form-group">
+                    <label><b>Question</b></label>
+                    <input type="text" placeholder="Question" class="question" value="${data.question || ''}" />
+                </div>
+                <div class="form-group">
+                    <label><b>Answer</b></label>
+                    <textarea placeholder="Answer" class="answer faq_answer">${data.answer || ''}</textarea>
+                </div>
+                <button type="button" onclick="removeFaq(this)">X</button>
+            </div>
+        `;
+
+        wrapper.insertAdjacentHTML('beforeend', html);
+
+        setTimeout(() => {
+            if (window.CKEDITOR) {
+                const el = wrapper.lastElementChild.querySelector('.faq_answer');
+                let id = 'faq_answer_' + Date.now() + '_' + Math.floor(Math.random() * 1000);
+                el.id = id;
+
+                CKEDITOR.replace(id, { height: 150 });
+
+                CKEDITOR.instances[id].on('change', function () {
+                    el.value = this.getData();
+                    updateFaqJSON();
+                });
+            }
+        }, 100);
+
+        updateFaqJSON();
+    }
+
+    function updateFaqJSON() {
+        const items = document.querySelectorAll('.faq-item');
+        let data = [];
+
+        items.forEach(item => {
+            let textarea = item.querySelector('.answer');
+            let value = textarea.value;
+
+            if (textarea.id && CKEDITOR.instances[textarea.id]) {
+                value = CKEDITOR.instances[textarea.id].getData();
+            }
+
+            data.push({
+                question: item.querySelector('.question').value,
+                answer: value
+            });
+        });
+
+        document.getElementById('faq_content_input').value = JSON.stringify(data);
+    }
+
+    function removeFaq(btn) {
+        let item = btn.closest('.faq-item');
+        let textarea = item.querySelector('.answer');
+
+        if (textarea.id && CKEDITOR.instances[textarea.id]) {
+            CKEDITOR.instances[textarea.id].destroy(true);
+        }
+
+        item.remove();
+        updateFaqJSON();
+    }
+
+    document.addEventListener('input', function (e) {
+        if (e.target.closest('.faq-item')) {
+            updateFaqJSON();
+        }
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        addFaq();
+    });
+</script>
+
+<!-- Final Submit -->
+<script>
+    document.querySelector("form").addEventListener("submit", function () {
+        if (window.CKEDITOR) {
+            for (let instance in CKEDITOR.instances) {
+                CKEDITOR.instances[instance].updateElement();
+            }
+        }
+
+        updateWhyChooseJSON();
+        updateApproachJSON();
+        updateServicesJSON();
+        updatefacilitiesJSON();
+        updateFaqJSON();
+
+        document.getElementById('hero_stats_input').value = JSON.stringify(statsData);
+    });
+</script>
+{% endblock %}
