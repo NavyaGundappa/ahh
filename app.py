@@ -30,6 +30,7 @@ import os
 from functools import wraps
 import io
 from sqlalchemy.orm import joinedload
+from models import DepartmentNew
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
@@ -3741,6 +3742,232 @@ def delete_faq(faq_id):  # Changed from 'id' to 'faq_id'
     flash("FAQ deleted successfully!", "success")
     return redirect(url_for('admin_department_overview'))
 
+
+# ------------------ ADMIN: Department list New ------------------
+
+@app.route('/admin/departments-new')
+@login_required
+def admin_departmentsnew():
+
+    departments = DepartmentNew.query.all()
+
+    admin_id = session.get("admin_id")
+    user = User.query.get(admin_id)
+
+    modules = [
+        'banners','doctors','counters','testimonials','specialities',
+        'departments','health_packages','sports_packages','department_content',
+        'users','callback_requests','reviews','blogs','bmw_report','life_moments'
+    ]
+
+    access = {module: False for module in modules}
+
+    if user and user.access:
+        for module in modules:
+            access[module] = getattr(user.access, module, False)
+
+    return render_template(
+        "admin/departments/list.html",
+        departments=departments,
+        access=access,
+        current_user=user
+    )
+    
+
+@app.route('/admin/departments-new/delete/<int:id>', methods=['POST'])
+@login_required
+def delete_department(id):
+    try:
+        department = DepartmentNew.query.get_or_404(id)
+
+        db.session.delete(department)
+        db.session.commit()
+
+        flash("Deleted successfully", "success")
+    except Exception as e:
+        db.session.rollback()
+        flash(str(e), "danger")
+
+    return redirect(url_for('admin_departmentsnew'))
+
+
+# ------------------ ADMIN: Department New Create ------------------
+@app.route('/admin/departments-new/create', methods=['GET', 'POST'])
+def create_department():
+    admin_id = session.get("admin_id")
+    user = User.query.get(admin_id)
+
+    modules = [
+        'banners', 'doctors', 'counters', 'testimonials', 'specialities',
+        'departments', 'health_packages', 'sports_packages', 'department_content',
+        'users', 'callback_requests', 'reviews', 'blogs', 'bmw_report', 'life_moments'
+    ]
+
+    access = {module: False for module in modules}
+
+    if user and user.access:
+        for module in modules:
+            access[module] = getattr(user.access, module, False)
+
+    if request.method == 'POST':
+        try:
+            department = DepartmentNew(
+                name=request.form.get('name'),
+                slug=request.form.get('slug'),
+                hero_main_heading=request.form.get('hero_main_heading'),
+                hero_description=request.form.get('hero_description'),
+                hero_phone=request.form.get('hero_phone'),
+                hero_stats=request.form.get('hero_stats'),
+                overview_heading=request.form.get('overview_heading'),
+                overview_content=request.form.get('overview_content'),
+                why_choose_title=request.form.get('why_choose_title'),
+                why_choose_items=request.form.get('why_choose_items'),
+                approach_heading=request.form.get('approach_heading'),
+                approach_subheading=request.form.get('approach_subheading'),
+                approach_cards=request.form.get('approach_cards'),
+                services_heading=request.form.get('services_heading'),
+                services_data=request.form.get('services_data'),
+                journey_heading=request.form.get('journey_heading'),
+                journey_items=request.form.get('journey_items'),
+                journey_image=request.form.get('journey_image'),
+                facilities_heading=request.form.get('facilities_heading'),
+                facilities_cards=request.form.get('facilities_cards'),
+                recommend_heading=request.form.get('recommend_heading'),
+                recommend_items=request.form.get('recommend_items'),
+                recommend_image=request.form.get('recommend_image'),
+                advanced_heading=request.form.get('advanced_heading'),
+                advanced_content=request.form.get('advanced_content'),
+                advanced_image=request.form.get('advanced_image'),
+                cta_heading=request.form.get('cta_heading'),
+                cta_content=request.form.get('cta_content'),
+                cta_phone=request.form.get('cta_phone'),
+                meta_title=request.form.get('meta_title'),
+                meta_description=request.form.get('meta_description'),
+                meta_Keyword=request.form.get('meta_Keyword'),
+                faq_content=request.form.get('faq_content'),
+                meta_robots=request.form.get('meta_robots'),
+                is_active=True
+            )
+
+            db.session.add(department)
+            db.session.commit()
+
+            flash("Department created successfully", "success")
+            return redirect('/admin/departments-new')
+
+        except Exception as e:
+            db.session.rollback()
+            flash(f"Error creating department: {str(e)}", "danger")
+
+    return render_template("admin/departments/create.html", access=access, current_user=user)
+# ------------------ ADMIN: Department New Edit ------------------
+
+
+@app.route('/admin/departments-new/edit/<int:id>', methods=['GET','POST'])
+@login_required
+def edit_department_new(id):
+
+    department = DepartmentNew.query.get_or_404(id)
+    
+    admin_id = session.get("admin_id")
+    user = User.query.get(admin_id)
+
+    modules = [
+        'banners','doctors','counters','testimonials','specialities',
+        'departments','health_packages','sports_packages','department_content',
+        'users','callback_requests','reviews','blogs','bmw_report','life_moments'
+    ]
+
+    access = {module: False for module in modules}
+
+    if user and user.access:
+        for module in modules:
+            access[module] = getattr(user.access, module, False)
+
+
+    if request.method == 'POST':
+        # Basic Info
+        department.name = request.form.get('name')
+        department.slug = request.form.get('slug')
+        department.is_active = request.form.get("is_active") == "1"
+        
+        # Hero Section
+        department.hero_main_heading = request.form.get('hero_main_heading')
+        department.hero_description = request.form.get('hero_description')
+        department.hero_phone = request.form.get('hero_phone')
+         # ✅ FIXED JSON HANDLING
+        hero_stats = request.form.get('hero_stats')
+
+        try:
+            parsed_stats = json.loads(hero_stats) if hero_stats else []
+            department.hero_stats = json.dumps(parsed_stats)
+        except Exception as e:
+            print("Hero Stats JSON Error:", e)
+            department.hero_stats = '[]'
+        
+        
+        # Overview Section
+        department.overview_heading = request.form.get('overview_heading')
+        department.overview_content = request.form.get('overview_content')
+        department.why_choose_title = request.form.get('why_choose_title')
+        department.why_choose_items = request.form.get('why_choose_items')
+        
+        # Approach Section
+        department.approach_heading = request.form.get('approach_heading')
+        department.approach_subheading = request.form.get('approach_subheading')
+        department.approach_cards = request.form.get('approach_cards')
+        
+        # Services Section
+        department.services_heading = request.form.get('services_heading')
+        department.services_data = request.form.get('services_data')
+        
+        # Journey Section
+        department.journey_heading = request.form.get('journey_heading')
+        department.journey_items = request.form.get('journey_items')
+        department.journey_image = request.form.get('journey_image')
+        
+        # Facilities Section
+        department.facilities_heading = request.form.get('facilities_heading')
+        department.facilities_cards = request.form.get('facilities_cards')
+        
+        # Why Recommend Section
+        department.recommend_heading = request.form.get('recommend_heading')
+        department.recommend_items = request.form.get('recommend_items')
+        department.recommend_image = request.form.get('recommend_image')
+        
+        # Advanced Care Section
+        department.advanced_heading = request.form.get('advanced_heading')
+        department.advanced_content = request.form.get('advanced_content')
+        department.advanced_image = request.form.get('advanced_image')
+        
+        # CTA Section
+        department.cta_heading = request.form.get('cta_heading')
+        department.cta_content = request.form.get('cta_content')
+        department.cta_phone = request.form.get('cta_phone')
+        
+        
+        department.faq_content = request.form.get('faq_content')
+        
+        # SEO Fields
+        department.meta_title = request.form.get('meta_title')
+        department.meta_description = request.form.get('meta_description')
+        department.meta_Keyword = request.form.get('meta_Keyword')
+        department.meta_robots = request.form.get('meta_robots')
+        
+
+        db.session.commit()
+        
+
+        flash("Department updated successfully", "success")
+        return redirect(url_for('admin_departmentsnew'))
+
+    return render_template(
+        "admin/departments/edit.html",
+        department=department,
+        access=access,
+        current_user=user
+    )
+# ------------------ ADMIN: Department New End ------------------
 
 # admin routes end -------------------------------------------------------------------------------------------------------------------------
 migrate = Migrate(app, db)
