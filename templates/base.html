@@ -8,14 +8,16 @@
     <meta name="format-detection" content="telephone=yes">
     <meta name="HandheldFriendly" content="true">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+     {% if not request.path.startswith('/departments-new') %}
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    {% endif %}
     <link rel="canonical" href="{{ request.url }}">
     <meta name="author" content="Aarogyahastha Pvt Ltd">
     <meta name="designer" content="Aarogyahastha Pvt Ltd">
     <meta name="publisher" content="Aarogyahastha Pvt Ltd">
     <meta name="no-email-collection" content="http://www.unspam.com/noemailcollection/">
     <meta name="distribution" content="web">
-    <meta name="keywords" content="">
+    <meta name="keywords" content="{% block keywords %}{% endblock %}">
 
     <link rel="icon" type="image/x-icon" href="/static/img/fav.png">
     <title>{% block title %}{% endblock %}</title>
