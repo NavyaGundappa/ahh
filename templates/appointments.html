@@ -133,8 +133,18 @@
 {% block scripts %}
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        // This script dynamically adjusts the iframe height to create a seamless, single-scroll experience.
 
+        // --- 1. IFRAME URL UPDATE LOGIC ---
+        const iframe = document.getElementById('appointment-page-iframe');
+        const queryString = window.location.search; // Grabs "?navya" or any other parameters from the URL
+
+        // If there's a query string in the main URL, append it to the iframe's base src
+        if (queryString && iframe) {
+            const baseUrl = iframe.getAttribute('src');
+            iframe.setAttribute('src', baseUrl + queryString);
+        }
+
+        // --- 2. EXISTING RESIZE LOGIC ---
         function resizeIframe() {
             const header = document.querySelector('.new-header');
             const breadcrumbs = document.getElementById('breadcrumb-nav');
