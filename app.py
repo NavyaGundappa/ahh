@@ -3759,6 +3759,19 @@ def delete_faq(faq_id):  # Changed from 'id' to 'faq_id'
 
 # ------------------ ADMIN: Department  New ------------------
 
+@app.route('/upload-image', methods=['POST'])
+def upload_image():
+    file = request.files['image']
+
+    filename = secure_filename(file.filename)
+    filepath = os.path.join('static/uploads', filename)
+
+    file.save(filepath)
+
+    return jsonify({
+        "path": "/static/uploads/" + filename
+    })
+
 
 @app.route('/departments-new/<slug>')
 def departmentnew_page(slug):
