@@ -450,3 +450,70 @@ class FAQ(db.Model):
 
     department = db.relationship(
         'Department', backref=db.backref('faqs', lazy=True))
+
+
+
+
+
+
+class DepartmentNew(db.Model):
+    __tablename__ = "department_new"
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(200), nullable=False)
+    slug = db.Column(db.String(200), unique=True, nullable=False)
+    meta_title = db.Column(db.String(255))
+    meta_description = db.Column(db.Text)
+    meta_Keyword = db.Column(db.Text)
+    faq_content = db.Column(db.Text, nullable=True)
+    meta_robots = db.Column(db.String(255), nullable=True)
+    
+    # Hero Section
+    hero_main_heading = db.Column(db.Text, nullable=True)  # Main heading text (supports HTML)
+    hero_description = db.Column(db.Text, nullable=True)  # Hero paragraph
+    hero_phone = db.Column(db.String(20), nullable=True)  # Phone number
+    hero_stats = db.Column(db.Text, nullable=True)  # JSON: [{"number":"15,000+", "label":"Patients Treated"}]
+    
+    # Overview Section
+    overview_heading = db.Column(db.Text, nullable=True)  # Supports HTML
+    overview_content = db.Column(db.Text, nullable=True)  # Multiple paragraphs, separated by || (supports HTML)
+    why_choose_title = db.Column(db.Text, nullable=True)
+    why_choose_items = db.Column(db.Text, nullable=True)  # JSON array of why-choose items
+    
+    # Approach Section
+    approach_heading = db.Column(db.Text, nullable=True)  # Supports HTML
+    approach_subheading = db.Column(db.Text, nullable=True)  # Supports HTML
+    approach_cards = db.Column(db.Text, nullable=True)  # JSON array with icon, heading, description (supports HTML)
+    
+    # Services Section
+    services_heading = db.Column(db.Text, nullable=True)  # Supports HTML
+    services_data = db.Column(db.Text, nullable=True)  # JSON array with 6 service cards (supports HTML)
+
+    # Journey & Facilities Sections
+    journey_heading = db.Column(db.Text, nullable=True)  # Supports HTML
+    journey_items = db.Column(db.Text, nullable=True)  # JSON array (supports HTML)
+    journey_image = db.Column(db.String(300), nullable=True)
+    
+    facilities_heading = db.Column(db.Text, nullable=True)  # Supports HTML
+    facilities_cards = db.Column(db.Text, nullable=True)  # JSON array (supports HTML)
+    
+    # Why Patients Recommend
+    recommend_heading = db.Column(db.Text, nullable=True)  # Supports HTML
+    recommend_items = db.Column(db.Text, nullable=True)  # JSON array (supports HTML)
+    recommend_image = db.Column(db.String(300), nullable=True)
+    
+    # Advanced Care Section
+    advanced_heading = db.Column(db.Text, nullable=True)  # Supports HTML
+    advanced_content = db.Column(db.Text, nullable=True)  # Supports HTML
+    advanced_image = db.Column(db.String(300), nullable=True)
+    
+    # CTA Section
+    cta_heading = db.Column(db.Text, nullable=True)  # Supports HTML
+    cta_content = db.Column(db.Text, nullable=True)  # Supports HTML
+    cta_phone = db.Column(db.String(20), nullable=True)
+    
+    is_active = db.Column(db.Boolean, default=True)
+    created_at = db.Column(db.DateTime, server_default=db.func.now())
+    updated_at = db.Column(db.DateTime, server_default=db.func.now(), onupdate=db.func.now())
+    
+    

@@ -8,14 +8,16 @@
     <meta name="format-detection" content="telephone=yes">
     <meta name="HandheldFriendly" content="true">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+    {% if not request.path.startswith('/departments-new') %}
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    {% endif %}
     <link rel="canonical" href="{{ request.url }}">
     <meta name="author" content="Aarogyahastha Pvt Ltd">
     <meta name="designer" content="Aarogyahastha Pvt Ltd">
     <meta name="publisher" content="Aarogyahastha Pvt Ltd">
     <meta name="no-email-collection" content="http://www.unspam.com/noemailcollection/">
     <meta name="distribution" content="web">
-    <meta name="keywords" content="">
+    <meta name="keywords" content="{% block keywords %}{% endblock %}">
 
     <link rel="icon" type="image/x-icon" href="/static/img/fav.png">
     <title>{% block title %}{% endblock %}</title>
@@ -429,9 +431,11 @@
             line-height: 1;
             cursor: pointer;
         }
-.logo-wrapper.new-logo-wrapper img.header-logo-img.new-logo-img {
-    width: 80px;
-}
+
+        .logo-wrapper.new-logo-wrapper img.header-logo-img.new-logo-img {
+            width: 80px;
+        }
+
         .nav-close-btn {
             position: absolute;
             top: 10px;
@@ -485,7 +489,7 @@
             transform: none;
         }
 
-        #mobile-nav .dropdown > a {
+        #mobile-nav .dropdown>a {
             font-weight: 700;
         }
 
@@ -980,7 +984,7 @@
     <div class="nav-overlay"></div>
 
     <div class="left-sidebar">
-        <a href="/appointments" class="icon-link">
+        <a href="https://aarogyahastha.fyndbetter.com/" class="icon-link">
             <img src="/static/img/book-appointment.png" alt="Book Appointment Icon">
             <span class="tooltip-text">Book an Appointment</span>
         </a>
@@ -1050,10 +1054,12 @@
                 <div class="container nav-content">
                     <ul id="mobile-nav" class="nav-list d-lg-none">
                         <li class="nav-close-wrap">
-                            <button class="nav-close-btn" id="mobile-menu-close" type="button" aria-label="Close menu">×</button>
+                            <button class="nav-close-btn" id="mobile-menu-close" type="button"
+                                aria-label="Close menu">×</button>
                         </li>
                         <li><a class="nav-links" href="/">Home</a></li>
-                        <li><a class="nav-links" href="/appointments">Appointments</a></li>
+                        <li><a class="nav-links" href="https://aarogyahastha.fyndbetter.com/"
+                                target="_blank">Appointments</a></li>
                         <li><a class="nav-links" href="/doctors">Doctors</a></li>
                         <li><a class="nav-links" href="/departments/">Departments</a></li>
                         <li><a class="nav-links" href="/health-packages">Health Packages</a></li>
@@ -1064,7 +1070,8 @@
                             <a class="nav-links" href="/contact">Contact</a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="https://www.google.com/search?sca_esv=01d7d1da4f3739f4&sxsrf=AE3TifMajnR1cj7CV7KMp-OAhDhG6-ag5A:1757584508053&si=AMgyJEtREmoPL4P1I5IDCfuA8gybfVI2d5Uj7QMwYCZHKDZ-E67a9GN5xsFdNX82bZli0D47ZU-t7_RrF_VvCuEUJnWTI5SR80ndLu5MxI-lgdtIvv6GkmwZO2uyJfSHoUpzWU5bjtfVoFrfNvZ8hwgIvFvNDwqWmX3a7tdbZfx8SWbB5YgDksnqmrDV4yojH420D2gkt6js&q=AAROGYA+HASTHA+HOSPITALS+-+CENTRE+FOR+SURGICAL+EXCELLENCE+Reviews&sa=X&ved=2ahUKEwiMnY_CuNCPAxXKTGwGHZhvD64Q0bkNegQIKhAD&biw=1280&bih=585&dpr=1.5#lrd=0x3bae132a0bbeb64b:0x626c13b98813a8a3,3,,,," target="_blank">Review us</a>
+                                    <a href="https://www.google.com/search?sca_esv=01d7d1da4f3739f4&sxsrf=AE3TifMajnR1cj7CV7KMp-OAhDhG6-ag5A:1757584508053&si=AMgyJEtREmoPL4P1I5IDCfuA8gybfVI2d5Uj7QMwYCZHKDZ-E67a9GN5xsFdNX82bZli0D47ZU-t7_RrF_VvCuEUJnWTI5SR80ndLu5MxI-lgdtIvv6GkmwZO2uyJfSHoUpzWU5bjtfVoFrfNvZ8hwgIvFvNDwqWmX3a7tdbZfx8SWbB5YgDksnqmrDV4yojH420D2gkt6js&q=AAROGYA+HASTHA+HOSPITALS+-+CENTRE+FOR+SURGICAL+EXCELLENCE+Reviews&sa=X&ved=2ahUKEwiMnY_CuNCPAxXKTGwGHZhvD64Q0bkNegQIKhAD&biw=1280&bih=585&dpr=1.5#lrd=0x3bae132a0bbeb64b:0x626c13b98813a8a3,3,,,,"
+                                        target="_blank">Review us</a>
                                 </li>
                                 <li><a href="#" class="write-review-btn">Write a message to ED</a></li>
                             </ul>
@@ -1073,7 +1080,8 @@
 
                     <ul class="main-nav" id="main-navigation">
                         <li><a class="nav-links" href="/">Home</a></li>
-                        <li><a class="nav-links" href="/appointments">Appointments</a></li>
+                        <li><a class="nav-links" href="https://aarogyahastha.fyndbetter.com/"
+                                target="_blank">Appointments</a></li>
                         <li><a class="nav-links" href="/doctors">Doctors</a></li>
                         <li><a class="nav-links" href="/departments/">Departments</a></li>
                         <li><a class="nav-links" href="/health-packages">Health Packages</a></li>
@@ -1093,11 +1101,13 @@
                             <a class="nav-links" href="/contact">Contact <i class="fa fa-angle-down"></i></a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="https://www.google.com/search?sca_esv=01d7d1da4f3739f4&sxsrf=AE3TifONK5RnA4evxGz8cGk4CrHNvVAxYg:1757584553118&si=AMgyJEtREmoPL4P1I5IDCfuA8gybfVI2d5Uj7QMwYCZHKDZ-E67a9GN5xsFdNX82bZli0D47ZU-t7_RrF_VvCuEUJnWTI5SR80ndLu5MxI-lgdtIvv6GkmwZO2uyJfSHoUpzWU5bjtfVoFrfNvZ8hwgIvFvNDwqWmX3a7tdbZfx8SWbB5YgDksnqmrDV4yojH420D2gkt6js&q=AAROGYA+HASTHA+HOSPITALS+-+CENTRE+FOR+SURGICAL+EXCELLENCE+Reviews&sa=X&ved=2ahUKEwjU_M3XuNCPAxU-RmwGHaDaFFcQ0bkNegQIKBAD&biw=1280&bih=585&dpr=1.5#lrd=0x3bae132a0bbeb64b:0x626c13b98813a8a3,3,,,," target="_blank">
+                                    <a href="https://www.google.com/search?sca_esv=01d7d1da4f3739f4&sxsrf=AE3TifONK5RnA4evxGz8cGk4CrHNvVAxYg:1757584553118&si=AMgyJEtREmoPL4P1I5IDCfuA8gybfVI2d5Uj7QMwYCZHKDZ-E67a9GN5xsFdNX82bZli0D47ZU-t7_RrF_VvCuEUJnWTI5SR80ndLu5MxI-lgdtIvv6GkmwZO2uyJfSHoUpzWU5bjtfVoFrfNvZ8hwgIvFvNDwqWmX3a7tdbZfx8SWbB5YgDksnqmrDV4yojH420D2gkt6js&q=AAROGYA+HASTHA+HOSPITALS+-+CENTRE+FOR+SURGICAL+EXCELLENCE+Reviews&sa=X&ved=2ahUKEwjU_M3XuNCPAxU-RmwGHaDaFFcQ0bkNegQIKBAD&biw=1280&bih=585&dpr=1.5#lrd=0x3bae132a0bbeb64b:0x626c13b98813a8a3,3,,,,"
+                                        target="_blank">
                                         <i class="fa-solid fa-star"></i> Review us
                                     </a>
                                 </li>
-                                <li><a href="#" class="write-review-btn"><i class="fa-solid fa-envelope"></i> Write a message to ED</a></li>
+                                <li><a href="#" class="write-review-btn"><i class="fa-solid fa-envelope"></i> Write a
+                                        message to ED</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -1125,13 +1135,15 @@
                     <input type="text" id="reviewer-name" name="reviewer-name" placeholder="Your Name" required>
                 </div>
                 <div class="login-form-group">
-                    <input type="number" id="reviewer-number" name="reviewer-number" placeholder="Mobile Number" required>
+                    <input type="number" id="reviewer-number" name="reviewer-number" placeholder="Mobile Number"
+                        required>
                 </div>
                 <div class="login-form-group">
                     <input type="email" id="reviewer-email" name="reviewer-email" placeholder="Email Address" required>
                 </div>
                 <div class="login-form-group">
-                    <textarea id="review-message" name="review-message" rows="4" placeholder="Your Message..." required></textarea>
+                    <textarea id="review-message" name="review-message" rows="4" placeholder="Your Message..."
+                        required></textarea>
                 </div>
                 <div class="login-form-group">
                     <button type="submit">Submit</button>
@@ -1144,27 +1156,38 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-column">
-                    <div class="logo-wrapper"><img loading="lazy" src="/static/img/logo.png" alt="AarogyaHastha Hospitals Logo"></div>
+                    <div class="logo-wrapper"><img loading="lazy" src="/static/img/logo.png"
+                            alt="AarogyaHastha Hospitals Logo"></div>
                     <p>
-                        <a href="https://www.google.com/maps/dir//Site+No.+2,+No.+2816%2F2,+SY.87,+Kasavanahalli+Main+Rd,+near+1st+Cross+Road,+opposite+HM+Symphony,+Bengaluru,+Karnataka+560035/@12.9007391,77.6745367,21769m/data=!3m1!1e3!4m8!4m7!1m0!1m5!1m1!1s0x3bae132a0bbeb64b:0x626c13b98813a8a3!2m2!1d77.67569!2d12.9005956?entry=ttu&g_ep=EgoyMDI1MDkxNi4wIKXMDSoASAFQAw%3D%3D" target="_blank" style="text-decoration: none; color: inherit;">
-                            Site No. 2, Kasavanahalli Main Rd, near 1st Cross Road, opposite HM Symphony, Bengaluru, Karnataka 560035
+                        <a href="https://www.google.com/maps/dir//Site+No.+2,+No.+2816%2F2,+SY.87,+Kasavanahalli+Main+Rd,+near+1st+Cross+Road,+opposite+HM+Symphony,+Bengaluru,+Karnataka+560035/@12.9007391,77.6745367,21769m/data=!3m1!1e3!4m8!4m7!1m0!1m5!1m1!1s0x3bae132a0bbeb64b:0x626c13b98813a8a3!2m2!1d77.67569!2d12.9005956?entry=ttu&g_ep=EgoyMDI1MDkxNi4wIKXMDSoASAFQAw%3D%3D"
+                            target="_blank" style="text-decoration: none; color: inherit;">
+                            Site No. 2, Kasavanahalli Main Rd, near 1st Cross Road, opposite HM Symphony, Bengaluru,
+                            Karnataka 560035
                         </a>
                     </p>
                     <div class="social-icons mt-4">
-                        <a href="https://www.instagram.com/aarogyahastha/" target="_blank"><img src="/static/img/icon-insta.png" alt="Instagram"></a>
-                        <a href="https://www.facebook.com/aarogyahastha" target="_blank"><img src="/static/img/icon-fb.png" alt="Facebook"></a>
-                        <a href="https://www.linkedin.com/company/aarogya-hastha/" target="_blank"><img src="/static/img/icon-linkedin.png" alt="LinkedIn"></a>
-                        <a href="https://twitter.com/AarogyaHastha" target="_blank"><img src="/static/img/icon-twitter.png" alt="Twitter"></a>
-                        <a href="https://www.youtube.com/channel/UCeQv8lTLIT4btbjgLxYzYrw" target="_blank"><img src="/static/img/icon-youtube.png" alt="YouTube"></a>
-                        <a href="javascript:void(0)" onclick="showChromePopup()"><img src="/static/img/icon-whatsapp.png" alt="WhatsApp"></a>
+                        <a href="https://www.instagram.com/aarogyahastha/" target="_blank"><img
+                                src="/static/img/icon-insta.png" alt="Instagram"></a>
+                        <a href="https://www.facebook.com/aarogyahastha" target="_blank"><img
+                                src="/static/img/icon-fb.png" alt="Facebook"></a>
+                        <a href="https://www.linkedin.com/company/aarogya-hastha/" target="_blank"><img
+                                src="/static/img/icon-linkedin.png" alt="LinkedIn"></a>
+                        <a href="https://twitter.com/AarogyaHastha" target="_blank"><img
+                                src="/static/img/icon-twitter.png" alt="Twitter"></a>
+                        <a href="https://www.youtube.com/channel/UCeQv8lTLIT4btbjgLxYzYrw" target="_blank"><img
+                                src="/static/img/icon-youtube.png" alt="YouTube"></a>
+                        <a href="javascript:void(0)" onclick="showChromePopup()"><img
+                                src="/static/img/icon-whatsapp.png" alt="WhatsApp"></a>
                     </div>
                     <div class="app-download">
                         <h4 style="font-size: 16px; margin-bottom: 15px;">Download App for more benefits</h4>
                         <div class="app-download-buttons">
-                            <a href="https://play.google.com/store/apps/details?id=com.better.aarogyahastha" target="_blank" class="app-download-btn">
+                            <a href="https://play.google.com/store/apps/details?id=com.better.aarogyahastha"
+                                target="_blank" class="app-download-btn">
                                 <img src="/static/img/play-store.png" alt="Get it on Google Play">
                             </a>
-                            <a href="https://apps.apple.com/in/app/aarogya-hastha/id6739343936" target="_blank" class="app-download-btn">
+                            <a href="https://apps.apple.com/in/app/aarogya-hastha/id6739343936" target="_blank"
+                                class="app-download-btn">
                                 <img src="/static/img/app-store.png" alt="Download on the App Store">
                             </a>
                         </div>
@@ -1176,7 +1199,7 @@
                         <h4>Quick Links</h4>
                         <ul class="footer-links">
                             <li><a href="/">Home</a></li>
-                            <li><a href="/appointments">Appointments</a></li>
+                            <li><a href="https://aarogyahastha.fyndbetter.com/" target="_blank">Appointments</a></li>
                             <li><a href="/doctors">Doctors</a></li>
                             <li><a href="/departments/">Departments</a></li>
                             <li><a href="/health-packages">Health Packages</a></li>
@@ -1245,7 +1268,8 @@
         </div>
         <div class="chrome-popup__actions">
             <a href="whatsapp://send?phone=919036092727" class="chrome-btn chrome-btn--blue">Open with App</a>
-            <a href="https://web.whatsapp.com/send?phone=9036092727" target="_blank" class="chrome-btn chrome-btn--green">Open with Web</a>
+            <a href="https://web.whatsapp.com/send?phone=9036092727" target="_blank"
+                class="chrome-btn chrome-btn--green">Open with Web</a>
             <button class="chrome-btn chrome-btn--grey" onclick="hideChromePopup()">Cancel</button>
         </div>
     </div>

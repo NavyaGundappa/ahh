@@ -1,0 +1,93 @@
+{% extends "admin_layout.html" %}
+
+{% block title %}
+Department New - Admin Panel
+{% endblock %}
+{% block content %}
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+
+<h2 class="mb-4 text-2xl font-bold">Departments</h2>
+<div class="flex justify-end mb-3 space-x-2">
+    <a href="{{ url_for('admin_dashboard') }}"
+        class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded transition">
+        Back to Dashboard
+    </a>
+    <a href="{{ url_for('create_department') }}"
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition">
+        <i class="fas fa-plus me-1"></i> Add New Service
+    </a>
+</div>
+<div class="bg-white p-6 rounded shadow-md">
+    <div class="mb-3">
+        <input type="text" id="departmentSearch"
+            class="w-full px-3 py-2 border rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="Search by Department (starting letters)...">
+    </div>
+    <div class="overflow-x-auto">
+        <table class="min-w-full leading-normal" id="servicesTable">
+            <tr>
+                <th
+                    class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                    ID</th>
+                <th
+                    class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                    Name</th>
+                <th
+                    class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                    Slug</th>
+                <th
+                    class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                    Status</th>
+                <th
+                    class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                    Action</th>
+            </tr>
+
+            {% for dept in departments %}
+            <tr class="hover:bg-gray-100 transition duration-150 ease-in-out">
+                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ dept.id }}</td>
+                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ dept.name }}</td>
+                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ dept.slug }}</td>
+                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ dept.is_active }}</td>
+                <td class="px-5 py-5 border-b border-gray-200 bg-white flex text-sm space-x-2"><a
+                        class="edit-service-btn bg-yellow-500 text-white px-2 py-1 rounded hover:bg-yellow-700 transition"
+                        href="{{ url_for('edit_department_new', id=dept.id) }}">Edit</a>
+                    <form action="{{ url_for('delete_department', id=dept.id) }}" method="POST"
+                        onsubmit="return confirm('Are you sure to delete this department?')">
+                        <button type="submit"
+                            class="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-700 transition">
+                            Delete
+                        </button>
+                    </form>
+                    <a target="_blank" href="/departments-new/{{ dept.slug }}"
+                        class="bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-700 transition">
+                        View
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+
+        </table>
+    </div>
+</div>
+
+<script>
+    document.getElementById("departmentSearch").addEventListener("keyup", function () {
+        const input = this.value.toLowerCase();
+        const rows = document.querySelectorAll("#servicesTable tbody tr");
+
+        rows.forEach(row => {
+            const departmentCell = row.cells[1];
+            if (departmentCell) {
+                const text = departmentCell.textContent.trim().toLowerCase();
+                // Filter by starting letters or show all if input is empty
+                if (text.startsWith(input) || input === "") {
+                    row.style.display = "";
+                } else {
+                    row.style.display = "none";
+                }
+            }
+        });
+    });
+</script>
+{% endblock %}
