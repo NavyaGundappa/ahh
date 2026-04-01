@@ -3573,6 +3573,20 @@ def serve_pdf(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
 
+@app.route('/upload-image', methods=['POST'])
+def upload_image():
+    file = request.files['image']
+
+    filename = secure_filename(file.filename)
+    filepath = os.path.join('static/uploads', filename)
+
+    file.save(filepath)
+
+    return jsonify({
+        "path": "/static/uploads/" + filename
+    })
+
+
 # ------------------ ADMIN: Department Testimonials Management ------------------
 @app.route('/admin/department_testimonials', methods=['GET', 'POST'])
 @login_required
