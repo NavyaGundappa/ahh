@@ -1674,7 +1674,7 @@
       <h1>{{ department.hero_main_heading | safe or 'Department Name' }}</h1>
       <p>{{ department.hero_description or 'Professional healthcare services tailored for your needs.' }}</p>
       <div class="hero-actions">
-        <a href="#" class="btn-primary"><i class="fa-regular fa-calendar-days"></i> Book Appointment</a>
+        <a href="https://app.fyndbetter.com/ahh_apt" class="btn-primary"><i class="fa-regular fa-calendar-days"></i> Book Appointment</a>
         <a href="tel:{{ department.hero_phone or '08046778188' }}" class="btn-outline"><i
             class="fa-solid fa-phone-volume"></i> {{ department.hero_phone or '080 4677 8188' }}</a>
       </div>
@@ -1720,7 +1720,7 @@
       <div class="doctor-card">
 
         <div class="doctor-photo">
-          <img src="{{ url_for('static', filename=doctor.image_path or 'img/doctors/dr-he.JPG') }}"
+          <img src="{{ url_for('static', filename=doctor.image_path or 'img/doctors/dr-he.jpg') }}"
             alt="{{ doctor.name }}">
         </div>
 
@@ -1809,9 +1809,9 @@
         <span>Speak with one of our specialists for free — get clarity in 10 minutes, no obligation.</span>
       </div>
       <div class="concern-cta-actions">
-        <a href="tel:08046778188" class="btn-cta-gold"><i class="fa-solid fa-phone-volume"></i> Call Now — Free
+        <a href="tel:{{ department.hero_phone or '08046778188' }}" class="btn-cta-gold"><i class="fa-solid fa-phone-volume"></i> Call Now — Free
           Advice</a>
-        <a href="#callback" class="btn-cta-ghost"><i class="fa-solid fa-comment"></i> Request a Callback</a>
+        <a href="javascript:void(0)" onclick="showChromePopup()" class="btn-cta-ghost"><i class="fa-solid fa-comment"></i> Request a Callback</a>
       </div>
     </div>
 
@@ -1867,7 +1867,7 @@
       <h4><i class="fa-regular fa-calendar-days"></i> Share Your Details</h4>
       <div class="form-row">
         <div class="hero-actions">
-          <a href="#" class="btn-dark">Book an Appointment</a>
+          <a href="https://app.fyndbetter.com/ahh_apt" class="btn-dark">Book an Appointment</a>
           <a href="tel:08046778188" class="btn-outline"> Call Us: 080 4677 8188</a>
         </div>
       </div>
@@ -1948,7 +1948,7 @@
     <h2>{{ department.advanced_heading or 'Why Patients Recommend Us' }}</h2>
     {{ department.cta_content | safe or 'Department Name' }}
     <div class="cta-actions">
-      <a href="#" class="btn-dark"><i class="fa-regular fa-calendar-days"></i> Book an Appointment</a>
+      <a href="https://app.fyndbetter.com/ahh_apt" class="btn-dark"><i class="fa-regular fa-calendar-days"></i> Book an Appointment</a>
       <a href="tel:{{ department.cta_phone | safe or '08046778188' }}" class="btn-dark" style="background:#0d1f3c;">
         Call Us: {{ department.cta_phone | safe or '080 4677 8188' }}</a>
     </div>
