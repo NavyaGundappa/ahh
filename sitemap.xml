@@ -5,11 +5,10 @@
       xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 <!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+
 <url>
   <loc>https://aarogyahastha.com/</loc>
-</url>
-<url>
-  <loc>https://aarogyahastha.com/appointments</loc>
 </url>
 <url>
   <loc>https://aarogyahastha.com/departments/</loc>
@@ -31,6 +30,12 @@
 </url>
 <url>
   <loc>https://aarogyahastha.com/contact</loc>
+</url>
+<url>
+  <loc>https://aarogyahastha.com/uploads/Monthwise_Report_Jan_-_Dec_2024.pdf</loc>
+</url>
+<url>
+  <loc>https://aarogyahastha.com/appointments</loc>
 </url>
 <url>
   <loc>https://aarogyahastha.com/departments/anaesthesia</loc>
@@ -99,9 +104,6 @@
   <loc>https://aarogyahastha.com/doctors/dr-sumalatha-c-b</loc>
 </url>
 <url>
-  <loc>https://aarogyahastha.com/doctors/dr-abhilasha-sadhoo</loc>
-</url>
-<url>
   <loc>https://aarogyahastha.com/doctors/dr-hiranmayi-seshu</loc>
 </url>
 <url>
@@ -132,16 +134,10 @@
   <loc>https://aarogyahastha.com/doctors/dr-akash-mukherjee</loc>
 </url>
 <url>
-  <loc>https://aarogyahastha.com/doctors/dr-sowmya</loc>
-</url>
-<url>
-  <loc>https://aarogyahastha.com/doctors/dr-vishnu-vandhana</loc>
+  <loc>https://aarogyahastha.com/doctors/dr-soumya</loc>
 </url>
 <url>
   <loc>https://aarogyahastha.com/doctors/dr-sharadhamma</loc>
-</url>
-<url>
-  <loc>https://aarogyahastha.com/doctors/dr-janaki-ram</loc>
 </url>
 <url>
   <loc>https://aarogyahastha.com/doctors/dr-shobha</loc>
@@ -192,13 +188,109 @@
   <loc>https://aarogyahastha.com/doctors/dr-sumanjitha-bora</loc>
 </url>
 <url>
+  <loc>https://aarogyahastha.com/doctors/dr.-surbhi-agrawal</loc>
+</url>
+<url>
+  <loc>https://aarogyahastha.com/doctors/dr-chetan-kumar-a</loc>
+</url>
+<url>
+  <loc>https://aarogyahastha.com/doctors/dr-nithin-prabhu</loc>
+</url>
+<url>
+  <loc>https://aarogyahastha.com/doctors/dr.-saraswathi-m</loc>
+</url>
+<url>
+  <loc>https://aarogyahastha.com/doctors/dr-anil-kumar-m</loc>
+</url>
+<url>
+  <loc>https://aarogyahastha.com/doctors/dr-advaith-kulkurni</loc>
+</url>
+<url>
+  <loc>https://aarogyahastha.com/doctors/dr-sandhya-b</loc>
+</url>
+<url>
+  <loc>https://aarogyahastha.com/doctors/dr.-pramod-s</loc>
+</url>
+<url>
+  <loc>https://aarogyahastha.com/doctors/dr.-vedarth-dash</loc>
+</url>
+<url>
+  <loc>https://aarogyahastha.com/doctors/dr-santosh</loc>
+</url>
+<url>
+  <loc>https://aarogyahastha.com/doctors/dr-sanjay</loc>
+</url>
+<url>
+  <loc>https://aarogyahastha.com/doctors/ms.taruni-priya</loc>
+</url>
+<url>
+  <loc>https://aarogyahastha.com/doctors/ms-manisha</loc>
+</url>
+<url>
+  <loc>https://aarogyahastha.com/doctors/ms-jhansi</loc>
+</url>
+<url>
+  <loc>https://aarogyahastha.com/doctors/dr.-pratyush</loc>
+</url>
+<url>
+  <loc>https://aarogyahastha.com/doctors/dr.-loganathan-m-s</loc>
+</url>
+<url>
+  <loc>https://aarogyahastha.com/doctors/dr.-g-rashmitha</loc>
+</url>
+<url>
+  <loc>https://aarogyahastha.com/doctors/dr.-niranjan-s-kadlur</loc>
+</url>
+<url>
+  <loc>https://aarogyahastha.com/doctors/dr-shahid-pasha</loc>
+</url>
+<url>
+  <loc>https://aarogyahastha.com/doctors/dr-ullas</loc>
+</url>
+<url>
+  <loc>https://aarogyahastha.com/doctors/dr-anudeep-nair</loc>
+</url>
+<url>
+  <loc>https://aarogyahastha.com/doctors/dr-abhey-wasudev</loc>
+</url>
+<url>
+  <loc>https://aarogyahastha.com/doctors/dr-g-sreenivas-reddy</loc>
+</url>
+<url>
+  <loc>https://aarogyahastha.com/doctors/dr-mini-garg</loc>
+</url>
+<url>
+  <loc>https://aarogyahastha.com/doctors/dr-spoorthi-g-reddy</loc>
+</url>
+<url>
+  <loc>https://aarogyahastha.com/our-stories?category_code=patient_stories&amp;highlight_id=10</loc>
+</url>
+<url>
+  <loc>https://aarogyahastha.com/our-stories?category_code=patient_stories&amp;highlight_id=7</loc>
+</url>
+<url>
+  <loc>https://aarogyahastha.com/our-stories?category_code=patient_stories&amp;highlight_id=6</loc>
+</url>
+<url>
+  <loc>https://aarogyahastha.com/our-stories?category_code=doctors_speak&amp;highlight_id=12</loc>
+</url>
+<url>
+  <loc>https://aarogyahastha.com/our-stories?category_code=doctors_speak&amp;highlight_id=11</loc>
+</url>
+<url>
+  <loc>https://aarogyahastha.com/our-stories?category_code=general&amp;highlight_id=13</loc>
+</url>
+<url>
+  <loc>https://aarogyahastha.com/our-stories?category_code=health_days&amp;highlight_id=9</loc>
+</url>
+<url>
   <loc>https://aarogyahastha.com/terms-and-conditions</loc>
 </url>
 <url>
   <loc>https://aarogyahastha.com/privacy-policy</loc>
 </url>
 <url>
-  <loc>https://aarogyahastha.com/disclaimer</loc>
+  <loc>https://aarogyahastha.com/departments/audiology-&amp;-speech-therapy</loc>
 </url>
 <url>
   <loc>https://aarogyahastha.com/departments/cardiology</loc>
@@ -207,24 +299,44 @@
   <loc>https://aarogyahastha.com/departments/dietetics</loc>
 </url>
 <url>
+  <loc>https://aarogyahastha.com/departments/medical-oncology</loc>
+</url>
+<url>
+  <loc>https://aarogyahastha.com/departments/neurology</loc>
+</url>
+<url>
+  <loc>https://aarogyahastha.com/departments/psychology</loc>
+</url>
+<url>
+  <loc>https://aarogyahastha.com/departments/pulmonology</loc>
+</url>
+<url>
   <loc>https://aarogyahastha.com/blog/understanding-neurodiversity-support-inclusive-care/</loc>
 </url>
 <url>
   <loc>https://aarogyahastha.com/blog/prenatal-care-for-healthy-pregnancy/</loc>
 </url>
 <url>
-  <loc>https://aarogyahastha.com/blog/best-family-hospital-in-kasavanahalli-aarogya-hastha-hospitals/</loc>
+  <loc>https://aarogyahastha.com/blog/how-physiotherapy-helps-speed-up-post-surgery-recovery/</loc>
 </url>
 <url>
-  <loc>https://aarogyahastha.com/blog/myth-vs-facts/</loc>
+  <loc>https://aarogyahastha.com/blog/understanding-childhood-allergies-causes-symptoms-and-care-tips/</loc>
+</url>
+<url>
+  <loc>https://aarogyahastha.com/blog/managing-diabetes-and-hypertension-lifestyle-tips-that-work/</loc>
+</url>
+<url>
+  <loc>https://aarogyahastha.com/blog/how-to-choose-the-right-health-check-up-package-what-tests-you-shouldnt-skip/</loc>
+</url>
+<url>
+  <loc>https://aarogyahastha.com/blog/why-quality-sleep-matters/</loc>
 </url>
 <url>
   <loc>https://aarogyahastha.com/blog/how-the-monsoon-can-affect-your-health/</loc>
 </url>
 <url>
-  <loc>https://aarogyahastha.com/blog/why-quality-sleep-matters/</loc>
+  <loc>https://aarogyahastha.com/blog/myth-vs-facts/</loc>
 </url>
-
 <url>
   <loc>https://aarogyahastha.com/best-plastic-surgeon-in-bangalore/</loc>
 </url>
@@ -246,4 +358,6 @@
 <url>
   <loc>https://aarogyahastha.com/best-hospital-in-bellandur-bangalore/</loc>
 </url>
+
+
 </urlset>
