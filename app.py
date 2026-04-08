@@ -2404,22 +2404,50 @@ def toggle_sports_package(package_id):
 @app.route('/departments/<slug>')
 def department_page(slug):
     """
-    Renders the dynamic department page.
+    Renders the dynamic department page using the new DepartmentNew model.
     """
-    # 1. Fetch the department object (first to handle 404)
-    department = Department.query.filter_by(
-        slug=slug, is_active=True).first_or_404()
+    # 1. First try to find in DepartmentNew (new system)
+    department = DepartmentNew.query.filter_by(
+        slug=slug, is_active=True
+    ).first()
 
-    # 2. Use the reusable helper to fetch all related content
-    context = _fetch_department_data(department)
+    if department:
+        # Use new system
+        doctors = (
+            Doctor.query
+            .filter_by(
+                department_slug=department.slug,
+                is_active=True
+            )
+            .order_by(Doctor.id.asc())
+            .limit(4)
+            .all()
+        )
 
-    # 3. Check for custom template
-    template_path = f"departments/{slug}.html"
-    if os.path.exists(os.path.join(app.template_folder, template_path)):
-        # If custom template exists, render it using the unpacked context dictionary
-        return render_template(template_path, **context)
-    # 4. Render the default template using the unpacked context dictionary
+        blogs = Blog.query.filter_by(is_active=True)\
+            .order_by(Blog.created_at.desc())\
+            .limit(3)\
+            .all()
+
+        testimonials = Testimonial.query.filter_by(is_active=True).options(
+            joinedload(Testimonial.doctor)
+        ).order_by(Testimonial.created_at.desc()).all()
+
+        # Use the new template
+        return render_template("department-new.html",
+                               department=department,
+                               doctors=doctors,
+                               blogs=blogs,
+                               testimonials=testimonials)
+
+    # 2. Fallback to old system if not found in new system
+    department_old = Department.query.filter_by(
+        slug=slug, is_active=True
+    ).first_or_404()
+
+    context = _fetch_department_data(department_old)
     return render_template("department.html", **context)
+
 
 # ------------------ ADMIN: Department Overview ------------------
 
