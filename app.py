@@ -2403,50 +2403,41 @@ def toggle_sports_package(package_id):
 
 @app.route('/departments/<slug>')
 def department_page(slug):
-    """
-    Renders the dynamic department page using the new DepartmentNew model.
-    """
-    # 1. First try to find in DepartmentNew (new system)
+    # 1. Try to find in DepartmentNew (new system)
     department = DepartmentNew.query.filter_by(
         slug=slug, is_active=True
     ).first()
 
     if department:
-        # Use new system
-        doctors = (
-            Doctor.query
-            .filter_by(
-                department_slug=department.slug,
-                is_active=True
-            )
-            .order_by(Doctor.id.asc())
-            .limit(4)
-            .all()
+        # Use the shared helper to get base data
+        context = _fetch_department_data(department)
+
+        # Add the specific lists needed for the new layout
+        context["doctors"] = (
+            Doctor.query.filter_by(
+                department_slug=department.slug, is_active=True)
+            .order_by(Doctor.id.asc()).limit(4).all()
+        )
+        context["blogs"] = (
+            Blog.query.filter_by(is_active=True)
+            .order_by(Blog.created_at.desc()).limit(3).all()
+        )
+        context["testimonials"] = (
+            Testimonial.query.filter_by(is_active=True)
+            .options(joinedload(Testimonial.doctor))
+            .order_by(Testimonial.created_at.desc()).all()
         )
 
-        blogs = Blog.query.filter_by(is_active=True)\
-            .order_by(Blog.created_at.desc())\
-            .limit(3)\
-            .all()
+        return render_template("department-new.html", **context)
 
-        testimonials = Testimonial.query.filter_by(is_active=True).options(
-            joinedload(Testimonial.doctor)
-        ).order_by(Testimonial.created_at.desc()).all()
-
-        # Use the new template
-        return render_template("department-new.html",
-                               department=department,
-                               doctors=doctors,
-                               blogs=blogs,
-                               testimonials=testimonials)
-
-    # 2. Fallback to old system if not found in new system
+    # 2. Fallback to old system
     department_old = Department.query.filter_by(
         slug=slug, is_active=True
     ).first_or_404()
 
     context = _fetch_department_data(department_old)
     return render_template("department.html", **context)
+
 
 
 # ------------------ ADMIN: Department Overview ------------------
