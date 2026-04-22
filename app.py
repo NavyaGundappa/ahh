@@ -31,6 +31,8 @@ from functools import wraps
 import io
 from sqlalchemy.orm import joinedload
 from models import DepartmentNew
+import requests
+import uuid
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
@@ -4050,6 +4052,174 @@ def edit_department_new(id):
         current_user=user
     )
 # ------------------ ADMIN: Department New End ------------------
+
+
+
+@app.route('/lp-thank-you')
+def langingthankyou():
+    return render_template('landing_pages/thank-you.html')
+
+@app.route('/general-laparoscopic-surgery')
+def langinglaparoscopic():
+    return render_template('landing_pages/general-laparoscopic-surgery.html')
+
+@app.route('/hip-replacement-surgery')
+def langingpagehipreplacement():
+    return render_template('landing_pages/hip-replacement-surgery.html')
+
+@app.route('/knee-replacement')
+def langingpagekneereplacement():
+    return render_template('landing_pages/knee-replacement.html')
+
+@app.route('/maternity-packages')
+def langingpagematernity():
+    return render_template('landing_pages/maternity-packages.html')
+
+@app.route('/planning-surgery')
+def langingpageplanning():
+    return render_template('landing_pages/planning-surgery.html')
+
+# facebook pixel
+@app.route('/general-laparoscopic-surgery-fb')
+def langingfblaparoscopic():
+    return render_template('landing_pages/facebook/general-laparoscopic-surgery.html')
+
+@app.route('/hip-replacement-surgery-fb')
+def langingfbpagehipreplacement():
+    return render_template('landing_pages/facebook/hip-replacement-surgery.html')
+
+@app.route('/knee-replacement-fb')
+def langingfbpagekneereplacement():
+    return render_template('landing_pages/facebook/knee-replacement.html')
+
+@app.route('/maternity-packages-fb')
+def langingfbpagematernity():
+    return render_template('landing_pages/facebook/maternity-packages.html')
+
+@app.route('/planning-surgery-fb')
+def langingfbpageplanning():
+    return render_template('landing_pages/facebook/planning-surgery.html')
+
+# instagram pixel
+@app.route('/general-laparoscopic-surgery-in')
+def langinginlaparoscopic():
+    return render_template('landing_pages/instagram/general-laparoscopic-surgery.html')
+
+@app.route('/hip-replacement-surgery-in')
+def langinginpagehipreplacement():
+    return render_template('landing_pages/instagram/hip-replacement-surgery.html')
+
+@app.route('/knee-replacement-in')
+def langinginpagekneereplacement():
+    return render_template('landing_pages/instagram/knee-replacement.html')
+
+@app.route('/maternity-packages-in')
+def langinginpagematernity():
+    return render_template('landing_pages/instagram/maternity-packages.html')
+
+@app.route('/planning-surgery-in')
+def langinginpageplanning():
+    return render_template('landing_pages/instagram/planning-surgery.html')
+
+
+
+UPLOAD_FOLDER = "static/uploads/landingpages"
+BASE_URL = "/static/uploads/landingpages/"
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+API_URL = "https://api.fyndbetter.com/create_lead_with_source"
+API_KEY = "Zx7Lp2Xv9Ka4Nz8Rw1TgYcDh6BsFeJu5"
+ORG_ID = "1720949403878x756898931863191600"
+
+def send_to_fyndbetter(data):
+    headers = {
+        "X-Auth-Key": API_KEY,
+        "Content-Type": "application/x-www-form-urlencoded"
+    }
+
+    response = requests.post(API_URL, headers=headers, data=data)
+    print(response.text)
+    return response
+
+
+@app.route('/submit-lead-1', methods=['POST'])
+def submit_lead_1():
+    form = request.form
+
+    data = {
+        "orgId": ORG_ID,
+        "patientName": form.get("patientName"),
+        "contactNumber": form.get("contactNumber"),
+        "description": form.get("description"),
+        "source": form.get("source"),
+        "sourceURL": request.url
+    }
+
+    send_to_fyndbetter(data)
+
+    return redirect("/lp-thank-you")
+
+
+@app.route('/submit-lead-2', methods=['POST'])
+def submit_lead_2():
+    form = request.form
+
+    description = f"Hospital: {form.get('hospital')} | Quote: {form.get('quotedAmount')}"
+
+    data = {
+        "orgId": ORG_ID,
+        "patientName": form.get("patientName"),
+        "contactNumber": form.get("contactNumber"),
+        "description": description,
+        "source": form.get("source"),
+        "sourceURL": request.url
+    }
+
+    send_to_fyndbetter(data)
+
+    return redirect("/lp-thank-you")
+
+
+
+@app.route('/submit-quote', methods=['POST'])
+def submit_quote():
+    form = request.form
+    file = request.files.get("file")
+
+    file_url = None
+
+    if file and file.filename != "":
+        filename = secure_filename(file.filename)
+        filename = str(uuid.uuid4()) + "_" + secure_filename(file.filename)
+
+        file_path = os.path.join(UPLOAD_FOLDER, filename)
+        file.save(file_path)
+
+        file_url = request.host_url + "static/uploads/landingpages/" + filename
+
+    data = {
+        "orgId": ORG_ID,
+        "patientName": form.get("patientName"),
+        "contactNumber": form.get("contactNumber"),
+        "description": f"Surgery: {form.get('surgery')} | File: {file_url}",
+        "notes": form.get("notes"),
+        "source": form.get("source") or "Website",
+        "sourceURL": request.url
+    }
+    
+
+    data.update({
+        "utmSource": form.get("utm_source"),
+        "utmMedium": form.get("utm_medium"),
+        "utmCampaign": form.get("utm_campaign"),
+        "utmContent": form.get("utm_content"),
+        "gclid": form.get("gclid"),
+    })
+
+    response = send_to_fyndbetter(data)
+
+    print("API Response:", response.text)
+
+    return redirect("/lp-thank-you")
 
 # admin routes end -------------------------------------------------------------------------------------------------------------------------
 migrate = Migrate(app, db)
