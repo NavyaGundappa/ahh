@@ -2096,18 +2096,22 @@
                 <h3>Book Your Free Consultation</h3>
                 <p class="form-sub">Our SPOC will call you within 20 minutes.</p>
                 <form id="book-consultation" method="POST" action="/submit-lead-1">
+
                     <div class="form-group">
                         <label>Full Name</label>
-                        <input name="patientName" id="patientName" type="text" placeholder="Enter your name" required>
+                        <input name="patientName" type="text" placeholder="Enter your name" required
+                            pattern="[A-Za-z\s]+" title="Name should contain only letters and spaces">
                     </div>
+
                     <div class="form-group">
                         <label>Phone Number</label>
-                        <input name="contactNumber" id="contactNumber" type="tel" placeholder="+91 XXXXX XXXXX"
-                            required>
+                        <input name="contactNumber" type="tel" placeholder="+91 XXXXX XXXXX" required
+                            pattern="[6-9]{1}[0-9]{9}" maxlength="10" title="Enter a valid 10-digit mobile number">
                     </div>
+
                     <div class="form-group">
                         <label>Which knee needs attention?</label>
-                        <select name="description" id="description" required>
+                        <select name="description" required>
                             <option value="">Select...</option>
                             <option value="Left Knee">Left Knee</option>
                             <option value="Right Knee">Right Knee</option>
@@ -2115,7 +2119,9 @@
                             <option value="Not Sure — Need Consultation">Not Sure — Need Consultation</option>
                         </select>
                     </div>
+
                     <input type="hidden" name="source" value="Googleads">
+
                     <button type="submit" class="form-submit">Get Free Consultation →</button>
                     <p class="form-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
@@ -2627,16 +2633,33 @@
                     <h3>Compare Your Quote Now</h3>
                     <p class="form-sub">Share your existing quote — we'll respond within 2 hours.</p>
                     <form method="POST" action="/submit-lead-2">
-                        <div class="form-group"><label>Your Name</label><input type="text" name="patientName"
-                                id="patientName" placeholder="Enter your name" required></div>
-                        <div class="form-group"><label>Phone Number</label><input type="tel" name="contactNumber"
-                                id="contactNumber" placeholder="+91 XXXXX XXXXX" required></div>
-                        <div class="form-group"><label>Hospital You Got Quoted From</label><input type="text"
-                                id="hospital" name="hospital" placeholder="e.g. Fortis, Manipal, Apollo..."></div>
-                        <div class="form-group"><label>Quoted Amount (₹)</label><input type="text" id="quotedAmount"
-                                name="quotedAmount" placeholder="e.g. ₹3,50,000"></div>
+
+                        <div class="form-group">
+                            <label>Your Name</label>
+                            <input type="text" name="patientName" placeholder="Enter your name" required
+                                pattern="[A-Za-z\s]+" title="Name should contain only letters and spaces">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Phone Number</label>
+                            <input type="tel" name="contactNumber" placeholder="+91 XXXXX XXXXX" required
+                                pattern="[6-9]{1}[0-9]{9}" maxlength="10" title="Enter a valid 10-digit mobile number">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Hospital You Got Quoted From</label>
+                            <input type="text" name="hospital" placeholder="e.g. Fortis, Manipal, Apollo...">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Quoted Amount (₹)</label>
+                            <input type="text" name="quotedAmount" placeholder="e.g. ₹3,50,000">
+                        </div>
+
                         <input type="hidden" name="source" value="Googleads">
+
                         <button type="submit" class="form-submit">Get Our Best Price →</button>
+
                         <p class="form-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                 width="12" height="12">
                                 <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
