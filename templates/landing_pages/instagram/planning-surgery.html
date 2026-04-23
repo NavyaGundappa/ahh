@@ -2,2197 +2,2210 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Planning a Surgery? | Aarogya Hastha Hospitals, Bengaluru</title>
-  <meta name="description"
-    content="Got a surgery quote? Let us beat it. Or explore our transparent surgery packages. Aarogya Hastha Hospitals — Bengaluru's trusted surgical excellence centre.">
-  <link rel="icon" type="image/x-icon" href="https://aarogyahastha.com/static/img/fav.png/">
-  <link
-    href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Playfair+Display:wght@600;700;800&display=swap"
-    rel="stylesheet">
-  <style>
-    *,
-    *::before,
-    *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0
-    }
-
-    :root {
-      --navy: #12385F;
-      --teal: #009697;
-      --gold: #E8A838;
-      --white: #FFFFFF;
-      --off-white: #F7FAFA;
-      --light-teal: #E6F5F5;
-      --light-navy: #E8EEF3;
-      --dark: #1A2B3C;
-      --gray: #6B7C8D;
-      --light-gray: #E2E8ED;
-      --rose: #9C2D6B;
-      --light-rose: #FDF2F8;
-      --font-display: 'Playfair Display', Georgia, serif;
-      --font-body: 'DM Sans', system-ui, sans-serif;
-      --shadow-sm: 0 2px 8px rgba(18, 56, 95, 0.08);
-      --shadow-md: 0 8px 30px rgba(18, 56, 95, 0.12);
-      --shadow-lg: 0 20px 60px rgba(18, 56, 95, 0.15);
-      --radius: 12px;
-      --radius-lg: 20px;
-      --radius-xl: 28px;
-    }
-
-    html {
-      scroll-behavior: smooth;
-      font-size: 16px
-    }
-
-    body {
-      font-family: var(--font-body);
-      color: var(--dark);
-      background: var(--white);
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased
-    }
-
-    .container {
-      max-width: 1140px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-
-    /* ===== HERO ===== */
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
-      background: linear-gradient(165deg, var(--navy) 0%, #0E2D4D 40%, #0A3A5C 70%, var(--navy) 100%);
-      padding: 40px;
-    }
-
-    .top-bar-phone svg {
-      width: 14px;
-      height: 14px;
-    }
-
-    .top-bar-actions {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .top-bar-wa svg {
-      width: 14px;
-      height: 14px;
-    }
-
-    .top-bar-wa {
-      background: #25D366;
-      color: #fff;
-      padding: 7px 14px;
-      border-radius: 50px;
-      font-weight: 700;
-      font-size: .76rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      transition: all .2s;
-      text-decoration: none;
-    }
-
-    a.top-bar-phone {
-      color: #4a3f4e;
-      text-decoration: none;
-    }
-
-    img.nabhNew_logo {
-      width: 60px;
-    }
-
-    .btn-top-cta {
-      background: #f4a261;
-      color: #2a1f2d;
-      padding: 8px 20px;
-      border-radius: 50px;
-      font-weight: 700;
-      font-size: .8rem;
-      transition: all .2s;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      cursor: pointer;
-      border: none;
-      text-decoration: none;
-    }
-
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      right: -30%;
-      width: 80vw;
-      height: 80vw;
-      background: radial-gradient(circle, rgba(0, 150, 151, 0.15) 0%, transparent 70%);
-      border-radius: 50%;
-      pointer-events: none
-    }
-
-    .hero::after {
-      content: '';
-      position: absolute;
-      bottom: -20%;
-      left: -20%;
-      width: 60vw;
-      height: 60vw;
-      background: radial-gradient(circle, rgba(232, 168, 56, 0.08) 0%, transparent 70%);
-      border-radius: 50%;
-      pointer-events: none
-    }
-
-    .top-bar {
-      position: sticky;
-      top: 0;
-      left: 0;
-      right: 0;
-      display: flex;
-      background: #fff;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1.2rem 2rem;
-      z-index: 10
-    }
-
-    .logo-area {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem
-    }
-
-    .logo-text {
-      color: var(--white);
-      font-family: var(--font-display);
-      font-size: 1.05rem;
-      font-weight: 700;
-      line-height: 1.2
-    }
-
-    .logo-text span {
-      display: block;
-      font-size: 0.65rem;
-      font-weight: 500;
-      font-family: var(--font-body);
-      letter-spacing: 0.5px;
-      opacity: 0.7;
-      text-transform: uppercase
-    }
-
-    .top-phone {
-      color: #4a3f4e;
-      font-size: 0.85rem;
-      font-weight: 500;
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-      opacity: 0.9;
-      transition: opacity 0.3s
-    }
-
-    .top-phone:hover {
-      opacity: 1
-    }
-
-    .top-phone svg {
-      width: 16px;
-      height: 16px
-    }
-
-    .hero-content {
-      text-align: center;
-      z-index: 5;
-      margin-top: 75px;
-      max-width: 780px;
-      animation: fadeUp 1s ease both
-    }
-
-    @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px)
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0)
-      }
-    }
-
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: rgba(0, 150, 151, 0.15);
-      border: 1px solid rgba(0, 150, 151, 0.3);
-      padding: 0.45rem 1.2rem;
-      border-radius: 50px;
-      margin-bottom: 1.8rem;
-      color: rgba(255, 255, 255, 0.9);
-      font-size: 0.8rem;
-      font-weight: 600;
-      letter-spacing: 0.3px;
-      text-transform: uppercase
-    }
-
-    .hero-badge .dot {
-      width: 6px;
-      height: 6px;
-      background: var(--gold);
-      border-radius: 50%;
-      animation: pulse 2s infinite
-    }
-
-    @keyframes pulse {
-
-      0%,
-      100% {
-        opacity: 1
-      }
-
-      50% {
-        opacity: 0.4
-      }
-    }
-
-    .hero h1 {
-      font-family: var(--font-display);
-      font-size: clamp(2.2rem, 5.5vw, 3.8rem);
-      font-weight: 800;
-      color: var(--white);
-      line-height: 1.15;
-      margin-bottom: 1.2rem
-    }
-
-    .hero h1 .highlight {
-      background: linear-gradient(135deg, var(--gold), #F0C060);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text
-    }
-
-    .hero-sub {
-      font-size: clamp(1rem, 2.2vw, 1.2rem);
-      color: rgba(255, 255, 255, 0.75);
-      line-height: 1.7;
-      max-width: 600px;
-      margin: 0 auto 2.5rem;
-      font-weight: 400
-    }
-
-    .hero-ctas {
-      display: flex;
-      gap: 1.2rem;
-      justify-content: center;
-      flex-wrap: wrap;
-      animation: fadeUp 1s 0.3s ease both
-    }
-
-    .cta-card {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 1.8rem 2rem;
-      border-radius: var(--radius-lg);
-      cursor: pointer;
-      text-decoration: none;
-      transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
-      width: 280px;
-      text-align: center;
-      overflow: hidden
-    }
-
-    .cta-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: var(--radius-lg);
-      transition: opacity 0.4s;
-      opacity: 0
-    }
-
-    .cta-card:hover {
-      transform: translateY(-6px)
-    }
-
-    .cta-card:hover::before {
-      opacity: 1
-    }
-
-    .cta-card--quote {
-      background: linear-gradient(145deg, var(--gold), #D4952E);
-      box-shadow: 0 8px 30px rgba(232, 168, 56, 0.35)
-    }
-
-    .cta-card--quote::before {
-      background: linear-gradient(145deg, #F0B840, var(--gold))
-    }
-
-    .cta-card--packages {
-      background: linear-gradient(145deg, var(--teal), #007A7B);
-      box-shadow: 0 8px 30px rgba(0, 150, 151, 0.35)
-    }
-
-    .cta-card--packages::before {
-      background: linear-gradient(145deg, #00ADAE, var(--teal))
-    }
-
-    .cta-card .cta-icon {
-      width: 52px;
-      height: 52px;
-      border-radius: 14px;
-      background: rgba(255, 255, 255, 0.2);
-      backdrop-filter: blur(10px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 0.9rem;
-      position: relative;
-      z-index: 2
-    }
-
-    .cta-card .cta-icon svg {
-      width: 26px;
-      height: 26px;
-      color: var(--white)
-    }
-
-    .cta-card .cta-label {
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: var(--white);
-      margin-bottom: 0.3rem;
-      position: relative;
-      z-index: 2;
-      line-height: 1.3
-    }
-
-    .cta-card .cta-desc {
-      font-size: 0.78rem;
-      color: rgba(255, 255, 255, 0.8);
-      position: relative;
-      z-index: 2;
-      line-height: 1.5
-    }
-
-    .cta-card .cta-arrow {
-      margin-top: 0.8rem;
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      z-index: 2;
-      transition: transform 0.3s
-    }
-
-    .cta-card:hover .cta-arrow {
-      transform: translateX(4px)
-    }
-
-    .cta-card .cta-arrow svg {
-      width: 18px;
-      height: 18px;
-      color: var(--white)
-    }
-
-    .trust-strip {
-      display: flex;
-      gap: 2rem;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-top: 3rem;
-      animation: fadeUp 1s 0.5s ease both;
-      z-index: 5
-    }
-
-    .trust-item {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      color: rgba(255, 255, 255, 0.7);
-      font-size: 0.8rem;
-      font-weight: 500
-    }
-
-    .trust-item svg {
-      width: 18px;
-      height: 18px;
-      color: var(--gold)
-    }
-
-    /* ===== COMMON ===== */
-    .section {
-      padding: 4.5rem 1.5rem
-    }
-
-    .section-inner {
-      max-width: 1140px;
-      margin: 0 auto
-    }
-
-    .section-title {
-      font-family: var(--font-display);
-      font-size: clamp(1.6rem, 3.5vw, 2.2rem);
-      font-weight: 700;
-      color: var(--navy);
-      text-align: center;
-      margin-bottom: 0.6rem
-    }
-
-    .section-sub {
-      color: var(--gray);
-      text-align: center;
-      font-size: 0.95rem;
-      margin-bottom: 2.5rem;
-      line-height: 1.6;
-      max-width: 620px;
-      margin-left: auto;
-      margin-right: auto
-    }
-
-    /* Reveal animation */
-    .reveal {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.6s, transform 0.6s
-    }
-
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0)
-    }
-
-    /* ===== SOCIAL PROOF BAR (below hero) ===== */
-    .social-proof-bar {
-      background: var(--white);
-      border-bottom: 1px solid var(--light-gray);
-      padding: 1.2rem 1.5rem;
-    }
-
-    .social-proof-inner {
-      max-width: 960px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 2.5rem;
-      flex-wrap: wrap;
-    }
-
-    .sp-item {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem
-    }
-
-    .sp-google {
-      display: flex;
-      align-items: center;
-      gap: 0.4rem
-    }
-
-    .sp-google-icon {
-      font-size: 1.3rem;
-      font-weight: 800
-    }
-
-    .sp-google-icon .g-blue {
-      color: #4285F4
-    }
-
-    .sp-google-icon .g-red {
-      color: #EA4335
-    }
-
-    .sp-google-icon .g-yellow {
-      color: #FBBC05
-    }
-
-    .sp-google-icon .g-green {
-      color: #34A853
-    }
-
-    .sp-rating {
-      font-family: var(--font-display);
-      font-size: 1.6rem;
-      font-weight: 800;
-      color: var(--navy)
-    }
-
-    .sp-stars {
-      color: var(--gold);
-      font-size: 1rem;
-      letter-spacing: 1px
-    }
-
-    .sp-label {
-      font-size: 0.75rem;
-      color: var(--gray);
-      line-height: 1.3
-    }
-
-    .sp-divider {
-      width: 1px;
-      height: 36px;
-      background: var(--light-gray)
-    }
-
-    .sp-stat {
-      text-align: center
-    }
-
-    .sp-stat-num {
-      font-family: var(--font-display);
-      font-size: 1.3rem;
-      font-weight: 800;
-      color: var(--navy)
-    }
-
-    .sp-stat-label {
-      font-size: 0.7rem;
-      color: var(--gray);
-      text-transform: uppercase;
-      letter-spacing: 0.3px
-    }
-
-    /* ===== GOOGLE REVIEWS SECTION ===== */
-    #reviews-section {
-      background: var(--off-white)
-    }
-
-    .google-header {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.8rem;
-      margin-bottom: 0.4rem
-    }
-
-    .google-header .g-logo {
-      font-size: 1.5rem;
-      font-weight: 800
-    }
-
-    .reviews-summary {
-      text-align: center;
-      margin-bottom: 2rem
-    }
-
-    .reviews-summary .big-rating {
-      font-family: var(--font-display);
-      font-size: 3rem;
-      font-weight: 800;
-      color: var(--navy)
-    }
-
-    .reviews-summary .stars-row {
-      color: var(--gold);
-      font-size: 1.4rem;
-      letter-spacing: 2px;
-      margin: 0.3rem 0
-    }
-
-    .reviews-summary .review-count {
-      font-size: 0.85rem;
-      color: var(--gray)
-    }
-
-    .reviews-scroll {
-      display: flex;
-      gap: 1.2rem;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      padding: 0.5rem 0 1.5rem;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
-    }
-
-    .reviews-scroll::-webkit-scrollbar {
-      display: none
-    }
-
-    .review-card {
-      flex: 0 0 300px;
-      scroll-snap-align: start;
-      background: var(--white);
-      border: 1px solid var(--light-gray);
-      border-radius: var(--radius-lg);
-      padding: 1.5rem;
-      position: relative;
-      transition: box-shadow 0.3s;
-    }
-
-    .review-card:hover {
-      box-shadow: var(--shadow-md)
-    }
-
-    .review-top {
-      display: flex;
-      align-items: center;
-      gap: 0.7rem;
-      margin-bottom: 0.8rem
-    }
-
-    .review-avatar {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 700;
-      font-size: 0.85rem;
-      color: var(--white)
-    }
-
-    .review-meta {
-      flex: 1
-    }
-
-    .review-name {
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--navy)
-    }
-
-    .review-date {
-      font-size: 0.7rem;
-      color: var(--gray)
-    }
-
-    .review-stars {
-      color: var(--gold);
-      font-size: 0.85rem;
-      letter-spacing: 1px;
-      margin-bottom: 0.6rem
-    }
-
-    .review-text {
-      font-size: 0.82rem;
-      color: var(--dark);
-      line-height: 1.65
-    }
-
-    .review-badge {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      width: 20px;
-      height: 20px;
-    }
-
-    .review-badge svg {
-      width: 20px;
-      height: 20px
-    }
-
-    /* ===== WHY CHOOSE US ===== */
-    #why-section {
-      background: var(--white)
-    }
-
-    .why-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
-      gap: 1.5rem
-    }
-
-    .why-card {
-      padding: 1.8rem 1.5rem;
-      border-radius: var(--radius-lg);
-      border: 1.5px solid var(--light-gray);
-      transition: all 0.3s;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .why-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 4px;
-      height: 100%;
-      border-radius: 2px;
-      transition: height 0.3s
-    }
-
-    .why-card:nth-child(1)::before {
-      background: var(--teal)
-    }
-
-    .why-card:nth-child(2)::before {
-      background: var(--gold)
-    }
-
-    .why-card:nth-child(3)::before {
-      background: var(--navy)
-    }
-
-    .why-card:nth-child(4)::before {
-      background: var(--rose)
-    }
-
-    .why-card:nth-child(5)::before {
-      background: var(--teal)
-    }
-
-    .why-card:nth-child(6)::before {
-      background: var(--gold)
-    }
-
-    .why-card:hover {
-      border-color: var(--teal);
-      box-shadow: var(--shadow-sm);
-      transform: translateY(-3px)
-    }
-
-    .why-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 1rem
-    }
-
-    .why-card:nth-child(1) .why-icon {
-      background: var(--light-teal)
-    }
-
-    .why-card:nth-child(2) .why-icon {
-      background: #FFF3E0
-    }
-
-    .why-card:nth-child(3) .why-icon {
-      background: var(--light-navy)
-    }
-
-    .why-card:nth-child(4) .why-icon {
-      background: var(--light-rose)
-    }
-
-    .why-card:nth-child(5) .why-icon {
-      background: var(--light-teal)
-    }
-
-    .why-card:nth-child(6) .why-icon {
-      background: #FFF3E0
-    }
-
-    .why-icon svg {
-      width: 22px;
-      height: 22px;
-      color: var(--navy)
-    }
-
-    .why-card h3 {
-      font-family: var(--font-display);
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: var(--navy);
-      margin-bottom: 0.4rem
-    }
-
-    .why-card p {
-      font-size: 0.82rem;
-      color: var(--gray);
-      line-height: 1.6
-    }
-
-    /* ===== DOCTORS SECTION ===== */
-    #doctors-section {
-      background: var(--off-white)
-    }
-
-    .doctors-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.2rem;
-      justify-content: center;
-    }
-
-    .doc-card {
-      background: var(--white);
-      text-align: center;
-      border: 1px solid var(--light-gray);
-      transition: all 0.3s;
-      width: 31%;
-    }
-
-    .doc-card .doctor-info {
-      padding: 1rem;
-    }
-
-    .doc-card:hover {
-      box-shadow: var(--shadow-md);
-      transform: translateY(-3px)
-    }
-
-    .doc-avatar img {
-      width: 100%;
-      height: 250px;
-      object-fit: cover;
-      object-position: top;
-      background: #E4EDF5;
-    }
-
-    .doc-card h3 {
-      font-family: var(--font-display);
-      font-size: 0.95rem;
-      font-weight: 700;
-      color: var(--navy);
-      margin-bottom: 0.2rem
-    }
-
-    .doc-card .doc-dept {
-      font-size: 0.75rem;
-      color: var(--teal);
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.3px;
-      margin-bottom: 0.3rem
-    }
-
-    .doc-card .doc-qual {
-      font-size: 0.78rem;
-      color: var(--gray);
-      line-height: 1.5
-    }
-
-    /* ===== QUOTE CHALLENGE ===== */
-    #quote-section {
-      background: var(--white)
-    }
-
-    .quote-box {
-      background: var(--off-white);
-      border-radius: var(--radius-xl);
-      padding: 2.5rem;
-      box-shadow: var(--shadow-sm);
-      max-width: 640px;
-      margin: 0 auto;
-      border: 1px solid var(--light-gray);
-    }
-
-    .quote-steps {
-      display: flex;
-      gap: 1rem;
-      margin-bottom: 2rem;
-      justify-content: center;
-      flex-wrap: wrap
-    }
-
-    .q-step {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 0.82rem;
-      color: var(--gray);
-      font-weight: 500
-    }
-
-    .q-step .num {
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      background: var(--light-teal);
-      color: var(--teal);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.75rem;
-      font-weight: 700
-    }
-
-    .q-step .arrow-sep {
-      color: var(--light-gray);
-      font-size: 1.2rem
-    }
-
-    .form-group {
-      margin-bottom: 1.2rem
-    }
-
-    .form-group label {
-      display: block;
-      font-size: 0.82rem;
-      font-weight: 600;
-      color: var(--navy);
-      margin-bottom: 0.4rem
-    }
-
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-      width: 100%;
-      padding: 0.75rem 1rem;
-      border: 1.5px solid var(--light-gray);
-      border-radius: var(--radius);
-      font-family: var(--font-body);
-      font-size: 0.9rem;
-      color: var(--dark);
-      background: var(--white);
-      transition: border-color 0.3s, box-shadow 0.3s;
-      outline: none
-    }
-
-    .form-group input:focus,
-    .form-group select:focus,
-    .form-group textarea:focus {
-      border-color: var(--teal);
-      box-shadow: 0 0 0 3px rgba(0, 150, 151, 0.1)
-    }
-
-    .form-group textarea {
-      resize: vertical;
-      min-height: 80px
-    }
-
-    .form-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem
-    }
-
-    .upload-area {
-      border: 2px dashed var(--light-gray);
-      border-radius: var(--radius);
-      padding: 1.5rem;
-      text-align: center;
-      cursor: pointer;
-      transition: all 0.3s;
-      background: var(--white);
-      position: relative
-    }
-
-    .upload-area:hover,
-    .upload-area.dragover {
-      border-color: var(--teal);
-      background: var(--light-teal)
-    }
-
-    .upload-area svg {
-      width: 36px;
-      height: 36px;
-      color: var(--teal);
-      margin-bottom: 0.5rem
-    }
-
-    .upload-area p {
-      font-size: 0.85rem;
-      color: var(--gray);
-      line-height: 1.5
-    }
-
-    .upload-area p strong {
-      color: var(--teal)
-    }
-
-    .upload-area input {
-      position: absolute;
-      inset: 0;
-      opacity: 0;
-      cursor: pointer
-    }
-
-    .file-name {
-      margin-top: 0.5rem;
-      font-size: 0.8rem;
-      color: var(--teal);
-      font-weight: 600;
-      display: none
-    }
-
-    .file-name.show {
-      display: block
-    }
-
-    .btn-submit {
-      width: 100%;
-      padding: 0.9rem;
-      border: none;
-      border-radius: var(--radius);
-      background: linear-gradient(135deg, var(--gold), #D4952E);
-      color: var(--white);
-      font-family: var(--font-body);
-      font-size: 1rem;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.3s;
-      box-shadow: 0 4px 15px rgba(232, 168, 56, 0.3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem
-    }
-
-    .btn-submit:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(232, 168, 56, 0.4)
-    }
-
-    .btn-submit svg {
-      width: 20px;
-      height: 20px
-    }
-
-    .form-success {
-      display: none;
-      text-align: center;
-      padding: 2rem 1rem
-    }
-
-    .form-success.show {
-      display: block
-    }
-
-    .form-success .check-circle {
-      width: 64px;
-      height: 64px;
-      border-radius: 50%;
-      background: var(--light-teal);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 1rem
-    }
-
-    .form-success .check-circle svg {
-      width: 32px;
-      height: 32px;
-      color: var(--teal)
-    }
-
-    .form-success h3 {
-      font-family: var(--font-display);
-      font-size: 1.4rem;
-      color: var(--navy);
-      margin-bottom: 0.5rem
-    }
-
-    .form-success p {
-      color: var(--gray);
-      font-size: 0.9rem;
-      line-height: 1.6
-    }
-
-    /* ===== PACKAGES ===== */
-    #packages-section {
-      background: var(--off-white)
-    }
-
-    .packages-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1.2rem;
-      max-width: 960px;
-      margin: 0 auto
-    }
-
-    .pkg-card {
-      background: var(--white);
-      border: 1.5px solid var(--light-gray);
-      border-radius: var(--radius-lg);
-      padding: 1.8rem 1.5rem;
-      text-decoration: none;
-      color: var(--dark);
-      transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column
-    }
-
-    .pkg-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: linear-gradient(90deg, var(--teal), var(--gold));
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.4s
-    }
-
-    .pkg-card:hover {
-      border-color: var(--teal);
-      box-shadow: var(--shadow-md);
-      transform: translateY(-4px)
-    }
-
-    .pkg-card:hover::before {
-      transform: scaleX(1)
-    }
-
-    .pkg-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 14px;
-      margin-bottom: 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: center
-    }
-
-    .pkg-card:nth-child(1) .pkg-icon {
-      background: #E8EEF3
-    }
-
-    .pkg-card:nth-child(2) .pkg-icon {
-      background: #E6F5F5
-    }
-
-    .pkg-card:nth-child(3) .pkg-icon {
-      background: #FFF3E0
-    }
-
-    .pkg-card:nth-child(4) .pkg-icon {
-      background: var(--light-rose)
-    }
-
-    .pkg-card:nth-child(5) .pkg-icon {
-      background: #E8F5E9
-    }
-
-    .pkg-icon svg {
-      width: 26px;
-      height: 26px;
-      color: var(--navy)
-    }
-
-    .pkg-card h3 {
-      font-family: var(--font-display);
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: var(--navy);
-      margin-bottom: 0.4rem
-    }
-
-    .pkg-card p {
-      font-size: 0.82rem;
-      color: var(--gray);
-      line-height: 1.6;
-      flex: 1
-    }
-
-    .pkg-card .pkg-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.3rem;
-      margin-top: 1rem;
-      font-size: 0.82rem;
-      font-weight: 600;
-      color: var(--teal);
-      transition: gap 0.3s
-    }
-
-    .pkg-card:hover .pkg-link {
-      gap: 0.6rem
-    }
-
-    .pkg-card .pkg-link svg {
-      width: 16px;
-      height: 16px
-    }
-
-    /* ===== FAQ ===== */
-    #faq-section {
-      background: var(--white)
-    }
-
-    .faq-list {
-      max-width: 700px;
-      margin: 0 auto
-    }
-
-    .faq-item {
-      border-bottom: 1px solid var(--light-gray)
-    }
-
-    .faq-q {
-      width: 100%;
-      background: none;
-      border: none;
-      padding: 1.2rem 0;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      cursor: pointer;
-      text-align: left;
-      font-family: var(--font-body);
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: var(--navy);
-      transition: color 0.3s;
-    }
-
-    .faq-q:hover {
-      color: var(--teal)
-    }
-
-    .faq-q .faq-icon {
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      background: var(--light-teal);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      transition: transform 0.3s, background 0.3s;
-    }
-
-    .faq-q .faq-icon svg {
-      width: 14px;
-      height: 14px;
-      color: var(--teal)
-    }
-
-    .faq-item.open .faq-q .faq-icon {
-      transform: rotate(45deg);
-      background: var(--teal)
-    }
-
-    .faq-item.open .faq-q .faq-icon svg {
-      color: var(--white)
-    }
-
-    .faq-a {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.4s ease, padding 0.3s
-    }
-
-    .faq-a-inner {
-      padding: 0 0 1.2rem;
-      font-size: 0.85rem;
-      color: var(--gray);
-      line-height: 1.7
-    }
-
-    .faq-item.open .faq-a {
-      max-height: 300px
-    }
-
-    /* ===== URGENCY STRIP ===== */
-    .urgency-strip {
-      background: linear-gradient(135deg, var(--gold), #D4952E);
-      padding: 1.2rem 1.5rem;
-      text-align: center;
-    }
-
-    .urgency-strip p {
-      color: var(--white);
-      font-size: 0.9rem;
-      font-weight: 600
-    }
-
-    .urgency-strip a {
-      color: var(--white);
-      text-decoration: underline;
-      font-weight: 700
-    }
-
-    /* ===== TRUST NUMBERS ===== */
-    #trust-section {
-      background: var(--navy);
-      color: var(--white);
-      padding: 3.5rem 1.5rem
-    }
-
-    .trust-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1.5rem;
-      max-width: 900px;
-      margin: 0 auto
-    }
-
-    .trust-card {
-      text-align: center;
-      padding: 1.2rem
-    }
-
-    .trust-card .t-num {
-      font-family: var(--font-display);
-      font-size: 2rem;
-      font-weight: 800;
-      color: var(--gold);
-      margin-bottom: 0.3rem
-    }
-
-    .trust-card .t-label {
-      font-size: 0.82rem;
-      color: rgba(255, 255, 255, 0.7);
-      line-height: 1.5
-    }
-
-    /* ===== LOCATION ===== */
-    #location-section {
-      background: var(--off-white);
-      padding: 3rem 1.5rem
-    }
-
-    .location-inner {
-      max-width: 960px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-      align-items: center
-    }
-
-    .location-info h3 {
-      font-family: var(--font-display);
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: var(--navy);
-      margin-bottom: 0.8rem
-    }
-
-    .location-detail {
-      display: flex;
-      gap: 0.6rem;
-      margin-bottom: 0.8rem;
-      font-size: 0.85rem;
-      color: var(--dark);
-      line-height: 1.5
-    }
-
-    .location-detail svg {
-      width: 18px;
-      height: 18px;
-      color: var(--teal);
-      flex-shrink: 0;
-      margin-top: 2px
-    }
-
-    .location-map {
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      height: 250px;
-      background: var(--light-gray);
-      border: 1px solid var(--light-gray)
-    }
-
-    .location-map iframe {
-      width: 100%;
-      height: 100%;
-      border: 0
-    }
-
-    img.New_logo {
-      width: 170px
-    }
-
-    /* ===== FOOTER CTA ===== */
-    .footer-cta {
-      background: linear-gradient(135deg, var(--teal), #007A7B);
-      padding: 3rem 1.5rem;
-      text-align: center
-    }
-
-    .footer-cta h2 {
-      font-family: var(--font-display);
-      font-size: clamp(1.4rem, 3vw, 1.8rem);
-      color: var(--white);
-      margin-bottom: 0.5rem
-    }
-
-    .footer-cta p {
-      color: rgba(255, 255, 255, 0.8);
-      font-size: 0.9rem;
-      margin-bottom: 1.5rem
-    }
-
-    .footer-cta-btns {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap
-    }
-
-    .footer-btn {
-      padding: 0.8rem 1.8rem;
-      border-radius: 50px;
-      font-family: var(--font-body);
-      font-size: 0.9rem;
-      font-weight: 600;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      transition: all 0.3s
-    }
-
-    .footer-btn--call {
-      background: var(--white);
-      color: var(--navy)
-    }
-
-    .footer-btn--call:hover {
-      background: var(--gold);
-      color: var(--white)
-    }
-
-    .footer-btn--whatsapp {
-      background: rgba(255, 255, 255, 0.15);
-      color: var(--white);
-      border: 1.5px solid rgba(255, 255, 255, 0.3)
-    }
-
-    .footer-btn--whatsapp:hover {
-      background: rgba(255, 255, 255, 0.25)
-    }
-
-    .footer-btn svg {
-      width: 18px;
-      height: 18px
-    }
-
-    .footer {
-      background: var(--navy);
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-      padding: 1.5rem;
-      text-align: center
-    }
-
-    .footer p {
-      color: rgba(255, 255, 255, 0.4);
-      font-size: 0.75rem
-    }
-
-    .footer a {
-      color: rgba(255, 255, 255, 0.6);
-      text-decoration: none
-    }
-
-    /* ===== STICKY MOBILE CTA ===== */
-    .sticky-cta {
-      display: none;
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      z-index: 100;
-      background: var(--white);
-      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.12);
-      padding: 0.8rem 1rem;
-      border-top: 2px solid var(--teal);
-    }
-
-    .sticky-cta-inner {
-      display: flex;
-      gap: 0.6rem;
-      max-width: 500px;
-      margin: 0 auto
-    }
-
-    .sticky-btn {
-      flex: 1;
-      padding: 0.7rem;
-      border-radius: var(--radius);
-      font-family: var(--font-body);
-      font-size: 0.82rem;
-      font-weight: 700;
-      text-decoration: none;
-      text-align: center;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.4rem;
-    }
-
-    .sticky-btn--call {
-      background: var(--teal);
-      color: var(--white)
-    }
-
-    .sticky-btn--wa {
-      background: #25D366;
-      color: var(--white)
-    }
-
-    .sticky-btn svg {
-      width: 16px;
-      height: 16px
-    }
-
-
-    .ins-wrap {
-      padding: 2.5rem 1.5rem;
-      background: linear-gradient(145deg, #071a2e 0%, #0d2b47 60%, #0a2238 100%);
-      border-radius: var(--border-radius-lg);
-      position: relative;
-      overflow: hidden;
-      text-align: center;
-    }
-
-    .blob1 {
-      position: absolute;
-      top: -80px;
-      right: -80px;
-      width: 260px;
-      height: 260px;
-      border-radius: 50%;
-      background: rgba(55, 138, 221, 0.07);
-      pointer-events: none;
-    }
-
-    .logo-box img {
-      width: 100%;
-    }
-
-    .blob2 {
-      position: absolute;
-      bottom: -60px;
-      left: -60px;
-      width: 200px;
-      height: 200px;
-      border-radius: 50%;
-      background: rgba(29, 158, 117, 0.07);
-      pointer-events: none;
-    }
-
-    .ins-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(55, 138, 221, 0.12);
-      border: 1px solid rgba(55, 138, 221, 0.3);
-      color: #85b7eb;
-      font-size: 10px;
-      font-weight: 500;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      padding: 5px 14px;
-      border-radius: 20px;
-      margin-bottom: 1rem;
-    }
-
-    .ins-pill-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: #1d9e75;
-    }
-
-    .ins-h {
-      font-size: 21px;
-      font-weight: 500;
-      color: #fff;
-      margin: 0 0 0.3rem;
-    }
-
-    .ins-sub {
-      font-size: 13px;
-      color: rgba(255, 255, 255, 0.42);
-      margin: 0 0 2rem;
-    }
-
-    .ins-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
-      margin: 0 auto 12px;
-    }
-
-    .ins-card {
-      background: rgba(255, 255, 255, 0.055);
-      border: 0.5px solid rgba(255, 255, 255, 0.1);
-      border-radius: 12px;
-      padding: 16px 10px 12px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-      transition: background 0.2s, border-color 0.2s, transform 0.18s;
-      cursor: default;
-      justify-content: center;
-    }
-
-    .ins-card:hover {
-      background: rgba(255, 255, 255, 0.09);
-      border-color: rgba(255, 255, 255, 0.2);
-      transform: translateY(-3px);
-    }
-
-    .logo-box {
-      width: 100px;
-      border-radius: 7px;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: white;
-    }
-
-    .ins-name {
-      font-size: 11px;
-      font-weight: 500;
-      color: rgba(255, 255, 255, 0.78);
-      text-align: center;
-      line-height: 1.35;
-    }
-
-    .ins-tag {
-      font-size: 10px;
-      color: rgba(255, 255, 255, 0.32);
-      text-align: center;
-    }
-
-    .ins-tag.health {
-      color: #5dcaa5;
-    }
-
-    .ins-tag.general {
-      color: #85b7eb;
-    }
-
-    .ins-tag.life {
-      color: #f0997b;
-    }
-
-    .more-card {
-      background: rgba(55, 138, 221, 0.1);
-      border: 0.5px solid rgba(55, 138, 221, 0.25);
-      border-radius: 12px;
-      padding: 16px 10px 12px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      cursor: pointer;
-      transition: background 0.2s, transform 0.18s;
-    }
-
-    .more-card:hover {
-      background: rgba(55, 138, 221, 0.18);
-      transform: translateY(-3px);
-    }
-
-    .more-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: rgba(55, 138, 221, 0.18);
-      border: 1px solid rgba(55, 138, 221, 0.3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 20px;
-      font-weight: 300;
-      color: #85b7eb;
-      line-height: 1;
-      padding-bottom: 7px;
-    }
-
-    .more-label {
-      font-size: 12px;
-      font-weight: 500;
-      color: #85b7eb;
-    }
-
-    .more-sub {
-      font-size: 10px;
-      color: rgba(255, 255, 255, 0.3);
-    }
-
-    .ins-stat {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 2px;
-    }
-
-    .ins-stat-num {
-      font-size: 16px;
-      font-weight: 500;
-      color: #fff;
-    }
-
-    .ins-stat-lbl {
-      font-size: 10px;
-      color: rgba(255, 255, 255, 0.35);
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-    }
-
-    .ins-divider {
-      width: 1px;
-      height: 28px;
-      background: rgba(255, 255, 255, 0.1);
-    }
-
-    @media(max-width:990px) {
-      .top-bar {
-        display: block;
-      }
-
-      .top-bar-actions {
-        display: none;
-        align-items: center;
-        gap: 10px;
-        flex-direction: column;
-      }
-
-
-      .top-bar {
-        text-align: center;
-      }
-
-      .logo-area {
-        display: block;
-      }
-    }
-
-    @media(max-width:768px) {
-      .top-bar {
-        display: block;
-      }
-
-      .hero {
-        padding: 5rem 1.2rem 2.5rem
-      }
-
-      .top-bar {
-        padding: 1rem 1.2rem
-      }
-
-      .logo-text {
-        font-size: 0.9rem
-      }
-
-      .logo-text span {
-        font-size: 0.58rem
-      }
-
-      .top-phone span.phone-text {
-        display: none
-      }
-
-      .cta-card {
-        width: 100%;
-        max-width: 340px
-      }
-
-      .hero-ctas {
-        flex-direction: column;
-        align-items: center
-      }
-
-      .form-row {
-        grid-template-columns: 1fr
-      }
-
-      .trust-strip {
-        gap: 1rem
-      }
-
-      .trust-item {
-        font-size: 0.72rem
-      }
-
-      .quote-box {
-        padding: 1.5rem
-      }
-
-      .packages-grid {
-        grid-template-columns: 1fr
-      }
-
-      .location-inner {
-        grid-template-columns: 1fr
-      }
-
-      .social-proof-inner {
-        gap: 1.2rem
-      }
-
-      .sp-divider {
-        display: none
-      }
-
-
-      .sticky-cta {
-        display: block
-      }
-
-      body {
-        padding-bottom: 70px
-      }
-
-      .doc-card {
-        width: 47%;
-      }
-
-      .ins-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .more-card {
-        padding: 30px 20px;
-      }
-    }
-
-    @media(max-width:500px) {
-      .doc-card {
-        width: 100%;
-      }
-    }
-
-    @media(max-width:380px) {
-      .hero h1 {
-        font-size: 1.9rem
-      }
-
-      .trust-strip {
-        flex-direction: column;
-        align-items: center;
-        gap: 0.6rem
-      }
-    }
-
-    :target {
-      scroll-margin-top: 2rem
-    }
-  </style>
-
-  <!-- Google Tag Manager -->
-  <script>(function (w, d, s, l, i) {
-      w[l] = w[l] || []; w[l].push({
-        'gtm.start':
-          new Date().getTime(), event: 'gtm.js'
-      }); var f = d.getElementsByTagName(s)[0],
-        j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
-          'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
-    })(window, document, 'script', 'dataLayer', 'GTM-WGJFVPCB');</script>
-  <!-- End Google Tag Manager -->
-
-  <!-- Meta Pixel Code -->
-  <script>
-    !function (f, b, e, v, n, t, s) {
-      if (f.fbq) return; n = f.fbq = function () {
-        n.callMethod ?
-          n.callMethod.apply(n, arguments) : n.queue.push(arguments)
-      };
-      if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
-      n.queue = []; t = b.createElement(e); t.async = !0;
-      t.src = v; s = b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t, s)
-    }(window, document, 'script',
-      'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '1282482353417147');
-    fbq('track', 'PageView');
-  </script>
-  <noscript><img height="1" width="1" style="display:none"
-      src="https://www.facebook.com/tr?id=1282482353417147&ev=PageView&noscript=1" /></noscript>
-  <!-- End Meta Pixel Code -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planning a Surgery? | Aarogya Hastha Hospitals, Bengaluru</title>
+    <meta name="description"
+        content="Got a surgery quote? Let us beat it. Or explore our transparent surgery packages. Aarogya Hastha Hospitals — Bengaluru's trusted surgical excellence centre.">
+    <link rel="icon" type="image/x-icon" href="https://aarogyahastha.com/static/img/fav.png/">
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Playfair+Display:wght@600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        :root {
+            --navy: #12385F;
+            --teal: #009697;
+            --gold: #E8A838;
+            --white: #FFFFFF;
+            --off-white: #F7FAFA;
+            --light-teal: #E6F5F5;
+            --light-navy: #E8EEF3;
+            --dark: #1A2B3C;
+            --gray: #6B7C8D;
+            --light-gray: #E2E8ED;
+            --rose: #9C2D6B;
+            --light-rose: #FDF2F8;
+            --font-display: 'Playfair Display', Georgia, serif;
+            --font-body: 'DM Sans', system-ui, sans-serif;
+            --shadow-sm: 0 2px 8px rgba(18, 56, 95, 0.08);
+            --shadow-md: 0 8px 30px rgba(18, 56, 95, 0.12);
+            --shadow-lg: 0 20px 60px rgba(18, 56, 95, 0.15);
+            --radius: 12px;
+            --radius-lg: 20px;
+            --radius-xl: 28px;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--dark);
+            background: var(--white);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased
+        }
+
+        .container {
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(165deg, var(--navy) 0%, #0E2D4D 40%, #0A3A5C 70%, var(--navy) 100%);
+            padding: 40px;
+        }
+
+        .top-bar-phone svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        .top-bar-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .top-bar-wa svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        .top-bar-wa {
+            background: #25D366;
+            color: #fff;
+            padding: 7px 14px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: .76rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: all .2s;
+            text-decoration: none;
+        }
+
+        a.top-bar-phone {
+            color: #4a3f4e;
+            text-decoration: none;
+        }
+
+        img.nabhNew_logo {
+            width: 60px;
+        }
+
+        .btn-top-cta {
+            background: #f4a261;
+            color: #2a1f2d;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: .8rem;
+            transition: all .2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            border: none;
+            text-decoration: none;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -30%;
+            width: 80vw;
+            height: 80vw;
+            background: radial-gradient(circle, rgba(0, 150, 151, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -20%;
+            left: -20%;
+            width: 60vw;
+            height: 60vw;
+            background: radial-gradient(circle, rgba(232, 168, 56, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none
+        }
+
+        .top-bar {
+            position: sticky;
+            top: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            background: #fff;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.2rem 2rem;
+            z-index: 10
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem
+        }
+
+        .logo-text {
+            color: var(--white);
+            font-family: var(--font-display);
+            font-size: 1.05rem;
+            font-weight: 700;
+            line-height: 1.2
+        }
+
+        .logo-text span {
+            display: block;
+            font-size: 0.65rem;
+            font-weight: 500;
+            font-family: var(--font-body);
+            letter-spacing: 0.5px;
+            opacity: 0.7;
+            text-transform: uppercase
+        }
+
+        .top-phone {
+            color: #4a3f4e;
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            opacity: 0.9;
+            transition: opacity 0.3s
+        }
+
+        .top-phone:hover {
+            opacity: 1
+        }
+
+        .top-phone svg {
+            width: 16px;
+            height: 16px
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 5;
+            margin-top: 75px;
+            max-width: 780px;
+            animation: fadeUp 1s ease both
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(0, 150, 151, 0.15);
+            border: 1px solid rgba(0, 150, 151, 0.3);
+            padding: 0.45rem 1.2rem;
+            border-radius: 50px;
+            margin-bottom: 1.8rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            text-transform: uppercase
+        }
+
+        .hero-badge .dot {
+            width: 6px;
+            height: 6px;
+            background: var(--gold);
+            border-radius: 50%;
+            animation: pulse 2s infinite
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1
+            }
+
+            50% {
+                opacity: 0.4
+            }
+        }
+
+        .hero h1 {
+            font-family: var(--font-display);
+            font-size: clamp(2.2rem, 5.5vw, 3.8rem);
+            font-weight: 800;
+            color: var(--white);
+            line-height: 1.15;
+            margin-bottom: 1.2rem
+        }
+
+        .hero h1 .highlight {
+            background: linear-gradient(135deg, var(--gold), #F0C060);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text
+        }
+
+        .hero-sub {
+            font-size: clamp(1rem, 2.2vw, 1.2rem);
+            color: rgba(255, 255, 255, 0.75);
+            line-height: 1.7;
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+            font-weight: 400
+        }
+
+        .hero-ctas {
+            display: flex;
+            gap: 1.2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeUp 1s 0.3s ease both
+        }
+
+        .cta-card {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1.8rem 2rem;
+            border-radius: var(--radius-lg);
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+            width: 280px;
+            text-align: center;
+            overflow: hidden
+        }
+
+        .cta-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: var(--radius-lg);
+            transition: opacity 0.4s;
+            opacity: 0
+        }
+
+        .cta-card:hover {
+            transform: translateY(-6px)
+        }
+
+        .cta-card:hover::before {
+            opacity: 1
+        }
+
+        .cta-card--quote {
+            background: linear-gradient(145deg, var(--gold), #D4952E);
+            box-shadow: 0 8px 30px rgba(232, 168, 56, 0.35)
+        }
+
+        .cta-card--quote::before {
+            background: linear-gradient(145deg, #F0B840, var(--gold))
+        }
+
+        .cta-card--packages {
+            background: linear-gradient(145deg, var(--teal), #007A7B);
+            box-shadow: 0 8px 30px rgba(0, 150, 151, 0.35)
+        }
+
+        .cta-card--packages::before {
+            background: linear-gradient(145deg, #00ADAE, var(--teal))
+        }
+
+        .cta-card .cta-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.9rem;
+            position: relative;
+            z-index: 2
+        }
+
+        .cta-card .cta-icon svg {
+            width: 26px;
+            height: 26px;
+            color: var(--white)
+        }
+
+        .cta-card .cta-label {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 0.3rem;
+            position: relative;
+            z-index: 2;
+            line-height: 1.3
+        }
+
+        .cta-card .cta-desc {
+            font-size: 0.78rem;
+            color: rgba(255, 255, 255, 0.8);
+            position: relative;
+            z-index: 2;
+            line-height: 1.5
+        }
+
+        .cta-card .cta-arrow {
+            margin-top: 0.8rem;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 2;
+            transition: transform 0.3s
+        }
+
+        .cta-card:hover .cta-arrow {
+            transform: translateX(4px)
+        }
+
+        .cta-card .cta-arrow svg {
+            width: 18px;
+            height: 18px;
+            color: var(--white)
+        }
+
+        .trust-strip {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 3rem;
+            animation: fadeUp 1s 0.5s ease both;
+            z-index: 5
+        }
+
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.8rem;
+            font-weight: 500
+        }
+
+        .trust-item svg {
+            width: 18px;
+            height: 18px;
+            color: var(--gold)
+        }
+
+        /* ===== COMMON ===== */
+        .section {
+            padding: 4.5rem 1.5rem
+        }
+
+        .section-inner {
+            max-width: 1140px;
+            margin: 0 auto
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+            font-weight: 700;
+            color: var(--navy);
+            text-align: center;
+            margin-bottom: 0.6rem
+        }
+
+        .section-sub {
+            color: var(--gray);
+            text-align: center;
+            font-size: 0.95rem;
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+            max-width: 620px;
+            margin-left: auto;
+            margin-right: auto
+        }
+
+        /* Reveal animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s, transform 0.6s
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0)
+        }
+
+        /* ===== SOCIAL PROOF BAR (below hero) ===== */
+        .social-proof-bar {
+            background: var(--white);
+            border-bottom: 1px solid var(--light-gray);
+            padding: 1.2rem 1.5rem;
+        }
+
+        .social-proof-inner {
+            max-width: 960px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .sp-item {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem
+        }
+
+        .sp-google {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem
+        }
+
+        .sp-google-icon {
+            font-size: 1.3rem;
+            font-weight: 800
+        }
+
+        .sp-google-icon .g-blue {
+            color: #4285F4
+        }
+
+        .sp-google-icon .g-red {
+            color: #EA4335
+        }
+
+        .sp-google-icon .g-yellow {
+            color: #FBBC05
+        }
+
+        .sp-google-icon .g-green {
+            color: #34A853
+        }
+
+        .sp-rating {
+            font-family: var(--font-display);
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--navy)
+        }
+
+        .sp-stars {
+            color: var(--gold);
+            font-size: 1rem;
+            letter-spacing: 1px
+        }
+
+        .sp-label {
+            font-size: 0.75rem;
+            color: var(--gray);
+            line-height: 1.3
+        }
+
+        .sp-divider {
+            width: 1px;
+            height: 36px;
+            background: var(--light-gray)
+        }
+
+        .sp-stat {
+            text-align: center
+        }
+
+        .sp-stat-num {
+            font-family: var(--font-display);
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--navy)
+        }
+
+        .sp-stat-label {
+            font-size: 0.7rem;
+            color: var(--gray);
+            text-transform: uppercase;
+            letter-spacing: 0.3px
+        }
+
+        /* ===== GOOGLE REVIEWS SECTION ===== */
+        #reviews-section {
+            background: var(--off-white)
+        }
+
+        .google-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            margin-bottom: 0.4rem
+        }
+
+        .google-header .g-logo {
+            font-size: 1.5rem;
+            font-weight: 800
+        }
+
+        .reviews-summary {
+            text-align: center;
+            margin-bottom: 2rem
+        }
+
+        .reviews-summary .big-rating {
+            font-family: var(--font-display);
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--navy)
+        }
+
+        .reviews-summary .stars-row {
+            color: var(--gold);
+            font-size: 1.4rem;
+            letter-spacing: 2px;
+            margin: 0.3rem 0
+        }
+
+        .reviews-summary .review-count {
+            font-size: 0.85rem;
+            color: var(--gray)
+        }
+
+        .reviews-scroll {
+            display: flex;
+            gap: 1.2rem;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding: 0.5rem 0 1.5rem;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+
+        .reviews-scroll::-webkit-scrollbar {
+            display: none
+        }
+
+        .review-card {
+            flex: 0 0 300px;
+            scroll-snap-align: start;
+            background: var(--white);
+            border: 1px solid var(--light-gray);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            position: relative;
+            transition: box-shadow 0.3s;
+        }
+
+        .review-card:hover {
+            box-shadow: var(--shadow-md)
+        }
+
+        .review-top {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            margin-bottom: 0.8rem
+        }
+
+        .review-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.85rem;
+            color: var(--white)
+        }
+
+        .review-meta {
+            flex: 1
+        }
+
+        .review-name {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--navy)
+        }
+
+        .review-date {
+            font-size: 0.7rem;
+            color: var(--gray)
+        }
+
+        .review-stars {
+            color: var(--gold);
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            margin-bottom: 0.6rem
+        }
+
+        .review-text {
+            font-size: 0.82rem;
+            color: var(--dark);
+            line-height: 1.65
+        }
+
+        .review-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 20px;
+            height: 20px;
+        }
+
+        .review-badge svg {
+            width: 20px;
+            height: 20px
+        }
+
+        /* ===== WHY CHOOSE US ===== */
+        #why-section {
+            background: var(--white)
+        }
+
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+            gap: 1.5rem
+        }
+
+        .why-card {
+            padding: 1.8rem 1.5rem;
+            border-radius: var(--radius-lg);
+            border: 1.5px solid var(--light-gray);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .why-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            border-radius: 2px;
+            transition: height 0.3s
+        }
+
+        .why-card:nth-child(1)::before {
+            background: var(--teal)
+        }
+
+        .why-card:nth-child(2)::before {
+            background: var(--gold)
+        }
+
+        .why-card:nth-child(3)::before {
+            background: var(--navy)
+        }
+
+        .why-card:nth-child(4)::before {
+            background: var(--rose)
+        }
+
+        .why-card:nth-child(5)::before {
+            background: var(--teal)
+        }
+
+        .why-card:nth-child(6)::before {
+            background: var(--gold)
+        }
+
+        .why-card:hover {
+            border-color: var(--teal);
+            box-shadow: var(--shadow-sm);
+            transform: translateY(-3px)
+        }
+
+        .why-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem
+        }
+
+        .why-card:nth-child(1) .why-icon {
+            background: var(--light-teal)
+        }
+
+        .why-card:nth-child(2) .why-icon {
+            background: #FFF3E0
+        }
+
+        .why-card:nth-child(3) .why-icon {
+            background: var(--light-navy)
+        }
+
+        .why-card:nth-child(4) .why-icon {
+            background: var(--light-rose)
+        }
+
+        .why-card:nth-child(5) .why-icon {
+            background: var(--light-teal)
+        }
+
+        .why-card:nth-child(6) .why-icon {
+            background: #FFF3E0
+        }
+
+        .why-icon svg {
+            width: 22px;
+            height: 22px;
+            color: var(--navy)
+        }
+
+        .why-card h3 {
+            font-family: var(--font-display);
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 0.4rem
+        }
+
+        .why-card p {
+            font-size: 0.82rem;
+            color: var(--gray);
+            line-height: 1.6
+        }
+
+        /* ===== DOCTORS SECTION ===== */
+        #doctors-section {
+            background: var(--off-white)
+        }
+
+        .doctors-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            justify-content: center;
+        }
+
+        .doc-card {
+            background: var(--white);
+            text-align: center;
+            border: 1px solid var(--light-gray);
+            transition: all 0.3s;
+            width: 31%;
+        }
+
+        .doc-card .doctor-info {
+            padding: 1rem;
+        }
+
+        .doc-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-3px)
+        }
+
+        .doc-avatar img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            object-position: top;
+            background: #E4EDF5;
+        }
+
+        .doc-card h3 {
+            font-family: var(--font-display);
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 0.2rem
+        }
+
+        .doc-card .doc-dept {
+            font-size: 0.75rem;
+            color: var(--teal);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            margin-bottom: 0.3rem
+        }
+
+        .doc-card .doc-qual {
+            font-size: 0.78rem;
+            color: var(--gray);
+            line-height: 1.5
+        }
+
+        /* ===== QUOTE CHALLENGE ===== */
+        #quote-section {
+            background: var(--white)
+        }
+
+        .quote-box {
+            background: var(--off-white);
+            border-radius: var(--radius-xl);
+            padding: 2.5rem;
+            box-shadow: var(--shadow-sm);
+            max-width: 640px;
+            margin: 0 auto;
+            border: 1px solid var(--light-gray);
+        }
+
+        .quote-steps {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            justify-content: center;
+            flex-wrap: wrap
+        }
+
+        .q-step {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.82rem;
+            color: var(--gray);
+            font-weight: 500
+        }
+
+        .q-step .num {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--light-teal);
+            color: var(--teal);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 700
+        }
+
+        .q-step .arrow-sep {
+            color: var(--light-gray);
+            font-size: 1.2rem
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 0.4rem
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1.5px solid var(--light-gray);
+            border-radius: var(--radius);
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            color: var(--dark);
+            background: var(--white);
+            transition: border-color 0.3s, box-shadow 0.3s;
+            outline: none
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--teal);
+            box-shadow: 0 0 0 3px rgba(0, 150, 151, 0.1)
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem
+        }
+
+        .upload-area {
+            border: 2px dashed var(--light-gray);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: var(--white);
+            position: relative
+        }
+
+        .upload-area:hover,
+        .upload-area.dragover {
+            border-color: var(--teal);
+            background: var(--light-teal)
+        }
+
+        .upload-area svg {
+            width: 36px;
+            height: 36px;
+            color: var(--teal);
+            margin-bottom: 0.5rem
+        }
+
+        .upload-area p {
+            font-size: 0.85rem;
+            color: var(--gray);
+            line-height: 1.5
+        }
+
+        .upload-area p strong {
+            color: var(--teal)
+        }
+
+        .upload-area input {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            cursor: pointer
+        }
+
+        .file-name {
+            margin-top: 0.5rem;
+            font-size: 0.8rem;
+            color: var(--teal);
+            font-weight: 600;
+            display: none
+        }
+
+        .file-name.show {
+            display: block
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 0.9rem;
+            border: none;
+            border-radius: var(--radius);
+            background: linear-gradient(135deg, var(--gold), #D4952E);
+            color: var(--white);
+            font-family: var(--font-body);
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(232, 168, 56, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(232, 168, 56, 0.4)
+        }
+
+        .btn-submit svg {
+            width: 20px;
+            height: 20px
+        }
+
+        .form-success {
+            display: none;
+            text-align: center;
+            padding: 2rem 1rem
+        }
+
+        .form-success.show {
+            display: block
+        }
+
+        .form-success .check-circle {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: var(--light-teal);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem
+        }
+
+        .form-success .check-circle svg {
+            width: 32px;
+            height: 32px;
+            color: var(--teal)
+        }
+
+        .form-success h3 {
+            font-family: var(--font-display);
+            font-size: 1.4rem;
+            color: var(--navy);
+            margin-bottom: 0.5rem
+        }
+
+        .form-success p {
+            color: var(--gray);
+            font-size: 0.9rem;
+            line-height: 1.6
+        }
+
+        /* ===== PACKAGES ===== */
+        #packages-section {
+            background: var(--off-white)
+        }
+
+        .packages-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.2rem;
+            max-width: 960px;
+            margin: 0 auto
+        }
+
+        .pkg-card {
+            background: var(--white);
+            border: 1.5px solid var(--light-gray);
+            border-radius: var(--radius-lg);
+            padding: 1.8rem 1.5rem;
+            text-decoration: none;
+            color: var(--dark);
+            transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column
+        }
+
+        .pkg-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--teal), var(--gold));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s
+        }
+
+        .pkg-card:hover {
+            border-color: var(--teal);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-4px)
+        }
+
+        .pkg-card:hover::before {
+            transform: scaleX(1)
+        }
+
+        .pkg-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center
+        }
+
+        .pkg-card:nth-child(1) .pkg-icon {
+            background: #E8EEF3
+        }
+
+        .pkg-card:nth-child(2) .pkg-icon {
+            background: #E6F5F5
+        }
+
+        .pkg-card:nth-child(3) .pkg-icon {
+            background: #FFF3E0
+        }
+
+        .pkg-card:nth-child(4) .pkg-icon {
+            background: var(--light-rose)
+        }
+
+        .pkg-card:nth-child(5) .pkg-icon {
+            background: #E8F5E9
+        }
+
+        .pkg-icon svg {
+            width: 26px;
+            height: 26px;
+            color: var(--navy)
+        }
+
+        .pkg-card h3 {
+            font-family: var(--font-display);
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 0.4rem
+        }
+
+        .pkg-card p {
+            font-size: 0.82rem;
+            color: var(--gray);
+            line-height: 1.6;
+            flex: 1
+        }
+
+        .pkg-card .pkg-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            margin-top: 1rem;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--teal);
+            transition: gap 0.3s
+        }
+
+        .pkg-card:hover .pkg-link {
+            gap: 0.6rem
+        }
+
+        .pkg-card .pkg-link svg {
+            width: 16px;
+            height: 16px
+        }
+
+        /* ===== FAQ ===== */
+        #faq-section {
+            background: var(--white)
+        }
+
+        .faq-list {
+            max-width: 700px;
+            margin: 0 auto
+        }
+
+        .faq-item {
+            border-bottom: 1px solid var(--light-gray)
+        }
+
+        .faq-q {
+            width: 100%;
+            background: none;
+            border: none;
+            padding: 1.2rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            cursor: pointer;
+            text-align: left;
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--navy);
+            transition: color 0.3s;
+        }
+
+        .faq-q:hover {
+            color: var(--teal)
+        }
+
+        .faq-q .faq-icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--light-teal);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: transform 0.3s, background 0.3s;
+        }
+
+        .faq-q .faq-icon svg {
+            width: 14px;
+            height: 14px;
+            color: var(--teal)
+        }
+
+        .faq-item.open .faq-q .faq-icon {
+            transform: rotate(45deg);
+            background: var(--teal)
+        }
+
+        .faq-item.open .faq-q .faq-icon svg {
+            color: var(--white)
+        }
+
+        .faq-a {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.3s
+        }
+
+        .faq-a-inner {
+            padding: 0 0 1.2rem;
+            font-size: 0.85rem;
+            color: var(--gray);
+            line-height: 1.7
+        }
+
+        .faq-item.open .faq-a {
+            max-height: 300px
+        }
+
+        /* ===== URGENCY STRIP ===== */
+        .urgency-strip {
+            background: linear-gradient(135deg, var(--gold), #D4952E);
+            padding: 1.2rem 1.5rem;
+            text-align: center;
+        }
+
+        .urgency-strip p {
+            color: var(--white);
+            font-size: 0.9rem;
+            font-weight: 600
+        }
+
+        .urgency-strip a {
+            color: var(--white);
+            text-decoration: underline;
+            font-weight: 700
+        }
+
+        /* ===== TRUST NUMBERS ===== */
+        #trust-section {
+            background: var(--navy);
+            color: var(--white);
+            padding: 3.5rem 1.5rem
+        }
+
+        .trust-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            max-width: 900px;
+            margin: 0 auto
+        }
+
+        .trust-card {
+            text-align: center;
+            padding: 1.2rem
+        }
+
+        .trust-card .t-num {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--gold);
+            margin-bottom: 0.3rem
+        }
+
+        .trust-card .t-label {
+            font-size: 0.82rem;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.5
+        }
+
+        /* ===== LOCATION ===== */
+        #location-section {
+            background: var(--off-white);
+            padding: 3rem 1.5rem
+        }
+
+        .location-inner {
+            max-width: 960px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center
+        }
+
+        .location-info h3 {
+            font-family: var(--font-display);
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 0.8rem
+        }
+
+        .location-detail {
+            display: flex;
+            gap: 0.6rem;
+            margin-bottom: 0.8rem;
+            font-size: 0.85rem;
+            color: var(--dark);
+            line-height: 1.5
+        }
+
+        .location-detail svg {
+            width: 18px;
+            height: 18px;
+            color: var(--teal);
+            flex-shrink: 0;
+            margin-top: 2px
+        }
+
+        .location-map {
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            height: 250px;
+            background: var(--light-gray);
+            border: 1px solid var(--light-gray)
+        }
+
+        .location-map iframe {
+            width: 100%;
+            height: 100%;
+            border: 0
+        }
+
+        img.New_logo {
+            width: 170px
+        }
+
+        /* ===== FOOTER CTA ===== */
+        .footer-cta {
+            background: linear-gradient(135deg, var(--teal), #007A7B);
+            padding: 3rem 1.5rem;
+            text-align: center
+        }
+
+        .footer-cta h2 {
+            font-family: var(--font-display);
+            font-size: clamp(1.4rem, 3vw, 1.8rem);
+            color: var(--white);
+            margin-bottom: 0.5rem
+        }
+
+        .footer-cta p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem
+        }
+
+        .footer-cta-btns {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap
+        }
+
+        .footer-btn {
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s
+        }
+
+        .footer-btn--call {
+            background: var(--white);
+            color: var(--navy)
+        }
+
+        .footer-btn--call:hover {
+            background: var(--gold);
+            color: var(--white)
+        }
+
+        .footer-btn--whatsapp {
+            background: rgba(255, 255, 255, 0.15);
+            color: var(--white);
+            border: 1.5px solid rgba(255, 255, 255, 0.3)
+        }
+
+        .footer-btn--whatsapp:hover {
+            background: rgba(255, 255, 255, 0.25)
+        }
+
+        .footer-btn svg {
+            width: 18px;
+            height: 18px
+        }
+
+        .footer {
+            background: var(--navy);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            text-align: center
+        }
+
+        .footer p {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.75rem
+        }
+
+        .footer a {
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none
+        }
+
+        /* ===== STICKY MOBILE CTA ===== */
+        .sticky-cta {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: var(--white);
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.12);
+            padding: 0.8rem 1rem;
+            border-top: 2px solid var(--teal);
+        }
+
+        .sticky-cta-inner {
+            display: flex;
+            gap: 0.6rem;
+            max-width: 500px;
+            margin: 0 auto
+        }
+
+        .sticky-btn {
+            flex: 1;
+            padding: 0.7rem;
+            border-radius: var(--radius);
+            font-family: var(--font-body);
+            font-size: 0.82rem;
+            font-weight: 700;
+            text-decoration: none;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+        }
+
+        .sticky-btn--call {
+            background: var(--teal);
+            color: var(--white)
+        }
+
+        .sticky-btn--wa {
+            background: #25D366;
+            color: var(--white)
+        }
+
+        .sticky-btn svg {
+            width: 16px;
+            height: 16px
+        }
+
+
+        .ins-wrap {
+            padding: 2.5rem 1.5rem;
+            background: linear-gradient(145deg, #071a2e 0%, #0d2b47 60%, #0a2238 100%);
+            border-radius: var(--border-radius-lg);
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .blob1 {
+            position: absolute;
+            top: -80px;
+            right: -80px;
+            width: 260px;
+            height: 260px;
+            border-radius: 50%;
+            background: rgba(55, 138, 221, 0.07);
+            pointer-events: none;
+        }
+
+        .logo-box img {
+            width: 100%;
+        }
+
+        .blob2 {
+            position: absolute;
+            bottom: -60px;
+            left: -60px;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: rgba(29, 158, 117, 0.07);
+            pointer-events: none;
+        }
+
+        .ins-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(55, 138, 221, 0.12);
+            border: 1px solid rgba(55, 138, 221, 0.3);
+            color: #85b7eb;
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            padding: 5px 14px;
+            border-radius: 20px;
+            margin-bottom: 1rem;
+        }
+
+        .ins-pill-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #1d9e75;
+        }
+
+        .ins-h {
+            font-size: 21px;
+            font-weight: 500;
+            color: #fff;
+            margin: 0 0 0.3rem;
+        }
+
+        .ins-sub {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.42);
+            margin: 0 0 2rem;
+        }
+
+        .ins-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin: 0 auto 12px;
+        }
+
+        .ins-card {
+            background: rgba(255, 255, 255, 0.055);
+            border: 0.5px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 16px 10px 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            transition: background 0.2s, border-color 0.2s, transform 0.18s;
+            cursor: default;
+            justify-content: center;
+        }
+
+        .ins-card:hover {
+            background: rgba(255, 255, 255, 0.09);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .logo-box {
+            width: 100px;
+            border-radius: 7px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+        }
+
+        .ins-name {
+            font-size: 11px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.78);
+            text-align: center;
+            line-height: 1.35;
+        }
+
+        .ins-tag {
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.32);
+            text-align: center;
+        }
+
+        .ins-tag.health {
+            color: #5dcaa5;
+        }
+
+        .ins-tag.general {
+            color: #85b7eb;
+        }
+
+        .ins-tag.life {
+            color: #f0997b;
+        }
+
+        .more-card {
+            background: rgba(55, 138, 221, 0.1);
+            border: 0.5px solid rgba(55, 138, 221, 0.25);
+            border-radius: 12px;
+            padding: 16px 10px 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.18s;
+        }
+
+        .more-card:hover {
+            background: rgba(55, 138, 221, 0.18);
+            transform: translateY(-3px);
+        }
+
+        .more-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(55, 138, 221, 0.18);
+            border: 1px solid rgba(55, 138, 221, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 300;
+            color: #85b7eb;
+            line-height: 1;
+            padding-bottom: 7px;
+        }
+
+        .more-label {
+            font-size: 12px;
+            font-weight: 500;
+            color: #85b7eb;
+        }
+
+        .more-sub {
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        .ins-stat {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+        }
+
+        .ins-stat-num {
+            font-size: 16px;
+            font-weight: 500;
+            color: #fff;
+        }
+
+        .ins-stat-lbl {
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.35);
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+
+        .ins-divider {
+            width: 1px;
+            height: 28px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        @media(max-width:990px) {
+            .top-bar {
+                display: block;
+            }
+
+            .top-bar-actions {
+                display: none;
+                align-items: center;
+                gap: 10px;
+                flex-direction: column;
+            }
+
+
+            .top-bar {
+                text-align: center;
+            }
+
+            .logo-area {
+                display: block;
+            }
+        }
+
+        @media(max-width:768px) {
+            .top-bar {
+                display: block;
+            }
+
+            .hero {
+                padding: 5rem 1.2rem 2.5rem
+            }
+
+            .top-bar {
+                padding: 1rem 1.2rem
+            }
+
+            .logo-text {
+                font-size: 0.9rem
+            }
+
+            .logo-text span {
+                font-size: 0.58rem
+            }
+
+            .top-phone span.phone-text {
+                display: none
+            }
+
+            .cta-card {
+                width: 100%;
+                max-width: 340px
+            }
+
+            .hero-ctas {
+                flex-direction: column;
+                align-items: center
+            }
+
+            .form-row {
+                grid-template-columns: 1fr
+            }
+
+            .trust-strip {
+                gap: 1rem
+            }
+
+            .trust-item {
+                font-size: 0.72rem
+            }
+
+            .quote-box {
+                padding: 1.5rem
+            }
+
+            .packages-grid {
+                grid-template-columns: 1fr
+            }
+
+            .location-inner {
+                grid-template-columns: 1fr
+            }
+
+            .social-proof-inner {
+                gap: 1.2rem
+            }
+
+            .sp-divider {
+                display: none
+            }
+
+
+            .sticky-cta {
+                display: block
+            }
+
+            body {
+                padding-bottom: 70px
+            }
+
+            .doc-card {
+                width: 47%;
+            }
+
+            .ins-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .more-card {
+                padding: 30px 20px;
+            }
+        }
+
+        @media(max-width:500px) {
+            .doc-card {
+                width: 100%;
+            }
+        }
+
+        @media(max-width:380px) {
+            .hero h1 {
+                font-size: 1.9rem
+            }
+
+            .trust-strip {
+                flex-direction: column;
+                align-items: center;
+                gap: 0.6rem
+            }
+        }
+
+        :target {
+            scroll-margin-top: 2rem
+        }
+    </style>
+
+    <!-- Google Tag Manager -->
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-WGJFVPCB');</script>
+    <!-- End Google Tag Manager -->
+
+    <!-- Meta Pixel Code -->
+    <script>
+        !function (f, b, e, v, n, t, s) {
+            if (f.fbq) return; n = f.fbq = function () {
+                n.callMethod ?
+                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+            };
+            if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+            n.queue = []; t = b.createElement(e); t.async = !0;
+            t.src = v; s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s)
+        }(window, document, 'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '1282482353417147');
+        fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+            src="https://www.facebook.com/tr?id=1282482353417147&ev=PageView&noscript=1" /></noscript>
+    <!-- End Meta Pixel Code -->
 </head>
 
 <body>
 
 
-  <!-- Google Tag Manager (noscript) -->
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WGJFVPCB" height="0" width="0"
-      style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WGJFVPCB" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
 
-  <noscript><img height="1" width="1" style="display:none"
-      src="https://www.facebook.com/tr?id=1282482353417147&ev=PageView&noscript=1" /></noscript>
-  <!-- End Google Tag Manager (noscript) -->
-  <!-- ===== HERO ===== -->
-  <section class="header">
-    <div class="container">
-      <div class="top-bar">
+    <noscript><img height="1" width="1" style="display:none"
+            src="https://www.facebook.com/tr?id=1282482353417147&ev=PageView&noscript=1" /></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <!-- ===== HERO ===== -->
+    <section class="header">
+        <div class="container">
+            <div class="top-bar">
 
 
-        <div class="logo-area">
-          <div class="logo-icon">
+                <div class="logo-area">
+                    <div class="logo-icon">
 
-            <img src="https://aarogyahastha.com/static/img/img/logo.png" class="New_logo"
-              alt="Aarogya Hastha Hospitals">
-            <img src="https://aarogyahastha.com/static/img/img/NABH_Logo-01.png" class="nabhNew_logo"
-              alt="New Hospital Logo" class="header-logo-img new-logo-img">
-          </div>
+                        <img src="https://aarogyahastha.com/static/img/img/logo.png" class="New_logo"
+                            alt="Aarogya Hastha Hospitals">
+                        <img src="https://aarogyahastha.com/static/img/img/NABH_Logo-01.png" class="nabhNew_logo"
+                            alt="New Hospital Logo" class="header-logo-img new-logo-img">
+                    </div>
+                </div>
+                <div class="top-bar-actions">
+
+                    <a href="tel:7259344848" class="top-bar-phone">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path
+                                d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z">
+                            </path>
+                        </svg>
+                        7259344848
+                    </a>
+
+                    <a href="https://wa.me/917259344848?text=Hi%2C%20I%27d%20like%20to%20know%20about%20your%20maternity%20packages."
+                        class="top-bar-wa" target="_blank">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z">
+                            </path>
+                        </svg>
+                        WhatsApp
+                    </a>
+
+                    <a href="#quote-section" class="btn-top-cta">Plan a Surgery</a>
+
+                </div>
+            </div>
         </div>
-        <div class="top-bar-actions">
+    </section>
 
-          <a href="tel:7259344848" class="top-bar-phone">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path
-                d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z">
-              </path>
-            </svg>
-            7259344848
-          </a>
-
-          <a href="https://wa.me/917259344848?text=Hi%2C%20I%27d%20like%20to%20know%20about%20your%20maternity%20packages."
-            class="top-bar-wa" target="_blank">
-            <svg viewBox="0 0 24 24" fill="currentColor">
-              <path
-                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z">
-              </path>
-            </svg>
-            WhatsApp
-          </a>
-
-          <a href="#quote-section" class="btn-top-cta">Plan a Surgery</a>
-
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="hero">
+    <section class="hero">
 
 
-    <div class="hero-content">
+        <div class="hero-content">
 
-      <!-- <div class="hero-badge">
+            <!-- <div class="hero-badge">
         <span class="dot"></span> NABH Certified
       </div> -->
 
-      <h1>Planning a <span class="highlight">Surgery?</span></h1>
+            <h1>Planning a <span class="highlight">Surgery?</span></h1>
 
-      <p class="hero-sub">
-        Get the best price and the best care — all under one roof. Choose how we can help you today.
-      </p>
+            <p class="hero-sub">
+                Get the best price and the best care — all under one roof. Choose how we can help you today.
+            </p>
 
-      <div class="hero-ctas">
+            <div class="hero-ctas">
 
-        <a href="#quote-section" class="cta-card cta-card--quote">
-          <div class="cta-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"></path>
-              <polyline points="14 2 14 8 20 8"></polyline>
-              <line x1="9" y1="15" x2="15" y2="15"></line>
-            </svg>
-          </div>
-          <div class="cta-label">Got a Quote?<br>Let Us Beat It</div>
-          <div class="cta-desc">Upload your surgery quote &amp; we'll offer a better price</div>
-        </a>
+                <a href="#quote-section" class="cta-card cta-card--quote">
+                    <div class="cta-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                            <line x1="9" y1="15" x2="15" y2="15"></line>
+                        </svg>
+                    </div>
+                    <div class="cta-label">Got a Quote?<br>Let Us Beat It</div>
+                    <div class="cta-desc">Upload your surgery quote &amp; we'll offer a better price</div>
+                </a>
 
-        <a href="#packages-section" class="cta-card cta-card--packages">
-          <div class="cta-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <rect x="1" y="4" width="22" height="16" rx="2"></rect>
-              <line x1="1" y1="10" x2="23" y2="10"></line>
-            </svg>
-          </div>
-          <div class="cta-label">Looking for a Quote?<br>Check Our Packages</div>
-          <div class="cta-desc">Browse transparent surgery packages by department</div>
-        </a>
+                <a href="#packages-section" class="cta-card cta-card--packages">
+                    <div class="cta-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="1" y="4" width="22" height="16" rx="2"></rect>
+                            <line x1="1" y1="10" x2="23" y2="10"></line>
+                        </svg>
+                    </div>
+                    <div class="cta-label">Looking for a Quote?<br>Check Our Packages</div>
+                    <div class="cta-desc">Browse transparent surgery packages by department</div>
+                </a>
 
-      </div>
+            </div>
 
-      <div class="trust-strip">
+            <div class="trust-strip">
 
-        <div class="trust-item">4.7★ Google Rating</div>
-        <div class="trust-item">1800+ Surgeries</div>
-        <div class="trust-item">40,000+ Patients</div>
+                <div class="trust-item">4.7★ Google Rating</div>
+                <div class="trust-item">1800+ Surgeries</div>
+                <div class="trust-item">40,000+ Patients</div>
 
-      </div>
+            </div>
 
-    </div>
-  </section>
-
-  <!-- ===== SOCIAL PROOF BAR ===== -->
-  <div class="social-proof-bar">
-    <div class="social-proof-inner">
-      <div class="sp-item sp-google">
-        <span class="sp-google-icon"><span class="g-blue">G</span><span class="g-red">o</span><span
-            class="g-yellow">o</span><span class="g-blue">g</span><span class="g-green">l</span><span
-            class="g-red">e</span></span>
-        <span class="sp-rating">4.7</span>
-        <div>
-          <div class="sp-stars">★★★★★</div>
-          <div class="sp-label">Based on 200+ reviews</div>
         </div>
-      </div>
-      <div class="sp-divider"></div>
-      <div class="sp-stat">
-        <div class="sp-stat-num">1800+</div>
-        <div class="sp-stat-label">Surgeries</div>
-      </div>
-      <div class="sp-divider"></div>
-      <div class="sp-stat">
-        <div class="sp-stat-num">40,000+</div>
-        <div class="sp-stat-label">Patients Treated</div>
-      </div>
-      <div class="sp-divider"></div>
-      <!-- <div class="sp-stat">
+    </section>
+
+    <!-- ===== SOCIAL PROOF BAR ===== -->
+    <div class="social-proof-bar">
+        <div class="social-proof-inner">
+            <div class="sp-item sp-google">
+                <span class="sp-google-icon"><span class="g-blue">G</span><span class="g-red">o</span><span
+                        class="g-yellow">o</span><span class="g-blue">g</span><span class="g-green">l</span><span
+                        class="g-red">e</span></span>
+                <span class="sp-rating">4.7</span>
+                <div>
+                    <div class="sp-stars">★★★★★</div>
+                    <div class="sp-label">Based on 200+ reviews</div>
+                </div>
+            </div>
+            <div class="sp-divider"></div>
+            <div class="sp-stat">
+                <div class="sp-stat-num">1800+</div>
+                <div class="sp-stat-label">Surgeries</div>
+            </div>
+            <div class="sp-divider"></div>
+            <div class="sp-stat">
+                <div class="sp-stat-num">40,000+</div>
+                <div class="sp-stat-label">Patients Treated</div>
+            </div>
+            <div class="sp-divider"></div>
+            <!-- <div class="sp-stat">
         <div class="sp-stat-num">Est. 2022</div>
         <div class="sp-stat-label">NABH Certified</div>
       </div> -->
+        </div>
     </div>
-  </div>
 
-  <!-- ===== GOOGLE REVIEWS ===== -->
-  <section class="section" id="reviews-section">
-    <div class="section-inner">
-      <div class="google-header">
-        <span class="g-logo"><span class="g-blue">G</span><span class="g-red">o</span><span
-            class="g-yellow">o</span><span class="g-blue">g</span><span class="g-green">l</span><span
-            class="g-red">e</span></span>
-        <span style="font-size:1rem;color:var(--gray);font-weight:500">Reviews</span>
-      </div>
-      <div class="reviews-summary">
-        <div class="big-rating">4.7</div>
-        <div class="stars-row">★★★★★</div>
-        <div class="review-count">Based on 200+ verified patient reviews</div>
-      </div>
-
-      <div class="reviews-scroll">
-        <!-- Review 1 -->
-        <div class="review-card">
-          <div class="review-badge"><svg viewBox="0 0 48 48" fill="none">
-              <circle cx="24" cy="24" r="24" fill="#4285F4" /><text x="50%" y="55%" text-anchor="middle" fill="#fff"
-                font-size="22" font-weight="bold" font-family="Arial">G</text>
-            </svg></div>
-          <div class="review-top">
-            <div class="review-avatar" style="background:linear-gradient(135deg,#4285F4,#34A853)">RK</div>
-            <div class="review-meta">
-              <div class="review-name">Ramesh K</div>
-              <div class="review-date">2 months ago</div>
+    <!-- ===== GOOGLE REVIEWS ===== -->
+    <section class="section" id="reviews-section">
+        <div class="section-inner">
+            <div class="google-header">
+                <span class="g-logo"><span class="g-blue">G</span><span class="g-red">o</span><span
+                        class="g-yellow">o</span><span class="g-blue">g</span><span class="g-green">l</span><span
+                        class="g-red">e</span></span>
+                <span style="font-size:1rem;color:var(--gray);font-weight:500">Reviews</span>
             </div>
-          </div>
-          <div class="review-stars">★★★★★</div>
-          <div class="review-text">got my mothers knee replacement done here last month. she was really scared
-            initially
-            but the doctors explained everything so patiently. now shes walking around the house without support
-            already.</div>
-        </div>
-
-        <!-- Review 2 -->
-        <div class="review-card">
-          <div class="review-badge"><svg viewBox="0 0 48 48" fill="none">
-              <circle cx="24" cy="24" r="24" fill="#4285F4" /><text x="50%" y="55%" text-anchor="middle" fill="#fff"
-                font-size="22" font-weight="bold" font-family="Arial">G</text>
-            </svg></div>
-          <div class="review-top">
-            <div class="review-avatar" style="background:linear-gradient(135deg,#EA4335,#FBBC05)">PS</div>
-            <div class="review-meta">
-              <div class="review-name">Priya Srinivasan</div>
-              <div class="review-date">3 months ago</div>
+            <div class="reviews-summary">
+                <div class="big-rating">4.7</div>
+                <div class="stars-row">★★★★★</div>
+                <div class="review-count">Based on 200+ verified patient reviews</div>
             </div>
-          </div>
-          <div class="review-stars">★★★★★</div>
-          <div class="review-text">Had my gallbladder removed through laparoscopic surgery. I was discharged the next
-            day itself which surprised me. Very small cuts only, barely any scars now. Good experience overall.</div>
-        </div>
 
-        <!-- Review 3 -->
-        <div class="review-card">
-          <div class="review-badge"><svg viewBox="0 0 48 48" fill="none">
-              <circle cx="24" cy="24" r="24" fill="#4285F4" /><text x="50%" y="55%" text-anchor="middle" fill="#fff"
-                font-size="22" font-weight="bold" font-family="Arial">G</text>
-            </svg></div>
-          <div class="review-top">
-            <div class="review-avatar" style="background:linear-gradient(135deg,#34A853,#4285F4)">SB</div>
-            <div class="review-meta">
-              <div class="review-name">Suresh Babu M</div>
-              <div class="review-date">1 month ago</div>
+            <div class="reviews-scroll">
+                <!-- Review 1 -->
+                <div class="review-card">
+                    <div class="review-badge"><svg viewBox="0 0 48 48" fill="none">
+                            <circle cx="24" cy="24" r="24" fill="#4285F4" /><text x="50%" y="55%" text-anchor="middle"
+                                fill="#fff" font-size="22" font-weight="bold" font-family="Arial">G</text>
+                        </svg></div>
+                    <div class="review-top">
+                        <div class="review-avatar" style="background:linear-gradient(135deg,#4285F4,#34A853)">RK</div>
+                        <div class="review-meta">
+                            <div class="review-name">Ramesh K</div>
+                            <div class="review-date">2 months ago</div>
+                        </div>
+                    </div>
+                    <div class="review-stars">★★★★★</div>
+                    <div class="review-text">got my mothers knee replacement done here last month. she was really scared
+                        initially
+                        but the doctors explained everything so patiently. now shes walking around the house without
+                        support
+                        already.</div>
+                </div>
+
+                <!-- Review 2 -->
+                <div class="review-card">
+                    <div class="review-badge"><svg viewBox="0 0 48 48" fill="none">
+                            <circle cx="24" cy="24" r="24" fill="#4285F4" /><text x="50%" y="55%" text-anchor="middle"
+                                fill="#fff" font-size="22" font-weight="bold" font-family="Arial">G</text>
+                        </svg></div>
+                    <div class="review-top">
+                        <div class="review-avatar" style="background:linear-gradient(135deg,#EA4335,#FBBC05)">PS</div>
+                        <div class="review-meta">
+                            <div class="review-name">Priya Srinivasan</div>
+                            <div class="review-date">3 months ago</div>
+                        </div>
+                    </div>
+                    <div class="review-stars">★★★★★</div>
+                    <div class="review-text">Had my gallbladder removed through laparoscopic surgery. I was discharged
+                        the next
+                        day itself which surprised me. Very small cuts only, barely any scars now. Good experience
+                        overall.</div>
+                </div>
+
+                <!-- Review 3 -->
+                <div class="review-card">
+                    <div class="review-badge"><svg viewBox="0 0 48 48" fill="none">
+                            <circle cx="24" cy="24" r="24" fill="#4285F4" /><text x="50%" y="55%" text-anchor="middle"
+                                fill="#fff" font-size="22" font-weight="bold" font-family="Arial">G</text>
+                        </svg></div>
+                    <div class="review-top">
+                        <div class="review-avatar" style="background:linear-gradient(135deg,#34A853,#4285F4)">SB</div>
+                        <div class="review-meta">
+                            <div class="review-name">Suresh Babu M</div>
+                            <div class="review-date">1 month ago</div>
+                        </div>
+                    </div>
+                    <div class="review-stars">★★★★★</div>
+                    <div class="review-text">I kept postponing my knee surgery for 2 years. Finally came to aarogya
+                        hastha after
+                        my neighbour recommended it. I wish i hadnt waited so long!! the pain is just gone now. I can
+                        climb stairs
+                        again.</div>
+                </div>
+
+                <!-- Review 4 -->
+                <div class="review-card">
+                    <div class="review-badge"><svg viewBox="0 0 48 48" fill="none">
+                            <circle cx="24" cy="24" r="24" fill="#4285F4" /><text x="50%" y="55%" text-anchor="middle"
+                                fill="#fff" font-size="22" font-weight="bold" font-family="Arial">G</text>
+                        </svg></div>
+                    <div class="review-top">
+                        <div class="review-avatar" style="background:linear-gradient(135deg,#FBBC05,#EA4335)">FB</div>
+                        <div class="review-meta">
+                            <div class="review-name">Fatima Begum</div>
+                            <div class="review-date">4 months ago</div>
+                        </div>
+                    </div>
+                    <div class="review-stars">★★★★★</div>
+                    <div class="review-text">my knee was bone on bone the doctor said. i could barely walk to the
+                        bathroom some
+                        days. after replacement surgery here im like a different person. went to the market by myself
+                        last week.
+                    </div>
+                </div>
+
+                <!-- Review 5 -->
+                <div class="review-card">
+                    <div class="review-badge"><svg viewBox="0 0 48 48" fill="none">
+                            <circle cx="24" cy="24" r="24" fill="#4285F4" /><text x="50%" y="55%" text-anchor="middle"
+                                fill="#fff" font-size="22" font-weight="bold" font-family="Arial">G</text>
+                        </svg></div>
+                    <div class="review-top">
+                        <div class="review-avatar" style="background:linear-gradient(135deg,var(--navy),var(--teal))">KR
+                        </div>
+                        <div class="review-meta">
+                            <div class="review-name">Kavitha R</div>
+                            <div class="review-date">2 months ago</div>
+                        </div>
+                    </div>
+                    <div class="review-stars">★★★★☆</div>
+                    <div class="review-text">my husband had hernia surgery here, laparoscopic method. he was back to
+                        office work
+                        in about a weeks time. they were quite transparent about cost upfront. no hidden charges which
+                        we
+                        appreciated.</div>
+                </div>
+
+                <!-- Review 6 -->
+                <div class="review-card">
+                    <div class="review-badge"><svg viewBox="0 0 48 48" fill="none">
+                            <circle cx="24" cy="24" r="24" fill="#4285F4" /><text x="50%" y="55%" text-anchor="middle"
+                                fill="#fff" font-size="22" font-weight="bold" font-family="Arial">G</text>
+                        </svg></div>
+                    <div class="review-top">
+                        <div class="review-avatar" style="background:linear-gradient(135deg,#34A853,#FBBC05)">DN</div>
+                        <div class="review-meta">
+                            <div class="review-name">Deepa Narayan</div>
+                            <div class="review-date">5 months ago</div>
+                        </div>
+                    </div>
+                    <div class="review-stars">★★★★★</div>
+                    <div class="review-text">came here for appendix surgery. it was an emergency around 11pm. they took
+                        us in
+                        immediately and the surgery happened within hours. the whole team was so calm and professional
+                        even at
+                        that
+                        hour.</div>
+                </div>
             </div>
-          </div>
-          <div class="review-stars">★★★★★</div>
-          <div class="review-text">I kept postponing my knee surgery for 2 years. Finally came to aarogya hastha after
-            my neighbour recommended it. I wish i hadnt waited so long!! the pain is just gone now. I can climb stairs
-            again.</div>
         </div>
+    </section>
 
-        <!-- Review 4 -->
-        <div class="review-card">
-          <div class="review-badge"><svg viewBox="0 0 48 48" fill="none">
-              <circle cx="24" cy="24" r="24" fill="#4285F4" /><text x="50%" y="55%" text-anchor="middle" fill="#fff"
-                font-size="22" font-weight="bold" font-family="Arial">G</text>
-            </svg></div>
-          <div class="review-top">
-            <div class="review-avatar" style="background:linear-gradient(135deg,#FBBC05,#EA4335)">FB</div>
-            <div class="review-meta">
-              <div class="review-name">Fatima Begum</div>
-              <div class="review-date">4 months ago</div>
-            </div>
-          </div>
-          <div class="review-stars">★★★★★</div>
-          <div class="review-text">my knee was bone on bone the doctor said. i could barely walk to the bathroom some
-            days. after replacement surgery here im like a different person. went to the market by myself last week.
-          </div>
-        </div>
-
-        <!-- Review 5 -->
-        <div class="review-card">
-          <div class="review-badge"><svg viewBox="0 0 48 48" fill="none">
-              <circle cx="24" cy="24" r="24" fill="#4285F4" /><text x="50%" y="55%" text-anchor="middle" fill="#fff"
-                font-size="22" font-weight="bold" font-family="Arial">G</text>
-            </svg></div>
-          <div class="review-top">
-            <div class="review-avatar" style="background:linear-gradient(135deg,var(--navy),var(--teal))">KR</div>
-            <div class="review-meta">
-              <div class="review-name">Kavitha R</div>
-              <div class="review-date">2 months ago</div>
-            </div>
-          </div>
-          <div class="review-stars">★★★★☆</div>
-          <div class="review-text">my husband had hernia surgery here, laparoscopic method. he was back to office work
-            in about a weeks time. they were quite transparent about cost upfront. no hidden charges which we
-            appreciated.</div>
-        </div>
-
-        <!-- Review 6 -->
-        <div class="review-card">
-          <div class="review-badge"><svg viewBox="0 0 48 48" fill="none">
-              <circle cx="24" cy="24" r="24" fill="#4285F4" /><text x="50%" y="55%" text-anchor="middle" fill="#fff"
-                font-size="22" font-weight="bold" font-family="Arial">G</text>
-            </svg></div>
-          <div class="review-top">
-            <div class="review-avatar" style="background:linear-gradient(135deg,#34A853,#FBBC05)">DN</div>
-            <div class="review-meta">
-              <div class="review-name">Deepa Narayan</div>
-              <div class="review-date">5 months ago</div>
-            </div>
-          </div>
-          <div class="review-stars">★★★★★</div>
-          <div class="review-text">came here for appendix surgery. it was an emergency around 11pm. they took us in
-            immediately and the surgery happened within hours. the whole team was so calm and professional even at
-            that
-            hour.</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== WHY CHOOSE US ===== -->
-  <section class="section" id="why-section">
-    <div class="section-inner">
-      <div class="section-title reveal">Why Patients Choose Aarogya Hastha</div>
-      <p class="section-sub reveal">We combine clinical expertise with genuine care — and back it up with transparent
-        pricing.</p>
-      <div class="why-grid">
-        <!-- <div class="why-card reveal">
+    <!-- ===== WHY CHOOSE US ===== -->
+    <section class="section" id="why-section">
+        <div class="section-inner">
+            <div class="section-title reveal">Why Patients Choose Aarogya Hastha</div>
+            <p class="section-sub reveal">We combine clinical expertise with genuine care — and back it up with
+                transparent
+                pricing.</p>
+            <div class="why-grid">
+                <!-- <div class="why-card reveal">
           <div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
               stroke-linecap="round" stroke-linejoin="round">
               <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
@@ -2201,299 +2214,325 @@
           <p>National-level quality accreditation ensuring the highest standards in patient safety, infection control,
             and clinical outcomes.</p>
         </div> -->
-        <div class="why-card reveal">
-          <div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="10" />
-              <line x1="12" y1="8" x2="12" y2="12" />
-              <line x1="12" y1="16" x2="12.01" y2="16" />
-            </svg></div>
-          <h3>Transparent Pricing</h3>
-          <p>No hidden charges, no surprise bills. Every cost is explained upfront — from consultation to discharge.
-          </p>
-        </div>
-        <div class="why-card reveal">
-          <div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
-              <path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
-              <circle cx="8.5" cy="7" r="4" />
-              <line x1="20" y1="8" x2="20" y2="14" />
-              <line x1="23" y1="11" x2="17" y2="11" />
-            </svg></div>
-          <h3>Experienced Surgical Team</h3>
-          <p>Our surgeons bring fellowship-trained expertise across orthopaedics, laparoscopic surgery, women and
-            Child
-            health.</p>
-        </div>
-        <div class="why-card reveal">
-          <div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
-              <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
-              <line x1="8" y1="21" x2="16" y2="21" />
-              <line x1="12" y1="17" x2="12" y2="21" />
-            </svg></div>
-          <h3>Advanced Technology</h3>
-          <p>CT scanner, C-Arm, ultrasound, and state-of-the-art operation theatres — technology that supports
-            precision
-            care.</p>
-        </div>
-        <div class="why-card reveal">
-          <div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
-              <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
-            </svg></div>
-          <h3>Post-Surgery Rehabilitation</h3>
-          <p>Structured physiotherapy and follow-up plans included. We don't just operate — we ensure you recover
-            fully.
-          </p>
-        </div>
-        <div class="why-card reveal">
-          <div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
-              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
-              <circle cx="12" cy="10" r="3" />
-            </svg></div>
-          <h3>Convenient Location</h3>
-          <p>Located on Kasavanahalli Main Road, Sarjapur Road — easily accessible from HSR Layout, Bellandur, Hosa
-            road, Electronic-city phase 1 & 2, and Haraluru</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== DOCTORS ===== -->
-  <section class="section" id="doctors-section">
-    <div class="section-inner">
-      <div class="section-title reveal">Meet Our Surgical Experts</div>
-      <p class="section-sub reveal">Our specialists bring years of experience and fellowship-level training to every
-        surgery.</p>
-      <div class="doctors-grid">
-        <!--  -->
-        <div class="doc-card reveal">
-          <div class="doc-avatar">
-            <img src="static/img/landingpageimage/dr-kushal-lakshmana.png" alt="Dr. Kushal Lakshmana">
-          </div>
-          <div class="doctor-info">
-            <h3>Dr. Kushal Lakshmana</h3>
-            <div class="doc-dept">MBBS , MS-Orthopaedics</div>
-            <div class="doc-qual">Consultant & HOD – Orthopaedics, Fellowship in Arthroplasty Medicine, Bangalore
-              Orthopaedic Society, Karnataka Orthopaedic Society, Indian Orthopaedic society</div>
-          </div>
-        </div>
-        <!--  -->
-        <div class="doc-card reveal">
-          <div class="doc-avatar"><img src="static/img/landingpageimage/karan-gowda.png" alt="">
-          </div>
-          <div class="doctor-info">
-            <h3>Dr. C L Karan Gowda</h3>
-            <div class="doc-dept">MBBS, MS (Ortho), DNB (Ortho), FRGUHS (Advanced trauma), FEIORA (Ortho Rheumatology)
+                <div class="why-card reveal">
+                    <div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10" />
+                            <line x1="12" y1="8" x2="12" y2="12" />
+                            <line x1="12" y1="16" x2="12.01" y2="16" />
+                        </svg></div>
+                    <h3>Transparent Pricing</h3>
+                    <p>No hidden charges, no surprise bills. Every cost is explained upfront — from consultation to
+                        discharge.
+                    </p>
+                </div>
+                <div class="why-card reveal">
+                    <div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                            <circle cx="8.5" cy="7" r="4" />
+                            <line x1="20" y1="8" x2="20" y2="14" />
+                            <line x1="23" y1="11" x2="17" y2="11" />
+                        </svg></div>
+                    <h3>Experienced Surgical Team</h3>
+                    <p>Our surgeons bring fellowship-trained expertise across orthopaedics, laparoscopic surgery, women
+                        and
+                        Child
+                        health.</p>
+                </div>
+                <div class="why-card reveal">
+                    <div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+                            <line x1="8" y1="21" x2="16" y2="21" />
+                            <line x1="12" y1="17" x2="12" y2="21" />
+                        </svg></div>
+                    <h3>Advanced Technology</h3>
+                    <p>CT scanner, C-Arm, ultrasound, and state-of-the-art operation theatres — technology that supports
+                        precision
+                        care.</p>
+                </div>
+                <div class="why-card reveal">
+                    <div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+                        </svg></div>
+                    <h3>Post-Surgery Rehabilitation</h3>
+                    <p>Structured physiotherapy and follow-up plans included. We don't just operate — we ensure you
+                        recover
+                        fully.
+                    </p>
+                </div>
+                <div class="why-card reveal">
+                    <div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+                            <circle cx="12" cy="10" r="3" />
+                        </svg></div>
+                    <h3>Convenient Location</h3>
+                    <p>Located on Kasavanahalli Main Road, Sarjapur Road — easily accessible from HSR Layout, Bellandur,
+                        Hosa
+                        road, Electronic-city phase 1 & 2, and Haraluru</p>
+                </div>
             </div>
-            <!-- <div class="doc-qual">Fellowship in Arthroplasty<br>Knee &amp; Hip Replacement Specialist</div> -->
-          </div>
         </div>
-        <!--  -->
-        <div class="doc-card reveal">
-          <div class="doc-avatar"><img src="static/img/landingpageimage/radhesh_menon.png" alt="">
-          </div>
-          <div class="doctor-info">
-            <h3>Dr. Radhesh R Menon</h3>
-            <div class="doc-dept">MBBS, MS Orthopaedics (Gold Medal)</div>
-            <div class="doc-qual">Fellow of Hand & Microsurgery (Japan), Fellow of Arthroscopy & Sports Medicine</div>
-          </div>
+    </section>
+
+    <!-- ===== DOCTORS ===== -->
+    <section class="section" id="doctors-section">
+        <div class="section-inner">
+            <div class="section-title reveal">Meet Our Surgical Experts</div>
+            <p class="section-sub reveal">Our specialists bring years of experience and fellowship-level training to
+                every
+                surgery.</p>
+            <div class="doctors-grid">
+                <!--  -->
+                <div class="doc-card reveal">
+                    <div class="doc-avatar">
+                        <img src="static/img/landingpageimage/dr-kushal-lakshmana.png" alt="Dr. Kushal Lakshmana">
+                    </div>
+                    <div class="doctor-info">
+                        <h3>Dr. Kushal Lakshmana</h3>
+                        <div class="doc-dept">MBBS , MS-Orthopaedics</div>
+                        <div class="doc-qual">Consultant & HOD – Orthopaedics, Fellowship in Arthroplasty Medicine,
+                            Bangalore
+                            Orthopaedic Society, Karnataka Orthopaedic Society, Indian Orthopaedic society</div>
+                    </div>
+                </div>
+                <!--  -->
+                <div class="doc-card reveal">
+                    <div class="doc-avatar"><img src="static/img/landingpageimage/karan-gowda.png" alt="">
+                    </div>
+                    <div class="doctor-info">
+                        <h3>Dr. C L Karan Gowda</h3>
+                        <div class="doc-dept">MBBS, MS (Ortho), DNB (Ortho), FRGUHS (Advanced trauma), FEIORA (Ortho
+                            Rheumatology)
+                        </div>
+                        <!-- <div class="doc-qual">Fellowship in Arthroplasty<br>Knee &amp; Hip Replacement Specialist</div> -->
+                    </div>
+                </div>
+                <!--  -->
+                <div class="doc-card reveal">
+                    <div class="doc-avatar"><img src="static/img/landingpageimage/radhesh_menon.png" alt="">
+                    </div>
+                    <div class="doctor-info">
+                        <h3>Dr. Radhesh R Menon</h3>
+                        <div class="doc-dept">MBBS, MS Orthopaedics (Gold Medal)</div>
+                        <div class="doc-qual">Fellow of Hand & Microsurgery (Japan), Fellow of Arthroscopy & Sports
+                            Medicine</div>
+                    </div>
+                </div>
+                <!--  -->
+                <div class="doc-card reveal">
+                    <div class="doc-avatar"><img src="static/img/landingpageimage/dr-v-devendran.png"
+                            alt="Dr. V Devendran">
+                    </div>
+                    <div class="doctor-info">
+                        <h3>Dr. V Devendran</h3>
+                        <div class="doc-dept">MBBS, DNB - General Surgery</div>
+                        <div class="doc-qual">Senior Consultant — General, Laparoscopic & Laser Surgery, Proctology
+                        </div>
+                    </div>
+                </div>
+                <!--  -->
+                <div class="doc-card reveal">
+                    <div class="doc-avatar"><img src="static/img/landingpageimage/dr-niranjan-s-kadlur.png"
+                            alt="Dr. Niranjan S Kadlur">
+                    </div>
+                    <div class="doctor-info">
+                        <h3>Dr. Niranjan S Kadlur</h3>
+                        <div class="doc-dept">MBBS, DNB (General Surgery), FAMS</div>
+                        <div class="doc-qual">Consultant - General Surgery</div>
+                    </div>
+                </div>
+                <!--  -->
+                <div class="doc-card reveal">
+                    <div class="doc-avatar"><img src="static/img/landingpageimage/dr-Shardamma.png"
+                            alt="Dr. Sharadhamma">
+                    </div>
+                    <div class="doctor-info">
+                        <h3>Dr. Sharadhamma</h3>
+                        <div class="doc-dept">MBBS, MD, DGO</div>
+                        <!-- <div class="doc-qual">Fellowship in Arthroplasty<br>Knee &amp; Hip Replacement Specialist</div> -->
+                    </div>
+                </div>
+                <!--  -->
+                <div class="doc-card reveal">
+                    <div class="doc-avatar"><img src="static/img/landingpageimage/dr-geetha-r.png" alt="Dr. Geetha R">
+                    </div>
+                    <div class="doctor-info">
+                        <h3>Dr. Geetha R</h3>
+                        <div class="doc-dept">MBBS, MS OBG, FMAS&FRM</div>
+                        <div class="doc-qual">Fellowship in Minimal Access Surgery & Fellowship in Reproductive Medicine
+                        </div>
+                    </div>
+                </div>
+                <!--  -->
+                <div class="doc-card reveal">
+                    <div class="doc-avatar"><img src="static/img/landingpageimage/dr-soumya.png" alt="Dr. Soumya">
+                    </div>
+                    <div class="doctor-info">
+                        <h3>Dr. Soumya</h3>
+                        <div class="doc-dept">MBBS, MS (Obstetrics & Gynecology)</div>
+                        <!-- <div class="doc-qual">Fellowship in Arthroplasty<br>Knee &amp; Hip Replacement Specialist</div> -->
+                    </div>
+                </div>
+                <!--  -->
+                <div class="doc-card reveal">
+                    <div class="doc-avatar"><img src="static/img/landingpageimage/dr-saraswathi-m.png"
+                            alt="Dr. Saraswathi M">
+                    </div>
+                    <div class="doctor-info">
+                        <h3>Dr. Saraswathi M</h3>
+                        <div class="doc-dept">MBBS, DNB (Obstetrics & Gynecology)</div>
+                        <div class="doc-qual">Fellowship in Reproductive Medicine</div>
+                    </div>
+                </div>
+                <!--  -->
+            </div>
         </div>
-        <!--  -->
-        <div class="doc-card reveal">
-          <div class="doc-avatar"><img src="static/img/landingpageimage/dr-v-devendran.png" alt="Dr. V Devendran">
-          </div>
-          <div class="doctor-info">
-            <h3>Dr. V Devendran</h3>
-            <div class="doc-dept">MBBS, DNB - General Surgery</div>
-            <div class="doc-qual">Senior Consultant — General, Laparoscopic & Laser Surgery, Proctology</div>
-          </div>
-        </div>
-        <!--  -->
-        <div class="doc-card reveal">
-          <div class="doc-avatar"><img src="static/img/landingpageimage/dr-niranjan-s-kadlur.png"
-              alt="Dr. Niranjan S Kadlur">
-          </div>
-          <div class="doctor-info">
-            <h3>Dr. Niranjan S Kadlur</h3>
-            <div class="doc-dept">MBBS, DNB (General Surgery), FAMS</div>
-            <div class="doc-qual">Consultant - General Surgery</div>
-          </div>
-        </div>
-        <!--  -->
-        <div class="doc-card reveal">
-          <div class="doc-avatar"><img src="static/img/landingpageimage/dr-Shardamma.png" alt="Dr. Sharadhamma">
-          </div>
-          <div class="doctor-info">
-            <h3>Dr. Sharadhamma</h3>
-            <div class="doc-dept">MBBS, MD, DGO</div>
-            <!-- <div class="doc-qual">Fellowship in Arthroplasty<br>Knee &amp; Hip Replacement Specialist</div> -->
-          </div>
-        </div>
-        <!--  -->
-        <div class="doc-card reveal">
-          <div class="doc-avatar"><img src="static/img/landingpageimage/dr-geetha-r.png" alt="Dr. Geetha R">
-          </div>
-          <div class="doctor-info">
-            <h3>Dr. Geetha R</h3>
-            <div class="doc-dept">MBBS, MS OBG, FMAS&FRM</div>
-            <div class="doc-qual">Fellowship in Minimal Access Surgery & Fellowship in Reproductive Medicine</div>
-          </div>
-        </div>
-        <!--  -->
-        <div class="doc-card reveal">
-          <div class="doc-avatar"><img src="static/img/landingpageimage/dr-soumya.png" alt="Dr. Soumya">
-          </div>
-          <div class="doctor-info">
-            <h3>Dr. Soumya</h3>
-            <div class="doc-dept">MBBS, MS (Obstetrics & Gynecology)</div>
-            <!-- <div class="doc-qual">Fellowship in Arthroplasty<br>Knee &amp; Hip Replacement Specialist</div> -->
-          </div>
-        </div>
-        <!--  -->
-        <div class="doc-card reveal">
-          <div class="doc-avatar"><img src="static/img/landingpageimage/dr-saraswathi-m.png" alt="Dr. Saraswathi M">
-          </div>
-          <div class="doctor-info">
-            <h3>Dr. Saraswathi M</h3>
-            <div class="doc-dept">MBBS, DNB (Obstetrics & Gynecology)</div>
-            <div class="doc-qual">Fellowship in Reproductive Medicine</div>
-          </div>
-        </div>
-        <!--  -->
-      </div>
+    </section>
+
+    <!-- ===== URGENCY STRIP ===== -->
+    <div class="urgency-strip">
+        <p>Limited slots available this month — <a href="tel:7259344848">Call now to book your consultation</a></p>
     </div>
-  </section>
 
-  <!-- ===== URGENCY STRIP ===== -->
-  <div class="urgency-strip">
-    <p>Limited slots available this month — <a href="tel:7259344848">Call now to book your consultation</a></p>
-  </div>
+    <!-- ===== QUOTE CHALLENGE ===== -->
+    <section class="section" id="quote-section">
+        <div class="section-inner">
+            <div class="section-title reveal">Got a Surgery Quote? We'll Beat It.</div>
+            <p class="section-sub reveal">Already have a quote from another hospital? Upload it below and our team will
+                review
+                it and get back to you with a better offer — same quality, better price.</p>
+            <div class="quote-box reveal">
+                <div class="quote-steps">
+                    <div class="q-step"><span class="num">1</span> Upload Quote</div>
+                    <span class="q-step arrow-sep">→</span>
+                    <div class="q-step"><span class="num">2</span> We Review</div>
+                    <span class="q-step arrow-sep">→</span>
+                    <div class="q-step"><span class="num">3</span> Get a Better Price</div>
+                </div>
+                <form method="POST" action="/submit-quote" enctype="multipart/form-data">
 
-  <!-- ===== QUOTE CHALLENGE ===== -->
-  <section class="section" id="quote-section">
-    <div class="section-inner">
-      <div class="section-title reveal">Got a Surgery Quote? We'll Beat It.</div>
-      <p class="section-sub reveal">Already have a quote from another hospital? Upload it below and our team will
-        review
-        it and get back to you with a better offer — same quality, better price.</p>
-      <div class="quote-box reveal">
-        <div class="quote-steps">
-          <div class="q-step"><span class="num">1</span> Upload Quote</div>
-          <span class="q-step arrow-sep">→</span>
-          <div class="q-step"><span class="num">2</span> We Review</div>
-          <span class="q-step arrow-sep">→</span>
-          <div class="q-step"><span class="num">3</span> Get a Better Price</div>
-        </div>
-        <form id="quoteForm" method="POST" action="/submit-quote" enctype="multipart/form-data">
-        <div class="form-row">
-          <div class="form-group"><label for="name">Full Name *</label>
-            <input name="patientName" id="patientName" type="text" placeholder="Enter your name" required>
-          </div>
-          <div class="form-group"><label for="phone">Phone Number *</label>
-            <input name="contactNumber" id="contactNumber" type="tel" placeholder="Enter your mobile number" required>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="surgery">Surgery Type</label>
-          <select id="surgery" name="surgery">
-            <option value="">Select surgery type</option>
-            <option>Knee Replacement</option>
-            <option>Hip Replacement</option>
-            <option>Hernia Surgery (Laparoscopic)</option>
-            <option>Gallbladder Surgery (Laparoscopic)</option>
-            <option>Appendix Surgery</option>
-            <option>Gynaecology Surgery</option>
-            <option>Maternity / Delivery</option>
-            <option>Other</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Upload Your Quote (PDF, Image, or Document)</label>
-          <div class="upload-area" id="uploadArea">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-              stroke-linejoin="round">
-              <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
-              <polyline points="17 8 12 3 7 8" />
-              <line x1="12" y1="3" x2="12" y2="15" />
-            </svg>
-            <p><strong>Click to upload</strong> or drag &amp; drop<br>PDF, JPG, PNG up to 10MB</p>
-            <input type="file" name="file" id="fileInput" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
-            <div class="file-name" id="fileName"></div>
-          </div>
-        </div>
-        <div class="form-group"><label for="notes">Additional Notes (Optional)</label><textarea id="notes" name="notes"
-            placeholder="Any details about your surgery requirement..."></textarea></div>
-            <input type="hidden" name="source" value="Googleads">
-        <button type="submit" class="btn-submit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="20 6 9 17 4 12" />
-          </svg>Submit Quote &amp; Request Call Back</button>
-        </form>
-        <div class="form-success" id="formSuccess">
-          <div class="check-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-              stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="20 6 9 17 4 12" />
-            </svg></div>
-          <h3>Quote Received!</h3>
-          <p>Our team will review your quote and call you back within 2 hours with a better offer. Thank you for
-            choosing Aarogya Hastha Hospitals.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+                    <div class="form-row">
 
-  <!-- ===== PACKAGES ===== -->
-  <section class="section" id="packages-section">
-    <div class="section-inner">
-      <div class="section-title reveal">Explore Our Surgery Packages</div>
-      <p class="section-sub reveal">Transparent pricing. No hidden charges. Choose a department below to view detailed
-        packages, doctor profiles, and book a consultation.</p>
-      <div class="packages-grid">
-        <a href="/knee-replacement.html" class="pkg-card reveal" target="_blank">
-          <div class="pkg-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-              <circle cx="12" cy="12" r="10" />
-              <path d="M12 8v4l2 2" />
-            </svg></div>
-          <h3>Orthopaedics &amp; Knee Replacement</h3>
-          <p>Total knee replacement, partial knee, joint care packages with Follow-up Visit.</p>
-          <span class="pkg-link">View Packages <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-              stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="5" y1="12" x2="19" y2="12" />
-              <polyline points="12 5 19 12 12 19" />
-            </svg></span>
-        </a>
-        <a href="/general-laparoscopic-surgery.html" class="pkg-card reveal" target="_blank">
-          <div class="pkg-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-            </svg></div>
-          <h3>General &amp; Laparoscopic Surgery</h3>
-          <p>Hernia, gallbladder, appendix — minimally invasive surgery with faster recovery and smaller incisions.
-          </p>
-          <span class="pkg-link">View Packages <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-              stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="5" y1="12" x2="19" y2="12" />
-              <polyline points="12 5 19 12 12 19" />
-            </svg></span>
-        </a>
-        <a href="/hip-replacement-surgery.html" class="pkg-card reveal" target="_blank">
-          <div class="pkg-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-              <path d="M18 20V10" />
-              <path d="M12 20V4" />
-              <path d="M6 20v-6" />
-            </svg></div>
-          <h3>Hip Replacement</h3>
-          <p>Total hip replacement with international-grade implants and expert surgeons.
-          </p>
-          <span class="pkg-link">View Packages <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-              stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="5" y1="12" x2="19" y2="12" />
-              <polyline points="12 5 19 12 12 19" />
-            </svg></span>
-        </a>
-        <!-- <a href="#" class="pkg-card reveal" target="_blank">
+                        <div class="form-group">
+                            <label>Full Name *</label>
+                            <input name="patientName" type="text" placeholder="Enter your name" required
+                                pattern="[A-Za-z\s]+" title="Name should contain only letters and spaces">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Phone Number *</label>
+                            <input name="contactNumber" type="text" placeholder="Enter your mobile number" required
+                                inputmode="numeric" pattern="[6-9][0-9]{9}" maxlength="10"
+                                title="Enter a valid 10-digit mobile number">
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+                        <label>Surgery Type</label>
+                        <select name="surgery">
+                            <option value="">Select surgery type</option>
+                            <option>Knee Replacement</option>
+                            <option>Hip Replacement</option>
+                            <option>Hernia Surgery (Laparoscopic)</option>
+                            <option>Gallbladder Surgery (Laparoscopic)</option>
+                            <option>Appendix Surgery</option>
+                            <option>Gynaecology Surgery</option>
+                            <option>Maternity / Delivery</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Upload Your Quote (PDF, Image, or Document)</label>
+                        <div class="upload-area" id="uploadArea">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
+                                <polyline points="17 8 12 3 7 8" />
+                                <line x1="12" y1="3" x2="12" y2="15" />
+                            </svg>
+                            <p><strong>Click to upload</strong> or drag &amp; drop<br>PDF, JPG, PNG up to 10MB</p>
+                            <input type="file" name="file" id="fileInput" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+                            <div class="file-name" id="fileName"></div>
+                        </div>
+                    </div>
+                    <div class="form-group"><label for="notes">Additional Notes (Optional)</label><textarea id="notes"
+                            name="notes" placeholder="Any details about your surgery requirement..."></textarea></div>
+                    <input type="hidden" name="source" value="Googleads">
+                    <button type="submit" class="btn-submit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg>Submit Quote &amp; Request Call Back</button>
+                </form>
+                <div class="form-success" id="formSuccess">
+                    <div class="check-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg></div>
+                    <h3>Quote Received!</h3>
+                    <p>Our team will review your quote and call you back within 2 hours with a better offer. Thank you
+                        for
+                        choosing Aarogya Hastha Hospitals.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PACKAGES ===== -->
+    <section class="section" id="packages-section">
+        <div class="section-inner">
+            <div class="section-title reveal">Explore Our Surgery Packages</div>
+            <p class="section-sub reveal">Transparent pricing. No hidden charges. Choose a department below to view
+                detailed
+                packages, doctor profiles, and book a consultation.</p>
+            <div class="packages-grid">
+                <a href="/knee-replacement.html" class="pkg-card reveal" target="_blank">
+                    <div class="pkg-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                            <circle cx="12" cy="12" r="10" />
+                            <path d="M12 8v4l2 2" />
+                        </svg></div>
+                    <h3>Orthopaedics &amp; Knee Replacement</h3>
+                    <p>Total knee replacement, partial knee, joint care packages with Follow-up Visit.</p>
+                    <span class="pkg-link">View Packages <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12" />
+                            <polyline points="12 5 19 12 12 19" />
+                        </svg></span>
+                </a>
+                <a href="/general-laparoscopic-surgery.html" class="pkg-card reveal" target="_blank">
+                    <div class="pkg-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                        </svg></div>
+                    <h3>General &amp; Laparoscopic Surgery</h3>
+                    <p>Hernia, gallbladder, appendix — minimally invasive surgery with faster recovery and smaller
+                        incisions.
+                    </p>
+                    <span class="pkg-link">View Packages <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12" />
+                            <polyline points="12 5 19 12 12 19" />
+                        </svg></span>
+                </a>
+                <a href="/hip-replacement-surgery.html" class="pkg-card reveal" target="_blank">
+                    <div class="pkg-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                            <path d="M18 20V10" />
+                            <path d="M12 20V4" />
+                            <path d="M6 20v-6" />
+                        </svg></div>
+                    <h3>Hip Replacement</h3>
+                    <p>Total hip replacement with international-grade implants and expert surgeons.
+                    </p>
+                    <span class="pkg-link">View Packages <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12" />
+                            <polyline points="12 5 19 12 12 19" />
+                        </svg></span>
+                </a>
+                <!-- <a href="#" class="pkg-card reveal" target="_blank">
           <div class="pkg-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
               <path
                 d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" />
@@ -2506,336 +2545,350 @@
               <polyline points="12 5 19 12 12 19" />
             </svg></span>
         </a> -->
-        <a href="/maternity-packages.html" class="pkg-card reveal" target="_blank">
-          <div class="pkg-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-              <path
-                d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" />
-            </svg></div>
-          <h3>Maternity Packages</h3>
-          <p>Comprehensive delivery packages — normal &amp; C-section and postnatal support included.
-          </p>
-          <span class="pkg-link">View Packages <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-              stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="5" y1="12" x2="19" y2="12" />
-              <polyline points="12 5 19 12 12 19" />
-            </svg></span>
-        </a>
-      </div>
+                <a href="/maternity-packages.html" class="pkg-card reveal" target="_blank">
+                    <div class="pkg-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                            <path
+                                d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" />
+                        </svg></div>
+                    <h3>Maternity Packages</h3>
+                    <p>Comprehensive delivery packages — normal &amp; C-section and postnatal support included.
+                    </p>
+                    <span class="pkg-link">View Packages <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12" />
+                            <polyline points="12 5 19 12 12 19" />
+                        </svg></span>
+                </a>
+            </div>
+        </div>
+    </section>
+    <section class="ins-wrap">
+        <div class="blob1"></div>
+        <div class="blob2"></div>
+        <div class="section-inner">
+            <div class="ins-pill"><span class="ins-pill-dot"></span>Cashless Insurance Partners</div>
+            <h2 class="ins-h">Empanelled With Major Insurance Providers</h2>
+            <p class="ins-sub">Direct cashless settlement — no paperwork, no hassle</p>
+
+            <div class="ins-grid">
+
+                <!-- Star Health -->
+                <div class="ins-card">
+                    <div class="logo-box">
+                        <img src="static/img/landingpageimage/Insurance_logo1.png" alt="">
+                    </div>
+                    <!-- <div class="ins-name">Star Health</div> -->
+                </div>
+
+                <!-- HDFC ERGO -->
+                <div class="ins-card">
+                    <div class="logo-box">
+                        <img src="static/img/landingpageimage/Insurance_logo2.png" alt="">
+                    </div>
+                    <!-- <div class="ins-name">Niva Bupa</div> -->
+                </div>
+
+                <!-- Bajaj Allianz -->
+                <div class="ins-card">
+                    <div class="logo-box">
+                        <img src="static/img/landingpageimage/Insurance_logo4.png" alt="">
+                    </div>
+                    <!-- <div class="ins-name">Bajaj Allianz</div> -->
+                </div>
+
+                <!-- New India Assurance -->
+                <div class="ins-card">
+                    <div class="logo-box">
+                        <img src="static/img/landingpageimage/Insurance_logo5.png" alt="">
+                    </div>
+                    <!-- <div class="ins-name">ICICI Lombard</div> -->
+                </div>
+
+            </div>
+
+            <div class="ins-grid">
+
+
+                <!-- Niva Bupa -->
+                <div class="ins-card">
+                    <div class="logo-box">
+                        <img src="static/img/landingpageimage/Insurance_logo6.png" alt="">
+                    </div>
+                    <!-- <div class="ins-name">HDFC ERGO</div> -->
+                </div>
+
+                <div class="ins-card">
+                    <div class="logo-box">
+                        <img src="static/img/landingpageimage/Insurance_logo7.png" alt="">
+                    </div>
+                    <!-- <div class="ins-name">Care Health</div> -->
+                </div>
+
+                <div class="ins-card">
+                    <div class="logo-box">
+                        <img src="static/img/landingpageimage/Insurance_logo8.png" alt="">
+                    </div>
+                    <!-- <div class="ins-name">Care Health</div> -->
+                </div>
+
+
+
+                <div class="ins-card">
+                    <div class="logo-box">
+                        <img src="static/img/landingpageimage/Insurance_logo9.png" alt="">
+                    </div>
+                    <!-- <div class="ins-name">Care Health</div> -->
+                </div>
+
+
+                <div class="ins-card">
+                    <div class="logo-box">
+                        <img src="static/img/landingpageimage/Insurance_logo10.png" alt="">
+                    </div>
+                    <!-- <div class="ins-name">Care Health</div> -->
+                </div>
+
+                <div class="ins-card">
+                    <div class="logo-box">
+                        <img src="static/img/landingpageimage/Insurance_logo11.png" alt="">
+                    </div>
+                    <!-- <div class="ins-name">Care Health</div> -->
+                </div>
+
+                <div class="ins-card">
+                    <div class="logo-box">
+                        <img src="static/img/landingpageimage/Insurance_logo3.png" alt="">
+                    </div>
+                    <!-- <div class="ins-name">Care Health</div> -->
+                </div>
+                <!-- Care Health (formerly Religare) -->
+
+                <!-- More card -->
+                <div class="more-card"
+                    onclick="window.sendPrompt && sendPrompt('Show me all available cashless insurance partners')">
+
+                    <div class="more-label">+ More</div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- ===== FAQ ===== -->
+    <section class="section" id="faq-section">
+        <div class="section-inner">
+            <div class="section-title reveal">Frequently Asked Questions</div>
+            <p class="section-sub reveal">Answers to the most common questions from patients considering surgery at
+                Aarogya
+                Hastha.</p>
+            <div class="faq-list">
+                <div class="faq-item reveal">
+                    <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">How does the Quote
+                        Challenge
+                        work?<span class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="12" y1="5" x2="12" y2="19" />
+                                <line x1="5" y1="12" x2="19" y2="12" />
+                            </svg></span></button>
+                    <div class="faq-a">
+                        <div class="faq-a-inner">Simply upload the surgery estimate you've received from another
+                            hospital. Our
+                            team
+                            will review it and contact you within 2 hours with a competitive offer — same quality care
+                            at a better
+                            price. There's no obligation to proceed.</div>
+                    </div>
+                </div>
+                <div class="faq-item reveal">
+                    <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">Is Aarogya Hastha
+                        covered under
+                        insurance / cashless?<span class="faq-icon"><svg viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="12" y1="5" x2="12" y2="19" />
+                                <line x1="5" y1="12" x2="19" y2="12" />
+                            </svg></span></button>
+                    <div class="faq-a">
+                        <div class="faq-a-inner">Yes, we are empanelled with major insurance providers and offer
+                            cashless
+                            treatment
+                            facilities. Our billing team will assist you with all insurance documentation and
+                            pre-authorisation
+                            requirements.</div>
+                    </div>
+                </div>
+                <div class="faq-item reveal">
+                    <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">What kind of implants
+                        are used
+                        for
+                        joint replacement?<span class="faq-icon"><svg viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="12" y1="5" x2="12" y2="19" />
+                                <line x1="5" y1="12" x2="19" y2="12" />
+                            </svg></span></button>
+                    <div class="faq-a">
+                        <div class="faq-a-inner">We use internationally certified implants from leading manufacturers.
+                            Our
+                            orthopaedic team will explain all implant options during your consultation, helping you
+                            choose the best
+                            fit based on your age, activity level, and clinical needs.</div>
+                    </div>
+                </div>
+                <div class="faq-item reveal">
+                    <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">Are the surgery packages
+                        all-inclusive?<span class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="12" y1="5" x2="12" y2="19" />
+                                <line x1="5" y1="12" x2="19" y2="12" />
+                            </svg></span></button>
+                    <div class="faq-a">
+                        <div class="faq-a-inner">Our packages are designed to cover the complete surgical journey —
+                            pre-operative
+                            tests, surgery charges, hospital stay, medicines, and follow-up consultations. Any
+                            exclusions are
+                            clearly
+                            communicated upfront with no hidden costs.</div>
+                    </div>
+                </div>
+                <div class="faq-item reveal">
+                    <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">How do I book a
+                        consultation?<span class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="12" y1="5" x2="12" y2="19" />
+                                <line x1="5" y1="12" x2="19" y2="12" />
+                            </svg></span></button>
+                    <div class="faq-a">
+                        <div class="faq-a-inner">You can call us at 7259344848, WhatsApp us at 7259344848, or fill out
+                            the form
+                            on any of our department landing pages. Our team will confirm your appointment within
+                            minutes.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== TRUST NUMBERS ===== -->
+    <section id="trust-section">
+        <div class="section-inner">
+            <div class="trust-grid">
+                <div class="trust-card reveal">
+                    <div class="t-num">1800+</div>
+                    <div class="t-label">Successful Surgeries</div>
+                </div>
+                <div class="trust-card reveal">
+                    <div class="t-num">40,000+</div>
+                    <div class="t-label">Happy Patients</div>
+                </div>
+                <div class="trust-card reveal">
+                    <div class="t-num">4.7★</div>
+                    <div class="t-label">Google Rating</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== LOCATION ===== -->
+    <section id="location-section">
+        <div class="location-inner">
+            <div class="location-info">
+                <h3>Visit Us</h3>
+                <div class="location-detail">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+                        <circle cx="12" cy="10" r="3" />
+                    </svg>
+                    <div>Kasavanahalli Main Road, Sarjapur Road,<br>Bengaluru 560035</div>
+                </div>
+                <div class="location-detail">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path
+                            d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" />
+                    </svg>
+                    <div>7259344848</div>
+                </div>
+                <div class="location-detail">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path
+                            d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" />
+                    </svg>
+                    <div>WhatsApp: 7259344848</div>
+                </div>
+                <div class="location-detail">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10" />
+                        <polyline points="12 6 12 12 16 14" />
+                    </svg>
+                    <div>Near HSR Layout, Bellandur &amp; Electronic City</div>
+                </div>
+            </div>
+            <div class="location-map">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3889.0!2d77.674!3d12.905!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTLCsDU0JzE4LjAiTiA3N8KwNDAnMjYuNCJF!5e0!3m2!1sen!2sin!4v1"
+                    allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER CTA ===== -->
+    <section class="footer-cta">
+        <h2>Ready to Take the Next Step?</h2>
+        <p>Speak to our team today — we're here to help you make the best decision for your health.</p>
+        <div class="footer-cta-btns">
+            <a href="tel:7259344848" class="footer-btn footer-btn--call"><svg viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path
+                        d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" />
+                </svg>Call: 7259344848</a>
+            <a href="https://wa.me/917259344848?text=Hi%2C%20I%27m%20interested%20in%20a%20surgery%20consultation."
+                class="footer-btn footer-btn--whatsapp" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor">
+                    <path
+                        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                </svg>WhatsApp Us</a>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2026 Aarogya Hastha Hospitals | Kasavanahalli Main Road, Sarjapur Road, Bengaluru 560035 | <a
+                href="tel:7259344848">7259344848</a></p>
+    </footer>
+
+    <!-- ===== STICKY MOBILE CTA ===== -->
+    <div class="sticky-cta">
+        <div class="sticky-cta-inner">
+            <a href="tel:7259344848" class="sticky-btn sticky-btn--call">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path
+                        d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" />
+                </svg>
+                Call Now
+            </a>
+            <a href="https://wa.me/917259344848?text=Hi%2C%20I%27m%20interested%20in%20a%20surgery%20consultation."
+                class="sticky-btn sticky-btn--wa" target="_blank">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path
+                        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                </svg>
+                WhatsApp
+            </a>
+        </div>
     </div>
-  </section>
-  <section class="ins-wrap">
-    <div class="blob1"></div>
-    <div class="blob2"></div>
-    <div class="section-inner">
-      <div class="ins-pill"><span class="ins-pill-dot"></span>Cashless Insurance Partners</div>
-      <h2 class="ins-h">Empanelled With Major Insurance Providers</h2>
-      <p class="ins-sub">Direct cashless settlement — no paperwork, no hassle</p>
 
-      <div class="ins-grid">
+    <script>
+        // File upload
+        const fileInput = document.getElementById('fileInput'), uploadArea = document.getElementById('uploadArea'), fileNameEl = document.getElementById('fileName');
+        fileInput.addEventListener('change', function () { if (this.files.length > 0) { fileNameEl.textContent = '\u{1F4CE} ' + this.files[0].name; fileNameEl.classList.add('show') } });
+        uploadArea.addEventListener('dragover', e => { e.preventDefault(); uploadArea.classList.add('dragover') });
+        uploadArea.addEventListener('dragleave', () => uploadArea.classList.remove('dragover'));
+        uploadArea.addEventListener('drop', e => { e.preventDefault(); uploadArea.classList.remove('dragover'); if (e.dataTransfer.files.length > 0) { fileInput.files = e.dataTransfer.files; fileNameEl.textContent = '\u{1F4CE} ' + e.dataTransfer.files[0].name; fileNameEl.classList.add('show') } });
 
-        <!-- Star Health -->
-        <div class="ins-card">
-          <div class="logo-box">
-            <img src="static/img/landingpageimage/Insurance_logo1.png" alt="">
-          </div>
-          <!-- <div class="ins-name">Star Health</div> -->
-        </div>
-
-        <!-- HDFC ERGO -->
-        <div class="ins-card">
-          <div class="logo-box">
-            <img src="static/img/landingpageimage/Insurance_logo2.png" alt="">
-          </div>
-          <!-- <div class="ins-name">Niva Bupa</div> -->
-        </div>
-
-        <!-- Bajaj Allianz -->
-        <div class="ins-card">
-          <div class="logo-box">
-            <img src="static/img/landingpageimage/Insurance_logo4.png" alt="">
-          </div>
-          <!-- <div class="ins-name">Bajaj Allianz</div> -->
-        </div>
-
-        <!-- New India Assurance -->
-        <div class="ins-card">
-          <div class="logo-box">
-            <img src="static/img/landingpageimage/Insurance_logo5.png" alt="">
-          </div>
-          <!-- <div class="ins-name">ICICI Lombard</div> -->
-        </div>
-
-      </div>
-
-      <div class="ins-grid">
-
-
-        <!-- Niva Bupa -->
-        <div class="ins-card">
-          <div class="logo-box">
-            <img src="static/img/landingpageimage/Insurance_logo6.png" alt="">
-          </div>
-          <!-- <div class="ins-name">HDFC ERGO</div> -->
-        </div>
-
-        <div class="ins-card">
-          <div class="logo-box">
-            <img src="static/img/landingpageimage/Insurance_logo7.png" alt="">
-          </div>
-          <!-- <div class="ins-name">Care Health</div> -->
-        </div>
-
-        <div class="ins-card">
-          <div class="logo-box">
-            <img src="static/img/landingpageimage/Insurance_logo8.png" alt="">
-          </div>
-          <!-- <div class="ins-name">Care Health</div> -->
-        </div>
-
-
-
-        <div class="ins-card">
-          <div class="logo-box">
-            <img src="static/img/landingpageimage/Insurance_logo9.png" alt="">
-          </div>
-          <!-- <div class="ins-name">Care Health</div> -->
-        </div>
-
-
-        <div class="ins-card">
-          <div class="logo-box">
-            <img src="static/img/landingpageimage/Insurance_logo10.png" alt="">
-          </div>
-          <!-- <div class="ins-name">Care Health</div> -->
-        </div>
-
-        <div class="ins-card">
-          <div class="logo-box">
-            <img src="static/img/landingpageimage/Insurance_logo11.png" alt="">
-          </div>
-          <!-- <div class="ins-name">Care Health</div> -->
-        </div>
-
-        <div class="ins-card">
-          <div class="logo-box">
-            <img src="static/img/landingpageimage/Insurance_logo3.png" alt="">
-          </div>
-          <!-- <div class="ins-name">Care Health</div> -->
-        </div>
-        <!-- Care Health (formerly Religare) -->
-
-        <!-- More card -->
-        <div class="more-card"
-          onclick="window.sendPrompt && sendPrompt('Show me all available cashless insurance partners')">
-
-          <div class="more-label">+ More</div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-  <!-- ===== FAQ ===== -->
-  <section class="section" id="faq-section">
-    <div class="section-inner">
-      <div class="section-title reveal">Frequently Asked Questions</div>
-      <p class="section-sub reveal">Answers to the most common questions from patients considering surgery at Aarogya
-        Hastha.</p>
-      <div class="faq-list">
-        <div class="faq-item reveal">
-          <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">How does the Quote Challenge
-            work?<span class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                stroke-linecap="round" stroke-linejoin="round">
-                <line x1="12" y1="5" x2="12" y2="19" />
-                <line x1="5" y1="12" x2="19" y2="12" />
-              </svg></span></button>
-          <div class="faq-a">
-            <div class="faq-a-inner">Simply upload the surgery estimate you've received from another hospital. Our
-              team
-              will review it and contact you within 2 hours with a competitive offer — same quality care at a better
-              price. There's no obligation to proceed.</div>
-          </div>
-        </div>
-        <div class="faq-item reveal">
-          <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">Is Aarogya Hastha covered under
-            insurance / cashless?<span class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="12" y1="5" x2="12" y2="19" />
-                <line x1="5" y1="12" x2="19" y2="12" />
-              </svg></span></button>
-          <div class="faq-a">
-            <div class="faq-a-inner">Yes, we are empanelled with major insurance providers and offer cashless
-              treatment
-              facilities. Our billing team will assist you with all insurance documentation and pre-authorisation
-              requirements.</div>
-          </div>
-        </div>
-        <div class="faq-item reveal">
-          <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">What kind of implants are used
-            for
-            joint replacement?<span class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="12" y1="5" x2="12" y2="19" />
-                <line x1="5" y1="12" x2="19" y2="12" />
-              </svg></span></button>
-          <div class="faq-a">
-            <div class="faq-a-inner">We use internationally certified implants from leading manufacturers. Our
-              orthopaedic team will explain all implant options during your consultation, helping you choose the best
-              fit based on your age, activity level, and clinical needs.</div>
-          </div>
-        </div>
-        <div class="faq-item reveal">
-          <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">Are the surgery packages
-            all-inclusive?<span class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="12" y1="5" x2="12" y2="19" />
-                <line x1="5" y1="12" x2="19" y2="12" />
-              </svg></span></button>
-          <div class="faq-a">
-            <div class="faq-a-inner">Our packages are designed to cover the complete surgical journey — pre-operative
-              tests, surgery charges, hospital stay, medicines, and follow-up consultations. Any exclusions are
-              clearly
-              communicated upfront with no hidden costs.</div>
-          </div>
-        </div>
-        <div class="faq-item reveal">
-          <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">How do I book a
-            consultation?<span class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="12" y1="5" x2="12" y2="19" />
-                <line x1="5" y1="12" x2="19" y2="12" />
-              </svg></span></button>
-          <div class="faq-a">
-            <div class="faq-a-inner">You can call us at 7259344848, WhatsApp us at 7259344848, or fill out the form
-              on any of our department landing pages. Our team will confirm your appointment within minutes.</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== TRUST NUMBERS ===== -->
-  <section id="trust-section">
-    <div class="section-inner">
-      <div class="trust-grid">
-        <div class="trust-card reveal">
-          <div class="t-num">1800+</div>
-          <div class="t-label">Successful Surgeries</div>
-        </div>
-        <div class="trust-card reveal">
-          <div class="t-num">40,000+</div>
-          <div class="t-label">Happy Patients</div>
-        </div>
-        <div class="trust-card reveal">
-          <div class="t-num">4.7★</div>
-          <div class="t-label">Google Rating</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== LOCATION ===== -->
-  <section id="location-section">
-    <div class="location-inner">
-      <div class="location-info">
-        <h3>Visit Us</h3>
-        <div class="location-detail">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-            stroke-linejoin="round">
-            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
-            <circle cx="12" cy="10" r="3" />
-          </svg>
-          <div>Kasavanahalli Main Road, Sarjapur Road,<br>Bengaluru 560035</div>
-        </div>
-        <div class="location-detail">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-            stroke-linejoin="round">
-            <path
-              d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" />
-          </svg>
-          <div>7259344848</div>
-        </div>
-        <div class="location-detail">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-            stroke-linejoin="round">
-            <path
-              d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" />
-          </svg>
-          <div>WhatsApp: 7259344848</div>
-        </div>
-        <div class="location-detail">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-            stroke-linejoin="round">
-            <circle cx="12" cy="12" r="10" />
-            <polyline points="12 6 12 12 16 14" />
-          </svg>
-          <div>Near HSR Layout, Bellandur &amp; Electronic City</div>
-        </div>
-      </div>
-      <div class="location-map">
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3889.0!2d77.674!3d12.905!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTLCsDU0JzE4LjAiTiA3N8KwNDAnMjYuNCJF!5e0!3m2!1sen!2sin!4v1"
-          allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== FOOTER CTA ===== -->
-  <section class="footer-cta">
-    <h2>Ready to Take the Next Step?</h2>
-    <p>Speak to our team today — we're here to help you make the best decision for your health.</p>
-    <div class="footer-cta-btns">
-      <a href="tel:7259344848" class="footer-btn footer-btn--call"><svg viewBox="0 0 24 24" fill="none"
-          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path
-            d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" />
-        </svg>Call: 7259344848</a>
-      <a href="https://wa.me/917259344848?text=Hi%2C%20I%27m%20interested%20in%20a%20surgery%20consultation."
-        class="footer-btn footer-btn--whatsapp" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor">
-          <path
-            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-        </svg>WhatsApp Us</a>
-    </div>
-  </section>
-
-  <footer class="footer">
-    <p>&copy; 2026 Aarogya Hastha Hospitals | Kasavanahalli Main Road, Sarjapur Road, Bengaluru 560035 | <a
-        href="tel:7259344848">7259344848</a></p>
-  </footer>
-
-  <!-- ===== STICKY MOBILE CTA ===== -->
-  <div class="sticky-cta">
-    <div class="sticky-cta-inner">
-      <a href="tel:7259344848" class="sticky-btn sticky-btn--call">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-          stroke-linejoin="round">
-          <path
-            d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" />
-        </svg>
-        Call Now
-      </a>
-      <a href="https://wa.me/917259344848?text=Hi%2C%20I%27m%20interested%20in%20a%20surgery%20consultation."
-        class="sticky-btn sticky-btn--wa" target="_blank">
-        <svg viewBox="0 0 24 24" fill="currentColor">
-          <path
-            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-        </svg>
-        WhatsApp
-      </a>
-    </div>
-  </div>
-
-  <script>
-    // File upload
-    const fileInput = document.getElementById('fileInput'), uploadArea = document.getElementById('uploadArea'), fileNameEl = document.getElementById('fileName');
-    fileInput.addEventListener('change', function () { if (this.files.length > 0) { fileNameEl.textContent = '\u{1F4CE} ' + this.files[0].name; fileNameEl.classList.add('show') } });
-    uploadArea.addEventListener('dragover', e => { e.preventDefault(); uploadArea.classList.add('dragover') });
-    uploadArea.addEventListener('dragleave', () => uploadArea.classList.remove('dragover'));
-    uploadArea.addEventListener('drop', e => { e.preventDefault(); uploadArea.classList.remove('dragover'); if (e.dataTransfer.files.length > 0) { fileInput.files = e.dataTransfer.files; fileNameEl.textContent = '\u{1F4CE} ' + e.dataTransfer.files[0].name; fileNameEl.classList.add('show') } });
-
-    // Scroll reveal
-    const observer = new IntersectionObserver(entries => { entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible') }) }, { threshold: 0.1 });
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-  </script>
+        // Scroll reveal
+        const observer = new IntersectionObserver(entries => { entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible') }) }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
 </body>
 
 </html>
