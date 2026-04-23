@@ -1571,30 +1571,59 @@
                 <div class="form-promo">🌸 Special Maternity Package — Limited Period Offer</div>
                 <h3>Book Your Maternity Consultation</h3>
                 <p class="form-sub">Our SPOC will call you within 20 minutes.</p>
-                <form id="book-consultation" method="POST" action="/submit-lead-1">
-                    <div class="form-group"><label>Your Name</label><input name="patientName" id="patientName"
-                            type="text" placeholder="Enter your name" required>
-                    </div>
-                    <div class="form-group"><label>Phone Number</label><input name="contactNumber" id="contactNumber"
-                            type="tel" placeholder="+91 XXXXX XXXXX" required>
-                    </div>
-                    <div class="form-group"><label>How far along are you?</label><select name="description"
-                            id="description" required>
-                            <option value="">Select...</option>
-                            <option value="Planning for Baby">Planning for Baby</option>
-                            <option value="1st Trimester (1-12 weeks)">1st Trimester (1-12 weeks)</option>
-                            <option value="2nd Trimester (13-26 weeks)">2nd Trimester (13-26 weeks)</option>
-                            <option value="3rd Trimester (27-40 weeks)">3rd Trimester (27-40 weeks)</option>
-                            <option value="Gynaecology support">Gynaecology support</option>
-                            <option value="Not Sure — Need Guidance">Not Sure — Need Guidance</option>
-                        </select></div>
-                    <input type="hidden" name="source" value="Googleads">
-                    <button type="submit" class="form-submit">Get Maternity Package Details →</button>
-                    <p class="form-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-                            <path d="M7 11V7a5 5 0 0110 0v4" />
-                        </svg> Your details are 100% confidential.</p>
-                </form>
+<form id="book-consultation" method="POST" action="/submit-lead-1">
+
+    <div class="form-group">
+        <label>Your Name</label>
+        <input 
+            name="patientName"
+            type="text" 
+            placeholder="Enter your name" 
+            required
+            pattern="[A-Za-z\s]+"
+            title="Name should contain only letters and spaces"
+        >
+    </div>
+
+    <div class="form-group">
+        <label>Phone Number</label>
+        <input 
+            name="contactNumber"
+            type="tel" 
+            placeholder="+91 XXXXX XXXXX" 
+            required
+            pattern="[6-9]{1}[0-9]{9}"
+            maxlength="10"
+            title="Enter a valid 10-digit mobile number"
+        >
+    </div>
+
+    <div class="form-group">
+        <label>How far along are you?</label>
+        <select name="description" required>
+            <option value="">Select...</option>
+            <option value="Planning for Baby">Planning for Baby</option>
+            <option value="1st Trimester (1-12 weeks)">1st Trimester (1-12 weeks)</option>
+            <option value="2nd Trimester (13-26 weeks)">2nd Trimester (13-26 weeks)</option>
+            <option value="3rd Trimester (27-40 weeks)">3rd Trimester (27-40 weeks)</option>
+            <option value="Gynaecology support">Gynaecology support</option>
+            <option value="Not Sure — Need Guidance">Not Sure — Need Guidance</option>
+        </select>
+    </div>
+
+    <input type="hidden" name="source" value="Googleads">
+
+    <button type="submit" class="form-submit">Get Maternity Package Details →</button>
+
+    <p class="form-note">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+            <path d="M7 11V7a5 5 0 0110 0v4" />
+        </svg> 
+        Your details are 100% confidential.
+    </p>
+
+</form>
             </div>
         </div>
     </section>
