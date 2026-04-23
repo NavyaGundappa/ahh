@@ -1752,27 +1752,40 @@
                 <div class="form-urgency">🔥 Same-Week Surgery Slots Available — Book Now</div>
                 <h3>Book Your Free Consultation</h3>
                 <p class="form-sub">Our SPOC will call you within 20 minutes to discuss your condition.</p>
-                <form id="book-consultation" method="POST" action="/submit-lead-1">
-                    <div class="form-group"><label>Full Name</label><input name="patientName" id="patientName"
-                            type="text" placeholder="Enter your name" required>
+                <form method="POST" action="/submit-lead-1">
+
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input name="patientName" type="text" placeholder="Enter your name" required
+                            pattern="[A-Za-z\s]+" title="Name should contain only letters and spaces">
                     </div>
-                    <div class="form-group"><label>Phone Number</label><input name="contactNumber" id="contactNumber"
-                            type="tel" placeholder="+91 XXXXX XXXXX" required>
+
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <input name="contactNumber" type="text" placeholder="+91 XXXXX XXXXX" required
+                            inputmode="numeric" pattern="[6-9][0-9]{9}" maxlength="10"
+                            title="Enter a valid 10-digit mobile number">
                     </div>
-                    <div class="form-group"><label>What condition needs attention?</label>
-                        <select name="description" id="description" required>
+
+                    <div class="form-group">
+                        <label>What condition needs attention?</label>
+                        <select name="description" required>
                             <option value="">Select...</option>
                             <option value="Gallbladder / Gallstones">Gallbladder / Gallstones</option>
-                            <option value="Hernia (Inguinal / Umbilical / Incisional / Ventral / Hiatal )">Hernia
-                                (Inguinal / Umbilical / Incisional / Ventral / Hiatal )</option>
+                            <option value="Hernia (Inguinal / Umbilical / Incisional / Ventral / Hiatal )">
+                                Hernia (Inguinal / Umbilical / Incisional / Ventral / Hiatal )
+                            </option>
                             <option value="Appendicitis / Appendix">Appendicitis / Appendix</option>
                             <option value="Piles / Fissure / Fistula">Piles / Fissure / Fistula</option>
                             <option value="Thyroid Surgery">Thyroid Surgery</option>
-                            <option value="Other / Not Sure — Need Consultation">Other / Not Sure — Need Consultation
+                            <option value="Other / Not Sure — Need Consultation">
+                                Other / Not Sure — Need Consultation
                             </option>
                         </select>
                     </div>
+
                     <input type="hidden" name="source" value="instagram">
+
                     <button type="submit" class="form-submit">Get Free Consultation →</button>
                     <p class="form-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
