@@ -47,6 +47,16 @@
         html {
             scroll-behavior: smooth
         }
+            .error {
+        color: red;
+        font-size: 12px;
+        display: block;
+        margin-top: 4px;
+    }
+
+    .error-border {
+        border: 1px solid red;
+    }
 
         .error {
             color: red;
@@ -1942,6 +1952,7 @@
                 <div class="form-urgency">🔥 Limited Slots — Only 6 Surgery Slots Left This Month</div>
                 <h3>Book Your Free Hip Consultation</h3>
                 <p class="form-sub">Our SPOC will call you within 20 minutes.</p>
+
                 <form method="POST" action="/submit-lead-1">
 
                     <div class="form-group">
@@ -1975,6 +1986,38 @@
                             <path d="M7 11V7a5 5 0 0110 0v4" />
                         </svg> Your details are safe. No spam, we promise.</p>
                 </form>
+
+<form id="book-consultation" method="POST" action="/submit-lead-1" novalidate>
+    <div class="form-group">
+        <label>Full Name</label>
+        <input name="patientName" id="patientName" type="text" placeholder="Enter your name" required>
+        <small class="error" id="nameError"></small>
+    </div>
+
+    <div class="form-group">
+        <label>Phone Number</label>
+        <input name="contactNumber" id="contactNumber" type="tel" placeholder="+91 XXXXX XXXXX" required>
+        <small class="error" id="phoneError"></small>
+    </div>
+
+    <div class="form-group">
+        <label>Which hip needs attention?</label>
+        <select name="description" id="description" required>
+            <option value="">Select...</option>
+            <option value="Left Hip">Left Hip</option>
+            <option value="Right Hip">Right Hip</option>
+            <option value="Both Hips">Both Hips</option>
+            <option value="Not Sure — Need Consultation">Not Sure — Need Consultation</option>
+        </select>
+    </div>
+
+    <input type="hidden" name="source" value="Googleads">
+
+    <button type="submit" class="form-submit">Get Free Consultation →</button>
+
+    <p class="form-note">
+        <svg viewBox="0 0 24 24" fill="none"
+
             </div>
         </div>
     </section>
@@ -2675,6 +2718,7 @@
         document.querySelectorAll('.pain-card,.package-card,.doctor-card,.testimonial-card,.process-step').forEach(el => { el.style.opacity = '0'; el.style.transform = 'translateY(20px)'; el.style.transition = 'opacity .5s ease,transform .5s ease'; observer.observe(el) });
     </script>
     <script>
+
         document.addEventListener("DOMContentLoaded", function () {
             const form = document.getElementById("book-consultation");
             const nameInput = document.getElementById("patientName");
@@ -2727,6 +2771,60 @@
             });
         });
     </script>
+
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("book-consultation");
+    const nameInput = document.getElementById("patientName");
+    const phoneInput = document.getElementById("contactNumber");
+
+    const nameError = document.getElementById("nameError");
+    const phoneError = document.getElementById("phoneError");
+
+    nameInput.addEventListener("input", function () {
+        this.value = this.value.replace(/[^A-Za-z\s]/g, "");
+        nameError.textContent = "";
+        this.classList.remove("error-border");
+    });
+
+    phoneInput.addEventListener("input", function () {
+        this.value = this.value.replace(/[^0-9]/g, "").slice(0, 10);
+        phoneError.textContent = "";
+        this.classList.remove("error-border");
+    });
+
+    form.addEventListener("submit", function (e) {
+        let isValid = true;
+
+        const name = nameInput.value.trim();
+        const phone = phoneInput.value.trim();
+
+        const nameRegex = /^[A-Za-z\s]+$/;
+        const phoneRegex = /^[6-9][0-9]{9}$/;
+
+        nameError.textContent = "";
+        phoneError.textContent = "";
+        nameInput.classList.remove("error-border");
+        phoneInput.classList.remove("error-border");
+
+        if (!nameRegex.test(name)) {
+            nameError.textContent = "Enter a valid name using letters only";
+            nameInput.classList.add("error-border");
+            isValid = false;
+        }
+
+        if (!phoneRegex.test(phone)) {
+            phoneError.textContent = "Enter a valid 10-digit mobile number";
+            phoneInput.classList.add("error-border");
+            isValid = false;
+        }
+
+        if (!isValid) {
+            e.preventDefault();
+        }
+    });
+});
+</script>
+
 </body>
 
 </html>
