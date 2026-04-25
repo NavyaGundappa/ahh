@@ -2414,7 +2414,9 @@
                     <div class="q-step"><span class="num">3</span> Get a Better Price</div>
                 </div>
                 <form method="POST" action="/submit-quote" enctype="multipart/form-data">
+
                     <div class="form-row">
+
                         <div class="form-group">
                             <label>Full Name *</label>
                             <input name="patientName" type="text" placeholder="Enter your name" required
@@ -2423,9 +2425,12 @@
 
                         <div class="form-group">
                             <label>Phone Number *</label>
-                            <input name="contactNumber" type="tel" placeholder="Enter your mobile number" required
-                                pattern="[6-9]{1}[0-9]{9}" maxlength="10" title="Enter a valid 10-digit mobile number">
+                            <input name="contactNumber" type="text" placeholder="Enter your mobile number" required
+                                inputmode="numeric" pattern="[6-9][0-9]{9}" maxlength="12"
+                                onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+                                title="Enter a valid 10-digit mobile number">
                         </div>
+
                     </div>
 
                     <div class="form-group">
@@ -2442,10 +2447,9 @@
                             <option>Other</option>
                         </select>
                     </div>
-
                     <div class="form-group">
                         <label>Upload Your Quote (PDF, Image, or Document)</label>
-                        <div class="upload-area">
+                        <div class="upload-area" id="uploadArea">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
                                 stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
@@ -2453,24 +2457,17 @@
                                 <line x1="12" y1="3" x2="12" y2="15" />
                             </svg>
                             <p><strong>Click to upload</strong> or drag &amp; drop<br>PDF, JPG, PNG up to 10MB</p>
-                            <input type="file" name="file" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+                            <input type="file" name="file" id="fileInput" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+                            <div class="file-name" id="fileName"></div>
                         </div>
                     </div>
-
-                    <div class="form-group">
-                        <label>Additional Notes (Optional)</label>
-                        <textarea name="notes" placeholder="Any details about your surgery requirement..."></textarea>
-                    </div>
-
+                    <div class="form-group"><label for="notes">Additional Notes (Optional)</label><textarea id="notes"
+                            name="notes" placeholder="Any details about your surgery requirement..."></textarea></div>
                     <input type="hidden" name="source" value="Facebook">
-
-                    <button type="submit" class="btn-submit">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                            stroke-linecap="round" stroke-linejoin="round">
+                    <button type="submit" class="btn-submit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                             <polyline points="20 6 9 17 4 12" />
-                        </svg>
-                        Submit Quote &amp; Request Call Back
-                    </button>
+                        </svg>Submit Quote &amp; Request Call Back</button>
                 </form>
                 <div class="form-success" id="formSuccess">
                     <div class="check-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"

@@ -4055,69 +4055,69 @@ def edit_department_new(id):
 
 
 
-@app.route('lp-thank-you')
+@app.route('/lp-thank-you')
 def langingthankyou():
     return render_template('landing_pages/thank-you.html')
 
-@app.route('general-laparoscopic-surgery')
+@app.route('/general-laparoscopic-surgery')
 def langinglaparoscopic():
     return render_template('landing_pages/general-laparoscopic-surgery.html')
 
-@app.route('hip-replacement-surgery')
+@app.route('/hip-replacement-surgery')
 def langingpagehipreplacement():
     return render_template('landing_pages/hip-replacement-surgery.html')
 
-@app.route('knee-replacement')
+@app.route('/knee-replacement')
 def langingpagekneereplacement():
     return render_template('landing_pages/knee-replacement.html')
 
-@app.route('maternity-packages')
+@app.route('/maternity-packages')
 def langingpagematernity():
     return render_template('landing_pages/maternity-packages.html')
 
-@app.route('planning-surgery')
+@app.route('/planning-surgery')
 def langingpageplanning():
     return render_template('landing_pages/planning-surgery.html')
 
 # facebook pixel
-@app.route('general-laparoscopic-surgery-fb')
+@app.route('/general-laparoscopic-surgery-fb')
 def langingfblaparoscopic():
     return render_template('landing_pages/facebook/general-laparoscopic-surgery.html')
 
-@app.route('hip-replacement-surgery-fb')
+@app.route('/hip-replacement-surgery-fb')
 def langingfbpagehipreplacement():
     return render_template('landing_pages/facebook/hip-replacement-surgery.html')
 
-@app.route('knee-replacement-fb')
+@app.route('/knee-replacement-fb')
 def langingfbpagekneereplacement():
     return render_template('landing_pages/facebook/knee-replacement.html')
 
-@app.route('maternity-packages-fb')
+@app.route('/maternity-packages-fb')
 def langingfbpagematernity():
     return render_template('landing_pages/facebook/maternity-packages.html')
 
-@app.route('planning-surgery-fb')
+@app.route('/planning-surgery-fb')
 def langingfbpageplanning():
     return render_template('landing_pages/facebook/planning-surgery.html')
 
 # instagram pixel
-@app.route('general-laparoscopic-surgery-in')
+@app.route('/general-laparoscopic-surgery-in')
 def langinginlaparoscopic():
     return render_template('landing_pages/instagram/general-laparoscopic-surgery.html')
 
-@app.route('hip-replacement-surgery-in')
+@app.route('/hip-replacement-surgery-in')
 def langinginpagehipreplacement():
     return render_template('landing_pages/instagram/hip-replacement-surgery.html')
 
-@app.route('knee-replacement-in')
+@app.route('/knee-replacement-in')
 def langinginpagekneereplacement():
     return render_template('landing_pages/instagram/knee-replacement.html')
 
-@app.route('maternity-packages-in')
+@app.route('/maternity-packages-in')
 def langinginpagematernity():
     return render_template('landing_pages/instagram/maternity-packages.html')
 
-@app.route('planning-surgery-in')
+@app.route('/planning-surgery-in')
 def langinginpageplanning():
     return render_template('landing_pages/instagram/planning-surgery.html')
 
