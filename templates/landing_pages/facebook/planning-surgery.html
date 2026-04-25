@@ -2426,7 +2426,8 @@
                         <div class="form-group">
                             <label>Phone Number *</label>
                             <input name="contactNumber" type="text" placeholder="Enter your mobile number" required
-                                inputmode="numeric" pattern="[6-9][0-9]{9}" maxlength="10"
+                                inputmode="numeric" pattern="[6-9][0-9]{9}" maxlength="12"
+                                onkeypress="return event.charCode >= 48 && event.charCode <= 57"
                                 title="Enter a valid 10-digit mobile number">
                         </div>
 
