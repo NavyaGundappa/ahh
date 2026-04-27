@@ -559,7 +559,7 @@
 
         /* JOURNEY */
         .journey-section {
-            background: var(--light-bg)
+            background: #fff;
         }
 
         .journey-grid {
@@ -626,7 +626,7 @@
 
         /* PACKAGES */
         .packages-section {
-            background: #fff
+            background: var(--light-bg);
         }
 
         .pkg-grid {
@@ -1571,20 +1571,19 @@
                 <div class="form-promo">🌸 Special Maternity Package — Limited Period Offer</div>
                 <h3>Book Your Maternity Consultation</h3>
                 <p class="form-sub">Our SPOC will call you within 20 minutes.</p>
-                <form method="POST" action="/submit-lead-1">
+                <form id="book-consultation" method="POST" action="/submit-lead-1">
 
                     <div class="form-group">
                         <label>Your Name</label>
-                        <input type="text" name="patientName" placeholder="Enter your name" required
+                        <input name="patientName" type="text" placeholder="Enter your name" required
                             pattern="[A-Za-z\s]+" title="Name should contain only letters and spaces">
                     </div>
 
                     <div class="form-group">
                         <label>Phone Number</label>
-                        <input type="text" name="contactNumber" placeholder="+91 XXXXX XXXXX" required
-                            inputmode="numeric" pattern="[6-9][0-9]{9}" maxlength="12"
-                            onkeypress="return event.charCode >= 48 && event.charCode <= 57"
-                            title="Enter a valid 10-digit mobile number">
+                        <input name="contactNumber" type="tel" placeholder="+91 XXXXX XXXXX" required
+                            onkeypress="return event.charCode >= 48 && event.charCode <= 57" pattern="[6-9]{1}[0-9]{9}"
+                            maxlength="12" title="Enter a valid 10-digit mobile number">
                     </div>
 
                     <div class="form-group">
@@ -1603,10 +1602,15 @@
                     <input type="hidden" name="source" value="instagram">
 
                     <button type="submit" class="form-submit">Get Maternity Package Details →</button>
-                    <p class="form-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+
+                    <p class="form-note">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
                             <path d="M7 11V7a5 5 0 0110 0v4" />
-                        </svg> Your details are 100% confidential.</p>
+                        </svg>
+                        Your details are 100% confidential.
+                    </p>
+
                 </form>
             </div>
         </div>
@@ -1623,47 +1627,6 @@
             </div>
         </div>
     </div>
-
-    <!-- PREGNANCY JOURNEY -->
-    <section class="journey-section">
-        <div class="container">
-            <p class="section-label text-center">Your Delivery Journey</p>
-            <h2 class="section-title text-center">How We Care for You — Every Step</h2>
-            <p class="section-desc text-center mx-auto">From your Admission to the day you take baby home — here's
-                what to
-                expect at Aarogya Hastha.</p>
-            <div class="journey-grid">
-                <!-- <div class="journey-card">
-                    <div class="journey-num">1</div>
-                    <div class="j-icon">📋</div>
-                    <h4>First Consultation</h4>
-                    <p>Meet your OBG doctor. Pregnancy confirmation, blood work, and personalised care plan.</p>
-                </div> -->
-                <div class="journey-card">
-                    <div class="journey-num">1</div>
-                    <div class="j-icon"><img src="static/img/landingpageimage/maternity_admission1.png" alt=""></div>
-                    <h4>Admission Day</h4>
-                    <p>All admission formalities and preparation for the delivery and new care care</p>
-                </div>
-                <div class="journey-card">
-                    <div class="journey-num">2</div>
-                    <div class="j-icon"><img src="static/img/landingpageimage/maternity_admission2.png" alt=""></div>
-                    <h4>Delivery Day</h4>
-                    <p>Dedicated labour suite. Emergency C-section preparedness. Paediatrician
-                        Support.
-                    </p>
-                </div>
-                <div class="journey-card">
-                    <div class="journey-num">3</div>
-                    <div class="j-icon"><img src="static/img/landingpageimage/maternity_admission3.png" alt=""></div>
-                    <h4>Postnatal &amp; Baby Care</h4>
-                    <p>Mother &amp; baby recovery, breastfeeding support, newborn screening, vaccination guidance, and
-                        postnatal
-                        follow-ups.</p>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <!-- PACKAGES -->
     <section class="packages-section" id="packages">
@@ -1724,6 +1687,49 @@
                 investigations are excluded from the package, </div>
         </div>
     </section>
+
+    <!-- PREGNANCY JOURNEY -->
+    <section class="journey-section">
+        <div class="container">
+            <p class="section-label text-center">Your Delivery Journey</p>
+            <h2 class="section-title text-center">How We Care for You — Every Step</h2>
+            <p class="section-desc text-center mx-auto">From your Admission to the day you take baby home — here's
+                what to
+                expect at Aarogya Hastha.</p>
+            <div class="journey-grid">
+                <!-- <div class="journey-card">
+                    <div class="journey-num">1</div>
+                    <div class="j-icon">📋</div>
+                    <h4>First Consultation</h4>
+                    <p>Meet your OBG doctor. Pregnancy confirmation, blood work, and personalised care plan.</p>
+                </div> -->
+                <div class="journey-card">
+                    <div class="journey-num">1</div>
+                    <div class="j-icon"><img src="static/img/landingpageimage/maternity_admission1.png" alt=""></div>
+                    <h4>Admission Day</h4>
+                    <p>All admission formalities and preparation for the delivery and new care care</p>
+                </div>
+                <div class="journey-card">
+                    <div class="journey-num">2</div>
+                    <div class="j-icon"><img src="static/img/landingpageimage/maternity_admission2.png" alt=""></div>
+                    <h4>Delivery Day</h4>
+                    <p>Dedicated labour suite. Emergency C-section preparedness. Paediatrician
+                        Support.
+                    </p>
+                </div>
+                <div class="journey-card">
+                    <div class="journey-num">3</div>
+                    <div class="j-icon"><img src="static/img/landingpageimage/maternity_admission3.png" alt=""></div>
+                    <h4>Postnatal &amp; Baby Care</h4>
+                    <p>Mother &amp; baby recovery, breastfeeding support, newborn screening, vaccination guidance, and
+                        postnatal
+                        follow-ups.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
 
     <!-- WHY CHOOSE -->
     <section class="why-section">

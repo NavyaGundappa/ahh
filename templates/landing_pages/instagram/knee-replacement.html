@@ -593,7 +593,7 @@
 
         /* ═══ PAIN POINTS ═══ */
         .pain-section {
-            background: var(--light-bg)
+            background: #53a6ff1f
         }
 
         .pain-cards {
@@ -1139,7 +1139,7 @@
 
         /* ═══ PACKAGES ═══ */
         .package-section {
-            background: #fff
+            background: var(--light-bg)
         }
 
         .package-grid {
@@ -2095,20 +2095,19 @@
                 <div class="form-urgency">🔥 Limited Slots — Only 8 Surgery Slots Left This Month</div>
                 <h3>Book Your Free Consultation</h3>
                 <p class="form-sub">Our SPOC will call you within 20 minutes.</p>
-                <form method="POST" action="/submit-lead-1">
+                <form id="book-consultation" method="POST" action="/submit-lead-1">
 
                     <div class="form-group">
                         <label>Full Name</label>
-                        <input type="text" name="patientName" placeholder="Enter your name" required
+                        <input name="patientName" type="text" placeholder="Enter your name" required
                             pattern="[A-Za-z\s]+" title="Name should contain only letters and spaces">
                     </div>
 
                     <div class="form-group">
                         <label>Phone Number</label>
-                        <input type="text" name="contactNumber" placeholder="+91 XXXXX XXXXX" required
-                            inputmode="numeric" pattern="[6-9][0-9]{9}" maxlength="12"
-                            onkeypress="return event.charCode >= 48 && event.charCode <= 57"
-                            title="Enter a valid 10-digit mobile number">
+                        <input name="contactNumber" type="tel" placeholder="+91 XXXXX XXXXX" required
+                            onkeypress="return event.charCode >= 48 && event.charCode <= 57" pattern="[6-9]{1}[0-9]{9}"
+                            maxlength="12" title="Enter a valid 10-digit mobile number">
                     </div>
 
                     <div class="form-group">
@@ -2171,6 +2170,150 @@
             </div>
         </div>
     </div>
+    <!-- ═══ 11. PACKAGES / PRICING ═══ -->
+    <section class="package-section" id="packages">
+        <div class="container">
+            <p class="section-label text-center">Surgery Packages</p>
+            <h2 class="section-title text-center">Transparent, All-Inclusive Pricing</h2>
+            <div class="package-grid">
+                <div class="package-card">
+                    <div class="package-header">
+                        <h4>Total Knee Replacement (Unilateral)</h4>
+                        <div class="package-price"><span class="strike"></span>₹1,25,000*<br><small><b>Inclusive:</b>
+                                Surgery Charges + Bed Charges + Pre Op Investigations</small></div>
+                    </div>
+                    <div class="package-body">
+                        <ul class="package-features">
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                    <polyline points="20 6 9 17 4 12" />
+                                </svg> 4–5 days hospital stay</li>
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                    <polyline points="20 6 9 17 4 12" />
+                                </svg> Enhanced recovery protocol</li>
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                    <polyline points="20 6 9 17 4 12" />
+                                </svg> In-hospital physiotherapy</li>
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                    <polyline points="20 6 9 17 4 12" />
+                                </svg> Dedicated diet counselling</li>
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                    <polyline points="20 6 9 17 4 12" />
+                                </svg> Post-op follow-up visits</li>
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                    <polyline points="20 6 9 17 4 12" />
+                                </svg> 24/7 emergency availability</li>
+                        </ul>
+                        <button class="package-cta"
+                            onclick="document.getElementById('book-consultation').scrollIntoView({behavior:'smooth'})">Enquire
+                            Now</button>
+                    </div>
+                </div>
+                <div class="package-card featured">
+                    <!-- <span class="package-tag">Most Popular</span> -->
+                    <div class="package-header">
+                        <h4>Total Knee Replacement (Bilateral)</h4>
+                        <div class="package-price"><span class="strike"></span>₹1,75,000*<br><small><b>Inclusive:</b>
+                                Surgery Charges + Bed Charges + Pre Op Investigations</small></div>
+                    </div>
+                    <div class="package-body">
+                        <ul class="package-features">
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                    <polyline points="20 6 9 17 4 12" />
+                                </svg> 6-7 days hospital stay</li>
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                    <polyline points="20 6 9 17 4 12" />
+                                </svg> Enhanced recovery protocol</li>
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                    <polyline points="20 6 9 17 4 12" />
+                                </svg> In-hospital physiotherapy</li>
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                    <polyline points="20 6 9 17 4 12" />
+                                </svg> Dedicated diet counselling</li>
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                    <polyline points="20 6 9 17 4 12" />
+                                </svg> Post-op follow-up visits</li>
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                    <polyline points="20 6 9 17 4 12" />
+                                </svg> 24/7 emergency availability</li>
+                        </ul>
+                        <button class="package-cta"
+                            onclick="document.getElementById('book-consultation').scrollIntoView({behavior:'smooth'})">Enquire
+                            Now</button>
+                    </div>
+                </div>
+                <div class="package-card">
+                    <div class="package-header">
+                        <h4>ACL Reconstruction</h4>
+                        <div class="package-price">₹85,000*<br><small><b>Inclusive:</b> Surgery Charges + Bed Charges +
+                                Pre Op Investigations</small>
+                        </div>
+                    </div>
+                    <div class="package-body">
+                        <ul class="package-features">
+
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                    <polyline points="20 6 9 17 4 12" />
+                                </svg> 3-4 days hospital stay</li>
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                    <polyline points="20 6 9 17 4 12" />
+                                </svg> Significant cost savings</li>
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                    <polyline points="20 6 9 17 4 12" />
+                                </svg> Single recovery period</li>
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                    <polyline points="20 6 9 17 4 12" />
+                                </svg> Intensive physio programme</li>
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                    <polyline points="20 6 9 17 4 12" />
+                                </svg> Post-op follow-up visits</li>
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                    <polyline points="20 6 9 17 4 12" />
+                                </svg> 24/7 emergency availability</li>
+                        </ul>
+                        <button class="package-cta"
+                            onclick="document.getElementById('book-consultation').scrollIntoView({behavior:'smooth'})">Enquire
+                            Now</button>
+                    </div>
+                </div>
+                <div class="package-card">
+                    <div class="package-header">
+                        <h4>Meniscus Repair</h4>
+                        <div class="package-price">₹1,00,000*<br><small><b>Inclusive:</b> Surgery Charges + Bed Charges
+                                + Pre Op Investigations</small>
+                        </div>
+                    </div>
+                    <div class="package-body">
+                        <ul class="package-features">
+
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                    <polyline points="20 6 9 17 4 12" />
+                                </svg> 4-5 days hospital stay</li>
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                    <polyline points="20 6 9 17 4 12" />
+                                </svg> Significant cost savings</li>
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                    <polyline points="20 6 9 17 4 12" />
+                                </svg> Single recovery period</li>
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                    <polyline points="20 6 9 17 4 12" />
+                                </svg> Intensive physio programme</li>
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                    <polyline points="20 6 9 17 4 12" />
+                                </svg> Post-op follow-up visits</li>
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                    <polyline points="20 6 9 17 4 12" />
+                                </svg> 24/7 emergency availability</li>
+                        </ul>
+                        <button class="package-cta"
+                            onclick="document.getElementById('book-consultation').scrollIntoView({behavior:'smooth'})">Enquire
+                            Now</button>
+                    </div>
+                </div>
+            </div>
+            <div class="package-note"><strong>💡 Exclusive:</strong> Drugs Consumables + Implant + Higherend
+                investigations + Blood Components</div>
+        </div>
+    </section>
 
     <!-- ═══ 4. PAIN POINTS — "IS THIS YOU?" ═══ -->
     <section class="pain-section">
@@ -2448,150 +2591,7 @@
     </section>
 
     <!-- ═══ 11. PACKAGES / PRICING ═══ -->
-    <!-- ═══ 11. PACKAGES / PRICING ═══ -->
-    <section class="package-section" id="packages">
-        <div class="container">
-            <p class="section-label text-center">Surgery Packages</p>
-            <h2 class="section-title text-center">Transparent, All-Inclusive Pricing</h2>
-            <div class="package-grid">
-                <div class="package-card">
-                    <div class="package-header">
-                        <h4>Total Knee Replacement (Unilateral)</h4>
-                        <div class="package-price"><span class="strike"></span>₹1,25,000*<br><small><b>Inclusive:</b>
-                                Surgery Charges + Bed Charges + Pre Op Investigations</small></div>
-                    </div>
-                    <div class="package-body">
-                        <ul class="package-features">
-                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                    <polyline points="20 6 9 17 4 12" />
-                                </svg> 4–5 days hospital stay</li>
-                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                    <polyline points="20 6 9 17 4 12" />
-                                </svg> Enhanced recovery protocol</li>
-                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                    <polyline points="20 6 9 17 4 12" />
-                                </svg> In-hospital physiotherapy</li>
-                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                    <polyline points="20 6 9 17 4 12" />
-                                </svg> Dedicated diet counselling</li>
-                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                    <polyline points="20 6 9 17 4 12" />
-                                </svg> Post-op follow-up visits</li>
-                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                    <polyline points="20 6 9 17 4 12" />
-                                </svg> 24/7 emergency availability</li>
-                        </ul>
-                        <button class="package-cta"
-                            onclick="document.getElementById('book-consultation').scrollIntoView({behavior:'smooth'})">Enquire
-                            Now</button>
-                    </div>
-                </div>
-                <div class="package-card featured">
-                    <!-- <span class="package-tag">Most Popular</span> -->
-                    <div class="package-header">
-                        <h4>Total Knee Replacement (Bilateral)</h4>
-                        <div class="package-price"><span class="strike"></span>₹1,75,000*<br><small><b>Inclusive:</b>
-                                Surgery Charges + Bed Charges + Pre Op Investigations</small></div>
-                    </div>
-                    <div class="package-body">
-                        <ul class="package-features">
-                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                    <polyline points="20 6 9 17 4 12" />
-                                </svg> 6-7 days hospital stay</li>
-                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                    <polyline points="20 6 9 17 4 12" />
-                                </svg> Enhanced recovery protocol</li>
-                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                    <polyline points="20 6 9 17 4 12" />
-                                </svg> In-hospital physiotherapy</li>
-                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                    <polyline points="20 6 9 17 4 12" />
-                                </svg> Dedicated diet counselling</li>
-                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                    <polyline points="20 6 9 17 4 12" />
-                                </svg> Post-op follow-up visits</li>
-                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                    <polyline points="20 6 9 17 4 12" />
-                                </svg> 24/7 emergency availability</li>
-                        </ul>
-                        <button class="package-cta"
-                            onclick="document.getElementById('book-consultation').scrollIntoView({behavior:'smooth'})">Enquire
-                            Now</button>
-                    </div>
-                </div>
-                <div class="package-card">
-                    <div class="package-header">
-                        <h4>ACL Reconstruction</h4>
-                        <div class="package-price">₹85,000*<br><small><b>Inclusive:</b> Surgery Charges + Bed Charges +
-                                Pre Op Investigations</small>
-                        </div>
-                    </div>
-                    <div class="package-body">
-                        <ul class="package-features">
 
-                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                    <polyline points="20 6 9 17 4 12" />
-                                </svg> 3-4 days hospital stay</li>
-                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                    <polyline points="20 6 9 17 4 12" />
-                                </svg> Significant cost savings</li>
-                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                    <polyline points="20 6 9 17 4 12" />
-                                </svg> Single recovery period</li>
-                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                    <polyline points="20 6 9 17 4 12" />
-                                </svg> Intensive physio programme</li>
-                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                    <polyline points="20 6 9 17 4 12" />
-                                </svg> Post-op follow-up visits</li>
-                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                    <polyline points="20 6 9 17 4 12" />
-                                </svg> 24/7 emergency availability</li>
-                        </ul>
-                        <button class="package-cta"
-                            onclick="document.getElementById('book-consultation').scrollIntoView({behavior:'smooth'})">Enquire
-                            Now</button>
-                    </div>
-                </div>
-                <div class="package-card">
-                    <div class="package-header">
-                        <h4>Meniscus Repair</h4>
-                        <div class="package-price">₹1,00,000*<br><small><b>Inclusive:</b> Surgery Charges + Bed Charges
-                                + Pre Op Investigations</small>
-                        </div>
-                    </div>
-                    <div class="package-body">
-                        <ul class="package-features">
-
-                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                    <polyline points="20 6 9 17 4 12" />
-                                </svg> 4-5 days hospital stay</li>
-                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                    <polyline points="20 6 9 17 4 12" />
-                                </svg> Significant cost savings</li>
-                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                    <polyline points="20 6 9 17 4 12" />
-                                </svg> Single recovery period</li>
-                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                    <polyline points="20 6 9 17 4 12" />
-                                </svg> Intensive physio programme</li>
-                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                    <polyline points="20 6 9 17 4 12" />
-                                </svg> Post-op follow-up visits</li>
-                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                    <polyline points="20 6 9 17 4 12" />
-                                </svg> 24/7 emergency availability</li>
-                        </ul>
-                        <button class="package-cta"
-                            onclick="document.getElementById('book-consultation').scrollIntoView({behavior:'smooth'})">Enquire
-                            Now</button>
-                    </div>
-                </div>
-            </div>
-            <div class="package-note"><strong>💡 Exclusive:</strong> Drugs Consumables + Implant + Higherend
-                investigations + Blood Components</div>
-        </div>
-    </section>
 
     <!-- ═══ 12. BEAT YOUR QUOTE ═══ -->
     <section class="quote-section" id="compare-quote">
@@ -2644,10 +2644,9 @@
 
                         <div class="form-group">
                             <label>Phone Number</label>
-                            <input type="text" name="contactNumber" placeholder="+91 XXXXX XXXXX" required
-                                inputmode="numeric" pattern="[6-9][0-9]{9}" maxlength="12"
+                            <input type="tel" name="contactNumber" placeholder="+91 XXXXX XXXXX" required
                                 onkeypress="return event.charCode >= 48 && event.charCode <= 57"
-                                title="Enter a valid 10-digit mobile number">
+                                pattern="[6-9]{1}[0-9]{9}" maxlength="12" title="Enter a valid 10-digit mobile number">
                         </div>
 
                         <div class="form-group">
@@ -2663,6 +2662,7 @@
                         <input type="hidden" name="source" value="instagram">
 
                         <button type="submit" class="form-submit">Get Our Best Price →</button>
+
                         <p class="form-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                 width="12" height="12">
                                 <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
