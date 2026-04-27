@@ -17,7 +17,42 @@
 {% else %}
 <link rel="canonical" href="{{ url_for('blog_detail', slug=blog.slug, _external=True) }}">
 {% endif %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "{{ url_for('blog_detail', slug=blog.slug, _external=True) }}"
+  },
+  "headline": "{{ blog.title[:110] }}",
+  "description": "{{ blog.content | striptags | truncate(160, True, '...') }}",
+  "url": "{{ url_for('blog_detail', slug=blog.slug, _external=True) }}",
 
+  "image": "{% if blog.image_path %}https://aarogyahastha.com{{ url_for('static', filename=blog.image_path) }}{% else %}https://aarogyahastha.com{{ url_for('static', filename='img/blogs/default.jpg') }}{% endif %}",
+
+  "datePublished": "{% if blog.created_at %}{{ blog.created_at.strftime('%d-%m-%Y') }}{% endif %}",
+  "dateModified": "{% if blog.updated_at %}{{ blog.updated_at.strftime('%d-%m-%Y') }}{% endif %}",
+
+  "author": {
+    "@type": "Organization",
+    "name": "Aarogya Hastha Hospitals Pvt Ltd",
+    "url": "https://aarogyahastha.com/"
+  },
+
+  "publisher": {
+    "@type": "Organization",
+    "name": "Aarogya Hastha Hospitals Pvt Ltd",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://aarogyahastha.com/static/img/logo.png"
+    }
+  },
+
+  "inLanguage": "en",
+  "isAccessibleForFree": true
+}
+</script>
 {% endblock %}
 
 {% block content %}
