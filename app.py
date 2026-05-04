@@ -4121,6 +4121,26 @@ def langinginpagematernity():
 def langinginpageplanning():
     return render_template('landing_pages/instagram/planning-surgery.html')
 
+# Website Landing Pages
+@app.route('/general-laparoscopic-surgery-lp')
+def langingwlplaparoscopic():
+    return render_template('landing_pages/website/general-laparoscopic-surgery.html')
+
+@app.route('/hip-replacement-surgery-lp')
+def langingwlppagehipreplacement():
+    return render_template('landing_pages/website/hip-replacement-surgery.html')
+
+@app.route('/knee-replacement-surgery-lp')
+def langingwlppagekneereplacement():
+    return render_template('landing_pages/website/knee-replacement.html')
+
+@app.route('/maternity-packages-lp')
+def langingwlppagematernity():
+    return render_template('landing_pages/website/maternity-packages.html')
+
+@app.route('/planning-surgery-lp')
+def langingwlppageplanning():
+    return render_template('landing_pages/website/planning-surgery.html')
 
 
 UPLOAD_FOLDER = "static/uploads/landingpages"
