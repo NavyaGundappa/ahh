@@ -14,7 +14,8 @@
     <!-- OpenGraph (OG) Tags -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Aarogya Hastha Hospitals" />
-    <meta property="og:title" content="Best [Multi-Speciality] Hospital in Sarjapur Road, Bangalore | Aarogya Hastha Hospitals" />
+    <meta property="og:title"
+        content="Best [Multi-Speciality] Hospital in Sarjapur Road, Bangalore | Aarogya Hastha Hospitals" />
     <meta property="og:description"
         content="Discover the best hospitals in Bangalore, India. Find expert care, advanced facilities & trusted doctors near you. Visit Aarogya Hastha Hospitals today!" />
     <meta property="og:url" content="https://aarogyahastha.com/" />
@@ -158,6 +159,22 @@
     }
     </script>
 
+    <style>
+        .hero-carousel-wrapper {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 0;
+        }
+
+        #heroCarousel img {
+            width: 100%;
+        }
+
+        .hero-image-wrapper {
+            aspect-ratio: auto;
+        }
+    </style>
+
 </head>
 
 <body>
@@ -298,7 +315,7 @@
         </div>
     </header>
 
-    <section class="breadcrumb-section" id="breadcrumb-nav">
+    <!-- <section class="breadcrumb-section" id="breadcrumb-nav">
         <div class="container-fluid">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
@@ -306,71 +323,90 @@
                 </ol>
             </nav>
         </div>
-    </section>
+    </section> -->
 
 
-    <section class="hero-section py-4">
+    <section class="hero-section pb-4">
         <div class="hero-carousel-wrapper">
-            <div id="heroCarousel" class="carousel slide shadow-lg rounded-4 overflow-hidden" data-bs-ride="carousel"
+            <div id="heroCarousel" class="carousel slide shadow-lg overflow-hidden" data-bs-ride="carousel"
                 data-bs-interval="4000">
 
                 <!-- Indicators -->
                 <div class="carousel-indicators">
-                    {% for banner in banners %}
-                    <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="{{ loop.index0 }}"
-                        class="{% if loop.first %}active{% endif %}" aria-current="{% if loop.first %}true{% endif %}">
+
+                    <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"
+                        aria-current="true">
                     </button>
-                    {% endfor %}
+
+                    <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1" class="">
+                    </button>
+
+                    <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2" class="">
+                    </button>
+
+                    <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="3" class="">
+                    </button>
+
+                    <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="4" class="">
+                    </button>
+
                 </div>
 
                 <!-- Slides -->
+
+
                 <div class="carousel-inner">
-                    {% if banners %}
-                    {% for banner in banners %}
-                    <div class="carousel-item {% if loop.first %}active{% endif %}">
-                        <a href="{{ banner.button_link or '/appointments' }}" target="_blank"
-                            class="banner-link-wrapper">
+
+
+                    <div class="carousel-item active">
+                        <a href="/general-laparoscopic-surgery-lp" target="_blank" class="banner-link-wrapper">
 
                             <div class="hero-image-wrapper">
-                                <img src="{{ url_for('static', filename='img/' + banner.image_path) }}"
-                                    class="d-block w-100 hero-img {{ banner.position_class or '' }}"
-                                    alt="{{ banner.title or 'Hero Banner' }}" {% if loop.first %} loading="eager"
-                                    fetchpriority="high" {% else %} loading="lazy" {% endif %}>
-                                <div class="overlay"></div>
+                                <img src="/static/img/banners/banner_1.png" class="d-block w-100"
+                                    alt="Compassionate Care, Dedicated Service" loading="lazy">
                             </div>
-
-                            {% if banner.title or banner.button_text %}
-                            <div class="carousel-caption text-start">
-                                <div class="container">
-                                    {% if banner.title %}
-                                    <h2 class="display-5 fw-bold">{{ banner.title }}</h2>
-                                    {% endif %}
-
-                                    {% if banner.button_text %}
-                                    <span class="btn btn-primary mt-3">
-                                        {{ banner.button_text }}
-                                    </span>
-                                    {% endif %}
-                                </div>
-                            </div>
-                            {% endif %}
-
                         </a>
                     </div>
-                    {% endfor %}
-                    {% else %}
-                    <!-- Fallback slide -->
-                    <div class="carousel-item active">
-                        <img src="{{ url_for('static', filename='img/banners/default.jpg') }}"
-                            class="d-block w-100 hero-img" alt="Default Banner">
-                        <div class="carousel-caption text-start">
-                            <div class="container">
-                                <h2 class="display-5 fw-bold">Welcome to AarogyaHastha</h2>
-                                <span class="btn btn-primary mt-3">Book an Appointment</span>
+
+                    <div class="carousel-item">
+                        <a href="/hip-replacement-surgery-lp" target="_blank" class="banner-link-wrapper">
+
+                            <div class="hero-image-wrapper">
+                                <img src="/static/img/banners/banner_2.jpg" class="d-block w-100"
+                                    alt="Empowering Health, Nurturing Life." loading="lazy">
                             </div>
-                        </div>
+                        </a>
                     </div>
-                    {% endif %}
+
+                    <div class="carousel-item">
+                        <a href="/knee-replacement-surgery-lp" target="_blank" class="banner-link-wrapper">
+
+                            <div class="hero-image-wrapper">
+                                <img src="/static/img/banners/banner_3.png" class="d-block w-100"
+                                    alt="Empowering Health, Nurturing Life." loading="lazy">
+                            </div>
+                        </a>
+                    </div>
+                    <div class="carousel-item">
+                        <a href="/maternity-packages-lp" target="_blank" class="banner-link-wrapper">
+
+                            <div class="hero-image-wrapper">
+                                <img src="/static/img/banners/banner_4.jpg" class="d-block w-100"
+                                    alt="Empowering Health, Nurturing Life." loading="lazy">
+                            </div>
+                        </a>
+                    </div>
+                    <div class="carousel-item">
+                        <a href="/maternity-packages-lp" target="_blank" class="banner-link-wrapper">
+
+                            <div class="hero-image-wrapper">
+                                <img src="/static/img/banners/banner_5.jpg" class="d-block w-100"
+                                    alt="Empowering Health, Nurturing Life." loading="lazy">
+                            </div>
+                        </a>
+                    </div>
+
+
                 </div>
             </div>
         </div>
@@ -386,6 +422,8 @@
             <span class="carousel-control-next-icon"></span>
         </button>
     </section>
+
+
     <section class="home_headtag text-center" data-aos="fade-up">
         <div class="narrow-container">
             <h1>Aarogya Hastha Hospitals – Caring Responsibly for Your Health</h1>
