@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="https://aarogyahastha.com/static/img/fav.png/">
-    <title>Hip Replacement Surgery in Bangalore | Aarogya Hastha Hospitals</title>
+    <title>Laparoscopy & General Surgery in Bangalore | Aarogya Hastha Hospitals</title>
     <meta name="description"
-        content="Expert hip replacement surgery at Aarogya Hastha Hospitals, Bangalore. Fellowship-trained orthopaedic surgeons, advanced implants, cashless insurance, all-inclusive pricing. Book free consultation.">
+        content="Advanced Laparoscopy & general surgery at Aarogya Hastha Hospitals, Bangalore. Gallbladder, hernia, aappendix & more. Smaller cuts, faster recovery. Cashless insurance. Book free consultation.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link
         href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
@@ -20,13 +20,14 @@
             --teal: #009697;
             --teal-light: #00ADAE;
             --teal-pale: #E0F5F5;
+            --sky: #C2D4E2;
             --accent: #E8A838;
             --accent-hover: #f0b94d;
             --dark: #1A2332;
             --body: #3A494C;
             --muted: #6B7E8A;
             --light-bg: #F5F8FA;
-            --white: #FFF;
+            --white: #FFFFFF;
             --border: #D6E0E8;
             --red-badge: #DC2626;
             --red-pale: #FEF2F2;
@@ -148,6 +149,7 @@
             font-size: .8rem;
             letter-spacing: .5px;
             text-transform: uppercase;
+            opacity: .9
         }
 
         .top-bar-actions {
@@ -211,6 +213,7 @@
             transform: translateY(-1px)
         }
 
+        /* HERO */
         .hero {
             background: linear-gradient(135deg, #F0F6FB 0%, #E4EDF5 40%, #DDE9F2 100%);
             padding: 60px 0 40px;
@@ -371,7 +374,8 @@
 
         .btn-primary:hover {
             background: var(--navy-light);
-            transform: translateY(-2px)
+            transform: translateY(-2px);
+            box-shadow: 0 6px 24px rgba(18, 56, 95, .3)
         }
 
         .btn-whatsapp {
@@ -434,6 +438,7 @@
             background: rgba(255, 255, 255, .1)
         }
 
+        /* FORM */
         .hero-form-card {
             background: #fff;
             border-radius: var(--radius-lg);
@@ -531,6 +536,7 @@
             margin-bottom: 16px
         }
 
+        /* TRUST BAR */
         .trust-bar {
             background: #fff;
             border-bottom: 1px solid var(--border);
@@ -571,210 +577,137 @@
             color: var(--teal)
         }
 
-        .pain-section {
-            background: #eaf4ffb5;
+        /* PROCEDURES GRID */
+        .procedures-section {
+            background: #eaf4ffb5
         }
 
-        .pain-cards {
+        .proc-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 20px
+            gap: 20px;
         }
 
-        .pain-card {
+        .proc-card {
             background: #fff;
             border-radius: var(--radius);
             padding: 28px;
             border: 1px solid var(--border);
-            transition: all .3s
+            transition: all .3s;
+            position: relative;
+            overflow: hidden
         }
 
-        .pain-card:hover {
+        .proc-card:hover {
             transform: translateY(-4px);
             box-shadow: var(--shadow-md);
             border-color: var(--teal-pale)
         }
 
-        .pain-card-icon img {
-            width: 55px;
-            height: 55px;
+        .proc-card-icon {
+            width: 48px;
+            height: 48px;
             background: var(--teal-pale);
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             margin-bottom: 16px;
-            padding: 6px;
+            font-size: 1.4rem
         }
 
-        .pain-card h4 {
+        .proc-card h4 {
             font-size: 1.05rem;
             margin-bottom: 8px
         }
 
-        .pain-card p {
+        .proc-card p {
             font-size: .86rem;
             color: var(--muted)
         }
 
-        .checker-section {
-            background: #fff;
-            padding: 70px 0
+        .proc-tag {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: var(--teal-pale);
+            color: var(--teal);
+            font-size: .68rem;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 50px;
+            text-transform: uppercase
         }
 
-        .checker-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            align-items: center
-        }
-
-        .checker-list {
-            list-style: none
-        }
-
-        .checker-list li {
-            display: flex;
-            align-items: flex-start;
-            gap: 14px;
-            padding: 14px 0;
-            border-bottom: 1px solid var(--border);
-            font-size: .95rem;
-            cursor: pointer;
-            transition: background .2s;
-            border-radius: 6px
-        }
-
-        .checker-list li:last-child {
-            border-bottom: none
-        }
-
-        .check-box {
-            width: 28px;
-            height: 28px;
-            flex-shrink: 0;
-            border: 2px solid var(--border);
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all .2s;
+        /* WHY Laparoscopy */
+        .why-section {
             background: #fff
         }
 
-        .check-box svg {
-            width: 14px;
-            height: 14px;
-            color: #fff;
-            opacity: 0;
-            transition: opacity .2s
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px
         }
 
-        .checker-list li.checked .check-box {
-            background: var(--teal);
-            border-color: var(--teal)
+        .why-card {
+            text-align: center;
+            padding: 24px 16px
         }
 
-        .checker-list li.checked .check-box svg {
-            opacity: 1
-        }
-
-        .checker-result {
-            margin-top: 24px;
-            padding: 20px;
-            border-radius: var(--radius);
-            background: var(--teal-pale);
-            border: 1px solid rgba(0, 150, 151, .15);
-            display: none
-        }
-
-        .checker-result.show {
-            display: block
-        }
-
-        .checker-result h4 {
-            color: var(--navy);
-            font-size: 1.1rem;
-            margin-bottom: 6px
-        }
-
-        .checker-result p {
-            font-size: .88rem;
-            color: var(--body);
-            margin-bottom: 14px
-        }
-
-        .checker-promo {
-            background: var(--navy);
-            color: #fff;
-            border-radius: var(--radius-lg);
-            padding: 36px;
-            text-align: center
-        }
-
-        .checker-promo h3 {
-            color: #fff;
-            font-size: 1.5rem;
-            margin-bottom: 8px
-        }
-
-        .checker-promo p {
-            color: rgba(255, 255, 255, .7);
-            margin-bottom: 20px
-        }
-
-        .checker-promo .score-ring {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            border: 6px solid rgba(255, 255, 255, .15);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-            position: relative
-        }
-
-        .checker-promo .score-ring::after {
-            content: '';
-            position: absolute;
-            inset: -6px;
-            border-radius: 50%;
-            border: 6px solid var(--accent);
-            border-bottom-color: transparent;
-            border-left-color: transparent;
-            transform: rotate(-45deg)
-        }
-
-        .score-inner {
-            text-align: center
-        }
-
-        .score-inner .num {
+        .why-num {
             font-size: 2.4rem;
             font-weight: 800;
-            color: #fff;
+            color: var(--navy);
             font-family: 'Plus Jakarta Sans', sans-serif;
-            line-height: 1
+            margin-bottom: 4px
         }
 
-        .score-inner small {
-            font-size: .7rem;
-            color: rgba(255, 255, 255, .5);
-            text-transform: uppercase;
-            letter-spacing: 1px
+        .why-label {
+            font-size: .85rem;
+            color: var(--muted);
+            font-weight: 500
         }
 
+        .why-card-visual {
+            background: var(--teal-pale);
+            border-radius: var(--radius);
+            padding: 28px;
+            text-align: center
+        }
+
+        .why-card-visual h4 {
+            font-size: 1rem;
+            color: var(--navy);
+            margin-top: 12px
+        }
+
+        .why-card-visual p {
+            font-size: .82rem;
+            color: var(--muted);
+            margin-top: 4px
+        }
+
+        .why-card-visual .emoji img {
+            width: 50px;
+            height: 50px;
+            margin: auto;
+            margin-bottom: 8px;
+            background: #fff;
+            border-radius: 10px;
+            padding: 7px;
+        }
+
+        /* DOCTORS */
         .doctors-section {
             background: var(--light-bg)
         }
 
         .doctor-cards {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px
+            display: flex;
+            gap: 20px;
+            justify-content: center;
         }
-
 
         .doctor-card {
             background: #fff;
@@ -782,7 +715,9 @@
             overflow: hidden;
             border: 1px solid var(--border);
             text-align: center;
-            transition: all .3s
+            transition: all .3s;
+            width: 30%;
+
         }
 
         .doctor-card:hover {
@@ -821,6 +756,7 @@
             justify-content: center;
         }
 
+        /* PROCESS */
         .process-section {
             background: #fff
         }
@@ -875,6 +811,7 @@
             color: var(--muted)
         }
 
+        /* TESTIMONIALS */
         .testimonials-section {
             background: var(--light-bg)
         }
@@ -982,11 +919,16 @@
             color: var(--muted)
         }
 
+        /* MID CTA */
         .mid-cta {
             background: linear-gradient(135deg, var(--teal) 0%, #00807F 100%);
             padding: 50px 0;
             text-align: center;
             color: #fff
+        }
+
+        .proc-card-icon img {
+            width: 35px;
         }
 
         .mid-cta h2 {
@@ -1008,20 +950,16 @@
             flex-wrap: wrap
         }
 
+        /* PACKAGES */
         .package-section {
-            background: var(--light-bg)
+            background: var(--light-bg);
         }
 
         .package-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 24px;
-            margin-top: 40px;
-            place-items: center;
-        }
-
-        .package-grid>div:only-child {
-            grid-column: 2 / 3;
+            margin-top: 30px;
         }
 
         .package-card {
@@ -1084,7 +1022,7 @@
         .package-price small {
             font-size: .75rem;
             font-weight: 500;
-            color: var(--muted)
+            color: var(--muted);
         }
 
         .package-body {
@@ -1154,137 +1092,7 @@
             color: var(--teal)
         }
 
-        .quote-section {
-            background: linear-gradient(135deg, var(--dark) 0%, #2A2A2A 100%);
-            padding: 70px 0;
-            color: #fff;
-            position: relative;
-            overflow: hidden
-        }
-
-        .quote-section::after {
-            content: '';
-            position: absolute;
-            bottom: -50px;
-            right: -50px;
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, rgba(232, 168, 56, .12) 0%, transparent 70%);
-            border-radius: 50%
-        }
-
-        .quote-section .section-label {
-            color: var(--accent)
-        }
-
-        .quote-section .section-title {
-            color: #fff
-        }
-
-        .quote-section .section-desc {
-            color: rgba(255, 255, 255, .65)
-        }
-
-        .quote-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            align-items: center
-        }
-
-        .quote-points {
-            list-style: none
-        }
-
-        .quote-points li {
-            display: flex;
-            align-items: flex-start;
-            gap: 14px;
-            padding: 16px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, .08);
-            font-size: .95rem;
-            color: rgba(255, 255, 255, .85)
-        }
-
-        .quote-points li:last-child {
-            border-bottom: none
-        }
-
-        .quote-check {
-            width: 28px;
-            height: 28px;
-            flex-shrink: 0;
-            background: rgba(232, 168, 56, .15);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center
-        }
-
-        .quote-check svg {
-            width: 14px;
-            height: 14px;
-            color: var(--accent)
-        }
-
-        .quote-points li strong {
-            color: #fff
-        }
-
-        .quote-form-card {
-            background: rgba(255, 255, 255, .06);
-            border: 1px solid rgba(255, 255, 255, .12);
-            border-radius: var(--radius-lg);
-            padding: 32px;
-            backdrop-filter: blur(10px)
-        }
-
-        .quote-form-card h3 {
-            color: #fff;
-            font-size: 1.3rem;
-            margin-bottom: 4px
-        }
-
-        .quote-form-card .form-sub {
-            color: rgba(255, 255, 255, .5);
-            margin-bottom: 16px;
-            font-size: .85rem
-        }
-
-        .quote-form-card .form-group label {
-            color: rgba(255, 255, 255, .7)
-        }
-
-        .quote-form-card .form-group input,
-        .quote-form-card .form-group select {
-            background: rgba(255, 255, 255, .08);
-            border-color: rgba(255, 255, 255, .15);
-            color: #fff
-        }
-
-        .quote-form-card .form-group input::placeholder {
-            color: rgba(255, 255, 255, .35)
-        }
-
-        .quote-form-card .form-group input:focus,
-        .quote-form-card .form-group select:focus {
-            border-color: var(--accent);
-            background: rgba(255, 255, 255, .12)
-        }
-
-        .quote-form-card .form-submit {
-            background: var(--accent);
-            color: var(--dark)
-        }
-
-        .quote-form-card .form-submit:hover {
-            background: var(--accent-hover)
-        }
-
-        .quote-form-card .form-note {
-            color: rgba(255, 255, 255, .4)
-        }
-
+        /* FAQ */
         .faq-section {
             background: var(--light-bg)
         }
@@ -1359,6 +1167,7 @@
             line-height: 1.7
         }
 
+        /* FINAL CTA */
         .final-cta {
             background: linear-gradient(135deg, var(--navy) 0%, #1A4A72 100%);
             padding: 70px 0;
@@ -1425,6 +1234,7 @@
             height: 16px
         }
 
+        /* FOOTER */
         .lp-footer {
             background: var(--dark);
             color: rgba(255, 255, 255, .5);
@@ -1449,6 +1259,7 @@
             flex-wrap: wrap
         }
 
+        /* FLOATING WA */
         .floating-wa {
             position: fixed;
             bottom: 24px;
@@ -1563,6 +1374,7 @@
             gap: 8px;
             transition: background 0.2s, border-color 0.2s, transform 0.18s;
             cursor: default;
+            justify-content: center;
         }
 
         .ins-card:hover {
@@ -1683,12 +1495,9 @@
             display: none;
         }
 
-
+        /* RESPONSIVE */
         @media(max-width:1024px) {
-
-            .hero .container,
-            .quote-grid,
-            .checker-grid {
+            .hero .container {
                 grid-template-columns: 1fr
             }
 
@@ -1700,9 +1509,6 @@
                 grid-template-columns: 1fr 1fr
             }
 
-            .doctor-cards {
-                grid-template-columns: repeat(2, 1fr)
-            }
 
             .process-steps {
                 grid-template-columns: repeat(3, 1fr)
@@ -1710,6 +1516,14 @@
 
             .process-steps::before {
                 display: none
+            }
+
+            .proc-grid {
+                grid-template-columns: 1fr 1fr
+            }
+
+            .why-grid {
+                grid-template-columns: repeat(2, 1fr)
             }
         }
 
@@ -1733,12 +1547,12 @@
                 font-size: 1.7rem
             }
 
-            .pain-cards,
+            .proc-grid,
             .package-grid {
                 grid-template-columns: 1fr;
                 max-width: 400px;
                 margin-left: auto;
-                margin-right: auto
+                margin-right: auto;
             }
 
             .testimonial-cards {
@@ -1758,13 +1572,13 @@
                 gap: 20px
             }
 
-            .doctor-cards {
-                grid-template-columns: 1fr;
-                max-width: 300px;
-                margin-left: auto;
-                margin-right: auto
+            .trust-badge span {
+                font-size: .75rem
             }
 
+            .why-grid {
+                grid-template-columns: 1fr 1fr
+            }
 
             .ins-grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -1803,9 +1617,16 @@
             .why-grid {
                 grid-template-columns: 1fr;
             }
+
+            .doctor-card {
+                width: 100%;
+            }
+
+            .doctor-cards {
+                flex-wrap: wrap;
+            }
         }
     </style>
-
 
     <!-- Google Tag Manager -->
     <script>(function (w, d, s, l, i) {
@@ -1849,6 +1670,7 @@
     <noscript><img height="1" width="1" style="display:none"
             src="https://www.facebook.com/tr?id=1282482353417147&ev=PageView&noscript=1" /></noscript>
     <!-- End Google Tag Manager (noscript) -->
+
     <!-- 1. STICKY TOP BAR -->
     <div class="top-bar">
         <div class="container">
@@ -1856,17 +1678,21 @@
                 <img src="https://aarogyahastha.com/static/img/img/logo.png" alt="Aarogya Hastha Hospitals">
                 <img src="https://aarogyahastha.com/static/img/img/NABH_Logo-01.png" alt="New Hospital Logo"
                     class="header-logo-img new-logo-img">
+
             </div>
-            <div class="top-bar-actions"><a href="tel:7259344848" class="top-bar-phone"><svg viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2">
+            <div class="top-bar-actions">
+                <a href="tel:7259344848" class="top-bar-phone"><svg viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2">
                         <path
                             d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" />
-                    </svg> 7259344848</a><a
-                    href="https://wa.me/917259344848?text=Hi%2C%20I%27m%20interested%20in%20hip%20replacement%20surgery."
+                    </svg> 7259344848</a>
+                <a href="https://wa.me/917259344848?text=Hi%2C%20I%27m%20interested%20in%20Laparoscopy%20surgery.%20Please%20share%20details."
                     class="top-bar-wa" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor">
                         <path
                             d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-                    </svg> WhatsApp</a><a href="#book-consultation" class="btn-top-cta">Book Free Consultation</a></div>
+                    </svg> WhatsApp</a>
+                <a href="#book-consultation" class="btn-top-cta">Book Free Consultation</a>
+            </div>
         </div>
     </div>
 
@@ -1875,13 +1701,11 @@
         <div class="container">
             <div class="hero-content">
                 <div class="hero-badge"><span class="dot"></span> Sarjapur Road, Bangalore</div>
-                <h1>Hip Replacement Surgery.<br><span>Move Freely Again.</span></h1>
-                <p class="hero-sub">Life Is Too Short for Hip Pain.</p>
-                <p class="hero-desc">Advanced hip arthroplasty by fellowship-trained orthopaedic experts. Total, partial
-                    &amp;
-                    revision hip replacement with modern implants. All-inclusive pricing, cashless
-                    insurance.
-                </p>
+                <h1>Laparoscopy &amp; General Surgery.<br><span>Smaller Cuts. Faster Recovery.</span></h1>
+                <p class="hero-sub">Get Back to Life Sooner.</p>
+                <p class="hero-desc">Advanced keyhole surgery for Gallbladder, hernia, appendix &amp; more — by Trusted
+                    Hospital
+                    in Bangalore. Minimal scarring, less pain.</p>
                 <div class="hero-stats">
                     <div class="hero-stat">
                         <div class="hero-stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -1891,16 +1715,13 @@
                             </svg></div>
                         <div><strong>1800+</strong><small>Successful Surgeries</small></div>
                     </div>
-                    <div class="hero-stat">
-                        <div class="hero-stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2">
-                                <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
-                                <circle cx="9" cy="7" r="4" />
-                                <path d="M23 21v-2a4 4 0 00-3-3.87" />
-                                <path d="M16 3.13a4 4 0 010 7.75" />
-                            </svg></div>
-                        <div><strong>40000+</strong><small>Patients Treated</small></div>
-                    </div>
+                    <!-- <div class="hero-stat">
+            <div class="hero-stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10" />
+                <path d="M12 6v6l4 2" />
+              </svg></div>
+            <div><strong>24-48 hrs</strong><small>Discharge Time</small></div>
+          </div> -->
                     <div class="hero-stat">
                         <div class="hero-stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="2">
@@ -1918,7 +1739,7 @@
                             <line x1="8" y1="2" x2="8" y2="6" />
                             <line x1="3" y1="10" x2="21" y2="10" />
                         </svg> Book Consultation</a>
-                    <a href="https://wa.me/917259344848?text=Hi%2C%20I%27m%20interested%20in%20hip%20replacement%20surgery.%20Please%20share%20details."
+                    <a href="https://wa.me/917259344848?text=Hi%2C%20I%27m%20interested%20in%20Laparoscopy%20surgery.%20Please%20share%20details."
                         class="btn-whatsapp" target="_blank"><svg width="18" height="18" viewBox="0 0 24 24"
                             fill="currentColor">
                             <path
@@ -1926,39 +1747,45 @@
                         </svg> WhatsApp Us</a>
                 </div>
             </div>
-            <!-- LEAD FORM -->
+            <!-- SIMPLIFIED LEAD FORM -->
             <div class="hero-form-card">
-                <div class="form-urgency">🔥 Limited Slots — Only 6 Surgery Slots Left This Month</div>
-                <h3>Book Your Free Hip Consultation</h3>
-                <p class="form-sub">Our SPOC will call you within 20 minutes.</p>
+                <div class="form-urgency">🔥 Same-Week Surgery Slots Available — Book Now</div>
+                <h3>Book Your Free Consultation</h3>
+                <p class="form-sub">Our SPOC will call you within 20 minutes to discuss your condition.</p>
                 <form method="POST" action="/submit-lead-1">
 
                     <div class="form-group">
                         <label>Full Name</label>
-                        <input type="text" name="patientName" placeholder="Enter your name" required
+                        <input name="patientName" type="text" placeholder="Enter your name" required
                             pattern="[A-Za-z\s]+" title="Name should contain only letters and spaces">
                     </div>
 
                     <div class="form-group">
                         <label>Phone Number</label>
-                        <input type="text" name="contactNumber" placeholder="Enter your phone number" required
+                        <input name="contactNumber" type="text" placeholder="Enter your phone number" required
                             inputmode="numeric" pattern="[6-9][0-9]{9}" maxlength="10"
                             onkeypress="return event.charCode >= 48 && event.charCode <= 57"
                             title="Enter a valid 10-digit mobile number">
                     </div>
 
                     <div class="form-group">
-                        <label>Which hip needs attention?</label>
+                        <label>What condition needs attention?</label>
                         <select name="description" required>
                             <option value="">Select...</option>
-                            <option value="Left Hip">Left Hip</option>
-                            <option value="Right Hip">Right Hip</option>
-                            <option value="Both Hips">Both Hips</option>
-                            <option value="Not Sure — Need Consultation">Not Sure — Need Consultation</option>
+                            <option value="Gallbladder / Gallstones">Gallbladder / Gallstones</option>
+                            <option value="Hernia (Inguinal / Umbilical / Incisional / Ventral / Hiatal )">
+                                Hernia (Inguinal / Umbilical / Incisional / Ventral / Hiatal )
+                            </option>
+                            <option value="Appendicitis / Appendix">Appendicitis / Appendix</option>
+                            <option value="Piles / Fissure / Fistula">Piles / Fissure / Fistula</option>
+                            <option value="Thyroid Surgery">Thyroid Surgery</option>
+                            <option value="Other / Not Sure — Need Consultation">
+                                Other / Not Sure — Need Consultation
+                            </option>
                         </select>
                     </div>
 
-                    <input type="hidden" name="source" value="instagram">
+                    <input type="hidden" name="source" value="Website">
 
                     <button type="submit" class="form-submit">Get Free Consultation →</button>
                     <p class="form-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1969,6 +1796,7 @@
             </div>
         </div>
     </section>
+
 
     <!-- 3. TRUST BADGES -->
     <div class="trust-bar">
@@ -1984,11 +1812,9 @@
                 <div class="trust-badge">
                     <div class="trust-badge-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2">
-                            <path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
-                            <circle cx="8.5" cy="7" r="4" />
-                            <path d="M20 8v6" />
-                            <path d="M23 11h-6" />
-                        </svg></div><span>Fellowship-Trained Surgeons</span>
+                            <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" />
+                            <line x1="4" y1="22" x2="4" y2="15" />
+                        </svg></div><span>Keyhole Surgery Experts</span>
                 </div>
                 <div class="trust-badge">
                     <div class="trust-badge-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -1997,13 +1823,13 @@
                             <line x1="2" y1="10" x2="22" y2="10" />
                         </svg></div><span>Cashless Insurance</span>
                 </div>
-                <div class="trust-badge">
+                <!-- <div class="trust-badge">
                     <div class="trust-badge-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2">
                             <circle cx="12" cy="12" r="10" />
                             <path d="M12 6v6l4 2" />
-                        </svg></div><span>Fast Recovery Protocols</span>
-                </div>
+                        </svg></div><span>Home in 24-48 Hours</span>
+                </div> -->
             </div>
         </div>
     </div>
@@ -2014,141 +1840,254 @@
         <div class="container">
             <p class="section-label text-center">Surgery Packages</p>
             <h2 class="section-title text-center">Transparent Pricing</h2>
+            <!-- <p class="section-desc text-center mx-auto">All prices include surgeon fees, anaesthesia, hospital stay,
+        medicines, and follow-up visits.</p> -->
             <div class="package-grid">
-                <!--  -->
-                <div class="package-card featured">
-
-                    <span class="package-tag">Most Popular</span>
+                <div class="package-card">
                     <div class="package-header">
-                        <h4>Total Hip Replacement</h4>
-                        <div class="package-price">1,50,000 *<br><small><b>Inclusive:</b> Surgery Charges + Bed Charges
-                                + Pre Op Investigations </small></div>
+                        <h4>Appendectomy (Laparoscopy)</h4>
+                        <!-- <p class="package-desc">Gallbladder removal — keyhole surgery</p> -->
+                        <div class="package-price">₹75,000*<br><small><b>Inclusive:</b> Surgery Charges + Bed Charges +
+                                Pre Op Invesitgations </small></div>
                     </div>
                     <div class="package-body">
                         <ul class="package-features">
                             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                                     <polyline points="20 6 9 17 4 12" />
-                                </svg>Complete hip joint replacement surgery</li>
+                                </svg> Laparoscopy technique</li>
                             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                                     <polyline points="20 6 9 17 4 12" />
-                                </svg>High-quality prosthetic implant included</li>
+                                </svg> 1-2 days hospital stay</li>
                             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                                     <polyline points="20 6 9 17 4 12" />
-                                </svg> 5-7 days hospital stay</li>
+                                </svg> 24/7 emergency availability</li>
                             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                                     <polyline points="20 6 9 17 4 12" />
-                                </svg> Advanced pain management care</li>
+                                </svg> Post of Follow-up Visit</li>
+
+                        </ul><button class="package-cta"
+                            onclick="document.getElementById('book-consultation').scrollIntoView({behavior:'smooth'})">Enquire
+                            Now</button>
+                    </div>
+                </div>
+                <div class="package-card featured">
+                    <!-- <span class="package-tag">Most Popular</span> -->
+                    <div class="package-header">
+                        <h4>Fissurectomy / Hemorrhoidectomy</h4>
+                        <!-- <p class="package-desc">Inguinal / umbilical / incisional hernia</p> -->
+                        <div class="package-price">₹50,000*<br><small><b>Inclusive:</b> Surgery Charges + Bed Charges +
+                                Pre Op Invesitgations </small></div>
+                    </div>
+                    <div class="package-body">
+                        <ul class="package-features">
                             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                                     <polyline points="20 6 9 17 4 12" />
-                                </svg> Intensive physio programme</li>
+                                </svg> Laparoscopy Techniques</li>
                             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                                     <polyline points="20 6 9 17 4 12" />
-                                </svg> Post-op follow-up visit</li>
-                        </ul>
-                        <button class="package-cta"
+                                </svg> 1-2 days hospital stay</li>
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                    <polyline points="20 6 9 17 4 12" />
+                                </svg> 24/7 emergency availability</li>
+
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                    <polyline points="20 6 9 17 4 12" />
+                                </svg> Post of Follow-up Visit</li>
+                            <!-- <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                    <polyline points="20 6 9 17 4 12" />
+                                </svg> Low recurrence rate</li> -->
+                        </ul><button class="package-cta"
+                            onclick="document.getElementById('book-consultation').scrollIntoView({behavior:'smooth'})">Enquire
+                            Now</button>
+                    </div>
+                </div>
+                <div class="package-card">
+                    <div class="package-header">
+                        <h4>Fistulectomy</h4>
+                        <!-- <p class="package-desc">Appendix removal — emergency or planned</p> -->
+                        <div class="package-price">₹50,000*<br><small><b>Inclusive:</b> Surgery Charges + Bed Charges +
+                                Pre Op Invesitgations </small></div>
+                    </div>
+                    <div class="package-body">
+                        <ul class="package-features">
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                    <polyline points="20 6 9 17 4 12" />
+                                </svg> Laparoscopy technique</li>
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                    <polyline points="20 6 9 17 4 12" />
+                                </svg> 1-2 days hospital stay</li>
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                    <polyline points="20 6 9 17 4 12" />
+                                </svg> 24/7 emergency availability</li>
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                    <polyline points="20 6 9 17 4 12" />
+                                </svg> Post of Follow-up Visit</li>
+                        </ul><button class="package-cta"
+                            onclick="document.getElementById('book-consultation').scrollIntoView({behavior:'smooth'})">Enquire
+                            Now</button>
+                    </div>
+                </div>
+                <div class="package-card">
+                    <div class="package-header">
+                        <h4>Umbilical Hernia </h4>
+                        <div class="package-price">₹75,000*<br><small><b>Inclusive:</b> Surgery Charges + Bed Charges +
+                                Pre Op Invesitgations </small></div>
+                    </div>
+                    <div class="package-body">
+                        <ul class="package-features">
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                    <polyline points="20 6 9 17 4 12" />
+                                </svg> Laparoscopy technique</li>
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                    <polyline points="20 6 9 17 4 12" />
+                                </svg> 1-2 days hospital stay</li>
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                    <polyline points="20 6 9 17 4 12" />
+                                </svg> 24/7 emergency availability</li>
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                    <polyline points="20 6 9 17 4 12" />
+                                </svg> Post of Follow-up Visit</li>
+                        </ul><button class="package-cta"
+                            onclick="document.getElementById('book-consultation').scrollIntoView({behavior:'smooth'})">Enquire
+                            Now</button>
+                    </div>
+                </div>
+                <div class="package-card">
+                    <div class="package-header">
+                        <h4>Inguinal Hernia</h4>
+                        <div class="package-price">₹80,000*<br><small><b>Inclusive:</b> Surgery Charges + Bed Charges +
+                                Pre Op Invesitgations </small></div>
+                    </div>
+                    <div class="package-body">
+                        <ul class="package-features">
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                    <polyline points="20 6 9 17 4 12" />
+                                </svg> Laparoscopy technique</li>
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                    <polyline points="20 6 9 17 4 12" />
+                                </svg> 1-2 days hospital stay</li>
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                    <polyline points="20 6 9 17 4 12" />
+                                </svg> 24/7 emergency availability</li>
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                    <polyline points="20 6 9 17 4 12" />
+                                </svg> Post of Follow-up Visit</li>
+                        </ul><button class="package-cta"
+                            onclick="document.getElementById('book-consultation').scrollIntoView({behavior:'smooth'})">Enquire
+                            Now</button>
+                    </div>
+                </div>
+                <div class="package-card">
+                    <div class="package-header">
+                        <h4>Laparoscopy Cholecystectomy</h4>
+                        <div class="package-price">₹75,000*<br><small><b>Inclusive:</b> Surgery Charges + Bed Charges +
+                                Pre Op Invesitgations </small></div>
+                    </div>
+                    <div class="package-body">
+                        <ul class="package-features">
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                    <polyline points="20 6 9 17 4 12" />
+                                </svg> Laparoscopy technique</li>
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                    <polyline points="20 6 9 17 4 12" />
+                                </svg> 1-2 days hospital stay</li>
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                    <polyline points="20 6 9 17 4 12" />
+                                </svg> 24/7 emergency availability</li>
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                    <polyline points="20 6 9 17 4 12" />
+                                </svg> Post of Follow-up Visit</li>
+                        </ul><button class="package-cta"
                             onclick="document.getElementById('book-consultation').scrollIntoView({behavior:'smooth'})">Enquire
                             Now</button>
                     </div>
                 </div>
             </div>
-            <div class="package-note"><strong>💡 Exclusive:</strong> Drugs Consumables + Implant + Higherend
-                investigations + Blood Components </div>
+            <div class="package-note"><strong>💡 Exclusive:</strong> Drugs + Consumables + Implant + Highend
+                investigations + Blood Components + Mesh</div>
         </div>
     </section>
 
-    <!-- 4. PAIN POINTS -->
-    <section class="pain-section">
+    <!-- 4. PROCEDURES WE TREAT -->
+    <section class="procedures-section">
         <div class="container">
-            <p class="section-label text-center">Is This You?</p>
-            <h2 class="section-title text-center">Don't Let Hip Pain Hold You Back</h2>
-            <p class="section-desc text-center mx-auto">If any of these sounds familiar, it's time to talk to an
-                orthopaedic
-                specialist about a Permanent solution.</p>
-            <div class="pain-cards">
-                <div class="pain-card">
-                    <div class="pain-card-icon"><img src="static/img/landingpageimage/hip-pain1.png" alt="">
+            <p class="section-label text-center">What We Treat</p>
+            <h2 class="section-title text-center">Laparoscopy &amp; General Surgery Procedures</h2>
+            <p class="section-desc text-center mx-auto">From routine gallbladder removal to complex hernia repair — our
+                surgeons use the latest minimally invasive techniques for faster healing.</p>
+            <div class="proc-grid">
+                <div class="proc-card"><span class="proc-tag">Most Common</span>
+                    <div class="proc-card-icon"><img src="static/img/landingpageimage/general-surgery1.png" alt="">
                     </div>
-                    <h4>Constant Hip or Groin Pain</h4>
-                    <p>Deep aching in the hip, groin, or thigh that worsens with activity. Pain when getting out of a
-                        car,
-                        climbing stairs, or simply standing up from a chair.</p>
+                    <h4>Gallbladder Removal (Cholecystectomy)</h4>
+                    <p>Laparoscopy removal of gallbladder for gallstones. 3 tiny keyhole incision, same-day or next-day
+                        discharge. No
+                        large scars.</p>
                 </div>
-                <div class="pain-card">
-                    <div class="pain-card-icon"><img src="static/img/landingpageimage/hip-pain2.png" alt="">
+                <div class="proc-card">
+                    <div class="proc-card-icon"><img src="static/img/landingpageimage/general-surgery2.png" alt="">
                     </div>
-                    <h4>Pain That Keeps You Awake</h4>
-                    <p>Sleeping on the affected side is impossible. You wake up multiple times at night. Painkillers
-                        barely take
-                        the edge off, and the relief doesn't last.</p>
+                    <h4>Hernia Repair (Lap / Open)</h4>
+                    <p>Inguinal, umbilical, incisional, Ventral and hiatal hernia repair using mesh reinforcement.
+                        Laparoscopy
+                        option for
+                        faster recovery.</p>
                 </div>
-                <div class="pain-card">
-                    <div class="pain-card-icon"><img src="static/img/landingpageimage/hip-pain3.png" alt="">
+                <div class="proc-card">
+                    <div class="proc-card-icon"><img src="static/img/landingpageimage/general-surgery3.png" alt="">
                     </div>
-                    <h4>Walking Has Become a Struggle</h4>
-                    <p>You limp, you lean, you avoid walks. Putting on shoes or socks is a daily battle. You've stopped
-                        doing
-                        things you love because your hip aren't cooperate.</p>
+                    <h4>Appendix Removal (Appendectomy)</h4>
+                    <p>Emergency and elective Laparoscopy appendectomy. Minimal pain, small incisions, back to work in
+                        a week.
+                    </p>
+                </div>
+                <div class="proc-card">
+                    <div class="proc-card-icon"><img src="static/img/landingpageimage/general-surgery4.png" alt="">
+                    </div>
+                    <h4>Piles, Fissure &amp; Fistula</h4>
+                    <p>Laser and minimally invasive procedures for haemorrhoids, fissures, and fistula. Reduced pain,
+                        faster
+                        healing.</p>
+                </div>
+                <div class="proc-card">
+                    <div class="proc-card-icon"><img src="static/img/landingpageimage/general-surgery5.png" alt="">
+                    </div>
+                    <h4>Thyroid Surgery (Thyroidectomy)</h4>
+                    <p>Safe removal of thyroid gland for nodules, goitre, or cancer. Expert endocrine surgeons with
+                        minimal
+                        scarring.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 5. SELF-ASSESSMENT CHECKLIST -->
-    <section class="checker-section">
+    <!-- 5. WHY Laparoscopy — COMPARISON -->
+    <section class="why-section">
         <div class="container">
-            <div class="checker-grid">
-                <div>
-                    <p class="section-label">Self-Assessment</p>
-                    <h2 class="section-title">Do You Need a Hip Replacement?</h2>
-                    <p class="section-desc">Tap each symptom that applies to you. This is a starting point — not a
-                        diagnosis.</p>
-                    <ul class="checker-list" id="checkerList">
-                        <li onclick="toggleCheck(this)"><span class="check-box"><svg viewBox="0 0 24 24" fill="none"
-                                    stroke="currentColor" stroke-width="3">
-                                    <polyline points="20 6 9 17 4 12" />
-                                </svg></span> Hip or groin pain that limits walking or standing</li>
-                        <li onclick="toggleCheck(this)"><span class="check-box"><svg viewBox="0 0 24 24" fill="none"
-                                    stroke="currentColor" stroke-width="3">
-                                    <polyline points="20 6 9 17 4 12" />
-                                </svg></span> Stiffness that makes bending or squatting difficult</li>
-                        <li onclick="toggleCheck(this)"><span class="check-box"><svg viewBox="0 0 24 24" fill="none"
-                                    stroke="currentColor" stroke-width="3">
-                                    <polyline points="20 6 9 17 4 12" />
-                                </svg></span> Pain even at rest or during sleep</li>
-                        <li onclick="toggleCheck(this)"><span class="check-box"><svg viewBox="0 0 24 24" fill="none"
-                                    stroke="currentColor" stroke-width="3">
-                                    <polyline points="20 6 9 17 4 12" />
-                                </svg></span> Painkillers or injections no longer provide relief</li>
-                        <li onclick="toggleCheck(this)"><span class="check-box"><svg viewBox="0 0 24 24" fill="none"
-                                    stroke="currentColor" stroke-width="3">
-                                    <polyline points="20 6 9 17 4 12" />
-                                </svg></span> X-ray shows arthritis or avascular necrosis</li>
-                        <li onclick="toggleCheck(this)"><span class="check-box"><svg viewBox="0 0 24 24" fill="none"
-                                    stroke="currentColor" stroke-width="3">
-                                    <polyline points="20 6 9 17 4 12" />
-                                </svg></span> You've had a hip fracture or previous injury</li>
-                        <li onclick="toggleCheck(this)"><span class="check-box"><svg viewBox="0 0 24 24" fill="none"
-                                    stroke="currentColor" stroke-width="3">
-                                    <polyline points="20 6 9 17 4 12" />
-                                </svg></span> Daily activities (dressing, bathing, walking) are affected</li>
-                    </ul>
-                    <div class="checker-result" id="checkerResult">
-                        <h4 id="resultTitle"></h4>
-                        <p id="resultText"></p><a href="#book-consultation" class="btn-primary"
-                            style="font-size:.88rem;padding:12px 24px;">Talk to Our Specialist — It's Free →</a>
-                    </div>
+            <p class="section-label text-center">Why Laparoscopy?</p>
+            <h2 class="section-title text-center">Keyhole Surgery vs. Traditional Open Surgery</h2>
+            <p class="section-desc text-center mx-auto">See why patients — and surgeons — prefer the minimally invasive
+                approach.</p>
+            <div class="why-grid">
+                <div class="why-card-visual">
+                    <div class="emoji"><img src="static/img/landingpageimage/general-approach1.png" alt=""></div>
+                    <h4>Smaller Incisions</h4>
+                    <p>3-4 tiny cuts (5-10mm) vs one large cut (15-20cm)</p>
                 </div>
-                <div class="checker-promo">
-                    <div class="score-ring">
-                        <div class="score-inner">
-                            <div class="num" id="scoreNum">0</div><small>of 7</small>
-                        </div>
-                    </div>
-                    <h3>Your Hip Health Score</h3>
-                    <p>The more symptoms you check, the stronger the case for a specialist consultation.</p><a
-                        href="#book-consultation" class="btn-accent" style="font-size:.9rem;padding:12px 28px;">Get
-                        Expert Opinion
-                        →</a>
+                <div class="why-card-visual">
+                    <div class="emoji"><img src="static/img/landingpageimage/general-approach2.png" alt=""></div>
+                    <h4>Less Pain</h4>
+                    <p>Significantly less post-operative pain and discomfort</p>
+                </div>
+                <div class="why-card-visual">
+                    <div class="emoji"><img src="static/img/landingpageimage/general-approach3.png" alt=""></div>
+                    <h4>Faster Discharge</h4>
+                    <p>Faster discharge than open surgery, shorter hospital stay</p>
+                </div>
+                <div class="why-card-visual">
+                    <div class="emoji"><img src="static/img/landingpageimage/general-approach4.png" alt=""></div>
+                    <h4>Quick Recovery</h4>
+                    <p>Back to normal activities in 1-2 weeks vs 4-6 weeks</p>
                 </div>
             </div>
         </div>
@@ -2157,42 +2096,31 @@
     <!-- 6. DOCTORS -->
     <section class="doctors-section" id="doctors">
         <div class="container">
-            <p class="section-label text-center">Your Surgical Team</p>
-            <h2 class="section-title text-center">Meet Your Orthopaedic Surgeons</h2>
-            <p class="section-desc text-center mx-auto">Fellowship-trained specialists with decades of combined
-                experience in joint replacement and trauma surgery.</p>
+            <p class="section-label text-center">our Surgical Team</p>
+            <h2 class="section-title text-center">Meet Our Surgeons</h2>
+            <p class="section-desc text-center mx-auto">Experienced general and Laparoscopy surgeons trusted by
+                thousands of
+                families across Bangalore.</p>
             <div class="doctor-cards">
-                <div class="doctor-card">
-                    <img src="static/img/landingpageimage/dr-kushal-lakshmana.png" alt="Dr. Kushal Lakshmana"
+                <div class="doctor-card"><img src="static/img/landingpageimage/dr-v-devendran.png" alt="Dr. V Devendran"
                         class="doctor-img">
                     <div class="doctor-info">
-                        <h4>Dr. Kushal Lakshmana</h4>
-                        <p>MBBS , MS-Orthopaedics</p>
-                        <small>Consultant & HOD – Orthopaedics, Fellowship in Arthroplasty Medicine, Bangalore
-                            Orthopaedic Society, Karnataka Orthopaedic Society, Indian Orthopaedic society</small>
+                        <h4>Dr. V Devendran</h4>
+                        <p>MBBS, DNB - General Surgery</p>
+                        <small>Senior Consultant — General, Laparoscopy &amp; Laser Surgery, Proctology</small>
                     </div>
                 </div>
-                <div class="doctor-card">
-                    <img src="static/img/landingpageimage/karan-gowda.png" alt="Dr. C L Karan Gowda" class="doctor-img">
+                <div class="doctor-card"><img src="static/img/landingpageimage/dr-niranjan-s-kadlur.png"
+                        alt="Dr. Niranjan S Kadlur" class="doctor-img">
                     <div class="doctor-info">
-                        <h4>Dr. C L Karan Gowda</h4>
-                        <p>MBBS, MS (Ortho), DNB (Ortho), FRGUHS (Advanced trauma), FEIORA (Ortho Rheumatology)</p>
-                        <!-- <small>MBBS, MS (Ortho), DNB (Ortho), FRGUHS (Advanced trauma), FEIORA (Ortho
-                            Rheumatology)</small> -->
-                    </div>
-                </div>
-                <div class="doctor-card">
-                    <img src="static/img/landingpageimage/radhesh_menon.png" alt="Dr. Radhesh Menon" class="doctor-img">
-                    <div class="doctor-info">
-                        <h4>Dr. Radhesh R Menon</h4>
-                        <p>MBBS, MS Orthopaedics (Gold Medal)</p>
-                        <small>Fellow of Hand & Microsurgery (Japan), Fellow of Arthroscopy & Sports Medicine</small>
+                        <h4>Dr. Niranjan S Kadlur</h4>
+                        <p>MBBS, DNB (General Surgery), FAMS</p>
+                        <small>Consultant - General Surgery</small>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
 
     <!-- 7. SURGERY JOURNEY -->
     <section class="process-section">
@@ -2207,23 +2135,23 @@
                 </div>
                 <div class="process-step">
                     <div class="process-num">2</div>
-                    <h4>Expert Assessment</h4>
-                    <p>Physical exam, X-rays &amp; scans on-site. Diagnosis same day.</p>
+                    <h4>Diagnosis &amp; Scans</h4>
+                    <p>Ultrasound, blood tests on-site. Clear diagnosis same day.</p>
                 </div>
                 <div class="process-step">
                     <div class="process-num">3</div>
-                    <h4>Personalised Plan</h4>
-                    <p>Implant selection, transparent pricing, insurance processing.</p>
+                    <h4>Surgery Plan</h4>
+                    <p>Transparent pricing, insurance processing, pre-op prep explained.</p>
                 </div>
                 <div class="process-step">
                     <div class="process-num">4</div>
                     <h4>Surgery Day</h4>
-                    <p>1-2 hour procedure. Advanced pain management.</p>
+                    <p>Keyhole technique, advanced anaesthesia. Procedure takes 30-90 mins.</p>
                 </div>
                 <div class="process-step">
                     <div class="process-num">5</div>
-                    <h4>Recovery &amp; Follow-up</h4>
-                    <p>Structured physio, home care support, regular check-ins until full recovery.</p>
+                    <h4>Recovery &amp; Home</h4>
+                    <p>Minimal hospital stay with faster return to normal life</p>
                 </div>
             </div>
         </div>
@@ -2237,38 +2165,37 @@
             <div class="testimonial-cards">
                 <div class="testimonial-card">
                     <div class="testimonial-stars">★★★★★</div>
-                    <p class="testimonial-text">Had a major fracture treated by Dr Karan Gowda. It was a complicated
-                        4-hour
-                        surgery. He understood the issue, didn't compromise on quality, and explained the whole recovery
-                        process in
-                        detail. Highly recommended for complex orthopaedic cases.</p>
+                    <p class="testimonial-text">I was admitted under Dr. Devendran for a minor surgery. Everything was
+                        patiently
+                        explained and I got excellent care. The rooms and facility are very well maintained. Dietitians
+                        were very
+                        knowledgeable too.</p>
                     <div class="testimonial-author">
-                        <div class="testimonial-avatar">HB</div>
-                        <div><strong>Himesh Bharat</strong><small>Orthopaedic Surgery · Google Review</small></div>
+                        <div class="testimonial-avatar">SK</div>
+                        <div><strong>Sarath KB</strong><small>General Surgery · Google Review</small></div>
                     </div>
                 </div>
                 <div class="testimonial-card">
                     <div class="testimonial-stars">★★★★★</div>
-                    <p class="testimonial-text">Mom got admitted and kyphoplasty surgery done by Dr Srinivas Reddy.
-                        Immediate
-                        attention from Dr Kushal. Special thanks to the nursing staff for the kindness and empathy. Very
-                        clean
-                        facility and excellent overall service.</p>
+                    <p class="testimonial-text">The nurses were very friendly and helpful. Doctors were able to answer
+                        our queries
+                        and did not mind us asking lots of questions. Dr Hiranmayi, Dr Janakiram, Dr Ankita were all
+                        excellent.</p>
                     <div class="testimonial-author">
-                        <div class="testimonial-avatar">AS</div>
-                        <div><strong>Ashwini Seshadhiri</strong><small>Spine Surgery · Google Review</small></div>
+                        <div class="testimonial-avatar">MG</div>
+                        <div><strong>Mikki Gurung</strong><small>Surgery · Google Review</small></div>
                     </div>
                 </div>
                 <div class="testimonial-card">
                     <div class="testimonial-stars">★★★★★</div>
-                    <p class="testimonial-text">Dear Dr. Karan, your expertise and attention to detail gave me great
-                        confidence. I
-                        deeply appreciate the care and support I received. The nursing staff, cleaning staff — everyone
-                        maintained a
-                        clean and hygienic environment.</p>
+                    <p class="testimonial-text">My husband recently had surgery. The doctor handled the procedure with
+                        utmost care
+                        and professionalism. The hospital was well-maintained, and the staff were all very friendly and
+                        helpful
+                        throughout.</p>
                     <div class="testimonial-author">
-                        <div class="testimonial-avatar">SN</div>
-                        <div><strong>Sivananda</strong><small>Leg Surgery · Google Review</small></div>
+                        <div class="testimonial-avatar">NJ</div>
+                        <div><strong>Nisha J</strong><small>Surgery · Google Review</small></div>
                     </div>
                 </div>
             </div>
@@ -2287,10 +2214,8 @@
     <!-- 9. MID-PAGE CTA -->
     <section class="mid-cta">
         <div class="container">
-            <h2>Still Thinking? Let's Talk.</h2>
-            <p>Consultation with our orthopaedic specialist can give you the clarity you need. No pressure, no
-                obligation.
-            </p>
+            <h2>Worried About Surgery? Let's Talk First.</h2>
+            <p>Consultation with our surgeon can answer all your questions. No commitment, no pressure.</p>
             <div class="mid-cta-buttons">
                 <a href="#book-consultation" class="btn-accent"><svg width="18" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2">
@@ -2299,7 +2224,7 @@
                         <line x1="8" y1="2" x2="8" y2="6" />
                         <line x1="3" y1="10" x2="21" y2="10" />
                     </svg> Book Free Consultation</a>
-                <a href="tel:+917259344848" class="btn-outline-white"><svg width="18" height="18" viewBox="0 0 24 24"
+                <a href="tel:7259344848" class="btn-outline-white"><svg width="18" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2">
                         <path
                             d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" />
@@ -2307,89 +2232,6 @@
             </div>
         </div>
     </section>
-
-
-    <!-- 11. BEAT YOUR QUOTE -->
-    <section class="quote-section" id="compare-quote">
-        <div class="container">
-            <div class="quote-grid">
-                <div>
-                    <p class="section-label">Price Match Promise</p>
-                    <h2 class="section-title">Got a Hip Replacement Quote?<br>We'll Beat It.</h2>
-                    <p class="section-desc">Better surgeons. Better care. Cashless insurance. A price that respects your
-                        budget.
-                    </p>
-                    <ul class="quote-points">
-                        <li><span class="quote-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2.5">
-                                    <polyline points="20 6 9 17 4 12" />
-                                </svg></span><span><strong>Fellowship-Trained Joint Replacement Surgeons</strong> —
-                                arthroplasty
-                                specialists, not generalists</span></li>
-                        <li><span class="quote-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2.5">
-                                    <polyline points="20 6 9 17 4 12" />
-                                </svg></span><span><strong>All-Inclusive Transparent Pricing</strong> — no hidden
-                                charges, no surprises
-                                at discharge</span></li>
-                        <li><span class="quote-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2.5">
-                                    <polyline points="20 6 9 17 4 12" />
-                                </svg></span><span><strong>Cashless Insurance Accepted</strong> — empanelled with major
-                                TPA and
-                                insurance providers</span></li>
-                        <li><span class="quote-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2.5">
-                                    <polyline points="20 6 9 17 4 12" />
-                                </svg></span><span><strong>Free Second Opinion</strong> — bring your scans, get an
-                                honest expert
-                                assessment</span></li>
-
-                    </ul>
-                </div>
-                <div class="quote-form-card">
-                    <h3>Compare Your Quote Now</h3>
-                    <p class="form-sub">Share your existing quote — we'll respond within 2 hours.</p>
-                    <form method="POST" action="/submit-lead-2">
-
-                        <div class="form-group">
-                            <label>Your Name</label>
-                            <input type="text" name="patientName" placeholder="Enter your name" required
-                                pattern="[A-Za-z\s]+" title="Name should contain only letters and spaces">
-                        </div>
-
-                        <div class="form-group">
-                            <label>Phone Number</label>
-                            <input type="text" name="contactNumber" placeholder="Enter your phone number" required
-                                inputmode="numeric" pattern="[6-9][0-9]{9}" maxlength="10"
-                                onkeypress="return event.charCode >= 48 && event.charCode <= 57"
-                                title="Enter a valid 10-digit mobile number">
-                        </div>
-
-                        <div class="form-group">
-                            <label>Hospital You Got Quoted From</label>
-                            <input type="text" name="hospital" placeholder="e.g. Fortis, Manipal, Apollo...">
-                        </div>
-
-                        <div class="form-group">
-                            <label>Quoted Amount (₹)</label>
-                            <input type="text" name="quotedAmount" placeholder="e.g. ₹3,50,000">
-                        </div>
-
-                        <input type="hidden" name="source" value="instagram">
-
-                        <button type="submit" class="form-submit">Get Our Best Price →</button>
-                        <p class="form-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                width="12" height="12">
-                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-                                <path d="M7 11V7a5 5 0 0110 0v4" />
-                            </svg> 100% confidential. We never share your details.</p>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-
 
     <section class="ins-wrap">
         <div class="blob1"></div>
@@ -2490,7 +2332,6 @@
                     </div>
                     <!-- <div class="ins-name">Care Health</div> -->
                 </div>
-
                 <!-- Care Health (formerly Religare) -->
 
                 <!-- More card -->
@@ -2504,98 +2345,110 @@
         </div>
     </section>
 
-    <!-- 12. FAQ -->
+    <!-- 11. FAQ -->
     <section class="faq-section" id="faq">
         <div class="container">
             <p class="section-label text-center">Common Questions</p>
-            <h2 class="section-title text-center">Hip Replacement FAQs</h2>
+            <h2 class="section-title text-center">Laparoscopy Surgery FAQs</h2>
             <div class="faq-list">
-
-                <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)">Is hip replacement surgery
-                        painful?<span class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)">Is Laparoscopy surgery
+                        safe?<span class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="2">
                                 <line x1="12" y1="5" x2="12" y2="19" />
                                 <line x1="5" y1="12" x2="19" y2="12" />
                             </svg></span></button>
                     <div class="faq-answer">
-                        <div class="faq-answer-inner">We use advanced pain management including spinal/epidural
-                            anaesthesia and
-                            nerve blocks. Most patients report the surgical pain is significantly less than the chronic
-                            hip pain they
-                            endured before surgery. Our anaesthesia team ensures personalized pain protocols.</div>
+                        <div class="faq-answer-inner">Yes. Laparoscopy surgery is the gold standard for many abdominal
+                            procedures
+                            worldwide. At Aarogya Hastha, our experienced surgeons perform these procedures routinely
+                            with excellent
+                            outcomes, advanced equipment, and rigorous safety protocols.</div>
                     </div>
                 </div>
-                <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)">Do you accept health
-                        insurance for
-                        hip replacement?<span class="faq-icon"><svg viewBox="0 0 24 24" fill="none"
+                <!-- <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)">How long is the hospital
+                        stay after
+                        Laparoscopy surgery?<span class="faq-icon"><svg viewBox="0 0 24 24" fill="none"
                                 stroke="currentColor" stroke-width="2">
                                 <line x1="12" y1="5" x2="12" y2="19" />
                                 <line x1="5" y1="12" x2="19" y2="12" />
                             </svg></span></button>
                     <div class="faq-answer">
+                        <div class="faq-answer-inner">Most patients are discharged within 24-48 hours after Laparoscopy
+                            procedures
+                            like cholecystectomy, appendectomy, or hernia repair. Open surgeries may require 3-5 days.
+                            Your surgeon
+                            will advise based on your specific case.</div>
+                    </div>
+                </div> -->
+                <!-- <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)">When can I return to work
+                        after
+                        surgery?<span class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <line x1="12" y1="5" x2="12" y2="19" />
+                                <line x1="5" y1="12" x2="19" y2="12" />
+                            </svg></span></button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">For Laparoscopy procedures, most patients return to desk work
+                            within 5-7 days
+                            and resume normal physical activity within 2-3 weeks. Open surgery recovery takes longer —
+                            typically 4-6
+                            weeks.</div>
+                    </div>
+                </div> -->
+                <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)">Do you accept health
+                        insurance?<span class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <line x1="12" y1="5" x2="12" y2="19" />
+                                <line x1="5" y1="12" x2="19" y2="12" />
+                            </svg></span></button>
+                    <div class="faq-answer">
                         <div class="faq-answer-inner">Yes. Aarogya Hastha is empanelled with major health insurance
-                            providers and
-                            TPAs. We offer cashless admission and handle all paperwork from pre-authorization to claim
-                            settlement.
-                            Most hip replacement procedures are covered.</div>
+                            providers. We
+                            offer cashless admission and our team handles all paperwork — pre-authorization to claim
+                            settlement.</div>
                     </div>
                 </div>
-                <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)">What age is ideal for hip
-                        replacement?<span class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)">What is the cost of
+                        Laparoscopy
+                        surgery?<span class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="2">
                                 <line x1="12" y1="5" x2="12" y2="19" />
                                 <line x1="5" y1="12" x2="19" y2="12" />
                             </svg></span></button>
                     <div class="faq-answer">
-                        <div class="faq-answer-inner">There's no strict age limit — patients from 40 to 90+ undergo hip
-                            replacement.
-                            The decision depends on pain severity, mobility limitation, and overall health. With modern
-                            implants
-                            lasting 20-25 years, the surgery is suitable across a wide age range. Nearly 40% of hip
-                            replacements are
-                            now performed on patients under 60.</div>
+                        <div class="faq-answer-inner">Our packages are all-inclusive — covering surgeon fees,
+                            anaesthesia, hospital
+                            stay, medicines, and follow-up. The exact cost depends on the procedure. Contact us for a
+                            detailed quote
+                            with no hidden charges.</div>
                     </div>
                 </div>
-                <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)">What conditions require hip
-                        replacement?<span class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2">
+                <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)">Do you handle emergency
+                        appendix or
+                        gallbladder cases?<span class="faq-icon"><svg viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2">
                                 <line x1="12" y1="5" x2="12" y2="19" />
                                 <line x1="5" y1="12" x2="19" y2="12" />
                             </svg></span></button>
                     <div class="faq-answer">
-                        <div class="faq-answer-inner">The most common conditions include osteoarthritis, rheumatoid
-                            arthritis,
-                            avascular necrosis (AVN), hip fractures (especially in elderly patients), ankylosing
-                            spondylitis, and
-                            post-traumatic arthritis. Our surgeons assess each case individually during consultation.
-                        </div>
-                    </div>
-                </div>
-                <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)">Can I get a free second
-                        opinion?<span class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2">
-                                <line x1="12" y1="5" x2="12" y2="19" />
-                                <line x1="5" y1="12" x2="19" y2="12" />
-                            </svg></span></button>
-                    <div class="faq-answer">
-                        <div class="faq-answer-inner">Absolutely. Bring your X-rays, MRI scans, and reports. Our
-                            orthopaedic
-                            specialists will review them and give you an honest, independent assessment — no obligation,
-                            no pressure.
-                            We recommend surgery only when truly necessary.</div>
+                        <div class="faq-answer-inner">Yes. Our 24/7 emergency and trauma unit is fully equipped for
+                            urgent surgical
+                            cases including acute appendicitis and gallbladder emergencies. On-call surgeons, ICU
+                            facilities, and
+                            ambulance services ensure rapid response.</div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 13. FINAL CTA -->
+    <!-- 12. FINAL CTA -->
     <section class="final-cta">
         <div class="container">
-            <h2>Ready to Move Freely Again?</h2>
-            <p>Take the first step. Book a free consultation with our orthopaedic specialist today. Your hips — and your
-                life
-                — deserve it.</p>
+            <h2>Ready for a Faster, Safer Surgery?</h2>
+            <p>Take the first step. Book a free consultation with our surgeon today. Smaller cuts. Faster recovery.
+                Better
+                care.</p>
             <div class="final-cta-buttons">
                 <a href="#book-consultation" class="btn-accent"><svg width="18" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2">
@@ -2609,7 +2462,7 @@
                         <path
                             d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" />
                     </svg> Call 7259344848</a>
-                <a href="https://wa.me/917259344848?text=Hi%2C%20I%27m%20interested%20in%20hip%20replacement%20surgery."
+                <a href="https://wa.me/917259344848?text=Hi%2C%20I%27m%20interested%20in%20Laparoscopy%20surgery."
                     class="btn-whatsapp" target="_blank"><svg width="18" height="18" viewBox="0 0 24 24"
                         fill="currentColor">
                         <path
@@ -2620,8 +2473,7 @@
                 <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M22 11.08V12a10 10 0 11-5.93-9.14" />
                         <polyline points="22 4 12 14.01 9 11.01" />
-                    </svg>
-                    1800+ Surgeries</span>
+                    </svg> 1800+ Surgeries</span>
                 <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path
                             d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
@@ -2641,22 +2493,23 @@
     <footer class="lp-footer">
         <div class="container">
             <div class="footer-links"><a href="https://aarogyahastha.com/">Home</a><a
-                    href="https://aarogyahastha.com/departments/orthopaedics">Orthopaedics</a><a
-                    href="https://aarogyahastha.com/doctors">Doctors</a><a href="https://aarogyahastha.com/about">About
-                    Us</a><a href="https://aarogyahastha.com/contact">Contact</a><a
-                    href="https://aarogyahastha.com/privacy-policy">Privacy
-                    Policy</a></div>
+                    href="https://aarogyahastha.com/departments/general-surgery">General Surgery</a><a
+                    href="https://aarogyahastha.com/departments/minimal-access-surgery">Laparoscopy Surgery</a><a
+                    href="https://aarogyahastha.com/doctors">Doctors</a><a
+                    href="https://aarogyahastha.com/contact">Contact</a><a
+                    href="https://aarogyahastha.com/privacy-policy">Privacy Policy</a></div>
             <p>Aarogya Hastha Hospitals Pvt Ltd · Site No. 2, Kasavanahalli Main Road, Bengaluru 560035</p>
             <p style="margin-top:6px">© 2026 Aarogya Hastha Hospitals. All rights reserved.</p>
         </div>
     </footer>
 
-    <!-- FLOATING WA -->
-    <a href="https://wa.me/917259344848?text=Hi%2C%20I%27m%20interested%20in%20hip%20replacement%20surgery."
+    <!-- FLOATING WHATSAPP -->
+    <a href="https://wa.me/917259344848?text=Hi%2C%20I%27m%20interested%20in%20Laparoscopy%20surgery."
         class="floating-wa" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor">
             <path
                 d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
         </svg></a>
+
 
     <div class="hero-ctas bottom_fix">
         <a href="#book-consultation" class="btn-primary">Book Free Consultation</a>
@@ -2665,9 +2518,8 @@
     <script>
         function toggleFaq(btn) { const a = btn.nextElementSibling, o = btn.classList.contains('active'); document.querySelectorAll('.faq-question').forEach(q => { q.classList.remove('active'); q.nextElementSibling.style.maxHeight = '0' }); if (!o) { btn.classList.add('active'); a.style.maxHeight = a.scrollHeight + 'px' } }
         document.querySelectorAll('a[href^="#"]').forEach(a => { a.addEventListener('click', function (e) { e.preventDefault(); const t = document.querySelector(this.getAttribute('href')); if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' }) }) });
-        function toggleCheck(li) { li.classList.toggle('checked'); const count = document.querySelectorAll('#checkerList li.checked').length; document.getElementById('scoreNum').textContent = count; const r = document.getElementById('checkerResult'), t = document.getElementById('resultTitle'), p = document.getElementById('resultText'); if (count >= 4) { r.classList.add('show'); t.textContent = '⚠️ Strong indicators — a consultation is recommended'; p.textContent = 'You\'ve checked ' + count + ' of 7 symptoms. This pattern commonly points to advanced hip joint degeneration. A specialist consultation can confirm whether hip replacement is the right next step.'; } else if (count >= 2) { r.classList.add('show'); t.textContent = '📋 Worth exploring — talk to a specialist'; p.textContent = 'You\'ve checked ' + count + ' of 7 symptoms. A free consultation can help you understand your options.'; } else { r.classList.remove('show'); } }
         const observer = new IntersectionObserver(e => { e.forEach(el => { if (el.isIntersecting) { el.target.style.opacity = '1'; el.target.style.transform = 'translateY(0)' } }) }, { threshold: .1 });
-        document.querySelectorAll('.pain-card,.package-card,.doctor-card,.testimonial-card,.process-step').forEach(el => { el.style.opacity = '0'; el.style.transform = 'translateY(20px)'; el.style.transition = 'opacity .5s ease,transform .5s ease'; observer.observe(el) });
+        document.querySelectorAll('.proc-card,.package-card,.doctor-card,.testimonial-card,.process-step,.why-card-visual').forEach(el => { el.style.opacity = '0'; el.style.transform = 'translateY(20px)'; el.style.transition = 'opacity .5s ease,transform .5s ease'; observer.observe(el) });
     </script>
 </body>
 
