@@ -478,7 +478,8 @@
             margin-bottom: 5px;
             display: block;
             text-transform: uppercase;
-            letter-spacing: .5px
+            letter-spacing: .5px;
+            text-align: left
         }
 
         .form-group input,
@@ -1824,6 +1825,60 @@
             display: none;
         }
 
+        /* Overlay */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+        }
+
+        /* Popup Box */
+        .popup-overlay .popup {
+            background: #fff;
+            width: 90%;
+            max-width: 500px;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            animation: fadeIn 0.3s ease;
+            position: relative;
+        }
+
+        .popup-overlay .popup p {
+            font-size: 15px;
+            margin-bottom: 10px;
+        }
+
+        /* Close Button */
+        .popup-overlay .close-btn {
+            float: right;
+            font-size: 30px;
+            cursor: pointer;
+            position: absolute;
+            top: -2%;
+            right: 3%;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+
 
         /* ═══ RESPONSIVE ═══ */
         @media(max-width:1024px) {
@@ -1861,11 +1916,6 @@
         @media(max-width:768px) {
             .hero h1 {
                 font-size: 2.2rem
-            }
-
-            .hero-stats {
-                flex-direction: column;
-                gap: 10px
             }
 
             .section-title {
@@ -1956,10 +2006,45 @@
             }
         }
 
-        @media(max-width:500px) {
+        @media(max-width:600px) {
+
+
             .why-grid {
                 grid-template-columns: 1fr;
             }
+
+            .popup-overlay .close-btn {
+                top: -1%;
+            }
+
+            .popup-overlay .popup h2 {
+                font-size: 22px;
+            }
+
+            .popup-overlay .popup p {
+                margin: 10px 0;
+                font-size: 12px;
+            }
+
+            .popup {
+                width: 95%;
+                padding: 15px;
+            }
+
+            .form-group input,
+            .form-group select {
+                font-size: 14px;
+            }
+
+        }
+
+        @media(max-width:450px) {
+
+            .hero-stats {
+                flex-direction: column
+            }
+
+
         }
     </style>
 
@@ -2095,7 +2180,7 @@
                 <div class="form-urgency">🔥 Limited Slots — Only 8 Surgery Slots Left This Month</div>
                 <h3>Book Your Free Consultation</h3>
                 <p class="form-sub">Our SPOC will call you within 20 minutes.</p>
-                <form id="book-consultation" method="POST" action="/submit-lead-1">
+                <form id="book-consultation" class="leadForm" method="POST" action="/submit-lead-1">
 
                     <div class="form-group">
                         <label>Full Name</label>
@@ -2123,7 +2208,7 @@
 
                     <input type="hidden" name="source" value="Facebook">
 
-                    <button type="submit" class="form-submit">Get Free Consultation →</button>
+                    <button type="submit" class="form-submit submitBtn">Get Free Consultation →</button>
                     <p class="form-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
                             <path d="M7 11V7a5 5 0 0110 0v4" />
@@ -2179,7 +2264,7 @@
                 <div class="package-card">
                     <div class="package-header">
                         <h4>Total Knee Replacement (Unilateral)</h4>
-                        <div class="package-price"><span class="strike"></span>₹1,25,000*<br><small><b>Inclusive:</b>
+                        <div class="package-price"><span class="strike"></span>₹X,XX,XXX*<br><small><b>Inclusive:</b>
                                 Surgery Charges + Bed Charges + Pre Op Investigations</small></div>
                     </div>
                     <div class="package-body">
@@ -2212,7 +2297,7 @@
                     <!-- <span class="package-tag">Most Popular</span> -->
                     <div class="package-header">
                         <h4>Total Knee Replacement (Bilateral)</h4>
-                        <div class="package-price"><span class="strike"></span>₹1,75,000*<br><small><b>Inclusive:</b>
+                        <div class="package-price"><span class="strike"></span>₹X,XX,XXX*<br><small><b>Inclusive:</b>
                                 Surgery Charges + Bed Charges + Pre Op Investigations</small></div>
                     </div>
                     <div class="package-body">
@@ -2244,7 +2329,7 @@
                 <div class="package-card">
                     <div class="package-header">
                         <h4>ACL Reconstruction</h4>
-                        <div class="package-price">₹85,000*<br><small><b>Inclusive:</b> Surgery Charges + Bed Charges +
+                        <div class="package-price">₹XX,XXX*<br><small><b>Inclusive:</b> Surgery Charges + Bed Charges +
                                 Pre Op Investigations</small>
                         </div>
                     </div>
@@ -2278,7 +2363,7 @@
                 <div class="package-card">
                     <div class="package-header">
                         <h4>Meniscus Repair</h4>
-                        <div class="package-price">₹1,00,000*<br><small><b>Inclusive:</b> Surgery Charges + Bed Charges
+                        <div class="package-price">₹X,XX,XXX*<br><small><b>Inclusive:</b> Surgery Charges + Bed Charges
                                 + Pre Op Investigations</small>
                         </div>
                     </div>
@@ -2958,6 +3043,49 @@
         <a href="#book-consultation" class="btn-primary">Book Free Consultation</a>
     </div>
 
+    <div class="popup-overlay" id="popup">
+        <div class="popup">
+            <span class="close-btn" onclick="closePopup()">&times;</span>
+            <h2>Book Your Free Consultation</h2>
+            <p>Our SPOC will call you within 20 minutes.</p>
+            <form id="book-consultation" class="leadForm" method="POST" action="/submit-lead-1">
+
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input name="patientName" type="text" placeholder="Enter your name" required pattern="[A-Za-z\s]+"
+                        title="Name should contain only letters and spaces">
+                </div>
+
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input name="contactNumber" type="tel" placeholder="Enter your phone number" required
+                        onkeypress="return event.charCode >= 48 && event.charCode <= 57" pattern="[6-9]{1}[0-9]{9}"
+                        maxlength="10" title="Enter a valid 10-digit mobile number">
+                </div>
+
+                <div class="form-group">
+                    <label>Which knee needs attention?</label>
+                    <select name="description" required>
+                        <option value="">Select...</option>
+                        <option value="Left Knee">Left Knee</option>
+                        <option value="Right Knee">Right Knee</option>
+                        <option value="Both Knees">Both Knees</option>
+                        <option value="Not Sure — Need Consultation">Not Sure — Need Consultation</option>
+                    </select>
+                </div>
+
+                <input type="hidden" name="source" value="Facebook">
+
+                <button type="submit" class="form-submit submitBtn">Get Free Consultation →</button>
+                <p class="form-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                        <path d="M7 11V7a5 5 0 0110 0v4" />
+                    </svg> Your details are safe. No spam, we promise.</p>
+            </form>
+
+        </div>
+    </div>
+
 
     <script>
         // FAQ Accordion
@@ -2990,6 +3118,50 @@
         // Scroll animation
         const observer = new IntersectionObserver(e => { e.forEach(el => { if (el.isIntersecting) { el.target.style.opacity = '1'; el.target.style.transform = 'translateY(0)' } }) }, { threshold: .1 });
         document.querySelectorAll('.pain-card,.package-card,.doctor-card,.testimonial-card,.process-step').forEach(el => { el.style.opacity = '0'; el.style.transform = 'translateY(20px)'; el.style.transition = 'opacity .5s ease,transform .5s ease'; observer.observe(el) });
+    </script>
+
+    <script>
+        function openPopup() {
+            document.getElementById("popup").style.display = "flex";
+        }
+
+        function closePopup() {
+            document.getElementById("popup").style.display = "none";
+        }
+
+        // Close on outside click
+        window.onclick = function (e) {
+            let popup = document.getElementById("popup");
+            if (e.target === popup) {
+                closePopup();
+            }
+        }
+
+        window.onload = function () {
+            setTimeout(function () {
+                openPopup();
+            }, 3000); // 3000ms = 3 seconds
+        };
+    </script>
+    <script>
+        document.querySelectorAll(".leadForm").forEach(form => {
+
+            const btn = form.querySelector(".submitBtn");
+
+            form.addEventListener("submit", function () {
+
+                if (!form.checkValidity()) return;
+
+                btn.disabled = true;
+                btn.innerText = "Submitting...";
+
+                setTimeout(function () {
+                    btn.disabled = false;
+                    btn.innerText = "Get Free Consultation →";
+                }, 8000);
+            });
+
+        });
     </script>
 </body>
 
