@@ -464,7 +464,8 @@
             margin-bottom: 5px;
             display: block;
             text-transform: uppercase;
-            letter-spacing: .5px
+            letter-spacing: .5px;
+            text-align: left;
         }
 
         .form-group input,
@@ -1367,10 +1368,62 @@
             display: none;
         }
 
-        @media(max-width:1024px) {
-            .hero .container {
-                grid-template-columns: 1fr
+        /* Overlay */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+        }
+
+        /* Popup Box */
+        .popup-overlay .popup {
+            background: #fff;
+            width: 90%;
+            max-width: 500px;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            animation: fadeIn 0.3s ease;
+            position: relative;
+        }
+
+        .popup-overlay .popup p {
+            font-size: 15px;
+            margin-bottom: 10px;
+        }
+
+        /* Close Button */
+        .popup-overlay .close-btn {
+            float: right;
+            font-size: 30px;
+            cursor: pointer;
+            position: absolute;
+            top: -2%;
+            right: 3%;
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
             }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @media(max-width:1024px) {
+
 
             .hero-form-card {
                 max-width: 480px
@@ -1390,6 +1443,12 @@
             }
         }
 
+        @media(max-width:990px) {
+            .hero .container {
+                grid-template-columns: 1fr
+            }
+        }
+
         @media(max-width:768px) {
             .hero-form-card {
                 max-width: 100%;
@@ -1405,10 +1464,6 @@
                 font-size: 2rem
             }
 
-            .hero-highlights {
-                flex-direction: column;
-                gap: 8px
-            }
 
             .section-title {
                 font-size: 1.65rem
@@ -1474,6 +1529,49 @@
                 padding: 14px 0;
                 font-size: 16px;
                 border-radius: 0;
+            }
+        }
+
+        @media(max-width:600px) {
+
+
+            .why-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .popup-overlay .close-btn {
+                top: -1%;
+            }
+
+            .popup-overlay .popup h2 {
+                font-size: 22px;
+            }
+
+            .popup-overlay .popup p {
+                margin: 10px 0;
+                font-size: 12px;
+            }
+
+            .popup {
+                width: 95%;
+                padding: 15px;
+            }
+
+            .form-group input,
+            .form-group select {
+                font-size: 14px;
+            }
+
+        }
+
+        @media(max-width:400px) {
+
+            .hero-highlights {
+                flex-direction: column
+            }
+
+            .form-submit {
+                font-size: 13px;
             }
         }
     </style>
@@ -1571,7 +1669,7 @@
                 <div class="form-promo">🌸 Special Maternity Package — Limited Period Offer</div>
                 <h3>Book Your Maternity Consultation</h3>
                 <p class="form-sub">Our SPOC will call you within 20 minutes.</p>
-                <form id="book-consultation" method="POST" action="/submit-lead-1">
+                <form id="book-consultation" class="leadForm" method="POST" action="/submit-lead-1">
 
                     <div class="form-group">
                         <label>Your Name</label>
@@ -1601,7 +1699,7 @@
 
                     <input type="hidden" name="source" value="instagram">
 
-                    <button type="submit" class="form-submit">Get Maternity Package Details →</button>
+                    <button type="submit" class="form-submit submitBtn">Get Maternity Package Details →</button>
 
                     <p class="form-note">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1643,7 +1741,7 @@
                         <div class="pkg-icon"><img src="static/img/landingpageimage/normal-deliver.png" alt=""></div>
                         <h4>Normal Delivery</h4>
                         <!-- <p class="pkg-desc">Natural birth with expert OBG care</p> -->
-                        <div class="pkg-price">₹54,000*<br><small><b>Inclusive: </b>(Including well baby care)+
+                        <div class="pkg-price">₹XX,XXX*<br><small><b>Inclusive: </b>(Including well baby care)+
                                 Medicines</small> <br><small><strong>Exclusive:</strong> Pre op investigations and blood
                                 components</small></div>
                     </div>
@@ -1666,7 +1764,7 @@
                         </div>
                         <h4>LSCS (Caesarean Section)</h4>
                         <!-- <p class="pkg-desc">Planned or emergency C-section</p> -->
-                        <div class="pkg-price">₹80,000*<br><small><b>Inclusive: </b>(Including well baby care)+
+                        <div class="pkg-price">₹XX,XXX*<br><small><b>Inclusive: </b>(Including well baby care)+
                                 Medicines</small> <br><small><strong>Exclusive:</strong> Pre op investigations and blood
                                 components</small></div>
                     </div>
@@ -2125,11 +2223,104 @@
         <a href="#book" class="btn-primary">Book Maternity Consultation</a>
     </div>
 
+    <div class="popup-overlay" id="popup">
+        <div class="popup">
+            <span class="close-btn" onclick="closePopup()">&times;</span>
+            <h2>Book Your Maternity Consultation</h2>
+            <p>Our SPOC will call you within 20 minutes.</p>
+            <form id="book-consultation" class="leadForm" method="POST" action="/submit-lead-1">
+
+                <div class="form-group">
+                    <label>Your Name</label>
+                    <input name="patientName" type="text" placeholder="Enter your name" required pattern="[A-Za-z\s]+"
+                        title="Name should contain only letters and spaces">
+                </div>
+
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input name="contactNumber" type="tel" placeholder="Enter your phone number" required
+                        onkeypress="return event.charCode >= 48 && event.charCode <= 57" pattern="[6-9]{1}[0-9]{9}"
+                        maxlength="10" title="Enter a valid 10-digit mobile number">
+                </div>
+
+                <div class="form-group">
+                    <label>How far along are you?</label>
+                    <select name="description" required>
+                        <option value="">Select...</option>
+                        <option value="Planning for Baby">Planning for Baby</option>
+                        <option value="1st Trimester (1-12 weeks)">1st Trimester (1-12 weeks)</option>
+                        <option value="2nd Trimester (13-26 weeks)">2nd Trimester (13-26 weeks)</option>
+                        <option value="3rd Trimester (27-40 weeks)">3rd Trimester (27-40 weeks)</option>
+                        <option value="Gynaecology support">Gynaecology support</option>
+                        <option value="Not Sure — Need Guidance">Not Sure — Need Guidance</option>
+                    </select>
+                </div>
+
+                <input type="hidden" name="source" value="instagram">
+
+                <button type="submit" class="form-submit submitBtn">Get Maternity Package Details →</button>
+
+                <p class="form-note">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                        <path d="M7 11V7a5 5 0 0110 0v4" />
+                    </svg>
+                    Your details are 100% confidential.
+                </p>
+
+            </form>
+        </div>
+    </div>
+
+
     <script>
         function toggleFaq(btn) { const a = btn.nextElementSibling, o = btn.classList.contains('active'); document.querySelectorAll('.faq-question').forEach(q => { q.classList.remove('active'); q.nextElementSibling.style.maxHeight = '0' }); if (!o) { btn.classList.add('active'); a.style.maxHeight = a.scrollHeight + 'px' } }
         document.querySelectorAll('a[href^="#"]').forEach(a => { a.addEventListener('click', function (e) { e.preventDefault(); const t = document.querySelector(this.getAttribute('href')); if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' }) }) });
         const obs = new IntersectionObserver(e => { e.forEach(el => { if (el.isIntersecting) { el.target.style.opacity = '1'; el.target.style.transform = 'translateY(0)' } }) }, { threshold: .1 });
         document.querySelectorAll('.pkg-card,.doctor-card,.testimonial-card,.journey-card,.why-card').forEach(el => { el.style.opacity = '0'; el.style.transform = 'translateY(20px)'; el.style.transition = 'opacity .5s ease,transform .5s ease'; obs.observe(el) });
+    </script>
+    <script>
+        function openPopup() {
+            document.getElementById("popup").style.display = "flex";
+        }
+
+        function closePopup() {
+            document.getElementById("popup").style.display = "none";
+        }
+
+        // Close on outside click
+        window.onclick = function (e) {
+            let popup = document.getElementById("popup");
+            if (e.target === popup) {
+                closePopup();
+            }
+        }
+
+        window.onload = function () {
+            setTimeout(function () {
+                openPopup();
+            }, 3000); // 3000ms = 3 seconds
+        };
+    </script>
+    <script>
+        document.querySelectorAll(".leadForm").forEach(form => {
+
+            const btn = form.querySelector(".submitBtn");
+
+            form.addEventListener("submit", function () {
+
+                if (!form.checkValidity()) return;
+
+                btn.disabled = true;
+                btn.innerText = "Submitting...";
+
+                setTimeout(function () {
+                    btn.disabled = false;
+                    btn.innerText = "Get Free Consultation →";
+                }, 8000);
+            });
+
+        });
     </script>
 </body>
 

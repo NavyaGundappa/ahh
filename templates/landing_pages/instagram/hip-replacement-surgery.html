@@ -466,7 +466,8 @@
             margin-bottom: 5px;
             display: block;
             text-transform: uppercase;
-            letter-spacing: .5px
+            letter-spacing: .5px;
+            text-align: left
         }
 
         .form-group input,
@@ -1683,10 +1684,63 @@
             display: none;
         }
 
+        /* Overlay */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+        }
+
+        /* Popup Box */
+        .popup-overlay .popup {
+            background: #fff;
+            width: 90%;
+            max-width: 500px;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            animation: fadeIn 0.3s ease;
+            position: relative;
+        }
+
+        .popup-overlay .popup p {
+            font-size: 15px;
+            margin-bottom: 10px;
+        }
+
+        /* Close Button */
+        .popup-overlay .close-btn {
+            float: right;
+            font-size: 30px;
+            cursor: pointer;
+            position: absolute;
+            top: -2%;
+            right: 3%;
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
 
         @media(max-width:1024px) {
 
-            .hero .container,
             .quote-grid,
             .checker-grid {
                 grid-template-columns: 1fr
@@ -1697,7 +1751,7 @@
             }
 
             .package-grid {
-                grid-template-columns: 1fr 1fr
+                grid-template-columns: repeat(3, 1fr);
             }
 
             .doctor-cards {
@@ -1713,7 +1767,23 @@
             }
         }
 
+        @media(max-width:990px) {
+
+            .hero .container {
+                grid-template-columns: 1fr
+            }
+
+            .package-grid>div:only-child {
+                grid-column: 1;
+            }
+
+            .package-grid {
+                grid-template-columns: repeat(1, 1fr);
+            }
+        }
+
         @media(max-width:768px) {
+
             .top-bar-actions {
                 flex-direction: column;
                 text-align: center;
@@ -1725,7 +1795,6 @@
             }
 
             .hero-stats {
-                flex-direction: column;
                 gap: 10px
             }
 
@@ -1797,11 +1866,54 @@
                 font-size: 16px;
                 border-radius: 0;
             }
+
+
+            .form-group label {
+                font-size: 10px;
+            }
+
+            .hero-form-card h3,
+            .form-sub {
+                text-align: center;
+            }
         }
 
-        @media(max-width:500px) {
+        @media(max-width:600px) {
+
+
             .why-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .popup-overlay .close-btn {
+                top: -1%;
+            }
+
+            .popup-overlay .popup h2 {
+                font-size: 22px;
+            }
+
+            .popup-overlay .popup p {
+                margin: 10px 0;
+                font-size: 12px;
+            }
+
+            .popup {
+                width: 95%;
+                padding: 15px;
+            }
+
+            .form-group input,
+            .form-group select {
+                font-size: 14px;
+            }
+
+        }
+
+        @media(max-width:400px) {
+
+            .hero-stats {
+                flex-direction: column
             }
         }
     </style>
@@ -1931,7 +2043,7 @@
                 <div class="form-urgency">🔥 Limited Slots — Only 6 Surgery Slots Left This Month</div>
                 <h3>Book Your Free Hip Consultation</h3>
                 <p class="form-sub">Our SPOC will call you within 20 minutes.</p>
-                <form method="POST" action="/submit-lead-1">
+                <form method="POST" class="leadForm" action="/submit-lead-1">
 
                     <div class="form-group">
                         <label>Full Name</label>
@@ -1960,7 +2072,7 @@
 
                     <input type="hidden" name="source" value="instagram">
 
-                    <button type="submit" class="form-submit">Get Free Consultation →</button>
+                    <button type="submit" class="form-submit submitBtn">Get Free Consultation →</button>
                     <p class="form-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
                             <path d="M7 11V7a5 5 0 0110 0v4" />
@@ -2021,7 +2133,7 @@
                     <span class="package-tag">Most Popular</span>
                     <div class="package-header">
                         <h4>Total Hip Replacement</h4>
-                        <div class="package-price">1,50,000 *<br><small><b>Inclusive:</b> Surgery Charges + Bed Charges
+                        <div class="package-price">₹X,XX,XXX *<br><small><b>Inclusive:</b> Surgery Charges + Bed Charges
                                 + Pre Op Investigations </small></div>
                     </div>
                     <div class="package-body">
@@ -2662,12 +2774,101 @@
         <a href="#book-consultation" class="btn-primary">Book Free Consultation</a>
     </div>
 
+    <div class="popup-overlay" id="popup">
+        <div class="popup">
+            <span class="close-btn" onclick="closePopup()">&times;</span>
+            <h2>Book Your Free Consultation</h2>
+            <p>Our SPOC will call you within 20 minutes.</p>
+            <form method="POST" class="leadForm" action="/submit-lead-1">
+
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" name="patientName" placeholder="Enter your name" required pattern="[A-Za-z\s]+"
+                        title="Name should contain only letters and spaces">
+                </div>
+
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="text" name="contactNumber" placeholder="Enter your phone number" required
+                        inputmode="numeric" pattern="[6-9][0-9]{9}" maxlength="10"
+                        onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+                        title="Enter a valid 10-digit mobile number">
+                </div>
+
+                <div class="form-group">
+                    <label>Which hip needs attention?</label>
+                    <select name="description" required>
+                        <option value="">Select...</option>
+                        <option value="Left Hip">Left Hip</option>
+                        <option value="Right Hip">Right Hip</option>
+                        <option value="Both Hips">Both Hips</option>
+                        <option value="Not Sure — Need Consultation">Not Sure — Need Consultation</option>
+                    </select>
+                </div>
+
+                <input type="hidden" name="source" value="instagram">
+
+                <button type="submit" class="form-submit submitBtn">Get Free Consultation →</button>
+                <p class="form-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                        <path d="M7 11V7a5 5 0 0110 0v4" />
+                    </svg> Your details are safe. No spam, we promise.</p>
+            </form>
+
+        </div>
+    </div>
+
+
     <script>
         function toggleFaq(btn) { const a = btn.nextElementSibling, o = btn.classList.contains('active'); document.querySelectorAll('.faq-question').forEach(q => { q.classList.remove('active'); q.nextElementSibling.style.maxHeight = '0' }); if (!o) { btn.classList.add('active'); a.style.maxHeight = a.scrollHeight + 'px' } }
         document.querySelectorAll('a[href^="#"]').forEach(a => { a.addEventListener('click', function (e) { e.preventDefault(); const t = document.querySelector(this.getAttribute('href')); if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' }) }) });
         function toggleCheck(li) { li.classList.toggle('checked'); const count = document.querySelectorAll('#checkerList li.checked').length; document.getElementById('scoreNum').textContent = count; const r = document.getElementById('checkerResult'), t = document.getElementById('resultTitle'), p = document.getElementById('resultText'); if (count >= 4) { r.classList.add('show'); t.textContent = '⚠️ Strong indicators — a consultation is recommended'; p.textContent = 'You\'ve checked ' + count + ' of 7 symptoms. This pattern commonly points to advanced hip joint degeneration. A specialist consultation can confirm whether hip replacement is the right next step.'; } else if (count >= 2) { r.classList.add('show'); t.textContent = '📋 Worth exploring — talk to a specialist'; p.textContent = 'You\'ve checked ' + count + ' of 7 symptoms. A free consultation can help you understand your options.'; } else { r.classList.remove('show'); } }
         const observer = new IntersectionObserver(e => { e.forEach(el => { if (el.isIntersecting) { el.target.style.opacity = '1'; el.target.style.transform = 'translateY(0)' } }) }, { threshold: .1 });
         document.querySelectorAll('.pain-card,.package-card,.doctor-card,.testimonial-card,.process-step').forEach(el => { el.style.opacity = '0'; el.style.transform = 'translateY(20px)'; el.style.transition = 'opacity .5s ease,transform .5s ease'; observer.observe(el) });
+    </script>
+
+    <script>
+        function openPopup() {
+            document.getElementById("popup").style.display = "flex";
+        }
+
+        function closePopup() {
+            document.getElementById("popup").style.display = "none";
+        }
+
+        // Close on outside click
+        window.onclick = function (e) {
+            let popup = document.getElementById("popup");
+            if (e.target === popup) {
+                closePopup();
+            }
+        }
+
+        window.onload = function () {
+            setTimeout(function () {
+                openPopup();
+            }, 3000); // 3000ms = 3 seconds
+        };
+    </script>
+    <script>
+        document.querySelectorAll(".leadForm").forEach(form => {
+
+            const btn = form.querySelector(".submitBtn");
+
+            form.addEventListener("submit", function () {
+
+                if (!form.checkValidity()) return;
+
+                btn.disabled = true;
+                btn.innerText = "Submitting...";
+
+                setTimeout(function () {
+                    btn.disabled = false;
+                    btn.innerText = "Get Free Consultation →";
+                }, 8000);
+            });
+
+        });
     </script>
 </body>
 
