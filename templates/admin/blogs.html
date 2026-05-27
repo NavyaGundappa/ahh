@@ -875,7 +875,7 @@
             });
 
             // Edit blog
-            $('.edit-blog').click(function () {
+            $(document).on('click', '.edit-blog', function () {
                 const blogId = $(this).data('blog-id');
                 const title = $(this).data('title');
                 const slug = $(this).data('slug');
@@ -929,7 +929,7 @@
                 $('#previewModal').modal('show');
             }
 
-            $('.preview-blog').click(function () {
+            $(document).on('click', '.preview-blog', function () {
                 const title = $(this).data('title');
                 const content = $(this).data('content');
                 showPreview(title, content);
