@@ -955,13 +955,16 @@ section.latest_blog_section.Realated {
   text-align: center;
   padding: 0 10px;
   margin-bottom: 25px;
-  width: 90%;
+  width: 70%;
   margin: auto;
 }
+
+
 
 .meet_our_section .meet_our_div p {
   line-height: 25px;
   font-size: 14px;
+  width: 100%;
 }
 
 section.meet_our_section {
@@ -1069,6 +1072,8 @@ section.step_by_step_section {
   border-radius: 100px;
   border-radius: 100px;
   border: 2px solid #00969C;
+  object-fit: cover;
+  object-position: top;
 }
 
 .meet_our_div .meet_sub h5 {
@@ -1117,7 +1122,7 @@ section.step_by_step_section {
   cursor: pointer;
   justify-content: space-between;
   border-radius: 10px;
-  /* border: 1px solid #00000042; */
+  border: 1px solid #00000042;
 }
 
 .over_lay_div .overlay-container:hover {
@@ -1748,7 +1753,7 @@ section.neighboring_sec {
 }
 
 
-.service-carouselseo.service-carousel-section .item  img.dept-icon {
+.service-carouselseo.service-carousel-section .item img.dept-icon {
   width: 100px;
   height: 100px;
 }
