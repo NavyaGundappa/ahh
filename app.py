@@ -339,6 +339,132 @@ def hospital_in_electronic_city():
         departments=departments
     )
 
+@app.route('/best-laparoscopic-surgeon-in-bangalore')
+def laparoscopic_in_bangalore():
+    doctors = Doctor.query.filter_by(is_active=True).all()
+
+    testimonials = Testimonial.query.filter_by(is_active=True).options(
+        joinedload(Testimonial.doctor)
+    ).order_by(Testimonial.created_at.desc()).all()
+
+    blogs = Blog.query.filter_by(is_active=True)\
+        .order_by(Blog.created_at.desc())\
+        .limit(5)\
+        .all()
+
+    departments = Department.query.filter_by(is_active=True)\
+        .order_by(Department.name)\
+        .all()
+
+    return render_template(
+        'seopages/best-laparoscopic-surgeon-in-bangalore.html',
+        doctors=doctors,
+        testimonials=testimonials,
+        blogs=blogs,
+        departments=departments
+    )
+    
+    
+@app.route('/endocrinologist-in-hsr-layout-bangalore')
+def endocrinologist_in_hsr_layout():
+    doctors = Doctor.query.filter_by(is_active=True).all()
+
+    testimonials = Testimonial.query.filter_by(is_active=True).options(
+        joinedload(Testimonial.doctor)
+    ).order_by(Testimonial.created_at.desc()).all()
+
+    blogs = Blog.query.filter_by(is_active=True)\
+        .order_by(Blog.created_at.desc())\
+        .limit(5)\
+        .all()
+
+    departments = Department.query.filter_by(is_active=True)\
+        .order_by(Department.name)\
+        .all()
+
+    return render_template(
+        'seopages/endocrinologist-in-hsr-layout-bangalore.html',
+        doctors=doctors,
+        testimonials=testimonials,
+        blogs=blogs,
+        departments=departments
+    )
+    
+@app.route('/general-physician-in-hsr-layout-bangalore')
+def general_physician_in_hsr_layout():
+    doctors = Doctor.query.filter_by(is_active=True).all()
+
+    testimonials = Testimonial.query.filter_by(is_active=True).options(
+        joinedload(Testimonial.doctor)
+    ).order_by(Testimonial.created_at.desc()).all()
+
+    blogs = Blog.query.filter_by(is_active=True)\
+        .order_by(Blog.created_at.desc())\
+        .limit(5)\
+        .all()
+
+    departments = Department.query.filter_by(is_active=True)\
+        .order_by(Department.name)\
+        .all()
+
+    return render_template(
+        'seopages/general-physician-in-hsr-layout-bangalore.html',
+        doctors=doctors,
+        testimonials=testimonials,
+        blogs=blogs,
+        departments=departments
+    )
+    
+@app.route('/skin-specialist-in-electronic-city-bangalore')
+def skin_specialist_in_electronic_city():
+    doctors = Doctor.query.filter_by(is_active=True).all()
+
+    testimonials = Testimonial.query.filter_by(is_active=True).options(
+        joinedload(Testimonial.doctor)
+    ).order_by(Testimonial.created_at.desc()).all()
+
+    blogs = Blog.query.filter_by(is_active=True)\
+        .order_by(Blog.created_at.desc())\
+        .limit(5)\
+        .all()
+
+    departments = Department.query.filter_by(is_active=True)\
+        .order_by(Department.name)\
+        .all()
+
+    return render_template(
+        'seopages/skin-specialist-in-electronic-city-bangalore.html',
+        doctors=doctors,
+        testimonials=testimonials,
+        blogs=blogs,
+        departments=departments
+    )
+
+@app.route('/general-surgeon-in-bangalore')
+def general_surgeon_in_bangalore():
+    doctors = Doctor.query.filter_by(is_active=True).all()
+
+    testimonials = Testimonial.query.filter_by(is_active=True).options(
+        joinedload(Testimonial.doctor)
+    ).order_by(Testimonial.created_at.desc()).all()
+
+    blogs = Blog.query.filter_by(is_active=True)\
+        .order_by(Blog.created_at.desc())\
+        .limit(5)\
+        .all()
+
+    departments = Department.query.filter_by(is_active=True)\
+        .order_by(Department.name)\
+        .all()
+
+    return render_template(
+        'seopages/general-surgeon-in-bangalore.html',
+        doctors=doctors,
+        testimonials=testimonials,
+        blogs=blogs,
+        departments=departments
+    )
+# --- Admin Authentication and Permissions ---
 
 def login_required(f):
     @wraps(f)
