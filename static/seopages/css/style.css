@@ -1133,23 +1133,37 @@ section.step_by_step_section {
 }
 
 .overlay-container .top_number p {
-  color: #1D385E;
+  color: #fff;
+  position: relative;
+  z-index: 9;
   font-size: 30px;
   text-align: left;
   font-weight: 600;
   font-family: "Montserrat", sans-serif;
+  display: none;
+}
+
+.overlay-container .top_number,
+.overlay-container .top_conent {
+  opacity: 1;
+  transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
 .overlay-container:hover .top_number,
 .overlay-container:hover .top_conent {
-  display: none;
+  /* display: none; */
+  opacity: 0;
+  transform: translateY(-20px);
+  pointer-events: none;
 }
 
 .top_conent h5 {
   font-size: 18px;
   font-weight: 600;
-  color: #0B1C34;
+  color: #fff;
   margin-bottom: 20px;
+  position: relative;
+  z-index: 9;
 }
 
 .overlay-container .image {
@@ -1174,12 +1188,18 @@ section.step_by_step_section {
 .overlay-container .overlay {
   position: absolute;
   transition: all 1s ease;
-  opacity: 0;
+  opacity: 1;
 }
 
-/*All overlay fade-in*/
-.overlay-container:hover .overlay {
+.hover_overlay_conent {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.overlay-container:hover .hover_overlay_conent {
   opacity: 1;
+  transform: translateY(0);
 }
 
 .overlay-container .overlay-left {
@@ -1204,7 +1224,7 @@ section.step_by_step_section {
 }
 
 .overlay-container .overlay-bottom {
-  height: 0;
+  height: 100%;
   width: 100%;
   bottom: 0;
   right: 0;
