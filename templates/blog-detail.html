@@ -1,10 +1,8 @@
 {% extends "base.html" %}
 
-{% block title %}{% if blog %}{{ blog.title }} - Aarogya Hastha{% else %}Blog - Aarogya Hastha{% endif %}{% endblock %}
+{% block title %}{{ blog.meta_title if blog.meta_title else blog.title }} - Aarogya Hastha{% endblock %}
 
 {% block head %}
-
-<title>{{ blog.meta_title if blog.meta_title else blog.title }} | Your Site Name</title>
 
 {% if blog.meta_description %}
 <meta name="description" content="{{ blog.meta_description }}">
