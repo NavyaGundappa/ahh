@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}{% if blog %}{{ blog.meta_title if blog.meta_title else blog.title }} | Aarogya Hastha{% else %}Blog -
-Aarogya Hastha{% endif %}{% endblock %}
+{% block title %}{% if blog %}{{ blog.title }} - Aarogya Hastha{% else %}Blog - Aarogya Hastha{% endif %}{% endblock %}
 
 {% block head %}
 
@@ -636,8 +635,10 @@ Aarogya Hastha{% endif %}{% endblock %}
     .mobile-related-image {
         width: 80px;
         height: 80px;
-        overflow: hidden;
+        min-width: 80px;
+        min-height: 80px;
         flex-shrink: 0;
+        overflow: hidden;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -649,6 +650,8 @@ Aarogya Hastha{% endif %}{% endblock %}
         width: 100%;
         height: 100%;
         object-fit: cover;
+        object-position: center;
+        display: block;
         border-radius: 6px;
     }
 
@@ -680,24 +683,7 @@ Aarogya Hastha{% endif %}{% endblock %}
         align-items: center;
     }
 
-    /* Auto-scroll animation for mobile - Slower and Smoother */
-    .auto-scroll-mobile {
-        animation: autoScrollMobile 2s linear infinite;
-    }
-
-    .auto-scroll-mobile:hover {
-        animation-play-state: paused;
-    }
-
-    @keyframes autoScrollMobile {
-        0% {
-            transform: translateY(0);
-        }
-
-        100% {
-            transform: translateY(-50%);
-        }
-    }
+    /* Auto-scroll animation for mobile */
 
     /* Desktop Styles */
     @media (min-width: 1024px) {
@@ -739,7 +725,8 @@ Aarogya Hastha{% endif %}{% endblock %}
         .sidebar {
             position: sticky;
             top: 100px;
-            height: 550px;
+            height: 80vh;
+            max-height: 800px;
             overflow: hidden;
             display: block;
         }
@@ -783,9 +770,9 @@ Aarogya Hastha{% endif %}{% endblock %}
         }
 
         .related-articles-scroll {
-            height: 100%;
             position: relative;
             overflow: hidden;
+            display: block;
         }
 
         .related-article-card {
@@ -812,6 +799,8 @@ Aarogya Hastha{% endif %}{% endblock %}
         .related-article-image {
             width: 100%;
             height: 100px;
+            min-height: 100px;
+            flex-shrink: 0;
             overflow: hidden;
             display: flex;
             align-items: center;
@@ -824,6 +813,8 @@ Aarogya Hastha{% endif %}{% endblock %}
             width: 100%;
             height: 100%;
             object-fit: cover;
+            object-position: center;
+            display: block;
         }
 
         .related-article-content {
@@ -855,24 +846,6 @@ Aarogya Hastha{% endif %}{% endblock %}
             margin-top: auto;
         }
 
-        /* Smooth Auto-scroll animation */
-        .auto-scroll-vertical {
-            animation: autoScrollVertical 35s linear infinite;
-        }
-
-        .auto-scroll-vertical:hover {
-            animation-play-state: paused;
-        }
-
-        @keyframes autoScrollVertical {
-            0% {
-                transform: translateY(0);
-            }
-
-            100% {
-                transform: translateY(-50%);
-            }
-        }
     }
 
     /* Hide sidebar on mobile */
@@ -999,41 +972,60 @@ Aarogya Hastha{% endif %}{% endblock %}
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        // Initialize auto-scroll for desktop related articles
-        const desktopScroll = document.getElementById('desktopRelatedScroll');
-        if (desktopScroll) {
-            const originalContent = desktopScroll.innerHTML;
-            desktopScroll.innerHTML = originalContent + originalContent;
-            desktopScroll.classList.add('auto-scroll-vertical');
+
+        // ── Smooth infinite scroll using requestAnimationFrame ──────────────
+        // Works for both desktop sidebar and mobile section.
+        // Cards are duplicated once so the loop is seamless.
+        function initSmoothScroll(containerId, speed) {
+            const track = document.getElementById(containerId);
+            if (!track) return;
+
+            // Duplicate content once for seamless looping
+            const original = track.innerHTML;
+            track.innerHTML = original + original;
+
+            // Make the track position-relative so we can move it via transform
+            track.style.willChange = 'transform';
+
+            let pos = 0;          // current pixel offset (downward)
+            let paused = false;
+            let raf;
+
+            const halfHeight = () => track.scrollHeight / 2;
+
+            function step() {
+                if (!paused) {
+                    pos += speed;
+                    // Once we've scrolled one full copy, snap back to 0 (seamless)
+                    if (pos >= halfHeight()) {
+                        pos = 0;
+                    }
+                    track.style.transform = `translateY(-${pos}px)`;
+                }
+                raf = requestAnimationFrame(step);
+            }
+
+            raf = requestAnimationFrame(step);
+
+            // Pause on hover (desktop) or touch (mobile)
+            track.addEventListener('mouseenter', () => { paused = true; });
+            track.addEventListener('mouseleave', () => { paused = false; });
+            track.addEventListener('touchstart', () => { paused = true; }, { passive: true });
+            track.addEventListener('touchend', () => {
+                // Resume after a short delay so tap-to-navigate still works
+                setTimeout(() => { paused = false; }, 1500);
+            }, { passive: true });
         }
 
-        // Initialize auto-scroll for mobile related articles
-        const mobileScroll = document.getElementById('mobileRelatedScroll');
-        if (mobileScroll) {
-            const originalContent = mobileScroll.innerHTML;
-            mobileScroll.innerHTML = originalContent + originalContent;
-            mobileScroll.classList.add('auto-scroll-mobile');
-        }
+        // Desktop sidebar — 0.5 px per frame ≈ smooth, readable
+        initSmoothScroll('desktopRelatedScroll', 0.5);
 
-        // Pause auto-scroll when user hovers
-        const relatedCards = document.querySelectorAll('.related-article-card, .mobile-related-card');
-        relatedCards.forEach(card => {
-            card.addEventListener('mouseenter', function () {
-                if (desktopScroll) desktopScroll.style.animationPlayState = 'paused';
-                if (mobileScroll) mobileScroll.style.animationPlayState = 'paused';
-            });
+        // Mobile section — same speed
+        initSmoothScroll('mobileRelatedScroll', 0.5);
 
-            card.addEventListener('mouseleave', function () {
-                if (desktopScroll) desktopScroll.style.animationPlayState = 'running';
-                if (mobileScroll) mobileScroll.style.animationPlayState = 'running';
-            });
-        });
-
-        // Ensure Quill images maintain their styles
+        // ── Quill image style preservation ──────────────────────────────────
         setTimeout(() => {
-            const images = document.querySelectorAll('.blog-body img');
-            images.forEach(img => {
-                // Preserve any inline styles from Quill
+            document.querySelectorAll('.blog-body img').forEach(img => {
                 if (img.style.width || img.style.height) {
                     img.style.maxWidth = '100%';
                     img.style.height = 'auto';
@@ -1041,19 +1033,15 @@ Aarogya Hastha{% endif %}{% endblock %}
             });
         }, 100);
 
-        // Force list styling after page load
+        // ── Force Quill list styling ─────────────────────────────────────────
         setTimeout(() => {
             const blogBody = document.querySelector('.blog-body');
             if (blogBody) {
-                // Force list styles
-                const lists = blogBody.querySelectorAll('ul, ol');
-                lists.forEach(list => {
+                blogBody.querySelectorAll('ul, ol').forEach(list => {
                     list.style.listStylePosition = 'outside';
                     list.style.paddingLeft = '1.5em';
                 });
-
-                const listItems = blogBody.querySelectorAll('li');
-                listItems.forEach(li => {
+                blogBody.querySelectorAll('li').forEach(li => {
                     li.style.display = 'list-item';
                 });
             }
