@@ -200,15 +200,16 @@ def best_ent_surgeon():
 @app.route('/upload-image', methods=['POST'])
 def upload_image():
     file = request.files['image']
- 
+
     filename = secure_filename(file.filename)
     filepath = os.path.join('static/uploads', filename)
- 
+
     file.save(filepath)
- 
+
     return jsonify({
         "path": "/static/uploads/" + filename
     })
+
 
 @app.route('/best-hospital-in-bellandur-bangalore')
 def hospital_in_bellandur():
@@ -339,6 +340,7 @@ def hospital_in_electronic_city():
         departments=departments
     )
 
+
 @app.route('/best-laparoscopic-surgeon-in-bangalore')
 def laparoscopic_in_bangalore():
     doctors = Doctor.query.filter_by(is_active=True).all()
@@ -363,8 +365,8 @@ def laparoscopic_in_bangalore():
         blogs=blogs,
         departments=departments
     )
-    
-    
+
+
 @app.route('/endocrinologist-in-hsr-layout-bangalore')
 def endocrinologist_in_hsr_layout():
     doctors = Doctor.query.filter_by(is_active=True).all()
@@ -389,7 +391,8 @@ def endocrinologist_in_hsr_layout():
         blogs=blogs,
         departments=departments
     )
-    
+
+
 @app.route('/general-physician-in-hsr-layout-bangalore')
 def general_physician_in_hsr_layout():
     doctors = Doctor.query.filter_by(is_active=True).all()
@@ -414,7 +417,8 @@ def general_physician_in_hsr_layout():
         blogs=blogs,
         departments=departments
     )
-    
+
+
 @app.route('/skin-specialist-in-electronic-city-bangalore')
 def skin_specialist_in_electronic_city():
     doctors = Doctor.query.filter_by(is_active=True).all()
@@ -439,6 +443,7 @@ def skin_specialist_in_electronic_city():
         blogs=blogs,
         departments=departments
     )
+
 
 @app.route('/general-surgeon-in-bangalore')
 def general_surgeon_in_bangalore():
@@ -465,6 +470,7 @@ def general_surgeon_in_bangalore():
         departments=departments
     )
 # --- Admin Authentication and Permissions ---
+
 
 def login_required(f):
     @wraps(f)
@@ -2567,7 +2573,6 @@ def department_page(slug):
     return render_template("department.html", **context)
 
 
-
 # ------------------ ADMIN: Department Overview ------------------
 
 
@@ -3239,6 +3244,7 @@ def blog():
 
 
 @app.route('/api/blogs')
+@cache.cached(timeout=120, query_string=True)
 def api_blogs():
     try:
         department_slug = request.args.get('department', 'all')
@@ -3262,13 +3268,15 @@ def api_blogs():
                 (Blog.content.ilike(f'%{search_query}%'))
             )
 
-        blogs = blog_query.order_by(Blog.created_at.desc()).all()
+        blogs = blog_query.order_by(Blog.created_at.desc()).options(
+            load_only(Blog.id, Blog.title, Blog.excerpt, Blog.image_path,
+                      Blog.slug, Blog.created_at, Blog.department_id)
+        ).all()
 
         return jsonify([{
             'id': blog.id,
             'title': blog.title,
             'excerpt': blog.excerpt,
-            'content': blog.content,
             'image_path': blog.image_path,
             'department': blog.department.name if blog.department else 'General',
             'department_slug': blog.department.slug if blog.department else 'general',
@@ -3929,7 +3937,7 @@ def departmentnew_page(slug):
         .order_by(Blog.created_at.desc())\
         .limit(3)\
         .all()
-        
+
     testimonials = Testimonial.query.filter_by(is_active=True).options(
         joinedload(Testimonial.doctor)
     ).order_by(Testimonial.created_at.desc()).all()
@@ -3947,13 +3955,13 @@ def departmentnew_page(slug):
     return render_template("department-new.html", **context)
 
 
-
 @app.template_filter('loads')
 def json_loads(value):
     try:
         return json.loads(value)
     except:
         return []
+
 
 @app.route('/admin/departments-new')
 @login_required
@@ -3965,9 +3973,9 @@ def admin_departmentsnew():
     user = User.query.get(admin_id)
 
     modules = [
-        'banners','doctors','counters','testimonials','specialities',
-        'departments','health_packages','sports_packages','department_content',
-        'users','callback_requests','reviews','blogs','bmw_report','life_moments'
+        'banners', 'doctors', 'counters', 'testimonials', 'specialities',
+        'departments', 'health_packages', 'sports_packages', 'department_content',
+        'users', 'callback_requests', 'reviews', 'blogs', 'bmw_report', 'life_moments'
     ]
 
     access = {module: False for module in modules}
@@ -3982,7 +3990,7 @@ def admin_departmentsnew():
         access=access,
         current_user=user
     )
-    
+
 
 @app.route('/admin/departments-new/delete/<int:id>', methods=['POST'])
 @login_required
@@ -4073,19 +4081,19 @@ def create_department():
 # ------------------ ADMIN: Department New Edit ------------------
 
 
-@app.route('/admin/departments-new/edit/<int:id>', methods=['GET','POST'])
+@app.route('/admin/departments-new/edit/<int:id>', methods=['GET', 'POST'])
 @login_required
 def edit_department_new(id):
 
     department = DepartmentNew.query.get_or_404(id)
-    
+
     admin_id = session.get("admin_id")
     user = User.query.get(admin_id)
 
     modules = [
-        'banners','doctors','counters','testimonials','specialities',
-        'departments','health_packages','sports_packages','department_content',
-        'users','callback_requests','reviews','blogs','bmw_report','life_moments'
+        'banners', 'doctors', 'counters', 'testimonials', 'specialities',
+        'departments', 'health_packages', 'sports_packages', 'department_content',
+        'users', 'callback_requests', 'reviews', 'blogs', 'bmw_report', 'life_moments'
     ]
 
     access = {module: False for module in modules}
@@ -4094,18 +4102,17 @@ def edit_department_new(id):
         for module in modules:
             access[module] = getattr(user.access, module, False)
 
-
     if request.method == 'POST':
         # Basic Info
         department.name = request.form.get('name')
         department.slug = request.form.get('slug')
         department.is_active = request.form.get("is_active") == "1"
-        
+
         # Hero Section
         department.hero_main_heading = request.form.get('hero_main_heading')
         department.hero_description = request.form.get('hero_description')
         department.hero_phone = request.form.get('hero_phone')
-         # ✅ FIXED JSON HANDLING
+        # ✅ FIXED JSON HANDLING
         hero_stats = request.form.get('hero_stats')
 
         try:
@@ -4114,59 +4121,56 @@ def edit_department_new(id):
         except Exception as e:
             print("Hero Stats JSON Error:", e)
             department.hero_stats = '[]'
-        
-        
+
         # Overview Section
         department.overview_heading = request.form.get('overview_heading')
         department.overview_content = request.form.get('overview_content')
         department.why_choose_title = request.form.get('why_choose_title')
         department.why_choose_items = request.form.get('why_choose_items')
-        
+
         # Approach Section
         department.approach_heading = request.form.get('approach_heading')
-        department.approach_subheading = request.form.get('approach_subheading')
+        department.approach_subheading = request.form.get(
+            'approach_subheading')
         department.approach_cards = request.form.get('approach_cards')
-        
+
         # Services Section
         department.services_heading = request.form.get('services_heading')
         department.services_data = request.form.get('services_data')
-        
+
         # Journey Section
         department.journey_heading = request.form.get('journey_heading')
         department.journey_items = request.form.get('journey_items')
         department.journey_image = request.form.get('journey_image')
-        
+
         # Facilities Section
         department.facilities_heading = request.form.get('facilities_heading')
         department.facilities_cards = request.form.get('facilities_cards')
-        
+
         # Why Recommend Section
         department.recommend_heading = request.form.get('recommend_heading')
         department.recommend_items = request.form.get('recommend_items')
         department.recommend_image = request.form.get('recommend_image')
-        
+
         # Advanced Care Section
         department.advanced_heading = request.form.get('advanced_heading')
         department.advanced_content = request.form.get('advanced_content')
         department.advanced_image = request.form.get('advanced_image')
-        
+
         # CTA Section
         department.cta_heading = request.form.get('cta_heading')
         department.cta_content = request.form.get('cta_content')
         department.cta_phone = request.form.get('cta_phone')
-        
-        
+
         department.faq_content = request.form.get('faq_content')
-        
+
         # SEO Fields
         department.meta_title = request.form.get('meta_title')
         department.meta_description = request.form.get('meta_description')
         department.meta_Keyword = request.form.get('meta_Keyword')
         department.meta_robots = request.form.get('meta_robots')
-        
 
         db.session.commit()
-        
 
         flash("Department updated successfully", "success")
         return redirect(url_for('admin_departmentsnew'))
@@ -4180,89 +4184,111 @@ def edit_department_new(id):
 # ------------------ ADMIN: Department New End ------------------
 
 
-
 @app.route('/lp-thank-you')
 def langingthankyou():
     return render_template('landing_pages/thank-you.html')
+
 
 @app.route('/general-laparoscopic-surgery')
 def langinglaparoscopic():
     return render_template('landing_pages/general-laparoscopic-surgery.html')
 
+
 @app.route('/hip-replacement-surgery')
 def langingpagehipreplacement():
     return render_template('landing_pages/hip-replacement-surgery.html')
+
 
 @app.route('/knee-replacement')
 def langingpagekneereplacement():
     return render_template('landing_pages/knee-replacement.html')
 
+
 @app.route('/maternity-packages')
 def langingpagematernity():
     return render_template('landing_pages/maternity-packages.html')
+
 
 @app.route('/planning-surgery')
 def langingpageplanning():
     return render_template('landing_pages/planning-surgery.html')
 
 # facebook pixel
+
+
 @app.route('/general-laparoscopic-surgery-fb')
 def langingfblaparoscopic():
     return render_template('landing_pages/facebook/general-laparoscopic-surgery.html')
+
 
 @app.route('/hip-replacement-surgery-fb')
 def langingfbpagehipreplacement():
     return render_template('landing_pages/facebook/hip-replacement-surgery.html')
 
+
 @app.route('/knee-replacement-fb')
 def langingfbpagekneereplacement():
     return render_template('landing_pages/facebook/knee-replacement.html')
 
+
 @app.route('/maternity-packages-fb')
 def langingfbpagematernity():
     return render_template('landing_pages/facebook/maternity-packages.html')
+
 
 @app.route('/planning-surgery-fb')
 def langingfbpageplanning():
     return render_template('landing_pages/facebook/planning-surgery.html')
 
 # instagram pixel
+
+
 @app.route('/general-laparoscopic-surgery-in')
 def langinginlaparoscopic():
     return render_template('landing_pages/instagram/general-laparoscopic-surgery.html')
+
 
 @app.route('/hip-replacement-surgery-in')
 def langinginpagehipreplacement():
     return render_template('landing_pages/instagram/hip-replacement-surgery.html')
 
+
 @app.route('/knee-replacement-in')
 def langinginpagekneereplacement():
     return render_template('landing_pages/instagram/knee-replacement.html')
 
+
 @app.route('/maternity-packages-in')
 def langinginpagematernity():
     return render_template('landing_pages/instagram/maternity-packages.html')
+
 
 @app.route('/planning-surgery-in')
 def langinginpageplanning():
     return render_template('landing_pages/instagram/planning-surgery.html')
 
 # Website Landing Pages
+
+
 @app.route('/general-laparoscopic-surgery-lp')
 def langingwlplaparoscopic():
     return render_template('landing_pages/website/general-laparoscopic-surgery.html')
+
 
 @app.route('/hip-replacement-surgery-lp')
 def langingwlppagehipreplacement():
     return render_template('landing_pages/website/hip-replacement-surgery.html')
 
+
 @app.route('/knee-replacement-surgery-lp')
 def langingwlppagekneereplacement():
     return render_template('landing_pages/website/knee-replacement.html')
 
+
 @app.route('/maternity-packages-lp')
 def langingwlppagematernity():
     return render_template('landing_pages/website/maternity-packages.html')
+
 
 @app.route('/planning-surgery-lp')
 def langingwlppageplanning():
@@ -4275,6 +4301,7 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 API_URL = "https://api.fyndbetter.com/create_lead_with_source"
 API_KEY = "Zx7Lp2Xv9Ka4Nz8Rw1TgYcDh6BsFeJu5"
 ORG_ID = "1720949403878x756898931863191600"
+
 
 def send_to_fyndbetter(data):
     headers = {
@@ -4325,7 +4352,6 @@ def submit_lead_2():
     return redirect("/lp-thank-you")
 
 
-
 @app.route('/submit-quote', methods=['POST'])
 def submit_quote():
     form = request.form
@@ -4351,7 +4377,6 @@ def submit_quote():
         "source": form.get("source") or "Website",
         "sourceURL": request.url
     }
-    
 
     data.update({
         "utmSource": form.get("utm_source"),
@@ -4366,6 +4391,7 @@ def submit_quote():
     print("API Response:", response.text)
 
     return redirect("/lp-thank-you")
+
 
 # admin routes end -------------------------------------------------------------------------------------------------------------------------
 migrate = Migrate(app, db)
