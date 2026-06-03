@@ -601,9 +601,8 @@
                         <div class="row mb-3">
                             <div class="col-md-12">
                                 <label for="meta_title" class="form-label">Meta Title</label>
-                                <input type="text" class="form-control" id="meta_title" name="meta_title" maxlength="60"
-                                    placeholder="Recommended length: 50-60 characters">
-                                <div class="form-text">Character Count: <span id="metaTitleCount">0</span>/60</div>
+                                <input type="text" class="form-control" id="meta_title" name="meta_title"
+                                    placeholder="Enter meta title (recommended: 50-60 characters for SEO)">
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -611,8 +610,6 @@
                                 <label for="meta_description" class="form-label">Meta Description</label>
                                 <textarea class="form-control" id="meta_description" name="meta_description" rows="3"
                                     maxlength="160" placeholder="Recommended length: 150-160 characters"></textarea>
-                                <div class="form-text">Character Count: <span id="metaDescriptionCount">0</span>/160
-                                </div>
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -1260,7 +1257,16 @@
 
             // Attach event listeners to the new inputs
             $('#meta_title').on('input', function () {
-                updateCharCount('#meta_title', '#metaTitleCount', 60);
+                const len = $(this).val().length;
+                $('#metaTitleCount').text(len);
+                // Advisory only: highlight if outside recommended SEO range
+                if (len > 0 && (len < 50 || len > 60)) {
+                    $('#metaTitleCount').addClass('text-warning').removeClass('text-danger text-success');
+                } else if (len >= 50 && len <= 60) {
+                    $('#metaTitleCount').addClass('text-success').removeClass('text-warning text-danger');
+                } else {
+                    $('#metaTitleCount').removeClass('text-warning text-danger text-success');
+                }
             });
 
             $('#meta_description').on('input', function () {
