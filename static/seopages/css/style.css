@@ -2056,7 +2056,11 @@ section.neighboring_sec {
   }
 
   section.overview_section {
-    padding: 50px 10px 30px;
+    padding: 30px 10px 30px;
+  }
+
+  section.breadcrumb-section li.breadcrumb-item {
+    font-size: 11px;
   }
 
   section.our_approach_section {
