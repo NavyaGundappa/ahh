@@ -32,6 +32,111 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+
+<script type="application/ld+json">
+{% set doctor_name = doctor.name if doctor.name and doctor.name.strip() else "Doctor" %}
+{% set designation = doctor.designation if doctor.designation and doctor.designation.strip() else doctor.specialization %}
+{% set experience = doctor.experience|string|trim if doctor.experience else "" %}
+{% set expertise = doctor.expertise if doctor.expertise and doctor.expertise.strip() else "" %}
+
+{% set pronoun = "She" if doctor.gender and doctor.gender|lower == "female" else "He" %}
+{% set possessive = "Her" if doctor.gender and doctor.gender|lower == "female" else "His" %}
+
+{% if experience %}
+    {% set experience_clean = experience
+        | replace('Years', '')
+        | replace('Year', '')
+        | replace('years', '')
+        | replace('year', '')
+        | trim %}
+{% else %}
+    {% set experience_clean = "" %}
+{% endif %}
+
+{% if experience_clean and expertise %}
+    {% set schema_description = doctor_name ~ " is a " ~ designation ~ " at Aarogya Hastha Hospitals, Bengaluru. " ~ pronoun ~ " has over " ~ experience_clean ~ " years of clinical experience. " ~ possessive ~ " areas of expertise include " ~ expertise|replace('\r\n', ', ')|replace('\n', ', ')|replace('\r', ', ') ~ "." %}
+{% elif experience_clean %}
+    {% set schema_description = doctor_name ~ " is a " ~ designation ~ " at Aarogya Hastha Hospitals, Bengaluru. " ~ pronoun ~ " has over " ~ experience_clean ~ " years of clinical experience." %}
+{% elif expertise %}
+    {% set schema_description = doctor_name ~ " is a " ~ designation ~ " at Aarogya Hastha Hospitals, Bengaluru. " ~ possessive ~ " areas of expertise include " ~ expertise|replace('\r\n', ', ')|replace('\n', ', ')|replace('\r', ', ') ~ "." %}
+{% else %}
+    {% set schema_description = doctor_name ~ " is a medical professional at Aarogya Hastha Hospitals, Bengaluru." %}
+{% endif %}
+
+
+{% set specialty_map = {
+    'cardiology': 'https://schema.org/Cardiovascular',
+    'dermatology': 'https://schema.org/Dermatology',
+    'dentistry': 'https://schema.org/Dentistry',
+    'endocrinology': 'https://schema.org/Endocrine',
+    'emergency': 'https://schema.org/Emergency',
+    'geriatrics': 'https://schema.org/Geriatric',
+    'gynecology': 'https://schema.org/Gynecologic',
+    'hematology': 'https://schema.org/Hematologic',
+    'infectious-disease': 'https://schema.org/Infectious',
+    'neurology': 'https://schema.org/Neurologic',
+    'oncology': 'https://schema.org/Oncologic',
+    'ophthalmology': 'https://schema.org/Ophthalmologic',
+    'orthopedics': 'https://schema.org/Musculoskeletal',
+    'orthopaedics': 'https://schema.org/Musculoskeletal',
+    'pediatrics': 'https://schema.org/Pediatric',
+    'psychiatry': 'https://schema.org/Psychiatric',
+    'pulmonology': 'https://schema.org/Pulmonary',
+    'urology': 'https://schema.org/Urologic'
+} %}
+
+
+{
+  "@context": "https://schema.org",
+  "@type": "Physician",
+  "@id": {{ request.url | tojson }},
+  "name": {{ doctor_name | replace('&amp;', '&') | tojson }},
+  "url": {{ request.url | tojson }},
+
+  "description": {{ schema_description | replace('&amp;', '&') | tojson }},
+
+{% if doctor.department_slug in specialty_map %}
+"medicalSpecialty": {{ specialty_map[doctor.department_slug] | tojson }},
+{% endif %}
+
+"image": {{ ("https://aarogyahastha.com" ~ url_for('static', filename=doctor.image_path)) | tojson }}, 
+"address": { "@type": "PostalAddress", "streetAddress": "Site No. 2, Kasavanahalli Main Rd, near 1st Cross Road, opposite HM Symphony", "addressLocality": "Bengaluru", "addressRegion": "Karnataka", "postalCode": "560035", "addressCountry": "IN" },
+  "hasCredential": [
+    {
+      "@type": "EducationalOccupationalCredential",
+      "credentialCategory": "Medical Degree",
+      "name": {{ (doctor.qualification if doctor.qualification and doctor.qualification.strip() else "Not specified")
+        | replace('&amp;', '&')
+        | tojson }}
+    },
+    {
+      "@type": "EducationalOccupationalCredential",
+      "credentialCategory": "Fellowship",
+      "name": {{ (doctor.fellowship_membership
+        | replace('\r\n', ', ')
+        | replace('\n', ', ')
+        | replace('\r', ', ')
+        if doctor.fellowship_membership and doctor.fellowship_membership.strip()
+        else "Not specified")
+        | replace('&amp;', '&')
+        | tojson }}
+    }
+  ],
+
+  "knowsLanguage": [
+    {% if doctor.languages and doctor.languages.strip() %}
+      {% for lang in doctor.languages.split(',') %}
+        {{ lang.strip() | tojson }}{% if not loop.last %},{% endif %}
+      {% endfor %}
+    {% else %}
+      "English"
+    {% endif %}
+  ]
+}
+</script>
+
+
 {% endblock %}
 <style>
     /* Scope everything under .doctor-profile-page */
