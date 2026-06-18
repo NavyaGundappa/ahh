@@ -469,6 +469,59 @@ def general_surgeon_in_bangalore():
         blogs=blogs,
         departments=departments
     )
+
+    
+    
+@app.route('/best-skin-specialist-in-hsr-layout')
+def skin_specialist_hsr_layout():
+    doctors = Doctor.query.filter_by(is_active=True).all()
+
+    testimonials = Testimonial.query.filter_by(is_active=True).options(
+        joinedload(Testimonial.doctor)
+    ).order_by(Testimonial.created_at.desc()).all()
+
+    blogs = Blog.query.filter_by(is_active=True)\
+        .order_by(Blog.created_at.desc())\
+        .limit(5)\
+        .all()
+
+    departments = Department.query.filter_by(is_active=True)\
+        .order_by(Department.name)\
+        .all()
+
+    return render_template(
+        'seopages/best-skin-specialist-in-hsr-layout.html',
+        doctors=doctors,
+        testimonials=testimonials,
+        blogs=blogs,
+        departments=departments
+    )
+    
+    
+@app.route('/best-ent-specialist-in-electronic-city')
+def ent_specialist_electronic():
+    doctors = Doctor.query.filter_by(is_active=True).all()
+
+    testimonials = Testimonial.query.filter_by(is_active=True).options(
+        joinedload(Testimonial.doctor)
+    ).order_by(Testimonial.created_at.desc()).all()
+
+    blogs = Blog.query.filter_by(is_active=True)\
+        .order_by(Blog.created_at.desc())\
+        .limit(5)\
+        .all()
+
+    departments = Department.query.filter_by(is_active=True)\
+        .order_by(Department.name)\
+        .all()
+
+    return render_template(
+        'seopages/best-ent-specialist-in-electronic-city.html',
+        doctors=doctors,
+        testimonials=testimonials,
+        blogs=blogs,
+        departments=departments
+    )
 # --- Admin Authentication and Permissions ---
 
 
