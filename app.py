@@ -522,6 +522,55 @@ def ent_specialist_electronic():
         blogs=blogs,
         departments=departments
     )
+
+@app.route('/best-ent-specialist-in-sarjapur-road-bengaluru')
+def ent_specialist_sarjapur():
+    doctors = Doctor.query.filter_by(is_active=True).all()
+
+    testimonials = Testimonial.query.filter_by(is_active=True).options(
+        joinedload(Testimonial.doctor)
+    ).order_by(Testimonial.created_at.desc()).all()
+
+    blogs = Blog.query.filter_by(is_active=True)\
+        .order_by(Blog.created_at.desc())\
+        .limit(5)\
+        .all()
+
+    departments = Department.query.filter_by(is_active=True)\
+        .order_by(Department.name)\
+        .all()
+
+    return render_template(
+        'seopages/best-ent-specialist-in-sarjapur-road-bengaluru.html',
+        doctors=doctors,
+        testimonials=testimonials,
+        blogs=blogs,
+        departments=departments
+    )
+@app.route('/best-physiotherapy-rehabilitation-center-in-hsrlayout-bangalore')
+def physiotherapy_hsr():
+    doctors = Doctor.query.filter_by(is_active=True).all()
+
+    testimonials = Testimonial.query.filter_by(is_active=True).options(
+        joinedload(Testimonial.doctor)
+    ).order_by(Testimonial.created_at.desc()).all()
+
+    blogs = Blog.query.filter_by(is_active=True)\
+        .order_by(Blog.created_at.desc())\
+        .limit(5)\
+        .all()
+
+    departments = Department.query.filter_by(is_active=True)\
+        .order_by(Department.name)\
+        .all()
+
+    return render_template(
+        'seopages/best-physiotherapy-rehabilitation-center-in-hsrlayout-bangalore.html',
+        doctors=doctors,
+        testimonials=testimonials,
+        blogs=blogs,
+        departments=departments
+    )
 # --- Admin Authentication and Permissions ---
 
 
