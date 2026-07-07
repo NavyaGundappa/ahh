@@ -303,6 +303,9 @@
   .stat {
     text-align: center;
   }
+  .cta-strip a{
+    color: #fff;
+}
 
   .stat-num {
     font-family: "Montserrat", sans-serif;
@@ -1945,7 +1948,7 @@
 <!-- ══════════ CTA ══════════ -->
 <section class="cta-strip">
   <div class="container">
-    <h2>{{ department.advanced_heading or 'Why Patients Recommend Us' }}</h2>
+    <h2>{{ department.cta_heading or 'Why Patients Recommend Us' }}</h2>
     {{ department.cta_content | safe or 'Department Name' }}
     <div class="cta-actions">
       <a href="https://app.fyndbetter.com/ahh_apt" class="btn-dark"><i class="fa-regular fa-calendar-days"></i> Book an Appointment</a>
