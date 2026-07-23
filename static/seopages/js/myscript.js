@@ -164,7 +164,7 @@ $(document).ready(function () {
     nav: true,
     autoHeight: true,
     dots: true,
-    autoplay: false,
+    autoplay: true,
     autoplayHoverPause: true,
     autoplayTimeout: 4000,
     smartSpeed: 800,
