@@ -196,6 +196,26 @@ def best_ent_surgeon():
         blogs=blogs
     )
 
+@app.route('/best-ent-specialist-in-bellandur-bengaluru')
+def best_ent_bellandur():
+    doctors = Doctor.query.filter_by(is_active=True).all()
+
+    testimonials = Testimonial.query.filter_by(is_active=True).options(
+        joinedload(Testimonial.doctor)
+    ).order_by(Testimonial.created_at.desc()).all()
+
+    blogs = Blog.query.filter_by(is_active=True)\
+        .order_by(Blog.created_at.desc())\
+        .limit(5)\
+        .all()
+
+    return render_template(
+        'seopages/best-ent-specialist-in-bellandur-bengaluru.html',
+        doctors=doctors,
+        testimonials=testimonials,
+        blogs=blogs
+    )
+
 
 @app.route('/upload-image', methods=['POST'])
 def upload_image():
