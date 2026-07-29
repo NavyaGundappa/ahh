@@ -200,27 +200,25 @@
       {% set img_file = 'img/doctors/dr-he.JPG' %}
       {% endif %}
 
-      <div class="meet_sub" data-key="{{ doctor.slug }}">
+      <div class="meet_sub" data-key="{{ doctor.slug }}" style="min-height: auto;">
         <img loading="lazy" src="{{ url_for('static', filename=img_file) }}" alt="Dr. {{ doctor.name }}">
         <h5>{{ doctor.name }}</h5>
         <p>{{ doctor.specialization }}</p>
+    {% if doctor.qualification
+      and doctor.qualification|string|trim
+      and doctor.qualification|string|trim|lower != 'none' %}
         <p>
-          <strong>Qualification:</strong>
-          {% if doctor.qualification and doctor.qualification.strip() %}
-          {{ doctor.qualification }}
-          {% else %}
-          <span class="text-muted">Not specified</span>
-          {% endif %}
+            <strong>Qualification:</strong> {{ doctor.qualification }}
         </p>
-
+        {% endif %}
+        
+               {% if doctor.experience
+              and doctor.experience|string|trim
+              and doctor.experience|string|trim|lower != 'none' %}
         <p>
-
-          {% if doctor.experience and doctor.experience.strip() %}
-          <strong>Experience:</strong>{{ doctor.experience }}
-          {% else %}
-          <!-- <span class="text-muted">Not specified</span> -->
-          {% endif %}
+            <strong>Experience:</strong> {{ doctor.experience }}
         </p>
+        {% endif %}
 
         <div class="main-div_btn">
           {% if doctor.appointment_link %}
