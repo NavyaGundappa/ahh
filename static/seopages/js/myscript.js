@@ -169,10 +169,10 @@ $(document).ready(function () {
     autoplayTimeout: 4000,
     smartSpeed: 800,
     responsive: {
-      0: { items: 1 },
-      600: { items: 2 },
-      1250: { items: 2.5 },
-      1300: { items: 3.5 },
+      0: { items: 1.1 },
+      600: { items: 2.1 },
+      1150: { items: 3.1 },
+      1300: { items: 4.1 },
     }
   });
 });
