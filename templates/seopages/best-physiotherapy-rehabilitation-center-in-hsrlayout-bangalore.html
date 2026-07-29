@@ -181,11 +181,11 @@
 <!-- Meet Our Expert Orthopedic  -->
 <section class="meet_our_section">
   <div class="container">
-    <h2 class="sub-heading">Meet Our Skin Specialists</h2>
-    <p>Our dermatology wing is led by highly qualified experts who are committed to clinical excellence and patient safety.</p>
+   <h2 class="sub-heading">Meet Our Physiotherapy & Rehabilitation Experts</h2>
+    <p>The rehabilitation wing at our HSR Layout center is powered by clinicians who combine high-level diagnostic skills with a deep commitment to patient recovery. We don’t just treat symptoms; we restore functional independence through scientific movement analysis and personalized care.</p>
     <div class="meet_our_div owl-carousel owl-theme">
       {% for doctor in doctors %}
-      {% if doctor.department_slug == 'dermatology' %}
+      {% if doctor.department_slug == 'physiotherapy' %}
 
       {# Normalize image path #}
       {% if doctor.image_path %}
