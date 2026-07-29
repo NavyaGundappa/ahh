@@ -567,7 +567,7 @@ def ent_specialist_sarjapur():
         blogs=blogs,
         departments=departments
     )
-@app.route('/best-physiotherapy-rehabilitation-center-in-hsrlayout-bangalore')
+@app.route('/physiotherapy-in-hsr-layout-bangalore')
 def physiotherapy_hsr():
     doctors = Doctor.query.filter_by(is_active=True).all()
 
