@@ -264,7 +264,7 @@ section.towards_better_section {
   margin-bottom: 10px;
 }
 
-.towards_better_section p a {
+.towards_better_section p a, .towards_better_section li a {
   color: #fff;
   font-weight: 600;
   text-decoration: underline;
@@ -278,7 +278,7 @@ section.towards_better_section {
   margin-top: 30px;
 }
 
-.towards_better_section p {
+.towards_better_section p, .towards_better_section li {
   font-size: 15px;
   line-height: 23px;
   color: #fff;
