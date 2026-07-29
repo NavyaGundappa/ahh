@@ -181,11 +181,11 @@
 <!-- Meet Our Expert Orthopedic  -->
 <section class="meet_our_section">
   <div class="container">
-    <h2 class="sub-heading">Meet Our Skin Specialists</h2>
-    <p>Our dermatology wing is led by highly qualified experts who are committed to clinical excellence and patient safety.</p>
+    <h2 class="sub-heading">Meet Our Physiotherapy & Rehabilitation Experts</h2>
+    <p>The rehabilitation wing at our HSR Layout center is powered by clinicians who combine high-level diagnostic skills with a deep commitment to patient recovery. We don’t just treat symptoms; we restore functional independence through scientific movement analysis and personalized care.</p>
     <div class="meet_our_div owl-carousel owl-theme">
       {% for doctor in doctors %}
-      {% if doctor.department_slug == 'dermatology' %}
+      {% if doctor.department_slug == 'physiotherapy' %}
 
       {# Normalize image path #}
       {% if doctor.image_path %}
@@ -200,27 +200,25 @@
       {% set img_file = 'img/doctors/dr-he.JPG' %}
       {% endif %}
 
-      <div class="meet_sub" data-key="{{ doctor.slug }}">
+      <div class="meet_sub" data-key="{{ doctor.slug }}" style="min-height: auto;">
         <img loading="lazy" src="{{ url_for('static', filename=img_file) }}" alt="Dr. {{ doctor.name }}">
         <h5>{{ doctor.name }}</h5>
         <p>{{ doctor.specialization }}</p>
+              {% if doctor.qualification
+              and doctor.qualification|string|trim
+              and doctor.qualification|string|trim|lower != 'none' %}
         <p>
-          <strong>Qualification:</strong>
-          {% if doctor.qualification and doctor.qualification.strip() %}
-          {{ doctor.qualification }}
-          {% else %}
-          <span class="text-muted">Not specified</span>
-          {% endif %}
+            <strong>Qualification:</strong> {{ doctor.qualification }}
         </p>
+        {% endif %}
 
+        {% if doctor.experience
+              and doctor.experience|string|trim
+              and doctor.experience|string|trim|lower != 'none' %}
         <p>
-
-          {% if doctor.experience and doctor.experience.strip() %}
-          <strong>Experience:</strong>{{ doctor.experience }}
-          {% else %}
-          <!-- <span class="text-muted">Not specified</span> -->
-          {% endif %}
+            <strong>Experience:</strong> {{ doctor.experience }}
         </p>
+        {% endif %}
 
         <div class="main-div_btn">
           {% if doctor.appointment_link %}
@@ -247,7 +245,7 @@
   <section class="our_approach_section">
     <div class="container">
       <h2 class="sub-heading">​Comprehensive Physiotherapy Services We Offer</h2>
-        <p>​Our department is equipped to handle a diverse range of physical challenges, ensuring that every patient receives a multi-dimensional treatment plan.</p>>
+        <p>​Our department is equipped to handle a diverse range of physical challenges, ensuring that every patient receives a multi-dimensional treatment plan.</p>
       <div class="our_approach_main_div new_our_approach">
         <div class="our_approach_sub">
           <img src="./Seopage/image/why-choose.png" alt="">

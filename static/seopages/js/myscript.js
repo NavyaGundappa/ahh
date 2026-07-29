@@ -171,8 +171,8 @@ $(document).ready(function () {
     responsive: {
       0: { items: 1 },
       600: { items: 2 },
-      1250: { items: 3 },
-      1300: { items: 4 },
+      1250: { items: 3.1 },
+      1300: { items: 4.1 },
     }
   });
 });
