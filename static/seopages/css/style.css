@@ -571,7 +571,9 @@ p.blog-date {
   right: 0;
 }
 
-
+section.towards_better_section a {
+    color: #000;
+}
 .blog-carousel .owl-nav.disabled {
   display: none;
 }
