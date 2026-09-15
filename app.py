@@ -196,6 +196,66 @@ def best_ent_surgeon():
         blogs=blogs
     )
 
+@app.route('/neurologist-in-hsr-layout-bangalore')
+def neurologist():
+    doctors = Doctor.query.filter_by(is_active=True).all()
+
+    testimonials = Testimonial.query.filter_by(is_active=True).options(
+        joinedload(Testimonial.doctor)
+    ).order_by(Testimonial.created_at.desc()).all()
+
+    blogs = Blog.query.filter_by(is_active=True)\
+        .order_by(Blog.created_at.desc())\
+        .limit(5)\
+        .all()
+
+    return render_template(
+        'seopages/neurologist-in-hsr-layout-bangalore.html',
+        doctors=doctors,
+        testimonials=testimonials,
+        blogs=blogs
+    )
+
+@app.route('/obstetrician-and-gynecologist-in-electronic-city-bangalore')
+def obstetrician():
+    doctors = Doctor.query.filter_by(is_active=True).all()
+
+    testimonials = Testimonial.query.filter_by(is_active=True).options(
+        joinedload(Testimonial.doctor)
+    ).order_by(Testimonial.created_at.desc()).all()
+
+    blogs = Blog.query.filter_by(is_active=True)\
+        .order_by(Blog.created_at.desc())\
+        .limit(5)\
+        .all()
+
+    return render_template(
+        'seopages/obstetrician-and-gynecologist-in-electronic-city-bangalore.html',
+        doctors=doctors,
+        testimonials=testimonials,
+        blogs=blogs
+    )
+
+@app.route('/general-physician-in-electronic-city-bangalore')
+def general_physician():
+    doctors = Doctor.query.filter_by(is_active=True).all()
+
+    testimonials = Testimonial.query.filter_by(is_active=True).options(
+        joinedload(Testimonial.doctor)
+    ).order_by(Testimonial.created_at.desc()).all()
+
+    blogs = Blog.query.filter_by(is_active=True)\
+        .order_by(Blog.created_at.desc())\
+        .limit(5)\
+        .all()
+
+    return render_template(
+        'seopages/general-physician-in-electronic-city-bangalore.html',
+        doctors=doctors,
+        testimonials=testimonials,
+        blogs=blogs
+    )
+
 @app.route('/best-ent-specialist-in-bellandur-bengaluru')
 def best_ent_bellandur():
     doctors = Doctor.query.filter_by(is_active=True).all()
