@@ -228,6 +228,15 @@
         cursor: grabbing;
     }
 
+    .doctor-inactive {
+        opacity: 0.55;
+        background: #f8f9fa;
+    }
+
+    .doctor-inactive .img-preview {
+        filter: grayscale(100%);
+    }
+
     .status-toggle {
         cursor: pointer;
         transition: all 0.3s ease;
@@ -481,7 +490,7 @@
                     </thead>
                     <tbody id="doctorsTableBody">
                         {% for doctor in doctors %}
-                        <tr class="doctor-card" data-doctor-id="{{ doctor.id }}"
+                        <tr class="doctor-card {% if not doctor.is_active %}doctor-inactive{% endif %}" data-doctor-id="{{ doctor.id }}"
                             data-order="{{ doctor.display_order or loop.index }}">
                             <td class="text-center">
                                 <div class="d-flex align-items-center justify-content-center">
@@ -535,6 +544,9 @@
                                         <i class="fas fa-phone me-1"></i>On Call
                                     </span>
                                     {% endif %}
+                                    <span class="badge status-badge {{ 'bg-success' if doctor.is_active else 'bg-secondary' }}">
+                                        {{ 'Active' if doctor.is_active else 'Inactive' }}
+                                    </span>
                                 </div>
                                 {% if doctor.timings %}
                                 <div class="mt-1">
@@ -559,12 +571,17 @@
                                         title="Edit Doctor">
                                         <i class="fas fa-edit"></i> Edit
                                     </button>
-                                    <a href="{{ url_for('delete_doctor', doctor_id=doctor.id) }}"
-                                        class="btn btn-danger btn-sm"
-                                        onclick="return confirm('Are you sure you want to delete Dr. {{ doctor.name }}? This action cannot be undone.');"
-                                        title="Delete Doctor">
-                                        <i class="fas fa-trash"></i> Delete
-                                    </a>
+                                    <button type="button"
+                                        class="btn btn-sm toggle-doctor-btn {{ 'btn-warning' if doctor.is_active else 'btn-success' }}"
+                                        data-id="{{ doctor.id }}" data-name="{{ doctor.name }}"
+                                        data-active="{{ 1 if doctor.is_active else 0 }}"
+                                        title="{{ 'Deactivate' if doctor.is_active else 'Activate' }} Doctor">
+                                        {% if doctor.is_active %}
+                                        <i class="fas fa-eye-slash"></i> Deactivate
+                                        {% else %}
+                                        <i class="fas fa-eye"></i> Activate
+                                        {% endif %}
+                                    </button>
                                 </div>
                                 {% if doctor.appointment_link %}
                                 <div class="mt-1">
@@ -1344,6 +1361,62 @@
         }
     }
 
+    // ===============================================
+    // ACTIVATE / DEACTIVATE DOCTOR
+    // ===============================================
+    function setupDoctorToggle() {
+        document.querySelectorAll('.toggle-doctor-btn').forEach(btn => {
+            btn.addEventListener('click', async function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                const id = this.dataset.id;
+                const name = this.dataset.name;
+                const isActive = this.dataset.active === '1';
+                const action = isActive ? 'deactivate' : 'activate';
+                const msg = isActive
+                    ? `Deactivate ${name}? The doctor will be hidden from the website, but all details are kept.`
+                    : `Activate ${name}? The doctor will be shown on the website again.`;
+
+                if (!confirm(msg)) return;
+
+                this.disabled = true;
+                try {
+                    const response = await fetch(`/api/toggle_doctor/${id}`, { method: 'POST' });
+                    const result = await response.json();
+
+                    if (result.status === 'success') {
+                        const row = this.closest('tr');
+                        const nowActive = result.is_active;
+
+                        this.dataset.active = nowActive ? '1' : '0';
+                        this.className = 'btn btn-sm toggle-doctor-btn ' + (nowActive ? 'btn-warning' : 'btn-success');
+                        this.title = (nowActive ? 'Deactivate' : 'Activate') + ' Doctor';
+                        this.innerHTML = nowActive
+                            ? '<i class="fas fa-eye-slash"></i> Deactivate'
+                            : '<i class="fas fa-eye"></i> Activate';
+
+                        row.classList.toggle('doctor-inactive', !nowActive);
+
+                        const badge = row.querySelector('.status-badge');
+                        if (badge) {
+                            badge.textContent = nowActive ? 'Active' : 'Inactive';
+                            badge.className = 'badge status-badge ' + (nowActive ? 'bg-success' : 'bg-secondary');
+                        }
+                        showAutoSaveMessage(result.message || 'Status updated');
+                    } else {
+                        showAutoSaveMessage(result.message || `Could not ${action} doctor`, false);
+                    }
+                } catch (err) {
+                    console.error(err);
+                    showAutoSaveMessage(`Could not ${action} doctor. Please try again.`, false);
+                } finally {
+                    this.disabled = false;
+                }
+            });
+        });
+    }
+
     // Initialize drag and drop
     function initializeDragAndDrop() {
         const tableBody = document.getElementById('doctorsTableBody');
@@ -1389,6 +1462,9 @@
 
         // Initialize drag and drop
         initializeDragAndDrop();
+
+        // Activate / Deactivate buttons
+        setupDoctorToggle();
 
         // Set up event listeners for image previews
         const addImageInput = document.querySelector('#addDoctorForm input[name="image"]');
