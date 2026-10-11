@@ -1304,6 +1304,7 @@ def doctor_to_dict(doctor):
         "appointment_link": doctor.appointment_link,
         "department_slug": doctor.department_slug,
         "slug": doctor.slug,
+        "is_active": bool(doctor.is_active),
         "timings": json.loads(doctor.timings) if doctor.timings else [],
         "days_parsed": getattr(doctor, 'days_parsed', [])
     }
@@ -2074,11 +2075,24 @@ def toggle_banner(id):
 
 
 @app.route('/api/toggle_doctor/<int:id>', methods=['POST'])
+@login_required
+@permission_required('doctors')
 def toggle_doctor(id):
+    """Activate / deactivate a doctor (data is kept, only visibility changes)."""
     doctor = Doctor.query.get_or_404(id)
     doctor.is_active = not doctor.is_active
     db.session.commit()
-    return jsonify({'status': 'success', 'is_active': doctor.is_active})
+
+    # Refresh the department page cache/HTML so the change shows up there too
+    department = Department.query.filter_by(slug=doctor.department_slug).first()
+    if department:
+        generate_department_html(department)
+
+    return jsonify({
+        'status': 'success',
+        'is_active': doctor.is_active,
+        'message': f"{doctor.name} {'activated' if doctor.is_active else 'deactivated'} successfully!"
+    })
 
 
 @app.route('/api/toggle_counter/<int:id>', methods=['POST'])
