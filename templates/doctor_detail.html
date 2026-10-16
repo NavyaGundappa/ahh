@@ -100,8 +100,7 @@
 "medicalSpecialty": {{ specialty_map[doctor.department_slug] | tojson }},
 {% endif %}
 
-"image": {{ ("https://aarogyahastha.com" ~ url_for('static', filename=doctor.image_path)) | tojson }}, 
-"address": { "@type": "PostalAddress", "streetAddress": "Site No. 2, Kasavanahalli Main Rd, near 1st Cross Road, opposite HM Symphony", "addressLocality": "Bengaluru", "addressRegion": "Karnataka", "postalCode": "560035", "addressCountry": "IN" },
+"image": {{ ("https://aarogyahastha.com" ~ url_for('static', filename=doctor.image_path or 'img/doctors/dr-he.jpg')) | tojson }},
   "hasCredential": [
     {
       "@type": "EducationalOccupationalCredential",

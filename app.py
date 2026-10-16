@@ -4453,6 +4453,9 @@ def langinginpagehipreplacement():
 def langinginpagekneereplacement():
     return render_template('landing_pages/instagram/knee-replacement.html')
 
+@app.route('/app-privacy-policy')
+def app_privacy_policy():
+    return render_template('app-privacy-policy.html')
 
 @app.route('/maternity-packages-in')
 def langinginpagematernity():
@@ -4547,6 +4550,15 @@ def submit_lead_2():
 
     return redirect("/lp-thank-you")
 
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template("404.html"), 404
+
+
+@app.errorhandler(500)
+def server_error(e):
+    db.session.rollback()          # clear any broken database session
+    return render_template("404.html"), 500
 
 @app.route('/submit-quote', methods=['POST'])
 def submit_quote():
@@ -4589,6 +4601,7 @@ def submit_quote():
     return redirect("/lp-thank-you")
 
 
+
 # admin routes end -------------------------------------------------------------------------------------------------------------------------
 migrate = Migrate(app, db)
 
@@ -4601,4 +4614,4 @@ if __name__ == "__main__":
         print("Startup error:", e)
         traceback.print_exc()
 
-    app.run(host="0.0.0.0", port=2020, debug=True)
+    app.run(host="0.0.0.0", port=2000, debug=True)
