@@ -56,6 +56,8 @@ class Doctor(db.Model):
     is_active = db.Column(db.Boolean, default=True)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     slug = db.Column(db.String(150), unique=True, nullable=False)
+    meta_title = db.Column(db.String(255), nullable=True)
+    meta_description = db.Column(db.Text, nullable=True)
 
     def __repr__(self):
         return f"<Doctor {self.name}>"

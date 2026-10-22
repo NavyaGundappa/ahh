@@ -490,8 +490,8 @@
                     </thead>
                     <tbody id="doctorsTableBody">
                         {% for doctor in doctors %}
-                        <tr class="doctor-card {% if not doctor.is_active %}doctor-inactive{% endif %}" data-doctor-id="{{ doctor.id }}"
-                            data-order="{{ doctor.display_order or loop.index }}">
+                        <tr class="doctor-card {% if not doctor.is_active %}doctor-inactive{% endif %}"
+                            data-doctor-id="{{ doctor.id }}" data-order="{{ doctor.display_order or loop.index }}">
                             <td class="text-center">
                                 <div class="d-flex align-items-center justify-content-center">
                                     <div class="order-badge">{{ doctor.display_order or loop.index }}</div>
@@ -544,7 +544,8 @@
                                         <i class="fas fa-phone me-1"></i>On Call
                                     </span>
                                     {% endif %}
-                                    <span class="badge status-badge {{ 'bg-success' if doctor.is_active else 'bg-secondary' }}">
+                                    <span
+                                        class="badge status-badge {{ 'bg-success' if doctor.is_active else 'bg-secondary' }}">
                                         {{ 'Active' if doctor.is_active else 'Inactive' }}
                                     </span>
                                 </div>
@@ -695,6 +696,21 @@
                                 <div class="col-md-6">
                                     <label class="form-label">Slug</label>
                                     <input type="text" name="slug" class="form-control" placeholder="dr-john-smith">
+                                </div>
+
+                                <div class="col-md-12">
+                                    <label class="form-label">Meta Title (SEO)</label>
+                                    <input type="text" name="meta_title" id="add_meta_title" class="form-control"
+                                        maxlength="70" placeholder="Dr. John Smith - Cardiologist in HSR Layout | Aarogyahastha">
+                                    <small class="text-muted"><span id="add_meta_title_count">0</span>/60 characters (recommended)</small>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <label class="form-label">Meta Description (SEO)</label>
+                                    <textarea name="meta_description" id="add_meta_description" class="form-control"
+                                        rows="3" maxlength="320"
+                                        placeholder="Book an appointment with Dr. John Smith, Cardiologist at Aarogyahastha..."></textarea>
+                                    <small class="text-muted"><span id="add_meta_description_count">0</span>/160 characters (recommended)</small>
                                 </div>
                             </div>
                         </div>
@@ -848,6 +864,21 @@
                                 <div class="col-md-6">
                                     <label class="form-label">Slug</label>
                                     <input type="text" name="slug" id="edit_slug" class="form-control">
+                                </div>
+
+                                <div class="col-md-12">
+                                    <label class="form-label">Meta Title (SEO)</label>
+                                    <input type="text" name="meta_title" id="edit_meta_title" class="form-control"
+                                        maxlength="70" placeholder="Dr. John Smith - Cardiologist in HSR Layout | Aarogyahastha">
+                                    <small class="text-muted"><span id="edit_meta_title_count">0</span>/60 characters (recommended)</small>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <label class="form-label">Meta Description (SEO)</label>
+                                    <textarea name="meta_description" id="edit_meta_description" class="form-control"
+                                        rows="3" maxlength="320"
+                                        placeholder="Book an appointment with Dr. John Smith, Cardiologist at Aarogyahastha..."></textarea>
+                                    <small class="text-muted"><span id="edit_meta_description_count">0</span>/160 characters (recommended)</small>
                                 </div>
                             </div>
                         </div>
@@ -1023,6 +1054,10 @@
                 document.getElementById('edit_languages').value = doctor.languages || '';
                 document.getElementById('edit_appointment_link').value = doctor.appointment_link || '';
                 document.getElementById('edit_slug').value = doctor.slug || '';
+                document.getElementById('edit_meta_title').value = doctor.meta_title || '';
+                document.getElementById('edit_meta_description').value = doctor.meta_description || '';
+                document.getElementById('edit_meta_title').dispatchEvent(new Event('input'));
+                document.getElementById('edit_meta_description').dispatchEvent(new Event('input'));
 
                 // Populate professional details
                 document.getElementById('edit_field_of_expertise').value = doctor.field_of_expertise || '';
@@ -1295,6 +1330,19 @@
     });
 
     // Form Submission: Edit Doctor
+    // Live character counters for SEO meta fields
+    ['add', 'edit'].forEach(function (prefix) {
+        ['meta_title', 'meta_description'].forEach(function (field) {
+            var input = document.getElementById(prefix + '_' + field);
+            var counter = document.getElementById(prefix + '_' + field + '_count');
+            if (input && counter) {
+                var update = function () { counter.textContent = input.value.length; };
+                input.addEventListener('input', update);
+                update();
+            }
+        });
+    });
+
     document.getElementById('editDoctorForm').addEventListener('submit', function (e) {
         // Copy Quill content to hidden inputs
         document.getElementById('edit_overview_input').value = editOverviewQuill.root.innerHTML;

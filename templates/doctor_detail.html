@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}{{ doctor.name }} - {{ doctor.specialization }} - Aarogya Hastha{% endblock %}
+{% block title %}{{ doctor.meta_title or (doctor.name ~ ' - ' ~ doctor.specialization ~ ' - Aarogya Hastha') }}{% endblock %}
 
 {% block content %}
 {% block head %}
@@ -8,6 +8,7 @@
 <meta name="author" content="Aarogyahastha Pvt Ltd">
 <meta name="designer" content="Aarogyahastha Pvt Ltd">
 <meta name="publisher" content="Aarogyahastha Pvt Ltd">
+<meta name="description" content="{{ doctor.meta_description or (doctor.name ~ ', ' ~ (doctor.designation or doctor.specialization) ~ ' at Aarogya Hastha Hospitals, Bengaluru. Book an appointment today.') }}">
 <link rel="canonical"
     href="https://aarogyahastha.com/doctors/{{ doctor.name|replace(' ', '-')|replace('.', '')|lower }}">
 <meta name="no-email-collection" content="http://www.unspam.com/noemailcollection/">
@@ -100,7 +101,8 @@
 "medicalSpecialty": {{ specialty_map[doctor.department_slug] | tojson }},
 {% endif %}
 
-"image": {{ ("https://aarogyahastha.com" ~ url_for('static', filename=doctor.image_path or 'img/doctors/dr-he.jpg')) | tojson }},
+"image": {{ ("https://aarogyahastha.com" ~ url_for('static', filename=doctor.image_path)) | tojson }}, 
+"address": { "@type": "PostalAddress", "streetAddress": "Site No. 2, Kasavanahalli Main Rd, near 1st Cross Road, opposite HM Symphony", "addressLocality": "Bengaluru", "addressRegion": "Karnataka", "postalCode": "560035", "addressCountry": "IN" },
   "hasCredential": [
     {
       "@type": "EducationalOccupationalCredential",

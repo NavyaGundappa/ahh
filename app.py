@@ -724,6 +724,8 @@ def get_doctor(id):
             "appointment_link": doctor.appointment_link or "",
             "department_slug": doctor.department_slug or "",
             "slug": doctor.slug or "",
+            "meta_title": doctor.meta_title or "",
+            "meta_description": doctor.meta_description or "",
             "field_of_expertise": doctor.field_of_expertise or "",
             "overview": doctor.overview or "",
             "bio": doctor.bio or "",
@@ -1304,6 +1306,8 @@ def doctor_to_dict(doctor):
         "appointment_link": doctor.appointment_link,
         "department_slug": doctor.department_slug,
         "slug": doctor.slug,
+        "meta_title": doctor.meta_title or "",
+        "meta_description": doctor.meta_description or "",
         "is_active": bool(doctor.is_active),
         "timings": json.loads(doctor.timings) if doctor.timings else [],
         "days_parsed": getattr(doctor, 'days_parsed', [])
@@ -1388,6 +1392,8 @@ def add_doctor_function(request, departments):
     languages = request.form.get('languages', '').strip()
     bio = request.form.get('bio', '').strip()
     slug = request.form.get('slug', '').strip()
+    meta_title = request.form.get('meta_title', '').strip() or None
+    meta_description = request.form.get('meta_description', '').strip() or None
     qualification = request.form.get('qualification', '').strip()
     overview = request.form.get('overview', '').strip()
     fellowship_membership = request.form.get(
@@ -1486,6 +1492,8 @@ def add_doctor_function(request, departments):
         talks_file_path=talks_file_path,
         bio=bio,
         slug=slug,
+        meta_title=meta_title,
+        meta_description=meta_description,
         image_path=image_path,
         appointment_link=appointment_link,
         department_slug=department_slug,
@@ -1529,6 +1537,9 @@ def edit_doctor_function(request, departments):
     doctor.appointment_link = request.form.get('appointment_link', '').strip()
     doctor.department_slug = request.form.get('department_slug', '').strip()
     doctor.slug = request.form.get('slug', '').strip()
+    doctor.meta_title = request.form.get('meta_title', '').strip() or None
+    doctor.meta_description = request.form.get(
+        'meta_description', '').strip() or None
 
     # ----- Collect timings with days -----
     time_from_hour = request.form.getlist('time_from_hour[]')
@@ -1755,6 +1766,9 @@ def edit_doctor(doctor_id):
         doctor.talks_links = talks_links
         doctor.appointment_link = appointment_link
         doctor.department_slug = department_slug
+        doctor.meta_title = request.form.get('meta_title', '').strip() or None
+        doctor.meta_description = request.form.get(
+            'meta_description', '').strip() or None
 
         db.session.commit()
 
@@ -4614,4 +4628,4 @@ if __name__ == "__main__":
         print("Startup error:", e)
         traceback.print_exc()
 
-    app.run(host="0.0.0.0", port=2000, debug=True)
+    app.run(host="0.0.0.0", port=2020, debug=True)
