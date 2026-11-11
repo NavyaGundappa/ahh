@@ -14,8 +14,7 @@
     <!-- OpenGraph (OG) Tags -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Aarogya Hastha Hospitals" />
-    <meta property="og:title"
-        content="Multispeciality Hospital in Sarjapur Road, Bangalore | Aarogya Hastha " />
+    <meta property="og:title" content="Multispeciality Hospital in Sarjapur Road, Bangalore | Aarogya Hastha " />
     <meta property="og:description"
         content="Aarogya Hastha is a multispeciality hospital in Sarjapur Road, Bangalore offering 24/7 emergency, surgery, maternity, ortho & more. Book an appointment today." />
     <meta property="og:url" content="https://aarogyahastha.com/" />
@@ -25,8 +24,7 @@
     <meta property="og:image:alt" content="Aarogya Hastha Hospitals Bangalore" />
     <!--  Twitter Card Tags -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title"
-        content="Multispeciality Hospital in Sarjapur Road, Bangalore | Aarogya Hastha " />
+    <meta name="twitter:title" content="Multispeciality Hospital in Sarjapur Road, Bangalore | Aarogya Hastha " />
     <meta name="twitter:description"
         content="Aarogya Hastha is a multispeciality hospital in Sarjapur Road, Bangalore offering 24/7 emergency, surgery, maternity, ortho & more. Book an appointment today." />
     <meta name="twitter:image" content="https://aarogyahastha.com/static/img/logo.png/" />
@@ -53,7 +51,7 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-84XCMMFTS8"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
+        function gtag() {dataLayer.push(arguments);}
         gtag('js', new Date());
 
         gtag('config', 'G-84XCMMFTS8');
@@ -357,12 +355,13 @@
 
                 <div class="carousel-inner">
 
-                     <div class="carousel-item active">
-                        <a href="https://aarogyahastha.fyndbetter.com/?_gl=1*1xrgm1*_ga*MzIyNDExNzAuMTc0MDk4MDU3OA..*_ga_84XCMMFTS8*czE3ODUzOTE0MjAkbzI4OSRnMSR0MTc4NTM5MTQ1MyRqMjckbDAkaDA" target="_blank" class="banner-link-wrapper">
+                    <div class="carousel-item active">
+                        <a href="https://aarogyahastha.fyndbetter.com/?_gl=1*1xrgm1*_ga*MzIyNDExNzAuMTc0MDk4MDU3OA..*_ga_84XCMMFTS8*czE3ODUzOTE0MjAkbzI4OSRnMSR0MTc4NTM5MTQ1MyRqMjckbDAkaDA"
+                            target="_blank" class="banner-link-wrapper">
 
                             <div class="hero-image-wrapper">
-                                <img src="/static/img/banners/aah-mainbanner.jpg" class="d-block w-100"
-                                    alt="" loading="lazy">
+                                <img src="/static/img/banners/aah-mainbanner.jpg" class="d-block w-100" alt=""
+                                    loading="lazy">
                             </div>
                         </a>
                     </div>
@@ -451,7 +450,8 @@
             <div class="row align-items-center">
                 <div class="col-lg-6 mb-4 mb-lg-0 image-column">
                     <img src="static/img/img/our-services.jpg" class="img-fluid rounded-lg shadow-lg w-100"
-                        alt="Best hospitals in Bangalore, Aarogya Hastha multi speciality hospital Kasavanahalli offering advanced medical services in Bangalore India" title="Top hospital in Bangalore – Aarogya Hastha multi-speciality hospital, Kasavanahalli, with expert healthcare services">
+                        alt="Best hospitals in Bangalore, Aarogya Hastha multi speciality hospital Kasavanahalli offering advanced medical services in Bangalore India"
+                        title="Top hospital in Bangalore – Aarogya Hastha multi-speciality hospital, Kasavanahalli, with expert healthcare services">
                 </div>
 
 
@@ -612,12 +612,12 @@
             </div>
             <div class="life-tabs-container mb-4">
                 <ul class="nav nav-pills justify-content-center" id="lifeTabs" role="tablist">
-                    <li class="nav-item" role="presentation">
+                    <!-- <li class="nav-item" role="presentation">
                         <button class="nav-link active" id="tab-patient_stories" data-bs-toggle="pill"
                             data-bs-target="#content-patient_stories" type="button" role="tab">
                             Patient Stories
                         </button>
-                    </li>
+                    </li> -->
 
                     <li class="nav-item" role="presentation">
                         <button class="nav-link " id="tab-doctors_speak" data-bs-toggle="pill"
@@ -647,10 +647,17 @@
                         </button>
                     </li>
 
-                    <li class="nav-item" role="presentation">
+                    <!-- <li class="nav-item" role="presentation">
                         <button class="nav-link " id="tab-written_testimonial" data-bs-toggle="pill"
                             data-bs-target="#content-written_testimonial" type="button" role="tab">
                             Written Reviews
+                        </button>
+                    </li> -->
+
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link " id="tab-written_testimonial" data-bs-toggle="pill"
+                            data-bs-target="#content-written_testimonial" type="button" role="tab">
+                            Reviews
                         </button>
                     </li>
 
@@ -933,7 +940,7 @@
 
                 <div class="tab-pane fade " id="content-written_testimonial" role="tabpanel">
                     <div class="owl-carousel life-glance-carousel owl-theme">
-                        {% for testimonial in testimonials if testimonial.id != 7 %}
+                        <!-- 1 -->
                         <div class="item h-100">
                             <div class="life-card testimonial-wide-card h-100 shadow-sm border-0 rounded bg-white">
                                 <div class="card-body d-flex flex-column h-100 p-0">
@@ -943,86 +950,275 @@
                                             <i class="fas fa-quote-left fa-3x"></i>
                                         </div>
 
-                                        <h5 class="life-patient-name fw-bold mb-3 mt-2" style="color: #103A60;">{{
-                                            testimonial.patient_name }}</h5>
+                                        <h5 class="life-patient-name fw-bold mb-3 mt-2" style="color: #103A60;">
+                                            Venkateswara Reddy﻿</h5>
 
                                         <div class="review-text-scroll pe-2">
-                                            <p class="mb-0 text-muted fst-italic" style="line-height: 1.6;">{{
-                                                testimonial.content }}</p>
+                                            <p class="mb-0 text-muted fst-italic" style="line-height: 1.6;"> I would
+                                                like to express my sincere appreciation for the nursing staff at Aarogya
+                                                Hasta Hospital for their excellent care, kindness, and dedication. The
+                                                nurses were supportive, patient, and compassionate throughout the
+                                                treatment. They took good care of the patient, responded to our
+                                                concerns, and made us feel comfortable during a difficult time.
+
+                                                Their professionalism, commitment, and humanity truly deserve
+                                                appreciation. Thank you to the entire nursing team for your hard work
+                                                and for treating patients with such care and respect. Your service makes
+                                                a real difference to patients and their families.
+
+                                                Thank you, Aarogya Hasta Hospital nursing staff, for your wonderful
+                                                service! ﻿</p>
                                         </div>
                                     </div>
 
-                                    {% if testimonial.doctor %}
-                                    <div class="doctor-footer-box mt-auto p-3 m-3 rounded-3">
-                                        <div class="row g-2 align-items-center">
 
-                                            <!-- Doctor 1 -->
-                                            <div class="col-md-6 col-12">
-                                                <div class="d-flex align-items-center">
-
-                                                    {% if testimonial.doctor.image_path %}
-                                                    <div class="flex-shrink-0">
-                                                        <img src="{{ url_for('static', filename=testimonial.doctor.image_path) }}"
-                                                            alt="{{ testimonial.doctor.name }}" class="doctor-avatar">
-                                                    </div>
-                                                    {% endif %}
-
-                                                    <div class="flex-grow-1 ms-3 overflow-hidden">
-                                                        <h6 class="mb-0 fw-bold text-dark text-truncate"
-                                                            title="{{ testimonial.doctor.name }}">
-                                                            {{ testimonial.doctor.name }}
-                                                        </h6>
-
-                                                        <small class="text-muted d-block text-truncate"
-                                                            title="{{ testimonial.doctor.designation or testimonial.doctor.specialization }}">
-                                                            {{ testimonial.doctor.designation or
-                                                            testimonial.doctor.specialization }}
-                                                        </small>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-
-                                            <!-- Doctor 2 (only if exists) -->
-                                            {% if testimonial.doctor2 %}
-                                            <div class="col-md-6 col-12 border-start-md">
-                                                <div class="d-flex align-items-center ps-md-3">
-
-                                                    {% if testimonial.doctor2.image_path %}
-                                                    <div class="flex-shrink-0">
-                                                        <img src="{{ url_for('static', filename=testimonial.doctor2.image_path) }}"
-                                                            alt="{{ testimonial.doctor2.name }}" class="doctor-avatar">
-                                                    </div>
-                                                    {% endif %}
-
-                                                    <div class="flex-grow-1 ms-3 overflow-hidden">
-                                                        <h6 class="mb-0 fw-bold text-dark text-truncate"
-                                                            title="{{ testimonial.doctor2.name }}">
-                                                            {{ testimonial.doctor2.name }}
-                                                        </h6>
-
-                                                        <small class="text-muted d-block text-truncate"
-                                                            title="{{ testimonial.doctor2.designation or testimonial.doctor2.specialization }}">
-                                                            {{ testimonial.doctor2.designation or
-                                                            testimonial.doctor2.specialization }}
-                                                        </small>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                            {% endif %}
-
-                                        </div>
-                                    </div>
-                                    {% endif %}
                                 </div>
                             </div>
                         </div>
-                        {% else %}
-                        <div class="item">
-                            <p class="text-center">No testimonials yet. Check back soon!</p>
+
+                        <!-- 2 -->
+
+                        <div class="item h-100">
+                            <div class="life-card testimonial-wide-card h-100 shadow-sm border-0 rounded bg-white">
+                                <div class="card-body d-flex flex-column h-100 p-0">
+                                    <div class="p-4 flex-grow-1 position-relative">
+                                        <div
+                                            class="quote-mark text-primary opacity-25 position-absolute top-0 start-0 p-3">
+                                            <i class="fas fa-quote-left fa-3x"></i>
+                                        </div>
+
+                                        <h5 class="life-patient-name fw-bold mb-3 mt-2" style="color: #103A60;">
+                                            ram reddy﻿</h5>
+
+                                        <div class="review-text-scroll pe-2">
+                                            <p class="mb-0 text-muted fst-italic" style="line-height: 1.6;">I recently
+                                                visited Aarogy Hastha Hospital for my wife’s migraine headaches. We had
+                                                a very good experience. The doctor listened patiently, explained the
+                                                condition and treatment clearly, and guided us properly throughout the
+                                                consultation.
+                                                My wife is feeling much better and is happy with the treatment. The
+                                                staff were also friendly and supportive. Overall, we are very satisfied
+                                                with the care and would definitely recommend Aarogy Hastha Hospital to
+                                                others.
+                                                Thank you to the entire team for the excellent care and support.
+                                                ﻿</p>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
                         </div>
-                        {% endfor %}
+
+                         <!-- 3 -->
+
+                        <div class="item h-100">
+                            <div class="life-card testimonial-wide-card h-100 shadow-sm border-0 rounded bg-white">
+                                <div class="card-body d-flex flex-column h-100 p-0">
+                                    <div class="p-4 flex-grow-1 position-relative">
+                                        <div
+                                            class="quote-mark text-primary opacity-25 position-absolute top-0 start-0 p-3">
+                                            <i class="fas fa-quote-left fa-3x"></i>
+                                        </div>
+
+                                        <h5 class="life-patient-name fw-bold mb-3 mt-2" style="color: #103A60;">
+                                            Hemanth Kumar﻿</h5>
+
+                                        <div class="review-text-scroll pe-2">
+                                            <p class="mb-0 text-muted fst-italic" style="line-height: 1.6;">I had a very good experience at the hospital. The staff were friendly, caring, and supportive throughout. Special thanks to Sushma for her excellent care, patience, and guidance. She explained everything clearly and made us feel comfortable and confident. I truly appreciate her dedication and professionalism. Highly recommended!
+
+                                                ﻿</p>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                         <!-- 4 -->
+
+                        <div class="item h-100">
+                            <div class="life-card testimonial-wide-card h-100 shadow-sm border-0 rounded bg-white">
+                                <div class="card-body d-flex flex-column h-100 p-0">
+                                    <div class="p-4 flex-grow-1 position-relative">
+                                        <div
+                                            class="quote-mark text-primary opacity-25 position-absolute top-0 start-0 p-3">
+                                            <i class="fas fa-quote-left fa-3x"></i>
+                                        </div>
+
+                                        <h5 class="life-patient-name fw-bold mb-3 mt-2" style="color: #103A60;">
+                                            Hariharan Iyer﻿</h5>
+
+                                        <div class="review-text-scroll pe-2">
+                                            <p class="mb-0 text-muted fst-italic" style="line-height: 1.6;">Very satisfying experience. Came here for my grandmother’s leg surgery. She is healed and back on her legs. Good service including nursing, housekeeping and other.
+
+                                                ﻿</p>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                         <!-- 5 -->
+
+                        <div class="item h-100">
+                            <div class="life-card testimonial-wide-card h-100 shadow-sm border-0 rounded bg-white">
+                                <div class="card-body d-flex flex-column h-100 p-0">
+                                    <div class="p-4 flex-grow-1 position-relative">
+                                        <div
+                                            class="quote-mark text-primary opacity-25 position-absolute top-0 start-0 p-3">
+                                            <i class="fas fa-quote-left fa-3x"></i>
+                                        </div>
+
+                                        <h5 class="life-patient-name fw-bold mb-3 mt-2" style="color: #103A60;">
+                                            Santhu﻿</h5>
+
+                                        <div class="review-text-scroll pe-2">
+                                            <p class="mb-0 text-muted fst-italic" style="line-height: 1.6;">I had a great experience at aarogya hastha. From admission to discharge, the staff were professional, caring, and responsive. Doctors explained everything clearly, nurses were attentive, and the hospital was clean and well-maintained. Felt genuinely looked after. Highly recommend!
+
+                                                ﻿</p>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                         <!-- 6 -->
+
+                        <div class="item h-100">
+                            <div class="life-card testimonial-wide-card h-100 shadow-sm border-0 rounded bg-white">
+                                <div class="card-body d-flex flex-column h-100 p-0">
+                                    <div class="p-4 flex-grow-1 position-relative">
+                                        <div
+                                            class="quote-mark text-primary opacity-25 position-absolute top-0 start-0 p-3">
+                                            <i class="fas fa-quote-left fa-3x"></i>
+                                        </div>
+
+                                        <h5 class="life-patient-name fw-bold mb-3 mt-2" style="color: #103A60;">
+                                            Asit Mukherjee﻿</h5>
+
+                                        <div class="review-text-scroll pe-2">
+                                            <p class="mb-0 text-muted fst-italic" style="line-height: 1.6;">Doctors are good here, staff was kind enough to arrange for a replacement doctor when there was a delay. We usually come here and is happy with the help and support received.
+
+                                                ﻿</p>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                           <!-- 7 -->
+
+                        <div class="item h-100">
+                            <div class="life-card testimonial-wide-card h-100 shadow-sm border-0 rounded bg-white">
+                                <div class="card-body d-flex flex-column h-100 p-0">
+                                    <div class="p-4 flex-grow-1 position-relative">
+                                        <div
+                                            class="quote-mark text-primary opacity-25 position-absolute top-0 start-0 p-3">
+                                            <i class="fas fa-quote-left fa-3x"></i>
+                                        </div>
+
+                                        <h5 class="life-patient-name fw-bold mb-3 mt-2" style="color: #103A60;">
+                                            Ambika Negi﻿</h5>
+
+                                        <div class="review-text-scroll pe-2">
+                                            <p class="mb-0 text-muted fst-italic" style="line-height: 1.6;">I was taken here on emergency - for a person who lives alone and miles apart from her hometown - staff here was very polite and made me feel at ease and were very sweetly answered all my doubts. They also consoled me lovingly when I was homesick. All the tests were taken quickly and the reports were also given on time. HIGHLY RECOMMEND this facility 💖
+
+                                                ﻿</p>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                            <!-- 8 -->
+
+                        <div class="item h-100">
+                            <div class="life-card testimonial-wide-card h-100 shadow-sm border-0 rounded bg-white">
+                                <div class="card-body d-flex flex-column h-100 p-0">
+                                    <div class="p-4 flex-grow-1 position-relative">
+                                        <div
+                                            class="quote-mark text-primary opacity-25 position-absolute top-0 start-0 p-3">
+                                            <i class="fas fa-quote-left fa-3x"></i>
+                                        </div>
+
+                                        <h5 class="life-patient-name fw-bold mb-3 mt-2" style="color: #103A60;">
+                                            Niruta Rai﻿</h5>
+
+                                        <div class="review-text-scroll pe-2">
+                                            <p class="mb-0 text-muted fst-italic" style="line-height: 1.6;">I had a very good experience at the hospital. The staff were caring, supportive, and professional throughout my treatment. The patient care and services provided were excellent, and the hospital maintained a clean and comfortable environment.
+
+                                                ﻿</p>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                         <!-- 9 -->
+
+                        <div class="item h-100">
+                            <div class="life-card testimonial-wide-card h-100 shadow-sm border-0 rounded bg-white">
+                                <div class="card-body d-flex flex-column h-100 p-0">
+                                    <div class="p-4 flex-grow-1 position-relative">
+                                        <div
+                                            class="quote-mark text-primary opacity-25 position-absolute top-0 start-0 p-3">
+                                            <i class="fas fa-quote-left fa-3x"></i>
+                                        </div>
+
+                                        <h5 class="life-patient-name fw-bold mb-3 mt-2" style="color: #103A60;">
+                                            Teja﻿</h5>
+
+                                        <div class="review-text-scroll pe-2">
+                                            <p class="mb-0 text-muted fst-italic" style="line-height: 1.6;">Got my blood test and Orthopedic tests done. The process was very smooth. The staff is really helpful and supporting. The doctor took his time to explain the report and explain what is the main issue.
+
+                                                ﻿</p>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 10 -->
+
+                        <div class="item h-100">
+                            <div class="life-card testimonial-wide-card h-100 shadow-sm border-0 rounded bg-white">
+                                <div class="card-body d-flex flex-column h-100 p-0">
+                                    <div class="p-4 flex-grow-1 position-relative">
+                                        <div
+                                            class="quote-mark text-primary opacity-25 position-absolute top-0 start-0 p-3">
+                                            <i class="fas fa-quote-left fa-3x"></i>
+                                        </div>
+
+                                        <h5 class="life-patient-name fw-bold mb-3 mt-2" style="color: #103A60;">
+                                            Yogesh Kotian﻿</h5>
+
+                                        <div class="review-text-scroll pe-2">
+                                            <p class="mb-0 text-muted fst-italic" style="line-height: 1.6;">The staff are very polite, helpful, and treat patients with great care. They are knowledgeable, provide the right diagnosis and treatment, and ensure timely follow-ups. Overall, it was a very good experience.
+
+                                                ﻿</p>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+
+
 
                     </div>
 
@@ -1764,7 +1960,7 @@
                     const url = new URL(videoId);
                     if (url.searchParams.has('v')) videoId = url.searchParams.get('v');
                     else videoId = url.pathname.split('/').pop();
-                } catch (e) { console.warn('Error parsing video ID', e); }
+                } catch (e) {console.warn('Error parsing video ID', e);}
             }
 
             const frame = document.getElementById('videoFrame');
@@ -1778,7 +1974,7 @@
             // Stop video playback when the modal is closed
             document.getElementById('videoModal').addEventListener('hidden.bs.modal', function () {
                 frame.src = '';
-            }, { once: true });
+            }, {once: true});
         }
 
         document.addEventListener('DOMContentLoaded', function () {
