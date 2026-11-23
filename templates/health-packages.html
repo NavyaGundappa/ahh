@@ -7,12 +7,12 @@
   <meta name="google-site-verification" content="NCMNy8zyXscWLWKEoLYF2wgA_DyjPOp8Qnd_8_n6F2w" />
   <link rel="icon" type="image/x-icon" href="https://aarogyahastha.com/static/img/fav.png/">
 
-    <title>Health Checkup Packages in Bangalore | Aarogya Hastha</title>
+  <title>Full Body Health Checkup Packages in Bangalore | Aarogya Hastha</title>
 
   <meta name="description"
-    content="Book full body health checkup packages in Bangalore from ₹1,999 at Aarogya Hastha, Kasavanahalli. Includes ECG, ultrasound & doctor consultations. Book now.">
+    content="Explore health checkup packages at Aarogya Hastha Hospitals, Bangalore. Compare available tests, consultations, package prices and booking options.">
   <link rel="canonical" href="https://aarogyahastha.com/health-packages">
-<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
   <base href="/">
 
   <link rel="stylesheet" href="static/css/css/bootstrap.min.css">
@@ -37,7 +37,7 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-84XCMMFTS8"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
+    function gtag() {dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-84XCMMFTS8');
   </script>
@@ -341,10 +341,18 @@
       background: #004494;
     }
 
+    section.page-title-section h1 {
+      font-size: 24px;
+    }
+
     /* Responsive adjustments */
     @media (max-width: 768px) {
       .health-packages-container {
         grid-template-columns: 1fr;
+      }
+
+      section.page-title-section h1 {
+        text-align: center;
       }
 
       .package-header h2 {
@@ -496,6 +504,12 @@
       </nav>
     </div>
   </section>
+  <section class="page-title-section">
+    <div class="container">
+      <h1>Health Checkup Packages in Bangalore </h1>
+    </div>
+  </section>
+
 
   <div class="health-packages-container">
     {% for package in packages %}
@@ -695,8 +709,8 @@
 
       fetch('/request_callback/', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, phone, package_name: packageName })
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({name, phone, package_name: packageName})
       })
         .then(res => res.json())
         .then(data => {
@@ -706,7 +720,7 @@
             document.getElementById('callbackForm').reset();
           }
         })
-        .catch(err => { console.error(err); alert('Something went wrong.'); });
+        .catch(err => {console.error(err); alert('Something went wrong.');});
     });
   </script>
 
