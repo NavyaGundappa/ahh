@@ -20,7 +20,7 @@ from flask_httpauth import HTTPBasicAuth
 from flask_caching import Cache
 from werkzeug.security import generate_password_hash, check_password_hash
 import traceback
-import flash
+from flask import flash
 from flask import Flask, render_template, request, redirect, url_for, flash, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.utils import secure_filename
@@ -362,6 +362,31 @@ def hospital_in_sarjapur_road():
 
     return render_template(
         'seopages/best-hospital-in-sarjapur-road-bangalore.html',
+        doctors=doctors,
+        testimonials=testimonials,
+        blogs=blogs,
+        departments=departments
+    )
+
+@app.route('/orthopedic-doctor-in-sarjapur-road-bangalore')
+def orthopedic_doctor_in_sarjapur_road():
+    doctors = Doctor.query.filter_by(is_active=True).all()
+
+    testimonials = Testimonial.query.filter_by(is_active=True).options(
+        joinedload(Testimonial.doctor)
+    ).order_by(Testimonial.created_at.desc()).all()
+
+    blogs = Blog.query.filter_by(is_active=True)\
+        .order_by(Blog.created_at.desc())\
+        .limit(5)\
+        .all()
+
+    departments = Department.query.filter_by(is_active=True)\
+        .order_by(Department.name)\
+        .all()
+
+    return render_template(
+        'seopages/orthopedic-doctor-in-sarjapur-road-bangalore.html',
         doctors=doctors,
         testimonials=testimonials,
         blogs=blogs,
